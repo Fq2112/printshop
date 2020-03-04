@@ -189,9 +189,9 @@
                 <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
 
                 <div id="logo">
-                    <a href="{{route('beranda')}}" class="standard-logo">
+                    <a href="{{route('beranda', $app->getLocale())}}" class="standard-logo">
                         <img src="{{asset('images/logotype.png')}}" alt="Canvas Logo"></a>
-                    <a href="{{route('beranda')}}" class="retina-logo">
+                    <a href="{{route('beranda', $app->getLocale())}}" class="retina-logo">
                         <img src="{{asset('images/logotype@2x.png')}}" alt="Canvas Logo"></a>
                 </div>
 
