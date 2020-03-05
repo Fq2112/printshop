@@ -125,24 +125,38 @@ dl, dt, dd, ol, ul, li {
 }
 
 .clear {
-	clear: both;
-	display: block;
-	font-size: 0;
-	height: 0;
-	line-height: 0;
-	width: 100%;
-	overflow:hidden;
+    clear: both;
+    display: block;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+body::-webkit-scrollbar {
+    width: 8px;
+    background: rgba(222, 222, 222, .75);
+}
+
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+    width: 8px;
+    background-color: #1ABC9C;
 }
 
 ::selection {
-	background: #1ABC9C;
-	color: #FFF;
-	text-shadow: none;
+    background: #1ABC9C;
+    color: #FFF;
+    text-shadow: none;
 }
 
 ::-moz-selection {
-	background: #1ABC9C; /* Firefox */
-	color: #FFF;
+    background: #1ABC9C; /* Firefox */
+    color: #FFF;
 	text-shadow: none;
 }
 
@@ -7035,25 +7049,48 @@ body:not(.device-touch) .button.button-full strong {
 .button.button-border.button-fill.fill-from-bottom:before {
 	width: 100%;
 	height: 0;
-	top: auto;
-	bottom: 0;
+    top: auto;
+    bottom: 0;
 }
 
-.button.button-border.button-fill.fill-from-bottom:hover:before { height: 100%; }
+.button.button-border.button-fill.fill-from-bottom:hover:before {
+    height: 100%;
+}
 
 
 /* Buttons - Colors
 -----------------------------------------------------------------*/
 
-.button-red { background-color: #C02942; }
+.button-primary {
+    background-color: #1ABC9C;
+}
+
+.button-3d.button-primary:hover,
+.button-reveal.button-primary:hover,
+.button-border.button-primary:hover,
+.button-border.button-primary.button-fill:before {
+    background-color: #1ABC9C !important;
+}
+
+.button-border.button-primary {
+    color: #1ABC9C;
+    border-color: #1ABC9C;
+}
+
+.button-red {
+    background-color: #C02942;
+}
+
 .button-3d.button-red:hover,
 .button-reveal.button-red:hover,
 .button-border.button-red:hover,
-.button-border.button-red.button-fill:before { background-color: #C02942 !important; }
+.button-border.button-red.button-fill:before {
+    background-color: #C02942 !important;
+}
 
 .button-border.button-red {
-	color: #C02942;
-	border-color: #C02942;
+    color: #C02942;
+    border-color: #C02942;
 }
 
 .button-teal { background-color: #53777A; }
