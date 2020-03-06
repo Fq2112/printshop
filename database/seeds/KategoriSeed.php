@@ -19,7 +19,7 @@ class KategoriSeed extends Seeder
         ['Kebutuhan Marketing', 'Marketing Needs'],
         ['Kartu', 'Cards'],
         ['Garmen', 'Garments'],
-        ['Foto & Hadiah', 'Photos & Gifts'],
+        //['Foto & Hadiah', 'Photos & Gifts'],
     ];
 
     public function run()

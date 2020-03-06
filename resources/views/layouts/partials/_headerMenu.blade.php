@@ -1,222 +1,92 @@
 <ul>
-    <li class="current"><a href="{{route('beranda', $app->getLocale())}}">
-            <div>{{__('lang.header.home')}}</div>
-        </a></li>
-    <li class="mega-menu"><a href="#">
-            <div>Men</div>
-        </a>
-        <div class="mega-menu-content style-2 clearfix">
-            <ul class="mega-menu-column border-left-0 col-lg-3">
-                <li class="mega-menu-title"><a href="#">
-                        <div>Footwear</div>
-                    </a>
-                    <ul>
-                        <li><a href="#">
-                                <div>Casual Shoes</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Formal Shoes</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Sports shoes</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Flip Flops</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Slippers</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Sandals</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Show all <i class="icon-angle-right"></i></div>
-                            </a></li>
+    @foreach(\App\Models\Kategori::all() as $kat)
+        <li class="mega-menu">
+            <a href="#">
+                <div>{{$kat->name}}</div>
+            </a>
+            <div class="mega-menu-content style-2 clearfix">
+                @foreach($kat->getSubKategori as $sub)
+                    <ul class="mega-menu-column border-left-0 col-lg-3">
+                        <li class="mega-menu-title">
+                            <a href="#">
+                                <div>{{$sub->name}}</div>
+                            </a>
+                            @if($sub->getCluster)
+                                <ul>
+                                    @foreach($sub->getCluster as $row)
+                                        <li><a href="#">
+                                                <div>{{$row->name}}</div>
+                                            </a></li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </li>
                     </ul>
-                </li>
-                <li class="mega-menu-title"><a href="#">
-                        <div>Clothing</div>
-                    </a>
-                    <ul>
-                        <li><a href="#">
-                                <div>Casual Shirts</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>T-Shirts</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Collared Tees</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Pants / Trousers</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Show all <i class="icon-angle-right"></i></div>
-                            </a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="mega-menu-column border-left-0 col-lg-3">
-                <li class="mega-menu-title"><a href="#">
-                        <div>Sportswear</div>
-                    </a>
-                    <ul>
-                        <li><a href="#">
-                                <div>Sports Casual Shirts</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Sports T-Shirts</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Sports Collared Tees</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Sports Shoes</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Jackets</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Swimwears</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Show all <i class="icon-angle-right"></i></div>
-                            </a></li>
-                    </ul>
-                </li>
-                <li class="mega-menu-title"><a href="#">
-                        <div>Innerwears</div>
-                    </a>
-                    <ul>
-                        <li><a href="#">
-                                <div>Boxers</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Vests</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Sleepwears</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Show all <i class="icon-angle-right"></i></div>
-                            </a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="mega-menu-column border-left-0 col-lg-3">
-                <li class="mega-menu-title"><a href="#">
-                        <div>Innerwears</div>
-                    </a>
-                    <ul>
-                        <li><a href="#">
-                                <div>Boxers</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Vests</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Sleepwears</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Show all <i class="icon-angle-right"></i></div>
-                            </a></li>
-                    </ul>
-                </li>
-                <li class="mega-menu-title"><a href="#">
-                        <div>Sunglasses</div>
-                    </a>
-                <li class="mega-menu-title"><a href="#">
-                        <div>Watches</div>
-                    </a>
-                <li class="mega-menu-title"><a href="#">
-                        <div>Bags</div>
-                    </a>
-                <li class="mega-menu-title"><a href="#">
-                        <div>Headphones</div>
-                    </a>
-                <li class="mega-menu-title"><a href="#">
-                        <div>Accessories</div>
-                    </a>
-            </ul>
-            <ul class="mega-menu-column col-lg-3 border-left-0">
-                <li class="card p-0 nobg noborder">
-                    <img class="card-img-top" src="{{asset('demos/shop/images/menu-image.jpg')}}" alt="image cap">
-                    <a href="#" class="btn btn-link text-left t500 pl-0 nobg"><u>Editor's Pick</u></a>
-                </li>
-            </ul>
-        </div>
-    </li>
-    <li><a href="#">
-            <div>Women</div>
-        </a>
-        <div class="mega-menu-content style-2 clearfix">
-            <ul class="mega-menu-column col-lg-6">
-                <li class="mega-menu-title"><a href="#">
-                        <div>Footwear</div>
-                    </a>
-                    <ul>
-                        <li><a href="#">
-                                <div>Casual Shoes</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Formal Shoes</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Sports shoes</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Flip Flops</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Slippers</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Sandals</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Party Shoes</div>
-                            </a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="mega-menu-column col-lg-6">
-                <li class="mega-menu-title"><a href="#">
-                        <div>Clothing</div>
-                    </a>
-                    <ul>
-                        <li><a href="#">
-                                <div>Casual Shirts</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>T-Shirts</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Collared Tees</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Pants / Trousers</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Ethnic Wear</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Jeans</div>
-                            </a></li>
-                        <li><a href="#">
-                                <div>Swimwear</div>
-                            </a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </li>
-    <li><a href="#">
-            <div>Accessories</div>
-        </a></li>
-    <li><a href="#">
-            <div>Blog</div>
-        </a></li>
-    <li><a href="#">
-            <div>Sales</div>
-        </a></li>
+                @endforeach
+                <ul class="mega-menu-column col-lg-3 border-left-0">
+                    <li class="card p-0 nobg noborder">
+                        <a href="#">
+                            <img class="card-img-top" src="{{asset('demos/shop/images/menu-image.jpg')}}" alt="">
+                            <p>{{$kat->caption}}</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    @endforeach
 </ul>
+
+<div id="top-search">
+    <a href="#" id="top-search-trigger">
+        <i class="icon-line-search"></i><i class="icon-line-cross"></i></a>
+    <form action="search.html">
+        <input type="text" name="q" class="form-control" value=""
+               placeholder="{{__('lang.placeholder.search')}}">
+    </form>
+</div>
+
+<div id="top-cart">
+    <a href="#" id="top-cart-trigger"><i class="icon-shopping-cart1"></i><span>5</span></a>
+    <div class="top-cart-content">
+        <div class="top-cart-title">
+            <h4>{{__('lang.header.cart')}}</h4>
+        </div>
+        <div class="top-cart-items">
+            <div class="top-cart-item clearfix">
+                <div class="top-cart-item-image">
+                    <a href="#">
+                        <img src="{{asset('demos/shop/images/items/featured/5.jpg')}}"
+                             alt="Blue Shoulder Bag"/></a>
+                </div>
+                <div class="top-cart-item-desc">
+                    <a href="#" class="t400">White athletic shoe</a>
+                    <span class="top-cart-item-price">$35.00</span>
+                    <span class="top-cart-item-quantity t600">x 1</span>
+                </div>
+            </div>
+            <div class="top-cart-item clearfix">
+                <div class="top-cart-item-image">
+                    <a href="#" class="t400"><img
+                            src="{{asset('demos/shop/images/items/featured/1.jpg')}}"
+                            alt="Leather Bag"/></a>
+                </div>
+                <div class="top-cart-item-desc">
+                    <a href="#" class="t400">Round Neck Solid Light Blue Colour T-shirts</a>
+                    <span class="top-cart-item-price">$12.49</span>
+                    <span class="top-cart-item-quantity t600">x 2</span>
+                </div>
+            </div>
+        </div>
+        <div class="top-cart-action clearfix">
+            <span class="fleft top-checkout-price t600 text-dark">$59.98</span>
+            <button
+                class="button button-dark button-small nomargin fright">{{__('lang.button.cart')}}</button>
+        </div>
+    </div>
+</div>
+
+<div id="top-account">
+    <a href="#modal-register" data-lightbox="inline"><i
+            class="icon-line2-user mr-1 position-relative" style="top: 1px;"></i><span
+            class="d-none d-sm-inline-block font-primary t500">{{__('lang.button.login')}}</span></a>
+</div>
