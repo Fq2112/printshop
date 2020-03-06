@@ -13,29 +13,29 @@ class ClusterKategoriSeed extends Seeder
     public function run()
     {
         $clust[] = [
-            ['Kartu Nama Standar','Standard Business Card'],
-            ['Kartu Nama Premium','Premium Business Card'],
-            ['Kartu Nama Eks Eksklusif','Exclusive Business Card']
+            ['Kartu Nama Standar', 'Standard Business Cards'],
+            ['Kartu Nama Premium', 'Premium Business Cards'],
+            ['Kartu Nama Eksklusif', 'Exclusive Business Cards']
         ];
 
         $clust[] = [
-            ['Kop Surat Standar','Standard Letterhead'],
-            ['Kop Surat Premium','Premium Letterhead']
+            ['Kop Surat Standar', 'Standard Letterheads'],
+            ['Kop Surat Premium', 'Premium Letterheads']
         ];
 
         $clust[] = [
-            ['Amplop DL','Envelope DL'],
-            ['Amplop F4','Envelope F4']
+            ['Amplop DL', 'DL Envelopes'],
+            ['Amplop F4', 'F4 Envelopes']
         ];
 
         $clust[] = [
-            ['Lanyard Standard','Standard Lanyard'],
-            ['Lanyard Premium','Premium Lanyard']
+            ['Lanyard Standar', 'Standard Lanyards'],
+            ['Lanyard Premium', 'Premium Lanyards']
         ];
 
         $clust[] = [
-            ['Map Folder Standard','Map Folder Standard'],
-            ['Map Folder Premium','Map Folder Premium']
+            ['Map Folder Standar', 'Standard Map Folders'],
+            ['Map Folder Premium', 'Premium Map Folders']
         ];
 
         $clust[] = [
@@ -47,58 +47,58 @@ class ClusterKategoriSeed extends Seeder
         ];
 
         $clust[] = [
-            ['Hot Paper Cup','Hot Paper Cup'],
-            ['Cold Paper Cup','Cold Paper Cup'],
-            ['Cup Es krim','Ice Cream Cup'],
-            ['Bowl Paper Cup','Bowl Paper Cup']
+            ['Hot Paper Cup', 'Hot Paper Cups'],
+            ['Cold Paper Cup', 'Cold Paper Cups'],
+            ['Cup Es Krim', 'Ice Cream Cups'],
+            ['Bowl Paper Cup', 'Bowl Paper Cups']
         ];
 
         $clust[] = [
-            ['Shopping Bag Standar','Standard Shopping Bag'],
-            ['Shopping Bag Premium','Premium Shopping Bag'],
-            ['Shopping Bag Cokelat','Brown Shopping Bag']
+            ['Shopping Bag Standar', 'Standard Shopping Bags'],
+            ['Shopping Bag Premium', 'Premium Shopping Bags'],
+            ['Shopping Bag Cokelat', 'Brown Shopping Bags']
         ];
 
         $clust[] = [
-            ['Lakban Custom Solid','Custom Solid Duct Tape'],
-            ['Lakban Custom Transparen','Custom Transparent Duct Tape'],
+            ['Lakban Custom Solid', 'Solid Custom Duct Tapes'],
+            ['Lakban Custom Transparan', 'Transparent Custom Duct Tapes'],
         ];
 
         $clust[] = [
-            ['Gelas Plastik PP','PP Plastic Cups'],
-            ['Gelas Plastik PET','PET Plastic Cups'],
+            ['Gelas Plastik PP', 'PP Plastic Cups'],
+            ['Gelas Plastik PET', 'PET Plastic Cups'],
         ];
 
         $clust[] = [
-            ['Snack Box Kecil','Small Snack Box'],
-            ['Snack Box Besar','Large Snack Bag'],
-            ['Snack Box Persegi','Square Snack Box'],
+            ['Snack Box Kecil', 'Small Snack Boxes'],
+            ['Snack Box Besar', 'Large Snack Boxes'],
+            ['Snack Box Persegi', 'Square Snack Boxes'],
         ];
 
         $clust[] = [
-            ['Label Harga Standard','Standard Price Tag'],
-            ['Label Harga Premium','Premium Price Tag']
+            ['Label Harga Standar', 'Standard Price Tags'],
+            ['Label Harga Premium', 'Premium Price Tags']
         ];
 
         $clust[] = [
-            ['Lunch Box Kecil','Small Lunch Box'],
-            ['Lunch Box Bento','Bento Lunch Box'],
-            ['Lunch Box Standard','Standard Lunch Box'],
+            ['Lunch Box Food Pail', 'Food Pail Lunch Boxes'],
+            ['Lunch Box Bento', 'Bento Lunch Boxes'],
+            ['Lunch Box Standard', 'Standard Lunch Boxes'],
         ];
         $clust[] = [
-            ['Kardus Box Kecil','Small Cardboard Box'],
-            ['Kardus Box Standard','Standard Cardboard Box'],
-            ['Kardus Box Pengiriman','Cardboard Shipping Box']
+            ['Kardus Box Kecil', 'Small Cardboard Boxes'],
+            ['Kardus Box Standar', 'Standard Cardboard Boxes'],
+            ['Kardus Box Pengiriman', 'Shipping Cardboard Boxes']
         ];
         $clust[] = [
-            ['Food Paper Bag Flat Standard','Standard Food Paper Bag Flat'],
-            ['Food Paper Bag Flat Premium','Premium Food Paper Bag Flat'],
-            ['Satchel Paper Bag  Standard','Standard Satchel Paper Bag'],
-            ['Satchel Paper Bag  Premium','Premium Satchel Paper Bag'],
+            ['Food Paper Bag Flat Standar', 'Standard Flat Food Paper Bags'],
+            ['Food Paper Bag Flat Premium', 'Premium Flat Food Paper Bags'],
+            ['Satchel Paper Bag  Standar', 'Standard Satchel Paper Bags'],
+            ['Satchel Paper Bag  Premium', 'Premium Satchel Paper Bags'],
         ];
         $clust[] = [
-            ['Kardus Box Duplex Kecil','Small Duplex Cardboard Boxes'],
-            ['Kardus Box Duplex Besar','Large Duplex Cardboard Boxes'],
+            ['Kardus Box Duplex Kecil', 'Small Duplex Cardboard Boxes'],
+            ['Kardus Box Duplex Besar', 'Large Duplex Cardboard Boxes'],
         ];
         $clust[] = [
             //Food Wrapping paper
@@ -110,64 +110,64 @@ class ClusterKategoriSeed extends Seeder
             //sealer
         ];
         $clust[] = [
-            ['Flyer Standard','Flyer Standard'],
-            ['Flyer Premium','Flyer Premium'],
-            ['Flyer Eknomis','Flyer Eknomis'],
+            ['Flyer Standar', 'Standard Flyers'],
+            ['Flyer Premium', 'Premium Flyers'],
+            ['Flyer Eknomis', 'Economic Flyers'],
         ];
         $clust[] = [
-            ['Poster Standard','Poster Standard'],
-            ['Poster Backlit','Poster Backlit']
+            ['Poster Standar', 'Standard Posters'],
+            ['Poster Backlit', 'Backlit Posters']
         ];
         $clust[] = [
-            ['Tent Card Lipatan Segitiga','Tent Card Folds Triangle'],
-            ['Tent Card Sisipan Lembar','Tent Card Sheet Inserts'],
+            ['Tent Card Lipatan Segitiga', 'Triangle Fold Tent Cards'],
+            ['Tent Card Sisipan Lembar', 'Sheet Insertion Tent Cards'],
 
         ];
         $clust[] = [
-            ['Brosur Standard','Standard Brochure '],
-            ['Brosur Premium','Premium Brochure'],
-            ['Brosur Eknomis','Economic Brochure'],
+            ['Brosur Standard', 'Standard Brochures'],
+            ['Brosur Premium', 'Premium Brochures'],
+            ['Brosur Eknomis', 'Economic Brochures'],
         ];
         $clust[] = [
-            ['X Banner','X Banner'],
-            ['Y Banner','Y Banner'],
-            ['Big Roll up Banner','Big Roll up Banner'],
-            ['Roll up Banner','Roll up Banner'],
-            ['Tripod Banner','Tripod Banner'],
-            ['Spanduk Indoor','Indoor Banner'],
-            ['Spanduk Outdoor','Outdoor Banner'],
+            ['X Banner', 'X Banners'],
+            ['Y Banner', 'Y Banners'],
+            ['Big Roll Up Banner', 'Big Roll Up Banners'],
+            ['Roll Up Banner', 'Roll Up Banners'],
+            ['Tripod Banner', 'Tripod Banners'],
+            ['Spanduk Indoor', 'Indoor Banners'],
+            ['Spanduk Outdoor', 'Outdoor Banners'],
         ];
         $clust[] = [
-            ['Booklet Standard','Standard Booklet'],
-            ['Booklet Premium','Premium Booklet'],
+            ['Booklet Standar', 'Standard Booklets'],
+            ['Booklet Premium', 'Premium Booklets'],
         ];
         $clust[] = [
-            ['Stiker Label Bulat','Round Label Sticker'],
-            ['Stiker Label Toples','Jar Label Sticker'],
-            ['Stiker Decal','Decal Sticker'],
-            ['Stiker Label Botol','Bottle Label Sticker'],
-            ['Stiker Label Lunch Box','Lunch Box Label Sticker'],
+            ['Stiker Label Bulat', 'Round Label Stickers'],
+            ['Stiker Label Toples', 'Jar Label Stickers'],
+            ['Stiker Decal', 'Decal Stickers'],
+            ['Stiker Label Botol', 'Bottle Label Stickers'],
+            ['Stiker Label Lunch Box', 'Lunch Box Label Stickers'],
         ];
         $clust[] = [
-            ['Sertifikat Standard','Standard Certificate'],
-            ['Sertifikat Premium','Premium Sertificate'],
+            ['Sertifikat Standar', 'Standard Certificates'],
+            ['Sertifikat Premium', 'Premium Certificates'],
         ];
         $clust[] = [
-            ['Majalah Standard','Standard Magazine'],
-            ['Majalah Premium','Premium Magazine'],
+            ['Majalah Standar', 'Standard Magazines'],
+            ['Majalah Premium', 'Premium Magazines'],
         ];
         $clust[] = [
-            ['Kalender Meja Standar','Standard Desk Calender'],
-            ['Kalender Poster','Poster Calender'],
-            ['Kalender Dinding','Wall Calender'],
+            ['Kalender Meja Standar', 'Standard Desk Calendars'],
+            ['Kalender Poster', 'Poster Calendars'],
+            ['Kalender Dinding', 'Wall Calendars'],
         ];
         $clust[] = [
-            ['Voucher Buku','Book Voucher'],
-            ['Voucher Satuan','Unit Voucher'],
+            ['Voucher Buku', 'Book Vouchers'],
+            ['Voucher Satuan', 'Unit Vouchers'],
         ];
         $clust[] = [
-            ['Company Profile Standard','Standard Company Profile '],
-            ['Company Profile Premium','Premium Company Profile '],
+            ['Company Profile Standar', 'Standard Company Profiles'],
+            ['Company Profile Premium', 'Premium Company Profiles'],
         ];
         $clust[] = [
             //Wobblers
@@ -182,52 +182,52 @@ class ClusterKategoriSeed extends Seeder
             //Popup Counter
         ];
         $clust[] = [
-            ['kartu Undangan Standard','Standard Invitation Card'],
-            ['kartu Undangan  Premium','Premium Invitation card'],
+            ['Kartu Undangan Standar', 'Standard Invitation Cards'],
+            ['Kartu Undangan Premium', 'Premium Invitation Cards'],
         ];
         $clust[] = [
-            ['kartu Terima Kasih Standard','Standard Thank You Card'],
-            ['kartu Terima Kasih  Premium','Premium Thank You Card '],
+            ['Kartu Terima Kasih Standar', 'Standard Gratitude Cards'],
+            ['Kartu Terima Kasih Premium', 'Premium Gratitude Cards'],
         ];
         $clust[] = [
-            ['ID Card Standard','Standard ID Card'],
-            ['kartu RFID','RFID Card'],
+            ['Kartu Identitas Standar', 'Standard ID Cards'],
+            ['Kartu RFID', 'RFID Cards'],
         ];
         $clust[] = [
-            ['kartu Ucapan Standard','Standard Greeting card'],
-            ['kartu Ucapan  Premium','Premium Greeting Card'],
+            ['Kartu Ucapan Standar', 'Standard Greeting Cards'],
+            ['Kartu Ucapan Premium', 'Premium Greeting Cards'],
         ];
         $clust[] = [
-            ['kartu Stamp Flat','Flat Stamp Card'],
-            ['kartu Stamp Folding','Folding Stamp Card'],
+            ['Kartu Stamp Flat', 'Flat Stamp Cards'],
+            ['Kartu Stamp Folding', 'Folding Stamp Cards'],
         ];
         $clust[] = [
-            ['Postcard Standard','Standard Postcard '],
-            ['Postcard  Premium','Premium Postcard  '],
+            ['Kartu Pos Standar', 'Standard Postcards'],
+            ['Kartu Pos Premium', 'Premium Postcards'],
         ];
         $clust[] = [
             //Kartu E
         ];
         $clust[] = [
-            ['Tote Bag Standard','Standard Tote Bas'],
-            ['Tote Bag  Premium','Premium Tote bag'],
+            ['Tote Bag Standar', 'Standard Tote Bags'],
+            ['Tote Bag Premium', 'Premium Tote Bags'],
         ];
         $clust[] = [
-            ['Tas Goodie Standard','Standard Goodie bag'],
-            ['Tas Goodie  Premium','Premium Goodie bag'],
+            ['Tas Goodie Standar', 'Standard Goodie Bags'],
+            ['Tas Goodie Premium', 'Premium Goodie Bags'],
         ];
         $clust[] = [
-            ['Kaos Polo Bordir','Standard Polo Shirt'],
-            ['Kaos Polo PolyFlex','PolyFlex Polo Shirt'],
+            ['Kaos Polo Bordir', 'Embroidery Polo Shirts'],
+            ['Kaos Polo PolyFlex', 'PolyFlex Polo Shirts'],
         ];
         $clust[] = [
             //tshirt
         ];
 
         for ($i = 0; $i < count($clust); $i++) {
-            if(!empty($clust[$i])){
+            if (!empty($clust[$i])) {
                 foreach ($clust[$i] as $data) {
-                    ClusterKategori ::create([
+                    ClusterKategori::create([
                         'subkategori_id' => $i + 1,
                         'name' => [
                             'en' => $data[1],
