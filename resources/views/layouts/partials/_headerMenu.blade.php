@@ -1,5 +1,5 @@
 <ul>
-    <li class="current"><a href="#">
+    <li class="current"><a href="{{route('beranda', $app->getLocale())}}">
             <div>{{__('lang.header.home')}}</div>
         </a></li>
     <li class="mega-menu"><a href="#">

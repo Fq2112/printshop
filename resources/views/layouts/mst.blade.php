@@ -189,9 +189,9 @@
                 <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
 
                 <div id="logo">
-                    <a href="{{route('beranda')}}" class="standard-logo">
+                    <a href="{{route('beranda', $app->getLocale())}}" class="standard-logo">
                         <img src="{{asset('images/logotype.png')}}" alt="Canvas Logo"></a>
-                    <a href="{{route('beranda')}}" class="retina-logo">
+                    <a href="{{route('beranda', $app->getLocale())}}" class="retina-logo">
                         <img src="{{asset('images/logotype@2x.png')}}" alt="Canvas Logo"></a>
                 </div>
 
@@ -203,7 +203,7 @@
                             <i class="icon-line-search"></i><i class="icon-line-cross"></i></a>
                         <form action="search.html">
                             <input type="text" name="q" class="form-control" value=""
-                                   placeholder="{{__('lang.header.search')}}">
+                                   placeholder="{{__('lang.placeholder.search')}}">
                         </form>
                     </div>
 
@@ -261,74 +261,85 @@
 
     <footer id="footer" class="nobg noborder">
         <div class="container clearfix">
-            <div class="footer-widgets-wrap pb-3 border-bottom clearfix">
+            <div class="footer-widgets-wrap pt-5 pb-3 border-bottom clearfix">
                 <div class="row">
-                    <div class="col-lg-2 col-md-3 col-6">
+                    <div class="col-lg-5 col-md-4 col-sm-12">
                         <div class="widget clearfix">
-                            <h4 class="ls0 mb-3 nott">Features</h4>
-                            <ul class="list-unstyled iconlist ml-0">
-                                <li><a href="#">Help Center</a></li>
-                                <li><a href="#">Paid with Moblie</a></li>
-                                <li><a href="#">Status</a></li>
-                                <li><a href="#">Changelog</a></li>
-                                <li><a href="#">Contact Support</a></li>
-                            </ul>
+                            <img src="{{asset('images/logotype-footer.png')}}" alt="Logo" class="footer-logo"
+                                 style="margin-top: -1.5rem">
+                            {!! __('lang.footer.caption') !!}
+                            <div
+                                style="background: url('{{asset('images/world_map.png')}}') no-repeat center center; background-size: 100%;">
+                                <address class="mb-3">
+                                    <strong>{{__('lang.footer.headquarters')}}:</strong><br>
+                                    Raya Kenjeran 469 Gading, Tambaksari, Surabaya, Jawa Timur &ndash; 60134.
+                                </address>
+                                <abbr title="{{__('lang.footer.phone')}}"><strong>{{__('lang.footer.phone')}}:</strong></abbr>
+                                <a href="tel:+62313814969">(031) 3814969</a><br>
+                                <abbr title="Fax"><strong>Fax:</strong></abbr> <a href="fax:+623.138.14969">(031)
+                                    3814969</a><br>
+                                <abbr title="Email"><strong>Email:</strong></abbr> <a
+                                    href="mailto:{{env('MAIL_USERNAME')}}">{{env('MAIL_USERNAME')}}</a>
+                            </div>
+                        </div>
+                    </div>
 
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-3 col-6">
+                    <div class="col-lg-3 col-md-4 col-sm-12">
                         <div class="widget clearfix">
-                            <h4 class="ls0 mb-3 nott">Support</h4>
+                            <h4 class="ls0 mb-3 nott">{{__('lang.footer.link')}}</h4>
                             <ul class="list-unstyled iconlist ml-0">
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">About</a></li>
-                                <li><a href="#">FAQs</a></li>
-                                <li><a href="#">Support</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li><a href="#">{{__('lang.header.pro')}}</a></li>
+                                <li><a href="#">{{__('lang.header.how-to')}}</a></li>
+                                <li><a href="#">{{__('lang.header.faq')}}</a></li>
+                                <li><a href="#">{{__('lang.header.about')}}</a></li>
+                                <li><a href="#">{{__('lang.header.contact')}}</a></li>
                             </ul>
                         </div>
-                    </div>
-                    <div class="col-lg-2 col-md-3 col-6">
+
                         <div class="widget clearfix">
-                            <h4 class="ls0 mb-3 nott">Trending</h4>
-                            <ul class="list-unstyled iconlist ml-0">
-                                <li><a href="#">Shop</a></li>
-                                <li><a href="#">Portfolio</a></li>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">Events</a></li>
-                                <li><a href="#">Forums</a></li>
-                            </ul>
+                            <h4 class="ls0 mb-3 nott">{{__('lang.footer.social')}}</h4>
+                            <a href="https://fb.com/pages/Premiere-Digital-Printing/164943546903733" target="_blank"
+                               class="social-icon si-small si-rounded si-facebook">
+                                <i class="icon-facebook"></i>
+                                <i class="icon-facebook"></i>
+                            </a>
+                            <a href="https://instagram.com/premierprintingsby" target="_blank"
+                               class="social-icon si-small si-rounded si-instagram">
+                                <i class="icon-instagram"></i>
+                                <i class="icon-instagram"></i>
+                            </a>
+                            <a href="https://api.whatsapp.com/send?phone=62817597777&text=&source=&data="
+                               target="_blank"
+                               class="social-icon si-small si-rounded si-whatsapp">
+                                <i class="icon-whatsapp"></i>
+                                <i class="icon-whatsapp"></i>
+                            </a>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-3 col-6">
+
+                    <div class="col-lg-4 col-md-4 col-sm-12">
                         <div class="widget clearfix">
-                            <h4 class="ls0 mb-3 nott">Get to Know us</h4>
-                            <ul class="list-unstyled iconlist ml-0">
-                                <li><a href="#">Corporate</a></li>
-                                <li><a href="#">Agency</a></li>
-                                <li><a href="#">eCommerce</a></li>
-                                <li><a href="#">Personal</a></li>
-                                <li><a href="#">OnePage</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-8">
-                        <div class="widget clearfix">
-                            <h4 class="ls0 mb-3 nott">Subscribe Now</h4>
+                            <h4 class="ls0 mb-3 nott">{{__('lang.footer.subs-head')}}</h4>
                             <div class="widget subscribe-widget mt-2 clearfix">
-                                <p class="mb-4"><strong>Subscribe</strong> to Our Newsletter to get Important News,
-                                    Amazing Offers &amp; Inside Scoops:</p>
+                                <p class="mb-4">{!! __('lang.footer.subs-capt') !!}</p>
                                 <div class="widget-subscribe-form-result"></div>
-                                <form id="widget-subscribe-form" action="include/subscribe.php" method="post"
+                                <form id="widget-subscribe-form" action="{{asset('include/subscribe.php')}}"
+                                      method="post"
                                       class="mt-1 nobottommargin d-flex">
                                     <input type="email" id="widget-subscribe-form-email"
                                            name="widget-subscribe-form-email"
                                            class="form-control sm-form-control required email"
-                                           placeholder="Enter your Email Address">
+                                           placeholder="{{__('lang.placeholder.email')}}">
 
-                                    <button class="button nott t400 ml-1 my-0" type="submit">Subscribe Now</button>
+                                    <button class="button nott t400 ml-1 my-0" type="submit">
+                                        {{__('lang.footer.subs-head')}}</button>
                                 </form>
                             </div>
+                        </div>
+
+                        <div class="widget clearfix">
+                            <h4 class="ls0 mb-3 nott">{{__('lang.footer.payment')}}</h4>
+                            <img src="{{asset('images/logo-midtrans-color.svg')}}" alt="Logo" class="footer-logo">
                         </div>
                     </div>
                 </div>
