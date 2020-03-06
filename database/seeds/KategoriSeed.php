@@ -25,8 +25,11 @@ class KategoriSeed extends Seeder
     {
         foreach (self::NAME as $item)
         {
+            $faker = \Faker\Factory::create('id_ID');
             Kategori::create([
-               'name' => $item
+               'name' => $item,
+                'image' => $faker->imageUrl(),
+                'caption' => $faker->paragraph
             ]);
         }
     }
