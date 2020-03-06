@@ -3,12 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class Kategori extends Model
 {
-    protected $table  = 'kategoris';
+    use HasTranslations;
+
+    protected $table = 'kategoris';
 
     protected $guarded = ['id'];
+
+    public $translatable = ['name'];
 
     public function getSubKategori()
     {
