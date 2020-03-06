@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Kategori;
+use Spatie\Translatable\HasTranslations;
 
 class KategoriSeed extends Seeder
 {
@@ -12,25 +13,32 @@ class KategoriSeed extends Seeder
      */
 
     const NAME = [
-        'Kartu Nama',
-        'Peralatan Kantor',
-        'Packaging',
-        'Kebutuhan Marketing',
-        'Kartu',
-        'Garmen',
-        'Foto & Hadiah',
+        ['Kartu Nama', 'Business Cards'],
+        ['Peralatan Kantor', 'Office Stationeries'],
+        ['Kemasan' , 'Packaging'],
+        ['Kebutuhan Marketing', 'Marketing Needs'],
+        ['Kartu', 'Cards'],
+        ['Garmen', 'Garments'],
+        ['Foto & Hadiah', 'Photos & Gifts'],
     ];
 
     public function run()
     {
-        foreach (self::NAME as $item)
-        {
+        foreach (self::NAME as $item ) {
             $faker = \Faker\Factory::create('id_ID');
-            Kategori::create([
-               'name' => $item,
+            $kat = Kategori::create([
+                'name' => [
+                    'en' => $item[1],
+                    'id' => $item[0]
+                ],
                 'image' => $faker->imageUrl(),
-                'caption' => $faker->paragraph
+
+                'caption' =>[
+                    'en' => $faker->paragraph,
+                    'id' => $faker->paragraph
+                ]
             ]);
+
         }
     }
 }

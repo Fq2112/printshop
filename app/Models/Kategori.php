@@ -13,7 +13,7 @@ class Kategori extends Model
 
     protected $guarded = ['id'];
 
-    public $translatable = ['name'];
+    public $translatable = ['name','caption'];
 
     public function getSubKategori()
     {
