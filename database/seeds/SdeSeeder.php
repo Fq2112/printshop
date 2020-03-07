@@ -14,12 +14,12 @@ class SdeSeeder extends Seeder
         ['name' => [
             '1 Sisi', ' 1 Side'
         ], 'description' => [
-            'Desain Akan Dicetak 1 sisi', 'Design Will be Printed on 1 side'
+            'Potongan Sudut 90 Derajat', 'Standard Cutting With 90 Degree Corner'
         ]],
         ['name' => [
-            '2 Sisi', ' 2 Sides'
+            '2 Sisi', ' Rounded Corner'
         ], 'description' => [
-            'Desain Akan Dicetak 2 sisi', 'Design Will be Printed on both sides'
+            'Potongan Sudut Melengkung', 'Advance Cutting With Rounded Corner'
         ],]
     ];
     public function run()

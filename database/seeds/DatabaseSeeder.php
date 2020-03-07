@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
              RightLeftSideSeeder::class,
              BackSideSeeder::class,
              ProvinceSeeder::class,
-             CitiesSeeder::class
+             CitiesSeeder::class,
+             FoldingSeeder::class
          ]);
     }
 }
