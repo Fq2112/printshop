@@ -19,7 +19,9 @@ class DatabaseSeeder extends Seeder
              SdeSeeder::class,
              FrontSeeder::class,
              RightLeftSideSeeder::class,
-             BackSideSeeder::class
+             BackSideSeeder::class,
+             ProvinceSeeder::class,
+             CitiesSeeder::class
          ]);
     }
 }
