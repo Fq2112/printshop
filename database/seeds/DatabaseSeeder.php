@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
          $this->call([
              KategoriSeed::class,
              SubKategoriSeed::class,
-             ClusterKategoriSeed::class
+             ClusterKategoriSeed::class,
+             EdgeSeeder::class
          ]);
     }
 }
