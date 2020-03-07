@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
              EdgeSeeder::class,
              SdeSeeder::class,
              FrontSeeder::class,
-             RightLeftSideSeeder::class
+             RightLeftSideSeeder::class,
+             BackSideSeeder::class
          ]);
     }
 }
