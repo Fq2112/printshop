@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
              BackSideSeeder::class,
              ProvinceSeeder::class,
              CitiesSeeder::class,
-             FoldingSeeder::class
+             FoldingSeeder::class,
+             LaminationSeeder::class
          ]);
     }
 }
