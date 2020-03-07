@@ -11,8 +11,10 @@ return [
         "contact" => "Hubungi Kami",
         "faq" => "FAQ",
         "about" => "Tentang Kami",
-        "home" => "Beranda",
         "cart" => "Keranjang Belanja",
+    ],
+    "modal" => [
+        "subs-head" => ""
     ],
     "revo" => [
         "head" => "Siapkan Tas Belanja Anda!",

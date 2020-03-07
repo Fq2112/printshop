@@ -11,7 +11,6 @@ return [
         "contact" => "Contact Us",
         "faq" => "FAQs",
         "about" => "About Us",
-        "home" => "Home",
         "cart" => "Shopping Cart",
     ],
     "revo" => [

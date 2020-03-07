@@ -4,18 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
-use League\Flysystem\Config;
+use Illuminate\Support\Facades\Config;
 use Spatie\Translatable\HasTranslations;
 
 class ClusterKategori extends Model
 {
     use HasTranslations;
 
-    protected $table  = 'cluster_kategoris';
+    protected $table = 'cluster_kategoris';
 
     protected $guarded = ['id'];
 
     public $translatable = ['name'];
+
+    public function getSubKategori()
+    {
+        return $this->belongsTo(SubKategori::class, 'subkategori_id');
+    }
 
     public function getLocale(): string
     {
@@ -24,10 +29,5 @@ class ClusterKategori extends Model
         }
 
         return Config::get('app.locale');
-    }
-
-    public function getSubKategori()
-    {
-        return $this->belongsTo(SubKategori::class,'subkategori_id');
     }
 }

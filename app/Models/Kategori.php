@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
-use League\Flysystem\Config;
+use Illuminate\Support\Facades\Config;
 use Spatie\Translatable\HasTranslations;
 
 class Kategori extends Model
@@ -15,7 +15,12 @@ class Kategori extends Model
 
     protected $guarded = ['id'];
 
-    public $translatable = ['name','caption'];
+    public $translatable = ['name', 'caption'];
+
+    public function getSubKategori()
+    {
+        return $this->hasMany(SubKategori::class, 'kategoris_id');
+    }
 
     public function getLocale(): string
     {
@@ -24,10 +29,5 @@ class Kategori extends Model
         }
 
         return Config::get('app.locale');
-    }
-
-    public function getSubKategori()
-    {
-        return $this->hasMany(SubKategori::class, 'kategoris_id');
     }
 }

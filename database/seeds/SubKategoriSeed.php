@@ -12,77 +12,78 @@ class SubKategoriSeed extends Seeder
      */
     public function run()
     {
-        $sub [] = [
-            ['Kartu Nama', 'Name Cards']
+        $sub[] = [
+            ['Kartu Nama', 'Business Cards']
         ];
 
         $sub[] = [
-            ['Kop Surat','Letterhead'],
-            ['Amplop','Envelope'],
-            ['Lanyard','Lanyard'],
-            ['Map Folder','Map Folder'],
-            ['Nota  NCR','Note NCR'],
-            ['Cetak Dokumen','Print Dokumen']
+            ['Kop Surat', 'Letterheads'],
+            ['Amplop', 'Envelopes'],
+            ['Lanyard', 'Lanyards'],
+            ['Map Folder', 'Map Folders'],
+            ['Nota NCR', 'NCR Notes'],
+            ['Cetak Dokumen', 'Document Printing']
         ];
 
         $sub[] = [
-            ['Paper Cup','Paper Cup'],
-            ['Shopping Paper Bag','Shopping Paper Bag'],
-            ['Lakban Custom','Lakban Custom'],
-            ['Gelas Plastik','Plastic Cups'],
-            ['Snack Box','Snack Box'],
-            ['Label Harga','Price Tag'],
-            ['Launch Box','Launch Box'],
-            ['Kardus Box','Cardboard Box'],
-            ['Paper Bag Makanan','Food Paper Bag'],
-            ['kardus Box Duplex','Duplex Cardboard Box'],
-            ['Food Wrapping Paper','Food Wrapping Paper'],
-            ['Placemat','Placemat'],
-            ['Sealer','Sealer']
+            ['Paper Cup', 'Paper Cups'],
+            ['Shopping Paper Bag', 'Shopping Paper Bags'],
+            ['Lakban Custom', 'Custom Duct Tapes'],
+            ['Gelas Plastik', 'Plastic Cups'],
+            ['Snack Box', 'Snack Boxes'],
+            ['Label Harga', 'Price Tags'],
+            ['Lunch Box', 'Lunch Boxes'],
+            ['Kardus Box', 'Cardboard Boxes'],
+            ['Paper Bag Makanan', 'Food Paper Bags'],
+            ['Kardus Box Duplex', 'Duplex Cardboard Boxes'],
+            ['Food Wrapping Paper', 'Food Wrapping Papers'],
+            ['Placemat', 'Placemats'],
+            ['Sealer', 'Sealers']
         ];
 
         $sub[] = [
-            ['Flyer','Flyer'],
-            ['Poster','Poster'],
-            ['Tent Card','Tent Card'],
-            ['Brosur','Brochure'],
-            ['Banners','Banners'],
-            ['Booklet','Booklet'],
-            ['Stiker','Sticker'],
-            ['Sertifikat','Certificate'],
-            ['Majalah','Magazine'],
-            ['Company Profile','Profil perusahaan'],
-            ['Kalender Voucher','Voucher Calender'],
-            ['Wobblers','Wobblers'],
-            ['Backdrop Portable','Backdrop Portable'],
-            ['Meja Promosi','Promotion Table'],
-            ['Pop up Counters','Pop Up Counters']
+            ['Flyer', 'Flyers'],
+            ['Poster', 'Posters'],
+            ['Tent Card', 'Tent Cards'],
+            ['Brosur', 'Brochures'],
+            ['Banners', 'Banners'],
+            ['Booklet', 'Booklets'],
+            ['Stiker', 'Stickers'],
+            ['Sertifikat', 'Certificates'],
+            ['Majalah', 'Magazines'],
+            ['Company Profile', 'Company Profiles'],
+            ['Kalender', 'Calendars'],
+            ['Voucher', 'Vouchers'],
+            ['Wobblers', 'Wobblers'],
+            ['Backdrop Portable', 'Portable Backdrops'],
+            ['Meja Promosi', 'Promotion Tables'],
+            ['Pop up Counter', 'Pop Up Counters']
         ];
 
         $sub[] = [
-            ['Kartu Undangan','Invitation cards'],
-            ['Kartu Terima Kasih',''],
-            ['ID Card','ID Card'],
-            ['Kartu Ucapan','Greeting Card'],
-            ['Kartu Stamp','Stamp Card'],
-            ['PostCard','PostCard'],
-            ['Kartu Elektronik','Electronic Card']
+            ['Kartu Undangan', 'Invitation Cards'],
+            ['Kartu Terima Kasih', 'Gratitude Cards'],
+            ['Kartu Identitas', 'ID Cards'],
+            ['Kartu Ucapan', 'Greeting Cards'],
+            ['Kartu Stamp', 'Stamp Cards'],
+            ['Kartu Pos', 'Postcards'],
+            ['Kartu Elektronik', 'Electronic Cards']
         ];
 
         $sub[] = [
-            ['Tote Bag','Tote Bag'],
-            ['Tas Goodie','Goodie Bag'],
-            ['Kaos Polo','Polo Shirt'],
-            ['T-Shirt','T-Shirt']
+            ['Tote Bag', 'Tote Bags'],
+            ['Tas Goodie', 'Goodie Bags'],
+            ['Kaos Polo', 'Polo Shirts'],
+            ['T-Shirt', 'T-Shirts']
         ];
 
         for ($i = 0; $i < count($sub); $i++) {
-            foreach ($sub[$i] as $city) {
+            foreach ($sub[$i] as $item) {
                 SubKategori::create([
                     'kategoris_id' => $i + 1,
                     'name' => [
-                        'en' => $city[1],
-                        'id' => $city[0]
+                        'en' => $item[1],
+                        'id' => $item[0]
                     ],
                 ]);
             }
