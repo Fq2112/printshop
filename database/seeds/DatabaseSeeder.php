@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
              CitiesSeeder::class,
              FoldingSeeder::class,
              LaminationSeeder::class,
-             FinishingSeeder::class
+             FinishingSeeder::class,
+             BannerSeeder::class
          ]);
     }
 }
