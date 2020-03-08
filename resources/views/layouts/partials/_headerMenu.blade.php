@@ -102,7 +102,48 @@
 </div>
 
 <div id="top-account">
-    <a href="#modal-register" data-lightbox="inline"><i
-            class="icon-line2-user mr-1 position-relative" style="top: 1px;"></i><span
-            class="d-none d-sm-inline-block font-primary t500">{{__('lang.button.login')}}</span></a>
+    @if(Auth::check() || Auth::guard('admin')->check())
+        <li class="has-children avatar">
+            <a href="javascript:void(0)" style="font-weight: 900;">
+                @if(Auth::check())
+                    <img class="img-thumbnail show_ava" src="{{Auth::user()->ava != "" ?
+                            asset('storage/users/ava/'.Auth::user()->ava) :
+                            asset('images/avatar.png')}}">{{Auth::user()->name}}
+                @elseif(Auth::guard('admin')->check())
+                    <img class="img-thumbnail show_ava" src="{{Auth::guard('admin')->user()->ava != "" ?
+                            asset('storage/admins/ava/'.Auth::guard('admin')->user()->ava) :
+                            asset('images/avatar.png')}}">{{Auth::guard('admin')->user()->name}}
+                @endif
+            </a>
+            <ul class="dropdown">
+                @auth('admin')
+                    @if(Auth::guard('admin')->user()->isRoot() || Auth::guard('admin')->user()->isAdmin())
+                        <li><a href="{{route('home-admin')}}"><i class="fa fa-tachometer-alt mr-2"></i>
+                                Dashboard</a></li>
+                    @else
+                        <li><a href="{{route('show.schedules')}}"><i class="fa fa-calendar-day mr-2"></i>
+                                Schedules</a></li>
+                    @endif
+                @else
+                    <li><a href="{{route('client.dashboard')}}"><i class="fa fa-tachometer-alt mr-2"></i>
+                            Dashboard</a></li>
+                @endauth
+                <li><a href="{{Auth::guard('admin')->check() ? route('admin.edit.profile') :
+                        route('client.edit.profile')}}"><i class="fa fa-user-edit mr-2"></i>Edit Profile</a></li>
+                <li><a href="{{Auth::guard('admin')->check() ? route('admin.settings') :
+                        route('client.settings')}}"><i class="fa fa-cogs mr-2"></i>Account Settings</a></li>
+                <li class="dropdown-divider"></li>
+                <li>
+                    <a class="btn_signOut"><i class="fa fa-sign-out-alt mr-2"></i>Sign Out</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
+            </ul>
+        </li>
+    @else
+        <a href="javascript:void(0)" data-toggle="modal" onclick="openRegisterModal();">
+            <i class="icon-line2-user mr-1 position-relative" style="top: 1px;"></i>
+            <span class="d-none d-sm-inline-block font-primary t500 text-uppercase">{{__('lang.header.sign-up-in')}}</span></a>
+    @endif
 </div>

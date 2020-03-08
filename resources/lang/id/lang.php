@@ -11,10 +11,8 @@ return [
         "contact" => "Hubungi Kami",
         "faq" => "FAQ",
         "about" => "Tentang Kami",
+        "sign-up-in" => "Daftar/Masuk",
         "cart" => "Keranjang Belanja",
-    ],
-    "modal" => [
-        "subs-head" => ""
     ],
     "revo" => [
         "head" => "Siapkan Tas Belanja Anda!",
@@ -77,16 +75,38 @@ return [
     "placeholder" => [
         "search" => "Mau cetak apa hari ini?",
         "email" => "Alamat email",
+        "password" => "Kata sandi",
+        "new-password" => "Kata sandi baru",
+        "re-password" => "Ulangi kata sandi",
+        "name" => "Nama lengkap",
     ],
     "button" => [
         "cart" => "Lihat Keranjang",
         "login" => "Masuk",
+        "register" => "Buat Akun",
+        "forgot" => "Lupa kata sandi?",
+        "reset" => "Kirim Tautan Reset",
+        "recovery" => "Reset Kata Sandi",
         "shop" => "Belanja Sekarang",
         "next" => "Selanjutnya",
         "prev" => "Sebelumnya",
         "finish" => "Selesai",
         "back" => "Kembali",
         "subs" => "Berlangganan",
+    ],
+    "modal" => [
+        "auth" => [
+            "header-create" => "Daftar",
+            "header-login" => "Masuk",
+            "header-reset" => "Reset Kata Sandi",
+            "header-recovery" => "Pulihkan Kata Sandi",
+            "divider" => "atau",
+            "alert" => "Peringatan!",
+            "remember" => "Ingat saya",
+            "pp-tnc" => "<small>Dengan melanjutkan ini, Anda mengakui bahwa Anda menerima <a href='".route('info')."' target='_blank'>Kebijakan Privasi</a> dan <a href='".route('info')."' target='_blank'>Syarat & Ketentuan</a> ".env('APP_TITLE').".</small>",
+            "footer-create" => "Ingin <a href='javascript:showRegisterForm()'>membuat akun</a>?",
+            "footer-login" => "Sudah punya akun? <a href='javascript:showLoginForm()'>Masuk</a>",
+        ],
     ],
     "footer" => [
         "caption" => "<p>Nikmati pengalaman mencetak dengan <strong>kualitas tinggi</strong> yang lebih <strong>murah</strong>, lebih <strong>terjamin</strong>, lebih <strong>mudah</strong>, dan lebih <strong>cepat</strong> hanya bersama kami, <strong>" . env('APP_TITLE') . "</strong>.</p>",

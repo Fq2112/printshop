@@ -18,10 +18,10 @@
     <link rel="stylesheet" href="{{asset('demos/shop/css/fonts.css')}}" type="text/css">
 
     <link rel="stylesheet" href="{{asset('css/font-icons.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/glyphicons.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('css/animate.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}" type="text/css">
-    <!-- AOS -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <link rel="stylesheet" href="{{asset('css/modal.css')}}">
 
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -55,6 +55,31 @@
             border-radius: 0;
             margin: 0;
             padding: 0;
+        }
+
+        .avatar img {
+            width: 40px;
+            margin-right: .5em;
+            border-radius: 100%;
+            -webkit-transition: all .3s ease-in-out;
+            -moz-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
+        }
+
+        .avatar:hover img {
+            border: 1px solid #122752;
+            -webkit-transition: all .3s ease-in-out;
+            -moz-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
+        }
+        .has-feedback .form-control-feedback {
+            position: absolute;
+            right: 15px;
+            display: block;
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
         }
 
         .content-area {
@@ -115,6 +140,8 @@
         }
     </style>
     @stack('styles')
+
+    <script src='https://www.google.com/recaptcha/api.js?onload=recaptchaCallback&render=explicit' async defer></script>
 </head>
 
 <body class="stretched use-nicescroll">
@@ -277,7 +304,7 @@
                                            class="form-control sm-form-control required email"
                                            placeholder="{{__('lang.placeholder.email')}}">
 
-                                    <button class="button nott t400 ml-1 my-0" type="submit">
+                                    <button class="button text-uppercase t400 ml-1 my-0" type="submit">
                                         {{__('lang.button.subs')}}</button>
                                 </form>
                             </div>
@@ -318,6 +345,8 @@
 <script src="{{asset('js/jquery.js')}}"></script>
 <script src="{{asset('js/plugins.js')}}"></script>
 
+<!-- toggle password -->
+<script src="{{ asset('js/hideShowPassword.min.js') }}"></script>
 <!-- check-mobile -->
 <script src="{{asset('js/checkMobileDevice.js')}}"></script>
 <!-- Nicescroll -->
