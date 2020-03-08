@@ -14,7 +14,18 @@ class DatabaseSeeder extends Seeder
          $this->call([
              KategoriSeed::class,
              SubKategoriSeed::class,
-             ClusterKategoriSeed::class
+             ClusterKategoriSeed::class,
+             EdgeSeeder::class,
+             SdeSeeder::class,
+             FrontSeeder::class,
+             RightLeftSideSeeder::class,
+             BackSideSeeder::class,
+             ProvinceSeeder::class,
+             CitiesSeeder::class,
+             FoldingSeeder::class,
+             LaminationSeeder::class,
+             FinishingSeeder::class,
+             BannerSeeder::class
          ]);
     }
 }
