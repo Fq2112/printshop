@@ -73,7 +73,7 @@ return [
     ],
     "placeholder" => [
         "search" => "What do you want to print today?",
-        "email" => "Enter your email address",
+        "email" => "Email address",
     ],
     "button" => [
         "cart" => "View Cart",
@@ -83,13 +83,14 @@ return [
         "prev" => "Previous",
         "finish" => "Finish",
         "back" => "Back",
+        "subs" => "Subscribe",
     ],
     "footer" => [
         "caption" => "<p>Enjoy a <strong>high-quality</strong> printing experience that is <strong>cheaper</strong>, more <strong>guaranteed</strong>, <strong>easier</strong>, and <strong>faster</strong> only with us, <strong>" . env('APP_TITLE') . "</strong>.</p>",
         "headquarters" => "Headquarters",
         "phone" => "Phone",
         "link" => "Get to Know Us",
-        "payment" => "Payment Vendor",
+        "payment" => "Payment Partner",
         "subs-head" => "Subscribe Now",
         "subs-capt" => "<strong>Subscribe</strong> to Our Newsletter to get Important News, Amazing Offers &amp; Inside Scoops:",
         "social" => "Get in Touch",

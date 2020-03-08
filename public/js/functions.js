@@ -1069,6 +1069,7 @@ var SEMICOLON = SEMICOLON || {};
 
 			$( '#primary-menu ul li:has(ul)' ).addClass('sub-menu');
 			$( '.top-links ul li:has(ul) > a:not(:has(.icon-angle-down)), #primary-menu.with-arrows > ul > li:has(ul) > a > div:not(:has(.icon-angle-down)), #primary-menu.with-arrows > div > ul > li:has(ul) > a > div:not(:has(.icon-angle-down)), #page-menu nav ul li:has(ul) > a > div:not(:has(.icon-angle-down))' ).append( '<i class="icon-angle-down"></i>' );
+			$( '#primary-menu ul li ul li:has(ul li) > a > div:not(:has(.icon-angle-right))' ).append( '<i class="icon-angle-right"></i>' );
 			$( '.top-links > ul' ).addClass( 'clearfix' );
 
 			if( $body.hasClass('device-xl') || $body.hasClass('device-lg') ) {

@@ -2,12 +2,6 @@
     $(function () {
         window.mobilecheck() ? $("body").removeClass('use-nicescroll') : $("body").css("overflow", "hidden");
 
-        AOS.init({
-            duration: 800,
-            easing: 'slide',
-            once: false,
-        });
-
         $('[data-toggle="tooltip"]').tooltip();
         $('[data-toggle="popover"]').popover();
     });
@@ -44,7 +38,7 @@
         var docHeight = $(document).height();
         var windowHeight = $(window).height();
         var progress = (windowScrollTop / (docHeight - windowHeight)) * 100;
-        var $bgColor = progress > 99 ? '#22ffd3' : '#1ABC9C';
+        var $bgColor = progress > 99 ? '#ff9a06' : '#f89406';
         var $textColor = progress > 99 ? '#fff' : '#333';
 
         $('.myProgress .bar').width(progress + '%').css({backgroundColor: $bgColor});
@@ -60,7 +54,7 @@
         // $('.images-preloader').fadeOut();
 
         $(".use-nicescroll").niceScroll({
-            cursorcolor: "rgb(26,188,156)",
+            cursorcolor: "rgb(248,148,6)",
             cursorwidth: "8px",
             background: "rgba(222, 222, 222, .75)",
             cursorborder: 'none',
@@ -73,7 +67,7 @@
             whatsapp: "+62817597777",
             email: "{{env('MAIL_USERNAME')}}",
             call_to_action: "{{__('lang.footer.wh')}}",
-            button_color: "#1ABC9C",
+            button_color: "#f89406",
             position: "left",
             order: "email,whatsapp",
         };

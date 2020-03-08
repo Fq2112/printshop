@@ -255,6 +255,38 @@ input.switch-toggle-round:checked + label:before,
 .dark .fbox-border.fbox-effect.fbox-dark .fbox-icon i:hover,
 .dark .fbox-border.fbox-effect.fbox-dark:hover .fbox-icon i { box-shadow: 0 0 0 1px <?php echo $color; ?>; }
 
+#primary-menu ul li .mega-menu-content.style-2 ul.mega-menu-column > li.mega-menu-title > a {
+text-decoration: none !important;
+color: #444 !important;
+transition: all .3s ease;
+}
+
+#primary-menu ul li .mega-menu-content.style-2 ul.mega-menu-column > li.mega-menu-title > a:hover {
+text-decoration: none !important;
+color: <?php echo $color; ?> !important;
+}
+
+body::-webkit-scrollbar-thumb,
+.css3-spinner > div,
+.myProgress .bar {
+background-color: <?php echo $color; ?> !important;
+}
+
+.button-primary {
+background-color: <?php echo $color; ?>;
+}
+
+.button-3d.button-primary:hover,
+.button-reveal.button-primary:hover,
+.button-border.button-primary:hover,
+.button-border.button-primary.button-fill:before {
+background-color: <?php echo $color; ?> !important;
+}
+
+.button-border.button-primary {
+color: <?php echo $color; ?>;
+border-color: <?php echo $color; ?>;
+}
 
 @media only screen and (max-width: 991px) {
 

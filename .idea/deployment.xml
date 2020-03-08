@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="kariernesia.com">
+  <component name="PublishConfigData" serverName="kariernesia.com" persistUploadOnCheckin="false">
     <serverData>
       <paths name="kariernesia.com">
         <serverdata>

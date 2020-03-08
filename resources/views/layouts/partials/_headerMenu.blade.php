@@ -5,32 +5,48 @@
                 <div>{{$kat->name}}</div>
             </a>
             <div class="mega-menu-content style-2 clearfix">
-                @foreach($kat->getSubKategori as $sub)
-                    <ul class="mega-menu-column border-left-0 col-lg-3">
-                        <li class="mega-menu-title">
-                            <a href="#">
-                                <div>{{$sub->name}}</div>
-                            </a>
-                            @if($sub->getCluster)
-                                <ul>
-                                    @foreach($sub->getCluster as $row)
-                                        <li><a href="#">
-                                                <div>{{$row->name}}</div>
-                                            </a></li>
-                                    @endforeach
-                                </ul>
-                            @endif
+                <div class="col-lg-3 justify-content-center align-self-center" style="border-right: 1px solid #F2F2F2;">
+                    <ul class="mega-menu-column mega-menu-thumb border-left-0">
+                        <li>
+                            <div class="widget clearfix">
+                                <div class="content-area">
+                                    <img class="card-img-top" src="{{asset('storage/products/thumb/'.$kat->image)}}"
+                                         alt="Thumbnail">
+                                    <div class="custom-overlay">
+                                        <div class="custom-text"></div>
+                                    </div>
+                                </div>
+                                <p class="topmargin-sm nobottommargin">{{$kat->caption}}</p>
+                            </div>
                         </li>
                     </ul>
-                @endforeach
-                <ul class="mega-menu-column col-lg-3 border-left-0">
-                    <li class="card p-0 nobg noborder">
-                        <a href="#">
-                            <img class="card-img-top" src="{{asset('demos/shop/images/menu-image.jpg')}}" alt="">
-                            <p>{{$kat->caption}}</p>
-                        </a>
-                    </li>
-                </ul>
+                </div>
+                <div class="card-columns col-lg-9 justify-content-center align-self-center">
+                    @foreach($kat->getSubKategori as $sub)
+                        <div class="card">
+                            <div class="card-body nopadding nomargin">
+                                <ul class="mega-menu-column border-left-0">
+                                    <li class="mega-menu-title">
+                                        <a href="#">
+                                            <div>{{$sub->name}}</div>
+                                        </a>
+                                        @if($sub->getCluster)
+                                            <ul>
+                                                @foreach($sub->getCluster as $row)
+                                                    <li>
+                                                        <a href="#">
+                                                            <div>{{$row->name}}</div>
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </li>
     @endforeach

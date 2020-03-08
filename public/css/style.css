@@ -7061,22 +7061,6 @@ body:not(.device-touch) .button.button-full strong {
 /* Buttons - Colors
 -----------------------------------------------------------------*/
 
-.button-primary {
-    background-color: #1ABC9C;
-}
-
-.button-3d.button-primary:hover,
-.button-reveal.button-primary:hover,
-.button-border.button-primary:hover,
-.button-border.button-primary.button-fill:before {
-    background-color: #1ABC9C !important;
-}
-
-.button-border.button-primary {
-    color: #1ABC9C;
-    border-color: #1ABC9C;
-}
-
 .button-red {
     background-color: #C02942;
 }

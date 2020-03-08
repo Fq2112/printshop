@@ -26,9 +26,77 @@
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="{{asset('css/colors.php?color=1ABC9C')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/colors.php?color=f89406')}}" type="text/css">
 
     <style>
+        #primary-menu ul li .mega-menu-content.style-2 ul.mega-menu-column:not(.mega-menu-thumb) {
+            padding: 5px 20px;
+        }
+
+        #primary-menu ul li .mega-menu-content ul:not(.mega-menu-column) {
+            margin-top: -1em
+        }
+
+        #primary-menu ul li .mega-menu-content ul:not(.mega-menu-column) li {
+            margin-top: -.7em
+        }
+
+        #primary-menu ul li .mega-menu-content ul:not(.mega-menu-column) li:hover > a {
+            background-color: transparent;
+        }
+
+        #primary-menu .card-columns {
+            column-gap: 0;
+        }
+
+        #primary-menu .card-columns .card {
+            border: none;
+            border-right: 1px solid #F2F2F2 !important;
+            border-radius: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .content-area {
+            position: relative;
+            cursor: default;
+            overflow: hidden;
+        }
+
+        .custom-overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.4);
+            opacity: 0;
+            transition: all 400ms ease-in-out;
+            height: 100%;
+        }
+
+        .custom-overlay:hover {
+            opacity: 1;
+        }
+
+        .custom-text {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            right: 10px;
+            transform: translateY(-50%);
+            color: #fff !important;
+        }
+
+        .content-area img {
+            transition: transform .5s ease;
+        }
+
+        .content-area:hover img {
+            transform: scale(1.2);
+        }
+
         .myProgress {
             position: fixed;
             margin-bottom: 0;
@@ -43,7 +111,6 @@
         .myProgress .bar {
             height: 100%;
             width: 10%;
-            background: #1ABC9C;
             transition: background 0.15s ease;
         }
     </style>
@@ -211,7 +278,7 @@
                                            placeholder="{{__('lang.placeholder.email')}}">
 
                                     <button class="button nott t400 ml-1 my-0" type="submit">
-                                        {{__('lang.footer.subs-head')}}</button>
+                                        {{__('lang.button.subs')}}</button>
                                 </form>
                             </div>
                         </div>
@@ -255,8 +322,6 @@
 <script src="{{asset('js/checkMobileDevice.js')}}"></script>
 <!-- Nicescroll -->
 <script src="{{asset('js/plugins/nicescroll/jquery.nicescroll.js')}}"></script>
-<!-- AOS -->
-<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
 <script src="{{asset('js/functions.js')}}"></script>
 

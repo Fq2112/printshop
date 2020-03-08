@@ -76,7 +76,7 @@ return [
     ],
     "placeholder" => [
         "search" => "Mau cetak apa hari ini?",
-        "email" => "Masukkan alamat email Anda",
+        "email" => "Alamat email",
     ],
     "button" => [
         "cart" => "Lihat Keranjang",
@@ -86,13 +86,14 @@ return [
         "prev" => "Sebelumnya",
         "finish" => "Selesai",
         "back" => "Kembali",
+        "subs" => "Berlangganan",
     ],
     "footer" => [
         "caption" => "<p>Nikmati pengalaman mencetak dengan <strong>kualitas tinggi</strong> yang lebih <strong>murah</strong>, lebih <strong>terjamin</strong>, lebih <strong>mudah</strong>, dan lebih <strong>cepat</strong> hanya bersama kami, <strong>" . env('APP_TITLE') . "</strong>.</p>",
         "headquarters" => "Kantor Pusat",
         "phone" => "Telepon",
         "link" => "Mengenal Kami",
-        "payment" => "Vendor Pembayaran",
+        "payment" => "Mitra Pembayaran",
         "subs-head" => "Berlangganan Sekarang",
         "subs-capt" => "<strong>Berlangganan</strong> Newsletter Kami untuk mendapatkan Berita Penting, Penawawan Menakjubkan &amp; <em>Inside Scoops</em>:",
         "social" => "Ikuti Kami",
