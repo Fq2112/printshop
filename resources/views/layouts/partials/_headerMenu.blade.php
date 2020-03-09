@@ -5,7 +5,7 @@
                 <div>{{$kat->name}}</div>
             </a>
             <div class="mega-menu-content style-2 clearfix">
-                <div class="col-lg-3 justify-content-center align-self-center" style="border-right: 1px solid #F2F2F2;">
+                <div class="col-lg-3" style="border-right: 1px solid #F2F2F2;">
                     <ul class="mega-menu-column mega-menu-thumb border-left-0">
                         <li>
                             <div class="widget clearfix">
@@ -21,7 +21,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="card-columns col-lg-9 justify-content-center align-self-center">
+                <div class="card-columns col-lg-9">
                     @foreach($kat->getSubKategori as $sub)
                         <div class="card">
                             <div class="card-body nopadding nomargin">
