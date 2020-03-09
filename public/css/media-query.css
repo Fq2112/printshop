@@ -55,6 +55,11 @@
   ##Screen = B/w 1025px to 1280px
 */
 @media (min-width: 1025px) and (max-width: 1280px) {
+    .tp-caption .button span {
+        font-size: 14px !important;
+        line-height: 42px !important;
+    }
+
     #processTabs .media img.step-1 {
         width: 200px;
     }
@@ -81,6 +86,11 @@
   ##Screen = B/w 768px to 1024px
 */
 @media (min-width: 768px) and (max-width: 1024px) {
+    .tp-caption .button span {
+        font-size: 12px !important;
+        line-height: 42px !important;
+    }
+
     #processTabs .media img.step-1 {
         width: 200px;
     }
@@ -107,6 +117,11 @@
   ##Screen = B/w 768px to 1024px
 */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .tp-caption .button span {
+        font-size: 14px !important;
+        line-height: 42px !important;
+    }
+
     #processTabs .media img.step-1 {
         width: 250px;
     }
@@ -133,6 +148,15 @@
   ##Screen = B/w 481px to 767px
 */
 @media (min-width: 481px) and (max-width: 767px) {
+    .tp-caption .button {
+        height: 30px !important;
+    }
+
+    .tp-caption .button span {
+        font-size: 10px !important;
+        line-height: 28px !important;
+    }
+
     #processTabs .media img.step-1 {
         width: 150px;
     }
@@ -159,6 +183,15 @@
   ##Screen = B/w 320px to 479px
 */
 @media (min-width: 320px) and (max-width: 480px) {
+    .tp-caption .button {
+        height: 30px !important;
+    }
+
+    .tp-caption .button span {
+        font-size: 10px !important;
+        line-height: 28px !important;
+    }
+
     #processTabs .media img.step-1 {
         width: 100px;
     }
