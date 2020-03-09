@@ -19,6 +19,34 @@ class ClusterKategoriSeed extends Seeder
         ];
 
         $clust[] = [
+            ['Kartu Undangan Standar', 'Standard Invitation Cards'],
+            ['Kartu Undangan Premium', 'Premium Invitation Cards'],
+        ];
+        $clust[] = [
+            ['Kartu Terima Kasih Standar', 'Standard Gratitude Cards'],
+            ['Kartu Terima Kasih Premium', 'Premium Gratitude Cards'],
+        ];
+        $clust[] = [
+            ['Kartu Identitas Standar', 'Standard ID Cards'],
+            ['Kartu RFID', 'RFID Cards'],
+        ];
+        $clust[] = [
+            ['Kartu Ucapan Standar', 'Standard Greeting Cards'],
+            ['Kartu Ucapan Premium', 'Premium Greeting Cards'],
+        ];
+        $clust[] = [
+            ['Kartu Stamp Flat', 'Flat Stamp Cards'],
+            ['Kartu Stamp Folding', 'Folding Stamp Cards'],
+        ];
+        $clust[] = [
+            ['Kartu Pos Standar', 'Standard Postcards'],
+            ['Kartu Pos Premium', 'Premium Postcards'],
+        ];
+        $clust[] = [
+            //Kartu E
+        ];
+
+        $clust[] = [
             ['Kop Surat Standar', 'Standard Letterheads'],
             ['Kop Surat Premium', 'Premium Letterheads']
         ];
@@ -181,33 +209,33 @@ class ClusterKategoriSeed extends Seeder
         $clust[] = [
             //Popup Counter
         ];
-        $clust[] = [
-            ['Kartu Undangan Standar', 'Standard Invitation Cards'],
-            ['Kartu Undangan Premium', 'Premium Invitation Cards'],
-        ];
-        $clust[] = [
-            ['Kartu Terima Kasih Standar', 'Standard Gratitude Cards'],
-            ['Kartu Terima Kasih Premium', 'Premium Gratitude Cards'],
-        ];
-        $clust[] = [
-            ['Kartu Identitas Standar', 'Standard ID Cards'],
-            ['Kartu RFID', 'RFID Cards'],
-        ];
-        $clust[] = [
-            ['Kartu Ucapan Standar', 'Standard Greeting Cards'],
-            ['Kartu Ucapan Premium', 'Premium Greeting Cards'],
-        ];
-        $clust[] = [
-            ['Kartu Stamp Flat', 'Flat Stamp Cards'],
-            ['Kartu Stamp Folding', 'Folding Stamp Cards'],
-        ];
-        $clust[] = [
-            ['Kartu Pos Standar', 'Standard Postcards'],
-            ['Kartu Pos Premium', 'Premium Postcards'],
-        ];
-        $clust[] = [
-            //Kartu E
-        ];
+//        $clust[] = [
+//            ['Kartu Undangan Standar', 'Standard Invitation Cards'],
+//            ['Kartu Undangan Premium', 'Premium Invitation Cards'],
+//        ];
+//        $clust[] = [
+//            ['Kartu Terima Kasih Standar', 'Standard Gratitude Cards'],
+//            ['Kartu Terima Kasih Premium', 'Premium Gratitude Cards'],
+//        ];
+//        $clust[] = [
+//            ['Kartu Identitas Standar', 'Standard ID Cards'],
+//            ['Kartu RFID', 'RFID Cards'],
+//        ];
+//        $clust[] = [
+//            ['Kartu Ucapan Standar', 'Standard Greeting Cards'],
+//            ['Kartu Ucapan Premium', 'Premium Greeting Cards'],
+//        ];
+//        $clust[] = [
+//            ['Kartu Stamp Flat', 'Flat Stamp Cards'],
+//            ['Kartu Stamp Folding', 'Folding Stamp Cards'],
+//        ];
+//        $clust[] = [
+//            ['Kartu Pos Standar', 'Standard Postcards'],
+//            ['Kartu Pos Premium', 'Premium Postcards'],
+//        ];
+//        $clust[] = [
+//            //Kartu E
+//        ];
         $clust[] = [
             ['Tote Bag Standar', 'Standard Tote Bags'],
             ['Tote Bag Premium', 'Premium Tote Bags'],

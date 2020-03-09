@@ -13,7 +13,14 @@ class SubKategoriSeed extends Seeder
     public function run()
     {
         $sub[] = [
-            ['Kartu Nama', 'Business Cards']
+            ['Kartu Nama', 'Business Cards'],
+            ['Kartu Undangan', 'Invitation Cards'],
+            ['Kartu Terima Kasih', 'Gratitude Cards'],
+            ['Kartu Identitas', 'ID Cards'],
+            ['Kartu Ucapan', 'Greeting Cards'],
+            ['Kartu Stamp', 'Stamp Cards'],
+            ['Kartu Pos', 'Postcards'],
+            ['Kartu Elektronik', 'Electronic Cards']
         ];
 
         $sub[] = [
@@ -60,15 +67,15 @@ class SubKategoriSeed extends Seeder
             ['Pop up Counter', 'Pop Up Counters']
         ];
 
-        $sub[] = [
-            ['Kartu Undangan', 'Invitation Cards'],
-            ['Kartu Terima Kasih', 'Gratitude Cards'],
-            ['Kartu Identitas', 'ID Cards'],
-            ['Kartu Ucapan', 'Greeting Cards'],
-            ['Kartu Stamp', 'Stamp Cards'],
-            ['Kartu Pos', 'Postcards'],
-            ['Kartu Elektronik', 'Electronic Cards']
-        ];
+//        $sub[] = [
+//            ['Kartu Undangan', 'Invitation Cards'],
+//            ['Kartu Terima Kasih', 'Gratitude Cards'],
+//            ['Kartu Identitas', 'ID Cards'],
+//            ['Kartu Ucapan', 'Greeting Cards'],
+//            ['Kartu Stamp', 'Stamp Cards'],
+//            ['Kartu Pos', 'Postcards'],
+//            ['Kartu Elektronik', 'Electronic Cards']
+//        ];
 
         $sub[] = [
             ['Tote Bag', 'Tote Bags'],

@@ -14,9 +14,10 @@ class KategoriSeed extends Seeder
 
     const NAME = [
         [
-            'Kartu Nama', 'Business Cards',
-            'Buktikan profesionalitas Anda maupun bisnis Anda dengan kartu nama yang berkualitas tinggi dan memukau.',
-            'Prove your professionalism and your business with a high-quality and stunning business cards.'
+            'Kartu', 'Cards',
+            'Produk cetak berkualitas tinggi yang berupa kartu, seperti kartu nama untuk membuktikan profesionalitas Anda, kartu undangan, kartu ucapan, dan masih banyak lainnya.',
+            'High-quality print product in the form of cards, such as business cards to prove your professionalism,
+             invitation cards, greeting cards and many more..'
         ],
         [
             'Peralatan Kantor', 'Office Stationeries',
@@ -33,11 +34,11 @@ class KategoriSeed extends Seeder
             'Penuhi kebutuhan promosi bisnis Anda dengan berbagai varian produk cetak berkualitas tinggi yang memukau.',
             'Meet your business promotion needs with a variety of stunning high-quality print product variants.'
         ],
-        [
-            'Kartu', 'Cards',
-            'Produk cetak berkualitas tinggi yang berupa kartu, juga digunakan untuk memenuhi kebutuhan promosi bisnis Anda.',
-            'High-quality print product in the form of cards, are also used to fulfill your business promotion needs.'
-        ],
+//        [
+//            'Kartu', 'Cards',
+//            'Produk cetak berkualitas tinggi yang berupa kartu, juga digunakan untuk memenuhi kebutuhan promosi bisnis Anda.',
+//            'High-quality print product in the form of cards, are also used to fulfill your business promotion needs.'
+//        ],
         [
             'Garmen', 'Garments',
             'Cetak garmen Anda yang berkualitas tinggi dan memukau sesuai keinginan, tersedia dalam berbagai varian warna.',
