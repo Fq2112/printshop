@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{asset('css/modal.css')}}">
 
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/media-query.css')}}" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="{{asset('css/colors.php?color=f89406')}}" type="text/css">

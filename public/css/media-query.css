@@ -1,0 +1,181 @@
+/*
+  ##Device = Desktops HiDPI screen
+  ##Screen = 1440px to higher resolution desktops
+*/
+@media (min-width: 1440px) {
+    #processTabs .media img.step-1 {
+        width: 250px;
+    }
+
+    #processTabs .media img.step-2 {
+        width: 280px;
+    }
+
+    #processTabs .media img.step-3 {
+        width: 300px;
+    }
+
+    #processTabs .media img.step-4 {
+        width: 350px;
+    }
+
+    #processTabs .media img.step-5 {
+        width: 400px;
+    }
+}
+
+/*
+  ##Device = Desktops
+  ##Screen = 1281px to 1439px
+*/
+@media (min-width: 1281px) and (max-width: 1439px) {
+    #processTabs .media img.step-1 {
+        width: 250px;
+    }
+
+    #processTabs .media img.step-2 {
+        width: 280px;
+    }
+
+    #processTabs .media img.step-3 {
+        width: 300px;
+    }
+
+    #processTabs .media img.step-4 {
+        width: 350px;
+    }
+
+    #processTabs .media img.step-5 {
+        width: 400px;
+    }
+}
+
+/*
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+@media (min-width: 1025px) and (max-width: 1280px) {
+    #processTabs .media img.step-1 {
+        width: 200px;
+    }
+
+    #processTabs .media img.step-2 {
+        width: 250px;
+    }
+
+    #processTabs .media img.step-3 {
+        width: 300px;
+    }
+
+    #processTabs .media img.step-4 {
+        width: 350px;
+    }
+
+    #processTabs .media img.step-5 {
+        width: 380px;
+    }
+}
+
+/*
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+    #processTabs .media img.step-1 {
+        width: 200px;
+    }
+
+    #processTabs .media img.step-2 {
+        width: 250px;
+    }
+
+    #processTabs .media img.step-3 {
+        width: 280px;
+    }
+
+    #processTabs .media img.step-4 {
+        width: 330px;
+    }
+
+    #processTabs .media img.step-5 {
+        width: 350px;
+    }
+}
+
+/*
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    #processTabs .media img.step-1 {
+        width: 250px;
+    }
+
+    #processTabs .media img.step-2 {
+        width: 280px;
+    }
+
+    #processTabs .media img.step-3 {
+        width: 300px;
+    }
+
+    #processTabs .media img.step-4 {
+        width: 350px;
+    }
+
+    #processTabs .media img.step-5 {
+        width: 380px;
+    }
+}
+
+/*
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+    #processTabs .media img.step-1 {
+        width: 150px;
+    }
+
+    #processTabs .media img.step-2 {
+        width: 150px;
+    }
+
+    #processTabs .media img.step-3 {
+        width: 150px;
+    }
+
+    #processTabs .media img.step-4 {
+        width: 130px;
+    }
+
+    #processTabs .media img.step-5 {
+        width: 200px;
+    }
+}
+
+/*
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+    #processTabs .media img.step-1 {
+        width: 100px;
+    }
+
+    #processTabs .media img.step-2 {
+        width: 100px;
+    }
+
+    #processTabs .media img.step-3 {
+        width: 120px;
+    }
+
+    #processTabs .media img.step-4 {
+        width: 120px;
+    }
+
+    #processTabs .media img.step-5 {
+        width: 100px;
+    }
+}

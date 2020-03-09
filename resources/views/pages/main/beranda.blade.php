@@ -708,7 +708,7 @@
                     <div>
                         <div id="ptab1">
                             <div class="media">
-                                <img class="align-self-center mr-3" alt="{{__('lang.how-to.step-1')}}"
+                                <img class="step-1 align-self-center mr-3" alt="{{__('lang.how-to.step-1')}}"
                                      src="{{asset('images/how-to/choose-product.png')}}">
                                 <div class="media-body">
                                     <h5 class="m-0"><span>{{__('lang.how-to.step')}} 1</span></h5>
@@ -723,7 +723,7 @@
                         </div>
                         <div id="ptab2">
                             <div class="media">
-                                <img class="align-self-center mr-3" alt="{{__('lang.how-to.step-2')}}"
+                                <img class="step-2 align-self-center mr-3" alt="{{__('lang.how-to.step-2')}}"
                                      src="{{asset('images/how-to/order-spec.png')}}">
                                 <div class="media-body">
                                     <h5 class="m-0"><span>{{__('lang.how-to.step')}} 2</span></h5>
@@ -742,7 +742,7 @@
                         </div>
                         <div id="ptab3">
                             <div class="media">
-                                <img class="align-self-center mr-3" alt="{{__('lang.how-to.step-3')}}"
+                                <img class="step-3 align-self-center mr-3" alt="{{__('lang.how-to.step-3')}}"
                                      src="{{asset('images/how-to/create-design.png')}}">
                                 <div class="media-body">
                                     <h5 class="m-0"><span>{{__('lang.how-to.step')}} 3</span></h5>
@@ -761,7 +761,7 @@
                         </div>
                         <div id="ptab4">
                             <div class="media">
-                                <img class="align-self-center mr-3" alt="{{__('lang.how-to.step-4')}}"
+                                <img class="step-4 align-self-center mr-3" alt="{{__('lang.how-to.step-4')}}"
                                      src="{{asset('images/how-to/payment.png')}}">
                                 <div class="media-body">
                                     <h5 class="m-0"><span>{{__('lang.how-to.step')}} 4</span></h5>
@@ -780,7 +780,7 @@
                         </div>
                         <div id="ptab5">
                             <div class="media">
-                                <img class="align-self-center mr-3" alt="{{__('lang.how-to.step-5')}}"
+                                <img class="step-5 align-self-center mr-3" alt="{{__('lang.how-to.step-5')}}"
                                      src="{{asset('images/how-to/shipping.png')}}">
                                 <div class="media-body">
                                     <h5 class="m-0"><span>{{__('lang.how-to.step')}} 5</span></h5>
