@@ -10,7 +10,7 @@
                         <li>
                             <div class="widget clearfix">
                                 <div class="content-area">
-                                    <img class="card-img-top" src="{{asset('storage/products/thumb/'.$kat->image)}}"
+                                    <img class="card-img-top" src="{{asset('images/products/thumb/'.$kat->image)}}"
                                          alt="Thumbnail">
                                     <div class="custom-overlay">
                                         <div class="custom-text"></div>
