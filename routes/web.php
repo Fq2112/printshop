@@ -16,34 +16,34 @@ Route::group(['namespace' => 'Pages', 'prefix' => '{lang?}', 'middleware' => 'lo
         'as' => 'info'
     ]);
 
-    Route::post('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
-    Route::post('password/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
+    Route::post(__('route.password') . '/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
+    Route::post(__('route.password') . '/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
 
     Auth::routes();
 
-    Route::group(['namespace' => 'Auth', 'prefix' => 'account'], function () {
+    Route::group(['namespace' => 'Auth', 'prefix' => __('route.account')], function () {
 
-        Route::post('login', [
+        Route::post(__('route.login'), [
             'uses' => 'LoginController@login',
             'as' => 'login'
         ]);
 
-        Route::post('logout', [
+        Route::post(__('route.logout'), [
             'uses' => 'LoginController@logout',
             'as' => 'logout'
         ]);
 
-        Route::get('activate', [
+        Route::get(__('route.activate'), [
             'uses' => 'ActivationController@activate',
             'as' => 'activate'
         ]);
 
-        Route::get('login/{provider}', [
+        Route::get(__('route.login') . '/{provider}', [
             'uses' => 'SocialAuthController@redirectToProvider',
             'as' => 'redirect'
         ]);
 
-        Route::get('login/{provider}/callback', [
+        Route::get(__('route.login') . '/{provider}/callback', [
             'uses' => 'SocialAuthController@handleProviderCallback',
             'as' => 'callback'
         ]);
