@@ -74,6 +74,7 @@ return [
     ],
     "placeholder" => [
         "search" => "Mau cetak apa hari ini?",
+        "useremail" => "Username atau email",
         "email" => "Alamat email",
         "password" => "Kata sandi",
         "new-password" => "Kata sandi baru",
@@ -101,11 +102,29 @@ return [
             "header-reset" => "Reset Kata Sandi",
             "header-recovery" => "Pulihkan Kata Sandi",
             "divider" => "atau",
-            "alert" => "Peringatan!",
             "remember" => "Ingat saya",
-            "pp-tnc" => "<small>Dengan melanjutkan ini, Anda mengakui bahwa Anda menerima <a href='".route('info')."' target='_blank'>Kebijakan Privasi</a> dan <a href='".route('info')."' target='_blank'>Syarat & Ketentuan</a> ".env('APP_TITLE').".</small>",
+            "pp-tnc" => "<small>Dengan melanjutkan ini, Anda mengakui bahwa Anda menerima <a href='" . route('info') . "' target='_blank'>Kebijakan Privasi</a> dan <a href='" . route('info') . "' target='_blank'>Syarat & Ketentuan</a> " . env('APP_TITLE') . ".</small>",
             "footer-create" => "Ingin <a href='javascript:showRegisterForm()'>membuat akun</a>?",
             "footer-login" => "Sudah punya akun? <a href='javascript:showLoginForm()'>Masuk</a>",
+        ],
+    ],
+    "alert" => [
+        "alert" => "Peringatan!",
+        "login" => "Anda telah masuk.",
+        "login-inactive" => "Akun Anda belum aktif! Silahkan aktivasi akun Anda terlebih dahulu.",
+        "login-fail" => "Email atau password Anda salah.",
+        "username" => "Username tersebut telah digunakan!",
+        "confirm-password" => "Konfirmasi kata sandi Anda tidak cocok!",
+        "socialite-fail" => "Silahkan masuk/daftar dengan akun " . env('APP_NAME') . ".",
+        "email" => "Email yang Anda masukkan tidak ditemukan.",
+        "register" => "Akun " . env('APP_NAME') . " berhasil dibuat! Silahkan cek email Anda untuk mengaktivasi akun Anda.",
+        "recovery" => " Silahkan masuk dengan password baru Anda.",
+        "logout" => "Anda telah keluar.",
+    ],
+    "mail" => [
+        "subject" => [
+            "activate" => "Akun " . env('APP_NAME') . ": Aktivasi Email",
+            "reset" => "Akun " . env('APP_NAME') . ": Reset Kata Sandi"
         ],
     ],
     "footer" => [

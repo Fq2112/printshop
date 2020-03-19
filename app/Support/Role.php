@@ -4,7 +4,7 @@
 namespace App\Support;
 
 
-class Roles
+class Role
 {
     //admin Privilege
     const ROOT = 'root';

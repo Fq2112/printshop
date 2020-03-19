@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Auth\ActivationMail;
+use App\Models\Bio;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -41,16 +46,27 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function cekUsername(Request $request)
+    {
+        $user = User::where('username', $request->username)->first();
+        if (!$user) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'min:4', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -64,10 +80,32 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
+            'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'status' => false,
+            'verifyToken' => Str::random(255),
         ]);
+
+        Bio::create(['user_id' => $user->id]);
+
+        return $user;
+    }
+
+    /**
+     * The user has been registered.
+     *
+     * @param mixed $user
+     * @return mixed
+     */
+    protected function registered($user)
+    {
+        Mail::to($user->email)->send(new ActivationMail($user));
+
+        $this->guard()->logout();
+
+        return back()->withSuccess(__('lang.alert.register'));
     }
 }

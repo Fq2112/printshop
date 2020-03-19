@@ -28,6 +28,11 @@ Route::group(['namespace' => 'Pages', 'prefix' => '{lang?}', 'middleware' => 'lo
 
     Route::group(['namespace' => 'Auth', 'prefix' => __('route.account')], function () {
 
+        Route::get('cek/{username}', [
+            'uses' => 'Auth\RegisterController@cekUsername',
+            'as' => 'cek.username'
+        ]);
+
         Route::post(__('route.login'), [
             'uses' => 'LoginController@login',
             'as' => 'login'

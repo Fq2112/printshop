@@ -19,6 +19,7 @@ class CreateBiosTable extends Migration
             $table->foreign('user_id')->references('id')
                 ->on('users')->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
+            $table->text('ava')->nullable();
             $table->string('full_name')->nullable();
             $table->string('phone')->nullable();
             $table->string('gender')->nullable();

@@ -52,14 +52,14 @@
                                 <div class="alert alert-success alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
                                     </button>
-                                    <h4><i class="icon fa fa-check"></i> {{__('lang.modal.auth.alert')}}</h4>
+                                    <h4><i class="icon fa fa-check"></i> {{__('lang.alert.alert')}}</h4>
                                     {{session('success') ? session('success') : session('recovered')}}
                                 </div>
                             @elseif(session('error') || session('inactive'))
                                 <div class="alert alert-danger alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
                                     </button>
-                                    <h4><i class="icon fa fa-times"></i> {{__('lang.modal.auth.alert')}}</h4>
+                                    <h4><i class="icon fa fa-times"></i> {{__('lang.alert.alert')}}</h4>
                                     {{session('error') ? session('error') : session('inactive')}}
                                 </div>
                             @endif
@@ -68,8 +68,9 @@
                                 @csrf
                                 <div class="row has-feedback">
                                     <div class="col-12">
-                                        <input class="form-control" type="email" placeholder="Email"
-                                               name="email" value="{{ old('email') }}" required>
+                                        <input class="form-control" type="email" name="useremail" required
+                                               value="{{old('email')}}"
+                                               placeholder="{{__('lang.placeholder.useremail')}}">
                                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                                     </div>
                                 </div>
@@ -118,14 +119,14 @@
                                 <div class="alert alert-danger alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
                                     </button>
-                                    <h4><i class="icon fa fa-times"></i> {{__('lang.modal.auth.alert')}}</h4>
+                                    <h4><i class="icon fa fa-times"></i> {{__('lang.alert.alert')}}</h4>
                                     {{ $errors->first('email') }}
                                 </div>
                             @elseif($errors->has('password') || $errors->has('name'))
                                 <div class="alert alert-danger alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
                                     </button>
-                                    <h4><i class="icon fa fa-times"></i> {{__('lang.modal.auth.alert')}}</h4>
+                                    <h4><i class="icon fa fa-times"></i> {{__('lang.alert.alert')}}</h4>
                                     {{ $errors->has('password') ? $errors->first('password') : $errors->first('name') }}
                                 </div>
                             @endif
@@ -137,6 +138,13 @@
                                     <div class="col-12">
                                         <input id="reg_name" type="text" placeholder="{{__('lang.placeholder.name')}}"
                                                class="form-control" name="name" required>
+                                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                                    </div>
+                                </div>
+                                <div class="row has-feedback">
+                                    <div class="col-12">
+                                        <input id="reg_username" type="text" placeholder="Username"
+                                               class="form-control" name="username" minlength="4" required>
                                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                                     </div>
                                 </div>
@@ -189,10 +197,12 @@
                     <div class="content emailBox" style="display:none;">
                         <div class="form">
                             @if(session('resetLink') || session('resetLink_failed'))
-                                <div class="alert alert-{{session('resetLink') ? 'success' : 'danger'}} alert-dismissible">
+                                <div
+                                    class="alert alert-{{session('resetLink') ? 'success' : 'danger'}} alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
                                     </button>
-                                    <h4><i class="icon fa fa-{{session('resetLink') ? 'check' : 'times'}}"></i> {{__('lang.modal.auth.alert')}}
+                                    <h4>
+                                        <i class="icon fa fa-{{session('resetLink') ? 'check' : 'times'}}"></i> {{__('lang.alert.alert')}}
                                     </h4>
                                     {{session('resetLink') ? session('resetLink') : session('resetLink_failed')}}
                                 </div>
@@ -232,7 +242,7 @@
                         <div class="alert alert-danger alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
                             </button>
-                            <h4><i class="icon fa fa-times"></i> {{__('lang.modal.auth.alert')}}</h4>
+                            <h4><i class="icon fa fa-times"></i> {{__('lang.alert.alert')}}</h4>
                             {{ session('recover_failed') }}
                         </div>
                     @endif
