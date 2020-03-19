@@ -27,14 +27,14 @@
                             <div class="card-body nopadding nomargin">
                                 <ul class="mega-menu-column border-left-0">
                                     <li class="mega-menu-title">
-                                        <a href="#">
+                                        <a href="{{route('produk', ['produk' => $sub->permalink], $app->getLocale())}}">
                                             <div>{{$sub->name}}</div>
                                         </a>
                                         @if($sub->getCluster)
                                             <ul>
                                                 @foreach($sub->getCluster as $row)
                                                     <li>
-                                                        <a href="#">
+                                                        <a href="{{route('produk',['produk' => $row->permalink], $app->getLocale())}}">
                                                             <div>{{$row->name}}</div>
                                                         </a>
                                                     </li>

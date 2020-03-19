@@ -92,6 +92,10 @@ class SubKategoriSeed extends Seeder
                         'en' => $item[1],
                         'id' => $item[0]
                     ],
+                    'permalink' => [
+                        'en' => preg_replace("![^a-z0-9]+!i", "-", strtolower($item[1])),
+                        'id' => preg_replace("![^a-z0-9]+!i", "-", strtolower($item[0])),
+                    ],
                 ]);
             }
         }

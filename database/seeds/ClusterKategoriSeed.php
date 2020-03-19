@@ -185,6 +185,10 @@ class ClusterKategoriSeed extends Seeder
             ['Majalah Premium', 'Premium Magazines'],
         ];
         $clust[] = [
+            ['Company Profile Standar', 'Standard Company Profiles'],
+            ['Company Profile Premium', 'Premium Company Profiles'],
+        ];
+        $clust[] = [
             ['Kalender Meja Standar', 'Standard Desk Calendars'],
             ['Kalender Poster', 'Poster Calendars'],
             ['Kalender Dinding', 'Wall Calendars'],
@@ -192,10 +196,6 @@ class ClusterKategoriSeed extends Seeder
         $clust[] = [
             ['Voucher Buku', 'Book Vouchers'],
             ['Voucher Satuan', 'Unit Vouchers'],
-        ];
-        $clust[] = [
-            ['Company Profile Standar', 'Standard Company Profiles'],
-            ['Company Profile Premium', 'Premium Company Profiles'],
         ];
         $clust[] = [
             //Wobblers
@@ -260,6 +260,10 @@ class ClusterKategoriSeed extends Seeder
                         'name' => [
                             'en' => $data[1],
                             'id' => $data[0]
+                        ],
+                        'permalink' => [
+                            'en' => preg_replace("![^a-z0-9]+!i", "-", strtolower($data[1])),
+                            'id' => preg_replace("![^a-z0-9]+!i", "-", strtolower($data[0])),
                         ],
                     ]);
                 }

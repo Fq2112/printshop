@@ -6,6 +6,11 @@
 
 Route::group(['namespace' => 'Pages', 'prefix' => '{lang?}', 'middleware' => 'locale'], function () {
 
+    Route::get('{produk}', [
+        'uses' => 'MainController@produk',
+        'as' => 'produk'
+    ]);
+
     Route::get('/', [
         'uses' => 'MainController@beranda',
         'as' => 'beranda'

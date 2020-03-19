@@ -20,6 +20,7 @@ class CreateSubKategorisTable extends Migration
                 ->on('kategoris')->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
             $table->string('name');
+            $table->text('permalink')->unique();
             $table->timestamps();
         });
     }
