@@ -152,7 +152,7 @@
     <div id="top-bar" class="d-none d-md-block">
         <div class="container clearfix">
             <div class="row justify-content-between">
-                <div class="col d-none d-lg-flex justify-content-end">
+                <div class="col d-lg-flex justify-content-end">
                     <div class="top-links">
                         <ul>
                             <li><a href="#">{{__('lang.header.pro')}}</a></li>
