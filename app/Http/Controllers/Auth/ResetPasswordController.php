@@ -54,10 +54,10 @@ class ResetPasswordController extends Controller
      * @param string|null $token
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showResetForm(Request $request, $token = null)
+    public function showResetForm(Request $request)
     {
-        return back()->with('reset', [
-            'token' => $token,
+        return redirect()->route('beranda')->with('reset', [
+            'token' => $request->token,
             'email' => $request->email
         ]);
     }
@@ -82,8 +82,7 @@ class ResetPasswordController extends Controller
             $resetter = 'admins';
 
         } else {
-            return back()->withInput($request->all())
-                ->with('recover_failed', __('lang.alert.email'));
+            return back()->withInput($request->all())->with('recover_failed', 'message');
         }
 
         $response = $this->broker($resetter)->reset(
@@ -162,7 +161,7 @@ class ResetPasswordController extends Controller
      */
     protected function sendResetResponse($response)
     {
-        return back()->with('recovered', trans($response) . __('lang.alert.recovery'));
+        return back()->with('recovered', trans($response));
     }
 
     /**

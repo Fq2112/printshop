@@ -48,27 +48,27 @@
                         </div>
                         <div class="error"></div>
                         <div class="form loginBox">
-                            @if(session('success') || session('recovered'))
+                            @if(session('register') || session('recovered'))
                                 <div class="alert alert-success alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
                                     </button>
-                                    <h4><i class="icon fa fa-check"></i> {{__('lang.alert.alert')}}</h4>
-                                    {{session('success') ? session('success') : session('recovered')}}
+                                    <h4 class="mb-1"><i class="icon-check"></i> {{__('lang.alert.success')}}</h4>
+                                    {{session('register') ? __('lang.alert.register') : __('lang.alert.recovery')}}
                                 </div>
                             @elseif(session('error') || session('inactive'))
                                 <div class="alert alert-danger alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
                                     </button>
-                                    <h4><i class="icon fa fa-times"></i> {{__('lang.alert.alert')}}</h4>
-                                    {{session('error') ? session('error') : session('inactive')}}
+                                    <h4 class="mb-1"><i class="icon-times"></i> {{__('lang.alert.error')}}</h4>
+                                    {{session('error') ? __('lang.alert.login-fail') : __('lang.alert.login-inactive')}}
                                 </div>
                             @endif
                             <form method="post" accept-charset="UTF-8" class="form-horizontal nomargin"
-                                  action="{{ route('login') }}" id="form-login">
+                                  action="{{route('login')}}" id="form-login">
                                 @csrf
                                 <div class="row has-feedback">
                                     <div class="col-12">
-                                        <input class="form-control" type="email" name="useremail" required
+                                        <input class="form-control" type="text" name="useremail" required
                                                value="{{old('email')}}"
                                                placeholder="{{__('lang.placeholder.useremail')}}">
                                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -119,20 +119,20 @@
                                 <div class="alert alert-danger alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
                                     </button>
-                                    <h4><i class="icon fa fa-times"></i> {{__('lang.alert.alert')}}</h4>
+                                    <h4 class="mb-1"><i class="icon-times"></i> {{__('lang.alert.error')}}</h4>
                                     {{ $errors->first('email') }}
                                 </div>
                             @elseif($errors->has('password') || $errors->has('name'))
                                 <div class="alert alert-danger alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
                                     </button>
-                                    <h4><i class="icon fa fa-times"></i> {{__('lang.alert.alert')}}</h4>
+                                    <h4 class="mb-1"><i class="icon-times"></i> {{__('lang.alert.error')}}</h4>
                                     {{ $errors->has('password') ? $errors->first('password') : $errors->first('name') }}
                                 </div>
                             @endif
                             <div id="reg_errorAlert"></div>
                             <form method="post" accept-charset="UTF-8" class="form-horizontal nomargin"
-                                  action="{{ route('register') }}" id="form-register">
+                                  action="{{route('register')}}" id="form-register">
                                 @csrf
                                 <div class="row has-feedback">
                                     <div class="col-12">
@@ -174,7 +174,13 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12" style="font-size: 15px;text-align: justify">
-                                        {!! __('lang.modal.auth.pp-tnc') !!}
+                                        <small>
+                                            {!! __('lang.modal.auth.pp-tnc') !!}
+                                            <a href="{{route('syarat-ketentuan', $app->getLocale())}}" target="_blank">
+                                                {{__('lang.footer.tnc')}}</a>{{__('lang.modal.auth.pp-tnc2')}}
+                                            <a href="{{route('kebijakan-privasi', $app->getLocale())}}" target="_blank">
+                                                {{__('lang.footer.pp')}}</a>{!! __('lang.modal.auth.pp-tnc3') !!}.
+                                        </small>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -201,14 +207,15 @@
                                     class="alert alert-{{session('resetLink') ? 'success' : 'danger'}} alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
                                     </button>
-                                    <h4>
-                                        <i class="icon fa fa-{{session('resetLink') ? 'check' : 'times'}}"></i> {{__('lang.alert.alert')}}
+                                    <h4 class="mb-1">
+                                        <i class="icon-{{session('resetLink') ? 'check' : 'times'}}"></i>
+                                        {{session('resetLink') ? __('lang.alert.success') : __('lang.alert.alert')}}
                                     </h4>
-                                    {{session('resetLink') ? session('resetLink') : session('resetLink_failed')}}
+                                    {{session('resetLink') ? __('lang.alert.reset') : __('lang.alert.email')}}
                                 </div>
                             @endif
                             <form method="post" accept-charset="UTF-8" class="form-horizontal nomargin"
-                                  action="{{ route('password.email') }}">
+                                  action="{{route('password.email')}}">
                                 @csrf
 
                                 <div class="row {{ $errors->has('Email') ? ' has-danger' : '' }} has-feedback">
@@ -242,22 +249,23 @@
                         <div class="alert alert-danger alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
                             </button>
-                            <h4><i class="icon fa fa-times"></i> {{__('lang.alert.alert')}}</h4>
-                            {{ session('recover_failed') }}
+                            <h4 class="mb-1"><i class="icon-times"></i> {{__('lang.alert.error')}}</h4>
+                            {{ __('lang.alert.email') }}
                         </div>
                     @endif
                     <div class="content passwordBox" style="display:none;">
                         <div id="forg_errorAlert"></div>
                         <div class="form">
                             <form id="form-recovery" method="post" accept-charset="UTF-8"
-                                  class="form-horizontal nomargin" action="{{route('password.request',
+                                  class="form-horizontal nomargin" action="{{route('password.reset',
                                   ['token' => session('reset') ? session('reset')['token'] : old('token')])}}">
                                 @csrf
                                 <div class="row {{ $errors->has('Email') ? ' has-danger' : '' }} has-feedback">
                                     <div class="col-12">
                                         <input class="form-control {{$errors->has('email') ? 'is-invalid' : ''}}"
                                                type="email" placeholder="Email" name="email"
-                                               value="{{ old('email') }}" required>
+                                               {{session('reset') ? 'readonly' : 'required'}}
+                                               value="{{session('reset') ? session('reset')['email'] : old('email')}}">
                                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                                         @if ($errors->has('email'))
                                             <span class="invalid-feedback" style="display: block">

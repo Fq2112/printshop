@@ -4,58 +4,74 @@
  * routing utama
  * */
 
-Route::group(['namespace' => 'Pages', 'prefix' => '{lang?}', 'middleware' => 'locale'], function () {
+Auth::routes();
 
-    Route::get('{produk}', [
-        'uses' => 'MainController@produk',
-        'as' => 'produk'
+Route::group(['namespace' => 'Auth', 'prefix' => 'auth'], function () {
+
+    Route::get('cek-username', [
+        'uses' => 'RegisterController@cekUsername',
+        'as' => 'cek.username'
     ]);
 
-    Route::get('/', [
-        'uses' => 'MainController@beranda',
-        'as' => 'beranda'
+    Route::get('password/reset', [
+        'uses' => 'ResetPasswordController@showResetForm',
+        'as' => 'password.request'
     ]);
 
-    Route::get('info', [
-        'uses' => 'UserController@info',
-        'as' => 'info'
+    Route::post('password/reset/submit', [
+        'uses' => 'ResetPasswordController@reset',
+        'as' => 'password.reset'
     ]);
 
-    Route::post(__('route.password') . '/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
-    Route::post(__('route.password') . '/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
+    Route::post('login', [
+        'uses' => 'LoginController@login',
+        'as' => 'login'
+    ]);
 
-    Auth::routes();
+    Route::post('logout', [
+        'uses' => 'LoginController@logout',
+        'as' => 'logout'
+    ]);
 
-    Route::group(['namespace' => 'Auth', 'prefix' => __('route.account')], function () {
+    Route::get('activate', [
+        'uses' => 'ActivationController@activate',
+        'as' => 'activate'
+    ]);
 
-        Route::get('cek/{username}', [
-            'uses' => 'Auth\RegisterController@cekUsername',
-            'as' => 'cek.username'
+    Route::get('login/{provider}', [
+        'uses' => 'SocialAuthController@redirectToProvider',
+        'as' => 'redirect'
+    ]);
+
+    Route::get('login/{provider}/callback', [
+        'uses' => 'SocialAuthController@handleProviderCallback',
+        'as' => 'callback'
+    ]);
+
+});
+
+Route::group(['prefix' => '{lang?}', 'middleware' => 'locale'], function () {
+
+    Route::group(['namespace' => 'Pages'], function () {
+
+        Route::get('{produk}', [
+            'uses' => 'MainController@produk',
+            'as' => 'produk'
         ]);
 
-        Route::post(__('route.login'), [
-            'uses' => 'LoginController@login',
-            'as' => 'login'
+        Route::get('/', [
+            'uses' => 'MainController@beranda',
+            'as' => 'beranda'
         ]);
 
-        Route::post(__('route.logout'), [
-            'uses' => 'LoginController@logout',
-            'as' => 'logout'
+        Route::get(__('lang.footer.tnc'), [
+            'uses' => 'MainController@syaratKetentuan',
+            'as' => 'syarat-ketentuan'
         ]);
 
-        Route::get(__('route.activate'), [
-            'uses' => 'ActivationController@activate',
-            'as' => 'activate'
-        ]);
-
-        Route::get(__('route.login') . '/{provider}', [
-            'uses' => 'SocialAuthController@redirectToProvider',
-            'as' => 'redirect'
-        ]);
-
-        Route::get(__('route.login') . '/{provider}/callback', [
-            'uses' => 'SocialAuthController@handleProviderCallback',
-            'as' => 'callback'
+        Route::get(__('lang.footer.pp'), [
+            'uses' => 'MainController@kebijakanPrivasi',
+            'as' => 'kebijakan-privasi'
         ]);
 
     });

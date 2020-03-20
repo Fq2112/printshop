@@ -66,10 +66,11 @@ class CustomPassword extends ResetPassword
 {
     public function toMail($notifiable)
     {
-        $data = $this->token;
+        $token = $this->token;
+        $email = $notifiable->getEmailForPasswordReset();
         return (new MailMessage)
             ->from(env('MAIL_USERNAME'), __('lang.title'))
             ->subject(__('lang.mail.subject.reset'))
-            ->view('emails.auth.reset', compact('data'));
+            ->view('emails.auth.reset', compact('token', 'email'));
     }
 }

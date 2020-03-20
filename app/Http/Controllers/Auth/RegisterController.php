@@ -7,6 +7,7 @@ use App\Mail\Auth\ActivationMail;
 use App\Models\Bio;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -68,7 +69,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'min:4', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
 
@@ -95,17 +96,21 @@ class RegisterController extends Controller
     }
 
     /**
-     * The user has been registered.
+     * Handle a registration request for the application.
      *
-     * @param mixed $user
+     * @param \Illuminate\Http\Request $request
      * @return mixed
      */
-    protected function registered($user)
+    public function register(Request $request)
     {
+        $this->validator($request->all())->validate();
+        $user = $this->create($request->all());
+
+        event(new Registered($user));
         Mail::to($user->email)->send(new ActivationMail($user));
 
         $this->guard()->logout();
 
-        return back()->withSuccess(__('lang.alert.register'));
+        return back()->with('register', 'message');
     }
 }

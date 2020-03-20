@@ -20,6 +20,6 @@ class ActivationController extends Controller
 
         Auth::loginUsingId($user->id);
 
-        return redirect()->route('beranda')->with('activated', __('lang.alert.login'));
+        return redirect()->route('beranda')->with('activated', 'message');
     }
 }

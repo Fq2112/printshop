@@ -30,8 +30,9 @@ class ActivationMail extends Mailable
      */
     public function build()
     {
+        $user = $this->user;
         return $this->from(env('MAIL_USERNAME'), __('lang.title'))
             ->subject(__('lang.mail.subject.activate'))
-            ->markdown('emails.auth.activation');
+            ->view('emails.auth.activation', compact('user'));
     }
 }

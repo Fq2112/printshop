@@ -65,13 +65,13 @@ class SocialAuthController extends Controller
             Auth::loginUsingId($user->id);
 
             if ($provider == 'facebook') {
-                return back()->with('signed', __('lang.alert.login'));
+                return back()->with('signed', 'message');
             } else {
-                return redirect()->route('beranda')->with('signed', __('lang.alert.login'));
+                return redirect()->route('beranda')->with('signed', 'message');
             }
 
         } catch (\Exception $e) {
-            return back()->with('unknown', __('lang.alert.socialite-fail'));
+            return back()->with('unknown', 'message');
         }
     }
 }

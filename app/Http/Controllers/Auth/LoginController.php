@@ -32,9 +32,9 @@ class LoginController extends Controller
     public function redirectTo()
     {
         if (Auth::guard('admin')->check()) {
-            return redirect()->route('admin.dashboard')->with('signed', __('lang.alert.login'));
+            return redirect()->route('admin.dashboard')->with('signed', 'message');
         } else {
-            return back()->with('signed', __('lang.alert.login'));
+            return back()->with('signed', 'message');
         }
     }
 
@@ -56,19 +56,16 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
-        $user = User::where('username', $request->useremail)->orwhere('email', $request->useremail)->first();
-        if (!is_null($user)) {
-            if (GlobalAuth::login(['email' => $request->email, 'password' => $request->password])) {
-                if (session()->has('intended')) {
-                    session()->forget('intended');
-                }
-
-                return $this->redirectTo();
+        if (GlobalAuth::login(['useremail' => $request->useremail, 'password' => $request->password], $request)) {
+            if (session()->has('intended')) {
+                session()->forget('intended');
             }
+
+            return $this->redirectTo();
         }
 
         return back()->withInput($request->all())->with([
-            'error' => __('lang.alert.login-fail')
+            'error' => 'message'
         ]);
     }
 
@@ -84,6 +81,6 @@ class LoginController extends Controller
 
         GlobalAuth::logout();
 
-        return redirect()->route('beranda')->with('logout', __('lang.alert.logout'));
+        return redirect()->route('beranda')->with('logout', 'message');
     }
 }

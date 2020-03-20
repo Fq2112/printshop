@@ -24,23 +24,24 @@ class GlobalAuth
      */
     public function login($credentials, Request $request)
     {
-        if ($this->isUser($credentials['email'])) {
-            $user = User::where('email', $credentials['email'])->first();
+        if ($this->isUser($credentials['useremail'])) {
+            $user = User::where('username', $request->useremail)->orwhere('email', $request->useremail)->first();
             if ($user->status == false) {
                 return back()->withInput($request->all())->with([
-                    'inactive' => __('lang.modal.auth.login-inactive')
+                    'inactive' => 'message'
                 ]);
             } else {
-                $guard = 'web';
+                if (Auth::guard('web')->attempt(['email' => $user->email, 'password' => $request->password])) {
+                    return true;
+                }
             }
-        } else if ($this->isAdmin($credentials['email'])) {
-            $guard = 'admin';
+        } else if ($this->isAdmin($credentials['useremail'])) {
+            $admin = Admin::where('username', $request->useremail)->orwhere('email', $request->useremail)->first();
+            if (Auth::guard('admin')->attempt(['email' => $admin->email, 'password' => $request->password])) {
+                return true;
+            }
         } else {
             return false;
-        }
-
-        if (Auth::guard($guard)->attempt($credentials)) {
-            return true;
         }
 
         return false;
@@ -96,24 +97,24 @@ class GlobalAuth
     }
 
     /**
-     * Check whether the intended email was found in the user table
+     * Check whether the intended username|email was found in the user table
      *
-     * @param string $email
+     * @param string $useremail
      * @return boolean
      */
-    private function isUser($email)
+    private function isUser($useremail)
     {
-        return !is_null(User::where('email', $email)->first());
+        return !is_null(User::where('username', $useremail)->orwhere('email', $useremail)->first());
     }
 
     /**
-     * Check whether the intended email was found in the admin table
+     * Check whether the intended username|email was found in the admin table
      *
-     * @param [type] $email
+     * @param [type] $useremail
      * @return boolean
      */
-    private function isAdmin($email)
+    private function isAdmin($useremail)
     {
-        return !is_null(Admin::where('email', $email)->first());
+        return !is_null(Admin::where('username', $useremail)->orwhere('email', $useremail)->first());
     }
 }

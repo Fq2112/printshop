@@ -220,7 +220,7 @@
     width: 100%;
 }
 
-.login .btn-login, .registerBox .btn-register {
+.login .btn-login, .registerBox .btn-register, .passwordBox .btn-password {
     text-transform: uppercase;
     width: 100%;
 }

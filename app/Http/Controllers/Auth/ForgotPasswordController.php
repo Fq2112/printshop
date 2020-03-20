@@ -51,7 +51,7 @@ class ForgotPasswordController extends Controller
             $resetter = 'admins';
 
         } else {
-            return back()->with('resetLink_failed', __('lang.alert.email'));
+            return back()->with('resetLink_failed', 'message');
         }
 
         $response = $this->broker($resetter)->sendResetLink(

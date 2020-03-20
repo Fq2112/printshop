@@ -28,6 +28,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="{{asset('css/colors.php?color=f89406')}}" type="text/css">
+    <!-- sweetalert2 -->
+    <link rel="stylesheet" href="{{asset('js/plugins/sweetalert/sweetalert2.css')}}">
 
     <style>
         #primary-menu ul li .mega-menu-content.style-2 ul.mega-menu-column:not(.mega-menu-thumb) {
@@ -59,7 +61,8 @@
         }
 
         .avatar img {
-            width: 40px;
+            width: 20px;
+            padding: 2px;
             margin-right: .5em;
             border-radius: 100%;
             -webkit-transition: all .3s ease-in-out;
@@ -68,11 +71,12 @@
         }
 
         .avatar:hover img {
-            border: 1px solid #122752;
+            border: 1px solid #f89406;
             -webkit-transition: all .3s ease-in-out;
             -moz-transition: all .3s ease-in-out;
             transition: all .3s ease-in-out;
         }
+
         .has-feedback .form-control-feedback {
             position: absolute;
             right: 15px;
@@ -330,7 +334,8 @@
 
                     <div class="col-md-6 d-md-flex flex-md-column align-items-md-end mt-4 mt-md-0">
                         <div class="copyright-links">
-                            <a href="#">{{__('lang.footer.tnc')}}</a> / <a href="#">{{__('lang.footer.pp')}}</a>
+                            <a href="{{route('syarat-ketentuan', $app->getLocale())}}">{{__('lang.footer.tnc')}}</a> /
+                            <a href="{{route('kebijakan-privasi', $app->getLocale())}}">{{__('lang.footer.pp')}}</a>
                         </div>
                     </div>
                 </div>
@@ -347,15 +352,19 @@
 <script src="{{asset('js/plugins.js')}}"></script>
 
 <!-- toggle password -->
-<script src="{{ asset('js/hideShowPassword.min.js') }}"></script>
+<script src="{{asset('js/hideShowPassword.min.js')}}"></script>
 <!-- check-mobile -->
 <script src="{{asset('js/checkMobileDevice.js')}}"></script>
 <!-- Nicescroll -->
 <script src="{{asset('js/plugins/nicescroll/jquery.nicescroll.js')}}"></script>
+<!-- sweetalert2 -->
+<script src="{{asset('js/plugins/sweetalert/sweetalert.min.js')}}"></script>
 
 <script src="{{asset('js/functions.js')}}"></script>
 
 @include('layouts.partials._scripts')
+@include('layouts.partials._alert')
+@include('layouts.partials._confirm')
 @stack('scripts')
 </body>
 </html>
