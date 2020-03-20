@@ -62,7 +62,7 @@
 
         .avatar img {
             width: 20px;
-            padding: 2px;
+            padding: 0;
             margin-right: .5em;
             border-radius: 100%;
             -webkit-transition: all .3s ease-in-out;
@@ -71,6 +71,7 @@
         }
 
         .avatar:hover img {
+            padding: 2px;
             border: 1px solid #f89406;
             -webkit-transition: all .3s ease-in-out;
             -moz-transition: all .3s ease-in-out;
