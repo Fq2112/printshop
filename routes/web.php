@@ -54,25 +54,29 @@ Route::group(['prefix' => '{lang?}', 'middleware' => 'locale'], function () {
 
     Route::group(['namespace' => 'Pages'], function () {
 
-        Route::get('{produk}', [
-            'uses' => 'MainController@produk',
-            'as' => 'produk'
-        ]);
-
         Route::get('/', [
             'uses' => 'MainController@beranda',
             'as' => 'beranda'
         ]);
 
-        Route::get(__('lang.footer.tnc'), [
-            'uses' => 'MainController@syaratKetentuan',
-            'as' => 'syarat-ketentuan'
+        Route::get('{produk}', [
+            'uses' => 'MainController@produk',
+            'as' => 'produk'
         ]);
 
-        Route::get(__('lang.footer.pp'), [
-            'uses' => 'MainController@kebijakanPrivasi',
-            'as' => 'kebijakan-privasi'
-        ]);
+        Route::group(['prefix' => 'info'], function () {
+
+            Route::get(__('routes.tnc'), [
+                'uses' => 'MainController@syaratKetentuan',
+                'as' => 'syarat-ketentuan'
+            ]);
+
+            Route::get(__('routes.pp'), [
+                'uses' => 'MainController@kebijakanPrivasi',
+                'as' => 'kebijakan-privasi'
+            ]);
+
+        });
 
     });
 

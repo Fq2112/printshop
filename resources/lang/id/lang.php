@@ -136,6 +136,7 @@ return [
         "logout-head" => "Keluar",
         "logout-capt" => "Apakah Anda yakin untuk mengakhiri sesi Anda?",
         "logout-message" => "Anda akan dialihkan ke halaman Beranda.",
+        "feature-fail" => "Fitur ini hanya berfungsi ketika Anda masuk sebagai Pelanggan.",
     ],
     "mail" => [
         "subject" => [

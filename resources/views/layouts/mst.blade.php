@@ -78,6 +78,88 @@
             transition: all .3s ease-in-out;
         }
 
+        span.twitter-typeahead {
+            display: block !important;
+            position: absolute;
+            height: 100%;
+        }
+
+        .tt-menu {
+            width: 100%;
+            margin: 0;
+            padding: 8px 0;
+            background-color: #FFF;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, .1);
+            -moz-box-shadow: 0 1px 10px rgba(0, 0, 0, .1);
+            box-shadow: 0 1px 10px rgba(0, 0, 0, .1);
+
+        }
+
+        .tt-suggestion {
+            padding: 3px 20px;
+            font-size: 15px;
+            line-height: 24px;
+        }
+
+        .tt-suggestion:hover {
+            cursor: pointer;
+            color: #FFF;
+            background-color: #f89406;
+        }
+
+        .tt-suggestion.tt-cursor {
+            color: #fff;
+            background-color: #f89406;
+
+        }
+
+        #top-search form input.form-control.tt-hint {
+            color: #999 !important;
+        }
+
+        /*
+
+                #top-search .dropdown-menu {
+                    width: 100%;
+                }
+
+                #top-search .dropdown-menu li {
+                    display: block;
+                }
+
+                #top-search .dropdown-menu li + li {
+                    margin-top: 10px;
+                }
+
+                #top-search .dropdown-menu li a {
+                    padding: 5px 0 5px 55px;
+                    min-height: 50px;
+                    position: relative;
+                    white-space: normal;
+                }
+
+                #top-search .dropdown-menu .typeahead-inner .item-img {
+                    width: 40px;
+                    height: 40px;
+                    position: absolute;
+                    left: 5px;
+                    top: 5px;
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    border-radius: 5px;
+                }
+
+                #top-search .dropdown-menu .typeahead-inner .item-heading {
+                    display: inline-block;
+                    vertical-align: middle;
+                    line-height: 18px;
+                }*/
+
         .has-feedback .form-control-feedback {
             position: absolute;
             right: 15px;
@@ -352,6 +434,9 @@
 <script src="{{asset('js/jquery.js')}}"></script>
 <script src="{{asset('js/plugins.js')}}"></script>
 
+<!-- Bootstrap Typeaheadjs Plugin -->
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.0/bootstrap3-typeahead.js"></script>--}}
+<script src="{{asset('js/components/typehead.js')}}"></script>
 <!-- toggle password -->
 <script src="{{asset('js/hideShowPassword.min.js')}}"></script>
 <!-- check-mobile -->

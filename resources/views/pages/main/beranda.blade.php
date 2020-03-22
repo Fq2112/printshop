@@ -147,7 +147,8 @@
                              data-endelementdelay="0.1"
                              data-endspeed="1000"
                              data-endeasing="Power4.easeIn" style="">
-                            <a href="#" class="button button-border button-large button-rounded tright nomargin">
+                            <a href="{{route('produk',['produk' => 'business-cards', 'lang' => $app->getLocale()])}}"
+                               class="button button-border button-large button-rounded tright nomargin">
                                 <span>{{__('lang.button.shop')}}</span><i class="icon-angle-right"></i></a>
                         </div>
                         <div class="tp-caption utb tp-resizeme revo-slider-caps-text uppercase"
@@ -242,7 +243,8 @@
                              data-endelementdelay="0.1"
                              data-endspeed="1000"
                              data-endeasing="Power4.easeIn" style="">
-                            <a href="#" class="button button-border button-large button-rounded tright nomargin">
+                            <a href="{{route('produk',['produk' => 'brochures', 'lang' => $app->getLocale()])}}"
+                               class="button button-border button-large button-rounded tright nomargin">
                                 <span>{{__('lang.button.shop')}}</span><i class="icon-angle-right"></i></a>
                         </div>
                         <div class="tp-caption utb tp-resizeme revo-slider-caps-text uppercase"
@@ -337,7 +339,8 @@
                              data-endelementdelay="0.1"
                              data-endspeed="1000"
                              data-endeasing="Power4.easeIn" style="">
-                            <a href="#" class="button button-border button-large button-rounded tright nomargin">
+                            <a href="{{route('produk',['produk' => 'flyers', 'lang' => $app->getLocale()])}}"
+                               class="button button-border button-large button-rounded tright nomargin">
                                 <span>{{__('lang.button.shop')}}</span><i class="icon-angle-right"></i></a>
                         </div>
                         <div class="tp-caption utb tp-resizeme revo-slider-caps-text uppercase"

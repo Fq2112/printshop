@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 
 class SetLocaleMiddleware
@@ -16,7 +17,19 @@ class SetLocaleMiddleware
      */
     public function handle($request, Closure $next)
     {
-        App::setLocale($request->lang);
+        $segment = $request->segment(1);
+
+        if (!in_array($segment, config('app.locales'))) {
+            $segments = $request->segments();
+            $fallback = config('app.fallback_locale');
+            $segments = Arr::prepend($segments, $fallback);
+
+            return redirect()->to(implode('/', $segments));
+        }
+
+        session(['locale' => $segment]);
+        app()->setLocale($segment);
+
         return $next($request);
     }
 }

@@ -992,19 +992,19 @@ var SEMICOLON = SEMICOLON || {};
 
 			SEMICOLON.header.superfish();
 			SEMICOLON.header.menufunctions();
-			SEMICOLON.header.fullWidthMenu();
-			SEMICOLON.header.overlayMenu();
-			SEMICOLON.header.stickyMenu();
-			SEMICOLON.header.stickyPageMenu();
-			SEMICOLON.header.sideHeader();
-			SEMICOLON.header.sidePanel();
-			SEMICOLON.header.onePageScroll();
-			SEMICOLON.header.onepageScroller();
-			SEMICOLON.header.logo();
-			SEMICOLON.header.topsearch();
-			SEMICOLON.header.topcart();
+            SEMICOLON.header.fullWidthMenu();
+            SEMICOLON.header.overlayMenu();
+            SEMICOLON.header.stickyMenu();
+            SEMICOLON.header.stickyPageMenu();
+            SEMICOLON.header.sideHeader();
+            SEMICOLON.header.sidePanel();
+            SEMICOLON.header.onePageScroll();
+            SEMICOLON.header.onepageScroller();
+            SEMICOLON.header.logo();
+            SEMICOLON.header.topsearch();
+            // SEMICOLON.header.topcart();
 
-		},
+        },
 
 		superfish: function(){
 

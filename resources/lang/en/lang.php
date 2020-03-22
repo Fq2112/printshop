@@ -136,6 +136,7 @@ return [
         "logout-head" => "Sign Out",
         "logout-capt" => "Are you sure to end your session?",
         "logout-message" => "You will be redirected to the Home page.",
+        "feature-fail" => "This feature only works when you're signed in as a Customer.",
     ],
     "mail" => [
         "subject" => [
