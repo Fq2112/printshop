@@ -16,6 +16,7 @@ return [
         "setting" => "Pengaturan Akun",
         "sign-out" => "Keluar",
         "cart" => "Keranjang Belanja",
+        "search" => "Hasil pencarian tidak ditemukan"
     ],
     "revo" => [
         "head" => "Siapkan Tas Belanja Anda!",
@@ -117,6 +118,7 @@ return [
     "alert" => [
         "alert" => "PERINGATAN!",
         "error" => "KESALAHAN!",
+        "error-capt" => "Terjadi kesalahan! Silahkan, segarkan browser Anda.",
         "warning" => "PERHATIAN!",
         "success" => "SUKSES!",
         "login" => "Anda telah masuk.",

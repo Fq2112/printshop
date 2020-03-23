@@ -32,94 +32,40 @@
         @endguest
     });
 
-    var substringMatcher = function (strs) {
-        return function findMatches(q, cb) {
-            var matches, substrRegex;
-            matches = [];
-
-            substrRegex = new RegExp(q, 'i');
-
-            $.each(strs, function (i, str) {
-                if (substrRegex.test(str)) {
-                    matches.push(str);
+    var keyword = $("#keyword"), fetchQuery = null, fetchResultsCallback = null,
+        fetchResults = _.debounce(function () {
+            $.get('{{route('get.cari-nama.produk', ['lang' => $app->getLocale()])}}?produk=' + fetchQuery, function (data) {
+                if (fetchResultsCallback) {
+                    fetchResultsCallback(data);
                 }
             });
+        }, 300);
 
-            cb(matches);
-        };
-    };
-
-    var jsonData = [
-            @foreach(\App\Models\ClusterKategori::all() as $row)
+    keyword.typeahead(
         {
-            'label': '{{$row->getSubKategori->name . ': ' . $row->name}}',
-            'q': '{{$row->name}}',
-            'link': '{{route('produk', ['produk' => $row->permalink, 'lang' => $app->getLocale()])}}',
-            'image': '{{asset('storage/products/thumb/'.$row->getSubKategori->getKategori->image)}}',
+            hint: true,
+            highlight: true,
+            minLength: 0,
         },
-        @endforeach
-    ], data = [];
-
-    $.each(jsonData, function (i, val) {
-        data.push(val.label + "#" + val.q + "#" + val.link + "#" + val.image);
-    });
-
-    $('#keyword').typeahead({
-        hint: true,
-        highlight: true,
-        minLength: 3,
-        source: data,
-        highlighter: function (item) {
-            var parts = item.split('#'),
-                html = '<div><div class="typeahead-inner">' +
-                    '<div class="item-img" style="background-image: url(' + parts[3] + ')"></div>' +
-                    '<div class="item-body"><p class="item-heading">' + parts[0] + '</p></div></div></div>';
-
-            var query = this.query, reEscQuery = query.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&"),
-                reQuery = new RegExp('(' + reEscQuery + ')', "gi"), jElem = $(html),
-                textNodes = $(jElem.find('*')).add(jElem).contents().filter(function () {
-                    return this.nodeType === 3;
-                });
-
-            textNodes.replaceWith(function () {
-                return $(this).text().replace(reQuery, '<strong>$1</strong>');
-            });
-
-            return jElem.html();
-        },
-        updater: function (selectedName) {
-            $("#top-search form").attr('action', selectedName.split('#')[2]);
-            return selectedName.split('#')[1];
-        }
-    });
-
-    /*$("#top-search form input[name=q]").autocomplete({
-        source: function (request, response) {
-            $.getJSON('/nama/' + $("#top-search form input[name=q]").val(), {
-                name: request.term,
-            }, function (data) {
-                response(data);
-            });
-        },
-        focus: function (event, ui) {
-            event.preventDefault();
-        },
-        select: function (event, ui) {
-            event.preventDefault();
-            console.log(ui);
-            $("#top-search form").attr('action', ui.item.link);
-            $("#top-search form input[name=q]").val(ui.item.q);
-            window.location.href = ui.item.link;
-        }
-    });*/
-
-    $("#top-search form").on('submit', function (e) {
-        e.preventDefault();
-        if ($("#top-search form").attr('action') == "") {
-            return false;
-        } else {
-            return true;
-        }
+        {
+            limit: 10,
+            source: function (query, syncResults, asyncResults) {
+                fetchQuery = query;
+                fetchResultsCallback = asyncResults;
+                fetchResults();
+            },
+            templates: {
+                empty: '<div class="tt-empty text-center">{{__('lang.header.search')}}</div>',
+                pending: '<div class="tt-pending"><div class="css3-spinner" style="position: absolute; z-index:auto;"><div class="css3-spinner-bounce1"></div><div class="css3-spinner-bounce2"></div><div class="css3-spinner-bounce3"></div></div></div>',
+                suggestion: function (data) {
+                    return '<div><img alt="thumbnail" src="' + data.image + '">' + data.name + '</div>'
+                },
+            },
+            display: function (data) {
+                return data.name;
+            }
+        }).on('typeahead:selected', function (evt, data) {
+        window.location.href = data.link;
     });
 
     var recaptcha_register, recaptchaCallback = function () {

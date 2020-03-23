@@ -99,10 +99,14 @@
 
         }
 
-        .tt-suggestion {
+        .tt-suggestion, .tt-empty, .tt-pending {
             padding: 3px 20px;
             font-size: 15px;
             line-height: 24px;
+        }
+
+        .tt-pending {
+            height: 50px;
         }
 
         .tt-suggestion:hover {
@@ -114,51 +118,18 @@
         .tt-suggestion.tt-cursor {
             color: #fff;
             background-color: #f89406;
+        }
 
+        .tt-suggestion img {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            margin-right: .5em;
         }
 
         #top-search form input.form-control.tt-hint {
             color: #999 !important;
         }
-
-        /*
-
-                #top-search .dropdown-menu {
-                    width: 100%;
-                }
-
-                #top-search .dropdown-menu li {
-                    display: block;
-                }
-
-                #top-search .dropdown-menu li + li {
-                    margin-top: 10px;
-                }
-
-                #top-search .dropdown-menu li a {
-                    padding: 5px 0 5px 55px;
-                    min-height: 50px;
-                    position: relative;
-                    white-space: normal;
-                }
-
-                #top-search .dropdown-menu .typeahead-inner .item-img {
-                    width: 40px;
-                    height: 40px;
-                    position: absolute;
-                    left: 5px;
-                    top: 5px;
-                    background-size: cover;
-                    background-position: center;
-                    background-repeat: no-repeat;
-                    border-radius: 5px;
-                }
-
-                #top-search .dropdown-menu .typeahead-inner .item-heading {
-                    display: inline-block;
-                    vertical-align: middle;
-                    line-height: 18px;
-                }*/
 
         .has-feedback .form-control-feedback {
             position: absolute;
@@ -242,11 +213,13 @@
                 <div class="col d-lg-flex justify-content-end">
                     <div class="top-links">
                         <ul>
-                            <li><a href="#">{{__('lang.header.pro')}}</a></li>
-                            <li><a href="#">{{__('lang.header.how-to')}}</a></li>
-                            <li><a href="#">{{__('lang.header.faq')}}</a></li>
-                            <li><a href="#">{{__('lang.header.about')}}</a></li>
-                            <li><a href="#">{{__('lang.header.contact')}}</a></li>
+                            <li><a href="{{route('pro', $app->getLocale())}}">{{__('lang.header.pro')}}</a></li>
+                            <li>
+                                <a href="{{route('cara-pemesanan', $app->getLocale())}}">{{__('lang.header.how-to')}}</a>
+                            </li>
+                            <li><a href="{{route('faq', $app->getLocale())}}">{{__('lang.header.faq')}}</a></li>
+                            <li><a href="{{route('tentang', $app->getLocale())}}">{{__('lang.header.about')}}</a></li>
+                            <li><a href="{{route('kontak', $app->getLocale())}}">{{__('lang.header.contact')}}</a></li>
                             <li>
                                 @if(\Illuminate\Support\Facades\Request::is(['/*', 'id*']))
                                     <a href="#"><img width="20" src="{{asset('images/icons/flags/indonesia.svg')}}"
@@ -349,11 +322,15 @@
                         <div class="widget clearfix">
                             <h4 class="ls0 mb-3 nott">{{__('lang.footer.link')}}</h4>
                             <ul class="list-unstyled iconlist ml-0">
-                                <li><a href="#">{{__('lang.header.pro')}}</a></li>
-                                <li><a href="#">{{__('lang.header.how-to')}}</a></li>
-                                <li><a href="#">{{__('lang.header.faq')}}</a></li>
-                                <li><a href="#">{{__('lang.header.about')}}</a></li>
-                                <li><a href="#">{{__('lang.header.contact')}}</a></li>
+                                <li><a href="{{route('pro', $app->getLocale())}}">{{__('lang.header.pro')}}</a></li>
+                                <li>
+                                    <a href="{{route('cara-pemesanan', $app->getLocale())}}">{{__('lang.header.how-to')}}</a>
+                                </li>
+                                <li><a href="{{route('faq', $app->getLocale())}}">{{__('lang.header.faq')}}</a></li>
+                                <li><a href="{{route('tentang', $app->getLocale())}}">{{__('lang.header.about')}}</a>
+                                </li>
+                                <li><a href="{{route('kontak', $app->getLocale())}}">{{__('lang.header.contact')}}</a>
+                                </li>
                             </ul>
                         </div>
 
@@ -435,8 +412,8 @@
 <script src="{{asset('js/plugins.js')}}"></script>
 
 <!-- Bootstrap Typeaheadjs Plugin -->
-{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.0/bootstrap3-typeahead.js"></script>--}}
 <script src="{{asset('js/components/typehead.js')}}"></script>
+<script src="{{asset('js/components/underscore-min.js')}}"></script>
 <!-- toggle password -->
 <script src="{{asset('js/hideShowPassword.min.js')}}"></script>
 <!-- check-mobile -->

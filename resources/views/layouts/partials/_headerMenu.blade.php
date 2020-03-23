@@ -87,14 +87,15 @@
                 </li>
             </ul>
         </li>
-    @endif
+        @endif
 </ul>
 
 <div id="top-search">
     <a href="#" id="top-search-trigger">
         <i class="icon-line-search"></i><i class="icon-line-cross"></i></a>
     <form action="#">
-        <input id="keyword" type="text" name="q" class="form-control" placeholder="{{__('lang.placeholder.search')}}">
+        <input id="keyword" type="text" class="form-control" autocomplete="off" spellcheck="false"
+               placeholder="{{__('lang.placeholder.search')}}">
     </form>
 </div>
 

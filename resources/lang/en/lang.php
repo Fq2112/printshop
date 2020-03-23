@@ -16,6 +16,7 @@ return [
         "setting" => "Account Settings",
         "sign-out" => "Sign Out",
         "cart" => "Shopping Cart",
+        "search" => "No search results found"
     ],
     "revo" => [
         "head" => "Get Your Shopping Bags Ready!",
@@ -117,6 +118,7 @@ return [
     "alert" => [
         "alert" => "ALERT!",
         "error" => "ERROR!",
+        "error-capt" => "Something went wrong! Please, refresh your browser.",
         "warning" => "ATTENTION!",
         "success" => "SUCCESS!",
         "login" => "You've signed in.",
