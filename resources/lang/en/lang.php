@@ -12,8 +12,9 @@ return [
         "faq" => "FAQs",
         "about" => "About Us",
         "sign-up-in" => "Sign Up/In",
+        "order" => "Order History",
         "profile" => "Edit Profile",
-        "setting" => "Account Settings",
+        "settings" => "Account Settings",
         "sign-out" => "Sign Out",
         "cart" => "Shopping Cart",
         "search" => "No search results found"
@@ -138,7 +139,20 @@ return [
         "logout-head" => "Sign Out",
         "logout-capt" => "Are you sure to end your session?",
         "logout-message" => "You will be redirected to the Home page.",
+        "auth-expire" => "The page you requested requires authentication, please sign in to your account.",
+        "token-fail" => "The page has expired due to inactivity, please try again.",
         "feature-fail" => "This feature only works when you're signed in as a Customer.",
+    ],
+    "errors" => [
+        "403-head" => "FORBIDDEN ACCESS",
+        "403-capt" => "Your client does not have permission to get URL /adsense from this server.",
+        "404-head" => "PAGE NOT FOUND",
+        "404-capt" => "The page you are looking for might have been removed, had its name changed or is temporarily unavailable.",
+        "405-head" => "METHOD NOT ALLOWED",
+        "405-capt" => "The requested URL was not found on this server.",
+        "maintenance" => "CURRENTLY UNDER CONSTRUCTION",
+        "act1" => "Redirect me to the Dashboard Page!",
+        "act2" => "Redirect me to the Home Page!",
     ],
     "mail" => [
         "subject" => [

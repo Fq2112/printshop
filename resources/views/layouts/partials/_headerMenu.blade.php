@@ -56,25 +56,30 @@
             <a href="#">
                 <div style="text-transform: none">
                     @if(Auth::check())
-                        <img alt="Ava" class="img-thumbnail show_ava" src="{{Auth::user()->ava != "" ?
-                        asset('storage/users/ava/'.Auth::user()->ava) : asset('images/avatar.png')}}">
+                        <img alt="Ava" class="img-thumbnail show_ava" src="{{Auth::user()->getBio->ava != "" ?
+                        asset('storage/users/ava/'.Auth::user()->getBio->ava) : asset('images/avatar.png')}}">
                         {{Auth::user()->username}}
                     @elseif(Auth::guard('admin')->check())
-                        <img alt="Ava" class="img-thumbnail show_ava" src="{{Auth::guard('admin')->user()->ava != "" ?
-                        asset('storage/admins/ava/'.Auth::guard('admin')->user()->ava) :
+                        <img alt="Ava" class="img-thumbnail show_ava" src="{{Auth::guard('admin')->user()->getBio->ava != "" ?
+                        asset('storage/admins/ava/'.Auth::guard('admin')->user()->getBio->ava) :
                         asset('images/avatar.png')}}">{{Auth::guard('admin')->user()->username}}
                     @endif
                 </div>
             </a>
             <ul>
-                <li><a href="{{Auth::guard('admin')->check() ? route('admin.dashboard', $app->getLocale()) : '#'}}">
+                <li><a href="{{Auth::guard('admin')->check() ? route('admin.dashboard', $app->getLocale()) :
+                route('user.dashboard',$app->getLocale())}}">
                         <div><i class="icon-dashboard"></i>Dashboard</div>
                     </a></li>
-                <li><a href="{{Auth::guard('admin')->check() ? route('admin.edit.profile', $app->getLocale()) : '#'}}">
-                        <div><i class="icon-user-edit"></i>{{__('lang.header.profile')}}</div>
+                <li><a href="{{Auth::guard('admin')->check() ? route('admin.profil', $app->getLocale()) :
+                route('user.profil', $app->getLocale())}}">
+                        <div><i class="icon-user-edit"></i>
+                            {{__('lang.header.profile')}}</div>
                     </a></li>
-                <li><a href="{{Auth::guard('admin')->check() ? route('admin.settings', $app->getLocale()) : '#'}}">
-                        <div><i class="icon-cogs"></i>{{__('lang.header.setting')}}</div>
+                <li><a href="{{Auth::guard('admin')->check() ? route('admin.pengaturan', $app->getLocale()) :
+                route('user.pengaturan', $app->getLocale())}}">
+                        <div><i class="icon-cogs"></i>
+                            {{__('lang.header.settings')}}</div>
                     </a></li>
                 <li class="dropdown-divider"></li>
                 <li>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\Bio;
+use App\Models\SocialProvider;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,6 @@ class SocialAuthController extends Controller
     {
         try {
             $userSocial = Socialite::driver($provider)->user();
-
             $checkUser = User::where('email', $userSocial->email)->first();
 
             if (!$checkUser) {
@@ -40,14 +40,15 @@ class SocialAuthController extends Controller
                 $user = User::firstOrCreate([
                     'email' => $userSocial->getEmail(),
                     'name' => $userSocial->getName(),
-                    'username' => $userSocial->getNickname(),
-                    'password' => bcrypt(str_random(15)),
+                    'username' => strtok($userSocial->getEmail(), '@'),
+                    'password' => bcrypt('secret'),
                     'status' => true,
                 ]);
 
                 Bio::create(['user_id' => $user->id, 'ava' => $userSocial->getId() . ".jpg"]);
 
-                $user->socialProviders()->create([
+                SocialProvider::create([
+                    'user_id' => $user->id,
                     'provider_id' => $userSocial->getId(),
                     'provider' => $provider
                 ]);
@@ -64,11 +65,7 @@ class SocialAuthController extends Controller
             }
             Auth::loginUsingId($user->id);
 
-            if ($provider == 'facebook') {
-                return back()->with('signed', 'message');
-            } else {
-                return redirect()->route('beranda')->with('signed', 'message');
-            }
+            return redirect()->route('beranda')->with('signed', 'message');
 
         } catch (\Exception $e) {
             return back()->with('unknown', 'message');

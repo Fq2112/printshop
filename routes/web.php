@@ -108,6 +108,35 @@ Route::group(['prefix' => '{lang?}', 'middleware' => 'locale'], function () {
 
         });
 
+        Route::group(['namespace' => 'Users', 'prefix' => __('routes.account'), 'middleware' => ['auth', 'user']], function () {
+
+            Route::get('dashboard', [
+                'uses' => 'UserController@dashboard',
+                'as' => 'user.dashboard'
+            ]);
+
+            Route::get(__('routes.profile'), [
+                'uses' => 'AkunController@profil',
+                'as' => 'user.profil'
+            ]);
+
+            Route::put(__('routes.profile') . '/update', [
+                'uses' => 'AkunController@updateProfil',
+                'as' => 'user.update.profil'
+            ]);
+
+            Route::get(__('routes.settings'), [
+                'uses' => 'AkunController@pengaturan',
+                'as' => 'user.pengaturan'
+            ]);
+
+            Route::put(__('routes.settings') . '/update', [
+                'uses' => 'AkunController@updatePengaturan',
+                'as' => 'user.update.pengaturan'
+            ]);
+
+        });
+
     });
 
 });

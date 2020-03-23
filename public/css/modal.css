@@ -113,7 +113,7 @@
 .login .division {
     float: none;
     margin: 0 auto 18px;
-    /*overflow: hidden;*/
+    overflow: hidden;
     position: relative;
     text-align: center;
     width: 100%;
@@ -161,6 +161,26 @@
     font-size: 24px;
 }
 
+.button-border.button-facebook {
+    color: #455CA8;
+    border-color: #455CA8;
+}
+
+.button-border.button-facebook:hover,
+.button-border.button-facebook.button-fill:before {
+    background-color: #455CA8 !important;
+}
+
+.button-border.button-google {
+    color: #DB4437;
+    border-color: #DB4437;
+}
+
+.button-border.button-google:hover,
+.button-border.button-google.button-fill:before {
+    background-color: #DB4437 !important;
+}
+
 .login .social .twitter {
     background-color: #0099db;
     color: #FFFFFF;
@@ -172,7 +192,7 @@
 }
 
 .login .social .google {
-    background-color: #F74933;
+    background-color: #DB4437;
 }
 
 .login .social .github {

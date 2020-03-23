@@ -11,34 +11,13 @@
                 <div class="box">
                     <div class="content">
                         <div class="social">
-                            {{--<a class="circle github" href="{{route('redirect', ['provider' => 'github'])}}"
-                               data-toggle="tooltip" data-title="Github" data-placement="left">
-                                <i class="fab fa-github fa-fw"></i>
-                            </a>--}}
-                            <a id="facebook_login" class="circle facebook"
-                               href="{{route('redirect', ['provider' => 'facebook'])}}"
-                               data-toggle="tooltip" data-title="Facebook" data-placement="left">
-                                <i class="icon-facebook"></i>
+                            <a class="button button-rounded button-reveal button-border button-facebook tleft"
+                               href="{{route('redirect', ['provider' => 'facebook'])}}">
+                                <i class="icon-facebook"></i><span>Facebook</span>
                             </a>
-                            <a id="twitter_login" class="circle twitter"
-                               href="{{route('redirect', ['provider' => 'twitter'])}}"
-                               data-toggle="tooltip" data-title="Twitter" data-placement="top">
-                                <i class="icon-twitter"></i>
-                            </a>
-                            {{--<a id="instagram_login" class="circle instagram"
-                               href="{{route('redirect', ['provider' => 'instagram'])}}"
-                               data-toggle="tooltip" data-title="Instagram" data-placement="bottom">
-                                <i class="fab fa-instagram fa-fw"></i>
-                            </a>--}}
-                            <a id="linkedin_login" class="circle linkedin"
-                               href="{{route('redirect', ['provider' => 'linkedin'])}}"
-                               data-toggle="tooltip" data-title="Linkedin" data-placement="bottom">
-                                <i class="icon-linkedin-in"></i>
-                            </a>
-                            <a id="google_login" class="circle google"
-                               href="{{route('redirect', ['provider' => 'google'])}}"
-                               data-toggle="tooltip" data-title="Google+" data-placement="right">
-                                <i class="icon-google-plus-g"></i>
+                            <a class="button button-rounded button-reveal button-border button-google tleft"
+                               href="{{route('redirect', ['provider' => 'google'])}}">
+                                <i class="icon-google"></i><span>Google</span>
                             </a>
                         </div>
                         <div class="division">

@@ -41,28 +41,4 @@ return [
         'client_secret' => env('Google_CLIENT_SECRET'),
         'redirect' => env('Google_REDIRECT'),
     ],
-
-    'twitter' => [
-        'client_id' => env('TW_CLIENT_ID'),
-        'client_secret' => env('TW_CLIENT_SECRET'),
-        'redirect' => env('TW_REDIRECT'),
-    ],
-
-    'github' => [
-        'client_id' => env('GIT_CLIENT_ID'),
-        'client_secret' => env('GIT_CLIENT_SECRET'),
-        'redirect' => env('GIT_REDIRECT'),
-    ],
-
-    'linkedin' => [
-        'client_id' => env('LinkedIn_CLIENT_ID'),
-        'client_secret' => env('LinkedIn_CLIENT_SECRET'),
-        'redirect' => env('LinkedIn_REDIRECT'),
-    ],
-
-    'instagram' => [
-        'client_id' => env('IG_CLIENT_ID'),
-        'client_secret' => env('IG_CLIENT_SECRET'),
-        'redirect' => env('IG_REDIRECT'),
-    ],
 ];

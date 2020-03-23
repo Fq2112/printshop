@@ -12,8 +12,11 @@
     swal('{{__('lang.alert.success')}}', '{{__('lang.mail.content.hello')}} {{Auth::guard('admin')->check() ?
     Auth::guard('admin')->user()->name : Auth::user()->name}}! {{__('lang.alert.login')}}', 'success');
 
+    @elseif(session('token'))
+    swal('{{__('lang.alert.error')}}', '{{__('lang.alert.token-fail')}}', 'error');
+
     @elseif(session('expire'))
-    swal('{{__('lang.alert.error')}}', '{{session('expire')}}', 'error');
+    swal('{{__('lang.alert.error')}}', '{{__('lang.alert.auth-expire')}}', 'error');
 
     @elseif(session('logout'))
     swal('{{__('lang.alert.warning')}}', '{{__('lang.alert.logout')}}', 'warning');
@@ -21,8 +24,8 @@
     @elseif(session('warning'))
     swal('{{__('lang.alert.warning')}}', '{{session('warning')}}', 'warning');
 
-    @elseif(session('status'))
-    swal('{{__('lang.alert.success')}}', '{{session('status')}}', 'success', '3500');
+    @elseif(session('register'))
+    swal('{{__('lang.alert.success')}}', '{{__('lang.alert.register')}}', 'success');
 
     @elseif(session('unknown'))
     swal('{{__('lang.alert.error')}}', '{{__('lang.alert.socialite-fail')}}', 'error');

@@ -12,8 +12,9 @@ return [
         "faq" => "FAQ",
         "about" => "Tentang Kami",
         "sign-up-in" => "Daftar/Masuk",
+        "order" => "Riwayat Pemesanan",
         "profile" => "Sunting Profil",
-        "setting" => "Pengaturan Akun",
+        "settings" => "Pengaturan Akun",
         "sign-out" => "Keluar",
         "cart" => "Keranjang Belanja",
         "search" => "Hasil pencarian tidak ditemukan"
@@ -138,7 +139,20 @@ return [
         "logout-head" => "Keluar",
         "logout-capt" => "Apakah Anda yakin untuk mengakhiri sesi Anda?",
         "logout-message" => "Anda akan dialihkan ke halaman Beranda.",
+        "auth-expire" => "Halaman yang Anda minta memerlukan otentikasi, silahkan masuk ke akun Anda.",
+        "token-fail" => "Halaman telah kedaluwarsa karena tidak aktif, silakan coba lagi.",
         "feature-fail" => "Fitur ini hanya berfungsi ketika Anda masuk sebagai Pelanggan.",
+    ],
+    "errors" => [
+        "403-head" => "AKSES TERLARANG",
+        "403-capt" => "Klien Anda tidak memiliki izin untuk mendapatkan URL /adsense dari server ini.",
+        "404-head" => "HALAMAN TIDAK DITEMUKAN",
+        "404-capt" => "Halaman yang Anda cari mungkin telah dihapus, namanya diubah atau untuk sementara tidak tersedia.",
+        "405-head" => "METODE TIDAK DIIZINKAN",
+        "405-capt" => "URL yang diminta tidak ditemukan di server ini.",
+        "maintenance" => "SAAT INI SEDANG DIPERBAIKI",
+        "act1" => "Alihkan saya ke halaman Dashboard!",
+        "act2" => "Alihkan saya ke halaman Beranda!",
     ],
     "mail" => [
         "subject" => [

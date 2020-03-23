@@ -35,7 +35,7 @@ class User extends Authenticatable
 
     public function socialProviders()
     {
-        return $this->hasMany(SocialProvider::class);
+        return $this->hasMany(SocialProvider::class, 'user_id');
     }
 
     public function scopeByActivationColumns(Builder $builder, $useremail, $verifyToken)
