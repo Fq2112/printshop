@@ -71,7 +71,7 @@ Route::group(['prefix' => '{lang?}', 'middleware' => 'locale'], function () {
 
         Route::group(['prefix' => 'info'], function () {
 
-            Route::get(__('routes.pro'), [
+            Route::get('pro', [
                 'uses' => 'MainController@pro',
                 'as' => 'pro'
             ]);

@@ -1,7 +1,6 @@
 <?php
 return [
     "account" => "account",
-    "pro" => "pro",
     "how-to" => "how-to",
     "faq" => "faqs",
     "about" => "about",

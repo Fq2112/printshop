@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,8 +28,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        setlocale(LC_TIME, config('app.locale'));
         Carbon::setLocale(config('app.locale'));
+        setlocale(LC_TIME, config('app.locale'));
+        session(['locale' => Request::segment(1)]);
+        app()->setLocale(Request::segment(1));
 
         $this->app->bind('GlobalAuth', 'App\Support\GlobalAuth');
     }
