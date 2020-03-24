@@ -220,6 +220,7 @@
                             <li><a href="{{route('faq', $app->getLocale())}}">{{__('lang.header.faq')}}</a></li>
                             <li><a href="{{route('tentang', $app->getLocale())}}">{{__('lang.header.about')}}</a></li>
                             <li><a href="{{route('kontak', $app->getLocale())}}">{{__('lang.header.contact')}}</a></li>
+                            <li><a href="{{route('blog', $app->getLocale())}}">Blog</a></li>
                             <li>
                                 @if(\Illuminate\Support\Facades\Request::is(['/*', 'id*']))
                                     <a href="#"><img width="20" src="{{asset('images/icons/flags/indonesia.svg')}}"
@@ -331,53 +332,22 @@
                                 </li>
                                 <li><a href="{{route('kontak', $app->getLocale())}}">{{__('lang.header.contact')}}</a>
                                 </li>
+                                <li><a href="{{route('blog', $app->getLocale())}}">Blog</a></li>
                             </ul>
-                        </div>
-
-                        <div class="widget clearfix">
-                            <h4 class="ls0 mb-3 nott">{{__('lang.footer.social')}}</h4>
-                            <a href="https://fb.com/pages/Premiere-Digital-Printing/164943546903733" target="_blank"
-                               class="social-icon si-small si-rounded si-facebook">
-                                <i class="icon-facebook"></i>
-                                <i class="icon-facebook"></i>
-                            </a>
-                            <a href="https://instagram.com/premierprintingsby" target="_blank"
-                               class="social-icon si-small si-rounded si-instagram">
-                                <i class="icon-instagram"></i>
-                                <i class="icon-instagram"></i>
-                            </a>
-                            <a href="https://api.whatsapp.com/send?phone=62817597777&text=&source=&data="
-                               target="_blank"
-                               class="social-icon si-small si-rounded si-whatsapp">
-                                <i class="icon-whatsapp"></i>
-                                <i class="icon-whatsapp"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-4 col-sm-12">
-                        <div class="widget clearfix">
-                            <h4 class="ls0 mb-3 nott">{{__('lang.footer.subs-head')}}</h4>
-                            <div class="widget subscribe-widget mt-2 clearfix">
-                                <p class="mb-4">{!! __('lang.footer.subs-capt') !!}</p>
-                                <div class="widget-subscribe-form-result"></div>
-                                <form id="widget-subscribe-form" action="{{asset('include/subscribe.php')}}"
-                                      method="post"
-                                      class="mt-1 nobottommargin d-flex">
-                                    <input type="email" id="widget-subscribe-form-email"
-                                           name="widget-subscribe-form-email"
-                                           class="form-control sm-form-control required email"
-                                           placeholder="{{__('lang.placeholder.email')}}">
-
-                                    <button class="button text-uppercase t400 ml-1 my-0" type="submit">
-                                        {{__('lang.button.subs')}}</button>
-                                </form>
-                            </div>
                         </div>
 
                         <div class="widget clearfix">
                             <h4 class="ls0 mb-3 nott">{{__('lang.footer.payment')}}</h4>
                             <img src="{{asset('images/logo-midtrans-color.svg')}}" alt="Logo" class="footer-logo">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div id="instagram" class="widget clearfix">
+                            <h4 class="ls0 mb-3 nott">{{__('lang.ig-feed.head')}}</h4>
+                            <div id="instagram-photos" class="instagram-photos masonry-thumbs grid-4"
+                                 data-user="5834720953" data-count="12" data-type="user"></div>
+                            {{--3832059847 | 5834720953--}}
                         </div>
                     </div>
                 </div>

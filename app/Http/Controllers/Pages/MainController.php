@@ -12,6 +12,7 @@ class MainController extends Controller
 {
     public function beranda(Request $request)
     {
+        \App\Models\Visitor::hit();
         return view('pages.main.beranda');
     }
 
@@ -58,36 +59,43 @@ class MainController extends Controller
 
     public function pro()
     {
+        \App\Models\Visitor::hit();
         return __('lang.header.pro');
     }
 
     public function caraPemesanan()
     {
+        \App\Models\Visitor::hit();
         return __('lang.header.how-to');
     }
 
     public function faq()
     {
+        \App\Models\Visitor::hit();
         return __('lang.header.faq');
     }
 
     public function tentang()
     {
+        \App\Models\Visitor::hit();
         return __('lang.header.about');
     }
 
     public function kontak()
     {
+        \App\Models\Visitor::hit();
         return __('lang.header.contact');
     }
 
     public function syaratKetentuan()
     {
+        \App\Models\Visitor::hit();
         return __('lang.footer.tnc');
     }
 
     public function kebijakanPrivasi()
     {
+        \App\Models\Visitor::hit();
         return __('lang.footer.pp');
     }
 }

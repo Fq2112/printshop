@@ -11,11 +11,11 @@
                 <div class="box">
                     <div class="content">
                         <div class="social">
-                            <a class="button button-rounded button-reveal button-border button-facebook tleft"
+                            <a class="button button-rounded button-reveal button-facebook tleft"
                                href="{{route('redirect', ['provider' => 'facebook'])}}">
                                 <i class="icon-facebook"></i><span>Facebook</span>
                             </a>
-                            <a class="button button-rounded button-reveal button-border button-google tleft"
+                            <a class="button button-rounded button-reveal button-google tleft"
                                href="{{route('redirect', ['provider' => 'google'])}}">
                                 <i class="icon-google"></i><span>Google</span>
                             </a>

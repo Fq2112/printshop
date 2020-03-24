@@ -807,7 +807,7 @@
                 <div class="container fancy-title title-dotted-border title-center mt-5 mb-0">
                     <h4 style="background-color: #f9f9f9">{{__('lang.client.head')}}</h4>
                 </div>
-                <div id="oc-clients-full" class="owl-carousel owl-carousel-full image-carousel carousel-widget"
+                <div id="oc-clients-full" class="owl-carousel owl-carousel-full image-carousel carousel-widget mb-5"
                      data-margin="30" data-nav="true" data-pagi="false" data-autoplay="5000" data-items-xs="3"
                      data-items-sm="3" data-items-md="5" data-items-lg="6" data-items-xl="7">
                     <div class="oc-item"><a href="#"><img src="{{asset('images/clients/1.png')}}" alt=""></a></div>
@@ -823,22 +823,12 @@
                     <div class="oc-item"><a href="#"><img src="{{asset('images/clients/11.png')}}" alt=""></a></div>
                     <div class="oc-item"><a href="#"><img src="{{asset('images/clients/12.png')}}" alt=""></a></div>
                 </div>
-
-                <!-- instagram feed -->
-                <div class="container fancy-title title-dotted-border title-center mt-4 mb-3">
-                    <h4 style="background-color: #f9f9f9">{{__('lang.ig-feed.head')}}</h4>
-                </div>
-                <div class="elfsight-app-512daad2-e2a6-40f5-b24b-5d76f7283321"></div>
-                <a class="button button-rounded button-reveal button-border button-primary tleft lowercase"
-                   href="https://instagram.com/premierprintingsby" target="_blank" style="margin: -1em 0 3.5em 0">
-                    <i class="icon-instagram"></i><span>premierprintingsby</span></a>
             </div>
             <div class="clear"></div>
         </div>
     </section>
 @endsection
 @push('scripts')
-    <script src="https://apps.elfsight.com/p/platform.js" defer></script>
     <script src="{{asset('include/rs-plugin/js/jquery.themepunch.tools.min.js')}}"></script>
     <script src="{{asset('include/rs-plugin/js/jquery.themepunch.revolution.min.js')}}"></script>
     <script src="{{asset('include/rs-plugin/js/extensions/revolution.extension.video.min.js')}}"></script>

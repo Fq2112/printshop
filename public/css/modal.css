@@ -161,23 +161,15 @@
     font-size: 24px;
 }
 
-.button-border.button-facebook {
-    color: #455CA8;
-    border-color: #455CA8;
-}
-
-.button-border.button-facebook:hover,
-.button-border.button-facebook.button-fill:before {
+.button-facebook,
+.button-facebook:hover,
+.button-facebook.button-fill:before {
     background-color: #455CA8 !important;
 }
 
-.button-border.button-google {
-    color: #DB4437;
-    border-color: #DB4437;
-}
-
-.button-border.button-google:hover,
-.button-border.button-google.button-fill:before {
+.button-google,
+.button-google:hover,
+.button-google.button-fill:before {
     background-color: #DB4437 !important;
 }
 

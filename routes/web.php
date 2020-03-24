@@ -108,6 +108,30 @@ Route::group(['prefix' => '{lang?}', 'middleware' => 'locale'], function () {
 
         });
 
+        Route::group(['prefix' => 'blog'], function () {
+
+            Route::get('/', [
+                'uses' => 'BlogController@blog',
+                'as' => 'blog'
+            ]);
+
+            Route::get('data', [
+                'uses' => 'BlogController@getDataBlog',
+                'as' => 'get.data.blog'
+            ]);
+
+            Route::get('cari/{title}', [
+                'uses' => 'BlogController@cariJudulBlog',
+                'as' => 'get.cari-judul.blog'
+            ]);
+
+            Route::get('{author}/{y?}/{m?}/{d?}/{title?}', [
+                'uses' => 'BlogController@detailBlog',
+                'as' => 'detail.blog'
+            ]);
+
+        });
+
         Route::group(['namespace' => 'Users', 'prefix' => __('routes.account'), 'middleware' => ['auth', 'user']], function () {
 
             Route::get('dashboard', [
