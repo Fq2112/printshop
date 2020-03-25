@@ -56,6 +56,11 @@ class Admin extends Authenticatable
         return ($this->role == Role::OWNER);
     }
 
+    public function getBlog()
+    {
+        return $this->hasMany(Blog::class, 'admin_id');
+    }
+
     /**
      * Sends the password reset notification.
      *

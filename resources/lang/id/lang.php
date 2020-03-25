@@ -77,6 +77,16 @@ return [
     "ig-feed" => [
         "head" => "Ikuti Kami di Instagram",
     ],
+    "breadcrumb" => [
+        "home" => "Beranda",
+        "list" => "Daftar",
+    ],
+    "blog" => [
+        "head" => "Blog Kami",
+        "capt" => "Kami juga menyediakan Anda dengan berita terbaru terkait hal-hal produk cetak.",
+        "search" => "Cari...",
+        "tabs" => "TAMPILKAN SEMUA",
+    ],
     "placeholder" => [
         "search" => "Mau cetak apa hari ini?",
         "useremail" => "Username atau email",

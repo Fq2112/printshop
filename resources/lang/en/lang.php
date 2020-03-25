@@ -77,6 +77,16 @@ return [
     "ig-feed" => [
         "head" => "Follow Us on Instagram",
     ],
+    "breadcrumb" => [
+        "home" => "Home",
+        "list" => "List",
+    ],
+    "blog" => [
+        "head" => "Our Blog",
+        "capt" => "We're also provide you with a recent news related to print product things.",
+        "search" => "Search...",
+        "tabs" => "SHOW ALL",
+    ],
     "placeholder" => [
         "search" => "What do you want to print today?",
         "useremail" => "Username or email",

@@ -106,29 +106,29 @@ Route::group(['prefix' => '{lang?}', 'middleware' => 'locale'], function () {
                 'as' => 'kebijakan-privasi'
             ]);
 
-        });
+            Route::group(['prefix' => 'blog'], function () {
 
-        Route::group(['prefix' => 'blog'], function () {
+                Route::get('/', [
+                    'uses' => 'BlogController@blog',
+                    'as' => 'blog'
+                ]);
 
-            Route::get('/', [
-                'uses' => 'BlogController@blog',
-                'as' => 'blog'
-            ]);
+                Route::get('data', [
+                    'uses' => 'BlogController@getDataBlog',
+                    'as' => 'get.data.blog'
+                ]);
 
-            Route::get('data', [
-                'uses' => 'BlogController@getDataBlog',
-                'as' => 'get.data.blog'
-            ]);
+                Route::get('cari/judul', [
+                    'uses' => 'BlogController@cariJudulBlog',
+                    'as' => 'get.cari-judul.blog'
+                ]);
 
-            Route::get('cari/{title}', [
-                'uses' => 'BlogController@cariJudulBlog',
-                'as' => 'get.cari-judul.blog'
-            ]);
+                Route::get('{author}/{y?}/{m?}/{d?}/{title?}', [
+                    'uses' => 'BlogController@detailBlog',
+                    'as' => 'detail.blog'
+                ]);
 
-            Route::get('{author}/{y?}/{m?}/{d?}/{title?}', [
-                'uses' => 'BlogController@detailBlog',
-                'as' => 'detail.blog'
-            ]);
+            });
 
         });
 

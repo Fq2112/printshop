@@ -141,6 +141,17 @@
             text-align: center;
         }
 
+        .parallax-overlay {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .45) 30%, rgba(0, 0, 0, .65) 80%, rgba(0, 0, 0, .85) 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+        }
+
         .content-area {
             position: relative;
             cursor: default;
@@ -179,6 +190,40 @@
 
         .content-area:hover img {
             transform: scale(1.2);
+        }
+
+        .pagination > li > a,
+        .pagination > li > span {
+            color: #777;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            font-weight: 600;
+        }
+
+        .pagination > li > a:hover,
+        .pagination > li > span:hover,
+        .pagination > li > a:focus,
+        .pagination > li > span:focus {
+            color: #101c37;
+        }
+
+        .pagination > .active > a,
+        .pagination > .active > span,
+        .pagination > .active > a:hover,
+        .pagination > .active > span:hover,
+        .pagination > .active > a:focus,
+        .pagination > .active > span:focus {
+            background-color: #122752;
+            border-color: #122752;
+        }
+
+        .pagination > .disabled > a,
+        .pagination > .disabled > a:focus,
+        .pagination > .disabled > a:hover,
+        .pagination > .disabled > span,
+        .pagination > .disabled > span:focus,
+        .pagination > .disabled > span:hover {
+            pointer-events: none;
         }
 
         .myProgress {
