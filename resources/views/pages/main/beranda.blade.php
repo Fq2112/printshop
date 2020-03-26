@@ -421,258 +421,41 @@
 
                             <div id="portfolio"
                                  class="portfolio grid-container portfolio-notitle portfolio-masonry clearfix">
-                                <article class="portfolio-item">
-                                    <div class="portfolio-image">
-                                        <div class="fslider" data-arrows="false" data-speed="400" data-pause="4000">
-                                            <div class="flexslider">
-                                                <div class="slider-wrap">
-                                                    @for($i=1;$i<=6;$i++)
-                                                        <div class="slide">
-                                                            <a href="#">
-                                                                <img
-                                                                    src="{{asset('images/featured/business-card/thumb/'.$i.'.jpg')}}"
-                                                                    alt="Business Card"></a>
-                                                        </div>
-                                                    @endfor
+                                @foreach($featured as $row)
+                                    <article class="portfolio-item">
+                                        <div class="portfolio-image">
+                                            <div class="fslider" data-arrows="false" data-speed="400" data-pause="4000">
+                                                <div class="flexslider">
+                                                    <div class="slider-wrap">
+                                                        @foreach($row['thumb'] as $file)
+                                                            <div class="slide">
+                                                                <a href="#"><img src="{{$file}}" alt="{{$row['name']}}"></a>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="portfolio-overlay" data-lightbox="gallery">
-                                            <a href="{{asset('images/featured/business-card/1.jpg')}}" class="left-icon"
-                                               data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
-                                            @for($i=2;$i<=6;$i++)
-                                                <a href="{{asset('images/featured/business-card/'.$i.'.jpg')}}"
-                                                   class="hidden" data-lightbox="gallery-item"></a>
-                                            @endfor
-                                            <a href="#" class="right-icon"><i class="icon-line-ellipsis"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="portfolio-desc">
-                                        <h3><a href="#">{{__('lang.featured.bc-head')}}</a></h3>
-                                        <span>{!! __('lang.featured.bc-capt') !!}</span>
-                                    </div>
-                                </article>
-
-                                <article class="portfolio-item">
-                                    <div class="portfolio-image">
-                                        <div class="fslider" data-arrows="false" data-speed="400" data-pause="4000">
-                                            <div class="flexslider">
-                                                <div class="slider-wrap">
-                                                    @for($i=1;$i<=4;$i++)
-                                                        <div class="slide">
-                                                            <a href="#">
-                                                                <img
-                                                                    src="{{asset('images/featured/brochure/thumb/'.$i.'.jpg')}}"
-                                                                    alt="Brochure"></a>
-                                                        </div>
-                                                    @endfor
-                                                </div>
+                                            <div class="portfolio-overlay" data-lightbox="gallery">
+                                                <a href="{{$row['init']}}" class="left-icon"
+                                                   data-lightbox="gallery-item">
+                                                    <i class="icon-line-stack-2"></i></a>
+                                                @foreach($row['gallery'] as $file)
+                                                    <a href="{{$file}}" class="hidden" data-lightbox="gallery-item"></a>
+                                                @endforeach
+                                                <a href="{{$row['link']}}" class="right-icon">
+                                                    <i class="icon-line-ellipsis"></i></a>
                                             </div>
                                         </div>
-                                        <div class="portfolio-overlay" data-lightbox="gallery">
-                                            <a href="{{asset('images/featured/brochure/1.jpg')}}" class="left-icon"
-                                               data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
-                                            @for($i=2;$i<=4;$i++)
-                                                <a href="{{asset('images/featured/brochure/'.$i.'.jpg')}}"
-                                                   class="hidden" data-lightbox="gallery-item"></a>
-                                            @endfor
-                                            <a href="#" class="right-icon"><i class="icon-line-ellipsis"></i></a>
+                                        <div class="portfolio-desc">
+                                            <h3><a href="{{$row['link']}}">{{$row['name']}}</a></h3>
+                                            <span>
+                                                @foreach($row['capt'] as $val)
+                                                    <a href="{{$val['link']}}">{{$val['name']}}</a>
+                                                @endforeach
+                                            </span>
                                         </div>
-                                    </div>
-                                    <div class="portfolio-desc">
-                                        <h3><a href="#">{{__('lang.featured.bro-head')}}</a></h3>
-                                        <span>{!! __('lang.featured.bro-capt') !!}</span>
-                                    </div>
-                                </article>
-
-                                <article class="portfolio-item">
-                                    <div class="portfolio-image">
-                                        <div class="fslider" data-arrows="false" data-speed="400" data-pause="4000">
-                                            <div class="flexslider">
-                                                <div class="slider-wrap">
-                                                    @for($i=1;$i<=5;$i++)
-                                                        <div class="slide">
-                                                            <a href="#">
-                                                                <img
-                                                                    src="{{asset('images/featured/flyer/thumb/'.$i.'.jpg')}}"
-                                                                    alt="Flyer"></a>
-                                                        </div>
-                                                    @endfor
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="portfolio-overlay" data-lightbox="gallery">
-                                            <a href="{{asset('images/featured/flyer/1.jpg')}}" class="left-icon"
-                                               data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
-                                            @for($i=2;$i<=5;$i++)
-                                                <a href="{{asset('images/featured/flyer/'.$i.'.jpg')}}"
-                                                   class="hidden" data-lightbox="gallery-item"></a>
-                                            @endfor
-                                            <a href="#" class="right-icon"><i class="icon-line-ellipsis"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="portfolio-desc">
-                                        <h3><a href="#">{{__('lang.featured.fly-head')}}</a></h3>
-                                        <span>{!! __('lang.featured.fly-capt') !!}</span>
-                                    </div>
-                                </article>
-
-                                <article class="portfolio-item">
-                                    <div class="portfolio-image">
-                                        <div class="fslider" data-arrows="false" data-speed="400" data-pause="4000">
-                                            <div class="flexslider">
-                                                <div class="slider-wrap">
-                                                    @for($i=1;$i<=4;$i++)
-                                                        <div class="slide">
-                                                            <a href="#">
-                                                                <img
-                                                                    src="{{asset('images/featured/in-banner/thumb/'.$i.'.jpg')}}"
-                                                                    alt="Indoor Banner"></a>
-                                                        </div>
-                                                    @endfor
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="portfolio-overlay" data-lightbox="gallery">
-                                            <a href="{{asset('images/featured/in-banner/1.jpg')}}" class="left-icon"
-                                               data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
-                                            @for($i=2;$i<=4;$i++)
-                                                <a href="{{asset('images/featured/in-banner/'.$i.'.jpg')}}"
-                                                   class="hidden" data-lightbox="gallery-item"></a>
-                                            @endfor
-                                            <a href="#" class="right-icon"><i class="icon-line-ellipsis"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="portfolio-desc">
-                                        <h3><a href="#">{{__('lang.featured.in-banner-head')}}</a></h3>
-                                        <span>{!! __('lang.featured.in-banner-capt') !!}</span>
-                                    </div>
-                                </article>
-
-                                <article class="portfolio-item">
-                                    <div class="portfolio-image">
-                                        <div class="fslider" data-arrows="false" data-speed="400" data-pause="4000">
-                                            <div class="flexslider">
-                                                <div class="slider-wrap">
-                                                    @for($i=1;$i<=2;$i++)
-                                                        <div class="slide">
-                                                            <a href="#">
-                                                                <img
-                                                                    src="{{asset('images/featured/tri-banner/thumb/'.$i.'.jpg')}}"
-                                                                    alt="Tripod Banner"></a>
-                                                        </div>
-                                                    @endfor
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="portfolio-overlay" data-lightbox="gallery">
-                                            <a href="{{asset('images/featured/tri-banner/1.jpg')}}" class="left-icon"
-                                               data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
-                                            <a href="{{asset('images/featured/tri-banner/2.jpg')}}" class="hidden"
-                                               data-lightbox="gallery-item"></a>
-                                            <a href="#" class="right-icon"><i class="icon-line-ellipsis"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="portfolio-desc">
-                                        <h3><a href="#">{{__('lang.featured.tri-banner-head')}}</a></h3>
-                                        <span>{!! __('lang.featured.tri-banner-capt') !!}</span>
-                                    </div>
-                                </article>
-
-                                <article class="portfolio-item">
-                                    <div class="portfolio-image">
-                                        <div class="fslider" data-arrows="false" data-speed="400" data-pause="4000">
-                                            <div class="flexslider">
-                                                <div class="slider-wrap">
-                                                    @for($i=1;$i<=3;$i++)
-                                                        <div class="slide">
-                                                            <a href="#">
-                                                                <img
-                                                                    src="{{asset('images/featured/e-card/thumb/'.$i.'.jpg')}}"
-                                                                    alt="Electronic Card"></a>
-                                                        </div>
-                                                    @endfor
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="portfolio-overlay" data-lightbox="gallery">
-                                            <a href="{{asset('images/featured/e-card/1.jpg')}}" class="left-icon"
-                                               data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
-                                            @for($i=2;$i<=3;$i++)
-                                                <a href="{{asset('images/featured/e-card/'.$i.'.jpg')}}"
-                                                   class="hidden" data-lightbox="gallery-item"></a>
-                                            @endfor
-                                            <a href="#" class="right-icon"><i class="icon-line-ellipsis"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="portfolio-desc">
-                                        <h3><a href="#">{{__('lang.featured.ecard-head')}}</a></h3>
-                                    </div>
-                                </article>
-
-                                <article class="portfolio-item">
-                                    <div class="portfolio-image">
-                                        <div class="fslider" data-arrows="false" data-speed="400" data-pause="4000">
-                                            <div class="flexslider">
-                                                <div class="slider-wrap">
-                                                    @for($i=1;$i<=4;$i++)
-                                                        <div class="slide">
-                                                            <a href="#">
-                                                                <img
-                                                                    src="{{asset('images/featured/greeting-card/thumb/'.$i.'.jpg')}}"
-                                                                    alt="Greeting Card"></a>
-                                                        </div>
-                                                    @endfor
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="portfolio-overlay" data-lightbox="gallery">
-                                            <a href="{{asset('images/featured/greeting-card/1.jpg')}}" class="left-icon"
-                                               data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
-                                            @for($i=2;$i<=4;$i++)
-                                                <a href="{{asset('images/featured/greeting-card/'.$i.'.jpg')}}"
-                                                   class="hidden" data-lightbox="gallery-item"></a>
-                                            @endfor
-                                            <a href="#" class="right-icon"><i class="icon-line-ellipsis"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="portfolio-desc">
-                                        <h3><a href="#">{{__('lang.featured.greeting-head')}}</a></h3>
-                                        <span>{!! __('lang.featured.greeting-capt') !!}</span>
-                                    </div>
-                                </article>
-
-                                <article class="portfolio-item">
-                                    <div class="portfolio-image">
-                                        <div class="fslider" data-arrows="false" data-speed="400" data-pause="4000">
-                                            <div class="flexslider">
-                                                <div class="slider-wrap">
-                                                    @for($i=1;$i<=4;$i++)
-                                                        <div class="slide">
-                                                            <a href="#">
-                                                                <img
-                                                                    src="{{asset('images/featured/calendar/thumb/'.$i.'.jpg')}}"
-                                                                    alt="Calendar"></a>
-                                                        </div>
-                                                    @endfor
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="portfolio-overlay" data-lightbox="gallery">
-                                            <a href="{{asset('images/featured/calendar/1.jpg')}}" class="left-icon"
-                                               data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
-                                            @for($i=2;$i<=4;$i++)
-                                                <a href="{{asset('images/featured/calendar/'.$i.'.jpg')}}"
-                                                   class="hidden" data-lightbox="gallery-item"></a>
-                                            @endfor
-                                            <a href="#" class="right-icon"><i class="icon-line-ellipsis"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="portfolio-desc">
-                                        <h3><a href="#">{{__('lang.featured.calendar-head')}}</a></h3>
-                                        <span>{!! __('lang.featured.calendar-capt') !!}</span>
-                                    </div>
-                                </article>
+                                    </article>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -901,6 +684,10 @@
 
             apiRevoSlider.bind("revolution.slide.onloaded", function (e) {
                 SEMICOLON.slider.sliderParallaxDimensions();
+            });
+
+            $(".portfolio-desc span a:not(:last-child)").each(function () {
+                $(this).append(',');
             });
 
             $("#processTabs").tabs({show: {effect: "slide", duration: 500}});

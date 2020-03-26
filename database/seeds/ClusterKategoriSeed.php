@@ -111,7 +111,7 @@ class ClusterKategoriSeed extends Seeder
         $clust[] = [
             ['Lunch Box Food Pail', 'Food Pail Lunch Boxes'],
             ['Lunch Box Bento', 'Bento Lunch Boxes'],
-            ['Lunch Box Standard', 'Standard Lunch Boxes'],
+            ['Lunch Box Standar', 'Standard Lunch Boxes'],
         ];
         $clust[] = [
             ['Kardus Box Kecil', 'Small Cardboard Boxes'],
@@ -152,7 +152,7 @@ class ClusterKategoriSeed extends Seeder
 
         ];
         $clust[] = [
-            ['Brosur Standard', 'Standard Brochures'],
+            ['Brosur Standar', 'Standard Brochures'],
             ['Brosur Premium', 'Premium Brochures'],
             ['Brosur Eknomis', 'Economic Brochures'],
         ];
