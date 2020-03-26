@@ -30,7 +30,7 @@
         </div>
     </section>
 
-    <section id="content">
+    <section id="content" style="background-color: #F9F9F9">
         <div class="content-wrap">
             <div class="container clearfix">
                 <div class="postcontent nobottommargin clearfix">
@@ -194,22 +194,23 @@
                                             <h3>
                                                 <a href="{{$url}}">{{\Illuminate\Support\Str::words($post->title,3,'...')}}</a>
                                             </h3>
-                                            <span><i class="icon-calendar3"></i> {{$tgl->formatLocalized('%d %b %Y')}} / <a
-                                                    href="{{$url2}}"><i class="icon-user"></i> {{$post->getAdmin->username}}</a></span>
+                                            <span><i
+                                                    class="icon-calendar3"></i> {{$tgl->formatLocalized('%d %b %Y')}}&ensp;/&ensp;
+                                                <a href="{{$url2}}"><i class="icon-user"></i> {{$post->getAdmin->username}}</a></span>
                                         </div>
                                     </article>
                                 @endforeach
                             </div>
                         @endif
-
-                        <div class="line"></div>
                     </div>
                 </div>
 
                 <div class="sidebar nobottommargin col_last clearfix">
                     <div class="sidebar-widgets-wrap">
                         <div id="subscriber" class="widget subscribe-widget clearfix">
-                            <h4 class="highlight-me">{{__('lang.blog.widget-search')}}</h4>
+                            <div class="fancy-title title-border">
+                                <h4 style="background-color: #F9F9F9">{{__('lang.blog.widget-search')}}</h4>
+                            </div>
                             <form action="{{route('blog', ['lang' => $app->getLocale()])}}"
                                   class="notopmargin nobottommargin">
                                 <div class="input-group divcenter">
@@ -223,8 +224,10 @@
                             </form>
                         </div>
 
-                        <div class="widget widget_categories clearfix">
-                            <h4 class="highlight-me">{{__('lang.blog.widget-category')}}</h4>
+                        <div class="widget widget_categories notopborder pt-0 clearfix">
+                            <div class="fancy-title title-border">
+                                <h4 style="background-color: #F9F9F9">{{__('lang.blog.widget-category')}}</h4>
+                            </div>
                             <ul>
                                 @foreach(\App\Models\BlogCategory::orderBy('name')->get() as $row)
                                     <li><a href="{{route('blog', ['filter' => $row->id,'lang' => $app->getLocale()])}}">

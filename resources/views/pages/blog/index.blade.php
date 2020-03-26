@@ -5,6 +5,7 @@
     <style>
         #tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
             color: #f89406 !important;
+            background-color: #F9F9F9 !important;
             border-color: transparent transparent #f3f3f3;
             border-bottom: 4px solid #f89406 !important;
         }
@@ -49,7 +50,7 @@
         </div>
     </section>
 
-    <section id="content">
+    <section id="content" style="background-color: #F9F9F9">
         <div class="content-wrap">
             <div class="container clearfix">
                 <form id="form-loadBlog">
@@ -57,7 +58,7 @@
                     <div class="form-group has-feedback">
                         <input id="blog-keyword" type="text" name="q" class="form-control"
                                autocomplete="off" spellcheck="false" value="{{$keyword}}"
-                               placeholder="{{__('lang.blog.search')}}" style="border-radius: 1rem;margin: 1em auto">
+                               placeholder="{{__('lang.blog.search')}}" style="border-radius: 1rem;">
                         <span class="glyphicon glyphicon-search form-control-feedback"
                               style="width: 35px;height: 35px;line-height: 35px;"></span>
                     </div>
@@ -89,7 +90,7 @@
                             <div class="css3-spinner-bounce2"></div>
                             <div class="css3-spinner-bounce3"></div>
                         </div>
-                        <div class="row mb-4" id="blog"></div>
+                        <div class="row mt-2 mb-4" id="blog"></div>
                         <div class="row text-right">
                             <div class="col-12 myPagination">
                                 <ul class="pagination justify-content-end"></ul>

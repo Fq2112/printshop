@@ -6,6 +6,7 @@
     <style>
         #tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
             color: #f89406 !important;
+            background-color: #F9F9F9 !important;
             border-color: transparent transparent #f3f3f3;
             border-bottom: 4px solid #f89406 !important;
         }
@@ -50,7 +51,7 @@
         </div>
     </section>
 
-    <section id="content">
+    <section id="content" style="background-color: #F9F9F9">
         <div class="content-wrap">
             <div class="container clearfix">
                 <div class="row clearfix">
@@ -146,12 +147,12 @@
                                                                 'd' => $date->format('d'), 'title' => $data->permalink]);
                                                             @endphp
                                                             <li>
-                                                                <a href="{{$url}}">
-                                                                    <p align="justify" class="blog-category">
+                                                                <a class="pt-3" href="{{$url}}">
+                                                                    <p align="justify" class="blog-category mb-0">
                                                                         {{$data->getBlogCategory->name}}
-                                                                        <i class="icon-calendar-alt"></i>{{$date
+                                                                        <i class="icon-calendar3"></i>{{$date
                                                                         ->formatLocalized('%d %b %Y')}}</p>
-                                                                    <h4>{{$data->title}}</h4>
+                                                                    <h4 class="mb-0">{{$data->title}}</h4>
                                                                 </a>
                                                             </li>
                                                         @endforeach
@@ -169,7 +170,7 @@
 
                     <div class="col-md-3 clearfix">
                         <div class="fancy-title topmargin title-border">
-                            <h4>{{__('lang.blog.about')}}</h4>
+                            <h4 style="background-color: #F9F9F9">{{__('lang.blog.about')}}</h4>
                         </div>
                         @if($admin->about != "")
                             <p align="justify">{{$admin->about}}</p>
@@ -178,7 +179,7 @@
                         @endif
 
                         <div class="fancy-title topmargin title-border">
-                            <h4>{{__('lang.blog.follow')}}</h4>
+                            <h4 style="background-color: #F9F9F9">{{__('lang.blog.follow')}}</h4>
                         </div>
                         <a class="social-icon si-call si-small si-rounded si-light" title="Facebook"
                            href="mailto:{{$admin->email}}">
@@ -230,7 +231,6 @@
                 $next = $this.next();
 
                 $next.slideToggle();
-                $this.find('i').toggleClass('icon-chevron-right icon-chevron-down');
                 $this.parent().toggleClass('open');
 
                 if (!e.data.multiple) {

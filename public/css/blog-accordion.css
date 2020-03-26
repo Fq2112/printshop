@@ -17,7 +17,7 @@ ul.static-menu, .static-menu ul {
 .static-menu {
     width: 100%;
     margin: 0 auto;
-    background: #FFF;
+    background: #F9F9F9;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
@@ -74,7 +74,7 @@ ul.static-menu, .static-menu ul {
     color: #fff;
 }
 
-.static-menu li.open i.fa-chevron-right {
+.static-menu li.open i.icon-chevron-right {
     -webkit-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
     -o-transform: rotate(90deg);
