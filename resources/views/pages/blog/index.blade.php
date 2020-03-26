@@ -69,19 +69,20 @@
                            data-toggle="tab" href="#tabContent-all" role="tab" aria-controls="nav-home"
                            aria-selected="true" onclick="filterBlog(null)">
                             <i class="icon-sort-alpha-up"></i>&ensp;{{__('lang.blog.tabs')}}&ensp;<span
-                                class="badge badge-secondary">{{\App\Models\Blog::count()}}</span></a>
+                                class="badge badge-secondary">{{\App\Models\Blog::count()}}</span>
+                        </a>
                         @foreach($categories as $row)
                             <a class="nav-item nav-link" onclick="filterBlog('{{$row->id}}')"
                                style="color: #495057" id="tabList-{{$row->id}}" data-toggle="tab"
                                href="#tabContent-{{$row->id}}" role="tab"
                                aria-controls="nav-home" aria-selected="true">
-                                <i class="{{$row->icon}}"></i>&ensp;{{$row->name}}&ensp;<span
-                                    class="badge badge-secondary">{{count($row->getBlog)}}</span></a>
+                                {{$row->name}}&ensp;<span class="badge badge-secondary">{{count($row->getBlog)}}</span>
+                            </a>
                         @endforeach
                     </div>
                 </nav>
                 <div id="nav-tabContent" class="tab-content">
-                    <div role="tabpanel" class="tab-pane fade" id="all" aria-labelledby="nav-home-tab"
+                    <div role="tabpanel" class="tab-pane fade" id="tabContent-all" aria-labelledby="nav-home-tab"
                          style="border: none">
                         <div class="css3-spinner mt-4" style="position: relative">
                             <div class="css3-spinner-bounce1"></div>
@@ -281,8 +282,8 @@
                     '<div class="blog-item">' +
                     '<a href="' + val.link + '"><div class="icon"><img src="' + val.thumbnail + '" alt="Thumbnail"></div>' +
                     '<div class="blog-content"><p class="blog-category">' + val.category + '<span class="blog-date">' +
-                    '<i class="icon-calendar-alt ml-2 mr-2"></i>' + val.date + '</span><br>' +
-                    '<sub class="blog-author">by <span>' + val.author + '</span></sub></p>' +
+                    '<i class="icon-calendar3 ml-2 mr-2"></i>' + val.date + '</span><br>' +
+                    '<sub class="blog-author">{{__('lang.blog.by')}} <span>' + val.author + '</span></sub></p>' +
                     '<div class="title">' + val.title + '</div><div class="rounded"></div>' + val.content + '</div>' +
                     '<div class="item-arrow"><i class="icon-long-arrow-alt-right" aria-hidden="true"></i></div></a></div>';
             });

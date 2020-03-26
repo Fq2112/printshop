@@ -39,7 +39,7 @@ class BlogController extends Controller
             $blog[$index] = [
                 'author' => $row->getAdmin->username,
                 'category' => $row->getBlogCategory->name,
-                'date' => Carbon::parse($row->created_at)->formatLocalized('%d %b %Y'),
+                'date' => Carbon::parse($row->created_at)->formatLocalized('%d %B %Y'),
                 'title' => $row->title,
                 'link' => route('detail.blog', ['lang' => App::getLocale(), 'author' => $row->getAdmin->username,
                     'y' => $tgl->format('Y'), 'm' => $tgl->format('m'), 'd' => $tgl->format('d'),
@@ -76,7 +76,7 @@ class BlogController extends Controller
     {
         $admin = Admin::where('username', $request->author)->firstOrFail();
 
-        if (!is_null($request->year) && !is_null($request->month) && !is_null($request->date) && !is_null($request->title)) {
+        if (is_null($request->segment(5))) {
             $latest = Blog::where('admin_id', $admin->id)->orderByDesc('id')->take(5)->get();
             $archive = Blog::where('admin_id', $admin->id)->get()->groupBy(function ($q) {
                 return Carbon::parse($q->created_at)->format('F Y');

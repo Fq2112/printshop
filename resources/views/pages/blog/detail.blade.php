@@ -81,10 +81,10 @@
                                 <div class="si-share noborder clearfix">
                                     <span>{{__('lang.blog.share-head')}}</span>
                                     <div>
-                                        <a class="social-icon si-borderless si-email3"
+                                        <a class="social-icon si-borderless si-call"
                                            href="mailto:?subject={{$blog->title}}&body={{__('lang.blog.share-capt').' '.$uri_blog}}">
-                                            <i class="icon-email3"></i>
-                                            <i class="icon-email3"></i>
+                                            <i class="icon-envelope-alt"></i>
+                                            <i class="icon-envelope-alt"></i>
                                         </a>
                                         <a class="social-icon si-borderless si-whatsapp"
                                            href="https://wa.me?text={{__('lang.blog.share-capt').' '.$uri_blog}}"
