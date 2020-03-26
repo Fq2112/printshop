@@ -192,6 +192,43 @@
             transform: scale(1.2);
         }
 
+        .btn-primary {
+            color: #fff;
+            background-color: #f89406;
+            border-color: #f89406;
+        }
+
+        .btn-primary:hover {
+            color: #fff;
+            background-color: #d77906;
+            border-color: #c37906;
+        }
+
+        .btn-primary:focus, .btn-primary.focus {
+            color: #fff;
+            background-color: #d77906;
+            border-color: #c37906;
+            box-shadow: 0 0 0 0.2rem rgba(255, 153, 6, 0.5);
+        }
+
+        .btn-primary.disabled, .btn-primary:disabled {
+            color: #fff;
+            background-color: #f89406;
+            border-color: #f89406;
+        }
+
+        .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
+        .show > .btn-primary.dropdown-toggle {
+            color: #fff;
+            background-color: #c37906;
+            border-color: #af6806;
+        }
+
+        .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
+        .show > .btn-primary.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba(255, 153, 6, 0.5);
+        }
+
         .pagination > li > a,
         .pagination > li > span {
             color: #777;
@@ -204,7 +241,7 @@
         .pagination > li > span:hover,
         .pagination > li > a:focus,
         .pagination > li > span:focus {
-            color: #101c37;
+            color: #9b6104;
         }
 
         .pagination > .active > a,
@@ -213,8 +250,8 @@
         .pagination > .active > span:hover,
         .pagination > .active > a:focus,
         .pagination > .active > span:focus {
-            background-color: #122752;
-            border-color: #122752;
+            background-color: #f89406;
+            border-color: #f89406;
         }
 
         .pagination > .disabled > a,
@@ -271,10 +308,10 @@
                                     <a href="#"><img width="20" src="{{asset('images/icons/flags/indonesia.svg')}}"
                                                      alt="Indonesia"> <i class="icon-angle-down"></i></a>
                                     <ul>
-                                        <li><a href="{{route(Route::currentRouteName(),'en')}}">
+                                        <li><a href="{{\App\Support\Facades\SwitchLocale::setUrl('en')}}">
                                                 <img src="{{asset('images/icons/flags/united-states.svg')}}"
                                                      alt="English"> {{__('lang.lang.en')}}</a></li>
-                                        <li><a href="{{route(Route::currentRouteName(),'id')}}">
+                                        <li><a href="{{\App\Support\Facades\SwitchLocale::setUrl('id')}}">
                                                 <img src="{{asset('images/icons/flags/indonesia.svg')}}"
                                                      alt="Indonesia"> {{__('lang.lang.id')}}</a></li>
                                     </ul>
@@ -282,10 +319,10 @@
                                     <a href="#"><img width="20" src="{{asset('images/icons/flags/united-states.svg')}}"
                                                      alt="English"> <i class="icon-angle-down"></i></a>
                                     <ul>
-                                        <li><a href="{{route(Route::currentRouteName(),'id')}}">
+                                        <li><a href="{{\App\Support\Facades\SwitchLocale::setUrl('id')}}">
                                                 <img src="{{asset('images/icons/flags/indonesia.svg')}}"
                                                      alt="Indonesia"> {{__('lang.lang.id')}}</a></li>
-                                        <li><a href="{{route(Route::currentRouteName(),'en')}}">
+                                        <li><a href="{{\App\Support\Facades\SwitchLocale::setUrl('en')}}">
                                                 <img src="{{asset('images/icons/flags/united-states.svg')}}"
                                                      alt="English"> {{__('lang.lang.en')}}</a></li>
                                     </ul>

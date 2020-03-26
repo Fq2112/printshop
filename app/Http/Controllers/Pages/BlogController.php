@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 
 class BlogController extends Controller
@@ -44,7 +45,7 @@ class BlogController extends Controller
                     'y' => $tgl->format('Y'), 'm' => $tgl->format('m'), 'd' => $tgl->format('d'),
                     'title' => $row->permalink]),
                 'thumbnail' => asset('storage/blog/thumbnail/' . $row->thumbnail),
-                'content' => Str::words($row->content, 20, '...') . '</p>',
+                'content' => Str::words($row->content, 20, '...'),
             ];
         }
 
@@ -53,7 +54,8 @@ class BlogController extends Controller
 
     public function cariJudulBlog(Request $request)
     {
-        $blog = Blog::where('title->en', 'LIKE', '%' . $request->title . '%')->orwhere('title->id', 'LIKE', '%' . $request->title . '%')->get();
+        $blog = Blog::where('title->en', 'LIKE', '%' . $request->title . '%')
+            ->orwhere('title->id', 'LIKE', '%' . $request->title . '%')->orderByDesc('id')->get();
 
         foreach ($blog as $index => $row) {
             $tgl = Carbon::parse($row->created_at);
@@ -70,32 +72,36 @@ class BlogController extends Controller
         return $blog;
     }
 
-    public function detailBlog($author, $year = null, $month = null, $date = null, $title = null)
+    public function detailBlog(Request $request)
     {
-        $admin = Admin::where('username', $author)->firstOrFail();
+        $admin = Admin::where('username', $request->author)->firstOrFail();
 
-        if (!$year && !$month && !$date && !$title) {
+        if (!is_null($request->year) && !is_null($request->month) && !is_null($request->date) && !is_null($request->title)) {
             $latest = Blog::where('admin_id', $admin->id)->orderByDesc('id')->take(5)->get();
             $archive = Blog::where('admin_id', $admin->id)->get()->groupBy(function ($q) {
                 return Carbon::parse($q->created_at)->format('F Y');
             });
 
             \App\Models\Visitor::hit();
-            return view('pages.blog.author', compact('user', 'latest', 'archive'));
+            return view('pages.blog.author', compact('admin', 'latest', 'archive'));
 
         } else {
-            $blog = Blog::where('admin_id', $admin->id)->whereYear('created_at', $year)
-                ->whereMonth('created_at', $month)->whereDay('created_at', $date)
-                ->where('permalink', $title)->firstOrFail();
-            $relates = Blog::where('category_id', $blog->category_id)->wherenotin('id', [$blog->id])->orderByDesc('id')->get();
+            $blog = Blog::where('admin_id', $admin->id)->whereYear('created_at', $request->year)
+                ->whereMonth('created_at', $request->month)->whereDay('created_at', $request->date)
+                ->where('permalink->en', $request->title)->orwhere('permalink->id', $request->title)->firstOrFail();
+
+            $prev = is_null($blog->prev()) ? null : $blog->prev();
+            $next = is_null($blog->next()) ? null : $blog->next();
+
+            $relates = Blog::where('category_id', $blog->category_id)->where('id', '!=', $blog->id)->orderByDesc('id')->get();
 
             $tgl = Carbon::parse($blog->created_at);
-            $uri = route('detail.blog', ['author' => $admin->username, 'y' => $tgl->format('Y'),
-                'm' => $tgl->format('m'), 'd' => $tgl->format('d'),
-                'title' => $blog->permalink, 'lang' => App::getLocale()]);
+            $uri_blog = URL::current();
+            $uri_author = route('detail.blog', ['lang' => App::getLocale(), 'author' => $admin->username]);
 
             \App\Models\Visitor::hit();
-            return view('pages.blog.detail', compact('user', 'blog', 'relates', 'uri'));
+            return view('pages.blog.detail', compact('admin', 'blog', 'prev', 'next', 'relates',
+                'tgl', 'uri_blog', 'uri_author'));
         }
     }
 }

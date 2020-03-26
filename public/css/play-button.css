@@ -1,0 +1,63 @@
+.stroke-dotted {
+    opacity: 0;
+    stroke-dasharray: 4, 5;
+    stroke-width: 1px;
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-animation: spin 4s infinite linear;
+    animation: spin 4s infinite linear;
+    transition: opacity 1s ease, stroke-width 1s ease;
+}
+
+.stroke-solid {
+    stroke-dashoffset: 0;
+    stroke-dashArray: 300;
+    stroke-width: 4px;
+    transition: stroke-dashoffset 1s ease, opacity 1s ease;
+}
+
+.icon {
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    transition: -webkit-transform 200ms ease-out;
+    transition: transform 200ms ease-out;
+    transition: transform 200ms ease-out, -webkit-transform 200ms ease-out;
+}
+
+.play:hover .stroke-dotted {
+    stroke-width: 4px;
+    opacity: 1;
+}
+
+.play:hover .stroke-solid {
+    opacity: 0;
+    stroke-dashoffset: 300;
+}
+
+.play:hover .icon {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+}
+
+.play {
+    cursor: pointer;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translateY(-50%) translateX(-50%);
+    transform: translateY(-50%) translateX(-50%);
+}
+
+@-webkit-keyframes spin {
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}

@@ -86,6 +86,13 @@ return [
         "capt" => "Kami juga menyediakan Anda dengan berita terbaru terkait hal-hal produk cetak.",
         "search" => "Cari...",
         "tabs" => "TAMPILKAN SEMUA",
+        "share-head" => "Bagikan postingan ini:",
+        "share-capt" => "Hai, saya pikir Anda akan menyukai ini:",
+        "author" => "Diposting oleh",
+        "author-bio" => "Penulis belum menuliskan apapun...",
+        "related" => "Postingan yang Berkaitan:",
+        "widget-search" => "Cari Blog",
+        "widget-category" => "Kategori Blog",
     ],
     "placeholder" => [
         "search" => "Mau cetak apa hari ini?",

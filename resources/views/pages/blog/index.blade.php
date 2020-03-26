@@ -52,50 +52,46 @@
     <section id="content">
         <div class="content-wrap">
             <div class="container clearfix">
-                <div class="col_full">
-                    <form id="form-loadBlog">
-                        <input type="hidden" name="filter" id="category">
-                        <div class="form-group has-feedback">
-                            <input id="blog-keyword" type="text" name="q" class="form-control" autocomplete="off"
-                                   value="{{$keyword}}" placeholder="{{__('lang.blog.search')}}"
-                                   style="border-radius: 1rem;margin: 1em auto">
-                            <span class="glyphicon glyphicon-search form-control-feedback"
-                                  style="right: 0;width: 40px;height: 40px;line-height: 40px;"></span>
-                        </div>
-                    </form>
+                <form id="form-loadBlog">
+                    <input type="hidden" name="filter" id="category">
+                    <div class="form-group has-feedback">
+                        <input id="blog-keyword" type="text" name="q" class="form-control"
+                               autocomplete="off" spellcheck="false" value="{{$keyword}}"
+                               placeholder="{{__('lang.blog.search')}}" style="border-radius: 1rem;margin: 1em auto">
+                        <span class="glyphicon glyphicon-search form-control-feedback"
+                              style="width: 35px;height: 35px;line-height: 35px;"></span>
+                    </div>
+                </form>
 
-                    <div class="clear"></div>
-
-                    <nav id="tabs">
-                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link" style="color: #495057" id="tabList-all"
-                               data-toggle="tab" href="#tabContent-all" role="tab" aria-controls="nav-home"
-                               aria-selected="true" onclick="filterBlog(null)">
-                                <i class="icon-sort-alpha-up"></i>&ensp;{{__('lang.blog.tabs')}}&ensp;<span
-                                    class="badge badge-secondary">{{\App\Models\Blog::count()}}</span></a>
-                            @foreach($categories as $row)
-                                <a class="nav-item nav-link" onclick="filterBlog('{{$row->id}}')"
-                                   style="color: #495057" id="tabList-{{$row->id}}" data-toggle="tab"
-                                   href="#tabContent-{{$row->id}}" role="tab"
-                                   aria-controls="nav-home" aria-selected="true">
-                                    <i class="{{$row->icon}}"></i>&ensp;{{$row->name}}&ensp;<span
-                                        class="badge badge-secondary">{{count($row->getBlog)}}</span></a>
-                            @endforeach
+                <nav id="tabs">
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link" style="color: #495057" id="tabList-all"
+                           data-toggle="tab" href="#tabContent-all" role="tab" aria-controls="nav-home"
+                           aria-selected="true" onclick="filterBlog(null)">
+                            <i class="icon-sort-alpha-up"></i>&ensp;{{__('lang.blog.tabs')}}&ensp;<span
+                                class="badge badge-secondary">{{\App\Models\Blog::count()}}</span></a>
+                        @foreach($categories as $row)
+                            <a class="nav-item nav-link" onclick="filterBlog('{{$row->id}}')"
+                               style="color: #495057" id="tabList-{{$row->id}}" data-toggle="tab"
+                               href="#tabContent-{{$row->id}}" role="tab"
+                               aria-controls="nav-home" aria-selected="true">
+                                <i class="{{$row->icon}}"></i>&ensp;{{$row->name}}&ensp;<span
+                                    class="badge badge-secondary">{{count($row->getBlog)}}</span></a>
+                        @endforeach
+                    </div>
+                </nav>
+                <div id="nav-tabContent" class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade" id="all" aria-labelledby="nav-home-tab"
+                         style="border: none">
+                        <div class="css3-spinner mt-4" style="position: relative">
+                            <div class="css3-spinner-bounce1"></div>
+                            <div class="css3-spinner-bounce2"></div>
+                            <div class="css3-spinner-bounce3"></div>
                         </div>
-                    </nav>
-                    <div id="nav-tabContent" class="tab-content">
-                        <div role="tabpanel" class="tab-pane fade" id="all" aria-labelledby="nav-home-tab"
-                             style="border: none">
-                            <div class="css3-spinner mt-4" style="position: relative">
-                                <div class="css3-spinner-bounce1"></div>
-                                <div class="css3-spinner-bounce2"></div>
-                                <div class="css3-spinner-bounce3"></div>
-                            </div>
-                            <div class="row mb-4" id="blog"></div>
-                            <div class="row text-right">
-                                <div class="col-12 myPagination">
-                                    <ul class="pagination justify-content-end"></ul>
-                                </div>
+                        <div class="row mb-4" id="blog"></div>
+                        <div class="row text-right">
+                            <div class="col-12 myPagination">
+                                <ul class="pagination justify-content-end"></ul>
                             </div>
                         </div>
                     </div>
@@ -123,11 +119,11 @@
             @endif
         });
 
-        var fetchQuery = null, fetchResultsCallback = null,
-            fetchResults = _.debounce(function () {
-                $.get('{{route('get.cari-judul.blog', ['lang' => $app->getLocale()])}}?title=' + fetchQuery, function (data) {
-                    if (fetchResultsCallback) {
-                        fetchResultsCallback(data);
+        var blog_fetchQuery = null, blog_fetchResultsCallback = null,
+            blog_fetchResults = _.debounce(function () {
+                $.get('{{route('get.cari-judul.blog', ['lang' => $app->getLocale()])}}?title=' + blog_fetchQuery, function (data) {
+                    if (blog_fetchResultsCallback) {
+                        blog_fetchResultsCallback(data);
                     }
                 });
             }, 300);
@@ -139,11 +135,10 @@
                 minLength: 0,
             },
             {
-                limit: 10,
                 source: function (query, syncResults, asyncResults) {
-                    fetchQuery = query;
-                    fetchResultsCallback = asyncResults;
-                    fetchResults();
+                    blog_fetchQuery = query;
+                    blog_fetchResultsCallback = asyncResults;
+                    blog_fetchResults();
                 },
                 templates: {
                     empty: '<div class="tt-empty text-center">{{__('lang.header.search')}}</div>',

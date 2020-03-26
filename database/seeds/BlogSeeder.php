@@ -32,31 +32,29 @@ class BlogSeeder extends Seeder
             ],
         ]);
 
-        foreach (\App\Models\BlogCategory::all() as $category) {
-            $x = 1;
-            for ($i = 0; $i < 15; $i++) {
-                $title = $faker->words(rand(2, 3), true);
-                $permalink = preg_replace("![^a-z0-9]+!i", "-", strtolower($title));
-                $content = $faker->paragraphs(rand(3, 5), true);
+        $x = 1;
+        for ($i = 0; $i < 9; $i++) {
+            $title = $faker->words(rand(2, 3), true);
+            $permalink = preg_replace("![^a-z0-9]+!i", "-", strtolower($title));
+            $content = $faker->paragraphs(rand(3, 5), true);
 
-                \App\Models\Blog::create([
-                    'admin_id' => rand(\App\Models\Admin::where('role', \App\Support\Role::ADMIN)->min('id'), \App\Models\Admin::where('role', \App\Support\Role::ADMIN)->max('id')),
-                    'category_id' => $category->id,
-                    'title' => [
-                        'id' => strtoupper($title),
-                        'en' => strtoupper($title),
-                    ],
-                    'permalink' => [
-                        'id' => $permalink,
-                        'en' => $permalink,
-                    ],
-                    'content' => [
-                        'id' => "<p align='justify'>" . $content . "</p>",
-                        'en' => "<p align='justify'>" . $content . "</p>",
-                    ],
-                    'thumbnail' => $x++ . '.jpg',
-                ]);
-            }
+            \App\Models\Blog::create([
+                'admin_id' => rand(\App\Models\Admin::where('role', \App\Support\Role::ADMIN)->min('id'), \App\Models\Admin::where('role', \App\Support\Role::ADMIN)->max('id')),
+                'category_id' => rand(\App\Models\BlogCategory::min('id'), \App\Models\BlogCategory::max('id')),
+                'title' => [
+                    'id' => strtoupper($title),
+                    'en' => strtoupper($title),
+                ],
+                'permalink' => [
+                    'id' => $permalink,
+                    'en' => $permalink,
+                ],
+                'content' => [
+                    'id' => "<p align='justify'>" . $content . "</p>",
+                    'en' => "<p align='justify'>" . $content . "</p>",
+                ],
+                'thumbnail' => $x++ . '.jpg',
+            ]);
         }
 
         foreach (\App\Models\Blog::all() as $blog) {
@@ -84,6 +82,11 @@ class BlogSeeder extends Seeder
                 'blog_id' => $blog->id,
                 'type' => 'photos',
                 'files' => '5.jpg'
+            ]);
+            \App\Models\BlogGallery::create([
+                'blog_id' => $blog->id,
+                'type' => 'photos',
+                'files' => '6.jpg'
             ]);
         }
     }

@@ -34,6 +34,16 @@ class Blog extends Model
         return $this->hasMany(BlogGallery::class, 'blog_id');
     }
 
+    public function prev()
+    {
+        return $this->where('id', '<', $this->id)->orderBy('id', 'desc')->first();
+    }
+
+    public function next()
+    {
+        return $this->where('id', '>', $this->id)->orderBy('id', 'asc')->first();
+    }
+
     public function getLocale(): string
     {
         if (is_null(App::getLocale())) {

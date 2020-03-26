@@ -86,6 +86,13 @@ return [
         "capt" => "We're also provide you with a recent news related to print product things.",
         "search" => "Search...",
         "tabs" => "SHOW ALL",
+        "share-head" => "Share this Post:",
+        "share-capt" => "Hi, I thought you'd like this:",
+        "author" => "Posted by",
+        "author-bio" => "The author hasn't written anything yet...",
+        "related" => "Related Posts:",
+        "widget-search" => "Search Blog",
+        "widget-category" => "Blog Categories",
     ],
     "placeholder" => [
         "search" => "What do you want to print today?",

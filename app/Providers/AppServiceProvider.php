@@ -34,5 +34,6 @@ class AppServiceProvider extends ServiceProvider
         app()->setLocale(Request::segment(1));
 
         $this->app->bind('GlobalAuth', 'App\Support\GlobalAuth');
+        $this->app->bind('SwitchLocale', 'App\Support\SwitchLocale');
     }
 }
