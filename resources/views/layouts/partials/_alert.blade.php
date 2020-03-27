@@ -1,6 +1,6 @@
 <script>
     @if(session('contact'))
-    swal('{{__('lang.alert.success')}}', '{{session('contact')}}', 'success');
+    swal('{{__('lang.alert.success')}}', '{{__('lang.alert.contact')}}', 'success');
 
     @elseif(session('activated'))
     swal('{{__('lang.alert.success')}}', '{{__('lang.alert.login')}}', 'success');

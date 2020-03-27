@@ -8,7 +8,7 @@ return [
     "header" => [
         "pro" => "Solusi Korporat",
         "how-to" => "Cara Pemesanan",
-        "contact" => "Hubungi Kami",
+        "contact" => "Kontak",
         "faq" => "FAQ",
         "about" => "Tentang Kami",
         "sign-up-in" => "Daftar/Masuk",
@@ -67,6 +67,21 @@ return [
         "list" => "Daftar",
         "author" => "Penulis",
     ],
+    "contact" => [
+        "head" => "Tinggalkan Kami Pesan",
+        "capt" => "Jangan ragu untuk menghubungi kami!",
+        "topic" => "Topik",
+        "opt-1" => "Mengenai Produk",
+        "opt-2" => "Cetak Custom",
+        "opt-3" => "Laporan Bug",
+        "opt-4" => "Saran",
+        "opt-5" => "Pembayaran Anda",
+        "opt-6" => "Pesanan Anda",
+        "message" => "Pesan",
+        "work" => "Senin - Sabtu",
+        "visit" => "Kunjungi Kami",
+        "follow" => "Ikuti Kami",
+    ],
     "blog" => [
         "title" => "Penulis Blog",
         "head" => "Blog Kami",
@@ -96,6 +111,10 @@ return [
         "new-password" => "Kata sandi baru",
         "re-password" => "Ulangi kata sandi",
         "name" => "Nama lengkap",
+        "phone" => "Nomor telepon",
+        "subject" => "Subyek",
+        "choose" => "-- Pilih --",
+        "message" => "Tulis sesuatu di sini...",
     ],
     "button" => [
         "cart" => "Lihat Keranjang",
@@ -111,6 +130,7 @@ return [
         "finish" => "Selesai",
         "back" => "Kembali",
         "subs" => "Berlangganan",
+        "contact" => "Kirim Pesan",
     ],
     "modal" => [
         "auth" => [
@@ -153,6 +173,7 @@ return [
         "auth-expire" => "Halaman yang Anda minta memerlukan otentikasi, silahkan masuk ke akun Anda.",
         "token-fail" => "Halaman telah kedaluwarsa karena tidak aktif, silakan coba lagi.",
         "feature-fail" => "Fitur ini hanya berfungsi ketika Anda masuk sebagai Pelanggan.",
+        "contact" => "Terima kasih telah meninggalkan kami pesan! Karena setiap komentar atau kritik yang Anda berikan, akan membuat kami menjadi perusahaan yang lebih baik.",
     ],
     "errors" => [
         "403-head" => "AKSES TERLARANG",

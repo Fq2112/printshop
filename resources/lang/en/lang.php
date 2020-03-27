@@ -8,7 +8,7 @@ return [
     "header" => [
         "pro" => "Corporate Solution",
         "how-to" => "How to Order",
-        "contact" => "Contact Us",
+        "contact" => "Contact",
         "faq" => "FAQs",
         "about" => "About Us",
         "sign-up-in" => "Sign Up/In",
@@ -67,6 +67,21 @@ return [
         "list" => "List",
         "author" => "Author",
     ],
+    "contact" => [
+        "head" => "Drop Us a Line",
+        "capt" => "Feel free to get in touch with us!",
+        "topic" => "Topic",
+        "opt-1" => "About the Product",
+        "opt-2" => "Custom Print",
+        "opt-3" => "Bug Report",
+        "opt-4" => "Suggestion",
+        "opt-5" => "Your Payment",
+        "opt-6" => "Your Order",
+        "message" => "Message",
+        "work" => "Monday - Saturday",
+        "visit" => "Visit Us",
+        "follow" => "Follow Us",
+    ],
     "blog" => [
         "title" => "Blog Author",
         "head" => "Our Blog",
@@ -96,6 +111,10 @@ return [
         "new-password" => "New password",
         "re-password" => "Retype password",
         "name" => "Full name",
+        "phone" => "Phone number",
+        "subject" => "Subject",
+        "choose" => "-- Choose --",
+        "message" => "Write something here...",
     ],
     "button" => [
         "cart" => "View Cart",
@@ -111,6 +130,7 @@ return [
         "finish" => "Finish",
         "back" => "Back",
         "subs" => "Subscribe",
+        "contact" => "Send Message",
     ],
     "modal" => [
         "auth" => [
@@ -153,6 +173,7 @@ return [
         "auth-expire" => "The page you requested requires authentication, please sign in to your account.",
         "token-fail" => "The page has expired due to inactivity, please try again.",
         "feature-fail" => "This feature only works when you're signed in as a Customer.",
+        "contact" => "Thank you for dropping us a line! Because every single comment or criticism that you gave, will make us be a better company.",
     ],
     "errors" => [
         "403-head" => "FORBIDDEN ACCESS",

@@ -72,37 +72,42 @@ Route::group(['prefix' => '{lang?}', 'middleware' => 'locale'], function () {
         Route::group(['prefix' => 'info'], function () {
 
             Route::get('pro', [
-                'uses' => 'MainController@pro',
+                'uses' => 'InfoController@pro',
                 'as' => 'pro'
             ]);
 
             Route::get(__('routes.how-to'), [
-                'uses' => 'MainController@caraPemesanan',
+                'uses' => 'InfoController@caraPemesanan',
                 'as' => 'cara-pemesanan'
             ]);
 
             Route::get(__('routes.faq'), [
-                'uses' => 'MainController@faq',
+                'uses' => 'InfoController@faq',
                 'as' => 'faq'
             ]);
 
             Route::get(__('routes.about'), [
-                'uses' => 'MainController@tentang',
+                'uses' => 'InfoController@tentang',
                 'as' => 'tentang'
             ]);
 
             Route::get(__('routes.contact'), [
-                'uses' => 'MainController@kontak',
+                'uses' => 'InfoController@kontak',
                 'as' => 'kontak'
             ]);
 
+            Route::post(__('routes.contact') . '/kirim', [
+                'uses' => 'InfoController@kirimKontak',
+                'as' => 'kirim.kontak'
+            ]);
+
             Route::get(__('routes.tnc'), [
-                'uses' => 'MainController@syaratKetentuan',
+                'uses' => 'InfoController@syaratKetentuan',
                 'as' => 'syarat-ketentuan'
             ]);
 
             Route::get(__('routes.pp'), [
-                'uses' => 'MainController@kebijakanPrivasi',
+                'uses' => 'InfoController@kebijakanPrivasi',
                 'as' => 'kebijakan-privasi'
             ]);
 

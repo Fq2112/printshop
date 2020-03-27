@@ -3172,29 +3172,31 @@ var SEMICOLON = SEMICOLON || {};
 
 			$ajaxForm.each( function(){
 				var element = $(this),
-					elementForm = element.find('form'),
-					elementFormId = elementForm.attr('id'),
-					elementAlert = element.attr('data-alert-type'),
-					elementLoader = element.attr('data-loader'),
-					elementResult = element.find('.form-result'),
-					elementRedirect = element.attr('data-redirect');
+                    elementForm = element.find('form').not('.no-ajax'),
+                    elementFormId = elementForm.attr('id'),
+                    elementAlert = element.attr('data-alert-type'),
+                    elementLoader = element.attr('data-loader'),
+                    elementResult = element.find('.form-result'),
+                    elementRedirect = element.attr('data-redirect');
 
-				if( !elementAlert ) { elementAlert = 'notify'; }
+                if (!elementAlert) {
+                    elementAlert = 'notify';
+                }
 
-				if( elementFormId ) {
-					$body.addClass( elementFormId + '-ready' );
-				}
+                if (elementFormId) {
+                    $body.addClass(elementFormId + '-ready');
+                }
 
-				element.find('form').validate({
-					errorPlacement: function(error, elementItem) {
-						if( elementItem.parents('.form-group').length > 0 ) {
-							error.appendTo( elementItem.parents('.form-group') );
-						} else {
-							error.insertAfter( elementItem );
-						}
-					},
-					focusCleanup: true,
-					submitHandler: function(form) {
+                element.find('form').not('.no-ajax').validate({
+                    errorPlacement: function (error, elementItem) {
+                        if (elementItem.parents('.form-group').length > 0) {
+                            error.appendTo(elementItem.parents('.form-group'));
+                        } else {
+                            error.insertAfter(elementItem);
+                        }
+                    },
+                    focusCleanup: true,
+                    submitHandler: function (form) {
 
 						elementResult.hide();
 
@@ -3307,24 +3309,24 @@ var SEMICOLON = SEMICOLON || {};
 			var $subscribeForm = $('.subscribe-widget:not(.customjs)');
 			if( $subscribeForm.length < 1 ){ return true; }
 
-			$subscribeForm.each( function(){
-				var element = $(this),
-					elementAlert = element.attr('data-alert-type'),
-					elementLoader = element.attr('data-loader'),
-					elementResult = element.find('.widget-subscribe-form-result'),
-					elementRedirect = element.attr('data-redirect');
+			$subscribeForm.each( function() {
+                var element = $(this),
+                    elementAlert = element.attr('data-alert-type'),
+                    elementLoader = element.attr('data-loader'),
+                    elementResult = element.find('.widget-subscribe-form-result'),
+                    elementRedirect = element.attr('data-redirect');
 
-				element.find('form').validate({
-					submitHandler: function(form) {
+                element.find('form').not('.no-ajax').validate({
+                    submitHandler: function (form) {
 
-						elementResult.hide();
+                        elementResult.hide();
 
-						if( elementLoader == 'button' ) {
-							var defButton = $(form).find('button'),
-								defButtonText = defButton.html();
+                        if (elementLoader == 'button') {
+                            var defButton = $(form).find('button'),
+                                defButtonText = defButton.html();
 
-							defButton.html('<i class="icon-line-loader icon-spin nomargin"></i>');
-						} else {
+                            defButton.html('<i class="icon-line-loader icon-spin nomargin"></i>');
+                        } else {
 							$(form).find('.icon-email2').removeClass('icon-email2').addClass('icon-line-loader icon-spin');
 						}
 
