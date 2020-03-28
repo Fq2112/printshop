@@ -50,7 +50,8 @@ Route::group(['namespace' => 'Auth', 'prefix' => 'auth'], function () {
 
 });
 
-Route::group(['prefix' => '{lang?}', 'middleware' => 'locale'], function () {
+Route::group(['prefix' => LaravelLocalization::setLocale(),
+    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localize']], function () {
 
     Route::group(['namespace' => 'Pages'], function () {
 
@@ -76,37 +77,37 @@ Route::group(['prefix' => '{lang?}', 'middleware' => 'locale'], function () {
                 'as' => 'pro'
             ]);
 
-            Route::get('cara-pemesanan', [
+            Route::get(LaravelLocalization::transRoute('routes.how-to'), [
                 'uses' => 'InfoController@caraPemesanan',
                 'as' => 'cara-pemesanan'
             ]);
 
-            Route::get('faq', [
+            Route::get(LaravelLocalization::transRoute('routes.faq'), [
                 'uses' => 'InfoController@faq',
                 'as' => 'faq'
             ]);
 
-            Route::get('tentang', [
+            Route::get(LaravelLocalization::transRoute('routes.about'), [
                 'uses' => 'InfoController@tentang',
                 'as' => 'tentang'
             ]);
 
-            Route::get('kontak', [
+            Route::get(LaravelLocalization::transRoute('routes.contact'), [
                 'uses' => 'InfoController@kontak',
                 'as' => 'kontak'
             ]);
 
-            Route::post('kontak/kirim', [
+            Route::post(LaravelLocalization::transRoute('routes.contact') . '/kirim', [
                 'uses' => 'InfoController@kirimKontak',
                 'as' => 'kirim.kontak'
             ]);
 
-            Route::get('syarat-ketentuan', [
+            Route::get(LaravelLocalization::transRoute('routes.tnc'), [
                 'uses' => 'InfoController@syaratKetentuan',
                 'as' => 'syarat-ketentuan'
             ]);
 
-            Route::get('kebijakan-privasi', [
+            Route::get(LaravelLocalization::transRoute('routes.pp'), [
                 'uses' => 'InfoController@kebijakanPrivasi',
                 'as' => 'kebijakan-privasi'
             ]);
@@ -137,29 +138,29 @@ Route::group(['prefix' => '{lang?}', 'middleware' => 'locale'], function () {
 
         });
 
-        Route::group(['namespace' => 'Users', 'prefix' => 'akun', 'middleware' => ['auth', 'user']], function () {
+        Route::group(['namespace' => 'Users', 'prefix' => LaravelLocalization::transRoute('routes.account'), 'middleware' => ['auth', 'user']], function () {
 
             Route::get('dashboard', [
                 'uses' => 'UserController@dashboard',
                 'as' => 'user.dashboard'
             ]);
 
-            Route::get('sunting-profil', [
+            Route::get(LaravelLocalization::transRoute('routes.profile'), [
                 'uses' => 'AkunController@profil',
                 'as' => 'user.profil'
             ]);
 
-            Route::put('sunting-profil/update', [
+            Route::put(LaravelLocalization::transRoute('routes.profile') . '/update', [
                 'uses' => 'AkunController@updateProfil',
                 'as' => 'user.update.profil'
             ]);
 
-            Route::get('pengaturan', [
+            Route::get(LaravelLocalization::transRoute('routes.settings'), [
                 'uses' => 'AkunController@pengaturan',
                 'as' => 'user.pengaturan'
             ]);
 
-            Route::put('pengaturan/update', [
+            Route::put(LaravelLocalization::transRoute('routes.settings') . '/update', [
                 'uses' => 'AkunController@updatePengaturan',
                 'as' => 'user.update.pengaturan'
             ]);

@@ -228,7 +228,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'GlobalAuth' => App\Support\Facades\GlobalAuth::class,
-        'SwitchLocale' => App\Support\Facades\SwitchLocale::class,
     ],
 
 ];

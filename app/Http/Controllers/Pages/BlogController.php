@@ -8,7 +8,6 @@ use App\Models\BlogCategory;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 
@@ -41,7 +40,7 @@ class BlogController extends Controller
                 'category' => $row->getBlogCategory->name,
                 'date' => Carbon::parse($row->created_at)->formatLocalized('%d %B %Y'),
                 'title' => $row->title,
-                'link' => route('detail.blog', ['lang' => App::getLocale(), 'author' => $row->getAdmin->username,
+                'link' => route('detail.blog', ['author' => $row->getAdmin->username,
                     'y' => $tgl->format('Y'), 'm' => $tgl->format('m'), 'd' => $tgl->format('d'),
                     'title' => $row->permalink]),
                 'thumbnail' => asset('storage/blog/thumbnail/' . $row->thumbnail),
@@ -62,7 +61,7 @@ class BlogController extends Controller
             $blog[$index] = [
                 'category_id' => $row->category_id,
                 'title' => $row->title,
-                'link' => route('detail.blog', ['lang' => App::getLocale(), 'author' => $row->getAdmin->username,
+                'link' => route('detail.blog', ['author' => $row->getAdmin->username,
                     'y' => $tgl->format('Y'), 'm' => $tgl->format('m'), 'd' => $tgl->format('d'),
                     'title' => $row->permalink]),
                 'thumbnail' => asset('storage/blog/thumbnail/' . $row->thumbnail),
@@ -97,7 +96,7 @@ class BlogController extends Controller
 
             $tgl = Carbon::parse($blog->created_at);
             $uri_blog = URL::current();
-            $uri_author = route('detail.blog', ['lang' => App::getLocale(), 'author' => $admin->username]);
+            $uri_author = route('detail.blog', ['author' => $admin->username]);
 
             \App\Models\Visitor::hit();
             return view('pages.blog.detail', compact('admin', 'blog', 'prev', 'next', 'relates',

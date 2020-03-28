@@ -118,14 +118,14 @@ class MainController extends Controller
 
                     $capt[$y] = [
                         'name' => App::getLocale() == 'en' ? $first : $last,
-                        'link' => route('produk', ['lang' => App::getLocale(), 'produk' => $item->permalink])
+                        'link' => route('produk', ['produk' => $item->permalink])
                     ];
                 }
             }
 
             $featured[$x] = [
                 'name' => $row->name,
-                'link' => route('produk', ['lang' => App::getLocale(), 'produk' => $row->permalink]),
+                'link' => route('produk', ['produk' => $row->permalink]),
                 'thumb' => $thumb,
                 'init' => $init,
                 'gallery' => $gallery,
@@ -156,7 +156,7 @@ class MainController extends Controller
         foreach ($sub as $row) {
             $sub[$x] = [
                 'name' => $row->name,
-                'link' => route('produk', ['produk' => $row->permalink, 'lang' => App::getLocale()]),
+                'link' => route('produk', ['produk' => $row->permalink]),
                 'image' => asset('storage/products/thumb/' . $row->getKategori->image),
             ];
             $x++;
@@ -168,7 +168,7 @@ class MainController extends Controller
         foreach ($cluster as $row) {
             $cluster[$y] = [
                 'name' => $row->name,
-                'link' => route('produk', ['produk' => $row->permalink, 'lang' => App::getLocale()]),
+                'link' => route('produk', ['produk' => $row->permalink]),
                 'image' => asset('storage/products/thumb/' . $row->getSubKategori->getKategori->image),
             ];
             $y++;

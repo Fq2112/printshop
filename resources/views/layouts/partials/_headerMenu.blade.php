@@ -27,14 +27,14 @@
                             <div class="card-body nopadding nomargin">
                                 <ul class="mega-menu-column border-left-0">
                                     <li class="mega-menu-title">
-                                        <a href="{{route('produk', ['produk' => $sub->permalink, 'lang' => $app->getLocale()])}}">
+                                        <a href="{{route('produk', ['produk' => $sub->permalink])}}">
                                             <div>{{$sub->name}}</div>
                                         </a>
                                         @if($sub->getCluster)
                                             <ul>
                                                 @foreach($sub->getCluster as $row)
                                                     <li>
-                                                        <a href="{{route('produk',['produk' => $row->permalink, 'lang' => $app->getLocale()])}}">
+                                                        <a href="{{route('produk',['produk' => $row->permalink])}}">
                                                             <div>{{$row->name}}</div>
                                                         </a>
                                                     </li>
@@ -67,19 +67,14 @@
                 </div>
             </a>
             <ul>
-                <li><a href="{{Auth::guard('admin')->check() ? route('admin.dashboard', $app->getLocale()) :
-                route('user.dashboard',$app->getLocale())}}">
+                <li><a href="{{Auth::guard('admin')->check() ? route('admin.dashboard') : route('user.dashboard')}}">
                         <div><i class="icon-dashboard"></i>Dashboard</div>
                     </a></li>
-                <li><a href="{{Auth::guard('admin')->check() ? route('admin.profil', $app->getLocale()) :
-                route('user.profil', $app->getLocale())}}">
-                        <div><i class="icon-user-edit"></i>
-                            {{__('lang.header.profile')}}</div>
+                <li><a href="{{Auth::guard('admin')->check() ? route('admin.profil') : route('user.profil')}}">
+                        <div><i class="icon-user-edit"></i>{{__('lang.header.profile')}}</div>
                     </a></li>
-                <li><a href="{{Auth::guard('admin')->check() ? route('admin.pengaturan', $app->getLocale()) :
-                route('user.pengaturan', $app->getLocale())}}">
-                        <div><i class="icon-cogs"></i>
-                            {{__('lang.header.settings')}}</div>
+                <li><a href="{{Auth::guard('admin')->check() ? route('admin.pengaturan') : route('user.pengaturan')}}">
+                        <div><i class="icon-cogs"></i>{{__('lang.header.settings')}}</div>
                     </a></li>
                 <li class="dropdown-divider"></li>
                 <li>

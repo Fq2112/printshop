@@ -43,8 +43,8 @@
             <span>{{__('lang.blog.capt')}}</span>
             <ol class="breadcrumb text-uppercase">
                 <li class="breadcrumb-item">
-                    <a href="{{route('beranda', $app->getLocale())}}">{{__('lang.breadcrumb.home')}}</a></li>
-                <li class="breadcrumb-item"><a href="{{route('blog', $app->getLocale())}}">Blog</a></li>
+                    <a href="{{route('beranda')}}">{{__('lang.breadcrumb.home')}}</a></li>
+                <li class="breadcrumb-item"><a href="{{route('blog')}}">Blog</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{__('lang.breadcrumb.list')}}</li>
             </ol>
         </div>
@@ -123,7 +123,7 @@
 
         var blog_fetchQuery = null, blog_fetchResultsCallback = null,
             blog_fetchResults = _.debounce(function () {
-                $.get('{{route('get.cari-judul.blog', ['lang' => $app->getLocale()])}}?title=' + blog_fetchQuery, function (data) {
+                $.get('{{route('get.cari-judul.blog')}}?title=' + blog_fetchQuery, function (data) {
                     if (blog_fetchResultsCallback) {
                         blog_fetchResultsCallback(data);
                     }
@@ -194,7 +194,7 @@
             clearTimeout(this.delay);
             this.delay = setTimeout(function () {
                 $.ajax({
-                    url: "{{route('get.data.blog', $app->getLocale())}}",
+                    url: "{{route('get.data.blog')}}",
                     type: "GET",
                     data: $("#form-loadBlog").serialize(),
                     beforeSend: function () {

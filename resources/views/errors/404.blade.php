@@ -91,9 +91,9 @@
 </div>
 <p>{{__('lang.errors.404-capt')}}</p>
 @if(Auth::guard('admin')->check() && \Illuminate\Support\Facades\Request::is('scott.royce*'))
-    <a href="{{route('admin.dashboard', $app->getLocale())}}">{{__('lang.errors.act1')}}</a>
+    <a href="{{route('admin.dashboard')}}">{{__('lang.errors.act1')}}</a>
 @else
-    <a href="{{route('beranda', $app->getLocale())}}">{{__('lang.errors.act2')}}</a>
+    <a href="{{route('beranda')}}">{{__('lang.errors.act2')}}</a>
 @endif
 <!-- jquery -->
 <script src="{{asset('js/jquery.js')}}"></script>

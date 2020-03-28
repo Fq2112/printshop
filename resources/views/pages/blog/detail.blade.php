@@ -23,8 +23,8 @@
             <span>{{__('lang.blog.capt')}}</span>
             <ol class="breadcrumb text-uppercase">
                 <li class="breadcrumb-item">
-                    <a href="{{route('beranda', $app->getLocale())}}">{{__('lang.breadcrumb.home')}}</a></li>
-                <li class="breadcrumb-item"><a href="{{route('blog', $app->getLocale())}}">Blog</a></li>
+                    <a href="{{route('beranda')}}">{{__('lang.breadcrumb.home')}}</a></li>
+                <li class="breadcrumb-item"><a href="{{route('blog')}}">Blog</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Detail</li>
             </ol>
         </div>
@@ -42,8 +42,8 @@
                             <ul class="entry-meta clearfix">
                                 <li><i class="icon-calendar3"></i> {{$tgl->formatLocalized('%d %B %Y')}}</li>
                                 <li><a href="{{$uri_author}}"><i class="icon-user"></i> {{$admin->username}}</a></li>
-                                <li><i class="icon-tag"></i> <a href="{{route('blog',
-                                ['filter' => $blog->category_id, 'lang' => $app->getLocale()])}}">
+                                <li><i class="icon-tag"></i> <a
+                                        href="{{route('blog', ['filter' => $blog->category_id])}}">
                                         {{$blog->getBlogCategory->name}}</a></li>
                             </ul>
 
@@ -118,8 +118,7 @@
                         <div class="post-navigation clearfix">
                             @if(!is_null($prev))
                                 <div class="col_half nobottommargin">
-                                    <a href="{{route('detail.blog', ['lang' => $app->getLocale(),
-                                    'author' => $prev->getAdmin->username,
+                                    <a href="{{route('detail.blog', ['author' => $prev->getAdmin->username,
                                     'y' => \Carbon\Carbon::parse($prev->created_at)->format('Y'),
                                     'm' => \Carbon\Carbon::parse($prev->created_at)->format('m'),
                                     'd' => \Carbon\Carbon::parse($prev->created_at)->format('d'),
@@ -128,8 +127,7 @@
                             @endif
                             @if(!is_null($next))
                                 <div class="col_half col_last tright nobottommargin">
-                                    <a href="{{route('detail.blog', ['lang' => $app->getLocale(),
-                                    'author' => $next->getAdmin->username,
+                                    <a href="{{route('detail.blog', ['author' => $next->getAdmin->username,
                                     'y' => \Carbon\Carbon::parse($next->created_at)->format('Y'),
                                     'm' => \Carbon\Carbon::parse($next->created_at)->format('m'),
                                     'd' => \Carbon\Carbon::parse($next->created_at)->format('d'),
@@ -165,11 +163,9 @@
                                 @foreach($relates as $post)
                                     @php
                                         $tgl = \Carbon\Carbon::parse($post->created_at);
-                                        $url = route('detail.blog', ['lang' => $app->getLocale(),
-                                        'author' => $post->getAdmin->username, 'y' => $tgl->format('Y'),
+                                        $url = route('detail.blog', ['author' => $post->getAdmin->username, 'y' => $tgl->format('Y'),
                                         'm' => $tgl->format('m'), 'd' => $tgl->format('d'), 'title' => $post->permalink]);
-                                        $url2 = route('detail.blog', ['lang' => $app->getLocale(),
-                                        'author' => $post->getAdmin->username]);
+                                        $url2 = route('detail.blog', ['author' => $post->getAdmin->username]);
                                     @endphp
                                     <article class="portfolio-item">
                                         <div class="portfolio-image">
@@ -211,7 +207,7 @@
                             <div class="fancy-title title-border">
                                 <h4 style="background-color: #F9F9F9">{{__('lang.blog.widget-search')}}</h4>
                             </div>
-                            <form action="{{route('blog', ['lang' => $app->getLocale()])}}"
+                            <form action="{{route('blog')}}"
                                   class="notopmargin nobottommargin">
                                 <div class="input-group divcenter">
                                     <input id="blog-keyword" name="q" type="text" class="form-control"
@@ -230,7 +226,7 @@
                             </div>
                             <ul>
                                 @foreach(\App\Models\BlogCategory::orderBy('name')->get() as $row)
-                                    <li><a href="{{route('blog', ['filter' => $row->id,'lang' => $app->getLocale()])}}">
+                                    <li><a href="{{route('blog', ['filter' => $row->id])}}">
                                             {{$row->name}}</a><span class="hover-span">({{count($row->getBlog)}})</span>
                                     </li>
                                 @endforeach
@@ -253,7 +249,7 @@
 
         var $keyword = $("#blog-keyword"), blog_fetchQuery = null, blog_fetchResultsCallback = null,
             blog_fetchResults = _.debounce(function () {
-                $.get('{{route('get.cari-judul.blog', ['lang' => $app->getLocale()])}}?title=' + blog_fetchQuery, function (data) {
+                $.get('{{route('get.cari-judul.blog')}}?title=' + blog_fetchQuery, function (data) {
                     if (blog_fetchResultsCallback) {
                         blog_fetchResultsCallback(data);
                     }

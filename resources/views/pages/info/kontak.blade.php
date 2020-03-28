@@ -81,8 +81,7 @@
             <h1>{{__('lang.header.contact')}}</h1>
             <span>{{__('lang.contact.capt')}}</span>
             <ol class="breadcrumb text-uppercase">
-                <li class="breadcrumb-item">
-                    <a href="{{route('beranda', $app->getLocale())}}">{{__('lang.breadcrumb.home')}}</a></li>
+                <li class="breadcrumb-item"><a href="{{route('beranda')}}">{{__('lang.breadcrumb.home')}}</a></li>
                 <li class="breadcrumb-item"><a href="{{URL::current()}}">Info</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{__('lang.header.contact')}}</li>
             </ol>
@@ -98,8 +97,7 @@
                     </div>
                     <div class="form-widget">
                         <div class="form-result"></div>
-                        <form class="no-ajax nobottommargin" method="post"
-                              action="{{route('kirim.kontak', ['lang' => $app->getLocale()])}}">
+                        <form class="no-ajax nobottommargin" method="post" action="{{route('kirim.kontak')}}">
                             @csrf
                             <div class="col_one_third">
                                 <label for="con-name">
@@ -222,7 +220,7 @@
                 '<img class="img-fluid" src="{{asset('images/logotype.png')}}">' +
                 '<div class="iw-subTitle">{{__('lang.header.contact')}}</div>' +
                 '<p>Raya Kenjeran 469 Gading, Tambaksari, Surabaya, Jawa Timur — 60134.<br>' +
-                '<br>Phone: <a href="tel:+62313814969">(031) 3814969</a>' +
+                '<br>{{__('lang.footer.phone')}}: <a href="tel:+62313814969">(031) 3814969</a>' +
                 '<br>E-mail: <a href="mailto:{{env('MAIL_USERNAME')}}">{{env('MAIL_USERNAME')}}</a>' +
                 '</p></div><div class="iw-bottom-gradient"></div></div>';
 

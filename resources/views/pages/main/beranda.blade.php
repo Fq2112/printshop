@@ -147,7 +147,7 @@
                              data-endelementdelay="0.1"
                              data-endspeed="1000"
                              data-endeasing="Power4.easeIn" style="">
-                            <a href="{{route('produk',['produk' => 'business-cards', 'lang' => $app->getLocale()])}}"
+                            <a href="{{route('produk',['produk' => 'business-cards'])}}"
                                class="button button-border button-large button-rounded tright nomargin">
                                 <span>{{__('lang.button.shop')}}</span><i class="icon-angle-right"></i></a>
                         </div>
@@ -243,7 +243,7 @@
                              data-endelementdelay="0.1"
                              data-endspeed="1000"
                              data-endeasing="Power4.easeIn" style="">
-                            <a href="{{route('produk',['produk' => 'brochures', 'lang' => $app->getLocale()])}}"
+                            <a href="{{route('produk',['produk' => 'brochures'])}}"
                                class="button button-border button-large button-rounded tright nomargin">
                                 <span>{{__('lang.button.shop')}}</span><i class="icon-angle-right"></i></a>
                         </div>
@@ -339,7 +339,7 @@
                              data-endelementdelay="0.1"
                              data-endspeed="1000"
                              data-endeasing="Power4.easeIn" style="">
-                            <a href="{{route('produk',['produk' => 'flyers', 'lang' => $app->getLocale()])}}"
+                            <a href="{{route('produk',['produk' => 'flyers'])}}"
                                class="button button-border button-large button-rounded tright nomargin">
                                 <span>{{__('lang.button.shop')}}</span><i class="icon-angle-right"></i></a>
                         </div>

@@ -295,35 +295,33 @@
                 <div class="col d-lg-flex justify-content-end">
                     <div class="top-links">
                         <ul>
-                            <li><a href="{{route('pro', $app->getLocale())}}">{{__('lang.header.pro')}}</a></li>
-                            <li>
-                                <a href="{{route('cara-pemesanan', $app->getLocale())}}">{{__('lang.header.how-to')}}</a>
-                            </li>
-                            <li><a href="{{route('faq', $app->getLocale())}}">{{__('lang.header.faq')}}</a></li>
-                            <li><a href="{{route('tentang', $app->getLocale())}}">{{__('lang.header.about')}}</a></li>
-                            <li><a href="{{route('kontak', $app->getLocale())}}">{{__('lang.header.contact')}}</a></li>
-                            <li><a href="{{route('blog', $app->getLocale())}}">Blog</a></li>
+                            <li><a href="{{route('pro')}}">{{__('lang.header.pro')}}</a></li>
+                            <li><a href="{{route('cara-pemesanan')}}">{{__('lang.header.how-to')}}</a></li>
+                            <li><a href="{{route('faq')}}">{{__('lang.header.faq')}}</a></li>
+                            <li><a href="{{route('tentang')}}">{{__('lang.header.about')}}</a></li>
+                            <li><a href="{{route('kontak')}}">{{__('lang.header.contact')}}</a></li>
+                            <li><a href="{{route('blog')}}">Blog</a></li>
                             <li>
                                 @if($app->isLocale('id'))
-                                    <a href="#"><img width="20" src="{{asset('images/icons/flags/indonesia.svg')}}"
+                                    <a href="#"><img width="20" src="{{asset('images/icons/flags/id.svg')}}"
                                                      alt="Indonesia"> <i class="icon-angle-down"></i></a>
                                     <ul>
-                                        <li><a href="{{\App\Support\Facades\SwitchLocale::setUrl('en')}}">
-                                                <img src="{{asset('images/icons/flags/united-states.svg')}}"
+                                        <li><a href="{{LaravelLocalization::getLocalizedURL('en', '/')}}">
+                                                <img src="{{asset('images/icons/flags/en.svg')}}"
                                                      alt="English"> {{__('lang.lang.en')}}</a></li>
-                                        <li><a href="{{\App\Support\Facades\SwitchLocale::setUrl('id')}}">
-                                                <img src="{{asset('images/icons/flags/indonesia.svg')}}"
+                                        <li><a href="{{LaravelLocalization::getLocalizedURL('id', '/')}}">
+                                                <img src="{{asset('images/icons/flags/id.svg')}}"
                                                      alt="Indonesia"> {{__('lang.lang.id')}}</a></li>
                                     </ul>
                                 @else
-                                    <a href="#"><img width="20" src="{{asset('images/icons/flags/united-states.svg')}}"
+                                    <a href="#"><img width="20" src="{{asset('images/icons/flags/en.svg')}}"
                                                      alt="English"> <i class="icon-angle-down"></i></a>
                                     <ul>
-                                        <li><a href="{{\App\Support\Facades\SwitchLocale::setUrl('id')}}">
-                                                <img src="{{asset('images/icons/flags/indonesia.svg')}}"
+                                        <li><a href="{{LaravelLocalization::getLocalizedURL('id', '/')}}">
+                                                <img src="{{asset('images/icons/flags/id.svg')}}"
                                                      alt="Indonesia"> {{__('lang.lang.id')}}</a></li>
-                                        <li><a href="{{\App\Support\Facades\SwitchLocale::setUrl('en')}}">
-                                                <img src="{{asset('images/icons/flags/united-states.svg')}}"
+                                        <li><a href="{{LaravelLocalization::getLocalizedURL('en', '/')}}">
+                                                <img src="{{asset('images/icons/flags/en.svg')}}"
                                                      alt="English"> {{__('lang.lang.en')}}</a></li>
                                     </ul>
                                 @endif
@@ -361,9 +359,9 @@
                 <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
 
                 <div id="logo">
-                    <a href="{{route('beranda', $app->getLocale())}}" class="standard-logo">
+                    <a href="{{route('beranda')}}" class="standard-logo">
                         <img src="{{asset('images/logotype.png')}}" alt="Canvas Logo"></a>
-                    <a href="{{route('beranda', $app->getLocale())}}" class="retina-logo">
+                    <a href="{{route('beranda')}}" class="retina-logo">
                         <img src="{{asset('images/logotype@2x.png')}}" alt="Canvas Logo"></a>
                 </div>
 
@@ -405,16 +403,12 @@
                         <div class="widget clearfix">
                             <h4 class="ls0 mb-3 nott">{{__('lang.footer.link')}}</h4>
                             <ul class="list-unstyled iconlist ml-0">
-                                <li><a href="{{route('pro', $app->getLocale())}}">{{__('lang.header.pro')}}</a></li>
-                                <li>
-                                    <a href="{{route('cara-pemesanan', $app->getLocale())}}">{{__('lang.header.how-to')}}</a>
-                                </li>
-                                <li><a href="{{route('faq', $app->getLocale())}}">{{__('lang.header.faq')}}</a></li>
-                                <li><a href="{{route('tentang', $app->getLocale())}}">{{__('lang.header.about')}}</a>
-                                </li>
-                                <li><a href="{{route('kontak', $app->getLocale())}}">{{__('lang.header.contact')}}</a>
-                                </li>
-                                <li><a href="{{route('blog', $app->getLocale())}}">Blog</a></li>
+                                <li><a href="{{route('pro')}}">{{__('lang.header.pro')}}</a></li>
+                                <li><a href="{{route('cara-pemesanan')}}">{{__('lang.header.how-to')}}</a></li>
+                                <li><a href="{{route('faq')}}">{{__('lang.header.faq')}}</a></li>
+                                <li><a href="{{route('tentang')}}">{{__('lang.header.about')}}</a></li>
+                                <li><a href="{{route('kontak')}}">{{__('lang.header.contact')}}</a></li>
+                                <li><a href="{{route('blog')}}">Blog</a></li>
                             </ul>
                         </div>
 
@@ -446,8 +440,8 @@
 
                     <div class="col-md-6 d-md-flex flex-md-column align-items-md-end mt-4 mt-md-0">
                         <div class="copyright-links">
-                            <a href="{{route('syarat-ketentuan', $app->getLocale())}}">{{__('lang.footer.tnc')}}</a> /
-                            <a href="{{route('kebijakan-privasi', $app->getLocale())}}">{{__('lang.footer.pp')}}</a>
+                            <a href="{{route('syarat-ketentuan')}}">{{__('lang.footer.tnc')}}</a> /
+                            <a href="{{route('kebijakan-privasi')}}">{{__('lang.footer.pp')}}</a>
                         </div>
                     </div>
                 </div>

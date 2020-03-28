@@ -44,8 +44,8 @@
             <span>{{__('lang.blog.capt')}}</span>
             <ol class="breadcrumb text-uppercase">
                 <li class="breadcrumb-item">
-                    <a href="{{route('beranda', $app->getLocale())}}">{{__('lang.breadcrumb.home')}}</a></li>
-                <li class="breadcrumb-item"><a href="{{route('blog', $app->getLocale())}}">Blog</a></li>
+                    <a href="{{route('beranda')}}">{{__('lang.breadcrumb.home')}}</a></li>
+                <li class="breadcrumb-item"><a href="{{route('blog')}}">Blog</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{__('lang.breadcrumb.author')}}</li>
             </ol>
         </div>
@@ -95,8 +95,7 @@
                                             @foreach($latest as $row)
                                                 @php
                                                     $date = \Carbon\Carbon::parse($row->created_at);
-                                                    $url = route('detail.blog', ['lang' => $app->getLocale(),
-                                                    'author' => $row->getAdmin->username,
+                                                    $url = route('detail.blog', ['author' => $row->getAdmin->username,
                                                     'y' => $date->format('Y'), 'm' => $date->format('m'),
                                                     'd' => $date->format('d'), 'title' => $row->permalink]);
                                                 @endphp
@@ -141,8 +140,7 @@
                                                         @foreach($archive as $data)
                                                             @php
                                                                 $date = \Carbon\Carbon::parse($data->created_at);
-                                                                $url = route('detail.blog', ['lang' => $app->getLocale(),
-                                                                'author' => $data->getAdmin->username,
+                                                                $url = route('detail.blog', ['author' => $data->getAdmin->username,
                                                                 'y' => $date->format('Y'), 'm' => $date->format('m'),
                                                                 'd' => $date->format('d'), 'title' => $data->permalink]);
                                                             @endphp

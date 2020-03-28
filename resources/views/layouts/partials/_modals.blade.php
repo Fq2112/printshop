@@ -155,9 +155,9 @@
                                     <div class="col-12" style="font-size: 15px;text-align: justify">
                                         <small>
                                             {!! __('lang.modal.auth.pp-tnc') !!}
-                                            <a href="{{route('syarat-ketentuan', $app->getLocale())}}" target="_blank">
+                                            <a href="{{route('syarat-ketentuan')}}" target="_blank">
                                                 {{__('lang.footer.tnc')}}</a>{{__('lang.modal.auth.pp-tnc2')}}
-                                            <a href="{{route('kebijakan-privasi', $app->getLocale())}}" target="_blank">
+                                            <a href="{{route('kebijakan-privasi')}}" target="_blank">
                                                 {{__('lang.footer.pp')}}</a>{!! __('lang.modal.auth.pp-tnc3') !!}.
                                         </small>
                                     </div>

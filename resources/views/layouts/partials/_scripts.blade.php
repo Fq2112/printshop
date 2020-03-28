@@ -34,7 +34,7 @@
 
     var keyword = $("#keyword"), fetchQuery = null, fetchResultsCallback = null,
         fetchResults = _.debounce(function () {
-            $.get('{{route('get.cari-nama.produk', ['lang' => $app->getLocale()])}}?produk=' + fetchQuery, function (data) {
+            $.get('{{route('get.cari-nama.produk')}}?produk=' + fetchQuery, function (data) {
                 if (fetchResultsCallback) {
                     fetchResultsCallback(data);
                 }
@@ -85,7 +85,7 @@
     }
 
     $("#reg_username").on('blur', function () {
-        $.get('{{route('cek.username', $app->getLocale())}}?username=' + $("#reg_username").val(), function (data) {
+        $.get('{{route('cek.username')}}?username=' + $("#reg_username").val(), function (data) {
             if (data == 1) {
                 $("#reg_errorAlert").html(
                     '<div class="alert alert-danger alert-dismissible">' +
