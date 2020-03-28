@@ -241,7 +241,7 @@
                                             <td align="center" valign="top" style="font-family:helvetica,arial,sans-serif;
                 color:#646464; font-size:16px; line-height:22px;
                 padding-left:20px; padding-right:20px" class="body">
-                                                {{__('lang.mail.content.activate2')}}
+                                                {!! __('lang.mail.content.activate2') !!}
                                                 <strong>{{$user->email}}</strong> {{__('lang.mail.content.activate3')}}
                                             </td>
                                         </tr>

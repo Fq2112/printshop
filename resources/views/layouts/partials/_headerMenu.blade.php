@@ -87,7 +87,7 @@
                 </li>
             </ul>
         </li>
-        @endif
+    @endif
 </ul>
 
 <div id="top-search">

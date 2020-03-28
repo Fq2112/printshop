@@ -4,54 +4,53 @@
  * routing utama
  * */
 
-Auth::routes();
-
-Route::group(['namespace' => 'Auth', 'prefix' => 'auth'], function () {
-
-    Route::get('cek-username', [
-        'uses' => 'RegisterController@cekUsername',
-        'as' => 'cek.username'
-    ]);
-
-    Route::get('password/reset', [
-        'uses' => 'ResetPasswordController@showResetForm',
-        'as' => 'password.request'
-    ]);
-
-    Route::post('password/reset/submit', [
-        'uses' => 'ResetPasswordController@reset',
-        'as' => 'password.reset'
-    ]);
-
-    Route::post('login', [
-        'uses' => 'LoginController@login',
-        'as' => 'login'
-    ]);
-
-    Route::post('logout', [
-        'uses' => 'LoginController@logout',
-        'as' => 'logout'
-    ]);
-
-    Route::get('activate', [
-        'uses' => 'ActivationController@activate',
-        'as' => 'activate'
-    ]);
-
-    Route::get('login/{provider}', [
-        'uses' => 'SocialAuthController@redirectToProvider',
-        'as' => 'redirect'
-    ]);
-
-    Route::get('login/{provider}/callback', [
-        'uses' => 'SocialAuthController@handleProviderCallback',
-        'as' => 'callback'
-    ]);
-
-});
-
 Route::group(['prefix' => LaravelLocalization::setLocale(),
     'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localize']], function () {
+
+    Auth::routes();
+    Route::group(['namespace' => 'Auth', 'prefix' => 'auth'], function () {
+
+        Route::get('cek-username', [
+            'uses' => 'RegisterController@cekUsername',
+            'as' => 'cek.username'
+        ]);
+
+        Route::get('password/reset', [
+            'uses' => 'ResetPasswordController@showResetForm',
+            'as' => 'password.request'
+        ]);
+
+        Route::post('password/reset/submit', [
+            'uses' => 'ResetPasswordController@reset',
+            'as' => 'password.reset'
+        ]);
+
+        Route::post('login', [
+            'uses' => 'LoginController@login',
+            'as' => 'login'
+        ]);
+
+        Route::post('logout', [
+            'uses' => 'LoginController@logout',
+            'as' => 'logout'
+        ]);
+
+        Route::get('activate', [
+            'uses' => 'ActivationController@activate',
+            'as' => 'activate'
+        ]);
+
+        Route::get('login/{provider}', [
+            'uses' => 'SocialAuthController@redirectToProvider',
+            'as' => 'redirect'
+        ]);
+
+        Route::get('login/{provider}/callback', [
+            'uses' => 'SocialAuthController@handleProviderCallback',
+            'as' => 'callback'
+        ]);
+
+    });
 
     Route::group(['namespace' => 'Pages'], function () {
 
