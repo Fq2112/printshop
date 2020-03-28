@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\App;
 
 class SetLocaleMiddleware
 {

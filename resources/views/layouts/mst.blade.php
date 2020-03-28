@@ -304,7 +304,7 @@
                             <li><a href="{{route('kontak', $app->getLocale())}}">{{__('lang.header.contact')}}</a></li>
                             <li><a href="{{route('blog', $app->getLocale())}}">Blog</a></li>
                             <li>
-                                @if(\Illuminate\Support\Facades\Request::is(['/*', 'id*']))
+                                @if($app->isLocale('id'))
                                     <a href="#"><img width="20" src="{{asset('images/icons/flags/indonesia.svg')}}"
                                                      alt="Indonesia"> <i class="icon-angle-down"></i></a>
                                     <ul>

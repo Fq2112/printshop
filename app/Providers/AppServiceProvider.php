@@ -30,8 +30,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Carbon::setLocale(config('app.locale'));
         setlocale(LC_TIME, config('app.locale'));
-        session(['locale' => Request::segment(1)]);
-        app()->setLocale(Request::segment(1));
 
         $this->app->bind('GlobalAuth', 'App\Support\GlobalAuth');
         $this->app->bind('SwitchLocale', 'App\Support\SwitchLocale');

@@ -76,37 +76,37 @@ Route::group(['prefix' => '{lang?}', 'middleware' => 'locale'], function () {
                 'as' => 'pro'
             ]);
 
-            Route::get(__('routes.how-to'), [
+            Route::get('cara-pemesanan', [
                 'uses' => 'InfoController@caraPemesanan',
                 'as' => 'cara-pemesanan'
             ]);
 
-            Route::get(__('routes.faq'), [
+            Route::get('faq', [
                 'uses' => 'InfoController@faq',
                 'as' => 'faq'
             ]);
 
-            Route::get(__('routes.about'), [
+            Route::get('tentang', [
                 'uses' => 'InfoController@tentang',
                 'as' => 'tentang'
             ]);
 
-            Route::get(__('routes.contact'), [
+            Route::get('kontak', [
                 'uses' => 'InfoController@kontak',
                 'as' => 'kontak'
             ]);
 
-            Route::post(__('routes.contact') . '/kirim', [
+            Route::post('kontak/kirim', [
                 'uses' => 'InfoController@kirimKontak',
                 'as' => 'kirim.kontak'
             ]);
 
-            Route::get(__('routes.tnc'), [
+            Route::get('syarat-ketentuan', [
                 'uses' => 'InfoController@syaratKetentuan',
                 'as' => 'syarat-ketentuan'
             ]);
 
-            Route::get(__('routes.pp'), [
+            Route::get('kebijakan-privasi', [
                 'uses' => 'InfoController@kebijakanPrivasi',
                 'as' => 'kebijakan-privasi'
             ]);
@@ -137,29 +137,29 @@ Route::group(['prefix' => '{lang?}', 'middleware' => 'locale'], function () {
 
         });
 
-        Route::group(['namespace' => 'Users', 'prefix' => __('routes.account'), 'middleware' => ['auth', 'user']], function () {
+        Route::group(['namespace' => 'Users', 'prefix' => 'akun', 'middleware' => ['auth', 'user']], function () {
 
             Route::get('dashboard', [
                 'uses' => 'UserController@dashboard',
                 'as' => 'user.dashboard'
             ]);
 
-            Route::get(__('routes.profile'), [
+            Route::get('sunting-profil', [
                 'uses' => 'AkunController@profil',
                 'as' => 'user.profil'
             ]);
 
-            Route::put(__('routes.profile') . '/update', [
+            Route::put('sunting-profil/update', [
                 'uses' => 'AkunController@updateProfil',
                 'as' => 'user.update.profil'
             ]);
 
-            Route::get(__('routes.settings'), [
+            Route::get('pengaturan', [
                 'uses' => 'AkunController@pengaturan',
                 'as' => 'user.pengaturan'
             ]);
 
-            Route::put(__('routes.settings') . '/update', [
+            Route::put('pengaturan/update', [
                 'uses' => 'AkunController@updatePengaturan',
                 'as' => 'user.update.pengaturan'
             ]);
