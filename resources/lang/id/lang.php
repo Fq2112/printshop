@@ -1,6 +1,7 @@
 <?php
 return [
-    "title" => "Premier Printshop – Pusat Digital Printing dan Percetakan di Surabaya Terpercaya",
+    "title" => "Premier Printshop – Pusat Digital Printing Online Terpercaya di Surabaya",
+    "subtitle" => "Pusat Digital Printing Online Terpercaya di Surabaya",
     "lang" => [
         "id" => "Indonesia",
         "en" => "Inggris"
@@ -66,6 +67,18 @@ return [
         "home" => "Beranda",
         "list" => "Daftar",
         "author" => "Penulis",
+    ],
+    "about" => [
+        "capt" => "Hai, kami adalah " . env('APP_TITLE') . '! Ingin tau lebih banyak tentang kami? Gulir kebawah :)',
+        "vision-head" => "<span>Visi</span> Kami",
+        "vision-capt" => "Menjadi pusat percetakan digital online paling terpercaya dan populer di Indonesia.",
+        "mission-head" => "<span>Misi</span> Kami",
+        "mission-capt" => "Membuat urusan desain dan mencetak jadi lebih efektif dan efisien bagi klien/mitra maupun pelanggan di seluruh Indonesia.",
+        "client" => "Klien/Mitra",
+        "customer" => "Pelanggan Puas",
+        "order" => "Pesanan Terpenuhi",
+        "design" => "Design Masuk Setahun",
+        "desc" => "<p>" . env('APP_TITLE') . " merupakan salah satu pusat layanan cetak digital (digital offset) terbesar di Surabaya.</p><p>Didirikan tahun 2008, awalnya " . env('APP_TITLE') . " hanya melayani cetak ukuran A3. Sekarang, kami siap memberikan pelayanan cetak serta finishing yang baik dan lengkap, mulai dari format A3 hingga media outdoor dengan ukuran besar.</p><p>Tujuan kami adalah menjadi percetakan digital terbesar yang terus tumbuh, tepercaya, dan menjadi pilihan utama untuk berbagai kebutuhan cetak Anda. Kami percaya, dengan kerja keras dan ketelitian dalam memberikan layanan berkualitas serta terus berinvestasi pada teknologi dan sumber daya manusia yang mumpuni, tujuan kami akan tercapai.</p>",
     ],
     "contact" => [
         "head" => "Tinggalkan Kami Pesan",

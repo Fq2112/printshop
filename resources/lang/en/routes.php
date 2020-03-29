@@ -2,7 +2,7 @@
 return [
     "how-to" => "how-to",
     "faq" => "faqs",
-    "about" => "about",
+    "about" => "about-us",
     "contact" => "contact",
     "tnc" => "terms-conditions",
     "pp" => "privacy-policy",

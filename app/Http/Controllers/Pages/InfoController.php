@@ -30,7 +30,7 @@ class InfoController extends Controller
     public function tentang()
     {
         \App\Models\Visitor::hit();
-        return __('lang.header.about');
+        return view('pages.info.tentang-kami');
     }
 
     public function kontak()

@@ -2,7 +2,7 @@
 return [
     "how-to" => "cara-pemesanan",
     "faq" => "faq",
-    "about" => "tentang",
+    "about" => "tentang-kami",
     "contact" => "kontak",
     "tnc" => "syarat-ketentuan",
     "pp" => "kebijakan-privasi",

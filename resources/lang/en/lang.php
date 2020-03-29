@@ -1,6 +1,7 @@
 <?php
 return [
-    "title" => "Premier Printshop – The Most Trusted Digital Printing Center in Surabaya",
+    "title" => "Premier Printshop – The Most Trusted Online Digital Printing Center in Surabaya",
+    "subtitle" => "The Most Trusted Online Digital Printing Center in Surabaya",
     "lang" => [
         "id" => "Indonesia",
         "en" => "English"
@@ -66,6 +67,18 @@ return [
         "home" => "Home",
         "list" => "List",
         "author" => "Author",
+    ],
+    "about" => [
+        "capt" => "Hi, we're " . env('APP_TITLE') . '! Want to know more about us? Scroll it down :)',
+        "vision-head" => "Our <span>Vision</span>",
+        "vision-capt" => "Become the most trusted and popular online digital printing center in Indonesia.",
+        "mission-head" => "Our <span>Mission</span>",
+        "mission-capt" => "Making design and printing matters more effective and efficient for clients/partners and customers throughout Indonesia.",
+        "client" => "Clients/Partners",
+        "customer" => "Happy Customers",
+        "order" => "Fulfilled Orders",
+        "design" => "Incoming Designs a Year",
+        "desc" => "<p>" . env('APP_TITLE') . " is one of the largest digital printing (digital offset) service centers in Surabaya.</p><p>Established in 2008, initially " . env('APP_TITLE') . " only served A3 size prints. Now, we are ready to provide good and complete printing and finishing services, from A3 to large outdoor media.</p><p>Our goal is to become the largest digital printing company that continues to grow, is trusted, and is the first choice for your various printing needs. We believe, with hard work and thoroughness in providing quality services and continuing to invest in technology and qualified human resources, our goals will be achieved.</p>",
     ],
     "contact" => [
         "head" => "Drop Us a Line",
