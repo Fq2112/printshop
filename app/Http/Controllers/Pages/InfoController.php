@@ -80,12 +80,12 @@ class InfoController extends Controller
     public function syaratKetentuan()
     {
         \App\Models\Visitor::hit();
-        return __('lang.footer.tnc');
+        return view('pages.info.syarat-ketentuan');
     }
 
     public function kebijakanPrivasi()
     {
         \App\Models\Visitor::hit();
-        return __('lang.footer.pp');
+        return view('pages.info.kebijakan-privasi');
     }
 }

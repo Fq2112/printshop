@@ -104,7 +104,7 @@
     @auth
         <div class="top-cart-content">
             <div class="top-cart-title">
-                <h4>{{__('lang.header.cart')}}</h4>
+                <h4 data-toc-skip>{{__('lang.header.cart')}}</h4>
             </div>
             <div class="top-cart-items">
                 <div class="top-cart-item clearfix">

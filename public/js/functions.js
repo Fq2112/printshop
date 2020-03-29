@@ -231,9 +231,9 @@ var SEMICOLON = SEMICOLON || {};
                 elementOffset = 100;
             }
 
-            if (elementMobile != 'true' && ($body.hasClass('device-sm') || $body.hasClass('device-xs'))) {
+            /*if (elementMobile != 'true' && ($body.hasClass('device-sm') || $body.hasClass('device-xs'))) {
                 return true;
-            }
+            }*/
 
             if ($window.scrollTop() > Number(elementOffset)) {
                 $goToTopEl.fadeIn();

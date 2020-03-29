@@ -401,7 +401,7 @@
 
                     <div class="col-lg-3 col-md-4 col-sm-12">
                         <div class="widget clearfix">
-                            <h4 class="ls0 mb-3 nott">{{__('lang.footer.link')}}</h4>
+                            <h4 class="ls0 mb-3 nott" data-toc-skip>{{__('lang.footer.link')}}</h4>
                             <ul class="list-unstyled iconlist ml-0">
                                 <li><a href="{{route('pro')}}">{{__('lang.header.pro')}}</a></li>
                                 <li><a href="{{route('cara-pemesanan')}}">{{__('lang.header.how-to')}}</a></li>
@@ -413,14 +413,14 @@
                         </div>
 
                         <div class="widget clearfix">
-                            <h4 class="ls0 mb-3 nott">{{__('lang.footer.payment')}}</h4>
+                            <h4 class="ls0 mb-3 nott" data-toc-skip>{{__('lang.footer.payment')}}</h4>
                             <img src="{{asset('images/logo-midtrans-color.svg')}}" alt="Logo" class="footer-logo">
                         </div>
                     </div>
 
                     <div class="col-lg-4 col-md-4 col-sm-12">
                         <div id="instagram" class="widget clearfix">
-                            <h4 class="ls0 mb-3 nott">{{__('lang.ig-feed.head')}}</h4>
+                            <h4 class="ls0 mb-3 nott" data-toc-skip>{{__('lang.ig-feed.head')}}</h4>
                             <div id="instagram-photos" class="instagram-photos masonry-thumbs grid-4"
                                  data-user="5834720953" data-count="12" data-type="user"></div>
                             {{--3832059847 | 5834720953--}}
