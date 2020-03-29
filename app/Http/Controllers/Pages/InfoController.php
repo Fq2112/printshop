@@ -24,7 +24,7 @@ class InfoController extends Controller
     public function faq()
     {
         \App\Models\Visitor::hit();
-        return __('lang.header.faq');
+        return view('pages.info.faq');
     }
 
     public function tentang()

@@ -192,12 +192,6 @@
                     <div class="oc-item"><a href="#"><img src="{{asset('images/clients/12.png')}}" alt=""></a></div>
                 </div>
             </div>
-            <div class="clear"></div>
         </div>
     </section>
 @endsection
-@push('scripts')
-    <script>
-
-    </script>
-@endpush

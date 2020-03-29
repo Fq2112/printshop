@@ -68,6 +68,10 @@ return [
         "list" => "List",
         "author" => "Author",
     ],
+    "faq" => [
+        "head" => "FAQs",
+        "capt" => "Here is the most frequently asked questions list.",
+    ],
     "about" => [
         "capt" => "Hi, we're " . env('APP_TITLE') . '! Want to know more about us? Scroll it down :)',
         "vision-head" => "Our <span>Vision</span>",

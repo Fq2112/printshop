@@ -68,6 +68,10 @@ return [
         "list" => "Daftar",
         "author" => "Penulis",
     ],
+    "faq" => [
+        "head" => "FAQ",
+        "capt" => "Berikut adalah daftar pertanyaan yang paling sering diajukan.",
+    ],
     "about" => [
         "capt" => "Hai, kami adalah " . env('APP_TITLE') . '! Ingin tau lebih banyak tentang kami? Gulir kebawah :)',
         "vision-head" => "<span>Visi</span> Kami",
