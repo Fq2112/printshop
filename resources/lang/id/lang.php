@@ -45,6 +45,8 @@ return [
     ],
     "how-to" => [
         "head" => "Ikuti Langkah-Langkah Mudah Ini Untuk Memesan",
+        "start" => "Mulai",
+        "finish" => "Selesai",
         "step" => "Langkah",
         "step-1" => "Pilih Produk Cetak",
         "desc-1" => "<ul><li>Cari produk cetak yang Anda inginkan berdasarkan kategori atau filter lain yang tersedia.</li><li>Pilih produk cetak yang akan Anda cetak.</li></ul>",
@@ -68,8 +70,11 @@ return [
         "list" => "Daftar",
         "author" => "Penulis",
     ],
+    "pro" => [
+        "capt" => "Dapatkan akun PRO " . env('APP_TITLE') . ", ubah kebutuhan cetak bisnis Anda jadi lebih mudah!",
+    ],
     "faq" => [
-        "head" => "FAQ",
+        "head" => "Beberapa Pertanyaan Anda",
         "capt" => "Berikut adalah daftar pertanyaan yang paling sering diajukan.",
     ],
     "about" => [

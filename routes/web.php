@@ -72,6 +72,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
         Route::group(['prefix' => 'info'], function () {
 
             Route::get('pro', [
+                'middleware' => '503',
                 'uses' => 'InfoController@pro',
                 'as' => 'pro'
             ]);

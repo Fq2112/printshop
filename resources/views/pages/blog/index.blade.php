@@ -68,16 +68,16 @@
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link" style="color: #495057" id="tabList-all"
                            data-toggle="tab" href="#tabContent-all" role="tab" aria-controls="nav-home"
-                           aria-selected="true" onclick="filterBlog(null)">
-                            <i class="icon-sort-alpha-up"></i>&ensp;{{__('lang.blog.tabs')}}&ensp;<span
-                                class="badge badge-secondary">{{\App\Models\Blog::count()}}</span>
+                           aria-selected="true" onclick="filterBlog(null)"><i class="icon-sort-alpha-up"></i>&ensp;
+                            {{__('lang.blog.tabs')}}&ensp;<span class="badge badge-secondary">
+                                {{\App\Models\Blog::count() > 999 ? '999+' : \App\Models\Blog::count()}}</span>
                         </a>
                         @foreach($categories as $row)
                             <a class="nav-item nav-link" onclick="filterBlog('{{$row->id}}')"
                                style="color: #495057" id="tabList-{{$row->id}}" data-toggle="tab"
-                               href="#tabContent-{{$row->id}}" role="tab"
-                               aria-controls="nav-home" aria-selected="true">
-                                {{$row->name}}&ensp;<span class="badge badge-secondary">{{count($row->getBlog)}}</span>
+                               href="#tabContent-{{$row->id}}" role="tab" aria-controls="nav-home" aria-selected="true">
+                                {{$row->name}}&ensp;<span class="badge badge-secondary">
+                                    {{count($row->getBlog) > 999 ? '999+' : count($row->getBlog)}}</span>
                             </a>
                         @endforeach
                     </div>

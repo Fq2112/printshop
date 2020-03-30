@@ -45,6 +45,8 @@ return [
     ],
     "how-to" => [
         "head" => "Follow These Easy Steps to Order",
+        "start" => "Start",
+        "finish" => "Finish",
         "step" => "Step",
         "step-1" => "Choose Print Products",
         "desc-1" => "<ul><li>Search for the print product you want by category or other available filters.</li><li>Choose the print product you want to print.</li></ul>",
@@ -68,8 +70,11 @@ return [
         "list" => "List",
         "author" => "Author",
     ],
+    "pro" => [
+        "capt" => "Meet " . env('APP_TITLE') . " PRO Account, transform your business printing needs easier!",
+    ],
     "faq" => [
-        "head" => "FAQs",
+        "head" => "Some of Your Questions",
         "capt" => "Here is the most frequently asked questions list.",
     ],
     "about" => [

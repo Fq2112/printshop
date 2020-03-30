@@ -2,7 +2,43 @@
 @section('title',  __('lang.header.faq').' | '.__('lang.title'))
 @push('styles')
     <style>
+        #tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+            color: #f89406 !important;
+            background-color: #F9F9F9 !important;
+            border-color: transparent transparent #f3f3f3;
+            border-bottom: 4px solid #f89406 !important;
+        }
 
+        #tabs .nav-tabs .nav-link {
+            text-transform: uppercase;
+            border: 1px solid transparent;
+            border-top-left-radius: .25rem;
+            border-top-right-radius: .25rem;
+        }
+
+        #tabs .nav-tabs .nav-link span.badge-primary {
+            color: #fff;
+            background-color: #f89406;
+        }
+
+        #tabs .nav-tabs .nav-link span.badge-primary:hover, #tabs .nav-tabs .nav-link span.badge-primary:focus {
+            color: #fff;
+            background-color: #cd7c06;
+        }
+
+        #tabs .nav-tabs .nav-link span.badge-primary:focus, #tabs .nav-tabs .nav-link span.badge-primary.focus {
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(248, 148, 6, 0.5);
+        }
+
+        #nav-tabContent h4 {
+            margin: 1rem auto;
+        }
+
+        #nav-tabContent p {
+            margin-bottom: 0;
+            text-align: justify;
+        }
     </style>
 @endpush
 @section('content')
@@ -24,131 +60,54 @@
     <section id="content" style="background-color: #F9F9F9">
         <div class="content-wrap">
             <div class="container clearfix">
-                <div class="col_half nobottommargin">
-                    <h4>Marketplace <small>(4)</small></h4>
-                    <div class="accordion accordion-border clearfix" data-state="closed">
-                        <div class="acctitle"><i class="acc-closed icon-question-sign"></i><i
-                                class="acc-open icon-question-sign"></i>How do I become an author?
-                        </div>
-                        <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum
-                            voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque
-                            explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam
-                            unde quas beatae vero vitae nulla.
-                        </div>
-                        <div class="acctitle"><i class="acc-closed icon-comments-alt"></i><i
-                                class="acc-open icon-comments-alt"></i>Helpful Resources for Authors
-                        </div>
-                        <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Explicabo, placeat, architecto rem dolorem dignissimos repellat veritatis in et eos
-                            doloribus magnam aliquam ipsa alias assumenda officiis quasi sapiente suscipit veniam odio
-                            voluptatum. Enim at asperiores quod velit minima officia accusamus cumque eligendi
-                            consequuntur fuga? Maiores, quasi, voluptates, exercitationem fuga voluptatibus a
-                            repudiandae expedita omnis molestiae alias repellat perferendis dolores dolor.
-                        </div>
-                        <div class="acctitle"><i class="acc-closed icon-lock3"></i><i class="acc-open icon-lock3"></i>How
-                            much money can I make?
-                        </div>
-                        <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Possimus, fugiat iste nisi tempore nesciunt nemo fuga? Nesciunt, delectus laboriosam nisi
-                            repudiandae nam fuga saepe animi recusandae. Asperiores, provident, esse, doloremque,
-                            adipisci eaque alias dolore molestias assumenda quasi saepe nisi ab illo ex nesciunt nobis
-                            laboriosam iusto quia nulla ad voluptatibus iste beatae voluptas corrupti facilis accusamus
-                            recusandae sequi debitis reprehenderit quibusdam. Facilis eligendi a exercitationem nisi et
-                            placeat excepturi velit!
-                        </div>
-                    </div>
-
-                    <h4 class="topmargin">Authors <small>(5)</small></h4>
-                    <div class="accordion accordion-border nobottommargin clearfix" data-state="closed">
-                        <div class="acctitle"><i class="acc-closed icon-download-alt"></i><i
-                                class="acc-open icon-download-alt"></i>Can I offer my items for free on a promotional
-                            basis?
-                        </div>
-                        <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum
-                            voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque
-                            explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam
-                            unde quas beatae vero vitae nulla.
-                        </div>
-                        <div class="acctitle"><i class="acc-closed icon-ok"></i><i class="acc-open icon-ok"></i>An
-                            Introduction to the Marketplaces for Authors
-                        </div>
-                        <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Explicabo, placeat, architecto rem dolorem dignissimos repellat veritatis in et eos
-                            doloribus magnam aliquam ipsa alias assumenda officiis quasi sapiente suscipit veniam odio
-                            voluptatum. Enim at asperiores quod velit minima officia accusamus cumque eligendi
-                            consequuntur fuga? Maiores, quasi, voluptates, exercitationem fuga voluptatibus a
-                            repudiandae expedita omnis molestiae alias repellat perferendis dolores dolor.
-                        </div>
-                        <div class="acctitle"><i class="acc-closed icon-credit"></i><i class="acc-open icon-credit"></i>How
-                            do I pay for items on the Marketplaces?
-                        </div>
-                        <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Possimus, fugiat iste nisi tempore nesciunt nemo fuga? Nesciunt, delectus laboriosam nisi
-                            repudiandae nam fuga saepe animi recusandae. Asperiores, provident, esse, doloremque,
-                            adipisci eaque alias dolore molestias assumenda quasi saepe nisi ab illo ex nesciunt nobis
-                            laboriosam iusto quia nulla ad voluptatibus iste beatae voluptas corrupti facilis accusamus
-                            recusandae sequi debitis reprehenderit quibusdam. Facilis eligendi a exercitationem nisi et
-                            placeat excepturi velit!
-                        </div>
-                    </div>
+                <div class="fancy-title title-dotted-border title-center mb-4">
+                    <h4 style="background-color: #f9f9f9">{{__('lang.faq.head')}}</h4>
                 </div>
-
-                <div class="col_half nobottommargin col_last">
-                    <h4>Item Discussion <small>(9)</small></h4>
-                    <div class="accordion accordion-border clearfix" data-state="closed">
-                        <div class="acctitle"><i class="acc-closed icon-picture"></i><i
-                                class="acc-open icon-picture"></i>What Images, Videos, Code Can I Use in my Items?
-                        </div>
-                        <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum
-                            voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque
-                            explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam
-                            unde quas beatae vero vitae nulla.
-                        </div>
-                        <div class="acctitle"><i class="acc-closed icon-file3"></i><i class="acc-open icon-file3"></i>Can
-                            I use trademarked names in my items?
-                        </div>
-                        <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Explicabo, placeat, architecto rem dolorem dignissimos repellat veritatis in et eos
-                            doloribus magnam aliquam ipsa alias assumenda officiis quasi sapiente suscipit veniam odio
-                            voluptatum. Enim at asperiores quod velit minima officia accusamus cumque eligendi
-                            consequuntur fuga? Maiores, quasi, voluptates, exercitationem fuga voluptatibus a
-                            repudiandae expedita omnis molestiae alias repellat perferendis dolores dolor.
-                        </div>
-                        <div class="acctitle"><i class="acc-closed icon-phone3"></i><i class="acc-open icon-phone3"></i>How
-                            can I get support for an item?
-                        </div>
-                        <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Possimus, fugiat iste nisi tempore nesciunt nemo fuga? Nesciunt, delectus laboriosam nisi
-                            repudiandae nam fuga saepe animi recusandae. Asperiores, provident, esse, doloremque,
-                            adipisci eaque alias dolore molestias assumenda quasi saepe nisi ab illo ex nesciunt nobis
-                            laboriosam iusto quia nulla ad voluptatibus iste beatae voluptas corrupti facilis accusamus
-                            recusandae sequi debitis reprehenderit quibusdam. Facilis eligendi a exercitationem nisi et
-                            placeat excepturi velit!
-                        </div>
-                    </div>
-                    <h4 class="topmargin">Affiliates <small>(3)</small></h4>
-                    <div class="accordion accordion-border nobottommargin clearfix" data-state="closed">
-                        <div class="acctitle"><i class="acc-closed icon-money"></i><i class="acc-open icon-money"></i>How
-                            does the Tuts+ Premium affiliate program work?
-                        </div>
-                        <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum
-                            voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque
-                            explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam
-                            unde quas beatae vero vitae nulla.
-                        </div>
-                        <div class="acctitle"><i class="acc-closed icon-bar-chart"></i><i
-                                class="acc-open icon-bar-chart"></i>Tips for Increasing Your Referral Income
-                        </div>
-                        <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Explicabo, placeat, architecto rem dolorem dignissimos repellat veritatis in et eos
-                            doloribus magnam aliquam ipsa alias assumenda officiis quasi sapiente suscipit veniam odio
-                            voluptatum. Enim at asperiores quod velit minima officia accusamus cumque eligendi
-                            consequuntur fuga? Maiores, quasi, voluptates, exercitationem fuga voluptatibus a
-                            repudiandae expedita omnis molestiae alias repellat perferendis dolores dolor.
+                <div class="row">
+                    <div class="col-lg-12">
+                        <nav id="tabs">
+                            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link show active" style="color: #495057" id="tabList-all"
+                                   data-toggle="tab" href="#tabContent-all" role="tab"
+                                   aria-controls="nav-all" aria-selected="true"><i class="icon-sort-alpha-up"></i>&ensp;
+                                    {{__('lang.blog.tabs')}}&ensp;<span class="badge badge-primary">
+                                        {{count($faqs) > 999 ? '999+' : count($faqs)}}</span></a>
+                                @foreach($category as $cat)
+                                    <a class="nav-item nav-link" style="color: #495057" id="tabList-{{$cat->id}}"
+                                       data-toggle="tab" href="#tabContent-{{$cat->id}}" role="tab"
+                                       aria-controls="nav-{{$cat->id}}" aria-selected="true">
+                                        {{$cat->name}}&ensp;<span class="badge badge-secondary">
+                                            {{count($cat->getFaq) > 999 ? '999+' : count($cat->getFaq)}}</span></a>
+                                @endforeach
+                            </div>
+                        </nav>
+                        <div id="nav-tabContent" class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade show active" id="tabContent-all"
+                                 aria-labelledby="nav-all-tab" style="border: none">
+                                <div class="accordion accordion-border clearfix" data-state="closed">
+                                    @foreach($faqs as $faq)
+                                        <div class="acctitle">
+                                            <i class="acc-closed icon-chevron-down1"></i>
+                                            <i class="acc-open icon-chevron-up1"></i>{{$faq->question}}
+                                        </div>
+                                        <div class="acc_content clearfix">{!! $faq->answer !!}</div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            @foreach($category as $cat)
+                                <div role="tabpanel" class="tab-pane fade" id="tabContent-{{$cat->id}}"
+                                     aria-labelledby="nav-{{$cat->id}}-tab" style="border: none">
+                                    <div class="accordion accordion-border clearfix" data-state="closed">
+                                        @foreach($cat->getFaq as $faq)
+                                            <div class="acctitle">
+                                                <i class="acc-closed icon-chevron-down1"></i>
+                                                <i class="acc-open icon-chevron-up1"></i>{{$faq->question}}
+                                            </div>
+                                            <div class="acc_content clearfix">{!! $faq->answer !!}</div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -156,3 +115,11 @@
         </div>
     </section>
 @endsection
+@push('scripts')
+    <script>
+        $('#tabs a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+            $(this).parent().find('span').removeClass('badge-primary').addClass('badge-secondary');
+            $(this).find('span').addClass('badge-primary').removeClass('badge-secondary');
+        });
+    </script>
+@endpush

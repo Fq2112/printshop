@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
+use App\Models\Faq;
+use App\Models\FaqCategory;
 use App\Models\Kontak;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -12,19 +14,22 @@ class InfoController extends Controller
     public function pro()
     {
         \App\Models\Visitor::hit();
-        return __('lang.header.pro');
+        return view('pages.info.pro');
     }
 
     public function caraPemesanan()
     {
         \App\Models\Visitor::hit();
-        return __('lang.header.how-to');
+        return view('pages.info.cara-pemesanan');
     }
 
     public function faq()
     {
+        $category = FaqCategory::orderBy('name')->get();
+        $faqs = Faq::orderByDesc('id')->get();
+
         \App\Models\Visitor::hit();
-        return view('pages.info.faq');
+        return view('pages.info.faq', compact('category', 'faqs'));
     }
 
     public function tentang()

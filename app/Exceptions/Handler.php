@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Foundation\Http\Exceptions\MaintenanceModeException;
 use Illuminate\Session\TokenMismatchException;
 use Illuminate\Support\Facades\App;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -57,6 +58,8 @@ class Handler extends ExceptionHandler
             return response()->view('errors.404');
         } elseif ($exception instanceof MethodNotAllowedHttpException) {
             return response()->view('errors.405');
+        } elseif ($exception instanceof MaintenanceModeException) {
+            return response()->view('errors.503');
         } elseif ($exception instanceof TokenMismatchException) {
             return back()->with('token', 'message');
         }
