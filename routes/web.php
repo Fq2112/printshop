@@ -138,7 +138,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
 
         });
 
-        Route::group(['namespace' => 'Users', 'prefix' => LaravelLocalization::transRoute('routes.account'), 'middleware' => ['auth', 'user']], function () {
+        Route::group(['namespace' => 'Users', 'prefix' => LaravelLocalization::transRoute('routes.account'),
+            'middleware' => ['auth', 'user']], function () {
 
             Route::get('dashboard', [
                 'uses' => 'UserController@dashboard',

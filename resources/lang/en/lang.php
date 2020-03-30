@@ -69,6 +69,8 @@ return [
         "home" => "Home",
         "list" => "List",
         "author" => "Author",
+        "account" => "Account",
+        "settings" => "Settings",
     ],
     "pro" => [
         "capt" => "Meet " . env('APP_TITLE') . " PRO Account, transform your business printing needs easier!",
@@ -125,11 +127,29 @@ return [
         "widget-search" => "Search Blog",
         "widget-category" => "Blog Categories",
     ],
+    "profile" => [
+        "member-since" => "Member Since",
+        "last-update" => "Last Update",
+    ],
+    "settings" => [
+        "capt" => "Here you can set your " . env('APP_TITLE') . " account username and password.",
+        "email-head" => "Primary Email (verified)",
+        "username-head" => "CHANGE USERNAME",
+        "password-head" => "PASSWORD SETTINGS",
+        "password-head2" => "Change Password ?",
+        "password" => "Your password is successfully updated!",
+        "current-password" => "Your old password is wrong!",
+        "confirm-password" => "Your confirmation password must be the same as your new password!",
+    ],
+    "tooltip" => [
+        "ava" => "Click here to change your avatar!",
+    ],
     "placeholder" => [
         "search" => "What do you want to print today?",
         "useremail" => "Username or email",
         "email" => "Email address",
         "password" => "Password",
+        "old-password" => "Current password",
         "new-password" => "New password",
         "re-password" => "Retype password",
         "name" => "Full name",
@@ -153,6 +173,7 @@ return [
         "back" => "Back",
         "subs" => "Subscribe",
         "contact" => "Send Message",
+        "save" => "SAVE CHANGES",
     ],
     "modal" => [
         "auth" => [
@@ -192,6 +213,11 @@ return [
         "logout-head" => "Sign Out",
         "logout-capt" => "Are you sure to end your session?",
         "logout-message" => "You will be redirected to the Home page.",
+        "browser" => "The browser you are using does not support! Please update or use another browser.",
+        "upload" => "Your avatar is successfully updated!",
+        "upload-fail" => "total size ' + file_name + ' is ' + humanFileSize(files_size) + ', allowed file size is ' + humanFileSize(max_file_size) + ', try to upload smaller file!",
+        "upload-fail2" => "File type ' + file_name + ' does not support!",
+        "upload-fail3" => "No file selected!",
         "auth-expire" => "The page you requested requires authentication, please sign in to your account.",
         "token-fail" => "The page has expired due to inactivity, please try again.",
         "feature-fail" => "This feature only works when you`re signed in as a Customer.",

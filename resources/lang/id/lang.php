@@ -69,6 +69,8 @@ return [
         "home" => "Beranda",
         "list" => "Daftar",
         "author" => "Penulis",
+        "account" => "Akun",
+        "settings" => "Pengaturan",
     ],
     "pro" => [
         "capt" => "Dapatkan akun PRO " . env('APP_TITLE') . ", ubah kebutuhan cetak bisnis Anda jadi lebih mudah!",
@@ -125,11 +127,29 @@ return [
         "widget-search" => "Cari Blog",
         "widget-category" => "Kategori Blog",
     ],
+    "profile" => [
+        "member-since" => "Bergabung Sejak",
+        "last-update" => "Update Terakhir",
+    ],
+    "settings" => [
+        "capt" => "Di sini Anda dapat mengatur username dan kata sandi akun " . env('APP_TITLE') . " Anda.",
+        "email-head" => "Email Utama (terverifikasi)",
+        "username-head" => "UBAH USERNAME",
+        "password-head" => "PENGATURAN KATA SANDI",
+        "password-head2" => "Ubah Kata Sandi ?",
+        "password" => "Kata sandi Anda berhasil diperbarui!",
+        "old-password" => "Kata sandi lama Anda salah!",
+        "confirm-password" => "Konfirmasi kata sandi harus sama dengan kata sandi baru Anda!",
+    ],
+    "tooltip" => [
+        "ava" => "Klik disini untuk mengubah avatar Anda!",
+    ],
     "placeholder" => [
         "search" => "Mau cetak apa hari ini?",
         "useremail" => "Username atau email",
         "email" => "Alamat email",
         "password" => "Kata sandi",
+        "old-password" => "Kata sandi lama",
         "new-password" => "Kata sandi baru",
         "re-password" => "Ulangi kata sandi",
         "name" => "Nama lengkap",
@@ -153,6 +173,7 @@ return [
         "back" => "Kembali",
         "subs" => "Berlangganan",
         "contact" => "Kirim Pesan",
+        "save" => "SIMPAN PERUBAHAN",
     ],
     "modal" => [
         "auth" => [
@@ -192,6 +213,11 @@ return [
         "logout-head" => "Keluar",
         "logout-capt" => "Apakah Anda yakin untuk mengakhiri sesi Anda?",
         "logout-message" => "Anda akan dialihkan ke halaman Beranda.",
+        "browser" => "Browser yang Anda gunakan tidak support! Silahkan perbarui atau gunakan browser yang lainnya.",
+        "upload" => "Avatar Anda berhasil diperbarui!",
+        "upload-fail" => "Ukuran total ' + file_name + ' adalah ' + humanFileSize(files_size) + ', ukuran file yang diperbolehkan adalah ' + humanFileSize(max_file_size) + ', coba unggah file yang ukurannya lebih kecil!",
+        "upload-fail2" => "Tipe file ' + file_name + ' tidak support!",
+        "upload-fail3" => "Tidak ada file yang dipilih!",
         "auth-expire" => "Halaman yang Anda minta memerlukan otentikasi, silahkan masuk ke akun Anda.",
         "token-fail" => "Halaman telah kedaluwarsa karena tidak aktif, silakan coba lagi.",
         "feature-fail" => "Fitur ini hanya berfungsi ketika Anda masuk sebagai Pelanggan.",

@@ -47,7 +47,7 @@ class AkunController extends Controller
     {
         $user = Auth::user();
 
-        return $user;
+        return view('pages.main.users.pengaturan-akun', compact('user'));
     }
 
     public function updatePengaturan(Request $request)
