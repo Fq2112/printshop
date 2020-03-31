@@ -5,6 +5,8 @@
         $('[data-toggle="tooltip"]').tooltip();
         $('[data-toggle="popover"]').popover();
 
+        $(".bt-switch").bootstrapSwitch();
+
         @if(session('register') || session('error') || session('logout') || session('expire') || session('inactive') ||
             session('unknown') || session('recovered'))
         openLoginModal();

@@ -9,4 +9,14 @@ class Cities extends Model
     protected $table = 'cities';
 
     protected $guarded = ['id'];
+
+    public function getProvince()
+    {
+        return $this->belongsTo(Province::class, 'province_id');
+    }
+
+    public function getAddress()
+    {
+        return $this->hasMany(Address::class, 'city_id');
+    }
 }

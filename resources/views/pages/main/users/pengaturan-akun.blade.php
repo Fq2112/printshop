@@ -55,7 +55,8 @@
                             </a></li>
                         <li class="current"><a href="{{URL::current()}}">
                                 <div>{{__('lang.header.settings')}}</div>
-                            </a></li>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <div id="page-submenu-trigger"><i class="icon-reorder"></i></div>
@@ -68,15 +69,15 @@
             <div class="container clearfix">
                 <div class="row">
                     <div class="col-lg-4 col-md-6 col-sm-12 text-center">
-                        <div class="card">
+                        <div class="myCard">
                             <form class="form-horizontal mb-0" role="form" method="POST" id="form-ava"
                                   enctype="multipart/form-data">
                                 @csrf
                                 {{ method_field('put') }}
                                 <div class="img-card image-upload">
                                     <label for="file-input">
-                                        <img style="width: 100%" class="show_ava" alt="Avatar" src="{{$user->getBio->ava == "" ?
-                                        asset('images/avatar.png') : asset('storage/users/ava/'.$user->getBio->ava)}}"
+                                        <img style="width: 100%" class="show_ava" alt="Avatar" src="{{$bio->ava == "" ?
+                                        asset('images/avatar.png') : asset('storage/users/ava/'.$bio->ava)}}"
                                              data-placement="bottom" data-toggle="tooltip"
                                              title="{{__('lang.tooltip.ava')}}">
                                     </label>
@@ -90,21 +91,61 @@
                                 </div>
                             </form>
 
-                            <div class="card-content">
-                                <div class="card-title text-center">
-                                    <h4 class="aj_name" style="color: #f89406">{{$user->name}}</h4>
-                                    <small style="text-transform: none">{{$user->username}}</small>
-                                </div>
-                                <div class="card-title">
-                                    <form class="form-horizontal mb-0" role="form" method="POST" id="form-username">
-                                        @csrf
-                                        {{ method_field('put') }}
+                            <form class="form-horizontal mb-0" role="form" method="POST" id="form-username">
+                                @csrf
+                                {{ method_field('put') }}
+                                <div class="card-content">
+                                    <div class="card-title text-center">
+                                        <h4 class="aj_name" style="color: #f89406">{{$user->name}}</h4>
+                                        <h5 class="show_username" style="text-transform: none">{{$user->username}}</h5>
+                                    </div>
+                                    <div class="card-title">
                                         <div id="show_username_settings" class="row"
                                              style="color: #f89406;cursor: pointer;font-size: 14px">
-                                            <div class="col text-right">
-                                                <i class="icon-edit mr-2"></i>{{__('lang.settings.username-head')}}
-                                            </div>
+                                            <div class="col text-right"><i class="icon-edit mr-1"></i>USERNAME</div>
                                         </div>
+                                        <table class="stats_username m-0" style="font-size: 14px">
+                                            <tr data-toggle="tooltip" data-placement="left"
+                                                title="{{__('lang.profile.gender')}}">
+                                                <td><i class="icon-transgender"></i></td>
+                                                <td>&nbsp;</td>
+                                                <td>{{$bio->gender != "" ? ucfirst($bio->gender) : __('lang.profile.empty')}}</td>
+                                            </tr>
+                                            <tr data-toggle="tooltip" data-placement="left"
+                                                title="{{__('lang.profile.birthday')}}">
+                                                <td><i class="icon-birthday-cake"></i></td>
+                                                <td>&nbsp;</td>
+                                                <td>{{$bio->dob != "" ? \Carbon\Carbon::parse($bio->dob)->format('j F Y') : __('lang.profile.empty')}}</td>
+                                            </tr>
+                                            <tr data-toggle="tooltip" data-placement="left"
+                                                title="{{ucwords(__('lang.placeholder.phone'))}}">
+                                                <td><i class="icon-phone"></i></td>
+                                                <td>&nbsp;</td>
+                                                <td>{{$bio->phone != "" ? $bio->phone : __('lang.profile.empty')}}</td>
+                                            </tr>
+                                            <tr data-toggle="tooltip" data-placement="left"
+                                                title="{{__('lang.profile.main-address')}}">
+                                                <td><i class="icon-map-marked-alt"></i></td>
+                                                <td>&nbsp;</td>
+                                                <td>{{$address != "" ? $address->address.' - '.$address->postal_code.' ('.$address->save_as.').' : __('lang.profile.empty')}}</td>
+                                            </tr>
+                                        </table>
+                                        <div class="divider divider-center stats_username mt-2 mb-1"><i
+                                                class="icon-circle"></i></div>
+                                        <table class="stats_username m-0" style="font-size: 14px">
+                                            <tr data-toggle="tooltip" data-placement="left"
+                                                title="{{__('lang.profile.member-since')}}">
+                                                <td><i class="icon-calendar-check"></i></td>
+                                                <td>&nbsp;</td>
+                                                <td>{{$user->created_at->formatLocalized('%d %B %Y')}}</td>
+                                            </tr>
+                                            <tr data-toggle="tooltip" data-placement="left"
+                                                title="{{__('lang.profile.last-update')}}">
+                                                <td><i class="icon-clock"></i></td>
+                                                <td>&nbsp;</td>
+                                                <td class="text-lowercase">{{$user->updated_at->diffForHumans()}}</td>
+                                            </tr>
+                                        </table>
                                         <div id="username_settings" style="display: none">
                                             <div id="error_username" class="row form-group has-feedback"
                                                  style="margin-bottom: 0">
@@ -118,166 +159,27 @@
                                                     </span>
                                                 </div>
                                             </div>
-
-                                            <div class="row form-group">
-                                                <div class="col">
-                                                    <button id="btn_save_username" class="btn btn-link btn-sm btn-block"
-                                                            type="submit" style="border: 1px solid #ccc">
-                                                        <i class="icon-user-lock mr-2"></i>{{__('lang.button.save')}}
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <hr style="margin: 10px 0">
-                                    <table class="stats" style="font-size: 14px; margin-top: 0">
-                                        <tr>
-                                            <td><i class="icon-calendar-check"></i></td>
-                                            <td>&nbsp;{{__('lang.profile.member-since')}}</td>
-                                            <td>
-                                                : {{$user->created_at->formatLocalized('%d %B %Y')}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><i class="icon-clock"></i></td>
-                                            <td>&nbsp;{{__('lang.profile.last-update')}}</td>
-                                            <td style="text-transform: none;">
-                                                : {{$user->updated_at->diffForHumans()}}
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="card-title">
-                                    @if(\Illuminate\Support\Facades\Request::is('account/profile'))
-                                        <div id="show_personal_data_settings" class="row justify-content-center"
-                                             style="color: #592f83;cursor: pointer;font-size: 14px">
-                                            <div class="col text-right"><i class="icon-edit mr-2"></i>EDIT</div>
-                                        </div>
-                                    @endif
-                                    <table class="stats_personal_data" style="font-size: 15px;margin-top: 0">
-                                        <tr data-toggle="tooltip" data-placement="left" title="Jenis Kelamin">
-                                            <td><i class="icon-transgender"></i></td>
-                                            <td>&nbsp;</td>
-                                            <td>{{$user->getBio->gender != "" ? ucfirst($user->getBio->gender) : '(kosong)'}}</td>
-                                        </tr>
-                                        <tr data-toggle="tooltip" data-placement="left" title="Tanggal Lahir">
-                                            <td><i class="icon-birthday-cake"></i></td>
-                                            <td>&nbsp;</td>
-                                            <td>{{$user->getBio->dob != "" ? \Carbon\Carbon::parse($user->getBio->dob)->format('j F Y') : '(kosong)'}}</td>
-                                        </tr>
-                                        <tr data-toggle="tooltip" data-placement="left" title="Nomor Telepon">
-                                            <td><i class="icon-phone"></i></td>
-                                            <td>&nbsp;</td>
-                                            <td>{{$user->getBio->phone != "" ? $user->getBio->phone : '(kosong)'}}</td>
-                                        </tr>
-                                    </table>
-                                    <hr class="stats_personal_data">
-                                    <table class="stats_personal_data" style="font-size: 14px;margin-top: 0">
-                                        <tr>
-                                            <td><i class="icon-calendar-check"></i></td>
-                                            <td>&nbsp;Member Since</td>
-                                            <td>: {{$user->created_at->format('j F Y')}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><i class="icon-clock"></i></td>
-                                            <td>&nbsp;Last Update</td>
-                                            <td>: {{$user->updated_at->diffForHumans()}}</td>
-                                        </tr>
-                                    </table>
-                                    <div id="personal_data_settings" style="display: none">
-                                        <small>Full Name</small>
-                                        <div class="row form-group">
-                                            <div class="col">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i
-                                                                class="icon-id-card"></i></span>
-                                                    </div>
-                                                    <input placeholder="Name" maxlength="191" value="{{$user->name}}"
-                                                           type="text" class="form-control" name="name" required
-                                                           autofocus>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <small>Gender</small>
-                                        <div class="row form-group fix-label-group">
-                                            <div class="col">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                    <span class="input-group-text fix-label-item"><i
-                                            class="icon-transgender"></i></span>
-                                                    </div>
-                                                    <select class="form-control selectpicker" title="-- Choose --"
-                                                            name="gender" required>
-                                                        <option
-                                                            value="male" {{$user->getBio->gender == "male" ? 'selected' : ''}}>
-                                                            Male
-                                                        </option>
-                                                        <option
-                                                            value="female" {{$user->getBio->gender == "female" ? 'selected' : ''}}>
-                                                            Female
-                                                        </option>
-                                                        <option
-                                                            value="other" {{$user->getBio->gender == "other" ? 'selected' : ''}}>
-                                                            Rather not say
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <small>Birthday</small>
-                                        <div class="row form-group">
-                                            <div class="col">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i
-                                                                class="icon-birthday-cake"></i></span>
-                                                    </div>
-                                                    <input class="form-control datepicker" name="dob" type="text"
-                                                           required
-                                                           placeholder="yyyy-mm-dd" value="{{$user->getBio->dob}}"
-                                                           maxlength="10">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <small>{{__('lang.footer.phone')}}</small>
-                                        <div class="row form-group">
-                                            <div class="col">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i class="icon-phone"></i></span>
-                                                    </div>
-                                                    <input placeholder="{{__('lang.placeholder.phone')}}" type="text"
-                                                           class="form-control" name="phone" required
-                                                           onkeypress="return numberOnly(event, false)"
-                                                           value="{{$user->getBio->phone != "" ? $user->getBio->phone : ''}}">
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
-
                                 </div>
-                            </div>
-                            <div class="card-footer p-0">
-                                <button class="btn btn-outline-primary btn-block noborder"
-                                        id="btn_save_personal_data" disabled>
-                                    <i class="icon-user mr-2"></i>{{__('lang.button.save')}}
-                                </button>
-                            </div>
+                                <div class="card-footer p-0">
+                                    <button type="submit" id="btn_save_username"
+                                            class="btn btn-outline-primary btn-block noborder" disabled>
+                                        <i class="icon-user mr-2"></i>{{__('lang.button.save')}}
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-6 col-sm-12">
-                        <div class="card">
+                        <div class="myCard">
                             <form class="form-horizontal mb-0" role="form" method="POST" id="form-password">
                                 @csrf
                                 {{ method_field('put') }}
                                 <div class="card-content">
                                     <div class="card-title">
                                         <small style="font-weight: 600">{{__('lang.header.settings')}}</small>
-                                        <hr class="mt-0">
+                                        <div class="divider stats_username mt-0 mb-2"><i class="icon-circle"></i></div>
                                         <small>{{__('lang.settings.email-head')}}</small>
                                         <div class="row form-group has-feedback">
                                             <div class="col">
@@ -334,8 +236,8 @@
                                     </div>
                                 </div>
                                 <div class="card-footer p-0">
-                                    <button id="btn_save_password" class="btn btn-outline-primary btn-block noborder"
-                                            disabled>
+                                    <button type="submit" id="btn_save_password"
+                                            class="btn btn-outline-primary btn-block noborder" disabled>
                                         <i class="icon-lock mr-2"></i>{{__('lang.button.save')}}
                                     </button>
                                 </div>
@@ -351,7 +253,13 @@
     <script>
         $("#show_username_settings").on('click', function () {
             $("#username_settings").toggle(300);
-            $("#btn_mode_publik").toggle(300);
+            $(".stats_username").toggle(300);
+
+            if ($("#btn_save_username").attr('disabled')) {
+                $("#btn_save_username").removeAttr('disabled');
+            } else {
+                $("#btn_save_username").attr('disabled', 'disabled');
+            }
         });
 
         $("#form-username").on("submit", function (e) {
@@ -368,7 +276,7 @@
                         $(".aj_username").text("{{__('lang.alert.username')}}").parent().show();
 
                     } else {
-                        swal('{{__('lang.header.settings')}}', '{{__('lang.alert.username')}}', 'success');
+                        swal('{{__('lang.header.settings')}}', '{{__('lang.settings.username')}}', 'success');
                         $("#error_username").removeClass('has-error');
                         $(".aj_username").text("").parent().hide();
                         $("#show_username_settings").click();

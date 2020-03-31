@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Address;
 use App\Models\Bio;
 use App\Models\SocialProvider;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -47,6 +48,11 @@ class User extends Authenticatable
     public function getBio()
     {
         return $this->hasOne(Bio::class, 'user_id');
+    }
+
+    public function getAddress()
+    {
+        return $this->hasMany(Address::class, 'user_id');
     }
 
     /**

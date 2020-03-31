@@ -68,13 +68,15 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6 checkbox">
-                                        <label>
-                                            <input type="checkbox" name="remember" {{old('remember') ? 'checked' : ''}}
-                                            style="position: relative"> {{__('lang.modal.auth.remember')}}
-                                        </label>
+                                    <div class="col-7">
+                                        <div>
+                                            <input id="remember" class="checkbox-style" name="remember"
+                                                   type="checkbox" {{old('remember') ? 'checked' : ''}}>
+                                            <label for="remember" class="checkbox-style-2-label checkbox-small"
+                                                   style="text-transform: none">{{__('lang.modal.auth.remember')}}</label>
+                                        </div>
                                     </div>
-                                    <div class="col-6 text-right">
+                                    <div class="col text-right">
                                         <a href="javascript:openEmailModal()">{{__('lang.button.forgot')}}</a>
                                     </div>
                                 </div>

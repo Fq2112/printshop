@@ -6,7 +6,7 @@
             text: "{{__('lang.alert.delete-capt')}}",
             icon: 'warning',
             dangerMode: true,
-            buttons: ["Tidak", "Ya"],
+            buttons: ["{{__('lang.button.no')}}", "{{__('lang.button.yes')}}"],
             closeOnEsc: false,
             closeOnClickOutside: false,
         }).then((confirm) => {
@@ -24,7 +24,7 @@
             text: "{{__('lang.alert.logout-capt')}}",
             icon: 'warning',
             dangerMode: true,
-            buttons: ["Tidak", "Ya"],
+            buttons: ["{{__('lang.button.no')}}", "{{__('lang.button.yes')}}"],
             closeOnEsc: false,
             closeOnClickOutside: false,
         }).then((confirm) => {

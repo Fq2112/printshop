@@ -101,13 +101,13 @@
                             @csrf
                             <div class="col_one_third">
                                 <label for="con-name">
-                                    {{__('lang.placeholder.name')}} <small>*</small></label>
+                                    {{__('lang.placeholder.name')}} <span class="required">*</span></label>
                                 <input type="text" id="con-name" name="name" required
                                        class="sm-form-control" placeholder="{{__('lang.placeholder.name')}}"
                                        value="{{Auth::check() ? Auth::user()->name : ''}}">
                             </div>
                             <div class="col_one_third">
-                                <label for="con-email">Email <small>*</small></label>
+                                <label for="con-email">Email <span class="required">*</span></label>
                                 <input type="email" id="con-email" name="email"
                                        placeholder="{{__('lang.placeholder.email')}}" required
                                        class="email sm-form-control" value="{{Auth::check()? Auth::user()->email :''}}">
@@ -124,13 +124,13 @@
 
                             <div class="col_two_third">
                                 <label for="con-subject">
-                                    {{__('lang.placeholder.subject')}} <small>*</small></label>
+                                    {{__('lang.placeholder.subject')}} <span class="required">*</span></label>
                                 <input type="text" id="con-subject" name="subject" required
                                        placeholder="{{__('lang.placeholder.subject')}}" class="sm-form-control">
                             </div>
                             <div class="col_one_third col_last">
                                 <label for="con-topic">
-                                    {{__('lang.contact.topic')}} <small>*</small></label>
+                                    {{__('lang.contact.topic')}} <span class="required">*</span></label>
                                 <select id="con-topic" name="topic" class="sm-form-control" required>
                                     <option value="" disabled selected>{{__('lang.placeholder.choose')}}</option>
                                     @for($i=1;$i<=6;$i++)
@@ -144,7 +144,7 @@
 
                             <div class="col_full">
                                 <label for="con-message">
-                                    {{__('lang.contact.message')}} <small>*</small></label>
+                                    {{__('lang.contact.message')}} <span class="required">*</span></label>
                                 <textarea class="sm-form-control" id="con-message"
                                           name="message" placeholder="{{__('lang.placeholder.message')}}"
                                           rows="6" cols="30" required></textarea>

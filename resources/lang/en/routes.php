@@ -9,5 +9,6 @@ return [
     "account" => "account",
     "order" => "order-history",
     "profile" => "edit-profile",
+    "profile-address" => "edit-profile/address",
     "settings" => "settings",
 ];

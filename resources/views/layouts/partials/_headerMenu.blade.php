@@ -58,7 +58,7 @@
                     @if(Auth::check())
                         <img alt="Ava" class="img-thumbnail show_ava" src="{{Auth::user()->getBio->ava != "" ?
                         asset('storage/users/ava/'.Auth::user()->getBio->ava) : asset('images/avatar.png')}}">
-                        {{Auth::user()->username}}
+                        <b class="show_username">{{Auth::user()->username}}</b>
                     @elseif(Auth::guard('admin')->check())
                         <img alt="Ava" class="img-thumbnail show_ava" src="{{Auth::guard('admin')->user()->getBio->ava != "" ?
                         asset('storage/admins/ava/'.Auth::guard('admin')->user()->getBio->ava) :

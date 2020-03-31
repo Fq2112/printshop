@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Pages\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
+use App\Models\Province;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,40 +16,54 @@ class AkunController extends Controller
     public function profil()
     {
         $user = Auth::user();
+        $bio = $user->getBio;
+        $addresses = $user->getAddress;
+        $address = Address::where('user_id', $user->id)->where('is_main', true)->first();
 
-        return $user;
+        $provinces = Province::all();
+
+        return view('pages.main.users.sunting-profile', compact('user', 'bio', 'addresses', 'address', 'provinces'));
     }
 
     public function updateProfil(Request $request)
     {
         $user = User::findOrFail(Auth::id());
 
-        if ($request->check_form == 'kontak') {
-            $user->getBio->update([
-                'hp' => $request->hp,
-                'alamat' => $request->alamat,
-                'kode_pos' => $request->kode_pos,
-                'kota_id' => $request->kota_id,
-            ]);
+        $user->update(['name' => $request->name]);
+        $user->getBio->update([
+            'gender' => $request->gender,
+            'dob' => $request->dob,
+            'phone' => $request->phone,
+        ]);
 
-        } elseif ($request->check_form == 'personal') {
-            $user->update(['name' => $request->name]);
-            $user->getBio->update([
-                'tgl_lahir' => $request->tgl_lahir,
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'kewarganegaraan' => $request->kewarganegaraan,
-                'website' => $request->website,
-            ]);
-        }
+        return back()->with('update', __('lang.profile.update-personal'));
+    }
 
-        return back()->with('update', 'Data ' . $request->check_form . ' Anda berhasil diperbarui!');
+    public function createProfilAddress(Request $request)
+    {
+        Address::create([
+            'user_id' => Auth::id(),
+            'name' => $request->address_name,
+            'phone' => $request->address_phone,
+            'city_id' => $request->city_id,
+            'postal_code' => $request->postal_code,
+            'address' => $request->address,
+            'lat' => $request->lat,
+            'long' => $request->long,
+            'save_as' => $request->save_as,
+            'is_main' => $request->is_main,
+        ]);
+
+        return back()->with('update', __('lang.profile.address') . ' [' . $request->address . '] ' . __('lang.profile.create-address'));
     }
 
     public function pengaturan()
     {
         $user = Auth::user();
+        $bio = $user->getBio;
+        $address = Address::where('user_id', $user->id)->where('is_main', true)->first();
 
-        return view('pages.main.users.pengaturan-akun', compact('user'));
+        return view('pages.main.users.pengaturan-akun', compact('user', 'bio', 'address'));
     }
 
     public function updatePengaturan(Request $request)

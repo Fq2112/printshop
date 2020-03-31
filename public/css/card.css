@@ -1,4 +1,4 @@
-.card {
+.myCard {
     display: block;
     margin-bottom: 20px;
     line-height: 1.42857143;
@@ -8,15 +8,15 @@
     transition: box-shadow .25s;
 }
 
-.card .stats {
+.myCard .stats {
     font-size: 15px;
 }
 
-.card:hover {
+.myCard:hover {
     box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.img-card {
+.myCard .img-card {
     width: 100%;
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
@@ -24,72 +24,77 @@
     overflow: hidden;
 }
 
-.img-card img {
+.myCard .img-card img {
     width: 100%;
     object-fit: cover;
     transition: all .25s ease;
 }
 
-.card-content {
+.myCard .card-content {
     padding: 15px;
     text-align: left;
 }
 
-.card-content small {
+.myCard .card-content small {
     text-transform: uppercase;
     font-size: 14px;
 }
 
-.card-content p {
+.myCard .card-content p {
     text-transform: none;
     font-size: 13px;
 }
 
-.card-content table {
+.myCard .card-content table {
     font-size: 16px;
     margin-top: 30px;
 }
 
-.card-content table tr > td {
+.myCard .card-content table tr > td {
     padding-bottom: .5em;
 }
 
-.card-title, .card-title h4 {
+.myCard .card-title, .myCard .card-title h4 {
     margin-top: 0;
     margin-bottom: .25em;
     font-weight: 700;
     text-transform: capitalize;
 }
 
-.card-title a {
+.myCard .card-title a {
     color: #777;
     font-weight: 700;
     transition: all .3s ease;
     text-decoration: none !important;
 }
 
-.card-title a:hover, .card-title a:focus, .card-title a:active {
+.myCard .card-title a:hover, .myCard .card-title a:focus, .myCard .card-title a:active {
     color: #122752;
 }
 
-.card .card-footer button {
+.myCard .card-footer {
+    background-color: #fff;
+}
+
+.myCard .card-footer button {
     border-radius: 0 0 4px 4px;
     font-size: 14px;
     padding: 10px 20px;
+    font-weight: 600;
 }
 
-.card-read-more {
+.myCard .card-read-more {
     border-top: 1px solid #D4D4D4;
 }
 
-.card-read-more a, .card-read-more button {
+.myCard .card-read-more a, .myCard .card-read-more button {
     text-decoration: none !important;
     padding: 10px;
     font-weight: 600;
     text-transform: uppercase;
 }
 
-.card-read-more button:hover, .card-read-more button:focus, .card-read-more button:active {
+.myCard .card-read-more button:hover, .myCard .card-read-more button:focus, .myCard .card-read-more button:active {
     border-radius: 0 0 4px 4px !important;
 }
 

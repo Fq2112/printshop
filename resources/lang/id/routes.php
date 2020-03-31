@@ -9,5 +9,6 @@ return [
     "account" => "akun",
     "order" => "riwayat-pemesanan",
     "profile" => "sunting-profil",
+    "profile-address" => "sunting-profil/alamat",
     "settings" => "pengaturan",
 ];

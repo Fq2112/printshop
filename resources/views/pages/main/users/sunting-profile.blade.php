@@ -1,0 +1,862 @@
+@extends('layouts.mst')
+@section('title',  __('lang.header.profile').': '.$user->name.' | '.__('lang.title'))
+@push('styles')
+    <link rel="stylesheet" href="{{asset('css/card.css')}}">
+    <link rel="stylesheet" href="{{asset('css/components/bs-select.css')}}">
+    <link rel="stylesheet" href="{{asset('css/components/datepicker.css')}}">
+    <style>
+        .bootstrap-select .dropdown-toggle {
+            background-color: #fff;
+            border-color: #ced4da;
+        }
+
+        .bootstrap-select > .dropdown-toggle.bs-placeholder {
+            color: #909090;
+        }
+
+        .bootstrap-select .dropdown-menu {
+            min-width: 100% !important;
+            background: #fff !important;
+            text-align: justify !important;
+        }
+
+        .bootstrap-select .dropdown-menu > .active > a,
+        .bootstrap-select .dropdown-menu > .active > a:hover,
+        .bootstrap-select .dropdown-menu > .active > a:focus {
+            color: #fff !important;
+            background: #f89406 !important;
+        }
+
+        .bootstrap-select a.dropdown-item:hover,
+        .bootstrap-select a.dropdown-item:focus,
+        .bootstrap-select a.dropdown-item:active {
+            color: #fff !important;
+            background: #f89406 !important;
+        }
+
+        .bootstrap-select .dropdown-menu li:hover,
+        .bootstrap-select .dropdown-menu li:focus {
+            background: #eee !important;
+        }
+
+        .datepicker {
+            padding: 0.375rem 0.75rem;
+        }
+
+        .has-feedback .form-control-feedback {
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
+        }
+
+        .image-upload > input {
+            display: none;
+        }
+
+        .image-upload label {
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .gm-style-iw {
+            width: 350px !important;
+            top: 15px;
+            left: 22px;
+            background-color: #fff;
+            box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
+            border: 1px solid rgba(248, 148, 6, 0.6);
+            border-radius: 2px 2px 10px 10px;
+        }
+
+        .gm-style-iw > div:first-child {
+            max-width: 350px !important;
+        }
+
+        #iw-container {
+            margin-bottom: 10px;
+        }
+
+        #iw-container .iw-title {
+            font-family: 'Open Sans Condensed', sans-serif;
+            font-size: 22px;
+            font-weight: 400;
+            padding: 10px;
+            background-color: #f89406;
+            color: white;
+            margin: 0;
+            border-radius: 2px 2px 0 0;
+        }
+
+        #iw-container .iw-content {
+            font-size: 13px;
+            line-height: 18px;
+            font-weight: 400;
+            margin-right: 1px;
+            padding: 15px 5px 20px 15px;
+            max-height: 140px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .iw-content a {
+            color: #f89406;
+            text-decoration: none;
+        }
+
+        .iw-content img {
+            float: right;
+            margin: 0 5px 5px 10px;
+            width: 30%;
+        }
+
+        .iw-subTitle {
+            font-size: 16px;
+            font-weight: 700;
+            padding: 5px 0;
+        }
+
+        .iw-bottom-gradient {
+            position: absolute;
+            width: 326px;
+            height: 25px;
+            bottom: 10px;
+            right: 18px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+            background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+            background: -ms-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+        }
+    </style>
+@endpush
+@section('content')
+    <section id="page-title" class="page-title-parallax page-title-dark"
+             data-bottom-top="background-position:0px 0px;" data-top-bottom="background-position:0px -300px;"
+             style="background-image:url('{{asset('images/banner/users.jpg')}}');background-size:cover;padding:120px 0;">
+        <div class="parallax-overlay"></div>
+        <div class="container clearfix">
+            <h1>{{__('lang.header.profile')}}</h1>
+            <span>{{__('lang.profile.capt')}}</span>
+            <ol class="breadcrumb text-uppercase">
+                <li class="breadcrumb-item"><a href="{{route('beranda')}}">{{__('lang.breadcrumb.home')}}</a></li>
+                <li class="breadcrumb-item"><a href="{{URL::current()}}">{{__('lang.breadcrumb.account')}}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{__('lang.header.profile')}}</li>
+            </ol>
+        </div>
+    </section>
+
+    <div id="page-menu">
+        <div id="page-menu-wrap">
+            <div class="container clearfix">
+                <div class="menu-title"><span>{{$user->name}}</span></div>
+                <nav>
+                    <ul>
+                        <li><a href="{{route('user.dashboard')}}">
+                                <div>Dashboard</div>
+                            </a></li>
+                        <li class="current"><a href="{{URL::current()}}">
+                                <div>{{__('lang.header.profile')}}</div>
+                            </a></li>
+                        <li><a href="{{route('user.pengaturan')}}">
+                                <div>{{__('lang.header.settings')}}</div>
+                            </a></li>
+                    </ul>
+                </nav>
+                <div id="page-submenu-trigger"><i class="icon-reorder"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <section id="content" style="background-color: #F9F9F9">
+        <div class="content-wrap">
+            <div class="container clearfix">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+                        <div class="myCard">
+                            <form class="form-horizontal mb-0" role="form" method="POST" id="form-ava"
+                                  enctype="multipart/form-data">
+                                @csrf
+                                {{ method_field('put') }}
+                                <div class="img-card image-upload">
+                                    <label for="file-input">
+                                        <img style="width: 100%" class="show_ava" alt="Avatar" src="{{$bio->ava == "" ?
+                                        asset('images/avatar.png') : asset('storage/users/ava/'.$bio->ava)}}"
+                                             data-placement="bottom" data-toggle="tooltip"
+                                             title="{{__('lang.tooltip.ava')}}">
+                                    </label>
+                                    <input id="file-input" name="ava" type="file" accept="image/*">
+                                    <div id="progress-upload">
+                                        <div class="progress-bar progress-bar-info progress-bar-striped active"
+                                             role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                             aria-valuemax="100" style="background-color: #f89406;z-index: 20">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <form class="form-horizontal mb-0" role="form" method="POST"
+                                  action="{{route('user.update.profil')}}">
+                                @csrf
+                                {{ method_field('put') }}
+                                <div class="card-content">
+                                    <div class="card-title text-center">
+                                        <h4 class="aj_name" style="color: #f89406">{{$user->name}}</h4>
+                                        <h5 style="text-transform: none">{{$user->username}}</h5>
+                                    </div>
+                                    <div class="card-title">
+                                        <div id="show_personal_settings" class="row justify-content-center"
+                                             style="color: #f89406;cursor: pointer;font-size: 14px">
+                                            <div class="col text-right"><i class="icon-edit mr-1"></i>PERSONAL</div>
+                                        </div>
+                                        <table class="stats_personal m-0" style="font-size: 14px">
+                                            <tr data-toggle="tooltip" data-placement="left"
+                                                title="{{__('lang.profile.gender')}}">
+                                                <td><i class="icon-transgender"></i></td>
+                                                <td>&nbsp;</td>
+                                                <td>{{$bio->gender != "" ? ucfirst($bio->gender) : __('lang.profile.empty')}}</td>
+                                            </tr>
+                                            <tr data-toggle="tooltip" data-placement="left"
+                                                title="{{__('lang.profile.birthday')}}">
+                                                <td><i class="icon-birthday-cake"></i></td>
+                                                <td>&nbsp;</td>
+                                                <td>{{$bio->dob != "" ? \Carbon\Carbon::parse($bio->dob)->format('j F Y') : __('lang.profile.empty')}}</td>
+                                            </tr>
+                                            <tr data-toggle="tooltip" data-placement="left"
+                                                title="{{ucwords(__('lang.placeholder.phone'))}}">
+                                                <td><i class="icon-phone"></i></td>
+                                                <td>&nbsp;</td>
+                                                <td>{{$bio->phone != "" ? $bio->phone : __('lang.profile.empty')}}</td>
+                                            </tr>
+                                            <tr data-toggle="tooltip" data-placement="left"
+                                                title="{{__('lang.profile.main-address')}}">
+                                                <td><i class="icon-map-marked-alt"></i></td>
+                                                <td>&nbsp;</td>
+                                                <td>{{$address != "" ? $address->address.' - '.$address->postal_code.' ('.$address->save_as.').' : __('lang.profile.empty')}}</td>
+                                            </tr>
+                                        </table>
+                                        <div class="divider divider-center stats_personal mt-2 mb-1">
+                                            <i class="icon-circle"></i></div>
+                                        <table class="stats_personal m-0" style="font-size: 14px">
+                                            <tr data-toggle="tooltip" data-placement="left"
+                                                title="{{__('lang.profile.member-since')}}">
+                                                <td><i class="icon-calendar-check"></i></td>
+                                                <td>&nbsp;</td>
+                                                <td>{{$user->created_at->formatLocalized('%d %B %Y')}}</td>
+                                            </tr>
+                                            <tr data-toggle="tooltip" data-placement="left"
+                                                title="{{__('lang.profile.last-update')}}">
+                                                <td><i class="icon-clock"></i></td>
+                                                <td>&nbsp;</td>
+                                                <td class="text-lowercase">{{$user->updated_at->diffForHumans()}}</td>
+                                            </tr>
+                                        </table>
+                                        <div id="personal_settings" style="display: none">
+                                            <small>{{ucwords(__('lang.placeholder.name'))}}
+                                                <span class="required">*</span></small>
+                                            <div class="row form-group">
+                                                <div class="col">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i class="icon-id-card"></i></span>
+                                                        </div>
+                                                        <input placeholder="{{__('lang.placeholder.name')}}"
+                                                               maxlength="191" value="{{$user->name}}" type="text"
+                                                               class="form-control" name="name" required autofocus>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <small>{{__('lang.profile.gender')}} <span class="required">*</span></small>
+                                            <div class="row form-group fix-label-group">
+                                                <div class="col">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text fix-label-item">
+                                                                <i class="icon-transgender"></i></span>
+                                                        </div>
+                                                        <select class="form-control selectpicker" name="gender" required
+                                                                title="{{__('lang.placeholder.choose')}}">
+                                                            <option value="male" {{$bio->gender ==
+                                                            strtolower(__('lang.profile.male')) ? 'selected' : ''}}>
+                                                                {{__('lang.profile.male')}}</option>
+                                                            <option value="female" {{$bio->gender ==
+                                                            strtolower(__('lang.profile.female')) ? 'selected' : ''}}>
+                                                                {{__('lang.profile.female')}}</option>
+                                                            <option value="other" {{$bio->gender ==
+                                                            strtolower(__('lang.profile.other')) ? 'selected' : ''}}>
+                                                                {{__('lang.profile.other')}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <small>{{__('lang.profile.birthday')}} <span
+                                                    class="required">*</span></small>
+                                            <div class="row form-group">
+                                                <div class="col">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i class="icon-birthday-cake"></i></span>
+                                                        </div>
+                                                        <input class="form-control datepicker" name="dob" type="text"
+                                                               placeholder="yyyy-mm-dd" maxlength="10"
+                                                               value="{{$bio->dob}}" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <small>{{__('lang.footer.phone')}} <span class="required">*</span></small>
+                                            <div class="row form-group">
+                                                <div class="col">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i class="icon-phone"></i></span>
+                                                        </div>
+                                                        <input placeholder="{{__('lang.placeholder.phone')}}"
+                                                               type="text" class="form-control" name="phone" required
+                                                               onkeypress="return numberOnly(event, false)"
+                                                               value="{{$bio->phone != "" ? $bio->phone : ''}}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer p-0">
+                                    <button type="submit" id="btn_save_personal"
+                                            class="btn btn-outline-primary btn-block noborder" disabled>
+                                        <i class="icon-user mr-2"></i>{{__('lang.button.save')}}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-6 col-sm-12">
+                        <div class="myCard">
+                            <form class="form-horizontal mb-0" role="form" method="POST" id="form-address"
+                                  action="{{route('user.profil-alamat.create')}}">
+                                @csrf
+                                <input type="hidden" name="_method">
+                                <input type="hidden" name="lat">
+                                <input type="hidden" name="long">
+                                <div class="card-content">
+                                    <div class="card-title">
+                                        <small id="show_address_settings" style="font-weight: 600">
+                                            {{__('lang.profile.address-head')}}
+                                            <span class="fright" style="cursor: pointer; color: #f89406">
+                                                <i class="icon-map-marked-alt mr-1"></i>{{__('lang.button.add')}}</span>
+                                        </small>
+                                        <div class="divider divider-center mt-0 mb-2"><i class="icon-circle"></i></div>
+                                        <div class="mt-0 stats_address" style="font-size: 14px;">
+                                            @if(count($addresses) > 0)
+                                                @foreach($addresses as $row)
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="media">
+                                                                <img class="align-self-center mr-3" alt="icon"
+                                                                     width="100" src="{{asset('images/icons/occupancy/'.
+                                                                     str_replace(' ', '-',strtolower($row->forgetTranslation('save_as', 'id')->save_as)).'.png')}}">
+                                                                <div class="media-body">
+                                                                    <h5 class="mt-0">
+                                                                        <i class="icon-building mr-1"></i>
+                                                                        {{$row->is_main == false ? $row->save_as :
+                                                                        $row->save_as.' ['.__('lang.profile.main-address').']'}}
+                                                                        <span class="fright">
+                                                                            <a style="color: #f89406;cursor: pointer;"
+                                                                               onclick="editAddress('{{$row->id}}')">
+                                                                                {{__('lang.button.edit')}}
+                                                                                <i class="icon-edit ml-1"></i>
+                                                                            </a>
+                                                                            <small style="color: #7f7f7f">&nbsp;&#124;&nbsp;</small>
+                                                                            <a href="{{route('user.profil-alamat.delete',
+                                                                            ['id' => encrypt($row->id)])}}"
+                                                                               class="delete-data"
+                                                                               style="color: #FA5555;">
+                                                                                <i class="icon-eraser mr-1"></i>
+                                                                                {{__('lang.button.delete')}}
+                                                                            </a>
+                                                                        </span>
+                                                                    </h5>
+                                                                    <blockquote
+                                                                        style="font-size: 14px;text-transform: none">
+                                                                        <table style="font-size: 14px; margin-top: 0">
+                                                                            <tr data-toggle="tooltip"
+                                                                                data-placement="left"
+                                                                                title="{{ucwords(__('lang.placeholder.name'))}}">
+                                                                                <td><i class="icon-id-card"></i></td>
+                                                                                <td>&nbsp;</td>
+                                                                                <td>{{$row->name}}</td>
+                                                                            </tr>
+                                                                            <tr data-toggle="tooltip"
+                                                                                data-placement="left"
+                                                                                title="{{__('lang.footer.phone')}}">
+                                                                                <td><i class="icon-phone"></i></td>
+                                                                                <td>&nbsp;</td>
+                                                                                <td>{{$row->phone}}</td>
+                                                                            </tr>
+                                                                            <tr data-toggle="tooltip"
+                                                                                data-placement="left"
+                                                                                title="{{__('lang.profile.city')}}">
+                                                                                <td><i class="icon-city"></i></td>
+                                                                                <td>&nbsp;</td>
+                                                                                <td>{{$row->getCity->getProvince->name.
+                                                                                ', '.$row->getCity->name}}</td>
+                                                                            </tr>
+                                                                            <tr data-toggle="tooltip"
+                                                                                data-placement="left"
+                                                                                title="{{__('lang.profile.address')}}">
+                                                                                <td><i class="icon-map-marker-alt"></i>
+                                                                                </td>
+                                                                                <td>&nbsp;</td>
+                                                                                <td>{{$row->address.' - '.
+                                                                                $row->postal_code}}</td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </blockquote>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="mt-0">
+                                                @endforeach
+                                            @else
+                                                <p class="mb-0 text-justify">{{__('lang.profile.address-capt')}}</p>
+                                            @endif
+                                        </div>
+                                        <div id="address_settings" style="display: none">
+                                            <div class="row form-group">
+                                                <div class="col-7">
+                                                    <small>{{ucwords(__('lang.placeholder.name'))}}
+                                                        <span class="required">*</span></small>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i class="icon-id-card"></i></span>
+                                                        </div>
+                                                        <input placeholder="{{__('lang.placeholder.name')}}" type="text"
+                                                               maxlength="191" value="{{$user->name}}" autofocus
+                                                               class="form-control" name="address_name" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <small>{{__('lang.footer.phone')}}
+                                                        <span class="required">*</span></small>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i class="icon-phone"></i></span>
+                                                        </div>
+                                                        <input placeholder="{{__('lang.placeholder.phone')}}"
+                                                               type="text" class="form-control" name="address_phone"
+                                                               onkeypress="return numberOnly(event, false)" required
+                                                               value="{{$bio->phone != "" ? $bio->phone : ''}}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-7">
+                                                    <div id="map" class="gmap img-thumbnail"
+                                                         style="height: 420px;"></div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="row form-group">
+                                                        <div class="col">
+                                                            <small>{{__('lang.profile.city')}}
+                                                                <span class="required">*</span></small>
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i class="icon-city"></i></span>
+                                                                </div>
+                                                                <select id="city_id" name="city_id"
+                                                                        data-live-search="true"
+                                                                        class="form-control selectpicker" required
+                                                                        title="{{__('lang.placeholder.choose')}}">
+                                                                    @foreach($provinces as $province)
+                                                                        <optgroup label="{{$province->name}}">
+                                                                            @foreach($province->getCity as $city)
+                                                                                <option value="{{$city->id}}">
+                                                                                    {{$city->name}}</option>
+                                                                            @endforeach
+                                                                        </optgroup>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <div class="col">
+                                                            <small>{{__('lang.profile.address')}}
+                                                                <span class="required">*</span></small>
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i class="icon-map-marker-alt"></i></span>
+                                                                </div>
+                                                                <textarea id="address_map" class="form-control"
+                                                                          placeholder="{{__('lang.profile.address')}}"
+                                                                          name="address" rows="5" required></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <div class="col">
+                                                            <small>{{__('lang.profile.zip')}}
+                                                                <span class="required">*</span></small>
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i class="icon-hashtag"></i></span>
+                                                                </div>
+                                                                <input
+                                                                    placeholder="{{ucfirst(strtolower(__('lang.profile.zip')))}}"
+                                                                    id="postal_code" type="text" class="form-control"
+                                                                    name="postal_code" maxlength="5" required
+                                                                    onkeypress="return numberOnly(event, false)">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <div class="col">
+                                                            <small>{{__('lang.profile.save-as')}}
+                                                                <span class="required">*</span></small>
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i class="icon-building"></i></span>
+                                                                </div>
+                                                                <select id="save_as" name="save_as"
+                                                                        data-live-search="true"
+                                                                        class="form-control selectpicker" required
+                                                                        title="{{__('lang.placeholder.choose')}}">
+                                                                    @foreach(__('lang.profile.options') as $value)
+                                                                        <option value="{{$value}}">{{$value}}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <div class="col">
+                                                            <div>
+                                                                <input id="is_main" class="checkbox-style"
+                                                                       name="is_main"
+                                                                       value="1" type="checkbox">
+                                                                <label for="is_main"
+                                                                       class="checkbox-style-2-label checkbox-small"
+                                                                       style="text-transform: none">{{__('lang.profile.cb-main')}}</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer p-0">
+                                    <button type="submit" id="btn_save_address"
+                                            class="btn btn-outline-primary btn-block noborder" disabled>
+                                        <i class="icon-map-marked-alt mr-2"></i>{{__('lang.button.save')}}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
+@push('scripts')
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIljHbKjgtTrpZhEiHum734tF1tolxI68&libraries=geometry,places"></script>
+    <script src="{{asset('js/components/bs-select.js')}}"></script>
+    <script src="{{asset('js/components/datepicker.js')}}"></script>
+    <script>
+        var google, myLatlng, geocoder, map, marker, infoWindow;
+
+        function init() {
+            geocoder = new google.maps.Geocoder();
+            myLatlng = new google.maps.LatLng(-7.250445, 112.768845);
+
+            var mapOptions = {
+                zoom: 15,
+                center: myLatlng,
+                scrollwheel: true,
+            }, mapElement = document.getElementById('map');
+
+            map = new google.maps.Map(mapElement, mapOptions);
+
+            marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                draggable: true,
+                icon: '{{asset('images/pin.png')}}',
+                anchorPoint: new google.maps.Point(0, -29)
+            });
+
+            infoWindow = new google.maps.InfoWindow({
+                maxWidth: 350,
+                content:
+                    '<div id="iw-container">' +
+                    '<div class="iw-title">{{__('lang.profile.address')}}</div>' +
+                    '<div class="iw-content">' +
+                    '<div class="iw-subTitle" style="text-transform: none">{{__('lang.profile.set-address')}}</div>' +
+                    '<img src="{{asset('images/searchPlace.png')}}">' +
+                    '</div><div class="iw-bottom-gradient"></div></div>'
+            });
+
+            marker.addListener('click', function () {
+                infoWindow.open(map, marker);
+            });
+
+            google.maps.event.addListener(map, 'click', function () {
+                infoWindow.close();
+            });
+
+            google.maps.event.addListener(marker, "dragend", function (event) {
+                geocodePosition(marker.getPosition());
+                $("#form-address input[name=lat]").val(event.latLng.lat());
+                $("#form-address input[name=long]").val(event.latLng.lng());
+            });
+
+            var autocomplete = new google.maps.places.Autocomplete(document.getElementById('address_map'));
+
+            autocomplete.bindTo('bounds', map);
+
+            autocomplete.setFields(['address_components', 'geometry', 'icon', 'name']);
+
+            autocomplete.addListener('place_changed', function () {
+                marker.setVisible(false);
+
+                var place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    window.alert("{{__('lang.profile.autocomplete-fail')}} '" + place.name + "'");
+                    return;
+                }
+
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(17);
+                }
+
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+
+                for (var i = 0; i < place.address_components.length; i++) {
+                    for (var j = 0; j < place.address_components[i].types.length; j++) {
+                        if (place.address_components[i].types[j] == "postal_code") {
+                            $("#postal_code").val(place.address_components[i].long_name);
+                        }
+                    }
+                }
+
+                var address = '';
+                if (place.address_components) {
+                    address = [
+                        (place.address_components[0] && place.address_components[0].short_name || ''),
+                        (place.address_components[1] && place.address_components[1].short_name || ''),
+                        (place.address_components[2] && place.address_components[2].short_name || '')
+                    ].join(' ');
+                }
+
+                infoWindow.setContent(
+                    '<div id="iw-container">' +
+                    '<div class="iw-title">{{__('lang.profile.address')}}</div>' +
+                    '<div class="iw-content">' +
+                    '<div class="iw-subTitle">' + place.name + '</div>' +
+                    '<img src="{{asset('images/searchPlace.png')}}">' +
+                    '<p>' + address + '</p>' +
+                    '</div><div class="iw-bottom-gradient"></div></div>'
+                );
+                infoWindow.open(map, marker);
+                $("#form-address input[name=lat]").val(place.geometry.location.lat());
+                $("#form-address input[name=long]").val(place.geometry.location.lng());
+
+                google.maps.event.addListener(infoWindow, 'domready', function () {
+                    var iwOuter = $('.gm-style-iw');
+                    var iwBackground = iwOuter.prev();
+
+                    iwBackground.children(':nth-child(2)').css({'display': 'none'});
+                    iwBackground.children(':nth-child(4)').css({'display': 'none'});
+
+                    iwOuter.css({left: '5px', top: '1px'});
+                    iwOuter.parent().parent().css({left: '0'});
+
+                    iwBackground.children(':nth-child(1)').attr('style', function (i, s) {
+                        return s + 'left: -39px !important;'
+                    });
+
+                    iwBackground.children(':nth-child(3)').attr('style', function (i, s) {
+                        return s + 'left: -39px !important;'
+                    });
+
+                    iwBackground.children(':nth-child(3)').find('div').children().css({
+                        'box-shadow': 'rgba(72, 181, 233, 0.6) 0 1px 6px',
+                        'z-index': '1'
+                    });
+
+                    var iwCloseBtn = iwOuter.next();
+                    iwCloseBtn.css({
+                        background: '#fff',
+                        opacity: '1',
+                        width: '30px',
+                        height: '30px',
+                        right: '15px',
+                        top: '6px',
+                        border: '6px solid #48b5e9',
+                        'border-radius': '50%',
+                        'box-shadow': '0 0 5px #3990B9'
+                    });
+
+                    if ($('.iw-content').height() < 140) {
+                        $('.iw-bottom-gradient').css({display: 'none'});
+                    }
+
+                    iwCloseBtn.mouseout(function () {
+                        $(this).css({opacity: '1'});
+                    });
+                });
+            });
+        }
+
+        function geocodePosition(pos) {
+            geocoder.geocode({
+                latLng: pos
+            }, function (responses) {
+                if (responses && responses.length > 0) {
+                    marker.formatted_address = responses[0].formatted_address;
+                } else {
+                    marker.formatted_address = '{{__('lang.profile.address-fail')}}';
+                }
+
+                for (var i = 0; i < responses[0].address_components.length; i++) {
+                    for (var j = 0; j < responses[0].address_components[i].types.length; j++) {
+                        if (responses[0].address_components[i].types[j] == "postal_code") {
+                            $("#postal_code").val(responses[0].address_components[i].long_name);
+                        }
+                    }
+                }
+
+                infoWindow.setContent(
+                    '<div id="iw-container">' +
+                    '<div class="iw-title">{{__('lang.profile.address')}}</div>' +
+                    '<div class="iw-content">' +
+                    '<div class="iw-subTitle">' + marker.formatted_address + '</div>' +
+                    '<img src="{{asset('images/searchPlace.png')}}">' +
+                    '</div><div class="iw-bottom-gradient"></div></div>'
+                );
+                infoWindow.open(map, marker);
+                $("#address_map").val(marker.formatted_address);
+            });
+        }
+
+        google.maps.event.addDomListener(window, 'load', init);
+
+        $(function () {
+            $('.datepicker').datepicker({format: "yyyy-mm-dd", autoclose: true, todayHighlight: true, todayBtn: true});
+        });
+
+        $("#show_personal_settings").on('click', function () {
+            $("#personal_settings").toggle(300);
+            $(".stats_personal").toggle(300);
+
+            if ($("#btn_save_personal").attr('disabled')) {
+                $("#btn_save_personal").removeAttr('disabled');
+            } else {
+                $("#btn_save_personal").attr('disabled', 'disabled');
+            }
+        });
+
+        $("#show_address_settings").on('click', function () {
+            $("#address_settings").toggle(300);
+            $(".stats_address").toggle(300);
+
+            if ($("#btn_save_address").attr('disabled')) {
+                $("#btn_save_address").removeAttr('disabled');
+            } else {
+                $("#btn_save_address").attr('disabled', 'disabled');
+            }
+        });
+
+        document.getElementById("file-input").onchange = function () {
+            var files_size = this.files[0].size,
+                max_file_size = 2000000, allowed_file_types = ['image/png', 'image/gif', 'image/jpeg', 'image/pjpeg'],
+                file_name = $(this).val().replace(/C:\\fakepath\\/i, ''),
+                progress_bar_id = $("#progress-upload .progress-bar");
+
+            if (!window.File && window.FileReader && window.FileList && window.Blob) {
+                swal('{{__('lang.alert.warning')}}', "{{__('lang.alert.browser')}}", 'warning');
+
+            } else {
+                if (files_size > max_file_size) {
+                    swal('{{__('lang.alert.error')}}', '{!! __('lang.alert.upload-fail') !!}', 'error');
+
+                } else {
+                    $(this.files).each(function (i, ifile) {
+                        if (ifile.value !== "") {
+                            if (allowed_file_types.indexOf(ifile.type) === -1) {
+                                swal('{{__('lang.alert.error')}}', '{!! __('lang.alert.upload-fail2') !!}', 'error');
+
+                            } else {
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '{{route('user.update.pengaturan')}}',
+                                    data: new FormData($("#form-ava")[0]),
+                                    contentType: false,
+                                    processData: false,
+                                    mimeType: "multipart/form-data",
+                                    xhr: function () {
+                                        var xhr = $.ajaxSettings.xhr();
+                                        if (xhr.upload) {
+                                            xhr.upload.addEventListener('progress', function (event) {
+                                                var percent = 0;
+                                                var position = event.loaded || event.position;
+                                                var total = event.total;
+                                                if (event.lengthComputable) {
+                                                    percent = Math.ceil(position / total * 100);
+                                                }
+                                                //update progressbar
+                                                $("#progress-upload").css("display", "block");
+                                                progress_bar_id.css("width", +percent + "%");
+                                                progress_bar_id.text(percent + "%");
+                                                if (percent == 100) {
+                                                    progress_bar_id.removeClass("progress-bar-info");
+                                                    progress_bar_id.addClass("progress-bar");
+                                                } else {
+                                                    progress_bar_id.removeClass("progress-bar");
+                                                    progress_bar_id.addClass("progress-bar-info");
+                                                }
+                                            }, true);
+                                        }
+                                        return xhr;
+                                    },
+                                    success: function (data) {
+                                        $(".show_ava").attr('src', data);
+                                        swal('{{__('lang.alert.success')}}', '{{__('lang.alert.upload')}}', 'success');
+                                        $("#progress-upload").css("display", "none");
+                                    },
+                                    error: function () {
+                                        swal('{{__('lang.alert.error')}}', '{{__('lang.alert.error-capt')}}', 'error');
+                                    }
+                                });
+                                return false;
+                            }
+                        } else {
+                            swal('{{__('lang.alert.error')}}', '{{__('lang.alert.upload-fail3')}}', 'error');
+                        }
+                    });
+                }
+            }
+        };
+
+        function humanFileSize(size) {
+            var i = Math.floor(Math.log(size) / Math.log(1024));
+            return (size / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i];
+        }
+    </script>
+@endpush

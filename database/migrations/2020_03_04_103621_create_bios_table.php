@@ -20,7 +20,6 @@ class CreateBiosTable extends Migration
                 ->on('users')->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
             $table->text('ava')->nullable();
-            $table->string('full_name')->nullable();
             $table->string('phone')->nullable();
             $table->string('gender')->nullable();
             $table->date('dob')->nullable();

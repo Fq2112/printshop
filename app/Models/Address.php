@@ -8,19 +8,24 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Spatie\Translatable\HasTranslations;
 
-class Bio extends Model
+class Address extends Model
 {
     use HasTranslations;
 
-    protected $table = 'bios';
+    protected $table = 'addresses';
 
     protected $guarded = ['id'];
 
-    protected $translatable = ['gender'];
+    protected $translatable = ['save_as'];
 
     public function getUser()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function getCity()
+    {
+        return $this->belongsTo(Cities::class, 'city_id');
     }
 
     public function getLocale(): string

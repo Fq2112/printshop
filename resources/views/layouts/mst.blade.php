@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="{{asset('css/animate.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('css/modal.css')}}">
+    <link rel="stylesheet" href="{{asset('css/components/bs-switches.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/components/radio-checkbox.css')}}" type="text/css">
 
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('css/media-query.css')}}" type="text/css">
@@ -471,7 +473,9 @@
                 <div class="row justify-content-between align-items-center">
                     <div class="col-md-6">
                         © {{now()->format('Y')}} Premier Printing. All rights reserved | Designed & Developed by
-                        <a href="http://rabbit-media.net" target="_blank">Rabbit Media</a><br>
+                        <a href="http://rabbit-media.net" target="_blank">Rabbit Media</a>
+                        @if(Route::currentRouteName() == 'user.profil')Icons from <a href="https://www.flaticon.com/"
+                                                                                     title="Flaticon">www.flaticon.com</a>@endif
                     </div>
 
                     <div class="col-md-6 d-md-flex flex-md-column align-items-md-end mt-4 mt-md-0">
@@ -496,6 +500,8 @@
 <!-- Bootstrap Typeaheadjs Plugin -->
 <script src="{{asset('js/components/typehead.js')}}"></script>
 <script src="{{asset('js/components/underscore-min.js')}}"></script>
+<!-- Bootstrap Switch Plugin -->
+<script src="{{asset('js/components/bs-switches.js')}}"></script>
 <!-- toggle password -->
 <script src="{{asset('js/hideShowPassword.min.js')}}"></script>
 <!-- check-mobile -->
