@@ -163,6 +163,11 @@ return [
         "last-update" => "Last Update",
         "update-personal" => "Your personal data is successfully updated!",
         "create-address" => "is successfully added to your address list!",
+        "update-address" => "is successfully updated from your address list!",
+        "delete-head" => "Delete Address \"'+occupancy+'\"",
+        "delete-capt" => "Are you sure to delete this address \"'+address+'\"? You won`t be able to revert this!",
+        "delete-fail" => "You are not allowed to delete your main address! If you still want to delete it, please add a new one and make it your main address first.",
+        "delete-address" => "is successfully deleted from your address list!",
     ],
     "settings" => [
         "capt" => "Here you can manage your " . env('APP_TITLE') . " account username and password.",

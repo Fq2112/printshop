@@ -163,6 +163,11 @@ return [
         "last-update" => "Update Terakhir",
         "update-personal" => "Data personal Anda berhasil diperbarui!",
         "create-address" => "berhasil ditambahkan ke daftar alamat Anda!",
+        "update-address" => "berhasil diperbarui dari daftar alamat Anda!",
+        "delete-head" => "Hapus Alamat \"'+occupancy+'\"",
+        "delete-capt" => "Apakah Anda yakin untuk menghapus alamat ini \"'+address+'\"? Anda tidak dapat mengembalikannya!",
+        "delete-fail" => "Anda tidak diizinkan menghapus alamat utama Anda! Jika Anda tetap ingin menghapusnya, silahkan buat alamat baru dan jadikan sebagai alamat utama Anda terlebih dahulu.",
+        "delete-address" => "berhasil dihapuskan dari daftar alamat Anda!",
     ],
     "settings" => [
         "capt" => "Di sini Anda dapat mengatur username dan kata sandi akun " . env('APP_TITLE') . " Anda.",

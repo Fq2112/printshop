@@ -338,15 +338,21 @@
                             <form class="form-horizontal mb-0" role="form" method="POST" id="form-address"
                                   action="{{route('user.profil-alamat.create')}}">
                                 @csrf
-                                <input type="hidden" name="_method">
-                                <input type="hidden" name="lat">
-                                <input type="hidden" name="long">
+                                <input id="method" type="hidden" name="_method">
+                                <input id="lat" type="hidden" name="lat">
+                                <input id="long" type="hidden" name="long">
                                 <div class="card-content">
                                     <div class="card-title">
-                                        <small id="show_address_settings" style="font-weight: 600">
+                                        <small style="font-weight: 600">
                                             {{__('lang.profile.address-head')}}
-                                            <span class="fright" style="cursor: pointer; color: #f89406">
-                                                <i class="icon-map-marked-alt mr-1"></i>{{__('lang.button.add')}}</span>
+                                            <span id="show_address_settings" class="fright"
+                                                  style="cursor: pointer; color: #f89406">
+                                                <i class="icon-map-marked-alt mr-1"></i>
+                                                {{__('lang.button.add')}}</span>
+                                            <span id="hide_address_settings" class="fright"
+                                                  style="cursor: pointer;color: #f89406;display:none">
+                                                <i class="icon-line2-action-undo mr-1"></i>
+                                                {{__('lang.button.cancel')}}</span>
                                         </small>
                                         <div class="divider divider-center mt-0 mb-2"><i class="icon-circle"></i></div>
                                         <div class="mt-0 stats_address" style="font-size: 14px;">
@@ -355,33 +361,40 @@
                                                     <div class="row">
                                                         <div class="col-lg-12">
                                                             <div class="media">
-                                                                <img class="align-self-center mr-3" alt="icon"
-                                                                     width="100" src="{{asset('images/icons/occupancy/'.
-                                                                     str_replace(' ', '-',strtolower($row->forgetTranslation('save_as', 'id')->save_as)).'.png')}}">
-                                                                <div class="media-body">
-                                                                    <h5 class="mt-0">
-                                                                        <i class="icon-building mr-1"></i>
-                                                                        {{$row->is_main == false ? $row->save_as :
-                                                                        $row->save_as.' ['.__('lang.profile.main-address').']'}}
+                                                                <img class="align-self-center" alt="icon" width="100"
+                                                                     src="{{asset('images/icons/occupancy/'.
+                                                                     str_replace(' ', '-',strtolower($row->forgetTranslation
+                                                                     ('save_as', 'id')->save_as)).'.png')}}">
+                                                                <div class="ml-2 media-body">
+                                                                    <h5 class="mt-0 mb-1">
+                                                                        <i class="icon-building mr-1"></i>{{$row->save_as}}
+                                                                        {!! $row->is_main == false ? '' :
+                                                                        '<span style="font-weight: 500;color: unset">['.
+                                                                        __('lang.profile.main-address').']</span>'!!}
                                                                         <span class="fright">
                                                                             <a style="color: #f89406;cursor: pointer;"
-                                                                               onclick="editAddress('{{$row->id}}')">
+                                                                               onclick="editAddress('{{$row->name}}',
+                                                                                   '{{$row->phone}}','{{$row->lat}}',
+                                                                                   '{{$row->long}}','{{$row->city_id}}',
+                                                                                   '{{$row->address}}','{{$row->postal_code}}',
+                                                                                   '{{$row->save_as}}','{{$row->is_main}}',
+                                                                                   '{{route('user.profil-alamat.update', ['id' => $row->id])}}')">
                                                                                 {{__('lang.button.edit')}}
                                                                                 <i class="icon-edit ml-1"></i>
                                                                             </a>
                                                                             <small style="color: #7f7f7f">&nbsp;&#124;&nbsp;</small>
-                                                                            <a href="{{route('user.profil-alamat.delete',
-                                                                            ['id' => encrypt($row->id)])}}"
-                                                                               class="delete-data"
-                                                                               style="color: #FA5555;">
+                                                                            <a style="color: #dc3545;cursor: pointer;"
+                                                                               onclick="deleteAddress('{{$row->is_main}}',
+                                                                                   '{{$row->save_as}}','{{$row->address}}',
+                                                                                   '{{route('user.profil-alamat.delete', ['id' => $row->id])}}')">
                                                                                 <i class="icon-eraser mr-1"></i>
                                                                                 {{__('lang.button.delete')}}
                                                                             </a>
                                                                         </span>
                                                                     </h5>
-                                                                    <blockquote
-                                                                        style="font-size: 14px;text-transform: none">
-                                                                        <table style="font-size: 14px; margin-top: 0">
+                                                                    <blockquote class="mb-0"
+                                                                                style="font-size: 14px;text-transform: none">
+                                                                        <table class="m-0" style="font-size: 14px">
                                                                             <tr data-toggle="tooltip"
                                                                                 data-placement="left"
                                                                                 title="{{ucwords(__('lang.placeholder.name'))}}">
@@ -419,7 +432,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <hr class="mt-0">
+                                                    <div class="divider mt-1 mb-2"><i class="icon-circle"></i></div>
                                                 @endforeach
                                             @else
                                                 <p class="mb-0 text-justify">{{__('lang.profile.address-capt')}}</p>
@@ -436,8 +449,9 @@
                                                                 <i class="icon-id-card"></i></span>
                                                         </div>
                                                         <input placeholder="{{__('lang.placeholder.name')}}" type="text"
-                                                               maxlength="191" value="{{$user->name}}" autofocus
-                                                               class="form-control" name="address_name" required>
+                                                               id="address_name" maxlength="191" value="{{$user->name}}"
+                                                               class="form-control" name="address_name"
+                                                               spellcheck="false" autocomplete="off" autofocus required>
                                                     </div>
                                                 </div>
                                                 <div class="col">
@@ -449,9 +463,11 @@
                                                                 <i class="icon-phone"></i></span>
                                                         </div>
                                                         <input placeholder="{{__('lang.placeholder.phone')}}"
-                                                               type="text" class="form-control" name="address_phone"
-                                                               onkeypress="return numberOnly(event, false)" required
-                                                               value="{{$bio->phone != "" ? $bio->phone : ''}}">
+                                                               id="address_phone" class="form-control"
+                                                               name="address_phone" type="text"
+                                                               onkeypress="return numberOnly(event, false)"
+                                                               value="{{$bio->phone != "" ? $bio->phone : ''}}"
+                                                               spellcheck="false" autocomplete="off" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -497,7 +513,8 @@
                                                                 </div>
                                                                 <textarea id="address_map" class="form-control"
                                                                           placeholder="{{__('lang.profile.address')}}"
-                                                                          name="address" rows="5" required></textarea>
+                                                                          name="address" rows="5" spellcheck="false"
+                                                                          autocomplete="off" required></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -510,11 +527,11 @@
                                                             <span class="input-group-text">
                                                                 <i class="icon-hashtag"></i></span>
                                                                 </div>
-                                                                <input
-                                                                    placeholder="{{ucfirst(strtolower(__('lang.profile.zip')))}}"
-                                                                    id="postal_code" type="text" class="form-control"
-                                                                    name="postal_code" maxlength="5" required
-                                                                    onkeypress="return numberOnly(event, false)">
+                                                                <input spellcheck="false" autocomplete="off"
+                                                                       placeholder="{{ucfirst(strtolower(__('lang.profile.zip')))}}"
+                                                                       id="postal_code" type="text" class="form-control"
+                                                                       name="postal_code" maxlength="5" required
+                                                                       onkeypress="return numberOnly(event, false)">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -542,8 +559,7 @@
                                                         <div class="col">
                                                             <div>
                                                                 <input id="is_main" class="checkbox-style"
-                                                                       name="is_main"
-                                                                       value="1" type="checkbox">
+                                                                       name="is_main" value="1" type="checkbox">
                                                                 <label for="is_main"
                                                                        class="checkbox-style-2-label checkbox-small"
                                                                        style="text-transform: none">{{__('lang.profile.cb-main')}}</label>
@@ -577,9 +593,9 @@
     <script>
         var google, myLatlng, geocoder, map, marker, infoWindow;
 
-        function init() {
+        function init(lat, long) {
             geocoder = new google.maps.Geocoder();
-            myLatlng = new google.maps.LatLng(-7.250445, 112.768845);
+            myLatlng = new google.maps.LatLng(lat, long);
 
             var mapOptions = {
                 zoom: 15,
@@ -618,8 +634,8 @@
 
             google.maps.event.addListener(marker, "dragend", function (event) {
                 geocodePosition(marker.getPosition());
-                $("#form-address input[name=lat]").val(event.latLng.lat());
-                $("#form-address input[name=long]").val(event.latLng.lng());
+                $("#lat").val(event.latLng.lat());
+                $("#long").val(event.latLng.lng());
             });
 
             var autocomplete = new google.maps.places.Autocomplete(document.getElementById('address_map'));
@@ -668,14 +684,14 @@
                     '<div id="iw-container">' +
                     '<div class="iw-title">{{__('lang.profile.address')}}</div>' +
                     '<div class="iw-content">' +
-                    '<div class="iw-subTitle">' + place.name + '</div>' +
+                    '<div class="iw-subTitle" style="text-transform: none">' + place.name + '</div>' +
                     '<img src="{{asset('images/searchPlace.png')}}">' +
                     '<p>' + address + '</p>' +
                     '</div><div class="iw-bottom-gradient"></div></div>'
                 );
                 infoWindow.open(map, marker);
-                $("#form-address input[name=lat]").val(place.geometry.location.lat());
-                $("#form-address input[name=long]").val(place.geometry.location.lng());
+                $("#lat").val(place.geometry.location.lat());
+                $("#long").val(place.geometry.location.lng());
 
                 google.maps.event.addListener(infoWindow, 'domready', function () {
                     var iwOuter = $('.gm-style-iw');
@@ -746,7 +762,7 @@
                     '<div id="iw-container">' +
                     '<div class="iw-title">{{__('lang.profile.address')}}</div>' +
                     '<div class="iw-content">' +
-                    '<div class="iw-subTitle">' + marker.formatted_address + '</div>' +
+                    '<div class="iw-subTitle" style="text-transform: none">' + marker.formatted_address + '</div>' +
                     '<img src="{{asset('images/searchPlace.png')}}">' +
                     '</div><div class="iw-bottom-gradient"></div></div>'
                 );
@@ -754,8 +770,6 @@
                 $("#address_map").val(marker.formatted_address);
             });
         }
-
-        google.maps.event.addDomListener(window, 'load', init);
 
         $(function () {
             $('.datepicker').datepicker({format: "yyyy-mm-dd", autoclose: true, todayHighlight: true, todayBtn: true});
@@ -773,15 +787,112 @@
         });
 
         $("#show_address_settings").on('click', function () {
+            $(this).toggle(300);
+            $("#hide_address_settings").toggle(300);
+
+            resetter();
+        });
+
+        $("#hide_address_settings").on('click', function () {
+            $(this).toggle(300);
+            $("#show_address_settings").toggle(300);
+
+            resetter();
+        });
+
+        function resetter() {
             $("#address_settings").toggle(300);
             $(".stats_address").toggle(300);
+
+            init(-7.250445, 112.768845);
+            infoWindow.setContent(
+                '<div id="iw-container">' +
+                '<div class="iw-title">{{__('lang.profile.address')}}</div>' +
+                '<div class="iw-content">' +
+                '<div class="iw-subTitle" style="text-transform: none">{{__('lang.profile.set-address')}}</div>' +
+                '<img src="{{asset('images/searchPlace.png')}}">' +
+                '</div><div class="iw-bottom-gradient"></div></div>'
+            );
+            infoWindow.open(map, marker);
+
+            $("#method, #lat, #long, #address_name, #address_phone, #address_map, #postal_code").val(null);
+            $("#city_id, #save_as").val('default').selectpicker('refresh');
+            $("#form-address").attr('action', '{{route('user.profil-alamat.create')}}');
+            $("#is_main").prop('checked', false);
 
             if ($("#btn_save_address").attr('disabled')) {
                 $("#btn_save_address").removeAttr('disabled');
             } else {
                 $("#btn_save_address").attr('disabled', 'disabled');
             }
-        });
+
+            $('html,body').animate({scrollTop: $("#page-menu").offset().top}, 500);
+        }
+
+        function editAddress(name, phone, lat, long, city_id, address, postal_code, save_as, is_main, url) {
+            $("#show_address_settings").hide();
+            $("#hide_address_settings").show();
+            $("#address_settings").toggle(300);
+            $(".stats_address").toggle(300);
+
+            init(lat, long);
+            infoWindow.setContent(
+                '<div id="iw-container">' +
+                '<div class="iw-title">{{__('lang.profile.address')}}</div>' +
+                '<div class="iw-content">' +
+                '<div class="iw-subTitle" style="text-transform: none">' + save_as + '</div>' +
+                '<img src="{{asset('images/searchPlace.png')}}">' +
+                '<p>' + address + '</p>' +
+                '</div><div class="iw-bottom-gradient"></div></div>'
+            );
+            infoWindow.open(map, marker);
+
+            $("#address_name").val(name);
+            $("#address_phone").val(phone);
+            $("#address_map").val(address);
+            $("#postal_code").val(postal_code);
+            $("#city_id").val(city_id).selectpicker('refresh');
+            $("#save_as").val(save_as).selectpicker('refresh');
+            if (is_main == 1) {
+                $("#is_main").prop('checked', true);
+            } else {
+                $("#is_main").prop('checked', false);
+            }
+
+            $("#method").val('PUT');
+            $("#lat").val(lat);
+            $("#long").val(long);
+            $("#form-address").attr('action', url);
+
+            if ($("#btn_save_address").attr('disabled')) {
+                $("#btn_save_address").removeAttr('disabled');
+            } else {
+                $("#btn_save_address").attr('disabled', 'disabled');
+            }
+
+            $('html,body').animate({scrollTop: $("#page-menu").offset().top}, 500);
+        }
+
+        function deleteAddress(is_main, occupancy, address, url) {
+            if (is_main == 1) {
+                swal('{{__('lang.alert.warning')}}', '{{__('lang.profile.delete-fail')}}', 'warning');
+            } else {
+                swal({
+                    title: '{!! __('lang.profile.delete-head') !!}',
+                    text: '{!! __('lang.profile.delete-capt') !!}',
+                    icon: 'warning',
+                    dangerMode: true,
+                    buttons: ["{{__('lang.button.no')}}", "{{__('lang.button.yes')}}"],
+                    closeOnEsc: false,
+                    closeOnClickOutside: false,
+                }).then((confirm) => {
+                    if (confirm) {
+                        swal({icon: "success", buttons: false});
+                        window.location.href = url;
+                    }
+                });
+            }
+        }
 
         document.getElementById("file-input").onchange = function () {
             var files_size = this.files[0].size,

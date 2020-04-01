@@ -33,7 +33,7 @@ class AkunController extends Controller
         $user->getBio->update([
             'gender' => $request->gender,
             'dob' => $request->dob,
-            'phone' => $request->phone,
+            'phone' => preg_replace("![^a-z0-9+]+!i", "", $request->phone),
         ]);
 
         return back()->with('update', __('lang.profile.update-personal'));
@@ -41,10 +41,14 @@ class AkunController extends Controller
 
     public function createProfilAddress(Request $request)
     {
+        if ($request->is_main == 1) {
+            Address::where('user_id', Auth::id())->update(['is_main' => false]);
+        }
+
         Address::create([
             'user_id' => Auth::id(),
             'name' => $request->address_name,
-            'phone' => $request->address_phone,
+            'phone' => preg_replace("![^a-z0-9+]+!i", "", $request->address_phone),
             'city_id' => $request->city_id,
             'postal_code' => $request->postal_code,
             'address' => $request->address,
@@ -54,7 +58,37 @@ class AkunController extends Controller
             'is_main' => $request->is_main,
         ]);
 
-        return back()->with('update', __('lang.profile.address') . ' [' . $request->address . '] ' . __('lang.profile.create-address'));
+        return back()->with('add', __('lang.profile.address') . ' [' . $request->address . '] ' . __('lang.profile.create-address'));
+    }
+
+    public function updateProfilAddress(Request $request)
+    {
+        if ($request->is_main == 1) {
+            Address::where('user_id', Auth::id())->update(['is_main' => false]);
+        }
+
+        $address = Address::find($request->id);
+        $address->update([
+            'name' => $request->address_name,
+            'phone' => preg_replace("![^a-z0-9+]+!i", "", $request->address_phone),
+            'city_id' => $request->city_id,
+            'postal_code' => $request->postal_code,
+            'address' => $request->address,
+            'lat' => $request->lat,
+            'long' => $request->long,
+            'save_as' => $request->save_as,
+            'is_main' => $request->is_main,
+        ]);
+
+        return back()->with('update', __('lang.profile.address') . ' [' . $address->address . '] ' . __('lang.profile.update-address'));
+    }
+
+    public function deleteProfilAddress(Request $request)
+    {
+        $address = Address::find($request->id);
+        $address->delete();
+
+        return back()->with('delete', __('lang.profile.address') . ' [' . $address->address . '] ' . __('lang.profile.delete-address'));
     }
 
     public function pengaturan()

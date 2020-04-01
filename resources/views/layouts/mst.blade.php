@@ -474,8 +474,8 @@
                     <div class="col-md-6">
                         © {{now()->format('Y')}} Premier Printing. All rights reserved | Designed & Developed by
                         <a href="http://rabbit-media.net" target="_blank">Rabbit Media</a>
-                        @if(Route::currentRouteName() == 'user.profil')Icons from <a href="https://www.flaticon.com/"
-                                                                                     title="Flaticon">www.flaticon.com</a>@endif
+                        @if(Route::currentRouteName() == 'user.profil')<br>Icons from
+                        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>@endif
                     </div>
 
                     <div class="col-md-6 d-md-flex flex-md-column align-items-md-end mt-4 mt-md-0">

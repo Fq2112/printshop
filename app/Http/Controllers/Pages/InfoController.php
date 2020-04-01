@@ -67,7 +67,7 @@ class InfoController extends Controller
         Kontak::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'phone' => $data['phone'],
+            'phone' => preg_replace("![^a-z0-9+]+!i", "", $data['phone']),
             'subject' => $data['subject'],
             'topic' => $data['topic'],
             'message' => $data['bodymessage']

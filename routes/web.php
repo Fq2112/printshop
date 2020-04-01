@@ -161,12 +161,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
                 'as' => 'user.profil-alamat.create'
             ]);
 
-            Route::post(LaravelLocalization::transRoute('routes.profile-address') . '/update', [
+            Route::put(LaravelLocalization::transRoute('routes.profile-address') . '{id}/update', [
                 'uses' => 'AkunController@updateProfilAddress',
                 'as' => 'user.profil-alamat.update'
             ]);
 
-            Route::get(LaravelLocalization::transRoute('routes.profile-address') . '/delete', [
+            Route::get(LaravelLocalization::transRoute('routes.profile-address') . '{id}/delete', [
                 'uses' => 'AkunController@deleteProfilAddress',
                 'as' => 'user.profil-alamat.delete'
             ]);
