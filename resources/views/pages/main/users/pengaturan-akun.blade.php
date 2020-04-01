@@ -3,12 +3,6 @@
 @push('styles')
     <link rel="stylesheet" href="{{asset('css/card.css')}}">
     <style>
-        blockquote {
-            background: unset;
-            border-color: unset;
-            color: unset;
-        }
-
         .has-feedback .form-control-feedback {
             width: 36px;
             height: 36px;
@@ -127,13 +121,13 @@
                                                 <td>{{$bio->dob != "" ? \Carbon\Carbon::parse($bio->dob)->format('j F Y') : __('lang.profile.empty')}}</td>
                                             </tr>
                                             <tr data-toggle="tooltip" data-placement="left"
-                                                title="{{ucwords(__('lang.placeholder.phone'))}}">
+                                                title="{{__('lang.footer.phone')}}">
                                                 <td><i class="icon-phone"></i></td>
                                                 <td>&nbsp;</td>
                                                 <td>{{$bio->phone != "" ? $bio->phone : __('lang.profile.empty')}}</td>
                                             </tr>
                                             <tr data-toggle="tooltip" data-placement="left"
-                                                title="{{__('lang.profile.main-address')}}">
+                                                title="{{__('lang.profile.address')}}">
                                                 <td><i class="icon-map-marked-alt"></i></td>
                                                 <td>&nbsp;</td>
                                                 <td>{{$address != "" ? $address->address.' - '.$address->postal_code.' ('.$address->save_as.').' : __('lang.profile.empty')}}</td>
@@ -188,7 +182,8 @@
                                 <div class="card-content">
                                     <div class="card-title">
                                         <small style="font-weight: 600">{{__('lang.header.settings')}}</small>
-                                        <div class="divider stats_username mt-0 mb-2"><i class="icon-circle"></i></div>
+                                        <div class="divider divider-center stats_username mt-0 mb-2"><i
+                                                class="icon-circle"></i></div>
                                         <small>{{__('lang.settings.email-head')}}</small>
                                         <div class="row form-group has-feedback">
                                             <div class="col">

@@ -229,13 +229,13 @@
                                                 <td>{{$bio->dob != "" ? \Carbon\Carbon::parse($bio->dob)->format('j F Y') : __('lang.profile.empty')}}</td>
                                             </tr>
                                             <tr data-toggle="tooltip" data-placement="left"
-                                                title="{{ucwords(__('lang.placeholder.phone'))}}">
+                                                title="{{__('lang.footer.phone')}}">
                                                 <td><i class="icon-phone"></i></td>
                                                 <td>&nbsp;</td>
                                                 <td>{{$bio->phone != "" ? $bio->phone : __('lang.profile.empty')}}</td>
                                             </tr>
                                             <tr data-toggle="tooltip" data-placement="left"
-                                                title="{{__('lang.profile.main-address')}}">
+                                                title="{{__('lang.profile.address')}}">
                                                 <td><i class="icon-map-marked-alt"></i></td>
                                                 <td>&nbsp;</td>
                                                 <td>{{$address != "" ? $address->address.' - '.$address->postal_code.' ('.$address->save_as.').' : __('lang.profile.empty')}}</td>
