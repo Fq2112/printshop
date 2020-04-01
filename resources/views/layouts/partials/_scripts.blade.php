@@ -5,6 +5,7 @@
         $('[data-toggle="tooltip"]').tooltip();
         $('[data-toggle="popover"]').popover();
 
+        $('.datepicker').datepicker({format: "yyyy-mm-dd", autoclose: true, todayHighlight: true, todayBtn: true});
         $(".bt-switch").bootstrapSwitch();
 
         @if(session('register') || session('error') || session('logout') || session('expire') || session('inactive') ||

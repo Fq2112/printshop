@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="{{asset('css/animate.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('css/modal.css')}}">
+    <link rel="stylesheet" href="{{asset('css/components/bs-select.css')}}">
+    <link rel="stylesheet" href="{{asset('css/components/datepicker.css')}}">
     <link rel="stylesheet" href="{{asset('css/components/bs-switches.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('css/components/radio-checkbox.css')}}" type="text/css">
 
@@ -500,6 +502,10 @@
 <!-- Bootstrap Typeaheadjs Plugin -->
 <script src="{{asset('js/components/typehead.js')}}"></script>
 <script src="{{asset('js/components/underscore-min.js')}}"></script>
+<!-- Bootstrap Select Plugin -->
+<script src="{{asset('js/components/bs-select.js')}}"></script>
+<!-- Bootstrap Datepicker Plugin -->
+<script src="{{asset('js/components/datepicker.js')}}"></script>
 <!-- Bootstrap Switch Plugin -->
 <script src="{{asset('js/components/bs-switches.js')}}"></script>
 <!-- toggle password -->

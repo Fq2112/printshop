@@ -119,6 +119,21 @@ class AkunController extends Controller
                 return asset('storage/users/ava/' . $name);
             }
 
+        } elseif ($request->hasFile('background')) {
+            $this->validate($request, ['background' => 'image|mimes:jpg,jpeg,gif,png|max:5120']);
+
+            $name = $request->file('background')->getClientOriginalName();
+
+            if ($user->getBio->background != '') {
+                Storage::delete('public/users/background/' . $user->getBio->background);
+            }
+
+            if ($request->file('background')->isValid()) {
+                $request->background->storeAs('public/users/background', $name);
+                $user->getBio->update(['background' => $name]);
+                return $name;
+            }
+
         } else {
             if ($request->has('username')) {
                 $check = User::where('username', $request->username)->first();

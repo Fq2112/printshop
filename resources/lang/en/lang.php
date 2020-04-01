@@ -128,12 +128,13 @@ return [
         "widget-category" => "Blog Categories",
     ],
     "profile" => [
-        "capt" => "Here you can manage your personal data and address list.",
+        "capt" => "Here you can manage your avatar and background profile, personal data, and also your address list.",
         "gender" => "Gender",
         "male" => "Male",
         "female" => "Female",
         "other" => "Other",
         "birthday" => "Birthday",
+        "bg-head" => "Background Profile",
         "address" => "Address",
         "address-head" => "Address List",
         "address-capt" => "Please add an address to make your order process easier.",
@@ -170,7 +171,7 @@ return [
         "delete-address" => "is successfully deleted from your address list!",
     ],
     "settings" => [
-        "capt" => "Here you can manage your " . env('APP_TITLE') . " account username and password.",
+        "capt" => "Here you can manage your " . env('APP_TITLE') . " account avatar, username, and password.",
         "username" => "Your username is successfully updated!",
         "email-head" => "Primary Email (verified)",
         "password-head" => "PASSWORD SETTINGS",
@@ -181,6 +182,7 @@ return [
     ],
     "tooltip" => [
         "ava" => "Click here to change your avatar!",
+        "background" => "Click here to change your background profile!",
     ],
     "placeholder" => [
         "search" => "What do you want to print today?",
@@ -259,6 +261,7 @@ return [
         "logout-message" => "You will be redirected to the Home page.",
         "browser" => "The browser you are using does not support! Please update or use another browser.",
         "upload" => "Your avatar is successfully updated!",
+        "upload-bg" => "Your background profile is successfully updated!",
         "upload-fail" => "total size ' + file_name + ' is ' + humanFileSize(files_size) + ', allowed file size is ' + humanFileSize(max_file_size) + ', try to upload smaller file!",
         "upload-fail2" => "File type ' + file_name + ' does not support!",
         "upload-fail3" => "No file selected!",

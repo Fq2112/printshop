@@ -2,8 +2,6 @@
 @section('title',  __('lang.header.profile').': '.$user->name.' | '.__('lang.title'))
 @push('styles')
     <link rel="stylesheet" href="{{asset('css/card.css')}}">
-    <link rel="stylesheet" href="{{asset('css/components/bs-select.css')}}">
-    <link rel="stylesheet" href="{{asset('css/components/datepicker.css')}}">
     <style>
         .bootstrap-select .dropdown-toggle {
             background-color: #fff;
@@ -131,7 +129,8 @@
 @section('content')
     <section id="page-title" class="page-title-parallax page-title-dark"
              data-bottom-top="background-position:0px 0px;" data-top-bottom="background-position:0px -300px;"
-             style="background-image:url('{{asset('images/banner/users.jpg')}}');background-size:cover;padding:120px 0;">
+             style="background-image:url('{{$bio->background == "" ? asset('images/banner/users.jpg') :
+             asset('storage/users/background/'.$bio->background)}}');background-size:cover;padding:120px 0;">
         <div class="parallax-overlay"></div>
         <div class="container clearfix">
             <h1>{{__('lang.header.profile')}}</h1>
@@ -193,7 +192,7 @@
                                 </div>
                             </form>
 
-                            <form class="form-horizontal mb-0" role="form" method="POST"
+                            <form class="form-horizontal mb-0" role="form" method="POST" id="form-personal"
                                   action="{{route('user.update.profil')}}">
                                 @csrf
                                 {{ method_field('put') }}
@@ -203,9 +202,18 @@
                                         <h5 style="text-transform: none">{{$user->username}}</h5>
                                     </div>
                                     <div class="card-title">
-                                        <div id="show_personal_settings" class="row justify-content-center"
-                                             style="color: #f89406;cursor: pointer;font-size: 14px">
-                                            <div class="col text-right"><i class="icon-edit mr-1"></i>PERSONAL</div>
+                                        <div class="row justify-content-center">
+                                            <div class="col">
+                                                <small style="font-weight: 600">
+                                                    <span id="show_personal_settings" class="fright"
+                                                          style="cursor: pointer;color: #f89406">
+                                                        <i class="icon-edit mr-1"></i> PERSONAL</span>
+                                                    <span id="hide_personal_settings" class="fright"
+                                                          style="color: #f89406;cursor: pointer;display:none">
+                                                        <i class="icon-line2-action-undo mr-1"></i>
+                                                        {{__('lang.button.cancel')}}</span>
+                                                </small>
+                                            </div>
                                         </div>
                                         <table class="stats_personal m-0" style="font-size: 14px">
                                             <tr data-toggle="tooltip" data-placement="left"
@@ -334,44 +342,99 @@
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-6 col-sm-12">
-                        <div class="myCard">
-                            <form class="form-horizontal mb-0" role="form" method="POST" id="form-address"
-                                  action="{{route('user.profil-alamat.create')}}">
-                                @csrf
-                                <input id="method" type="hidden" name="_method">
-                                <input id="lat" type="hidden" name="lat">
-                                <input id="long" type="hidden" name="long">
-                                <div class="card-content">
-                                    <div class="card-title">
-                                        <small style="font-weight: 600">
-                                            {{__('lang.profile.address-head')}}
-                                            <span id="show_address_settings" class="fright"
-                                                  style="cursor: pointer; color: #f89406">
+                        <div class="row">
+                            <div class="col">
+                                <div class="myCard">
+                                    <form class="form-horizontal mb-0" role="form" method="POST" id="form-background"
+                                          enctype="multipart/form-data">
+                                        @csrf
+                                        {{ method_field('put') }}
+                                        <div class="img-card image-upload">
+                                            <label for="file-input-bg">
+                                                <img style="width: 100%" class="show_bg" alt="Background"
+                                                     src="{{$bio->background == "" ? asset('images/banner/users.jpg') :
+                                                     asset('storage/users/background/'.$bio->background)}}"
+                                                     data-placement="bottom" data-toggle="tooltip"
+                                                     title="{{__('lang.tooltip.background')}}">
+                                            </label>
+                                            <input id="file-input-bg" name="background" type="file" accept="image/*">
+                                            <div id="progress-upload-bg">
+                                                <div class="progress-bar progress-bar-info progress-bar-striped active"
+                                                     role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                                     aria-valuemax="100" style="background-color: #f89406;z-index: 20">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="card-title">
+                                                <small style="font-weight: 600">
+                                                    {{__('lang.profile.bg-head')}}
+                                                    <span id="show_bg_settings" class="fright"
+                                                          style="cursor: pointer; color: #f89406">
+                                                <i class="icon-edit mr-1"></i>
+                                                {{__('lang.button.edit')}}</span>
+                                                </small>
+                                                <div class="divider divider-center mt-0 mb-2"><i
+                                                        class="icon-circle"></i></div>
+                                                <blockquote class="mb-0" style="font-size: 14px;text-transform: none">
+                                                    <table class="m-0" style="font-size: 14px">
+                                                        <tr>
+                                                            <td><i class="icon-picture"></i></td>
+                                                            <td>&nbsp;</td>
+                                                            <td id="show_bg_name">
+                                                                {{$bio->background != "" ? $bio->background : '(empty)'}}
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </blockquote>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="myCard">
+                                    <form class="form-horizontal mb-0" role="form" method="POST" id="form-address"
+                                          action="{{route('user.profil-alamat.create')}}">
+                                        @csrf
+                                        <input id="method" type="hidden" name="_method">
+                                        <input id="lat" type="hidden" name="lat">
+                                        <input id="long" type="hidden" name="long">
+                                        <div class="card-content">
+                                            <div class="card-title">
+                                                <small style="font-weight: 600">
+                                                    {{__('lang.profile.address-head')}}
+                                                    <span id="show_address_settings" class="fright"
+                                                          style="cursor: pointer;color: #f89406">
                                                 <i class="icon-map-marked-alt mr-1"></i>
                                                 {{__('lang.button.add')}}</span>
-                                            <span id="hide_address_settings" class="fright"
-                                                  style="cursor: pointer;color: #f89406;display:none">
+                                                    <span id="hide_address_settings" class="fright"
+                                                          style="color: #f89406;cursor: pointer;display:none">
                                                 <i class="icon-line2-action-undo mr-1"></i>
                                                 {{__('lang.button.cancel')}}</span>
-                                        </small>
-                                        <div class="divider divider-center mt-0 mb-2"><i class="icon-circle"></i></div>
-                                        <div class="mt-0 stats_address" style="font-size: 14px;">
-                                            @if(count($addresses) > 0)
-                                                @foreach($addresses as $row)
-                                                    <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <div class="media">
-                                                                <img class="align-self-center" alt="icon" width="100"
-                                                                     src="{{asset('images/icons/occupancy/'.
+                                                </small>
+                                                <div class="divider divider-center mt-0 mb-2"><i
+                                                        class="icon-circle"></i></div>
+                                                <div class="mt-0 stats_address" style="font-size: 14px;">
+                                                    @if(count($addresses) > 0)
+                                                        @foreach($addresses as $row)
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="media">
+                                                                        <img class="align-self-center" alt="icon"
+                                                                             width="100"
+                                                                             src="{{asset('images/icons/occupancy/'.
                                                                      str_replace(' ', '-',strtolower($row->forgetTranslation
                                                                      ('save_as', 'id')->save_as)).'.png')}}">
-                                                                <div class="ml-2 media-body">
-                                                                    <h5 class="mt-0 mb-1">
-                                                                        <i class="icon-building mr-1"></i>{{$row->save_as}}
-                                                                        {!! $row->is_main == false ? '' :
-                                                                        '<span style="font-weight: 500;color: unset">['.
-                                                                        __('lang.profile.main-address').']</span>'!!}
-                                                                        <span class="fright">
+                                                                        <div class="ml-2 media-body">
+                                                                            <h5 class="mt-0 mb-1">
+                                                                                <i class="icon-building mr-1"></i>{{$row->save_as}}
+                                                                                {!! $row->is_main == false ? '' :
+                                                                                '<span style="font-weight: 500;color: unset">['.
+                                                                                __('lang.profile.main-address').']</span>'!!}
+                                                                                <span class="fright">
                                                                             <a style="color: #f89406;cursor: pointer;"
                                                                                onclick="editAddress('{{$row->name}}',
                                                                                    '{{$row->phone}}','{{$row->lat}}',
@@ -391,193 +454,210 @@
                                                                                 {{__('lang.button.delete')}}
                                                                             </a>
                                                                         </span>
-                                                                    </h5>
-                                                                    <blockquote class="mb-0"
-                                                                                style="font-size: 14px;text-transform: none">
-                                                                        <table class="m-0" style="font-size: 14px">
-                                                                            <tr data-toggle="tooltip"
-                                                                                data-placement="left"
-                                                                                title="{{ucwords(__('lang.placeholder.name'))}}">
-                                                                                <td><i class="icon-id-card"></i></td>
-                                                                                <td>&nbsp;</td>
-                                                                                <td>{{$row->name}}</td>
-                                                                            </tr>
-                                                                            <tr data-toggle="tooltip"
-                                                                                data-placement="left"
-                                                                                title="{{__('lang.footer.phone')}}">
-                                                                                <td><i class="icon-phone"></i></td>
-                                                                                <td>&nbsp;</td>
-                                                                                <td>{{$row->phone}}</td>
-                                                                            </tr>
-                                                                            <tr data-toggle="tooltip"
-                                                                                data-placement="left"
-                                                                                title="{{__('lang.profile.city')}}">
-                                                                                <td><i class="icon-city"></i></td>
-                                                                                <td>&nbsp;</td>
-                                                                                <td>{{$row->getCity->getProvince->name.
+                                                                            </h5>
+                                                                            <blockquote class="mb-0"
+                                                                                        style="font-size: 14px;text-transform: none">
+                                                                                <table class="m-0"
+                                                                                       style="font-size: 14px">
+                                                                                    <tr data-toggle="tooltip"
+                                                                                        data-placement="left"
+                                                                                        title="{{ucwords(__('lang.placeholder.name'))}}">
+                                                                                        <td><i class="icon-id-card"></i>
+                                                                                        </td>
+                                                                                        <td>&nbsp;</td>
+                                                                                        <td>{{$row->name}}</td>
+                                                                                    </tr>
+                                                                                    <tr data-toggle="tooltip"
+                                                                                        data-placement="left"
+                                                                                        title="{{__('lang.footer.phone')}}">
+                                                                                        <td><i class="icon-phone"></i>
+                                                                                        </td>
+                                                                                        <td>&nbsp;</td>
+                                                                                        <td>{{$row->phone}}</td>
+                                                                                    </tr>
+                                                                                    <tr data-toggle="tooltip"
+                                                                                        data-placement="left"
+                                                                                        title="{{__('lang.profile.city')}}">
+                                                                                        <td><i class="icon-city"></i>
+                                                                                        </td>
+                                                                                        <td>&nbsp;</td>
+                                                                                        <td>{{$row->getCity->getProvince->name.
                                                                                 ', '.$row->getCity->name}}</td>
-                                                                            </tr>
-                                                                            <tr data-toggle="tooltip"
-                                                                                data-placement="left"
-                                                                                title="{{__('lang.profile.address')}}">
-                                                                                <td><i class="icon-map-marker-alt"></i>
-                                                                                </td>
-                                                                                <td>&nbsp;</td>
-                                                                                <td>{{$row->address.' - '.
+                                                                                    </tr>
+                                                                                    <tr data-toggle="tooltip"
+                                                                                        data-placement="left"
+                                                                                        title="{{__('lang.profile.address')}}">
+                                                                                        <td>
+                                                                                            <i class="icon-map-marker-alt"></i>
+                                                                                        </td>
+                                                                                        <td>&nbsp;</td>
+                                                                                        <td>{{$row->address.' - '.
                                                                                 $row->postal_code}}</td>
-                                                                            </tr>
-                                                                        </table>
-                                                                    </blockquote>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </blockquote>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="divider mt-1 mb-2"><i class="icon-circle"></i></div>
-                                                @endforeach
-                                            @else
-                                                <p class="mb-0 text-justify">{{__('lang.profile.address-capt')}}</p>
-                                            @endif
-                                        </div>
-                                        <div id="address_settings" style="display: none">
-                                            <div class="row form-group">
-                                                <div class="col-7">
-                                                    <small>{{ucwords(__('lang.placeholder.name'))}}
-                                                        <span class="required">*</span></small>
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
+                                                            <div class="divider mt-1 mb-2"><i class="icon-circle"></i>
+                                                            </div>
+                                                        @endforeach
+                                                    @else
+                                                        <p class="mb-0 text-justify">{{__('lang.profile.address-capt')}}</p>
+                                                    @endif
+                                                </div>
+                                                <div id="address_settings" style="display: none">
+                                                    <div class="row form-group">
+                                                        <div class="col-7">
+                                                            <small>{{ucwords(__('lang.placeholder.name'))}}
+                                                                <span class="required">*</span></small>
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
                                                             <span class="input-group-text">
                                                                 <i class="icon-id-card"></i></span>
+                                                                </div>
+                                                                <input placeholder="{{__('lang.placeholder.name')}}"
+                                                                       type="text"
+                                                                       id="address_name" maxlength="191"
+                                                                       value="{{$user->name}}"
+                                                                       class="form-control" name="address_name"
+                                                                       spellcheck="false" autocomplete="off" autofocus
+                                                                       required>
+                                                            </div>
                                                         </div>
-                                                        <input placeholder="{{__('lang.placeholder.name')}}" type="text"
-                                                               id="address_name" maxlength="191" value="{{$user->name}}"
-                                                               class="form-control" name="address_name"
-                                                               spellcheck="false" autocomplete="off" autofocus required>
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <small>{{__('lang.footer.phone')}}
-                                                        <span class="required">*</span></small>
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
+                                                        <div class="col">
+                                                            <small>{{__('lang.footer.phone')}}
+                                                                <span class="required">*</span></small>
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
                                                             <span class="input-group-text">
                                                                 <i class="icon-phone"></i></span>
+                                                                </div>
+                                                                <input placeholder="{{__('lang.placeholder.phone')}}"
+                                                                       id="address_phone" class="form-control"
+                                                                       name="address_phone" type="text"
+                                                                       onkeypress="return numberOnly(event, false)"
+                                                                       value="{{$bio->phone != "" ? $bio->phone : ''}}"
+                                                                       spellcheck="false" autocomplete="off" required>
+                                                            </div>
                                                         </div>
-                                                        <input placeholder="{{__('lang.placeholder.phone')}}"
-                                                               id="address_phone" class="form-control"
-                                                               name="address_phone" type="text"
-                                                               onkeypress="return numberOnly(event, false)"
-                                                               value="{{$bio->phone != "" ? $bio->phone : ''}}"
-                                                               spellcheck="false" autocomplete="off" required>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-7">
-                                                    <div id="map" class="gmap img-thumbnail"
-                                                         style="height: 420px;"></div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="row form-group">
+                                                    <div class="row">
+                                                        <div class="col-7">
+                                                            <div id="map" class="gmap img-thumbnail"
+                                                                 style="height: 420px;"></div>
+                                                        </div>
                                                         <div class="col">
-                                                            <small>{{__('lang.profile.city')}}
-                                                                <span class="required">*</span></small>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
+                                                            <div class="row form-group">
+                                                                <div class="col">
+                                                                    <small>{{__('lang.profile.city')}}
+                                                                        <span class="required">*</span></small>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
                                                             <span class="input-group-text">
                                                                 <i class="icon-city"></i></span>
-                                                                </div>
-                                                                <select id="city_id" name="city_id"
-                                                                        data-live-search="true"
-                                                                        class="form-control selectpicker" required
-                                                                        title="{{__('lang.placeholder.choose')}}">
-                                                                    @foreach($provinces as $province)
-                                                                        <optgroup label="{{$province->name}}">
-                                                                            @foreach($province->getCity as $city)
-                                                                                <option value="{{$city->id}}">
-                                                                                    {{$city->name}}</option>
+                                                                        </div>
+                                                                        <select id="city_id" name="city_id"
+                                                                                data-live-search="true"
+                                                                                class="form-control selectpicker"
+                                                                                required
+                                                                                title="{{__('lang.placeholder.choose')}}">
+                                                                            @foreach($provinces as $province)
+                                                                                <optgroup label="{{$province->name}}">
+                                                                                    @foreach($province->getCity as $city)
+                                                                                        <option value="{{$city->id}}">
+                                                                                            {{$city->name}}</option>
+                                                                                    @endforeach
+                                                                                </optgroup>
                                                                             @endforeach
-                                                                        </optgroup>
-                                                                    @endforeach
-                                                                </select>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row form-group">
-                                                        <div class="col">
-                                                            <small>{{__('lang.profile.address')}}
-                                                                <span class="required">*</span></small>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
+                                                            <div class="row form-group">
+                                                                <div class="col">
+                                                                    <small>{{__('lang.profile.address')}}
+                                                                        <span class="required">*</span></small>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
                                                             <span class="input-group-text">
                                                                 <i class="icon-map-marker-alt"></i></span>
+                                                                        </div>
+                                                                        <textarea id="address_map" class="form-control"
+                                                                                  placeholder="{{__('lang.profile.address')}}"
+                                                                                  name="address" rows="5"
+                                                                                  spellcheck="false"
+                                                                                  autocomplete="off"
+                                                                                  required></textarea>
+                                                                    </div>
                                                                 </div>
-                                                                <textarea id="address_map" class="form-control"
-                                                                          placeholder="{{__('lang.profile.address')}}"
-                                                                          name="address" rows="5" spellcheck="false"
-                                                                          autocomplete="off" required></textarea>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row form-group">
-                                                        <div class="col">
-                                                            <small>{{__('lang.profile.zip')}}
-                                                                <span class="required">*</span></small>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
+                                                            <div class="row form-group">
+                                                                <div class="col">
+                                                                    <small>{{__('lang.profile.zip')}}
+                                                                        <span class="required">*</span></small>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
                                                             <span class="input-group-text">
                                                                 <i class="icon-hashtag"></i></span>
+                                                                        </div>
+                                                                        <input spellcheck="false" autocomplete="off"
+                                                                               placeholder="{{ucfirst(strtolower(__('lang.profile.zip')))}}"
+                                                                               id="postal_code" type="text"
+                                                                               class="form-control"
+                                                                               name="postal_code" maxlength="5" required
+                                                                               onkeypress="return numberOnly(event, false)">
+                                                                    </div>
                                                                 </div>
-                                                                <input spellcheck="false" autocomplete="off"
-                                                                       placeholder="{{ucfirst(strtolower(__('lang.profile.zip')))}}"
-                                                                       id="postal_code" type="text" class="form-control"
-                                                                       name="postal_code" maxlength="5" required
-                                                                       onkeypress="return numberOnly(event, false)">
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row form-group">
-                                                        <div class="col">
-                                                            <small>{{__('lang.profile.save-as')}}
-                                                                <span class="required">*</span></small>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
+                                                            <div class="row form-group">
+                                                                <div class="col">
+                                                                    <small>{{__('lang.profile.save-as')}}
+                                                                        <span class="required">*</span></small>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
                                                             <span class="input-group-text">
                                                                 <i class="icon-building"></i></span>
+                                                                        </div>
+                                                                        <select id="save_as" name="save_as"
+                                                                                data-live-search="true"
+                                                                                class="form-control selectpicker"
+                                                                                required
+                                                                                title="{{__('lang.placeholder.choose')}}">
+                                                                            @foreach(__('lang.profile.options') as $value)
+                                                                                <option
+                                                                                    value="{{$value}}">{{$value}}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
-                                                                <select id="save_as" name="save_as"
-                                                                        data-live-search="true"
-                                                                        class="form-control selectpicker" required
-                                                                        title="{{__('lang.placeholder.choose')}}">
-                                                                    @foreach(__('lang.profile.options') as $value)
-                                                                        <option value="{{$value}}">{{$value}}</option>
-                                                                    @endforeach
-                                                                </select>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row form-group">
-                                                        <div class="col">
-                                                            <div>
-                                                                <input id="is_main" class="checkbox-style"
-                                                                       name="is_main" value="1" type="checkbox">
-                                                                <label for="is_main"
-                                                                       class="checkbox-style-2-label checkbox-small"
-                                                                       style="text-transform: none">{{__('lang.profile.cb-main')}}</label>
+                                                            <div class="row form-group">
+                                                                <div class="col">
+                                                                    <div>
+                                                                        <input id="is_main" class="checkbox-style"
+                                                                               name="is_main" value="1" type="checkbox">
+                                                                        <label for="is_main"
+                                                                               class="checkbox-style-2-label checkbox-small"
+                                                                               style="text-transform: none">{{__('lang.profile.cb-main')}}</label>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div class="card-footer p-0">
+                                            <button type="submit" id="btn_save_address"
+                                                    class="btn btn-outline-primary btn-block noborder" disabled>
+                                                <i class="icon-map-marked-alt mr-2"></i>{{__('lang.button.save')}}
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="card-footer p-0">
-                                    <button type="submit" id="btn_save_address"
-                                            class="btn btn-outline-primary btn-block noborder" disabled>
-                                        <i class="icon-map-marked-alt mr-2"></i>{{__('lang.button.save')}}
-                                    </button>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -588,8 +668,6 @@
 @push('scripts')
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIljHbKjgtTrpZhEiHum734tF1tolxI68&libraries=geometry,places"></script>
-    <script src="{{asset('js/components/bs-select.js')}}"></script>
-    <script src="{{asset('js/components/datepicker.js')}}"></script>
     <script>
         var google, myLatlng, geocoder, map, marker, infoWindow;
 
@@ -771,11 +849,23 @@
             });
         }
 
-        $(function () {
-            $('.datepicker').datepicker({format: "yyyy-mm-dd", autoclose: true, todayHighlight: true, todayBtn: true});
+        $("#show_personal_settings").on('click', function () {
+            $(this).toggle(300);
+            $("#hide_personal_settings").toggle(300);
+
+            resetterPersonal();
+
+            $('html,body').animate({scrollTop: $("#form-personal").offset().top}, 500);
         });
 
-        $("#show_personal_settings").on('click', function () {
+        $("#hide_personal_settings").on('click', function () {
+            $(this).toggle(300);
+            $("#show_personal_settings").toggle(300);
+
+            resetterPersonal();
+        });
+
+        function resetterPersonal() {
             $("#personal_settings").toggle(300);
             $(".stats_personal").toggle(300);
 
@@ -784,23 +874,31 @@
             } else {
                 $("#btn_save_personal").attr('disabled', 'disabled');
             }
+        }
+
+        $("#show_bg_settings").on('click', function () {
+            $("#file-input-bg").trigger('click');
+
+            $('html,body').animate({scrollTop: $("#form-background").offset().top}, 500);
         });
 
         $("#show_address_settings").on('click', function () {
             $(this).toggle(300);
             $("#hide_address_settings").toggle(300);
 
-            resetter();
+            resetterAddress();
+
+            $('html,body').animate({scrollTop: $("#form-address").parent().parent().parent().offset().top}, 500);
         });
 
         $("#hide_address_settings").on('click', function () {
             $(this).toggle(300);
             $("#show_address_settings").toggle(300);
 
-            resetter();
+            resetterAddress();
         });
 
-        function resetter() {
+        function resetterAddress() {
             $("#address_settings").toggle(300);
             $(".stats_address").toggle(300);
 
@@ -825,8 +923,6 @@
             } else {
                 $("#btn_save_address").attr('disabled', 'disabled');
             }
-
-            $('html,body').animate({scrollTop: $("#page-menu").offset().top}, 500);
         }
 
         function editAddress(name, phone, lat, long, city_id, address, postal_code, save_as, is_main, url) {
@@ -870,7 +966,7 @@
                 $("#btn_save_address").attr('disabled', 'disabled');
             }
 
-            $('html,body').animate({scrollTop: $("#page-menu").offset().top}, 500);
+            $('html,body').animate({scrollTop: $("#form-address").parent().parent().parent().offset().top}, 500);
         }
 
         function deleteAddress(is_main, occupancy, address, url) {
@@ -950,6 +1046,79 @@
                                         $(".show_ava").attr('src', data);
                                         swal('{{__('lang.alert.success')}}', '{{__('lang.alert.upload')}}', 'success');
                                         $("#progress-upload").css("display", "none");
+                                    },
+                                    error: function () {
+                                        swal('{{__('lang.alert.error')}}', '{{__('lang.alert.error-capt')}}', 'error');
+                                    }
+                                });
+                                return false;
+                            }
+                        } else {
+                            swal('{{__('lang.alert.error')}}', '{{__('lang.alert.upload-fail3')}}', 'error');
+                        }
+                    });
+                }
+            }
+        };
+
+        document.getElementById("file-input-bg").onchange = function () {
+            var files_size = this.files[0].size,
+                max_file_size = 5000000, allowed_file_types = ['image/png', 'image/gif', 'image/jpeg', 'image/pjpeg'],
+                file_name = $(this).val().replace(/C:\\fakepath\\/i, ''),
+                progress_bar_id = $("#progress-upload-bg .progress-bar");
+
+            if (!window.File && window.FileReader && window.FileList && window.Blob) {
+                swal('{{__('lang.alert.warning')}}', "{{__('lang.alert.browser')}}", 'warning');
+
+            } else {
+                if (files_size > max_file_size) {
+                    swal('{{__('lang.alert.error')}}', '{!! __('lang.alert.upload-fail') !!}', 'error');
+
+                } else {
+                    $(this.files).each(function (i, ifile) {
+                        if (ifile.value !== "") {
+                            if (allowed_file_types.indexOf(ifile.type) === -1) {
+                                swal('{{__('lang.alert.error')}}', '{!! __('lang.alert.upload-fail2') !!}', 'error');
+
+                            } else {
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '{{route('user.update.pengaturan')}}',
+                                    data: new FormData($("#form-background")[0]),
+                                    contentType: false,
+                                    processData: false,
+                                    mimeType: "multipart/form-data",
+                                    xhr: function () {
+                                        var xhr = $.ajaxSettings.xhr();
+                                        if (xhr.upload) {
+                                            xhr.upload.addEventListener('progress', function (event) {
+                                                var percent = 0;
+                                                var position = event.loaded || event.position;
+                                                var total = event.total;
+                                                if (event.lengthComputable) {
+                                                    percent = Math.ceil(position / total * 100);
+                                                }
+                                                //update progressbar
+                                                $("#progress-upload-bg").css("display", "block");
+                                                progress_bar_id.css("width", +percent + "%");
+                                                progress_bar_id.text(percent + "%");
+                                                if (percent == 100) {
+                                                    progress_bar_id.removeClass("progress-bar-info");
+                                                    progress_bar_id.addClass("progress-bar");
+                                                } else {
+                                                    progress_bar_id.removeClass("progress-bar");
+                                                    progress_bar_id.addClass("progress-bar-info");
+                                                }
+                                            }, true);
+                                        }
+                                        return xhr;
+                                    },
+                                    success: function (data) {
+                                        $("#show_bg_name").text(data);
+                                        $("#page-title").attr('background-image', 'url("{{asset('storage/users/background')}}/' + data + '")');
+                                        $(".show_bg").attr('src', '{{asset('storage/users/background')}}/' + data);
+                                        swal('{{__('lang.alert.success')}}', '{{__('lang.alert.upload-bg')}}', 'success');
+                                        $("#progress-upload-bg").css("display", "none");
                                     },
                                     error: function () {
                                         swal('{{__('lang.alert.error')}}', '{{__('lang.alert.error-capt')}}', 'error');

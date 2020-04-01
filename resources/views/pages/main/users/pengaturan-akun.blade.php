@@ -28,7 +28,8 @@
 @section('content')
     <section id="page-title" class="page-title-parallax page-title-dark"
              data-bottom-top="background-position:0px 0px;" data-top-bottom="background-position:0px -300px;"
-             style="background-image:url('{{asset('images/banner/users.jpg')}}');background-size:cover;padding:120px 0;">
+             style="background-image:url('{{$bio->background == "" ? asset('images/banner/users.jpg') :
+             asset('storage/users/background/'.$bio->background)}}');background-size:cover;padding:120px 0;">
         <div class="parallax-overlay"></div>
         <div class="container clearfix">
             <h1>{{__('lang.header.settings')}}</h1>
@@ -55,8 +56,7 @@
                             </a></li>
                         <li class="current"><a href="{{URL::current()}}">
                                 <div>{{__('lang.header.settings')}}</div>
-                            </a>
-                        </li>
+                            </a></li>
                     </ul>
                 </nav>
                 <div id="page-submenu-trigger"><i class="icon-reorder"></i></div>
@@ -100,9 +100,18 @@
                                         <h5 class="show_username" style="text-transform: none">{{$user->username}}</h5>
                                     </div>
                                     <div class="card-title">
-                                        <div id="show_username_settings" class="row"
-                                             style="color: #f89406;cursor: pointer;font-size: 14px">
-                                            <div class="col text-right"><i class="icon-edit mr-1"></i>USERNAME</div>
+                                        <div class="row justify-content-center">
+                                            <div class="col">
+                                                <small style="font-weight: 600">
+                                                <span id="show_username_settings" class="fright"
+                                                      style="cursor: pointer;color: #f89406">
+                                                    <i class="icon-edit mr-1"></i> USERNAME</span>
+                                                    <span id="hide_username_settings" class="fright"
+                                                          style="color: #f89406;cursor: pointer;display:none">
+                                                    <i class="icon-line2-action-undo mr-1"></i>
+                                                    {{__('lang.button.cancel')}}</span>
+                                                </small>
+                                            </div>
                                         </div>
                                         <table class="stats_username m-0" style="font-size: 14px">
                                             <tr data-toggle="tooltip" data-placement="left"
@@ -130,8 +139,8 @@
                                                 <td>{{$address != "" ? $address->address.' - '.$address->postal_code.' ('.$address->save_as.').' : __('lang.profile.empty')}}</td>
                                             </tr>
                                         </table>
-                                        <div class="divider divider-center stats_username mt-2 mb-1"><i
-                                                class="icon-circle"></i></div>
+                                        <div class="divider divider-center stats_username mt-2 mb-1">
+                                            <i class="icon-circle"></i></div>
                                         <table class="stats_username m-0" style="font-size: 14px">
                                             <tr data-toggle="tooltip" data-placement="left"
                                                 title="{{__('lang.profile.member-since')}}">
@@ -252,6 +261,22 @@
 @push('scripts')
     <script>
         $("#show_username_settings").on('click', function () {
+            $(this).toggle(300);
+            $("#hide_username_settings").toggle(300);
+
+            resetterUsername();
+
+            $('html,body').animate({scrollTop: $("#form-ava").offset().top}, 500);
+        });
+
+        $("#hide_username_settings").on('click', function () {
+            $(this).toggle(300);
+            $("#show_username_settings").toggle(300);
+
+            resetterUsername();
+        });
+
+        function resetterUsername() {
             $("#username_settings").toggle(300);
             $(".stats_username").toggle(300);
 
@@ -260,7 +285,7 @@
             } else {
                 $("#btn_save_username").attr('disabled', 'disabled');
             }
-        });
+        }
 
         $("#form-username").on("submit", function (e) {
             $.ajax({

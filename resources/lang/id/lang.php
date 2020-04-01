@@ -128,12 +128,13 @@ return [
         "widget-category" => "Kategori Blog",
     ],
     "profile" => [
-        "capt" => "Di sini Anda dapat mengatur data personal dan daftar alamat Anda.",
+        "capt" => "Di sini Anda dapat mengatur avatar dan latar belakang profil Anda, data personal dan juga daftar alamat Anda.",
         "gender" => "Jenis Kelamin",
         "male" => "Pria",
         "female" => "Wanita",
         "other" => "Lainnya",
         "birthday" => "Tanggal Lahir",
+        "bg-head" => "Latar Belakang Profil",
         "address" => "Alamat",
         "address-head" => "Daftar Alamat",
         "address-capt" => "Mohon untuk menambahkan alamat agar mempermudah proses pemesanan Anda.",
@@ -170,7 +171,7 @@ return [
         "delete-address" => "berhasil dihapuskan dari daftar alamat Anda!",
     ],
     "settings" => [
-        "capt" => "Di sini Anda dapat mengatur username dan kata sandi akun " . env('APP_TITLE') . " Anda.",
+        "capt" => "Di sini Anda dapat mengatur avatar, username, dan kata sandi akun " . env('APP_TITLE') . " Anda.",
         "username" => "Username Anda berhasil diperbarui!",
         "email-head" => "Email Utama (terverifikasi)",
         "password-head" => "PENGATURAN KATA SANDI",
@@ -181,6 +182,7 @@ return [
     ],
     "tooltip" => [
         "ava" => "Klik disini untuk mengubah avatar Anda!",
+        "background" => "Klik disini untuk mengubah latar belakang profil Anda!",
     ],
     "placeholder" => [
         "search" => "Mau cetak apa hari ini?",
@@ -259,6 +261,7 @@ return [
         "logout-message" => "Anda akan dialihkan ke halaman Beranda.",
         "browser" => "Browser yang Anda gunakan tidak support! Silahkan perbarui atau gunakan browser yang lainnya.",
         "upload" => "Avatar Anda berhasil diperbarui!",
+        "upload-bg" => "Latar belakang profil Anda berhasil diperbarui!",
         "upload-fail" => "Ukuran total ' + file_name + ' adalah ' + humanFileSize(files_size) + ', ukuran file yang diperbolehkan adalah ' + humanFileSize(max_file_size) + ', coba unggah file yang ukurannya lebih kecil!",
         "upload-fail2" => "Tipe file ' + file_name + ' tidak support!",
         "upload-fail3" => "Tidak ada file yang dipilih!",
