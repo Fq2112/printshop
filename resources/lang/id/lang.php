@@ -67,10 +67,15 @@ return [
     ],
     "breadcrumb" => [
         "home" => "Beranda",
+        "product" => "Produk Cetak",
         "list" => "Daftar",
         "author" => "Penulis",
         "account" => "Akun",
         "settings" => "Pengaturan",
+    ],
+    "product" => [
+        "title" => "Produk Cetak: ",
+        "head" => "Pilih Jenis :Name Sesuai Kebutuhan Bisnis Anda",
     ],
     "pro" => [
         "capt" => "Dapatkan akun PRO " . env('APP_TITLE') . ", ubah kebutuhan cetak bisnis Anda jadi lebih mudah!",

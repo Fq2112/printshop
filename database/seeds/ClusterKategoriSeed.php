@@ -13,9 +13,21 @@ class ClusterKategoriSeed extends Seeder
     public function run()
     {
         $clust[] = [
-            ['Kartu Nama Standar', 'Standard Business Cards'],
-            ['Kartu Nama Premium', 'Premium Business Cards'],
-            ['Kartu Nama Eksklusif', 'Exclusive Business Cards']
+            [
+                'Kartu Nama Standar', 'Standard Business Cards',
+                'Kartu nama harga ekonomis dengan material berkualitass',
+                ''
+            ],
+            [
+                'Kartu Nama Premium', 'Premium Business Cards',
+                '',
+                ''
+            ],
+            [
+                'Kartu Nama Eksklusif', 'Exclusive Business Cards',
+                '',
+                ''
+            ]
         ];
 
         $clust[] = [
@@ -258,13 +270,19 @@ class ClusterKategoriSeed extends Seeder
                     ClusterKategori::create([
                         'subkategori_id' => $i + 1,
                         'name' => [
+                            'id' => $data[0],
                             'en' => $data[1],
-                            'id' => $data[0]
                         ],
                         'permalink' => [
-                            'en' => preg_replace("![^a-z0-9]+!i", "-", strtolower($data[1])),
                             'id' => preg_replace("![^a-z0-9]+!i", "-", strtolower($data[0])),
+                            'en' => preg_replace("![^a-z0-9]+!i", "-", strtolower($data[1])),
                         ],
+                        'banner' => preg_replace("![^a-z0-9]+!i", "-", strtolower($data[1])) . '.jpg',
+                        'caption' => [
+                            'id' => $data[2],
+                            'en' => $data[3],
+                        ],
+                        'thumbnail' => preg_replace("![^a-z0-9]+!i", "-", strtolower($data[1])) . '.jpg',
                     ]);
                 }
             }

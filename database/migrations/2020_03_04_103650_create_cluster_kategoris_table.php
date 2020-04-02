@@ -21,6 +21,9 @@ class CreateClusterKategorisTable extends Migration
                 ->onUpdate('CASCADE');
             $table->string('name');
             $table->text('permalink')->unique();
+            $table->text('banner');
+            $table->text('caption');
+            $table->text('thumbnail');
             $table->timestamps();
         });
     }

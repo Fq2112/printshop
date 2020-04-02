@@ -136,18 +136,6 @@ class MainController extends Controller
         return $featured;
     }
 
-    public function produk(Request $request)
-    {
-        $sub = SubKategori::where('permalink->en', $request->produk)->orwhere('permalink->id', $request->produk)->first();
-        $clust = ClusterKategori::where('permalink->en', $request->produk)->orwhere('permalink->id', $request->produk)->first();
-
-        if ($sub) {
-            return $sub;
-        } else {
-            return $clust;
-        }
-    }
-
     public function cariNamaProduk(Request $request)
     {
         $sub = SubKategori::where('name->en', 'LIKE', '%' . $request->produk . '%')
@@ -175,5 +163,17 @@ class MainController extends Controller
         }
 
         return collect($sub)->merge($cluster);
+    }
+
+    public function produk(Request $request)
+    {
+        $sub = SubKategori::where('permalink->en', $request->produk)->orwhere('permalink->id', $request->produk)->first();
+        $clust = ClusterKategori::where('permalink->en', $request->produk)->orwhere('permalink->id', $request->produk)->first();
+
+        if ($sub) {
+            return view('pages.main.produk', compact('sub'));
+        } else {
+            return $clust;
+        }
     }
 }

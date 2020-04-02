@@ -36,7 +36,6 @@ class BlogSeeder extends Seeder
         for ($i = 0; $i < 9; $i++) {
             $title = $faker->words(rand(2, 3), true);
             $permalink = preg_replace("![^a-z0-9]+!i", "-", strtolower($title));
-            $content = $faker->paragraphs(rand(3, 5), true);
 
             \App\Models\Blog::create([
                 'admin_id' => rand(\App\Models\Admin::where('role', \App\Support\Role::ADMIN)->min('id'), \App\Models\Admin::where('role', \App\Support\Role::ADMIN)->max('id')),
@@ -50,8 +49,8 @@ class BlogSeeder extends Seeder
                     'en' => $permalink,
                 ],
                 'content' => [
-                    'id' => "<p align='justify'>" . $content . "</p>",
-                    'en' => "<p align='justify'>" . $content . "</p>",
+                    'id' => "<p align='justify'>" . \Faker\Factory::create('id_ID')->paragraphs(rand(3, 5), true) . "</p>",
+                    'en' => "<p align='justify'>" . \Faker\Factory::create()->paragraphs(rand(3, 5), true) . "</p>",
                 ],
                 'thumbnail' => $x++ . '.jpg',
             ]);

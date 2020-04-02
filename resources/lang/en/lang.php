@@ -67,10 +67,15 @@ return [
     ],
     "breadcrumb" => [
         "home" => "Home",
+        "product" => "Print Product",
         "list" => "List",
         "author" => "Author",
         "account" => "Account",
         "settings" => "Settings",
+    ],
+    "product" => [
+        "title" => "Print Product: ",
+        "head" => "Choose The :Name Type According to Your Business Needs",
     ],
     "pro" => [
         "capt" => "Meet " . env('APP_TITLE') . " PRO Account, transform your business printing needs easier!",

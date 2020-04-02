@@ -25,7 +25,6 @@ class DatabaseSeeder extends Seeder
              FoldingSeeder::class,
              LaminationSeeder::class,
              FinishingSeeder::class,
-             BannerSeeder::class,
              AdminSeeder::class,
              BlogSeeder::class,
              FaqSeeder::class,
