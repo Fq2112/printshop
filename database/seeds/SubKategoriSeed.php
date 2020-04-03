@@ -111,8 +111,8 @@ class SubKategoriSeed extends Seeder
             ],
             [
                 'Snack Box', 'Snack Boxes',
-                'Cetak snack box berkualitas tinggi yang memukau, lalu kemas produk snack Anda ke dalamnya.',
-                'Print a stunning high-quality snack boxes, then pack your snack products into them.'
+                'Cetak snack box berkualitas tinggi yang memukau, lalu kemas produk makanan Anda ke dalamnya.',
+                'Print a stunning high-quality snack boxes, then pack your makanan products into them.'
             ],
             [
                 'Label Harga', 'Price Tags',

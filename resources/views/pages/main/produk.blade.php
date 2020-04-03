@@ -2,6 +2,11 @@
 @section('title',  __('lang.product.title').$sub->name.' | '.__('lang.title'))
 @push('styles')
     <style>
+        .parallax-overlay {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, .1) 0%, rgba(0, 0, 0, .3) 30%, rgba(0, 0, 0, .5) 80%,
+            rgba(0, 0, 0, .7) 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+        }
+
         .media .media-body ul {
             margin-left: 1.5rem;
             margin-bottom: 1rem;
@@ -12,7 +17,7 @@
 @section('content')
     <section id="page-title" class="page-title-parallax page-title-dark page-title-center"
              data-bottom-top="background-position:0px 0px;" data-top-bottom="background-position:0px -300px;"
-             style="background-image:url('{{asset('images/banner/'.$sub->banner)}}');background-size:cover;padding:120px 0;">
+             style="background-image:url('{{asset('storage/products/banner/'.$sub->banner)}}');background-size:cover;padding:120px 0;">
         <div class="parallax-overlay"></div>
         <div class="container clearfix">
             <h1>{{$sub->name}}</h1>
@@ -32,18 +37,6 @@
                     <h3>{{__('lang.product.head', ['name' => $sub->name])}}</h3>
                 </div>
                 <div id="section-pricing" class="page-section nopadding nomargin">
-                    <div class="pricing-tenure-switcher center bottommargin-sm" data-container="#pricing-switch">
-                        <span class="pts-left">Monthly</span>
-                        <div class="pts-switcher">
-                            <div class="switch">
-                                <input id="switch-toggle-pricing-tenure" class="switch-toggle switch-toggle-round"
-                                       type="checkbox">
-                                <label for="switch-toggle-pricing-tenure"></label>
-                            </div>
-                        </div>
-                        <span class="pts-right">Yearly</span>
-                    </div>
-
                     <div id="pricing-switch" class="pricing row bottommargin-lg clearfix">
                         <div class="col-lg-4 col-md-6">
                             <div class="pricing-box">
@@ -73,10 +66,7 @@
                                     <span>Most Popular</span>
                                 </div>
                                 <div class="pricing-price">
-                                    <div class="pts-switch-content-left"><span class="price-unit">&dollar;</span>12
-                                    </div>
-                                    <div class="pts-switch-content-right"><span class="price-unit">&dollar;</span>99
-                                    </div>
+                                    <span class="price-unit">&dollar;</span>12
                                 </div>
                                 <div class="pricing-features">
                                     <ul>
@@ -92,14 +82,8 @@
                                     </ul>
                                 </div>
                                 <div class="pricing-action">
-                                    <div class="pts-switch-content-left">
-                                        <a href="#" class="button button-large button-rounded capitalize ls0"
-                                           style="border-radius: 23px;">Start Free Trial</a>
-                                    </div>
-                                    <div class="pts-switch-content-right">
-                                        <a href="#" class="button button-large button-rounded capitalize ls0"
-                                           style="border-radius: 23px;">Start Free Trial</a>
-                                    </div>
+                                    <a href="#" class="button button-large button-rounded capitalize ls0"
+                                       style="border-radius: 23px;">Start Free Trial</a>
                                 </div>
                             </div>
                         </div>
@@ -109,10 +93,7 @@
                                     <h3>Business</h3>
                                 </div>
                                 <div class="pricing-price">
-                                    <div class="pts-switch-content-left"><span class="price-unit">&dollar;</span>19
-                                    </div>
-                                    <div class="pts-switch-content-right"><span class="price-unit">&dollar;</span>149
-                                    </div>
+                                    <span class="price-unit">&dollar;</span>19
                                 </div>
                                 <div class="pricing-features">
                                     <ul>
@@ -124,14 +105,8 @@
                                     </ul>
                                 </div>
                                 <div class="pricing-action">
-                                    <div class="pts-switch-content-left">
-                                        <a href="#" class="button button-large button-rounded capitalize ls0"
-                                           style="border-radius: 23px;">Start Free Trial</a>
-                                    </div>
-                                    <div class="pts-switch-content-right">
-                                        <a href="#" class="button button-large button-rounded capitalize ls0"
-                                           style="border-radius: 23px;">Start Free Trial</a>
-                                    </div>
+                                    <a href="#" class="button button-large button-rounded capitalize ls0"
+                                       style="border-radius: 23px;">Start Free Trial</a>
                                 </div>
                             </div>
                         </div>
