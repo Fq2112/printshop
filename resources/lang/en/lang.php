@@ -76,6 +76,7 @@ return [
     "product" => [
         "title" => "Print Product: ",
         "head" => "Choose The :Name Type According to Your Business Needs",
+        "price" => "Starting price Rp:price",
     ],
     "pro" => [
         "capt" => "Meet " . env('APP_TITLE') . " PRO Account, transform your business printing needs easier!",

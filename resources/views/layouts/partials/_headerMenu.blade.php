@@ -10,7 +10,7 @@
                         <li>
                             <div class="widget clearfix">
                                 <div class="content-area">
-                                    <img class="card-img-top" src="{{asset('storage/products/thumb/'.$kat->image)}}"
+                                    <img class="card-img-top" src="{{asset('storage/products/menu/'.$kat->image)}}"
                                          alt="Thumbnail">
                                     <div class="custom-overlay">
                                         <div class="custom-text"></div>
@@ -23,27 +23,25 @@
                 </div>
                 <div class="card-columns col-lg-9">
                     @foreach($kat->getSubKategori as $sub)
-                        <div class="card">
-                            <div class="card-body nopadding nomargin">
-                                <ul class="mega-menu-column border-left-0">
-                                    <li class="mega-menu-title">
-                                        <a href="{{route('produk', ['produk' => $sub->permalink])}}">
-                                            <div>{{$sub->name}}</div>
-                                        </a>
-                                        @if($sub->getCluster)
-                                            <ul>
-                                                @foreach($sub->getCluster as $row)
-                                                    <li>
-                                                        <a href="{{route('produk',['produk' => $row->permalink])}}">
-                                                            <div>{{$row->name}}</div>
-                                                        </a>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        @endif
-                                    </li>
-                                </ul>
-                            </div>
+                        <div class="card card-body nopadding nomargin">
+                            <ul class="mega-menu-column border-left-0">
+                                <li class="mega-menu-title">
+                                    <a href="{{route('produk', ['produk' => $sub->permalink])}}">
+                                        <div>{{$sub->name}}</div>
+                                    </a>
+                                    @if($sub->getCluster)
+                                        <ul>
+                                            @foreach($sub->getCluster as $row)
+                                                <li>
+                                                    <a href="{{route('produk',['produk' => $row->permalink])}}">
+                                                        <div>{{$row->name}}</div>
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                </li>
+                            </ul>
                         </div>
                     @endforeach
                 </div>

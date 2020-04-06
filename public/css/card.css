@@ -16,6 +16,14 @@
     box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.myCard:hover img {
+    transform: scale(1.2);
+}
+
+.myCard:hover div.custom-overlay {
+    opacity: 1;
+}
+
 .myCard .img-card {
     width: 100%;
     border-top-left-radius: 2px;
@@ -72,11 +80,17 @@
     color: #122752;
 }
 
+.myCard .card-title ul {
+    margin: 0 0 0 1.5em;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
 .myCard .card-footer {
     background-color: #fff;
 }
 
-.myCard .card-footer button {
+.myCard .card-footer .btn {
     border-radius: 0 0 4px 4px;
     font-size: 14px;
     padding: 10px 20px;
@@ -94,6 +108,7 @@
     text-transform: uppercase;
 }
 
+.myCard .card-footer .btn:hover, .myCard .card-footer .btn:focus, .myCard .card-footer .btn:active,
 .myCard .card-read-more button:hover, .myCard .card-read-more button:focus, .myCard .card-read-more button:active {
     border-radius: 0 0 4px 4px !important;
 }

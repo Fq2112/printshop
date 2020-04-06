@@ -76,6 +76,7 @@ return [
     "product" => [
         "title" => "Produk Cetak: ",
         "head" => "Pilih Jenis :Name Sesuai Kebutuhan Bisnis Anda",
+        "price" => "Harga awal Rp:price",
     ],
     "pro" => [
         "capt" => "Dapatkan akun PRO " . env('APP_TITLE') . ", ubah kebutuhan cetak bisnis Anda jadi lebih mudah!",

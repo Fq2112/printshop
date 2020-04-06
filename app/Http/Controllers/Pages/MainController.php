@@ -167,7 +167,8 @@ class MainController extends Controller
 
     public function produk(Request $request)
     {
-        $sub = SubKategori::where('permalink->en', $request->produk)->orwhere('permalink->id', $request->produk)->first();
+        $sub = SubKategori::where('permalink->en', $request->produk)->orwhere('permalink->id', $request->produk)
+            ->whereHas('getCluster')->first();
         $clust = ClusterKategori::where('permalink->en', $request->produk)->orwhere('permalink->id', $request->produk)->first();
 
         if ($sub) {
