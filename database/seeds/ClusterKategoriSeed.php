@@ -686,8 +686,8 @@ class ClusterKategoriSeed extends Seeder
                         ],
                         'thumbnail' => preg_replace("![^a-z0-9]+!i", "-", strtolower($data[1])) . '.jpg',
                         'features' => [
-                            'id' => '<ul><li>' . \Faker\Factory::create()->words(rand(4, 5), true) . '</li><li>' . \Faker\Factory::create()->words(rand(4, 5), true) . '</li><li>' . \Faker\Factory::create()->words(rand(4, 5), true) . '</li></ul>',
-                            'en' => '<ul><li>' . \Faker\Factory::create()->words(rand(4, 5), true) . '</li><li>' . \Faker\Factory::create()->words(rand(4, 5), true) . '</li><li>' . \Faker\Factory::create()->words(rand(4, 5), true) . '</li></ul>',
+                            'id' => '<ul><li>' . \Faker\Factory::create()->words(rand(4, 7), true) . '</li><li>' . \Faker\Factory::create()->words(rand(4, 5), true) . '</li><li>' . \Faker\Factory::create()->words(rand(4, 5), true) . '</li></ul>',
+                            'en' => '<ul><li>' . \Faker\Factory::create()->words(rand(4, 7), true) . '</li><li>' . \Faker\Factory::create()->words(rand(4, 5), true) . '</li><li>' . \Faker\Factory::create()->words(rand(4, 5), true) . '</li></ul>',
                         ],
                     ]);
                 }

@@ -3,6 +3,23 @@
 @push('styles')
     <link rel="stylesheet" href="{{asset('css/card.css')}}">
     <style>
+        .card-deck {
+            display: flex;
+            flex-direction: row;
+            flex: 1 0 0;
+        }
+
+        .card-deck .myCard {
+            display: flex;
+            flex-direction: column;
+            width: auto;
+            margin: 1%;
+        }
+
+        .card-deck .myCard .card-content {
+            flex-grow: 1;
+        }
+
         .media .media-body ul {
             margin-left: 1.5rem;
             margin-bottom: 1rem;
@@ -34,7 +51,7 @@
                 </div>
                 <div class="page-section card-deck nopadding nomargin">
                     @foreach($sub->getCluster as $row)
-                        <div class="card myCard noborder nopadding mb-4" style="min-width: 18rem;">
+                        <div class="card myCard noborder nopadding" style="margin-bottom: 2rem;min-width: 18rem;">
                             <div class="img-card">
                                 <a href="{{route('produk', ['produk' => $row->permalink])}}">
                                     <img class="img-fluid" alt="Thumbnail"
