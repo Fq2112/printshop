@@ -15,7 +15,7 @@ class ClusterKategori extends Model
 
     protected $guarded = ['id'];
 
-    public $translatable = ['name', 'permalink', 'caption'];
+    public $translatable = ['name', 'permalink', 'caption', 'features'];
 
     public function getSubKategori()
     {

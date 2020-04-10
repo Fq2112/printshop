@@ -32,42 +32,33 @@
                 <div class="fancy-title title-dotted-border title-center">
                     <h3>{{__('lang.product.head', ['name' => $sub->name])}}</h3>
                 </div>
-                <div class="page-section card-columns nopadding nomargin"
-                     style="column-count: {{count($sub->getCluster) > 2 ? 3 : 2}}">
+                <div class="page-section card-deck nopadding nomargin">
                     @foreach($sub->getCluster as $row)
-                        <div class="card card-body noborder nopadding">
-                            <div class="myCard">
-                                <div class="img-card">
+                        <div class="card myCard noborder nopadding mb-4" style="min-width: 18rem;">
+                            <div class="img-card">
+                                <a href="{{route('produk', ['produk' => $row->permalink])}}">
+                                    <img class="img-fluid" alt="Thumbnail"
+                                         src="{{asset('storage/products/thumb/'.$row->thumbnail)}}">
+                                    <div class="custom-overlay"></div>
+                                </a>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-title">
                                     <a href="{{route('produk', ['produk' => $row->permalink])}}">
-                                        <img class="img-fluid" alt="Thumbnail"
-                                             src="{{asset('storage/products/thumb/'.$row->thumbnail)}}">
-                                        <div class="custom-overlay">
-                                            <div class="custom-text"></div>
-                                        </div>
-                                    </a>
+                                        <h4 class="text-center" style="color: #f89406">
+                                            {{$row->name}}</h4></a>
+                                    <h5 class="text-center mb-2" style="text-transform: none">
+                                        {{__('lang.product.price', ['price' => number_format(25000,2,',','.')])}}
+                                    </h5>
+                                    <div class="divider divider-center m-1"><i class="icon-circle"></i></div>
+                                    {!! $row->features !!}
                                 </div>
-                                <div class="card-content">
-                                    <div class="card-title">
-                                        <a href="{{route('produk', ['produk' => $row->permalink])}}">
-                                            <h4 class="text-center" style="color: #f89406">
-                                                {{$row->name}}</h4></a>
-                                        <h5 class="text-center mb-2" style="text-transform: none">
-                                            {{__('lang.product.price', ['price' => number_format(25000,2,',','.')])}}
-                                        </h5>
-                                        <div class="divider divider-center m-1"><i class="icon-circle"></i></div>
-                                        <ul>
-                                            <li>{{\Faker\Factory::create()->words(rand(4,5), true)}}</li>
-                                            <li>{{\Faker\Factory::create()->words(rand(4,5), true)}}</li>
-                                            <li>{{\Faker\Factory::create()->words(rand(4,5), true)}}</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="card-footer p-0">
-                                    <a href="{{route('produk', ['produk' => $row->permalink])}}"
-                                       class="btn btn-outline-primary btn-block text-uppercase text-left noborder">
-                                        {{__('lang.button.shop')}}<i class="icon-chevron-right fright"></i>
-                                    </a>
-                                </div>
+                            </div>
+                            <div class="card-footer p-0">
+                                <a href="{{route('produk', ['produk' => $row->permalink])}}"
+                                   class="btn btn-outline-primary btn-block text-uppercase text-left noborder">
+                                    {{__('lang.button.shop')}}<i class="icon-chevron-right fright"></i>
+                                </a>
                             </div>
                         </div>
                     @endforeach
@@ -211,6 +202,8 @@
 @push('scripts')
     <script>
         $(function () {
+            $(".myCard .custom-overlay").css('height', $(".myCard .img-card img").height());
+
             $("#processTabs").tabs({show: {effect: "slide", duration: 500}});
             $(".tab-linker").on("click", function () {
                 $("#processTabs").tabs("option", "active", $(this).attr('rel') - 1);

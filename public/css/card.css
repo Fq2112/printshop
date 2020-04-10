@@ -20,7 +20,7 @@
     transform: scale(1.2);
 }
 
-.myCard:hover div.custom-overlay {
+.myCard:hover .custom-overlay {
     opacity: 1;
 }
 

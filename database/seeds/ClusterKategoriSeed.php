@@ -16,7 +16,7 @@ class ClusterKategoriSeed extends Seeder
             [
                 'Kartu Nama Standar', 'Standard Business Cards',
                 'Kartu nama harga ekonomis dengan bahan berkualitas.',
-                'Economic price business cards with a high-quality material.'
+                'Economic price business cards with a high-quality material.',
             ],
             [
                 'Kartu Nama Premium', 'Premium Business Cards',
@@ -215,14 +215,14 @@ class ClusterKategoriSeed extends Seeder
 
         $clust[] = [
             [
-                'Lakban Custom Solid', 'Solid Custom Duct Tapes',
-                'Lakban kustom dengan warna dasar solid.',
-                'Custom duct tapes with solid base color.'
-            ],
-            [
                 'Lakban Custom Transparan', 'Transparent Custom Duct Tapes',
                 'Lakban kustom dengan warna dasar transparan.',
                 'Custom duct tapes with transparent base color.'
+            ],
+            [
+                'Lakban Custom Solid', 'Solid Custom Duct Tapes',
+                'Lakban kustom dengan warna dasar solid.',
+                'Custom duct tapes with solid base color.'
             ],
         ];
 
@@ -272,9 +272,9 @@ class ClusterKategoriSeed extends Seeder
 
         $clust[] = [
             [
-                'Lunch Box Food Pail', 'Food Pail Lunch Boxes',
-                'Lunch box unik dengan bahan food grade.',
-                'Unique lunch boxes with a food grade materials.'
+                'Lunch Box Standar', 'Standard Lunch Boxes',
+                'Lunch box standar dengan bahan food grade.',
+                'Standard lunch boxes with a food grade materials.'
             ],
             [
                 'Lunch Box Bento', 'Bento Lunch Boxes',
@@ -282,9 +282,9 @@ class ClusterKategoriSeed extends Seeder
                 'Bento boxes with a high-quality materials.'
             ],
             [
-                'Lunch Box Standar', 'Standard Lunch Boxes',
-                'Lunch box standar dengan bahan food grade.',
-                'Standard lunch boxes with a food grade materials.'
+                'Lunch Box Food Pail', 'Food Pail Lunch Boxes',
+                'Lunch box unik dengan bahan food grade.',
+                'Unique lunch boxes with a food grade materials.'
             ],
         ];
 
@@ -308,16 +308,6 @@ class ClusterKategoriSeed extends Seeder
 
         $clust[] = [
             [
-                'Food Paper Bag Flat Standar', 'Standard Flat Food Paper Bags',
-                'Food paper bag standar yang memiliki dasar, jadi bisa dibuat berdiri.',
-                'Standard food paper bags that have a base, so it can be stand up.'
-            ],
-            [
-                'Food Paper Bag Flat Premium', 'Premium Flat Food Paper Bags',
-                'Food paper bag yang juga memiliki dasar dengan bahan anti minyak.',
-                'Food paper bags that also have a base with anti-oil materials.'
-            ],
-            [
                 'Satchel Paper Bag  Standar', 'Standard Satchel Paper Bags',
                 'Food paper bag harga ekonomis tanpa dasar, jadi tidak bisa dibuat berdiri.',
                 'Economic price food paper bag without a base, so it can\'t be stand up.'
@@ -326,6 +316,16 @@ class ClusterKategoriSeed extends Seeder
                 'Satchel Paper Bag  Premium', 'Premium Satchel Paper Bags',
                 'Food paper bag yang juga tanpa dasar dengan bahan anti minyak.',
                 'Food paper bags that also without a base with anti-oil materials.'
+            ],
+            [
+                'Food Paper Bag Flat Standar', 'Standard Flat Food Paper Bags',
+                'Food paper bag standar yang memiliki dasar, jadi bisa dibuat berdiri.',
+                'Standard food paper bags that have a base, so it can be stand up.'
+            ],
+            [
+                'Food Paper Bag Flat Premium', 'Premium Flat Food Paper Bags',
+                'Food paper bag yang juga memiliki dasar dengan bahan anti minyak.',
+                'Food paper bags that also have a base with anti-oil materials.'
             ],
         ];
 
@@ -569,7 +569,7 @@ class ClusterKategoriSeed extends Seeder
 
         $clust[] = [
             [
-                'Voucher Satuan', 'Unit Vouchers',
+                'Voucher Satuan', 'Single Vouchers',
                 'Voucher untuk kebutuhan promosi jangka pendek dan terbatas dengan bahan berkualitas.',
                 'Vouchers for short-term and limited promotional needs with a high-quality materials.'
             ],
@@ -685,6 +685,10 @@ class ClusterKategoriSeed extends Seeder
                             'en' => $data[3],
                         ],
                         'thumbnail' => preg_replace("![^a-z0-9]+!i", "-", strtolower($data[1])) . '.jpg',
+                        'features' => [
+                            'id' => '<ul><li>' . \Faker\Factory::create()->words(rand(4, 5), true) . '</li><li>' . \Faker\Factory::create()->words(rand(4, 5), true) . '</li><li>' . \Faker\Factory::create()->words(rand(4, 5), true) . '</li></ul>',
+                            'en' => '<ul><li>' . \Faker\Factory::create()->words(rand(4, 5), true) . '</li><li>' . \Faker\Factory::create()->words(rand(4, 5), true) . '</li><li>' . \Faker\Factory::create()->words(rand(4, 5), true) . '</li></ul>',
+                        ],
                     ]);
                 }
             }

@@ -151,8 +151,8 @@ class SubKategoriSeed extends Seeder
             ],
             [
                 'Sealer', 'Sealers',
-                'Tingkatkan branding bisnis F&B Anda dengan mencetak sealer atau plastik pembungkus berkualitas tinggi yang memukau.',
-                'Enhance your F&B business branding by printing a stunning high-quality sealers or plastic wrappers.'
+                'Tingkatkan branding bisnis F&B Anda dengan mencetak beverage sealer atau plastik pembungkus minuman berkualitas tinggi yang memukau.',
+                'Enhance your F&B business branding by printing a stunning high-quality beverage sealers or plastic wrappers.'
             ]
         ];
 

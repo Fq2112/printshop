@@ -24,6 +24,7 @@ class CreateClusterKategorisTable extends Migration
             $table->text('banner');
             $table->text('caption');
             $table->text('thumbnail');
+            $table->text('features');
             $table->timestamps();
         });
     }
