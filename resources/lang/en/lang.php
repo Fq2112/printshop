@@ -77,6 +77,19 @@ return [
         "title" => "Print Product: ",
         "head" => "Choose The :Name Type According to Your Business Needs",
         "price" => "Starting price Rp:price",
+        "form" => [
+            "head" => "Specify Your Needs",
+            "capt" => "Choose your preferred materials",
+            "summary" => [
+                "head" => "Order Summary",
+                "capt" => "Make sure your order is correct",
+                "layout" => "Layout Guideline"
+            ],
+            "quantity" => [
+                "head" => "Choose Product Quantity",
+                "capt" => "Make sure the product quantity that you order matches your needs",
+            ],
+        ],
     ],
     "pro" => [
         "capt" => "Meet " . env('APP_TITLE') . " PRO Account, transform your business printing needs easier!",
@@ -224,6 +237,9 @@ return [
         "reset" => "Send Reset Link",
         "recovery" => "Reset Password",
         "shop" => "Start Printing",
+        "download" => "Download",
+        "upload" => "UPLOAD DESIGN",
+        "create" => "CREATE DESIGN",
         "next" => "Next",
         "prev" => "Previous",
         "finish" => "Finish",

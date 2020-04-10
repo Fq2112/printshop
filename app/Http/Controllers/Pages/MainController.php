@@ -174,7 +174,7 @@ class MainController extends Controller
         if ($sub) {
             return view('pages.main.produk', compact('sub'));
         } else {
-            return $clust;
+            return view('pages.main.form-pemesanan', compact('clust'));
         }
     }
 }

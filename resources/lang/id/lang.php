@@ -77,6 +77,19 @@ return [
         "title" => "Produk Cetak: ",
         "head" => "Pilih Jenis :Name Sesuai Kebutuhan Bisnis Anda",
         "price" => "Harga awal Rp:price",
+        "form" => [
+            "head" => "Spesifikasikan Kebutuhan Anda",
+            "capt" => "Pilih bahan yang lebih Anda sukai",
+            "summary" => [
+                "head" => "Ringkasan Pemesanan",
+                "capt" => "Pastikan pesanan Anda benar",
+                "layout" => "Pedoman Tata Letak"
+            ],
+            "quantity" => [
+                "head" => "Pilih Kuantitas Produk",
+                "capt" => "Pastikan jumlah produk yang Anda pesan sesuai kebutuhan Anda",
+            ],
+        ],
     ],
     "pro" => [
         "capt" => "Dapatkan akun PRO " . env('APP_TITLE') . ", ubah kebutuhan cetak bisnis Anda jadi lebih mudah!",
@@ -224,6 +237,9 @@ return [
         "reset" => "Kirim Tautan Reset",
         "recovery" => "Reset Kata Sandi",
         "shop" => "Mulai Mencetak",
+        "download" => "UNDUH",
+        "upload" => "UNGGAH DESAIN",
+        "create" => "BUAT DESAIN",
         "next" => "Selanjutnya",
         "prev" => "Sebelumnya",
         "finish" => "Selesai",

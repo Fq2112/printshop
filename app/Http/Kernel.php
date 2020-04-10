@@ -2,7 +2,6 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\Pages\Users\UserMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -64,7 +63,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         '503' => \App\Http\Middleware\Pages\MaintenanceMiddleware::class,
         'locale' => \App\Http\Middleware\SetLocaleMiddleware::class,
-        'user' => UserMiddleware::class,
+        'user' => \App\Http\Middleware\Pages\Users\UserMiddleware::class,
         'localize' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
         'localizationRedirect' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
         'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
