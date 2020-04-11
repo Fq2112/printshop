@@ -7,6 +7,17 @@
             width: 70%;
         }
 
+        #content .postcontent .accordion .acctitle {
+            padding: 10px 0;
+            font-weight: normal;
+            text-transform: none;
+        }
+
+        #content .postcontent .accordion .acctitle i {
+            right: 0;
+            left: unset;
+        }
+
         #content .sidebar {
             width: 27%;
         }
@@ -63,7 +74,57 @@
                                     <h5 class="text-center mb-2" style="text-transform: none">
                                         {{__('lang.product.form.capt')}}</h5>
                                     <div class="divider divider-center mt-1 mb-1"><i class="icon-circle"></i></div>
+                                    <div class="accordion pl-3 pr-3 clearfix" data-state="closed">
+                                        <div class="acctitle">
+                                            <i class="acc-closed icon-edit1"></i>
+                                            <i class="acc-open icon-edit"></i>
+                                            {{__('lang.product.form.summary.materials')}}
+                                            <b class="fright mr-4">Art Carton 260gsm</b>
+                                        </div>
+                                        <div class="acc_content p-0 clearfix">
+                                            Art Carton 260gsm
+                                        </div>
 
+                                        <div class="acctitle">
+                                            <i class="acc-closed icon-edit1"></i>
+                                            <i class="acc-open icon-edit"></i>
+                                            {{__('lang.product.form.summary.size')}}
+                                            <b class="fright mr-4">9,0 &times; 5,5 cm</b>
+                                        </div>
+                                        <div class="acc_content p-0 clearfix">
+                                            9,0 &times; 5,5 cm
+                                        </div>
+
+                                        <div class="acctitle">
+                                            <i class="acc-closed icon-edit1"></i>
+                                            <i class="acc-open icon-edit"></i>
+                                            {{__('lang.product.form.summary.side')}}
+                                            <b class="fright mr-4">2 sides</b>
+                                        </div>
+                                        <div class="acc_content p-0 clearfix">
+                                            2 sides
+                                        </div>
+
+                                        <div class="acctitle">
+                                            <i class="acc-closed icon-edit1"></i>
+                                            <i class="acc-open icon-edit"></i>
+                                            {{__('lang.product.form.summary.corner')}}
+                                            <b class="fright mr-4">Rounded</b>
+                                        </div>
+                                        <div class="acc_content p-0 clearfix">
+                                            Rounded
+                                        </div>
+
+                                        <div class="acctitle">
+                                            <i class="acc-closed icon-edit1"></i>
+                                            <i class="acc-open icon-edit"></i>
+                                            {{__('lang.product.form.summary.lamination')}}
+                                            <b class="fright mr-4">Non-laminated</b>
+                                        </div>
+                                        <div class="acc_content p-0 clearfix">
+                                            Non-laminated
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +176,7 @@
                                                 <tr>
                                                     <td>{{__('lang.product.form.summary.side')}}</td>
                                                     <td>:&nbsp;</td>
-                                                    <td>2</td>
+                                                    <td>2 sides</td>
                                                 </tr>
                                                 <tr>
                                                     <td>{{__('lang.product.form.summary.corner')}}</td>
@@ -136,23 +197,23 @@
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.quantity')}}
-                                            <b class="fright">&ndash;</b>
+                                            <b class="fright">1 box</b>
                                         </li>
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.price')}}
-                                            <b class="fright">&ndash;</b>
+                                            <b class="fright">Rp{{number_format(25000,2,',','.')}}</b>
                                         </li>
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.production')}}
-                                            <b class="fright">&ndash;</b>
+                                            <b class="fright">{{now()->formatLocalized('%d %b %Y')}}</b>
                                         </li>
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.delivery')}}
-                                            <b class="fright">&ndash;</b>
+                                            <b class="fright">2 &ndash; 3 days</b>
                                         </li>
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.received')}}
-                                            <b class="fright"><b>&ndash;</b></b>
+                                            <b class="fright"><b>{{now()->addDays(3)->formatLocalized('%d %b %Y')}}</b></b>
                                         </li>
                                     </ul>
                                     <div class="card-content pt-0 pb-0">

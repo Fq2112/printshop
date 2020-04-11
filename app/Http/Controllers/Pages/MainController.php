@@ -184,7 +184,7 @@ class MainController extends Controller
 
         } else {
             $data = $clust;
-            $guidelines = $data->guidelines;
+            $guidelines = $data->getSubKategori->guidelines;
             return view('pages.main.form-pemesanan', compact('data', 'guidelines'));
         }
     }
