@@ -83,7 +83,7 @@
 .myCard .card-title ul {
     margin: 0 0 0 1.5em;
     font-size: 14px;
-    text-transform: capitalize;
+    text-transform: none;
 }
 
 .myCard .card-footer {

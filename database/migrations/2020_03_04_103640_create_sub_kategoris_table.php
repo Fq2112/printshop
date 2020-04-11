@@ -23,6 +23,7 @@ class CreateSubKategorisTable extends Migration
             $table->text('permalink')->unique();
             $table->text('banner');
             $table->text('caption');
+            $table->text('guidelines')->nullable();
             $table->timestamps();
         });
     }

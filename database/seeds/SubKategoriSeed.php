@@ -289,6 +289,7 @@ class SubKategoriSeed extends Seeder
                         'id' => $item[2],
                         'en' => $item[3],
                     ],
+                    'guidelines' => preg_replace("![^a-z0-9]+!i", "-", strtolower($item[1])) . '.zip',
                 ]);
             }
         }

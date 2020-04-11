@@ -170,11 +170,22 @@ class MainController extends Controller
         $sub = SubKategori::where('permalink->en', $request->produk)->orwhere('permalink->id', $request->produk)
             ->whereHas('getCluster')->first();
         $clust = ClusterKategori::where('permalink->en', $request->produk)->orwhere('permalink->id', $request->produk)->first();
+        $guidelines = null;
 
-        if ($sub) {
-            return view('pages.main.produk', compact('sub'));
+        if (!is_null($sub)) {
+            $data = $sub;
+
+            if (count($sub->getCluster) > 0) {
+                return view('pages.main.produk', compact('data'));
+            } else {
+                $guidelines = $sub->guidelines;
+                return view('pages.main.form-pemesanan', compact('data', 'guidelines'));
+            }
+
         } else {
-            return view('pages.main.form-pemesanan', compact('clust'));
+            $data = $clust;
+            $guidelines = $data->guidelines;
+            return view('pages.main.form-pemesanan', compact('data', 'guidelines'));
         }
     }
 }

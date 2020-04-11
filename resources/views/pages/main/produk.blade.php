@@ -1,5 +1,5 @@
 @extends('layouts.mst')
-@section('title',  __('lang.product.title').$sub->name.' | '.__('lang.title'))
+@section('title',  __('lang.product.title').$data->name.' | '.__('lang.title'))
 @push('styles')
     <link rel="stylesheet" href="{{asset('css/card.css')}}">
     <style>
@@ -30,15 +30,15 @@
 @section('content')
     <section id="page-title" class="page-title-parallax page-title-dark page-title-center"
              data-bottom-top="background-position:0px 0px;" data-top-bottom="background-position:0px -300px;"
-             style="background-image:url('{{asset('storage/products/banner/'.$sub->banner)}}');background-size:cover;padding:120px 0;">
+             style="background-image:url('{{asset('storage/products/banner/'.$data->banner)}}');background-size:cover;padding:120px 0;">
         <div class="parallax-overlay"></div>
         <div class="container clearfix">
-            <h1>{{$sub->name}}</h1>
-            <span>{{$sub->caption}}</span>
+            <h1>{{$data->name}}</h1>
+            <span>{{$data->caption}}</span>
             <ol class="breadcrumb text-uppercase">
                 <li class="breadcrumb-item"><a href="{{route('beranda')}}">{{__('lang.breadcrumb.home')}}</a></li>
                 <li class="breadcrumb-item"><a href="{{URL::current()}}">{{__('lang.breadcrumb.product')}}</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{$sub->name}}</li>
+                <li class="breadcrumb-item active" aria-current="page">{{$data->name}}</li>
             </ol>
         </div>
     </section>
@@ -47,10 +47,10 @@
         <div class="content-wrap">
             <div class="container clearfix">
                 <div class="fancy-title title-dotted-border title-center">
-                    <h3>{{__('lang.product.head', ['name' => $sub->name])}}</h3>
+                    <h3>{{__('lang.product.head', ['name' => $data->name])}}</h3>
                 </div>
                 <div class="page-section card-deck nopadding nomargin">
-                    @foreach($sub->getCluster as $row)
+                    @foreach($data->getCluster as $row)
                         <div class="card myCard noborder nopadding" style="margin-bottom: 2rem;min-width: 18rem;">
                             <div class="img-card">
                                 <a href="{{route('produk', ['produk' => $row->permalink])}}">
@@ -67,7 +67,7 @@
                                     <h5 class="text-center mb-2" style="text-transform: none">
                                         {{__('lang.product.price', ['price' => number_format(25000,2,',','.')])}}
                                     </h5>
-                                    <div class="divider divider-center m-1"><i class="icon-circle"></i></div>
+                                    <div class="divider divider-center mt-1 mb-1"><i class="icon-circle"></i></div>
                                     {!! $row->features !!}
                                 </div>
                             </div>
