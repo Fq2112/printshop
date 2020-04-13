@@ -181,9 +181,6 @@
                                         asset('images/avatar.png') : asset('storage/users/ava/'.$bio->ava)}}"
                                              data-placement="bottom" data-toggle="tooltip"
                                              title="{{__('lang.tooltip.ava')}}">
-                                        <div class="custom-overlay">
-                                            <div class="custom-text"></div>
-                                        </div>
                                     </label>
                                     <input id="file-input" name="ava" type="file" accept="image/*">
                                     <div id="progress-upload">
@@ -359,9 +356,6 @@
                                                      asset('storage/users/background/'.$bio->background)}}"
                                                      data-placement="bottom" data-toggle="tooltip"
                                                      title="{{__('lang.tooltip.background')}}">
-                                                <div class="custom-overlay">
-                                                    <div class="custom-text"></div>
-                                                </div>
                                             </label>
                                             <input id="file-input-bg" name="background" type="file" accept="image/*">
                                             <div id="progress-upload-bg">

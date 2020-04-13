@@ -3,6 +3,14 @@
 @push('styles')
     <link rel="stylesheet" href="{{asset('css/card.css')}}">
     <style>
+        .myCard:hover img {
+            transform: scale(1.2);
+        }
+
+        .myCard:hover .custom-overlay {
+            opacity: 1;
+        }
+
         .card-deck {
             display: flex;
             flex-direction: row;

@@ -55,7 +55,7 @@ class AkunController extends Controller
             'lat' => $request->lat,
             'long' => $request->long,
             'save_as' => $request->save_as,
-            'is_main' => $request->is_main,
+            'is_main' => $request->has('is_main') ? $request->is_main : false,
         ]);
 
         return back()->with('add', __('lang.profile.address') . ' [' . $request->address . '] ' . __('lang.profile.create-address'));
@@ -77,7 +77,7 @@ class AkunController extends Controller
             'lat' => $request->lat,
             'long' => $request->long,
             'save_as' => $request->save_as,
-            'is_main' => $request->is_main,
+            'is_main' => $request->has('is_main') ? $request->is_main : false,
         ]);
 
         return back()->with('update', __('lang.profile.address') . ' [' . $address->address . '] ' . __('lang.profile.update-address'));
