@@ -11,26 +11,34 @@ class FrontSeeder extends Seeder
      */
 
     const DATA = [
-        ['name' => [
-            '5 X 5 Cm', ' 5 X 5 Cm'
-        ], 'description' => [
-            'Desain akan dicetak dalam ukuran 5 X 5 Cm', 'Design Will be Printed on 5 X 5 Cm'
-        ]],
-        ['name' => [
-            '10 X 10 Cm', ' 10 X 10 Cm'
-        ], 'description' => [
-            'Desain Akan Dicetak dalam ukuran 10 X 10 Cm', 'Design Will be Printed on 10 X 10 Cm'
-        ],],
-        ['name' => [
-            '10 X 20 Cm', ' 10 X 20 Cm'
-        ], 'description' => [
-            'Desain Akan Dicetak dalam ukuran 10 X 20 Cm', 'Design Will be Printed on 10 X 20 Cm'
-        ],],
-        ['name' => [
-            'Kosong', ' None'
-        ], 'description' => [
-            'Tanpa Desain', 'Without Design'
-        ],],
+        [
+            'name' => ['5 × 5 cm', ' 5 × 5 cm'],
+            'description' => [
+                'Desain akan dicetak dalam ukuran 5 × 5 cm',
+                'Design will be printed on 5 × 5 cm'
+            ]
+        ],
+        [
+            'name' => ['10 × 10 cm', ' 10 × 10 cm'],
+            'description' => [
+                'Desain Akan Dicetak dalam ukuran 10 × 10 cm',
+                'Design will be printed on 10 × 10 cm'
+            ],
+        ],
+        [
+            'name' => ['10 × 20 cm', ' 10 × 20 cm'],
+            'description' => [
+                'Desain Akan Dicetak dalam ukuran 10 × 20 cm',
+                'Design will be printed on 10 × 20 cm'
+            ],
+        ],
+        [
+            'name' => ['Kosong', 'Blank'],
+            'description' => [
+                'Tanpa desain',
+                'Without design'
+            ],
+        ],
     ];
 
     public function run()

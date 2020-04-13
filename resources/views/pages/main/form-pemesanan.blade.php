@@ -7,17 +7,6 @@
             width: 70%;
         }
 
-        #content .postcontent .accordion .acctitle {
-            padding: 10px 0;
-            font-weight: normal;
-            text-transform: none;
-        }
-
-        #content .postcontent .accordion .acctitle i {
-            right: 0;
-            left: unset;
-        }
-
         #content .sidebar {
             width: 27%;
         }
@@ -43,6 +32,77 @@
             padding: 0;
             border-collapse: separate;
             border-spacing: {{$app->isLocale('en') ? '1.1em' : '1.1rem'}} 0;
+        }
+
+        .component-accordion .panel-group .panel {
+            border: 0 none;
+            box-shadow: 0 4px 5px -1px #E5E5E5;
+            margin-bottom: 15px;
+        }
+
+        .component-accordion .panel-group .panel-heading {
+            background-color: #fff;
+            border-radius: 5px 5px 0 0;
+            color: #444;
+            padding: 0;
+        }
+
+        .component-accordion .panel-group .panel-heading h4 {
+            margin: 0;
+        }
+
+        .component-accordion .panel-group .panel-heading a:hover.active,
+        .component-accordion .panel-group .panel-heading a.active {
+            color: #f89406;
+        }
+
+        .component-accordion .panel-group .panel-title a {
+            border-radius: 5px 5px 0 0;
+            color: #888;
+            display: block;
+            font-size: 16px;
+            font-weight: 500;
+            text-transform: none;
+            position: relative;
+            padding: 15px;
+            transition: color .2s ease-in-out;
+        }
+
+        .component-accordion .panel-group .panel-title a:hover {
+            color: #444;
+            text-decoration: none;
+        }
+
+        .component-accordion .panel-group .panel-title a b {
+            margin-right: 4em;
+            float: right;
+        }
+
+        .component-accordion .panel-group .panel-title a.collapsed::after,
+        .component-accordion .panel-group .panel-title a::after {
+            border-left: 1px solid #eee;
+            font-family: 'font-icons';
+            content: "\ec52";
+            line-height: 55px;
+            padding-left: 20px;
+            position: absolute;
+            right: 19px;
+            top: 0;
+        }
+
+        .component-accordion .panel-group .panel-title a:after {
+            content: "\e9eb";
+        }
+
+        .component-accordion .panel-body {
+            background: #fff;
+            color: #888;
+            padding: 20px;
+        }
+
+        .component-accordion .panel-group .panel-heading + .panel-collapse > .panel-body,
+        .component-accordion .panel-group .panel-heading + .panel-collapse > .list-group {
+            border-top: 1px solid #eee;
         }
     </style>
 @endpush
@@ -74,55 +134,111 @@
                                     <h5 class="text-center mb-2" style="text-transform: none">
                                         {{__('lang.product.form.capt')}}</h5>
                                     <div class="divider divider-center mt-1 mb-1"><i class="icon-circle"></i></div>
-                                    <div class="accordion pl-3 pr-3 clearfix" data-state="closed">
-                                        <div class="acctitle">
-                                            <i class="acc-closed icon-edit1"></i>
-                                            <i class="acc-open icon-edit"></i>
-                                            {{__('lang.product.form.summary.materials')}}
-                                            <b class="fright mr-4">Art Carton 260gsm</b>
-                                        </div>
-                                        <div class="acc_content p-0 clearfix">
-                                            Art Carton 260gsm
-                                        </div>
-
-                                        <div class="acctitle">
-                                            <i class="acc-closed icon-edit1"></i>
-                                            <i class="acc-open icon-edit"></i>
-                                            {{__('lang.product.form.summary.size')}}
-                                            <b class="fright mr-4">9,0 &times; 5,5 cm</b>
-                                        </div>
-                                        <div class="acc_content p-0 clearfix">
-                                            9,0 &times; 5,5 cm
-                                        </div>
-
-                                        <div class="acctitle">
-                                            <i class="acc-closed icon-edit1"></i>
-                                            <i class="acc-open icon-edit"></i>
-                                            {{__('lang.product.form.summary.side')}}
-                                            <b class="fright mr-4">2 sides</b>
-                                        </div>
-                                        <div class="acc_content p-0 clearfix">
-                                            2 sides
-                                        </div>
-
-                                        <div class="acctitle">
-                                            <i class="acc-closed icon-edit1"></i>
-                                            <i class="acc-open icon-edit"></i>
-                                            {{__('lang.product.form.summary.corner')}}
-                                            <b class="fright mr-4">Rounded</b>
-                                        </div>
-                                        <div class="acc_content p-0 clearfix">
-                                            Rounded
-                                        </div>
-
-                                        <div class="acctitle">
-                                            <i class="acc-closed icon-edit1"></i>
-                                            <i class="acc-open icon-edit"></i>
-                                            {{__('lang.product.form.summary.lamination')}}
-                                            <b class="fright mr-4">Non-laminated</b>
-                                        </div>
-                                        <div class="acc_content p-0 clearfix">
-                                            Non-laminated
+                                    <div class="component-accordion">
+                                        <div class="panel-group" id="accordion" role="tablist">
+                                            <div class="panel">
+                                                <div class="panel-heading" role="tab" id="headingOne">
+                                                    <h4 class="panel-title">
+                                                        <a role="button" data-toggle="collapse" href="#collapseOne"
+                                                           aria-expanded="false" aria-controls="collapseOne"
+                                                           class="collapsed">
+                                                            {{__('lang.product.form.summary.materials')}}
+                                                            <b>Art Carton 260gsm</b>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel"
+                                                     aria-labelledby="headingOne" aria-expanded="false"
+                                                     style="height: 0;" data-parent="#accordion">
+                                                    <div class="panel-body">
+                                                        Nulla tempus imperdiet leo, eu maximus lacus gravida gravida.
+                                                        Curabitur quis vestibulum diam. Proin sed interdum turpis.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" role="tab" id="headingTwo">
+                                                    <h4 class="panel-title">
+                                                        <a class="collapsed" role="button" data-toggle="collapse"
+                                                           href="#collapseTwo" aria-expanded="false"
+                                                           aria-controls="collapseTwo">
+                                                            {{__('lang.product.form.summary.size')}}
+                                                            <b>9,0 &times; 5,5 cm</b>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+                                                     aria-labelledby="headingTwo" aria-expanded="false"
+                                                     style="height: 0;" data-parent="#accordion">
+                                                    <div class="panel-body">
+                                                        Nulla tempus imperdiet leo, eu maximus lacus gravida gravida.
+                                                        Curabitur quis vestibulum diam. Proin sed interdum turpis.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" role="tab" id="headingThree">
+                                                    <h4 class="panel-title">
+                                                        <a class="collapsed" role="button" data-toggle="collapse"
+                                                           href="#collapseThree" aria-expanded="false"
+                                                           aria-controls="collapseThree">
+                                                            {{__('lang.product.form.summary.side')}}
+                                                            <b>2 sides</b>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
+                                                     aria-labelledby="headingThree" aria-expanded="false"
+                                                     style="height: 0;" data-parent="#accordion">
+                                                    <div class="panel-body">
+                                                        Nulla tempus imperdiet leo, eu maximus lacus gravida gravida.
+                                                        Curabitur quis vestibulum diam. Proin sed interdum
+                                                        turpis.vestibulum diam. Proin sed interdum turpis.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" role="tab" id="headingFour">
+                                                    <h4 class="panel-title">
+                                                        <a class="collapsed" role="button" data-toggle="collapse"
+                                                           href="#collapseFour" aria-expanded="false"
+                                                           aria-controls="collapseFour">
+                                                            {{__('lang.product.form.summary.corner')}}
+                                                            <b>Rounded</b>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel"
+                                                     aria-labelledby="headingFour" aria-expanded="false"
+                                                     style="height: 0;" data-parent="#accordion">
+                                                    <div class="panel-body">
+                                                        Nulla tempus imperdiet leo, eu maximus lacus gravida gravida.
+                                                        Curabitur quis vestibulum diam. Proin sed interdum
+                                                        turpis.vestibulum diam. Proin sed interdum turpis.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" role="tab" id="headingFive">
+                                                    <h4 class="panel-title">
+                                                        <a class="collapsed" role="button" data-toggle="collapse"
+                                                           href="#collapseFive" aria-expanded="false"
+                                                           aria-controls="collapseFive">
+                                                            {{__('lang.product.form.summary.lamination')}}
+                                                            <b>Non-laminated</b>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapseFive" class="panel-collapse collapse" role="tabpanel"
+                                                     aria-labelledby="headingFive" aria-expanded="false"
+                                                     style="height: 0;" data-parent="#accordion">
+                                                    <div class="panel-body">
+                                                        Nulla tempus imperdiet leo, eu maximus lacus gravida gravida.
+                                                        Curabitur quis vestibulum diam. Proin sed interdum
+                                                        turpis.vestibulum diam. Proin sed interdum turpis.
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -262,6 +378,20 @@
 @endsection
 @push('scripts')
     <script>
+        $(function () {
+            var collapse = $('.panel-collapse');
 
+            collapse.on('show.bs.collapse', function () {
+                $(this).siblings('.panel-heading').addClass('active');
+                $(this).siblings('.panel-heading').find('a').addClass('active font-weight-bold');
+                $(this).siblings('.panel-heading').find('b').toggle(300);
+            });
+
+            collapse.on('hide.bs.collapse', function () {
+                $(this).siblings('.panel-heading').removeClass('active');
+                $(this).siblings('.panel-heading').find('a').removeClass('active font-weight-bold');
+                $(this).siblings('.panel-heading').find('b').toggle(300);
+            });
+        });
     </script>
 @endpush

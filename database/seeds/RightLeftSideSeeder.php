@@ -10,16 +10,20 @@ class RightLeftSideSeeder extends Seeder
      * @return void
      */
     const DATA = [
-        ['name' => [
-            '5 X 5 Cm', ' 5 X 5 Cm'
-        ], 'description' => [
-            'Desain akan dicetak dalam ukuran 5 X 5 Cm', 'Design Will be Printed on 5 X 5 Cm'
-        ]],
-        ['name' => [
-            'Kosong', ' None'
-        ], 'description' => [
-            'Tanpa Desain', 'Without Design'
-        ],],
+        [
+            'name' => ['5 × 5 cm', ' 5 × 5 cm'],
+            'description' => [
+                'Desain akan dicetak dalam ukuran 5 × 5 cm',
+                'Design will be printed on 5 × 5 cm'
+            ]
+        ],
+        [
+            'name' => ['Kosong', 'Blank'],
+            'description' => [
+                'Tanpa desain',
+                'Without design'
+            ],
+        ],
     ];
 
     public function run()

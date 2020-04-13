@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class SdeSeeder extends Seeder
+class SideSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,16 +11,20 @@ class SdeSeeder extends Seeder
      */
 
     const DATA = [
-        ['name' => [
-            '1 Sisi', ' 1 Side'
-        ], 'description' => [
-            'Potongan Sudut 90 Derajat', 'Standard Cutting With 90 Degree Corner'
-        ]],
-        ['name' => [
-            '2 Sisi', ' Rounded Corner'
-        ], 'description' => [
-            'Potongan Sudut Melengkung', 'Advance Cutting With Rounded Corner'
-        ],]
+        [
+            'name' => ['1 sisi', '1 side'],
+            'description' => [
+                'Desain akan dicetak pada satu sisi',
+                'Design will be printed on one side'
+            ]
+        ],
+        [
+            'name' => ['2 sisi', '2 sides'],
+            'description' => [
+                'Desain akan dicetak pada kedua sisi',
+                'Design will be printed on both sides'
+            ],
+        ]
     ];
     public function run()
     {

@@ -11,22 +11,22 @@ class FinishingSeeder extends Seeder
      */
 
     const DATA = [
-        'Hard Cover Kancing',
-        'Hard Cover Spiral Dalam',
-        'Hard Cover Spiral Luar',
-        'Hard Cover Lem',
-        'Hard Cover Jahit',
-        'Soft Cover < 2 Cm',
-        'Soft Cover < 4 Cm' ,
-        'Soft Cover > 4 Cm',
-        'Spiral < 2 Cm',
-        'Spiral > 2 Cm',
-        'Jepret',
-        'Hard Cover Calender',
-        'Laser Cut',
-        'Laser Ivory',
-        'Klep Seng',
-        'Spiral Kalender',
+        ['Hardcover Kancing', 'Buttons Hardcover'],
+        ['Hardcover Spiral Dalam', 'Inner Spiral Hardcover'],
+        ['Hardcover Spiral Luar', 'Outer Spiral Hardcover'],
+        ['Hardcover Lem', 'Glue Hardcover'],
+        ['Hardcover Jahit', 'Sewing Hardcover'],
+        ['Softcover < 2 cm', 'Softcover < 2 cm'],
+        ['Softcover < 4 cm', 'Softcover < 4 cm'],
+        ['Softcover > 4 cm', 'Softcover > 4 cm'],
+        ['Spiral < 2 cm', 'Spiral < 2 cm'],
+        ['Spiral > 2 cm', 'Spiral > 2 cm'],
+        ['Jepret', 'Snap'],
+        ['Hardcover Kalender', 'Calendar Hardcover'],
+        ['Laser Cut', 'Cut Laser'],
+        ['Laser Ivory', 'Ivory Laser'],
+        ['Klep Seng', 'Zinc Valve'],
+        ['Spiral Kalender', ''],
     ];
 
     public function run()
@@ -34,7 +34,10 @@ class FinishingSeeder extends Seeder
         foreach (self::DATA as $item){
             $faker = \Faker\Factory::create('id_ID');
             \App\Models\Finishing::create([
-                'name' => $item
+                'name' => [
+                    'id' => $item[0],
+                    'en' => $item[1],
+                ]
             ]);
         }
     }

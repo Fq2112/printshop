@@ -9,20 +9,20 @@ use Spatie\Translatable\HasTranslations;
 
 class Finishing extends Model
 {
-//    use HasTranslations;
+    use HasTranslations;
 
     protected $table = 'finishings';
 
     protected $guarded = ['id'];
 
-//    public $translatable = ['name','description'];
+    public $translatable = ['name'];
 
-//    public function getLocale(): string
-//    {
-//        if (is_null(App::getLocale())) {
-//            Config::set('app.locale', 'id');
-//        }
-//
-//        return Config::get('app.locale');
-//    }
+    public function getLocale(): string
+    {
+        if (is_null(App::getLocale())) {
+            Config::set('app.locale', 'id');
+        }
+
+        return Config::get('app.locale');
+    }
 }

@@ -10,24 +10,27 @@ class FoldingSeeder extends Seeder
      * @return void
      */
     const DATA = [
-        ['name' => [
-            'Lipat Dua', ' 1 Side'
-        ], 'description' => [
-            'Lipatan di tengah kertas menghasilkan porduk yang telipat menjadi dua pada bagaian tengah',
-            'One Time Folding product the amount of 2 sections'
-        ],],
-        ['name' => [
-            'Tri-Fold U', ' Tri-Fold U'
-        ], 'description' => [
-            'Lipatan di tengah kertas menghasilkan porduk yang telipat menjadi tiga dengan model lipatan kedalam',
-            'Two times centered-folding producing the amount of 3 sections'
-        ],],
-        ['name' => [
-            'Tri-Fold Z', ' Tri-Fold Z'
-        ], 'description' => [
-            'Lipatan di tengah kertas menghasilkan porduk yang telipat menjadi tiga dengan moodel lipatan Zig-Zag',
-            'Two times zig-zag producing the amount of 3 sections'
-        ],]
+        [
+            'name' => ['Lipat Dua', 'Bifold'],
+            'description' => [
+                'Satu lipatan di tengah kertas menghasilkan dua bagian yang sama',
+                'A fold in the middle of the paper produces two equal parts'
+            ],
+        ],
+        [
+            'name' => ['Tri-Fold U', ' Tri-Fold U'],
+            'description' => [
+                'Dua lipatan di tengah kertas dengan model lipatan ke dalam menghasilkan tiga bagian yang sama',
+                'Two folds in the middle of the paper with inward-fold model produce three equal parts'
+            ],
+        ],
+        [
+            'name' => ['Tri-Fold Z', ' Tri-Fold Z'],
+            'description' => [
+                'Dua lipatan di tengah kertas dengan model lipatan zigzag menghasilkan tiga bagian yang sama',
+                'Two folds in the middle of the paper with zigzag-fold model produce three equal parts'
+            ],
+        ]
     ];
 
     public function run()

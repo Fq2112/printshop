@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
              SubKategoriSeed::class,
              ClusterKategoriSeed::class,
              EdgeSeeder::class,
-             SdeSeeder::class,
+             SideSeeder::class,
              FrontSeeder::class,
              RightLeftSideSeeder::class,
              BackSideSeeder::class,
