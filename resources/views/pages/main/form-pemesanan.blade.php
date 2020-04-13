@@ -104,6 +104,64 @@
         .component-accordion .panel-group .panel-heading + .panel-collapse > .list-group {
             border-top: 1px solid #eee;
         }
+
+        .card-label {
+            width: 100%;
+        }
+
+        .card-rb {
+            display: none;
+        }
+
+        .card-input {
+            cursor: pointer;
+            border: 1px solid #eee;
+            -webkit-transition: all .2s ease-in-out;
+            -moz-transition: all .2s ease-in-out;
+            transition: all .2s ease-in-out;
+            opacity: .6;
+        }
+
+        .card-input:hover {
+            border-color: #f89406;
+            opacity: .8;
+        }
+
+        .card-rb:checked + .card-input {
+            border-color: #f89406;
+            opacity: 1;
+        }
+
+        .card-input .card-img-overlay {
+            background: rgba(0, 0, 0, 0.4);
+            font-size: 2rem;
+            opacity: 0;
+            -webkit-transition: all .3s ease-in-out;
+            -moz-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
+        }
+
+        .card-input a:hover .card-img-overlay {
+            opacity: 1;
+            color: #fff;
+        }
+
+        .card-input img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .card-input .card-title {
+            font-weight: 600 !important;
+            font-size: 15px;
+            text-transform: none;
+        }
+
+        .card-input .card-text {
+            font-weight: 500;
+            text-align: justify;
+            line-height: unset !important;
+        }
     </style>
 @endpush
 @section('content')
@@ -137,105 +195,398 @@
                                     <div class="component-accordion">
                                         <div class="panel-group" id="accordion" role="tablist">
                                             <div class="panel">
-                                                <div class="panel-heading" role="tab" id="headingOne">
+                                                <div class="panel-heading" role="tab" id="heading-materials">
                                                     <h4 class="panel-title">
-                                                        <a role="button" data-toggle="collapse" href="#collapseOne"
-                                                           aria-expanded="false" aria-controls="collapseOne"
-                                                           class="collapsed">
+                                                        <a role="button" data-toggle="collapse"
+                                                           href="#collapse-materials" aria-expanded="false"
+                                                           aria-controls="collapse-materials" class="collapsed">
                                                             {{__('lang.product.form.summary.materials')}}
-                                                            <b>Art Carton 260gsm</b>
+                                                            <b class="show-materials"></b>
                                                         </a>
                                                     </h4>
                                                 </div>
-                                                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel"
-                                                     aria-labelledby="headingOne" aria-expanded="false"
+                                                <div id="collapse-materials" class="panel-collapse collapse"
+                                                     role="tabpanel"
+                                                     aria-labelledby="heading-materials" aria-expanded="false"
                                                      style="height: 0;" data-parent="#accordion">
                                                     <div class="panel-body">
-                                                        Nulla tempus imperdiet leo, eu maximus lacus gravida gravida.
-                                                        Curabitur quis vestibulum diam. Proin sed interdum turpis.
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <label class="card-label" for="ac-260"
+                                                                       onclick="productSpecs('materials', $(this).attr('for'))">
+                                                                    <input id="ac-260" class="card-rb" name="materials"
+                                                                           type="radio" value="Art Carton 260gsm"
+                                                                           checked required>
+                                                                    <div class="card card-input">
+                                                                        <div class="row no-gutters">
+                                                                            <div class="col-auto">
+                                                                                <a href="//placehold.it/500"
+                                                                                   data-lightbox="image">
+                                                                                    <img src="//placehold.it/100"
+                                                                                         alt="Thumbnail">
+                                                                                    <div
+                                                                                        class="card-img-overlay d-flex">
+                                                                                        <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                                    </div>
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <div class="card-block p-2">
+                                                                                    <h4 class="card-title">Art Carton
+                                                                                        260gsm</h4>
+                                                                                    <p class="card-text">Thick but
+                                                                                        economical. Shiny surface on
+                                                                                        both sides with a thickness of
+                                                                                        260 gsm.</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <label class="card-label" for="ac-310"
+                                                                       onclick="productSpecs('materials', $(this).attr('for'))">
+                                                                    <input id="ac-310" class="card-rb" name="materials"
+                                                                           type="radio" value="Art Carton 310gsm">
+                                                                    <div class="card card-input">
+                                                                        <div class="row no-gutters">
+                                                                            <div class="col-auto">
+                                                                                <a href="//placehold.it/500"
+                                                                                   data-lightbox="image">
+                                                                                    <img src="//placehold.it/100"
+                                                                                         alt="Thumbnail">
+                                                                                    <div
+                                                                                        class="card-img-overlay d-flex">
+                                                                                        <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                                    </div>
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <div class="card-block p-2">
+                                                                                    <h4 class="card-title">Art Carton
+                                                                                        310gsm</h4>
+                                                                                    <p class="card-text">Same with
+                                                                                        260gsm Art Carton but
+                                                                                        thicker.</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="panel panel-default">
-                                                <div class="panel-heading" role="tab" id="headingTwo">
+                                                <div class="panel-heading" role="tab" id="heading-size">
                                                     <h4 class="panel-title">
                                                         <a class="collapsed" role="button" data-toggle="collapse"
-                                                           href="#collapseTwo" aria-expanded="false"
-                                                           aria-controls="collapseTwo">
+                                                           href="#collapse-size" aria-expanded="false"
+                                                           aria-controls="collapse-size">
                                                             {{__('lang.product.form.summary.size')}}
-                                                            <b>9,0 &times; 5,5 cm</b>
+                                                            <b class="show-size"></b>
                                                         </a>
                                                     </h4>
                                                 </div>
-                                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
-                                                     aria-labelledby="headingTwo" aria-expanded="false"
+                                                <div id="collapse-size" class="panel-collapse collapse" role="tabpanel"
+                                                     aria-labelledby="heading-size" aria-expanded="false"
                                                      style="height: 0;" data-parent="#accordion">
                                                     <div class="panel-body">
-                                                        Nulla tempus imperdiet leo, eu maximus lacus gravida gravida.
-                                                        Curabitur quis vestibulum diam. Proin sed interdum turpis.
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <label class="card-label" for="size-95"
+                                                                       onclick="productSpecs('size', $(this).attr('for'))">
+                                                                    <input id="size-95" class="card-rb" name="size"
+                                                                           type="radio" value="9,0 x 5,5 cm" checked
+                                                                           required>
+                                                                    <div class="card card-input">
+                                                                        <div class="card-block py-2 px-5">
+                                                                            <h4 class="card-title text-center">9,0 x 5,5
+                                                                                cm</h4>
+                                                                        </div>
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="panel panel-default">
-                                                <div class="panel-heading" role="tab" id="headingThree">
+                                                <div class="panel-heading" role="tab" id="heading-side">
                                                     <h4 class="panel-title">
                                                         <a class="collapsed" role="button" data-toggle="collapse"
-                                                           href="#collapseThree" aria-expanded="false"
-                                                           aria-controls="collapseThree">
+                                                           href="#collapse-side" aria-expanded="false"
+                                                           aria-controls="collapse-side">
                                                             {{__('lang.product.form.summary.side')}}
-                                                            <b>2 sides</b>
+                                                            <b class="show-side"></b>
                                                         </a>
                                                     </h4>
                                                 </div>
-                                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
-                                                     aria-labelledby="headingThree" aria-expanded="false"
+                                                <div id="collapse-side" class="panel-collapse collapse" role="tabpanel"
+                                                     aria-labelledby="heading-side" aria-expanded="false"
                                                      style="height: 0;" data-parent="#accordion">
                                                     <div class="panel-body">
-                                                        Nulla tempus imperdiet leo, eu maximus lacus gravida gravida.
-                                                        Curabitur quis vestibulum diam. Proin sed interdum
-                                                        turpis.vestibulum diam. Proin sed interdum turpis.
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <label class="card-label" for="side-1"
+                                                                       onclick="productSpecs('side', $(this).attr('for'))">
+                                                                    <input id="side-1" class="card-rb" name="side"
+                                                                           type="radio" value="1 side" checked required>
+                                                                    <div class="card card-input">
+                                                                        <div class="row no-gutters">
+                                                                            <div class="col-auto">
+                                                                                <a href="//placehold.it/500"
+                                                                                   data-lightbox="image">
+                                                                                    <img src="//placehold.it/100"
+                                                                                         alt="Thumbnail">
+                                                                                    <div
+                                                                                        class="card-img-overlay d-flex">
+                                                                                        <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                                    </div>
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <div class="card-block p-2">
+                                                                                    <h4 class="card-title">1 side</h4>
+                                                                                    <p class="card-text">Design will be
+                                                                                        printed on one side.</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <label class="card-label" for="side-2"
+                                                                       onclick="productSpecs('side', $(this).attr('for'))">
+                                                                    <input id="side-2" class="card-rb" name="side"
+                                                                           type="radio" value="2 sides">
+                                                                    <div class="card card-input">
+                                                                        <div class="row no-gutters">
+                                                                            <div class="col-auto">
+                                                                                <a href="//placehold.it/500"
+                                                                                   data-lightbox="image">
+                                                                                    <img src="//placehold.it/100"
+                                                                                         alt="Thumbnail">
+                                                                                    <div
+                                                                                        class="card-img-overlay d-flex">
+                                                                                        <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                                    </div>
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <div class="card-block p-2">
+                                                                                    <h4 class="card-title">2 sides</h4>
+                                                                                    <p class="card-text">Design will be
+                                                                                        printed on both sides.</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="panel panel-default">
-                                                <div class="panel-heading" role="tab" id="headingFour">
+                                                <div class="panel-heading" role="tab" id="heading-corner">
                                                     <h4 class="panel-title">
                                                         <a class="collapsed" role="button" data-toggle="collapse"
-                                                           href="#collapseFour" aria-expanded="false"
-                                                           aria-controls="collapseFour">
+                                                           href="#collapse-corner" aria-expanded="false"
+                                                           aria-controls="collapse-corner">
                                                             {{__('lang.product.form.summary.corner')}}
-                                                            <b>Rounded</b>
+                                                            <b class="show-corner"></b>
                                                         </a>
                                                     </h4>
                                                 </div>
-                                                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel"
-                                                     aria-labelledby="headingFour" aria-expanded="false"
+                                                <div id="collapse-corner" class="panel-collapse collapse"
+                                                     role="tabpanel"
+                                                     aria-labelledby="heading-corner" aria-expanded="false"
                                                      style="height: 0;" data-parent="#accordion">
                                                     <div class="panel-body">
-                                                        Nulla tempus imperdiet leo, eu maximus lacus gravida gravida.
-                                                        Curabitur quis vestibulum diam. Proin sed interdum
-                                                        turpis.vestibulum diam. Proin sed interdum turpis.
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <label class="card-label" for="corner-square"
+                                                                       onclick="productSpecs('corner', $(this).attr('for'))">
+                                                                    <input id="corner-square" class="card-rb"
+                                                                           name="corner"
+                                                                           type="radio" value="Square" checked required>
+                                                                    <div class="card card-input">
+                                                                        <div class="row no-gutters">
+                                                                            <div class="col-auto">
+                                                                                <a href="//placehold.it/500"
+                                                                                   data-lightbox="image">
+                                                                                    <img src="//placehold.it/100"
+                                                                                         alt="Thumbnail">
+                                                                                    <div
+                                                                                        class="card-img-overlay d-flex">
+                                                                                        <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                                    </div>
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <div class="card-block p-2">
+                                                                                    <h4 class="card-title">Square
+                                                                                        Corner</h4>
+                                                                                    <p class="card-text">Standard
+                                                                                        cutting with 90° square
+                                                                                        corner.</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <label class="card-label" for="corner-rounded"
+                                                                       onclick="productSpecs('corner', $(this).attr('for'))">
+                                                                    <input id="corner-rounded" class="card-rb"
+                                                                           name="corner"
+                                                                           type="radio" value="Rounded">
+                                                                    <div class="card card-input">
+                                                                        <div class="row no-gutters">
+                                                                            <div class="col-auto">
+                                                                                <a href="//placehold.it/500"
+                                                                                   data-lightbox="image">
+                                                                                    <img src="//placehold.it/100"
+                                                                                         alt="Thumbnail">
+                                                                                    <div
+                                                                                        class="card-img-overlay d-flex">
+                                                                                        <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                                    </div>
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <div class="card-block p-2">
+                                                                                    <h4 class="card-title">Rounded
+                                                                                        Corner</h4>
+                                                                                    <p class="card-text">Advance cutting
+                                                                                        with rounded corner.</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="panel panel-default">
-                                                <div class="panel-heading" role="tab" id="headingFive">
+                                                <div class="panel-heading" role="tab" id="heading-lamination">
                                                     <h4 class="panel-title">
                                                         <a class="collapsed" role="button" data-toggle="collapse"
-                                                           href="#collapseFive" aria-expanded="false"
-                                                           aria-controls="collapseFive">
+                                                           href="#collapse-lamination" aria-expanded="false"
+                                                           aria-controls="collapse-lamination">
                                                             {{__('lang.product.form.summary.lamination')}}
-                                                            <b>Non-laminated</b>
+                                                            <b class="show-lamination"></b>
                                                         </a>
                                                     </h4>
                                                 </div>
-                                                <div id="collapseFive" class="panel-collapse collapse" role="tabpanel"
-                                                     aria-labelledby="headingFive" aria-expanded="false"
+                                                <div id="collapse-lamination" class="panel-collapse collapse"
+                                                     role="tabpanel"
+                                                     aria-labelledby="heading-lamination" aria-expanded="false"
                                                      style="height: 0;" data-parent="#accordion">
                                                     <div class="panel-body">
-                                                        Nulla tempus imperdiet leo, eu maximus lacus gravida gravida.
-                                                        Curabitur quis vestibulum diam. Proin sed interdum
-                                                        turpis.vestibulum diam. Proin sed interdum turpis.
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <label class="card-label" for="lamination-non"
+                                                                       onclick="productSpecs('lamination', $(this).attr('for'))">
+                                                                    <input id="lamination-non" class="card-rb"
+                                                                           name="lamination"
+                                                                           type="radio" value="Non-laminated" required>
+                                                                    <div class="card card-input">
+                                                                        <div class="row no-gutters">
+                                                                            <div class="col-auto">
+                                                                                <a href="//placehold.it/500"
+                                                                                   data-lightbox="image">
+                                                                                    <img src="//placehold.it/100"
+                                                                                         alt="Thumbnail">
+                                                                                    <div
+                                                                                        class="card-img-overlay d-flex">
+                                                                                        <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                                    </div>
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <div class="card-block p-2">
+                                                                                    <h4 class="card-title">
+                                                                                        Non-laminated</h4>
+                                                                                    <p class="card-text">Paper surface
+                                                                                        is not laminated.</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <label class="card-label" for="lamination-doff"
+                                                                       onclick="productSpecs('lamination', $(this).attr('for'))">
+                                                                    <input id="lamination-doff" class="card-rb"
+                                                                           name="lamination"
+                                                                           type="radio" value="Doff/Matte" checked>
+                                                                    <div class="card card-input">
+                                                                        <div class="row no-gutters">
+                                                                            <div class="col-auto">
+                                                                                <a href="//placehold.it/500"
+                                                                                   data-lightbox="image">
+                                                                                    <img src="//placehold.it/100"
+                                                                                         alt="Thumbnail">
+                                                                                    <div
+                                                                                        class="card-img-overlay d-flex">
+                                                                                        <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                                    </div>
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <div class="card-block p-2">
+                                                                                    <h4 class="card-title">
+                                                                                        Doff/Matte</h4>
+                                                                                    <p class="card-text">Paper surface
+                                                                                        is smooth, non-glossy, and looks
+                                                                                        more exclusive.</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <label class="card-label" for="lamination-glossy"
+                                                                       onclick="productSpecs('lamination', $(this).attr('for'))">
+                                                                    <input id="lamination-glossy" class="card-rb"
+                                                                           name="lamination"
+                                                                           type="radio" value="Glossy">
+                                                                    <div class="card card-input">
+                                                                        <div class="row no-gutters">
+                                                                            <div class="col-auto">
+                                                                                <a href="//placehold.it/500"
+                                                                                   data-lightbox="image">
+                                                                                    <img src="//placehold.it/100"
+                                                                                         alt="Thumbnail">
+                                                                                    <div
+                                                                                        class="card-img-overlay d-flex">
+                                                                                        <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                                    </div>
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="col">
+                                                                                <div class="card-block p-2">
+                                                                                    <h4 class="card-title">Glossy</h4>
+                                                                                    <p class="card-text">Paper surface
+                                                                                        is glossy, brighter, and print
+                                                                                        colors are more visible.</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -253,7 +604,8 @@
                                     <h5 class="text-center mb-2" style="text-transform: none">
                                         {{__('lang.product.form.quantity.capt')}}</h5>
                                     <div class="divider divider-center mt-1 mb-1"><i class="icon-circle"></i></div>
-
+                                    <input id="range-quantity" name="quantity"
+                                           class="range_01 input-range-slider" required>
                                 </div>
                             </div>
                         </div>
@@ -282,27 +634,27 @@
                                                 <tr>
                                                     <td>{{__('lang.product.form.summary.materials')}}</td>
                                                     <td>:&nbsp;</td>
-                                                    <td>Art Carton 260gsm</td>
+                                                    <td class="show-materials"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>{{__('lang.product.form.summary.size')}}</td>
                                                     <td>:&nbsp;</td>
-                                                    <td>9,0 &times; 5,5 cm</td>
+                                                    <td class="show-size"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>{{__('lang.product.form.summary.side')}}</td>
                                                     <td>:&nbsp;</td>
-                                                    <td>2 sides</td>
+                                                    <td class="show-side"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>{{__('lang.product.form.summary.corner')}}</td>
                                                     <td>:&nbsp;</td>
-                                                    <td>Rounded</td>
+                                                    <td class="show-corner"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>{{__('lang.product.form.summary.lamination')}}</td>
                                                     <td>:&nbsp;</td>
-                                                    <td>Non-laminated</td>
+                                                    <td class="show-lamination"></td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -313,7 +665,7 @@
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.quantity')}}
-                                            <b class="fright">1 box</b>
+                                            <b class="fright show-quantity"></b>
                                         </li>
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.price')}}
@@ -378,8 +730,22 @@
 @endsection
 @push('scripts')
     <script>
+        var collapse = $('.panel-collapse'), range_slider = $("#range-quantity");
+
         $(function () {
-            var collapse = $('.panel-collapse');
+            range_slider.ionRangeSlider({
+                grid: true,
+                min: 1,
+                max: 100,
+                from: 5,
+                postfix: " pcs",
+                onStart: function (data) {
+                    $(".show-quantity").text(data.from + " pcs");
+                },
+                onChange: function (data) {
+                    $(".show-quantity").text(data.from + " pcs");
+                }
+            });
 
             collapse.on('show.bs.collapse', function () {
                 $(this).siblings('.panel-heading').addClass('active');
@@ -392,6 +758,17 @@
                 $(this).siblings('.panel-heading').find('a').removeClass('active font-weight-bold');
                 $(this).siblings('.panel-heading').find('b').toggle(300);
             });
+
+            $(".show-materials").text($("input[name='materials']:checked").val());
+            $(".show-size").text($("input[name='size']:checked").val());
+            $(".show-side").text($("input[name='side']:checked").val());
+            $(".show-corner").text($("input[name='corner']:checked").val());
+            $(".show-lamination").text($("input[name='lamination']:checked").val());
         });
+
+        function productSpecs(check, spec) {
+            $(".show-" + check).text($("#" + spec).val());
+            $('#collapse-' + check).collapse('toggle');
+        }
     </script>
 @endpush

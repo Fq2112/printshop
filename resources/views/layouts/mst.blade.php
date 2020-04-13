@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{{asset('css/components/datepicker.css')}}">
     <link rel="stylesheet" href="{{asset('css/components/bs-switches.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('css/components/radio-checkbox.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/components/ion.rangeslider.css')}}" type="text/css">
 
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('css/media-query.css')}}" type="text/css">
@@ -508,6 +509,8 @@
 <script src="{{asset('js/components/datepicker.js')}}"></script>
 <!-- Bootstrap Switch Plugin -->
 <script src="{{asset('js/components/bs-switches.js')}}"></script>
+<!-- ion range-slider Plugin -->
+<script src="{{asset('js/components/rangeslider.min.js')}}"></script>
 <!-- toggle password -->
 <script src="{{asset('js/hideShowPassword.min.js')}}"></script>
 <!-- check-mobile -->
