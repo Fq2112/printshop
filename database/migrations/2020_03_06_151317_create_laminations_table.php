@@ -16,6 +16,8 @@ class CreateLaminationsTable extends Migration
         Schema::create('laminations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->text('image');
+            $table->text('description');
             $table->timestamps();
         });
     }
