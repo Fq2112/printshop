@@ -79,7 +79,7 @@ return [
         "price" => "Starting price Rp:price",
         "form" => [
             "head" => "Specify Your Needs",
-            "capt" => "Choose your preferred materials",
+            "capt" => "Choose your preferred product specifications",
             "summary" => [
                 "head" => "Order Summary",
                 "capt" => "Make sure your order is correct",
@@ -98,8 +98,12 @@ return [
                 "alert" => "Product specifications and designs listed will be applied to <b>:quantity</b> of the <b>:product</b> that you ordered.",
                 "layout" => "Layout Guidelines",
             ],
+            "shipping" => [
+                "head" => "Shipping Address",
+                "capt" => "Decide where the district/city your print products will be sent",
+            ],
             "quantity" => [
-                "head" => "Choose Product Quantity",
+                "head" => "Product Quantity",
                 "capt" => "Make sure the product quantity that you order matches your needs",
             ],
         ],
@@ -183,7 +187,7 @@ return [
         "address-capt" => "Please add an address to make your order process easier.",
         "main-address" => "Main Address",
         "province" => "Province",
-        "city" => "City",
+        "city" => "District / City",
         "zip" => "Postal Code",
         "set-address" => "Please set your address first.",
         "address-fail" => "Cannot determine address at this location.",

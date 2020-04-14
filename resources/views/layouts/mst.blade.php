@@ -146,6 +146,40 @@
             text-align: center;
         }
 
+        .bootstrap-select .dropdown-toggle {
+            background-color: #fff;
+            border-color: #ced4da;
+        }
+
+        .bootstrap-select > .dropdown-toggle.bs-placeholder {
+            color: #909090;
+        }
+
+        .bootstrap-select .dropdown-menu {
+            min-width: 100% !important;
+            background: #fff !important;
+            text-align: justify !important;
+        }
+
+        .bootstrap-select .dropdown-menu > .active > a,
+        .bootstrap-select .dropdown-menu > .active > a:hover,
+        .bootstrap-select .dropdown-menu > .active > a:focus {
+            color: #fff !important;
+            background: #f89406 !important;
+        }
+
+        .bootstrap-select a.dropdown-item:hover,
+        .bootstrap-select a.dropdown-item:focus,
+        .bootstrap-select a.dropdown-item:active {
+            color: #fff !important;
+            background: #f89406 !important;
+        }
+
+        .bootstrap-select .dropdown-menu li:hover,
+        .bootstrap-select .dropdown-menu li:focus {
+            background: #eee !important;
+        }
+
         .parallax-overlay {
             background: linear-gradient(to bottom, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .45) 30%, rgba(0, 0, 0, .65) 80%, rgba(0, 0, 0, .85) 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
             position: absolute;
