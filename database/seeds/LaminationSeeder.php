@@ -39,16 +39,16 @@ class LaminationSeeder extends Seeder
             'name' => ['3D', '3D'],
             'description' =>
                 [
-                    '',
-                    ''
+                    'Permukaan kertas bertekstur dan tampak lebih eksklusif',
+                    'Paper surface is textured and looks more exclusive'
                 ],
         ],
         [
             'name' => ['Emboss', 'Embossed'],
             'description' =>
                 [
-                    '',
-                    ''
+                    'Permukaan kertas emboss dan tampak lebih eksklusif',
+                    'Paper surface is embossed and looks more exclusive'
                 ],
         ],
     ];

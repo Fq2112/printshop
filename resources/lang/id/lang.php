@@ -91,7 +91,7 @@ return [
                 "corner" => "Tipe Sudut",
                 "lamination" => "Laminasi",
                 "quantity" => "Kuantitas",
-                "price" => "Harga /pcs",
+                "price" => "Harga /:unit",
                 "production" => "Selesai Produksi",
                 "delivery" => "Durasi Pengiriman",
                 "received" => "Tanggal Terima",
