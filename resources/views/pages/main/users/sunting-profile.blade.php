@@ -3,40 +3,6 @@
 @push('styles')
     <link rel="stylesheet" href="{{asset('css/card.css')}}">
     <style>
-        .bootstrap-select .dropdown-toggle {
-            background-color: #fff;
-            border-color: #ced4da;
-        }
-
-        .bootstrap-select > .dropdown-toggle.bs-placeholder {
-            color: #909090;
-        }
-
-        .bootstrap-select .dropdown-menu {
-            min-width: 100% !important;
-            background: #fff !important;
-            text-align: justify !important;
-        }
-
-        .bootstrap-select .dropdown-menu > .active > a,
-        .bootstrap-select .dropdown-menu > .active > a:hover,
-        .bootstrap-select .dropdown-menu > .active > a:focus {
-            color: #fff !important;
-            background: #f89406 !important;
-        }
-
-        .bootstrap-select a.dropdown-item:hover,
-        .bootstrap-select a.dropdown-item:focus,
-        .bootstrap-select a.dropdown-item:active {
-            color: #fff !important;
-            background: #f89406 !important;
-        }
-
-        .bootstrap-select .dropdown-menu li:hover,
-        .bootstrap-select .dropdown-menu li:focus {
-            background: #eee !important;
-        }
-
         .datepicker {
             padding: 0.375rem 0.75rem;
         }

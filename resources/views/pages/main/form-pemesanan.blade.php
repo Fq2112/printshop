@@ -212,8 +212,7 @@
                                                     <div class="panel-body">
                                                         <div class="row">
                                                             <div class="col-6">
-                                                                <label class="card-label" for="ac-260"
-                                                                       onclick="productSpecs('materials', $(this).attr('for'))">
+                                                                <label class="card-label" for="ac-260">
                                                                     <input id="ac-260" class="card-rb" name="materials"
                                                                            type="radio" value="Art Carton 260gsm"
                                                                            checked required>
@@ -230,7 +229,8 @@
                                                                                     </div>
                                                                                 </a>
                                                                             </div>
-                                                                            <div class="col">
+                                                                            <div class="col"
+                                                                                 onclick="productSpecs('materials', $(this).parents('label').attr('for'))">
                                                                                 <div class="card-block p-2">
                                                                                     <h4 class="card-title">Art Carton
                                                                                         260gsm</h4>
@@ -245,8 +245,7 @@
                                                                 </label>
                                                             </div>
                                                             <div class="col-6">
-                                                                <label class="card-label" for="ac-310"
-                                                                       onclick="productSpecs('materials', $(this).attr('for'))">
+                                                                <label class="card-label" for="ac-310">
                                                                     <input id="ac-310" class="card-rb" name="materials"
                                                                            type="radio" value="Art Carton 310gsm">
                                                                     <div class="card card-input">
@@ -262,7 +261,8 @@
                                                                                     </div>
                                                                                 </a>
                                                                             </div>
-                                                                            <div class="col">
+                                                                            <div class="col"
+                                                                                 onclick="productSpecs('materials', $(this).parents('label').attr('for'))">
                                                                                 <div class="card-block p-2">
                                                                                     <h4 class="card-title">Art Carton
                                                                                         310gsm</h4>
@@ -296,15 +296,19 @@
                                                     <div class="panel-body">
                                                         <div class="row">
                                                             <div class="col-4">
-                                                                <label class="card-label" for="size-95"
-                                                                       onclick="productSpecs('size', $(this).attr('for'))">
+                                                                <label class="card-label" for="size-95">
                                                                     <input id="size-95" class="card-rb" name="size"
                                                                            type="radio" value="9,0 x 5,5 cm" checked
                                                                            required>
                                                                     <div class="card card-input">
-                                                                        <div class="card-block py-2 px-5">
-                                                                            <h4 class="card-title text-center">9,0 x 5,5
-                                                                                cm</h4>
+                                                                        <div class="row no-gutters">
+                                                                            <div class="col"
+                                                                                 onclick="productSpecs('size', $(this).parents('label').attr('for'))">
+                                                                                <div class="card-block py-2 px-5">
+                                                                                    <h4 class="card-title text-center">
+                                                                                        9,0 x 5,5 cm</h4>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </label>
@@ -330,8 +334,7 @@
                                                     <div class="panel-body">
                                                         <div class="row">
                                                             <div class="col-6">
-                                                                <label class="card-label" for="side-1"
-                                                                       onclick="productSpecs('side', $(this).attr('for'))">
+                                                                <label class="card-label" for="side-1">
                                                                     <input id="side-1" class="card-rb" name="side"
                                                                            type="radio" value="1 side" checked required>
                                                                     <div class="card card-input">
@@ -347,7 +350,8 @@
                                                                                     </div>
                                                                                 </a>
                                                                             </div>
-                                                                            <div class="col">
+                                                                            <div class="col"
+                                                                                 onclick="productSpecs('side', $(this).parents('label').attr('for'))">
                                                                                 <div class="card-block p-2">
                                                                                     <h4 class="card-title">1 side</h4>
                                                                                     <p class="card-text">Design will be
@@ -359,8 +363,7 @@
                                                                 </label>
                                                             </div>
                                                             <div class="col-6">
-                                                                <label class="card-label" for="side-2"
-                                                                       onclick="productSpecs('side', $(this).attr('for'))">
+                                                                <label class="card-label" for="side-2">
                                                                     <input id="side-2" class="card-rb" name="side"
                                                                            type="radio" value="2 sides">
                                                                     <div class="card card-input">
@@ -376,7 +379,8 @@
                                                                                     </div>
                                                                                 </a>
                                                                             </div>
-                                                                            <div class="col">
+                                                                            <div class="col"
+                                                                                 onclick="productSpecs('side', $(this).parents('label').attr('for'))">
                                                                                 <div class="card-block p-2">
                                                                                     <h4 class="card-title">2 sides</h4>
                                                                                     <p class="card-text">Design will be
@@ -409,8 +413,7 @@
                                                     <div class="panel-body">
                                                         <div class="row">
                                                             <div class="col-6">
-                                                                <label class="card-label" for="corner-square"
-                                                                       onclick="productSpecs('corner', $(this).attr('for'))">
+                                                                <label class="card-label" for="corner-square">
                                                                     <input id="corner-square" class="card-rb"
                                                                            name="corner"
                                                                            type="radio" value="Square" checked required>
@@ -427,7 +430,8 @@
                                                                                     </div>
                                                                                 </a>
                                                                             </div>
-                                                                            <div class="col">
+                                                                            <div class="col"
+                                                                                 onclick="productSpecs('corner', $(this).parents('label').attr('for'))">
                                                                                 <div class="card-block p-2">
                                                                                     <h4 class="card-title">Square
                                                                                         Corner</h4>
@@ -441,8 +445,7 @@
                                                                 </label>
                                                             </div>
                                                             <div class="col-6">
-                                                                <label class="card-label" for="corner-rounded"
-                                                                       onclick="productSpecs('corner', $(this).attr('for'))">
+                                                                <label class="card-label" for="corner-rounded">
                                                                     <input id="corner-rounded" class="card-rb"
                                                                            name="corner"
                                                                            type="radio" value="Rounded">
@@ -459,7 +462,8 @@
                                                                                     </div>
                                                                                 </a>
                                                                             </div>
-                                                                            <div class="col">
+                                                                            <div class="col"
+                                                                                 onclick="productSpecs('corner', $(this).parents('label').attr('for'))">
                                                                                 <div class="card-block p-2">
                                                                                     <h4 class="card-title">Rounded
                                                                                         Corner</h4>
@@ -493,8 +497,7 @@
                                                     <div class="panel-body">
                                                         <div class="row">
                                                             <div class="col-6">
-                                                                <label class="card-label" for="lamination-non"
-                                                                       onclick="productSpecs('lamination', $(this).attr('for'))">
+                                                                <label class="card-label" for="lamination-non">
                                                                     <input id="lamination-non" class="card-rb"
                                                                            name="lamination"
                                                                            type="radio" value="Non-laminated" required>
@@ -511,7 +514,8 @@
                                                                                     </div>
                                                                                 </a>
                                                                             </div>
-                                                                            <div class="col">
+                                                                            <div class="col"
+                                                                                 onclick="productSpecs('lamination', $(this).parents('label').attr('for'))">
                                                                                 <div class="card-block p-2">
                                                                                     <h4 class="card-title">
                                                                                         Non-laminated</h4>
@@ -524,8 +528,7 @@
                                                                 </label>
                                                             </div>
                                                             <div class="col-6">
-                                                                <label class="card-label" for="lamination-doff"
-                                                                       onclick="productSpecs('lamination', $(this).attr('for'))">
+                                                                <label class="card-label" for="lamination-doff">
                                                                     <input id="lamination-doff" class="card-rb"
                                                                            name="lamination"
                                                                            type="radio" value="Doff/Matte" checked>
@@ -542,7 +545,8 @@
                                                                                     </div>
                                                                                 </a>
                                                                             </div>
-                                                                            <div class="col">
+                                                                            <div class="col"
+                                                                                 onclick="productSpecs('lamination', $(this).parents('label').attr('for'))">
                                                                                 <div class="card-block p-2">
                                                                                     <h4 class="card-title">
                                                                                         Doff/Matte</h4>
@@ -556,8 +560,7 @@
                                                                 </label>
                                                             </div>
                                                             <div class="col-6">
-                                                                <label class="card-label" for="lamination-glossy"
-                                                                       onclick="productSpecs('lamination', $(this).attr('for'))">
+                                                                <label class="card-label" for="lamination-glossy">
                                                                     <input id="lamination-glossy" class="card-rb"
                                                                            name="lamination"
                                                                            type="radio" value="Glossy">
@@ -574,7 +577,8 @@
                                                                                     </div>
                                                                                 </a>
                                                                             </div>
-                                                                            <div class="col">
+                                                                            <div class="col"
+                                                                                 onclick="productSpecs('lamination', $(this).parents('label').attr('for'))">
                                                                                 <div class="card-block p-2">
                                                                                     <h4 class="card-title">Glossy</h4>
                                                                                     <p class="card-text">Paper surface
@@ -596,6 +600,40 @@
                             </div>
                         </div>
 
+                        <div class="myCard mb-4">
+                            <div class="card-content">
+                                <div class="card-title" style="text-transform: none">
+                                    <h4 class="text-center"
+                                        style="color: #f89406">{{__('lang.product.form.shipping.head')}}</h4>
+                                    <h5 class="text-center mb-2" style="text-transform: none">
+                                        {{__('lang.product.form.shipping.capt')}}</h5>
+                                    <div class="divider divider-center mt-1 mb-1"><i class="icon-circle"></i></div>
+                                    <div class="row form-group">
+                                        <div class="col">
+                                            <small>{{__('lang.profile.city')}} <span class="required">*</span></small>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="icon-city"></i></span>
+                                                </div>
+                                                <select id="city_id" name="city_id" data-live-search="true"
+                                                        class="form-control selectpicker" required
+                                                        title="{{__('lang.placeholder.choose')}}">
+                                                    @foreach($provinces as $province)
+                                                        <optgroup label="{{$province->name}}">
+                                                            @foreach($province->getCity as $city)
+                                                                <option
+                                                                    value="{{$city->id}}" {{!is_null($address) && $address->city_id == $city->id ? 'selected' : ''}}>{{$city->name}}</option>
+                                                            @endforeach
+                                                        </optgroup>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="myCard">
                             <div class="card-content">
                                 <div class="card-title" style="text-transform: none">
@@ -604,8 +642,14 @@
                                     <h5 class="text-center mb-2" style="text-transform: none">
                                         {{__('lang.product.form.quantity.capt')}}</h5>
                                     <div class="divider divider-center mt-1 mb-1"><i class="icon-circle"></i></div>
-                                    <input id="range-quantity" name="quantity"
-                                           class="range_01 input-range-slider" required>
+                                    <div class="row form-group">
+                                        <div class="col">
+                                            <small>{{__('lang.product.form.summary.quantity')}}
+                                                <span class="required">*</span></small>
+                                            <input id="range-quantity" name="quantity" class="input-range-slider"
+                                                   required>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

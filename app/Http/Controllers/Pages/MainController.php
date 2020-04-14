@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
 use App\Models\ClusterKategori;
+use App\Models\Province;
 use App\Models\SubKategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
@@ -171,6 +173,8 @@ class MainController extends Controller
             ->orwhere('permalink->id', $request->produk)->whereHas('getCluster')->first();
         $clust = ClusterKategori::where('permalink->en', $request->produk)
             ->orwhere('permalink->id', $request->produk)->first();
+        $provinces = Province::all();
+        $address = \App\Models\Address::where('user_id', Auth::id())->where('is_main', true)->first();
         $guidelines = null;
 
         if (!is_null($sub)) {
@@ -180,13 +184,13 @@ class MainController extends Controller
                 return view('pages.main.produk', compact('data'));
             } else {
                 $guidelines = $sub->guidelines;
-                return view('pages.main.form-pemesanan', compact('data', 'guidelines'));
+                return view('pages.main.form-pemesanan', compact('data', 'provinces', 'address', 'guidelines'));
             }
 
         } else {
             $data = $clust;
             $guidelines = $data->getSubKategori->guidelines;
-            return view('pages.main.form-pemesanan', compact('data', 'guidelines'));
+            return view('pages.main.form-pemesanan', compact('data', 'provinces', 'address', 'guidelines'));
         }
     }
 }

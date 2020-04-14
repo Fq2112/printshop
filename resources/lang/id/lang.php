@@ -79,7 +79,7 @@ return [
         "price" => "Harga awal Rp:price",
         "form" => [
             "head" => "Spesifikasikan Kebutuhan Anda",
-            "capt" => "Pilih bahan yang lebih Anda sukai",
+            "capt" => "Pilih spesifikasi produk yang lebih Anda sukai",
             "summary" => [
                 "head" => "Ringkasan Pemesanan",
                 "capt" => "Pastikan pesanan Anda benar",
@@ -98,8 +98,12 @@ return [
                 "alert" => "Spesifikasi dan desain produk yang tertera akan diterapkan pada <b>:quantity</b> <b>:product</b> yang Anda pesan.",
                 "layout" => "Pedoman Tata Letak",
             ],
+            "shipping" => [
+                "head" => "Alamat Pengiriman",
+                "capt" => "Tentukan kabupaten/kota mana produk cetak Anda akan dikirim",
+            ],
             "quantity" => [
-                "head" => "Pilih Kuantitas Produk",
+                "head" => "Kuantitas Produk",
                 "capt" => "Pastikan jumlah produk yang Anda pesan sesuai kebutuhan Anda",
             ],
         ],
@@ -183,7 +187,7 @@ return [
         "address-capt" => "Mohon untuk menambahkan alamat agar mempermudah proses pemesanan Anda.",
         "main-address" => "Alamat Utama",
         "province" => "Provinsi",
-        "city" => "Kabupaten/Kota",
+        "city" => "Kabupaten / Kota",
         "zip" => "Kode Pos",
         "set-address" => "Silahkan tentukan alamat Anda terlebih dahulu.",
         "address-fail" => "Tidak dapat menentukan alamat di lokasi ini.",
