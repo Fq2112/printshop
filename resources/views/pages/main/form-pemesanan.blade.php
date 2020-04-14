@@ -598,7 +598,7 @@
 
                         <div class="myCard">
                             <div class="card-content">
-                                <div class="card-title">
+                                <div class="card-title" style="text-transform: none">
                                     <h4 class="text-center"
                                         style="color: #f89406">{{__('lang.product.form.quantity.head')}}</h4>
                                     <h5 class="text-center mb-2" style="text-transform: none">
@@ -668,7 +668,7 @@
                                             <b class="fright show-quantity"></b>
                                         </li>
                                         <li class="list-group-item noborder">
-                                            {{__('lang.product.form.summary.price')}}
+                                            {{__('lang.product.form.summary.price', ['unit' => 'box'])}}
                                             <b class="fright">Rp{{number_format(25000,2,',','.')}}</b>
                                         </li>
                                         <li class="list-group-item noborder">
@@ -690,7 +690,7 @@
                                     </div>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item noborder">
-                                            TOTAL<b class="fright" style="font-size: large">&ndash;</b>
+                                            TOTAL<b class="fright show-total" style="font-size: large">&ndash;</b>
                                         </li>
                                     </ul>
                                     <div class="card-content pb-0">
@@ -730,20 +730,25 @@
 @endsection
 @push('scripts')
     <script>
-        var collapse = $('.panel-collapse'), range_slider = $("#range-quantity");
+        var collapse = $('.panel-collapse'), range_slider = $("#range-quantity"), total = 0, str_unit = ' box';
 
         $(function () {
             range_slider.ionRangeSlider({
                 grid: true,
+                grid_num: 5,
                 min: 1,
                 max: 100,
-                from: 5,
-                postfix: " pcs",
+                from: 1,
+                postfix: str_unit,
                 onStart: function (data) {
-                    $(".show-quantity").text(data.from + " pcs");
+                    total = parseInt(data.from) * 25000;
+                    $(".show-quantity").text(data.from + str_unit);
+                    $(".show-total").text("Rp" + thousandSeparator(total) + ",00");
                 },
                 onChange: function (data) {
-                    $(".show-quantity").text(data.from + " pcs");
+                    total = parseInt(data.from) * 25000;
+                    $(".show-quantity").text(data.from + str_unit);
+                    $(".show-total").text("Rp" + thousandSeparator(total) + ",00");
                 }
             });
 

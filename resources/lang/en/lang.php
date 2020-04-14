@@ -91,7 +91,7 @@ return [
                 "corner" => "Corner Type",
                 "lamination" => "Lamination",
                 "quantity" => "Quantity",
-                "price" => "Price /pcs",
+                "price" => "Price /:unit",
                 "production" => "Production Finished",
                 "delivery" => "Delivery Duration",
                 "received" => "Received Date",

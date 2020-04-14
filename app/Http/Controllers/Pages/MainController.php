@@ -145,7 +145,7 @@ class MainController extends Controller
             $sub[$x] = [
                 'name' => $row->name,
                 'link' => route('produk', ['produk' => $row->permalink]),
-                'image' => asset('storage/products/thumb/' . $row->getKategori->image),
+                'image' => asset('storage/products/menu/' . $row->getKategori->image),
             ];
             $x++;
         }
@@ -157,7 +157,7 @@ class MainController extends Controller
             $cluster[$y] = [
                 'name' => $row->name,
                 'link' => route('produk', ['produk' => $row->permalink]),
-                'image' => asset('storage/products/thumb/' . $row->getSubKategori->getKategori->image),
+                'image' => asset('storage/products/menu/' . $row->getSubKategori->getKategori->image),
             ];
             $y++;
         }
@@ -167,9 +167,10 @@ class MainController extends Controller
 
     public function produk(Request $request)
     {
-        $sub = SubKategori::where('permalink->en', $request->produk)->orwhere('permalink->id', $request->produk)
-            ->whereHas('getCluster')->first();
-        $clust = ClusterKategori::where('permalink->en', $request->produk)->orwhere('permalink->id', $request->produk)->first();
+        $sub = SubKategori::where('permalink->en', $request->produk)
+            ->orwhere('permalink->id', $request->produk)->whereHas('getCluster')->first();
+        $clust = ClusterKategori::where('permalink->en', $request->produk)
+            ->orwhere('permalink->id', $request->produk)->first();
         $guidelines = null;
 
         if (!is_null($sub)) {
