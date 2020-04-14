@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             FaqSeeder::class,
             SizeSeeder::class,
             MaterialSeeder::class,
-//             DetailSubkatSeeder::class
+            DetailSubkatSeeder::class
         ]);
     }
 }

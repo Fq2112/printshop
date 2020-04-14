@@ -327,7 +327,7 @@ class SizeSeeder extends Seeder
             ],
         ],
         [
-            'name' => ['9 cm x 9 cm', '19 cm x 9 cm'],
+            'name' => ['9 cm x 9 cm', '9 cm x 9 cm'],
             'description' => [
                 '9 cm x 9 cm',
                 '9 cm x 9 cm'
@@ -393,6 +393,34 @@ class SizeSeeder extends Seeder
             'description' => [
                 'Bentuk hasil cetak memanjang ke atas.',
                 'Bentuk hasil cetak memanjang ke atas.'
+            ],
+        ],
+        [
+            'name' => ['3 cm x 3 cm', '3 cm x 3 cm'],
+            'description' => [
+                '3 cm x 3 cm',
+                '3 cm x 3 cm'
+            ],
+        ],
+        [
+            'name' => ['4 cm x 4 cm', '4 cm x 4 cm'],
+            'description' => [
+                '4 cm x 4 cm',
+                '4 cm x 4 cm'
+            ],
+        ],
+        [
+            'name' => ['81 cm x 218 cm', '81 cm x 218 cm'],
+            'description' => [
+                '81 cm x 218 cm',
+                '81 cm x 218 cm'
+            ],
+        ],
+        [
+            'name' => ['86 cm x 214 cm', '86 cm x 214 cm'],
+            'description' => [
+                '86 cm x 214 cm',
+                '86 cm x 214 cm'
             ],
         ],
     ];
