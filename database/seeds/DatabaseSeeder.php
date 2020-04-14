@@ -11,23 +11,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call([
-             KategoriSeed::class,
-             SubKategoriSeed::class,
-             ClusterKategoriSeed::class,
-             EdgeSeeder::class,
-             SideSeeder::class,
-             FrontSeeder::class,
-             RightLeftSideSeeder::class,
-             BackSideSeeder::class,
-             ProvinceSeeder::class,
-             CitiesSeeder::class,
-             FoldingSeeder::class,
-             LaminationSeeder::class,
-             FinishingSeeder::class,
-             AdminSeeder::class,
-             BlogSeeder::class,
-             FaqSeeder::class,
-         ]);
+        $this->call([
+            KategoriSeed::class,
+            SubKategoriSeed::class,
+            ClusterKategoriSeed::class,
+            EdgeSeeder::class,
+            SideSeeder::class,
+            FrontSeeder::class,
+            RightLeftSideSeeder::class,
+            BackSideSeeder::class,
+            ProvinceSeeder::class,
+            CitiesSeeder::class,
+            FoldingSeeder::class,
+            LaminationSeeder::class,
+            FinishingSeeder::class,
+            AdminSeeder::class,
+            BlogSeeder::class,
+            FaqSeeder::class,
+            SizeSeeder::class,
+            MaterialSeeder::class,
+//             DetailSubkatSeeder::class
+        ]);
     }
 }
