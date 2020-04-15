@@ -31,8 +31,6 @@ class CreateDetailSubkatsTable extends Migration
             $table->string('edge_ids')->nullable();
             $table->boolean('is_color')->default(false);
             $table->string('color_ids')->nullable();
-            $table->boolean('is_folding')->default(false);
-            $table->string('folding_ids')->nullable();
             $table->boolean('is_front')->default(false);
             $table->string('front_ids')->nullable();
             $table->boolean('is_right_side')->default(false);

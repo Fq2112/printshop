@@ -259,6 +259,68 @@
                                                 </div>
                                             @endif
 
+                                            @if($specs->is_color == true)
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" role="tab" id="heading-color">
+                                                        <h4 class="panel-title">
+                                                            <a role="button" data-toggle="collapse"
+                                                               href="#collapse-color" aria-expanded="false"
+                                                               aria-controls="collapse-color" class="collapsed">
+                                                                {{__('lang.product.form.summary.color')}}
+                                                                <b class="show-color"></b>
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapse-color" class="panel-collapse collapse"
+                                                         role="tabpanel" aria-labelledby="heading-color"
+                                                         aria-expanded="false" style="height: 0;"
+                                                         data-parent="#accordion">
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                @foreach(\App\Models\Color::whereIn('id', $specs->color_ids)->get() as $row)
+                                                                    <div class="col-{{$row->image != "" ? 6 : 4}}">
+                                                                        <label class="card-label"
+                                                                               for="color-{{$row->id}}">
+                                                                            <input id="color-{{$row->id}}"
+                                                                                   class="card-rb"
+                                                                                   name="color" type="radio"
+                                                                                   value="{{$row->name}}">
+                                                                            <div class="card card-input">
+                                                                                <div class="row no-gutters">
+                                                                                    @if($row->image != "")
+                                                                                        <div class="col-auto">
+                                                                                            <a href="{{$row->image}}"
+                                                                                               data-lightbox="image">
+                                                                                                <img
+                                                                                                    src="{{$row->image}}"
+                                                                                                    alt="Thumbnail">
+                                                                                                <div
+                                                                                                    class="card-img-overlay d-flex">
+                                                                                                    <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                                                </div>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    @endif
+                                                                                    <div class="col"
+                                                                                         onclick="productSpecs('color', $(this).parents('label').attr('for'))">
+                                                                                        <div class="card-block p-2">
+                                                                                            <h4 class="card-title {{$row->image != "" ? '' : 'text-center'}}">{{$row->name}}</h4>
+                                                                                            @if($row->image != "")
+                                                                                                <p class="card-text">{{$row->description}}</p>
+                                                                                            @endif
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </label>
+                                                                    </div>
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+
                                             @if($specs->is_size == true)
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading" role="tab" id="heading-size">
@@ -599,6 +661,13 @@
                                                         <td class="show-materials"></td>
                                                     </tr>
                                                 @endif
+                                                @if($specs->is_color == true)
+                                                    <tr>
+                                                        <td>{{__('lang.product.form.summary.color')}}</td>
+                                                        <td>:&nbsp;</td>
+                                                        <td class="show-color"></td>
+                                                    </tr>
+                                                @endif
                                                 @if($specs->is_size == true)
                                                     <tr>
                                                         <td>{{__('lang.product.form.summary.size')}}</td>
@@ -745,6 +814,7 @@
             });
 
             $(".show-materials").text($("input[name='materials']:checked").val());
+            $(".show-color").text($("input[name='color']:checked").val());
             $(".show-size").text($("input[name='size']:checked").val());
             $(".show-side").text($("input[name='side']:checked").val());
             $(".show-corner").text($("input[name='corner']:checked").val());
