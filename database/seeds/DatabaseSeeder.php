@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             PrintingMethodsSeeder::class,
             PagesSeeder::class,
             CopiesSeeder::class,
+            ColorsSeeder::class,
             DetailSubkatSeeder::class
         ]);
     }
