@@ -23,7 +23,7 @@ class PagesSeeder extends Seeder
     public function run()
     {
         foreach (self::DATA as $DATUM) {
-           for ($i = 20 ; $i<=40 ; $i++){
+           for ($i = 20 ; $i<=50 ; $i++){
               if ($i % 2 == 0){
                   $faker = \Faker\Factory::create('id_ID');
                   \App\Models\Pages::create([
