@@ -260,6 +260,22 @@ class MaterialSeeder extends Seeder
                 'soft material so it is more comfortable when used'
             ],
         ],
+        [
+            'name' => ['Mica Plastic', 'Mica Plastic'],
+            'description' => null
+        ],
+        [
+            'name' => ['Red Buffalo Paper', 'Red Buffalo Paper'],
+            'description' => null
+        ],
+        [
+            'name' => ['Green Buffalo Paper', 'Green Buffalo Paper'],
+            'description' => null
+        ],
+        [
+            'name' => ['Blue  Buffalo Paper', 'Blue  Buffalo Paper'],
+            'description' => null
+        ],
     ];
 
     public function run()

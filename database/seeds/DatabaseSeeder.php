@@ -30,6 +30,11 @@ class DatabaseSeeder extends Seeder
             FaqSeeder::class,
             SizeSeeder::class,
             MaterialSeeder::class,
+            TypeProductSeeder::class,
+            PrintingMethodsSeeder::class,
+            PagesSeeder::class,
+            CopiesSeeder::class,
+            ColorsSeeder::class,
             DetailSubkatSeeder::class
         ]);
     }
