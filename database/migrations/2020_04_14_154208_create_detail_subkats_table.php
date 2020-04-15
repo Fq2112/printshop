@@ -21,6 +21,16 @@ class CreateDetailSubkatsTable extends Migration
                 ->onUpdate('CASCADE');
             $table->boolean('is_material')->default(false);
             $table->string('material_ids')->nullable();
+            $table->boolean('is_type')->default(false);
+            $table->string('type_ids')->nullable();
+            $table->boolean('is_balance')->default(false);
+            $table->string('balance_ids')->nullable();
+            $table->boolean('is_page')->default(false);
+            $table->string('page_ids')->nullable();
+            $table->boolean('is_copies')->default(false);
+            $table->string('copies_ids')->nullable();
+            $table->boolean('is_finishing')->default(false);
+            $table->string('finishing_ids')->nullable();
             $table->boolean('is_size')->default(false);
             $table->string('size_ids')->nullable();
             $table->boolean('is_lamination')->default(false);
@@ -39,6 +49,13 @@ class CreateDetailSubkatsTable extends Migration
             $table->string('left_side_ids')->nullable();
             $table->boolean('is_back_side')->default(false);
             $table->string('back_side_ids')->nullable();
+            $table->boolean('is_front_cover')->default(false);
+            $table->string('front_cover_ids')->nullable();
+            $table->boolean('is_back_cover')->default(false);
+            $table->string('back_cover_ids')->nullable();
+            $table->boolean('is_print_method')->default(false);
+            $table->string('print_method_ids')->nullable();
+            $table->boolean('is_design')->default(false);
             $table->timestamps();
         });
     }
