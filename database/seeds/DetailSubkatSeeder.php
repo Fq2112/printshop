@@ -17,6 +17,10 @@ class DetailSubkatSeeder extends Seeder
             'size_ids' => ['50'],
             'is_side' => true,
             'side_ids' => ['1', '2'],
+            'is_type'=> true,
+            'type_ids' => ['1','2','3'],
+            'is_balance' => true,
+            'balance_ids' => ['1','2','3'],
         ]);
 
         $detail2 = \App\Models\DetailSubkat::create([//NCR
@@ -27,6 +31,10 @@ class DetailSubkatSeeder extends Seeder
             'size_ids' => ['7', '9', '10', '11', '12'],
             'is_side' => true,
             'side_ids' => ['1'],
+            'is_color' => true,
+            'color_ids' => ['2', '3'],
+            'is_page' => true,
+            'page_ids' => ['16']
         ]);
 
         $detail3 = \App\Models\DetailSubkat::create([ //cetak Dokumen
@@ -35,6 +43,14 @@ class DetailSubkatSeeder extends Seeder
             'material_ids' => ['10'],
             'is_size' => true,
             'size_ids' => ['9', '10', '12'],
+            'is_page' => true,
+            'page_ids' => ['1','2','3','4','5','6','7','8','9','10','11'],
+             'is_color' => true,
+            'color_ids' => ['1', '2'],
+            'is_front_cover' => true,
+            'front_cover_ids' =>['43'],
+            'is_back_cover' => true,
+            'back_cover_ids' =>['44','45','46'],
         ]);
         $detail4 = \App\Models\DetailSubkat::create([//Food Wrapper
             'subkategori_id' => 25,
@@ -44,6 +60,8 @@ class DetailSubkatSeeder extends Seeder
             'size_ids' => ['39', '40'],
             'is_side' => true,
             'side_ids' => ['1'],
+            'is_color' => true,
+            'color_ids' => ['3', '6'],
         ]);
         $detail5 = \App\Models\DetailSubkat::create([ //Placement
             'subkategori_id' => 26,
@@ -56,6 +74,8 @@ class DetailSubkatSeeder extends Seeder
             'subkategori_id' => 27,
             'is_side' => true,
             'side_ids' => ['1'],
+            'is_color' => true,
+            'color_ids' => ['3'],
         ]);
         $detail7 = \App\Models\DetailSubkat::create([ //Wobbler
             'subkategori_id' => 40,
@@ -65,6 +85,8 @@ class DetailSubkatSeeder extends Seeder
             'lamination_ids' => ['1', '2', '3'],
             'is_size' => true,
             'size_ids' => ['48'],
+            'is_type' => true,
+            'type_ids' => ['4', '5']
         ]);
         $detail8 = \App\Models\DetailSubkat::create([//Portable Backdrop
             'subkategori_id' => 41,
@@ -72,6 +94,8 @@ class DetailSubkatSeeder extends Seeder
             'material_ids' => ['30'],
             'is_size' => true,
             'size_ids' => ['58', '59'],
+            'is_type' => true,
+            'type_ids' => ['6', '7']
         ]);
         $detail9 = \App\Models\DetailSubkat::create([//Meja Promosi
             'subkategori_id' => 42,
@@ -101,6 +125,8 @@ class DetailSubkatSeeder extends Seeder
             'right_side_ids' => ['1', '2'],
             'is_left_side' => true,
             'left_side_ids' => ['1', '2'],
+            'is_print_method' => true,
+            'print_method_ids' => ['1', '2', '3'],
         ]);
 
     }
