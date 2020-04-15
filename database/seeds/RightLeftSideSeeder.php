@@ -11,17 +11,17 @@ class RightLeftSideSeeder extends Seeder
      */
     const DATA = [
         [
-            'name' => ['10 x 10 cm', '10 x 10 cm'],
+            'name' => ['10 x 10 cm', ' 10 x 10 cm'],
             'description' => [
-                'Desain akan dicetak dalam ukuran 10 x 10 cm.',
-                'Design will be printed on 10 x 10 cm.'
-            ]
+                'Area cetak sebesar 10 x 10 cm.',
+                'Print area of 10 x 10 cm.'
+            ],
         ],
         [
             'name' => ['Kosong', 'Blank'],
             'description' => [
-                'Tanpa desain.',
-                'Without design.'
+                'Tidak ada area cetak pada bagian depan.',
+                'No print area at the front side.'
             ],
         ],
     ];

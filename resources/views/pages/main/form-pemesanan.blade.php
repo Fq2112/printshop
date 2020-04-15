@@ -777,16 +777,16 @@
                                                                    aria-controls="collapse-lamination">
                                                                     {{__('lang.product.form.summary.lamination')}}
                                                                     <b class="show-lamination"></b>
-                                                            </a>
-                                                        </h4>
-                                                    </div>
-                                                    <div id="collapse-lamination" class="panel-collapse collapse"
-                                                         role="tabpanel"
-                                                         aria-labelledby="heading-lamination" aria-expanded="false"
-                                                         style="height: 0;" data-parent="#accordion">
-                                                        <div class="panel-body">
-                                                            <div class="row">
-                                                                @foreach(\App\Models\Lamination::whereIn('id', $specs->lamination_ids)->get() as $row)
+                                                                </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="collapse-lamination" class="panel-collapse collapse"
+                                                             role="tabpanel"
+                                                             aria-labelledby="heading-lamination" aria-expanded="false"
+                                                             style="height: 0;" data-parent="#accordion">
+                                                            <div class="panel-body">
+                                                                <div class="row">
+                                                                    @foreach(\App\Models\Lamination::whereIn('id', $specs->lamination_ids)->get() as $row)
                                                                     <div class="col-{{$row->image != "" ? 6 : 4}}">
                                                                         <label class="card-label"
                                                                                for="lamination-{{$row->id}}">
