@@ -99,7 +99,7 @@ return [
                 "production" => "Production Finished",
                 "delivery" => "Delivery Duration",
                 "received" => "Received Date",
-                "alert" => "Product specifications and designs listed will be applied to <b>:quantity</b> of the <b>:product</b> that you ordered.",
+                "alert" => "Product specifications and designs listed will be applied to <b class='show-quantity'>:quantity</b> of the <b>:product</b> that you ordered.",
                 "layout" => "Layout Guidelines",
             ],
             "shipping" => [

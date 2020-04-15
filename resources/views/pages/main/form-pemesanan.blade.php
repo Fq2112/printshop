@@ -186,7 +186,9 @@
     <section id="content" style="background-color: #F9F9F9">
         <div class="content-wrap">
             <div class="container clearfix">
-                <div class="row">
+                <form id="form-pemesanan" class="row" method="POST" enctype="multipart/form-data"
+                      action="{{route('produk.submit.pemesanan', ['produk' => $data->permalink])}}">
+                    @csrf
                     <div class="postcontent mr-4 nobottommargin clearfix">
                         <div class="myCard mb-4">
                             <div class="card-content">
@@ -509,284 +511,284 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @endif
+                                            @endif
 
-                                                @if($specs->is_front_side == true)
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading" role="tab" id="heading-front_side">
-                                                            <h4 class="panel-title">
-                                                                <a class="collapsed" role="button"
-                                                                   data-toggle="collapse"
-                                                                   href="#collapse-front_side" aria-expanded="false"
-                                                                   aria-controls="collapse-front_side">
-                                                                    {{__('lang.product.form.summary.front_side')}}
-                                                                    <b class="show-front_side"></b>
-                                                                </a>
-                                                            </h4>
-                                                        </div>
-                                                        <div id="collapse-front_side" class="panel-collapse collapse"
-                                                             role="tabpanel"
-                                                             aria-labelledby="heading-front_side" aria-expanded="false"
-                                                             style="height: 0;" data-parent="#accordion">
-                                                            <div class="panel-body">
-                                                                <div class="row">
-                                                                    @foreach(\App\Models\Front::whereIn('id', $specs->front_side_ids)->get() as $row)
-                                                                        <div class="col-{{$row->image != "" ? 6 : 4}}">
-                                                                            <label class="card-label"
-                                                                                   for="front_side-{{$row->id}}">
-                                                                                <input id="front_side-{{$row->id}}"
-                                                                                       class="card-rb"
-                                                                                       name="front_side" type="radio"
-                                                                                       value="{{$row->name}}">
-                                                                                <div class="card card-input">
-                                                                                    <div class="row no-gutters">
-                                                                                        @if($row->image != "")
-                                                                                            <div class="col-auto">
-                                                                                                <a href="{{$row->image}}"
-                                                                                                   data-lightbox="image">
-                                                                                                    <img
-                                                                                                        src="{{$row->image}}"
-                                                                                                        alt="Thumbnail">
-                                                                                                    <div
-                                                                                                        class="card-img-overlay d-flex">
-                                                                                                        <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
-                                                                                                    </div>
-                                                                                                </a>
-                                                                                            </div>
-                                                                                        @endif
-                                                                                        <div class="col"
-                                                                                             onclick="productSpecs('front_side', $(this).parents('label').attr('for'))">
-                                                                                            <div class="card-block p-2">
-                                                                                                <h4 class="card-title {{$row->image != "" ? '' : 'text-center'}}">
-                                                                                                    {{$row->name}}</h4>
-                                                                                                @if($row->image != "")
-                                                                                                    <p class="card-text">{{$row->description}}</p>
-                                                                                                @endif
-                                                                                            </div>
+                                            @if($specs->is_front_side == true)
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" role="tab" id="heading-front_side">
+                                                        <h4 class="panel-title">
+                                                            <a class="collapsed" role="button"
+                                                               data-toggle="collapse"
+                                                               href="#collapse-front_side" aria-expanded="false"
+                                                               aria-controls="collapse-front_side">
+                                                                {{__('lang.product.form.summary.front_side')}}
+                                                                <b class="show-front_side"></b>
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapse-front_side" class="panel-collapse collapse"
+                                                         role="tabpanel"
+                                                         aria-labelledby="heading-front_side" aria-expanded="false"
+                                                         style="height: 0;" data-parent="#accordion">
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                @foreach(\App\Models\Front::whereIn('id', $specs->front_side_ids)->get() as $row)
+                                                                    <div class="col-{{$row->image != "" ? 6 : 4}}">
+                                                                        <label class="card-label"
+                                                                               for="front_side-{{$row->id}}">
+                                                                            <input id="front_side-{{$row->id}}"
+                                                                                   class="card-rb"
+                                                                                   name="front_side" type="radio"
+                                                                                   value="{{$row->name}}">
+                                                                            <div class="card card-input">
+                                                                                <div class="row no-gutters">
+                                                                                    @if($row->image != "")
+                                                                                        <div class="col-auto">
+                                                                                            <a href="{{$row->image}}"
+                                                                                               data-lightbox="image">
+                                                                                                <img
+                                                                                                    src="{{$row->image}}"
+                                                                                                    alt="Thumbnail">
+                                                                                                <div
+                                                                                                    class="card-img-overlay d-flex">
+                                                                                                    <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                                                </div>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    @endif
+                                                                                    <div class="col"
+                                                                                         onclick="productSpecs('front_side', $(this).parents('label').attr('for'))">
+                                                                                        <div class="card-block p-2">
+                                                                                            <h4 class="card-title {{$row->image != "" ? '' : 'text-center'}}">
+                                                                                                {{$row->name}}</h4>
+                                                                                            @if($row->image != "")
+                                                                                                <p class="card-text">{{$row->description}}</p>
+                                                                                            @endif
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                            </label>
-                                                                        </div>
-                                                                    @endforeach
-                                                                </div>
+                                                                            </div>
+                                                                        </label>
+                                                                    </div>
+                                                                @endforeach
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @endif
+                                                </div>
+                                            @endif
 
-                                                @if($specs->is_back_side == true)
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading" role="tab" id="heading-back_side">
-                                                            <h4 class="panel-title">
-                                                                <a class="collapsed" role="button"
-                                                                   data-toggle="collapse"
-                                                                   href="#collapse-back_side" aria-expanded="false"
-                                                                   aria-controls="collapse-back_side">
-                                                                    {{__('lang.product.form.summary.back_side')}}
-                                                                    <b class="show-back_side"></b>
-                                                                </a>
-                                                            </h4>
-                                                        </div>
-                                                        <div id="collapse-back_side" class="panel-collapse collapse"
-                                                             role="tabpanel"
-                                                             aria-labelledby="heading-back_side" aria-expanded="false"
-                                                             style="height: 0;" data-parent="#accordion">
-                                                            <div class="panel-body">
-                                                                <div class="row">
-                                                                    @foreach(\App\Models\BackSide::whereIn('id', $specs->back_side_ids)->get() as $row)
-                                                                        <div class="col-{{$row->image != "" ? 6 : 4}}">
-                                                                            <label class="card-label"
-                                                                                   for="back_side-{{$row->id}}">
-                                                                                <input id="back_side-{{$row->id}}"
-                                                                                       class="card-rb"
-                                                                                       name="back_side" type="radio"
-                                                                                       value="{{$row->name}}">
-                                                                                <div class="card card-input">
-                                                                                    <div class="row no-gutters">
-                                                                                        @if($row->image != "")
-                                                                                            <div class="col-auto">
-                                                                                                <a href="{{$row->image}}"
-                                                                                                   data-lightbox="image">
-                                                                                                    <img
-                                                                                                        src="{{$row->image}}"
-                                                                                                        alt="Thumbnail">
-                                                                                                    <div
-                                                                                                        class="card-img-overlay d-flex">
-                                                                                                        <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
-                                                                                                    </div>
-                                                                                                </a>
-                                                                                            </div>
-                                                                                        @endif
-                                                                                        <div class="col"
-                                                                                             onclick="productSpecs('back_side', $(this).parents('label').attr('for'))">
-                                                                                            <div class="card-block p-2">
-                                                                                                <h4 class="card-title {{$row->image != "" ? '' : 'text-center'}}">
-                                                                                                    {{$row->name}}</h4>
-                                                                                                @if($row->image != "")
-                                                                                                    <p class="card-text">{{$row->description}}</p>
-                                                                                                @endif
-                                                                                            </div>
+                                            @if($specs->is_back_side == true)
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" role="tab" id="heading-back_side">
+                                                        <h4 class="panel-title">
+                                                            <a class="collapsed" role="button"
+                                                               data-toggle="collapse"
+                                                               href="#collapse-back_side" aria-expanded="false"
+                                                               aria-controls="collapse-back_side">
+                                                                {{__('lang.product.form.summary.back_side')}}
+                                                                <b class="show-back_side"></b>
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapse-back_side" class="panel-collapse collapse"
+                                                         role="tabpanel"
+                                                         aria-labelledby="heading-back_side" aria-expanded="false"
+                                                         style="height: 0;" data-parent="#accordion">
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                @foreach(\App\Models\BackSide::whereIn('id', $specs->back_side_ids)->get() as $row)
+                                                                    <div class="col-{{$row->image != "" ? 6 : 4}}">
+                                                                        <label class="card-label"
+                                                                               for="back_side-{{$row->id}}">
+                                                                            <input id="back_side-{{$row->id}}"
+                                                                                   class="card-rb"
+                                                                                   name="back_side" type="radio"
+                                                                                   value="{{$row->name}}">
+                                                                            <div class="card card-input">
+                                                                                <div class="row no-gutters">
+                                                                                    @if($row->image != "")
+                                                                                        <div class="col-auto">
+                                                                                            <a href="{{$row->image}}"
+                                                                                               data-lightbox="image">
+                                                                                                <img
+                                                                                                    src="{{$row->image}}"
+                                                                                                    alt="Thumbnail">
+                                                                                                <div
+                                                                                                    class="card-img-overlay d-flex">
+                                                                                                    <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                                                </div>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    @endif
+                                                                                    <div class="col"
+                                                                                         onclick="productSpecs('back_side', $(this).parents('label').attr('for'))">
+                                                                                        <div class="card-block p-2">
+                                                                                            <h4 class="card-title {{$row->image != "" ? '' : 'text-center'}}">
+                                                                                                {{$row->name}}</h4>
+                                                                                            @if($row->image != "")
+                                                                                                <p class="card-text">{{$row->description}}</p>
+                                                                                            @endif
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                            </label>
-                                                                        </div>
-                                                                    @endforeach
-                                                                </div>
+                                                                            </div>
+                                                                        </label>
+                                                                    </div>
+                                                                @endforeach
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @endif
+                                                </div>
+                                            @endif
 
-                                                @if($specs->is_right_side == true)
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading" role="tab" id="heading-right_side">
-                                                            <h4 class="panel-title">
-                                                                <a class="collapsed" role="button"
-                                                                   data-toggle="collapse"
-                                                                   href="#collapse-right_side" aria-expanded="false"
-                                                                   aria-controls="collapse-right_side">
-                                                                    {{__('lang.product.form.summary.right_side')}}
-                                                                    <b class="show-right_side"></b>
-                                                                </a>
-                                                            </h4>
-                                                        </div>
-                                                        <div id="collapse-right_side" class="panel-collapse collapse"
-                                                             role="tabpanel"
-                                                             aria-labelledby="heading-right_side" aria-expanded="false"
-                                                             style="height: 0;" data-parent="#accordion">
-                                                            <div class="panel-body">
-                                                                <div class="row">
-                                                                    @foreach(\App\Models\RightLeftSide::whereIn('id', $specs->right_side_ids)->get() as $row)
-                                                                        <div class="col-{{$row->image != "" ? 6 : 4}}">
-                                                                            <label class="card-label"
-                                                                                   for="right_side-{{$row->id}}">
-                                                                                <input id="right_side-{{$row->id}}"
-                                                                                       class="card-rb"
-                                                                                       name="right_side" type="radio"
-                                                                                       value="{{$row->name}}">
-                                                                                <div class="card card-input">
-                                                                                    <div class="row no-gutters">
-                                                                                        @if($row->image != "")
-                                                                                            <div class="col-auto">
-                                                                                                <a href="{{$row->image}}"
-                                                                                                   data-lightbox="image">
-                                                                                                    <img
-                                                                                                        src="{{$row->image}}"
-                                                                                                        alt="Thumbnail">
-                                                                                                    <div
-                                                                                                        class="card-img-overlay d-flex">
-                                                                                                        <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
-                                                                                                    </div>
-                                                                                                </a>
-                                                                                            </div>
-                                                                                        @endif
-                                                                                        <div class="col"
-                                                                                             onclick="productSpecs('right_side', $(this).parents('label').attr('for'))">
-                                                                                            <div class="card-block p-2">
-                                                                                                <h4 class="card-title {{$row->image != "" ? '' : 'text-center'}}">
-                                                                                                    {{$row->name}}</h4>
-                                                                                                @if($row->image != "")
-                                                                                                    <p class="card-text">{{$row->description}}</p>
-                                                                                                @endif
-                                                                                            </div>
+                                            @if($specs->is_right_side == true)
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" role="tab" id="heading-right_side">
+                                                        <h4 class="panel-title">
+                                                            <a class="collapsed" role="button"
+                                                               data-toggle="collapse"
+                                                               href="#collapse-right_side" aria-expanded="false"
+                                                               aria-controls="collapse-right_side">
+                                                                {{__('lang.product.form.summary.right_side')}}
+                                                                <b class="show-right_side"></b>
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapse-right_side" class="panel-collapse collapse"
+                                                         role="tabpanel"
+                                                         aria-labelledby="heading-right_side" aria-expanded="false"
+                                                         style="height: 0;" data-parent="#accordion">
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                @foreach(\App\Models\RightLeftSide::whereIn('id', $specs->right_side_ids)->get() as $row)
+                                                                    <div class="col-{{$row->image != "" ? 6 : 4}}">
+                                                                        <label class="card-label"
+                                                                               for="right_side-{{$row->id}}">
+                                                                            <input id="right_side-{{$row->id}}"
+                                                                                   class="card-rb"
+                                                                                   name="right_side" type="radio"
+                                                                                   value="{{$row->name}}">
+                                                                            <div class="card card-input">
+                                                                                <div class="row no-gutters">
+                                                                                    @if($row->image != "")
+                                                                                        <div class="col-auto">
+                                                                                            <a href="{{$row->image}}"
+                                                                                               data-lightbox="image">
+                                                                                                <img
+                                                                                                    src="{{$row->image}}"
+                                                                                                    alt="Thumbnail">
+                                                                                                <div
+                                                                                                    class="card-img-overlay d-flex">
+                                                                                                    <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                                                </div>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    @endif
+                                                                                    <div class="col"
+                                                                                         onclick="productSpecs('right_side', $(this).parents('label').attr('for'))">
+                                                                                        <div class="card-block p-2">
+                                                                                            <h4 class="card-title {{$row->image != "" ? '' : 'text-center'}}">
+                                                                                                {{$row->name}}</h4>
+                                                                                            @if($row->image != "")
+                                                                                                <p class="card-text">{{$row->description}}</p>
+                                                                                            @endif
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                            </label>
-                                                                        </div>
-                                                                    @endforeach
-                                                                </div>
+                                                                            </div>
+                                                                        </label>
+                                                                    </div>
+                                                                @endforeach
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @endif
+                                                </div>
+                                            @endif
 
-                                                @if($specs->is_left_side == true)
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading" role="tab" id="heading-left_side">
-                                                            <h4 class="panel-title">
-                                                                <a class="collapsed" role="button"
-                                                                   data-toggle="collapse"
-                                                                   href="#collapse-left_side" aria-expanded="false"
-                                                                   aria-controls="collapse-left_side">
-                                                                    {{__('lang.product.form.summary.left_side')}}
-                                                                    <b class="show-left_side"></b>
-                                                                </a>
-                                                            </h4>
-                                                        </div>
-                                                        <div id="collapse-left_side" class="panel-collapse collapse"
-                                                             role="tabpanel"
-                                                             aria-labelledby="heading-left_side" aria-expanded="false"
-                                                             style="height: 0;" data-parent="#accordion">
-                                                            <div class="panel-body">
-                                                                <div class="row">
-                                                                    @foreach(\App\Models\RightLeftSide::whereIn('id', $specs->left_side_ids)->get() as $row)
-                                                                        <div class="col-{{$row->image != "" ? 6 : 4}}">
-                                                                            <label class="card-label"
-                                                                                   for="left_side-{{$row->id}}">
-                                                                                <input id="left_side-{{$row->id}}"
-                                                                                       class="card-rb"
-                                                                                       name="left_side" type="radio"
-                                                                                       value="{{$row->name}}">
-                                                                                <div class="card card-input">
-                                                                                    <div class="row no-gutters">
-                                                                                        @if($row->image != "")
-                                                                                            <div class="col-auto">
-                                                                                                <a href="{{$row->image}}"
-                                                                                                   data-lightbox="image">
-                                                                                                    <img
-                                                                                                        src="{{$row->image}}"
-                                                                                                        alt="Thumbnail">
-                                                                                                    <div
-                                                                                                        class="card-img-overlay d-flex">
-                                                                                                        <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
-                                                                                                    </div>
-                                                                                                </a>
-                                                                                            </div>
-                                                                                        @endif
-                                                                                        <div class="col"
-                                                                                             onclick="productSpecs('left_side', $(this).parents('label').attr('for'))">
-                                                                                            <div class="card-block p-2">
-                                                                                                <h4 class="card-title {{$row->image != "" ? '' : 'text-center'}}">
-                                                                                                    {{$row->name}}</h4>
-                                                                                                @if($row->image != "")
-                                                                                                    <p class="card-text">{{$row->description}}</p>
-                                                                                                @endif
-                                                                                            </div>
+                                            @if($specs->is_left_side == true)
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" role="tab" id="heading-left_side">
+                                                        <h4 class="panel-title">
+                                                            <a class="collapsed" role="button"
+                                                               data-toggle="collapse"
+                                                               href="#collapse-left_side" aria-expanded="false"
+                                                               aria-controls="collapse-left_side">
+                                                                {{__('lang.product.form.summary.left_side')}}
+                                                                <b class="show-left_side"></b>
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapse-left_side" class="panel-collapse collapse"
+                                                         role="tabpanel"
+                                                         aria-labelledby="heading-left_side" aria-expanded="false"
+                                                         style="height: 0;" data-parent="#accordion">
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                @foreach(\App\Models\RightLeftSide::whereIn('id', $specs->left_side_ids)->get() as $row)
+                                                                    <div class="col-{{$row->image != "" ? 6 : 4}}">
+                                                                        <label class="card-label"
+                                                                               for="left_side-{{$row->id}}">
+                                                                            <input id="left_side-{{$row->id}}"
+                                                                                   class="card-rb"
+                                                                                   name="left_side" type="radio"
+                                                                                   value="{{$row->name}}">
+                                                                            <div class="card card-input">
+                                                                                <div class="row no-gutters">
+                                                                                    @if($row->image != "")
+                                                                                        <div class="col-auto">
+                                                                                            <a href="{{$row->image}}"
+                                                                                               data-lightbox="image">
+                                                                                                <img
+                                                                                                    src="{{$row->image}}"
+                                                                                                    alt="Thumbnail">
+                                                                                                <div
+                                                                                                    class="card-img-overlay d-flex">
+                                                                                                    <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                                                </div>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    @endif
+                                                                                    <div class="col"
+                                                                                         onclick="productSpecs('left_side', $(this).parents('label').attr('for'))">
+                                                                                        <div class="card-block p-2">
+                                                                                            <h4 class="card-title {{$row->image != "" ? '' : 'text-center'}}">
+                                                                                                {{$row->name}}</h4>
+                                                                                            @if($row->image != "")
+                                                                                                <p class="card-text">{{$row->description}}</p>
+                                                                                            @endif
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                            </label>
-                                                                        </div>
-                                                                    @endforeach
-                                                                </div>
+                                                                            </div>
+                                                                        </label>
+                                                                    </div>
+                                                                @endforeach
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @endif
+                                                </div>
+                                            @endif
 
-                                                @if($specs->is_lamination == true)
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading" role="tab" id="heading-lamination">
-                                                            <h4 class="panel-title">
-                                                                <a class="collapsed" role="button"
-                                                                   data-toggle="collapse"
-                                                                   href="#collapse-lamination" aria-expanded="false"
-                                                                   aria-controls="collapse-lamination">
-                                                                    {{__('lang.product.form.summary.lamination')}}
-                                                                    <b class="show-lamination"></b>
-                                                                </a>
-                                                            </h4>
-                                                        </div>
-                                                        <div id="collapse-lamination" class="panel-collapse collapse"
-                                                             role="tabpanel"
-                                                             aria-labelledby="heading-lamination" aria-expanded="false"
-                                                             style="height: 0;" data-parent="#accordion">
-                                                            <div class="panel-body">
-                                                                <div class="row">
-                                                                    @foreach(\App\Models\Lamination::whereIn('id', $specs->lamination_ids)->get() as $row)
+                                            @if($specs->is_lamination == true)
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" role="tab" id="heading-lamination">
+                                                        <h4 class="panel-title">
+                                                            <a class="collapsed" role="button"
+                                                               data-toggle="collapse"
+                                                               href="#collapse-lamination" aria-expanded="false"
+                                                               aria-controls="collapse-lamination">
+                                                                {{__('lang.product.form.summary.lamination')}}
+                                                                <b class="show-lamination"></b>
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapse-lamination" class="panel-collapse collapse"
+                                                         role="tabpanel"
+                                                         aria-labelledby="heading-lamination" aria-expanded="false"
+                                                         style="height: 0;" data-parent="#accordion">
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                @foreach(\App\Models\Lamination::whereIn('id', $specs->lamination_ids)->get() as $row)
                                                                     <div class="col-{{$row->image != "" ? 6 : 4}}">
                                                                         <label class="card-label"
                                                                                for="lamination-{{$row->id}}">
@@ -870,7 +872,7 @@
                             </div>
                         </div>
 
-                        <div class="myCard">
+                        <div id="card-quantity" class="myCard" style="display: none">
                             <div class="card-content">
                                 <div class="card-title" style="text-transform: none">
                                     <h4 class="text-center"
@@ -882,8 +884,7 @@
                                         <div class="col">
                                             <small>{{__('lang.product.form.summary.quantity')}}
                                                 <span class="required">*</span></small>
-                                            <input id="range-quantity" name="quantity" class="input-range-slider"
-                                                   required>
+                                            <input id="range-quantity" name="quantity" class="input-range-slider">
                                         </div>
                                     </div>
                                 </div>
@@ -990,23 +991,23 @@
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.quantity')}}
-                                            <b class="fright show-quantity"></b>
+                                            <b class="fright show-quantity">&ndash;</b>
                                         </li>
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.price', ['unit' => 'box'])}}
-                                            <b class="fright">Rp{{number_format(25000,2,',','.')}}</b>
+                                            <b class="fright show-price">&ndash;</b>
                                         </li>
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.production')}}
-                                            <b class="fright">{{now()->formatLocalized('%d %b %Y')}}</b>
+                                            <b class="fright show-production">&ndash;</b>
                                         </li>
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.delivery')}}
-                                            <b class="fright">2 &ndash; 3 days</b>
+                                            <b class="fright show-delivery">&ndash;</b>
                                         </li>
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.received')}}
-                                            <b class="fright"><b>{{now()->addDays(3)->formatLocalized('%d %b %Y')}}</b></b>
+                                            <b class="fright show-received">&ndash;</b>
                                         </li>
                                     </ul>
                                     <div class="card-content pt-0 pb-0">
@@ -1018,14 +1019,15 @@
                                             TOTAL<b class="fright show-total" style="font-size: large">&ndash;</b>
                                         </li>
                                     </ul>
-                                    <div class="card-content pb-0">
+                                    <div id="summary-alert" class="card-content pb-0" style="display: none">
                                         <div class="alert alert-warning text-justify">
-                                            <i class="icon-exclamation-sign"></i><b>{{__('lang.alert.warning')}}</b> {!! __('lang.product.form.summary.alert', ['quantity' => '1 box', 'product' => $data->name]) !!}
+                                            <i class="icon-exclamation-sign"></i><b>{{__('lang.alert.warning')}}</b>
+                                            {!! __('lang.product.form.summary.alert', ['quantity' => '1 box', 'product' => $data->name]) !!}
                                         </div>
                                     </div>
                                     <div class="card-footer p-0">
-                                        <button
-                                            class="btn btn-primary btn-block text-uppercase text-left noborder">
+                                        <button id="btn_upload" type="button" disabled
+                                                class="btn btn-primary btn-block text-uppercase text-left noborder">
                                             {{__('lang.button.upload')}}<i class="icon-chevron-right fright"></i>
                                         </button>
                                     </div>
@@ -1048,33 +1050,70 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                    <div id="modal_upload" class="modal fade" tabindex="-1" role="dialog"
+                         aria-labelledby="modal_upload" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-body">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Modal Heading</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <label>Select Multiple Items:</label><br>
+                                        <input id="files" name="files[]" type="file" class="file" multiple>
+                                        <div id="errorBlock" class="form-text"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </section>
 @endsection
 @push('scripts')
     <script>
-        var collapse = $('.panel-collapse'), range_slider = $("#range-quantity"), total = 0, str_unit = ' box';
+        var collapse = $('.panel-collapse'), range_slider = $("#range-quantity"),
+            btn_upload = $("#btn_upload"), upload_input = $("#files"),
+            total = 0, str_unit = ' box';
 
         $(function () {
             range_slider.ionRangeSlider({
                 grid: true,
                 grid_num: 5,
-                min: 1,
+                min: 0,
                 max: 100,
-                from: 1,
+                from: 0,
                 postfix: str_unit,
-                onStart: function (data) {
-                    total = parseInt(data.from) * 25000;
-                    $(".show-quantity").text(data.from + str_unit);
-                    $(".show-total").text("Rp" + thousandSeparator(total) + ",00");
-                },
                 onChange: function (data) {
-                    total = parseInt(data.from) * 25000;
-                    $(".show-quantity").text(data.from + str_unit);
-                    $(".show-total").text("Rp" + thousandSeparator(total) + ",00");
+                    if (data.from > 0) {
+                        total = parseInt(data.from) * 25000;
+                        $(".show-quantity").text(data.from + str_unit);
+                        $(".show-price").text('Rp{{number_format(25000,2,',','.')}}');
+                        $(".show-production").text('{{now()->formatLocalized('%d %b %Y')}}');
+                        $(".show-delivery").html('2 &ndash; 3 days');
+                        $(".show-received").text('{{now()->addDays(3)->formatLocalized('%d %b %Y')}}');
+                        $(".show-total").text("Rp" + thousandSeparator(total) + ",00");
+                        $("#summary-alert").show();
+                        btn_upload.removeAttr('disabled');
+                    } else {
+                        resetter();
+                    }
                 }
+            });
+
+            upload_input.fileinput({
+                showUpload: false,
+                showCaption: true,
+                showPreview: true,
+                allowedFileTypes: ["image"],
+                allowedFileExtensions: ["jpg", "jpeg", "png", "tiff", "pdf", "zip", "rar"],
+                maxFileSize: 204800, //200 mb
+                elErrorContainer: "#errorBlock",
             });
 
             collapse.on('show.bs.collapse', function () {
@@ -1111,8 +1150,43 @@
         });
 
         function productSpecs(check, spec) {
+            var rs = range_slider.data("ionRangeSlider");
+            rs.reset();
+            resetter();
+
             $(".show-" + check).text($("#" + spec).val());
+
             $('#collapse-' + check).collapse('toggle');
         }
+
+        $("#city_id").on("change", function () {
+            var rs = range_slider.data("ionRangeSlider");
+            rs.reset();
+            resetter();
+
+            $("#card-quantity").show();
+        });
+
+        function resetter() {
+            total = 0;
+            $(".show-quantity").html('&ndash;');
+            $(".show-price").html('&ndash;');
+            $(".show-production").html('&ndash;');
+            $(".show-delivery").html('&ndash;');
+            $(".show-received").html('&ndash;');
+            $(".show-total").html('&ndash;');
+            $("#summary-alert").hide();
+            btn_upload.attr('disabled', 'disabled');
+        }
+
+        btn_upload.on('click', function () {
+            @auth
+            $("#modal_upload").modal('show');
+            @elseauth('admin')
+            swal('{{__('lang.alert.warning')}}', '{{__('lang.alert.feature-fail')}}', 'warning');
+            @else
+            openLoginModal();
+            @endauth
+        });
     </script>
 @endpush
