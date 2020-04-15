@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             MaterialSeeder::class,
             TypeProductSeeder::class,
             PrintingMethodsSeeder::class,
+            PagesSeeder::class,
             DetailSubkatSeeder::class
         ]);
     }
