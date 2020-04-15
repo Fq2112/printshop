@@ -13,10 +13,8 @@ class DetailSubkatSeeder extends Seeder
     {
         $detail1 = \App\Models\DetailSubkat::create([// E Card
             'subkategori_id' => 8,
-            'is_material' => true,
-            'material_ids' => ['39'],
             'is_size' => true,
-            'size_ids' => ['48'],
+            'size_ids' => ['50'],
             'is_side' => true,
             'side_ids' => ['1', '2'],
         ]);
@@ -26,7 +24,7 @@ class DetailSubkatSeeder extends Seeder
             'is_material' => true,
             'material_ids' => ['11'],
             'is_size' => true,
-            'size_ids' => ['7', '8', '9', '10'],
+            'size_ids' => ['7', '9', '10', '11', '12'],
             'is_side' => true,
             'side_ids' => ['1'],
         ]);
@@ -36,21 +34,23 @@ class DetailSubkatSeeder extends Seeder
             'is_material' => true,
             'material_ids' => ['10'],
             'is_size' => true,
-            'size_ids' => ['7', '8', '9', '10'],
+            'size_ids' => ['9', '10', '12'],
         ]);
         $detail4 = \App\Models\DetailSubkat::create([//Food Wrapper
             'subkategori_id' => 25,
             'is_material' => true,
             'material_ids' => ['25'],
             'is_size' => true,
-            'size_ids' => ['37', '38'],
+            'size_ids' => ['39', '40'],
+            'is_side' => true,
+            'side_ids' => ['1'],
         ]);
         $detail5 = \App\Models\DetailSubkat::create([ //Placement
             'subkategori_id' => 26,
             'is_material' => true,
-            'material_ids' => ['9', '10'],
+            'material_ids' => ['9', '10', '26'],
             'is_size' => true,
-            'size_ids' => ['7'],
+            'size_ids' => ['8', '9'],
         ]);
         $detail6 = \App\Models\DetailSubkat::create([ //Sealer
             'subkategori_id' => 27,
@@ -64,28 +64,28 @@ class DetailSubkatSeeder extends Seeder
             'is_lamination' => true,
             'lamination_ids' => ['1', '2', '3'],
             'is_size' => true,
-            'size_ids' => ['46'],
+            'size_ids' => ['48'],
         ]);
         $detail8 = \App\Models\DetailSubkat::create([//Portable Backdrop
             'subkategori_id' => 41,
             'is_material' => true,
             'material_ids' => ['30'],
             'is_size' => true,
-            'size_ids' => ['56', '57'],
+            'size_ids' => ['58', '59'],
         ]);
         $detail9 = \App\Models\DetailSubkat::create([//Meja Promosi
             'subkategori_id' => 42,
             'is_material' => true,
             'material_ids' => ['30'],
             'is_size' => true,
-            'size_ids' => ['47'],
+            'size_ids' => ['49'],
         ]);
         $detail10 = \App\Models\DetailSubkat::create([ //Pop up counter
             'subkategori_id' => 43,
             'is_material' => true,
             'material_ids' => ['30'],
             'is_size' => true,
-            'size_ids' => ['58', '59'],
+            'size_ids' => ['60', '61'],
         ]);
         $detail11 = \App\Models\DetailSubkat::create([//KAOS
             'subkategori_id' => 47,

@@ -33,7 +33,7 @@ class SizeSeeder extends Seeder
             ],
         ],
         [
-            'name' => ['XL (53 x 74 cm)', 'XL (53 x 7 4cm)'],
+            'name' => ['XL (53 x 74 cm)', 'XL (53 x 74 cm)'],
             'description' => [
                 'XL (53 x 74 cm).',
                 'XL (53 x 74 cm).'
@@ -51,11 +51,15 @@ class SizeSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['A4 (21 x 29,7 cm)', 'A4 (21 x 29,7 cm)'],
+            'name' => ['10 x 21 cm', '10 x 21 cm'],
             'description' => null
         ],
         [
-            'name' => ['F4 (21,6 x 33 cm)', 'F4 (21,6 x 33 cm)'],
+            'name' => ['A3 (29,7 x 42 cm)', 'A3 (29,7 x 42 cm)'],
+            'description' => null
+        ],
+        [
+            'name' => ['A4 (21 x 29,7 cm)', 'A4 (21 x 29,7 cm)'],
             'description' => null
         ],
         [
@@ -67,15 +71,19 @@ class SizeSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['1.5 cm x 90 cm', '1.5 cm x 90 cm'],
+            'name' => ['F4 (21,6 x 33 cm)', 'F4 (21,6 x 33 cm)'],
             'description' => null
         ],
         [
-            'name' => ['2.5 cm x 90 cm', '2.5 cm x 90 cm'],
+            'name' => ['1.5 x 90 cm', '1.5 x 90 cm'],
             'description' => null
         ],
         [
-            'name' => ['2 cm x 90 cm', '2 cm x 90 cm'],
+            'name' => ['2.5 x 90 cm', '2.5 x 90 cm'],
+            'description' => null
+        ],
+        [
+            'name' => ['2 x 90 cm', '2 x 90 cm'],
             'description' => null
         ],
         [
@@ -95,21 +103,21 @@ class SizeSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['FP Large (8 cm x 6.5 cm x 10.5 cm)', 'FP Large (8 cm x 6.5 cm x 10.5 cm)'],
+            'name' => ['FP Large (8 x 6.5 x 10.5 cm)', 'FP Large (8 x 6.5 x 10.5 cm)'],
             'description' => [
-                'FP Large (8 cm x 6.5 cm x 10.5 cm).',
-                'FP Large (8 cm x 6.5 cm x 10.5 cm).'
+                'FP Large (8 x 6.5 x 10.5 cm).',
+                'FP Large (8 x 6.5 x 10.5 cm).'
             ],
         ],
         [
-            'name' => ['16.2 cm x 21.6 cm x 5.5 cm (Sekat 3)', '16.2 cm x 21.6 cm x 5.5 cm (Sekat 3)'],
+            'name' => ['16.2 x 21.6 x 5.5 cm (Sekat 3)', '16.2 x 21.6 x 5.5 cm (3 Bulkheads)'],
             'description' => [
                 'Bento lunch box dengan 3 kompartemen.',
                 'Bento lunch boxes with 3 separate sections.'
             ],
         ],
         [
-            'name' => ['16.2 cm x 21.6 cm x 5.5 cm (Sekat 4)', '16.2 cm x 21.6 cm x 5.5 cm (Sekat 4)'],
+            'name' => ['16.2 x 21.6 x 5.5 cm (Sekat 4)', '16.2 x 21.6 x 5.5 cm (4 Bulkheads)'],
             'description' => [
                 'Bento lunch box dengan 4 kompartemen.',
                 'Bento lunch boxes with 4 separate sections.'
@@ -123,31 +131,31 @@ class SizeSeeder extends Seeder
             ],
         ],
         [
-            'name' => ['M (32 cm x 8 cm x 27 cm)', 'M (32 cm x 8 cm x 27 cm)'],
+            'name' => ['M (32 x 8 x 27 cm)', 'M (32 x 8 x 27 cm)'],
             'description' => [
-                'M (32 cm x 8 cm x 27 cm).',
-                'M (32 cm x 8 cm x 27 cm).'
+                'M (32 x 8 x 27 cm).',
+                'M (32 x 8 x 27 cm).'
             ],
         ],
         [
-            'name' => ['L (40 cm x 12 cm x 30 cm)', 'L (40 cm x 12 cm x 30 cm)'],
+            'name' => ['L (40 x 12 x 30 cm)', 'L (40 x 12 x 30 cm)'],
             'description' => [
-                'L (40 cm x 12 cm x 30 cm).',
-                'L (40 cm x 12 cm x 30 cm).'
+                'L (40 x 12 x 30 cm).',
+                'L (40 x 12 x 30 cm).'
             ],
         ],
         [
-            'name' => ['17 cm x 10.5 cm x 6.5 cm', '17 cm x 10.5 cm x 6.5 cm'],
+            'name' => ['17 x 10.5 x 6.5 cm', '17 x 10.5 x 6.5 cm'],
             'description' => [
-                '17 cm x 10.5 cm x 6.5 cm.',
-                '17 cm x 10.5 cm x 6.5 cm.'
+                '17 x 10.5 x 6.5 cm.',
+                '17 x 10.5 x 6.5 cm.'
             ],
         ],
         [
-            'name' => ['32 cm x 19 cm x 11 cm', '32 cm x 19 cm x 11 cm'],
+            'name' => ['32 x 19 x 11 cm', '32 x 19 x 11 cm'],
             'description' => [
-                '32 cm x 19 cm x 11 cm.',
-                '32 cm x 19 cm x 11 cm.'
+                '32 x 19 x 11 cm.',
+                '32 x 19 x 11 cm.'
             ],
         ],
         [
@@ -184,39 +192,39 @@ class SizeSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['3 cm x 5.5 cm', '3 cm x 5.5 cm'],
+            'name' => ['3 x 5.5 cm', '3 x 5.5 cm'],
             'description' => null
         ],
         [
-            'name' => ['5 cm x 8 cm', '5 cm x 8 cm'],
+            'name' => ['5 x 8 cm', '5 x 8 cm'],
             'description' => null
         ],
         [
-            'name' => ['12 cm x 7 cm x 17cm', '12 cm x 7 cm x 17cm'],
+            'name' => ['12 x 7 x 17cm', '12 x 7 x 17cm'],
             'description' => null
         ],
         [
-            'name' => ['12 cm x 7 cm x 18.5 cm', '12 cm x 7 cm x 18.5 cm'],
+            'name' => ['12 x 7 x 18.5 cm', '12 x 7 x 18.5 cm'],
             'description' => null
         ],
         [
-            'name' => ['12 cm x 7 cm x 23,5 cm', '12 cm x 7 cm x 23,5 cm'],
+            'name' => ['12 x 7 x 23,5 cm', '12 x 7 x 23,5 cm'],
             'description' => null
         ],
         [
-            'name' => ['22.5 cm x 27 cm', '22.5 cm x 27 cm'],
+            'name' => ['22.5 x 27 cm', '22.5 x 27 cm'],
             'description' => null
         ],
         [
-            'name' => ['30 cm x 30 cm', '30 cm x 30 cm'],
+            'name' => ['30 x 30 cm', '30 x 30 cm'],
             'description' => null
         ],
         [
-            'name' => ['3.8 cm x 3.8 cm', '3.8 cm x 3.8 cm'],
+            'name' => ['3.8 x 3.8 cm', '3.8 x 3.8 cm'],
             'description' => null
         ],
         [
-            'name' => ['6.4 cm x 6.4 cm', '6.4 cm x 6.4 cm'],
+            'name' => ['6.4 x 6.4 cm', '6.4 x 6.4 cm'],
             'description' => null
         ],
         [
@@ -228,11 +236,11 @@ class SizeSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['80 cm x 180 cm', '80 cm x 180 cm'],
+            'name' => ['80 x 180 cm', '80 x 180 cm'],
             'description' => null
         ],
         [
-            'name' => ['120 cm x 200 cm', '120 cm x 200 cm'],
+            'name' => ['120 x 200 cm', '120 x 200 cm'],
             'description' => null
         ],
         [
@@ -240,14 +248,14 @@ class SizeSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['9 cm x 9 cm', '9 cm x 9 cm'],
+            'name' => ['9 x 9 cm', '9 x 9 cm'],
             'description' => null
-        ],[
-            'name' => ['81 cm x 181 cm', '81 cm x 181 cm'],
+        ], [
+            'name' => ['81 x 181 cm', '81 x 181 cm'],
             'description' => null
         ],
         [
-            'name' => ['8.5 cm x 5.5 cm', '8.5 cm x 5.5 cm'],
+            'name' => ['8.5 x 5.5 cm', '8.5 x 5.5 cm'],
             'description' => null
         ],
         [
@@ -259,7 +267,7 @@ class SizeSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['25 cm x 35 cm x 10 cm', '25 cm x 35 cm x 10 cm'],
+            'name' => ['25 x 35 x 10 cm', '25 x 35 x 10 cm'],
             'description' => null
         ],
         [
@@ -271,33 +279,33 @@ class SizeSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['Landscape (10.5 cm x 14.8 cm)', 'Landscape (10.5 cm x 14.8 cm)'],
+            'name' => ['Landscape (10.5 x 14.8 cm)', 'Landscape (10.5 x 14.8 cm)'],
             'description' => [
                 'Bentuk hasil cetak memanjang ke samping.',
                 'Printed form extend to sidewards.'
             ],
         ],
         [
-            'name' => ['Potrait (10.5 cm x 14.8 cm)', 'Potrait (10.5 cm x 14.8 cm)'],
+            'name' => ['Potrait (10.5 x 14.8 cm)', 'Potrait (10.5 x 14.8 cm)'],
             'description' => [
                 'Bentuk hasil cetak memanjang ke atas.',
                 'Printed form extend to upwards.'
             ],
         ],
         [
-            'name' => ['3 cm x 3 cm', '3 cm x 3 cm'],
+            'name' => ['3 x 3 m', '3 x 3 m'],
             'description' => null
         ],
         [
-            'name' => ['4 cm x 4 cm', '4 cm x 4 cm'],
+            'name' => ['3 x 4 m', '3 x 4 m'],
             'description' => null
         ],
         [
-            'name' => ['81 cm x 218 cm', '81 cm x 218 cm'],
+            'name' => ['81 x 218 cm', '81 x 218 cm'],
             'description' => null
         ],
         [
-            'name' => ['86 cm x 214 cm', '86 cm x 214 cm'],
+            'name' => ['86 x 214 cm', '86 x 214 cm'],
             'description' => null
         ],
     ];
