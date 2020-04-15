@@ -12,24 +12,15 @@ class PrintingMethodsSeeder extends Seeder
     const DATA = [
         [
             'name' => ['DTG (min. 1 pcs)', 'DTG (min. 1 pcs)'],
-            'description' => [
-                '',
-                ''
-            ]
+            'description' => null
         ],
         [
-            'name' => ['Print & Cut (min. 40 pcs)', 'Print & Cut (min. 40 pcs)'],
-            'description' => [
-                '',
-                ''
-            ],
+            'name' => ['Cetak & Potong (min. 40 pcs)', 'Print & Cut (min. 40 pcs)'],
+            'description' => null
         ],
         [
-            'name' => ['Screen-printing (min. 120 pcs)', 'Screen-printing (min. 120 pcs)'],
-            'description' => [
-                '',
-                ''
-            ],
+            'name' => ['Sablon (min. 120 pcs)', 'Screen-printing (min. 120 pcs)'],
+            'description' => null
         ],
     ];
     public function run()
@@ -41,9 +32,10 @@ class PrintingMethodsSeeder extends Seeder
                     'en' => $DATUM['name'][1],
                     'id' => $DATUM['name'][0]
                 ],
+                'image' => !is_null($DATUM['description']) ? $faker->imageUrl() : null,
                 'description' => [
-                    'en' => $DATUM['description'][1],
-                    'id' => $DATUM['description'][0]
+                    'en' => !is_null($DATUM['description']) ? $DATUM['description'][1] : null,
+                    'id' => !is_null($DATUM['description']) ? $DATUM['description'][0] : null
                 ]
             ]);
         }

@@ -64,6 +64,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
             'as' => 'produk'
         ]);
 
+        Route::get('{produk}/submit', [
+            'uses' => 'MainController@submitPemesanan',
+            'as' => 'produk.submit.pemesanan'
+        ]);
+
         Route::get('cari/nama', [
             'uses' => 'MainController@cariNamaProduk',
             'as' => 'get.cari-nama.produk'

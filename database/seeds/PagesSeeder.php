@@ -13,10 +13,7 @@ class PagesSeeder extends Seeder
     const DATA = [
         [
             'name' => ['Pages', 'Pages'],
-            'description' => [
-                '',
-                ''
-            ]
+            'description' => null
         ],
     ];
 
@@ -28,12 +25,13 @@ class PagesSeeder extends Seeder
                   $faker = \Faker\Factory::create('id_ID');
                   \App\Models\Pages::create([
                       'name' => [
-                          'en' => $i." ". $DATUM['name'][1],
-                          'id' => $i." ". $DATUM['name'][0]
+                          'en' => $i . " " . $DATUM['name'][1],
+                          'id' => $i . " " . $DATUM['name'][0]
                       ],
+                      'image' => !is_null($DATUM['description']) ? $faker->imageUrl() : null,
                       'description' => [
-                          'en' => $DATUM['description'][1],
-                          'id' => $DATUM['description'][0]
+                          'en' => !is_null($DATUM['description']) ? $DATUM['description'][1] : null,
+                          'id' => !is_null($DATUM['description']) ? $DATUM['description'][0] : null
                       ]
                   ]);
               }

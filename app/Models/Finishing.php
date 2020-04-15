@@ -15,7 +15,7 @@ class Finishing extends Model
 
     protected $guarded = ['id'];
 
-    public $translatable = ['name'];
+    public $translatable = ['name', 'description'];
 
     public function getLocale(): string
     {
