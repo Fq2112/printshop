@@ -1063,7 +1063,8 @@
                                     </div>
                                     <div class="modal-body">
                                         <label>Select Multiple Items:</label><br>
-                                        <input id="files" name="files[]" type="file" class="file" multiple>
+                                        <input id="files" name="files[]" type="file" class="file"
+                                               accept="image/*,.pdf,.zip,.rar" multiple>
                                         <div id="errorBlock" class="form-text"></div>
                                     </div>
                                 </div>

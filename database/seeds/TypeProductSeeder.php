@@ -14,52 +14,31 @@ class TypeProductSeeder extends Seeder
     const DATA = [
         [
             'name' => ['BRIZZI', 'BRIZZI'],
-            'description' => [
-                '',
-                ''
-            ]
+            'description' => null
         ],
         [
             'name' => ['E-Money', 'E-Money'],
-            'description' => [
-                '',
-                ''
-            ],
+            'description' => null
         ],
         [
             'name' => ['Flazz', 'Flazz'],
-            'description' => [
-                '',
-                ''
-            ],
+            'description' => null
         ],
         [
-            'name' => ['Circle', 'Circle'],
-            'description' => [
-                '',
-                ''
-            ],
+            'name' => ['Lingkaran', 'Circle'],
+            'description' => null
         ],
         [
-            'name' => ['Rectangle', 'Rectangle'],
-            'description' => [
-                '',
-                ''
-            ],
+            'name' => ['Persegi Panjang', 'Rectangle'],
+            'description' => null
         ],
         [
-            'name' => ['Curve', 'Curve'],
-            'description' => [
-                '',
-                ''
-            ],
+            'name' => ['Melengkung', 'Curve'],
+            'description' => null
         ],
         [
-            'name' => ['Straight/Flat', 'Straight/Flat'],
-            'description' => [
-                '',
-                ''
-            ],
+            'name' => ['Lurus / Rata', 'Straight / Flat'],
+            'description' => null
         ]
     ];
     public function run()
@@ -71,9 +50,10 @@ class TypeProductSeeder extends Seeder
                     'en' => $DATUM['name'][1],
                     'id' => $DATUM['name'][0]
                 ],
+                'image' => !is_null($DATUM['description']) ? $faker->imageUrl() : null,
                 'description' => [
-                    'en' => $DATUM['description'][1],
-                    'id' => $DATUM['description'][0]
+                    'en' => !is_null($DATUM['description']) ? $DATUM['description'][1] : null,
+                    'id' => !is_null($DATUM['description']) ? $DATUM['description'][0] : null
                 ]
             ]);
         }

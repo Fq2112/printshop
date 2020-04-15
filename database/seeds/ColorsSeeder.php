@@ -14,51 +14,63 @@ class ColorsSeeder extends Seeder
         [
             'name' => ['Hitam & Putih', 'Black & White'],
             'description' => [
-                'Dokumen dengan warna cetak hitam putih.',
-                'Documents Will printed with black and white only'
+                'Dokumen akan dicetak dengan warna hitam putih saja.',
+                'Documents will be printed in black and white only.'
             ]
         ],
         [
             'name' => ['Full Color', 'Full Color'],
             'description' => [
-                'Dokumen dengan warna cetak full color.',
-                'Documents Will printed full color'
+                'Dokumen akan dicetak dengan penuh warna.',
+                'Documents will be printed in full color.'
             ],
         ],
         [
             'name' => ['1 Warna', '1 Color'],
             'description' => [
-                'Item dengan design cetak 1 warna',
-                'Item With one color only'
+                'Desain item dengan satu warna saja.',
+                'Item design with one color only.'
             ],
         ],
         [
             'name' => ['2 Warna', '2 Colors'],
             'description' => [
-                'Item dengan design cetak 2 warna',
-                'Item With full color design'
+                'Desain item dengan dua warna.',
+                'Item design with two colors.'
             ],
         ],
         [
-            'name' => ['Full Color Non Fullblock', 'Full Color Non Fullblock'],
+            'name' => ['Full Color Non-fullblock', 'Full Color Non-fullblock'],
             'description' => [
-                'Item dengan design cetak penuh warna non fullblock',
-                'Item with full colors design non fullback'
+                'Desain item dengan penuh warna non-fullblock.',
+                'Item design with full colors non-fullblock.'
             ],
         ],
         [
             'name' => ['4 Warna', '4 Colors'],
             'description' => [
-                'Item dengan maksimal 4 warna pada design',
-                'Iitem with maximum 4 colors design'
+                'Desain item dengan empat warna.',
+                'Item design with four colors.'
             ],
         ],
         [
             'name' => ['Full Color', 'Full Color'],
             'description' => [
-                'Item dengan design cetak penuh warna',
-                'Item with full colors design'
+                'Desain item dengan penuh warna.',
+                'Item design with full colors.'
             ],
+        ],
+        [
+            'name' => ['Hitam', 'Black'],
+            'description' => null
+        ],
+        [
+            'name' => ['Biru Laut', 'Navy Blue'],
+            'description' => null
+        ],
+        [
+            'name' => ['Putih', 'White'],
+            'description' => null
         ],
     ];
 
@@ -71,10 +83,10 @@ class ColorsSeeder extends Seeder
                     'en' => $DATUM['name'][1],
                     'id' => $DATUM['name'][0]
                 ],
-                'image' => $faker->imageUrl(),
+                'image' => !is_null($DATUM['description']) ? $faker->imageUrl() : null,
                 'description' => [
-                    'en' => $DATUM['description'][1],
-                    'id' => $DATUM['description'][0]
+                    'en' => !is_null($DATUM['description']) ? $DATUM['description'][1] : null,
+                    'id' => !is_null($DATUM['description']) ? $DATUM['description'][0] : null
                 ]
             ]);
         }

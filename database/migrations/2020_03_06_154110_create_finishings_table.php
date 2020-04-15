@@ -16,6 +16,8 @@ class CreateFinishingsTable extends Migration
         Schema::create('finishings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->text('image')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
