@@ -27,6 +27,11 @@ class SubKategori extends Model
         return $this->belongsTo(Kategori::class, 'kategoris_id');
     }
 
+    public function getSpecs()
+    {
+        return $this->hasOne(DetailSubkat::class, 'subkategori_id');
+    }
+
     public function getLocale(): string
     {
         if (is_null(App::getLocale())) {

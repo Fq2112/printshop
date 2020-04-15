@@ -16,8 +16,8 @@ class CreateEdgesTable extends Migration
         Schema::create('edges', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->text('image');
-            $table->text('description');
+            $table->text('image')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

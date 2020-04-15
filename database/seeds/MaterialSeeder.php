@@ -14,22 +14,22 @@ class MaterialSeeder extends Seeder
         [
             'name' => ['Cotton Combed 30s', 'Cotton Combed 30s'],
             'description' => [
-                'Bahan material dengan ketebalan 3-s, sangat cocok dengan suhu tropis',
-                'Combed material with a thickness of 30s, single knit and very suitable in tropic temperature'
+                'Bahan material dengan ketebalan 30s, sangat cocok dengan suhu tropis.',
+                'Combed material with a thickness of 30s, single knit and very suitable in tropic temperature.'
             ]
         ],
         [
             'name' => ['Art Carton 260gsm', 'Art Carton 260gsm'],
             'description' => [
                 'Tebal namun ekonomis. Permukaan mengkilap di kedua sisi dengan ketebalan 260 gsm.',
-                'Thick but vey economic, Glossy Surface on both sides with thickness 260 gsm'
+                'Thick but vey economic, Glossy Surface on both sides with thickness 260 gsm.'
             ],
         ],
         [
             'name' => ['Art Carton 310gsm', 'Art Carton 310gsm'],
             'description' => [
                 'Tebal namun ekonomis. Permukaan mengkilap di kedua sisi dengan ketebalan 310gsm.',
-                'Thick but vey economic, Glossy Surface on both sides with thickness 310gsm'
+                'Thick but vey economic, Glossy Surface on both sides with thickness 310gsm.'
             ],
         ],
         [
@@ -97,38 +97,23 @@ class MaterialSeeder extends Seeder
         ],
         [
             'name' => ['PP 12 Oz / 360 ml', 'PP 12 Oz / 360 ml'],
-            'description' => [
-                '',
-                ''
-            ],
+            'description' => null
         ],
         [
             'name' => ['PP 16 Oz / 480 ml', 'PP 16 Oz / 480 ml'],
-            'description' => [
-                '',
-                ''
-            ],
+            'description' => null
         ],
         [
             'name' => ['PP 22 Oz / 480 ml', 'PP 16 22 / 480 ml'],
-            'description' => [
-                '',
-                ''
-            ],
+            'description' => null
         ],
         [
             'name' => ['SPE 260 gr', 'SPE 260 gr'],
-            'description' => [
-                '',
-                ''
-            ],
+            'description' => null
         ],
         [
             'name' => ['Food Grade 350gsm', 'Food Grade 350gsm'],
-            'description' => [
-                '',
-                ''
-            ],
+            'description' => null
         ],
         [
             'name' => ['Ivory 300gsm', 'Ivory 300gsm'],
@@ -146,24 +131,15 @@ class MaterialSeeder extends Seeder
         ],
         [
             'name' => ['K150/M125/K125 B/F', 'K150/M125/K125 B/F'],
-            'description' => [
-                '',
-                ''
-            ],
+            'description' => null
         ],
         [
             'name' => ['WK150/M125/K125 B/F', 'WK150/M125/K125 B/F'],
-            'description' => [
-                '',
-                ''
-            ],
+            'description' => null
         ],
         [
             'name' => ['Duplex 250 gsm + K 125 M 125 E/F', 'Duplex 250 gsm + K 125 M 125 E/F'],
-            'description' => [
-                '',
-                ''
-            ],
+            'description' => null
         ],
         [
             'name' => ['Bopp', 'Bopp'],
@@ -174,17 +150,11 @@ class MaterialSeeder extends Seeder
         ],
         [
             'name' => ['Brown Kraft 80 GSM', 'Brown Kraft 80 GSM'],
-            'description' => [
-                '',
-                ''
-            ],
+            'description' => null
         ],
         [
             'name' => ['MG 40 GSM', 'MG 40 GSM'],
-            'description' => [
-                '',
-                ''
-            ],
+            'description' => null
         ],
         [
             'name' => ['Matte Paper 120gsm', 'Matte Paper 120gsm'],
@@ -202,31 +172,19 @@ class MaterialSeeder extends Seeder
         ],
         [
             'name' => ['Sticker ChromoSticker ', 'Sticker ChromoSticker '],
-            'description' => [
-                '',
-                ''
-            ],
+            'description' => null
         ],
         [
             'name' => ['Transparant Sticker  ', 'Transparant Sticker '],
-            'description' => [
-                '',
-                ''
-            ],
+            'description' => null
         ],
         [
             'name' => ['Vinyl GlossySticker', 'Vinyl GlossySticker'],
-            'description' => [
-                '',
-                ''
-            ],
+            'description' => null
         ],
         [
             'name' => ['Vinyl Matte', 'Vinyl Matte'],
-            'description' => [
-                '',
-                ''
-            ],
+            'description' => null
         ],
         [
             'name' => ['Albatros (Matte)', 'Albatros (Matte)'],
@@ -267,7 +225,7 @@ class MaterialSeeder extends Seeder
             'name' => ['Flexy China UV 340', 'Flexy China UV 340'],
             'description' => [
                 'Sama dengan Flexy China 280 gsm namun lebih tebal. Dicetak menggunakan tinta UV.',
-                'Same with Flexy China 280 gsm but thicker. Printed using UV ink..'
+                'Same with Flexy China 280 gsm but thicker. Printed using UV ink.'
             ],
         ],
         [
@@ -279,10 +237,7 @@ class MaterialSeeder extends Seeder
         ],
         [
             'name' => ['PVC', 'PVC'],
-            'description' => [
-                '',
-                ''
-            ],
+            'description' => null
         ],
         [
             'name' => ['Blacu', 'Blacu'],
@@ -316,10 +271,10 @@ class MaterialSeeder extends Seeder
                     'en' => $DATUM['name'][1],
                     'id' => $DATUM['name'][0]
                 ],
-                'image' => $faker->imageUrl(),
+                'image' => !is_null($DATUM['description']) ? $faker->imageUrl() : null,
                 'description' => [
-                    'en' => $DATUM['description'][1],
-                    'id' => $DATUM['description'][0]
+                    'en' => !is_null($DATUM['description']) ? $DATUM['description'][1] : null,
+                    'id' => !is_null($DATUM['description']) ? $DATUM['description'][0] : null
                 ]
             ]);
         }

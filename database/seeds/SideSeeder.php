@@ -14,15 +14,15 @@ class SideSeeder extends Seeder
         [
             'name' => ['1 sisi', '1 side'],
             'description' => [
-                'Desain akan dicetak pada satu sisi',
-                'Design will be printed on one side'
+                'Desain akan dicetak pada satu sisi.',
+                'Design will be printed on one side.'
             ]
         ],
         [
             'name' => ['2 sisi', '2 sides'],
             'description' => [
-                'Desain akan dicetak pada kedua sisi',
-                'Design will be printed on both sides'
+                'Desain akan dicetak pada kedua sisi.',
+                'Design will be printed on both sides.'
             ],
         ]
     ];

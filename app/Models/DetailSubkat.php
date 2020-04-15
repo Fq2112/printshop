@@ -23,4 +23,9 @@ class DetailSubkat extends Model
         'right_left_ids' => 'array',
         'back_side_ids' => 'array',
     ];
+
+    public function getSubKategori()
+    {
+        return $this->belongsTo(SubKategori::class, 'subkategori_id');
+    }
 }

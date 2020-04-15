@@ -13,11 +13,11 @@ class EdgeSeeder extends Seeder
     const DATA = [
         [
             'name' => ['Sudut Siku', 'Square Corner'],
-            'description' => ['Potongan sudut siku 90°', 'Standard cutting with 90° square corner']
+            'description' => ['Potongan sudut siku 90°.', 'Standard cutting with 90° square corner.']
         ],
         [
             'name' => ['Sudut Lengkung', 'Rounded Corner'],
-            'description' => ['Potongan sudut melengkung', 'Advance cutting with rounded corner']
+            'description' => ['Potongan sudut melengkung.', 'Advance cutting with rounded corner.']
         ]
     ];
 

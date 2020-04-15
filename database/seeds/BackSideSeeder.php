@@ -11,24 +11,24 @@ class BackSideSeeder extends Seeder
      */
     const DATA = [
         ['name' => [
-            '5 X 5 Cm', ' 5 X 5 Cm'
+            '5 x 5 cm', ' 5 x 5 cm'
         ], 'description' => [
-            'Desain akan dicetak dalam ukuran 5 X 5 Cm', 'Design Will be Printed on 5 X 5 Cm'
+            'Desain akan dicetak dalam ukuran 5 x 5 cm.', 'Design will be printed on 5 x 5 cm.'
         ]],
         ['name' => [
-            '10 X 10 Cm', ' 10 X 10 Cm'
+            '10 x 10 cm', ' 10 x 10 cm'
         ], 'description' => [
-            'Desain Akan Dicetak dalam ukuran 10 X 10 Cm', 'Design Will be Printed on 10 X 10 Cm'
+            'Desain akan dicetak dalam ukuran 10 x 10 cm.', 'Design will be printed on 10 x 10 cm.'
         ],],
         ['name' => [
-            '10 X 20 Cm', ' 10 X 20 Cm'
+            '10 x 20 cm', ' 10 x 20 cm'
         ], 'description' => [
-            'Desain Akan Dicetak dalam ukuran 10 X 20 Cm', 'Design Will be Printed on 10 X 20 Cm'
+            'Desain akan dicetak dalam ukuran 10 x 20 cm.', 'Design will be printed on 10 x 20 cm.'
         ],],
         ['name' => [
-            'Kosong', ' None'
+            'Kosong', 'Blank'
         ], 'description' => [
-            'Tanpa Desain', 'Without Design'
+            'Tanpa desain.', 'Without design.'
         ],],
     ];
 

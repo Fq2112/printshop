@@ -194,406 +194,408 @@
                                     <div class="divider divider-center mt-1 mb-1"><i class="icon-circle"></i></div>
                                     <div class="component-accordion">
                                         <div class="panel-group" id="accordion" role="tablist">
-                                            <div class="panel">
-                                                <div class="panel-heading" role="tab" id="heading-materials">
-                                                    <h4 class="panel-title">
-                                                        <a role="button" data-toggle="collapse"
-                                                           href="#collapse-materials" aria-expanded="false"
-                                                           aria-controls="collapse-materials" class="collapsed">
-                                                            {{__('lang.product.form.summary.materials')}}
-                                                            <b class="show-materials"></b>
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapse-materials" class="panel-collapse collapse"
-                                                     role="tabpanel"
-                                                     aria-labelledby="heading-materials" aria-expanded="false"
-                                                     style="height: 0;" data-parent="#accordion">
-                                                    <div class="panel-body">
-                                                        <div class="row">
-                                                            <div class="col-6">
-                                                                <label class="card-label" for="ac-260">
-                                                                    <input id="ac-260" class="card-rb" name="materials"
-                                                                           type="radio" value="Art Carton 260gsm"
-                                                                           checked required>
-                                                                    <div class="card card-input">
-                                                                        <div class="row no-gutters">
-                                                                            <div class="col-auto">
-                                                                                <a href="//placehold.it/500"
-                                                                                   data-lightbox="image">
-                                                                                    <img src="//placehold.it/100"
-                                                                                         alt="Thumbnail">
-                                                                                    <div
-                                                                                        class="card-img-overlay d-flex">
-                                                                                        <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                            @if($specs->is_material == true)
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" role="tab" id="heading-materials">
+                                                        <h4 class="panel-title">
+                                                            <a role="button" data-toggle="collapse"
+                                                               href="#collapse-materials" aria-expanded="false"
+                                                               aria-controls="collapse-materials" class="collapsed">
+                                                                {{__('lang.product.form.summary.materials')}}
+                                                                <b class="show-materials"></b>
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapse-materials" class="panel-collapse collapse"
+                                                         role="tabpanel" aria-labelledby="heading-materials"
+                                                         aria-expanded="false" style="height: 0;"
+                                                         data-parent="#accordion">
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                @foreach(\App\Models\Material::whereIn('id', $specs->material_ids)->get() as $row)
+                                                                    <div class="col-{{$row->image != "" ? 6 : 4}}">
+                                                                        <label class="card-label"
+                                                                               for="materials-{{$row->id}}">
+                                                                            <input id="materials-{{$row->id}}"
+                                                                                   class="card-rb"
+                                                                                   name="materials" type="radio"
+                                                                                   value="{{$row->name}}">
+                                                                            <div class="card card-input">
+                                                                                <div class="row no-gutters">
+                                                                                    @if($row->image != "")
+                                                                                        <div class="col-auto">
+                                                                                            <a href="{{$row->image}}"
+                                                                                               data-lightbox="image">
+                                                                                                <img
+                                                                                                    src="{{$row->image}}"
+                                                                                                    alt="Thumbnail">
+                                                                                                <div
+                                                                                                    class="card-img-overlay d-flex">
+                                                                                                    <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                                                </div>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    @endif
+                                                                                    <div class="col"
+                                                                                         onclick="productSpecs('materials', $(this).parents('label').attr('for'))">
+                                                                                        <div class="card-block p-2">
+                                                                                            <h4 class="card-title {{$row->image != "" ? '' : 'text-center'}}">{{$row->name}}</h4>
+                                                                                            <p class="card-text">{{$row->description}}</p>
+                                                                                        </div>
                                                                                     </div>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div class="col"
-                                                                                 onclick="productSpecs('materials', $(this).parents('label').attr('for'))">
-                                                                                <div class="card-block p-2">
-                                                                                    <h4 class="card-title">Art Carton
-                                                                                        260gsm</h4>
-                                                                                    <p class="card-text">Thick but
-                                                                                        economical. Shiny surface on
-                                                                                        both sides with a thickness of
-                                                                                        260 gsm.</p>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
+                                                                        </label>
                                                                     </div>
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <label class="card-label" for="ac-310">
-                                                                    <input id="ac-310" class="card-rb" name="materials"
-                                                                           type="radio" value="Art Carton 310gsm">
-                                                                    <div class="card card-input">
-                                                                        <div class="row no-gutters">
-                                                                            <div class="col-auto">
-                                                                                <a href="//placehold.it/500"
-                                                                                   data-lightbox="image">
-                                                                                    <img src="//placehold.it/100"
-                                                                                         alt="Thumbnail">
-                                                                                    <div
-                                                                                        class="card-img-overlay d-flex">
-                                                                                        <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
-                                                                                    </div>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div class="col"
-                                                                                 onclick="productSpecs('materials', $(this).parents('label').attr('for'))">
-                                                                                <div class="card-block p-2">
-                                                                                    <h4 class="card-title">Art Carton
-                                                                                        310gsm</h4>
-                                                                                    <p class="card-text">Same with
-                                                                                        260gsm Art Carton but
-                                                                                        thicker.</p>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </label>
+                                                                @endforeach
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading" role="tab" id="heading-size">
-                                                    <h4 class="panel-title">
-                                                        <a class="collapsed" role="button" data-toggle="collapse"
-                                                           href="#collapse-size" aria-expanded="false"
-                                                           aria-controls="collapse-size">
-                                                            {{__('lang.product.form.summary.size')}}
-                                                            <b class="show-size"></b>
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapse-size" class="panel-collapse collapse" role="tabpanel"
-                                                     aria-labelledby="heading-size" aria-expanded="false"
-                                                     style="height: 0;" data-parent="#accordion">
-                                                    <div class="panel-body">
-                                                        <div class="row">
-                                                            <div class="col-4">
-                                                                <label class="card-label" for="size-95">
-                                                                    <input id="size-95" class="card-rb" name="size"
-                                                                           type="radio" value="9,0 x 5,5 cm" checked
-                                                                           required>
-                                                                    <div class="card card-input">
-                                                                        <div class="row no-gutters">
-                                                                            <div class="col"
-                                                                                 onclick="productSpecs('size', $(this).parents('label').attr('for'))">
-                                                                                <div class="card-block py-2 px-5">
-                                                                                    <h4 class="card-title text-center">
-                                                                                        9,0 x 5,5 cm</h4>
+                                            @endif
+
+                                            @if($specs->is_size == true)
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" role="tab" id="heading-size">
+                                                        <h4 class="panel-title">
+                                                            <a class="collapsed" role="button" data-toggle="collapse"
+                                                               href="#collapse-size" aria-expanded="false"
+                                                               aria-controls="collapse-size">
+                                                                {{__('lang.product.form.summary.size')}}
+                                                                <b class="show-size"></b>
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapse-size" class="panel-collapse collapse"
+                                                         role="tabpanel"
+                                                         aria-labelledby="heading-size" aria-expanded="false"
+                                                         style="height: 0;" data-parent="#accordion">
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-4">
+                                                                    <label class="card-label" for="size-95">
+                                                                        <input id="size-95" class="card-rb" name="size"
+                                                                               type="radio" value="9,0 x 5,5 cm" checked
+                                                                               required>
+                                                                        <div class="card card-input">
+                                                                            <div class="row no-gutters">
+                                                                                <div class="col"
+                                                                                     onclick="productSpecs('size', $(this).parents('label').attr('for'))">
+                                                                                    <div class="card-block py-2 px-5">
+                                                                                        <h4 class="card-title text-center">
+                                                                                            9,0 x 5,5 cm</h4>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                </label>
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading" role="tab" id="heading-side">
-                                                    <h4 class="panel-title">
-                                                        <a class="collapsed" role="button" data-toggle="collapse"
-                                                           href="#collapse-side" aria-expanded="false"
-                                                           aria-controls="collapse-side">
-                                                            {{__('lang.product.form.summary.side')}}
-                                                            <b class="show-side"></b>
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapse-side" class="panel-collapse collapse" role="tabpanel"
-                                                     aria-labelledby="heading-side" aria-expanded="false"
-                                                     style="height: 0;" data-parent="#accordion">
-                                                    <div class="panel-body">
-                                                        <div class="row">
-                                                            <div class="col-6">
-                                                                <label class="card-label" for="side-1">
-                                                                    <input id="side-1" class="card-rb" name="side"
-                                                                           type="radio" value="1 side" checked required>
-                                                                    <div class="card card-input">
-                                                                        <div class="row no-gutters">
-                                                                            <div class="col-auto">
-                                                                                <a href="//placehold.it/500"
-                                                                                   data-lightbox="image">
-                                                                                    <img src="//placehold.it/100"
-                                                                                         alt="Thumbnail">
-                                                                                    <div
-                                                                                        class="card-img-overlay d-flex">
-                                                                                        <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                            @endif
+
+                                            @if($specs->is_side == true)
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" role="tab" id="heading-side">
+                                                        <h4 class="panel-title">
+                                                            <a class="collapsed" role="button" data-toggle="collapse"
+                                                               href="#collapse-side" aria-expanded="false"
+                                                               aria-controls="collapse-side">
+                                                                {{__('lang.product.form.summary.side')}}
+                                                                <b class="show-side"></b>
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapse-side" class="panel-collapse collapse"
+                                                         role="tabpanel"
+                                                         aria-labelledby="heading-side" aria-expanded="false"
+                                                         style="height: 0;" data-parent="#accordion">
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <label class="card-label" for="side-1">
+                                                                        <input id="side-1" class="card-rb" name="side"
+                                                                               type="radio" value="1 side" checked
+                                                                               required>
+                                                                        <div class="card card-input">
+                                                                            <div class="row no-gutters">
+                                                                                <div class="col-auto">
+                                                                                    <a href="//placehold.it/500"
+                                                                                       data-lightbox="image">
+                                                                                        <img src="//placehold.it/100"
+                                                                                             alt="Thumbnail">
+                                                                                        <div
+                                                                                            class="card-img-overlay d-flex">
+                                                                                            <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                                        </div>
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div class="col"
+                                                                                     onclick="productSpecs('side', $(this).parents('label').attr('for'))">
+                                                                                    <div class="card-block p-2">
+                                                                                        <h4 class="card-title">1
+                                                                                            side</h4>
+                                                                                        <p class="card-text">Design will
+                                                                                            be
+                                                                                            printed on one side.</p>
                                                                                     </div>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div class="col"
-                                                                                 onclick="productSpecs('side', $(this).parents('label').attr('for'))">
-                                                                                <div class="card-block p-2">
-                                                                                    <h4 class="card-title">1 side</h4>
-                                                                                    <p class="card-text">Design will be
-                                                                                        printed on one side.</p>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <label class="card-label" for="side-2">
-                                                                    <input id="side-2" class="card-rb" name="side"
-                                                                           type="radio" value="2 sides">
-                                                                    <div class="card card-input">
-                                                                        <div class="row no-gutters">
-                                                                            <div class="col-auto">
-                                                                                <a href="//placehold.it/500"
-                                                                                   data-lightbox="image">
-                                                                                    <img src="//placehold.it/100"
-                                                                                         alt="Thumbnail">
-                                                                                    <div
-                                                                                        class="card-img-overlay d-flex">
-                                                                                        <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <label class="card-label" for="side-2">
+                                                                        <input id="side-2" class="card-rb" name="side"
+                                                                               type="radio" value="2 sides">
+                                                                        <div class="card card-input">
+                                                                            <div class="row no-gutters">
+                                                                                <div class="col-auto">
+                                                                                    <a href="//placehold.it/500"
+                                                                                       data-lightbox="image">
+                                                                                        <img src="//placehold.it/100"
+                                                                                             alt="Thumbnail">
+                                                                                        <div
+                                                                                            class="card-img-overlay d-flex">
+                                                                                            <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                                        </div>
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div class="col"
+                                                                                     onclick="productSpecs('side', $(this).parents('label').attr('for'))">
+                                                                                    <div class="card-block p-2">
+                                                                                        <h4 class="card-title">2
+                                                                                            sides</h4>
+                                                                                        <p class="card-text">Design will
+                                                                                            be
+                                                                                            printed on both sides.</p>
                                                                                     </div>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div class="col"
-                                                                                 onclick="productSpecs('side', $(this).parents('label').attr('for'))">
-                                                                                <div class="card-block p-2">
-                                                                                    <h4 class="card-title">2 sides</h4>
-                                                                                    <p class="card-text">Design will be
-                                                                                        printed on both sides.</p>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                </label>
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading" role="tab" id="heading-corner">
-                                                    <h4 class="panel-title">
-                                                        <a class="collapsed" role="button" data-toggle="collapse"
-                                                           href="#collapse-corner" aria-expanded="false"
-                                                           aria-controls="collapse-corner">
-                                                            {{__('lang.product.form.summary.corner')}}
-                                                            <b class="show-corner"></b>
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapse-corner" class="panel-collapse collapse"
-                                                     role="tabpanel"
-                                                     aria-labelledby="heading-corner" aria-expanded="false"
-                                                     style="height: 0;" data-parent="#accordion">
-                                                    <div class="panel-body">
-                                                        <div class="row">
-                                                            <div class="col-6">
-                                                                <label class="card-label" for="corner-square">
-                                                                    <input id="corner-square" class="card-rb"
-                                                                           name="corner"
-                                                                           type="radio" value="Square" checked required>
-                                                                    <div class="card card-input">
-                                                                        <div class="row no-gutters">
-                                                                            <div class="col-auto">
-                                                                                <a href="//placehold.it/500"
-                                                                                   data-lightbox="image">
-                                                                                    <img src="//placehold.it/100"
-                                                                                         alt="Thumbnail">
-                                                                                    <div
-                                                                                        class="card-img-overlay d-flex">
-                                                                                        <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                            @endif
+
+                                            @if($specs->is_edge == true)
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" role="tab" id="heading-corner">
+                                                        <h4 class="panel-title">
+                                                            <a class="collapsed" role="button" data-toggle="collapse"
+                                                               href="#collapse-corner" aria-expanded="false"
+                                                               aria-controls="collapse-corner">
+                                                                {{__('lang.product.form.summary.corner')}}
+                                                                <b class="show-corner"></b>
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapse-corner" class="panel-collapse collapse"
+                                                         role="tabpanel"
+                                                         aria-labelledby="heading-corner" aria-expanded="false"
+                                                         style="height: 0;" data-parent="#accordion">
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <label class="card-label" for="corner-square">
+                                                                        <input id="corner-square" class="card-rb"
+                                                                               name="corner"
+                                                                               type="radio" value="Square" checked
+                                                                               required>
+                                                                        <div class="card card-input">
+                                                                            <div class="row no-gutters">
+                                                                                <div class="col-auto">
+                                                                                    <a href="//placehold.it/500"
+                                                                                       data-lightbox="image">
+                                                                                        <img src="//placehold.it/100"
+                                                                                             alt="Thumbnail">
+                                                                                        <div
+                                                                                            class="card-img-overlay d-flex">
+                                                                                            <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                                        </div>
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div class="col"
+                                                                                     onclick="productSpecs('corner', $(this).parents('label').attr('for'))">
+                                                                                    <div class="card-block p-2">
+                                                                                        <h4 class="card-title">Square
+                                                                                            Corner</h4>
+                                                                                        <p class="card-text">Standard
+                                                                                            cutting with 90° square
+                                                                                            corner.</p>
                                                                                     </div>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div class="col"
-                                                                                 onclick="productSpecs('corner', $(this).parents('label').attr('for'))">
-                                                                                <div class="card-block p-2">
-                                                                                    <h4 class="card-title">Square
-                                                                                        Corner</h4>
-                                                                                    <p class="card-text">Standard
-                                                                                        cutting with 90° square
-                                                                                        corner.</p>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <label class="card-label" for="corner-rounded">
-                                                                    <input id="corner-rounded" class="card-rb"
-                                                                           name="corner"
-                                                                           type="radio" value="Rounded">
-                                                                    <div class="card card-input">
-                                                                        <div class="row no-gutters">
-                                                                            <div class="col-auto">
-                                                                                <a href="//placehold.it/500"
-                                                                                   data-lightbox="image">
-                                                                                    <img src="//placehold.it/100"
-                                                                                         alt="Thumbnail">
-                                                                                    <div
-                                                                                        class="card-img-overlay d-flex">
-                                                                                        <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <label class="card-label" for="corner-rounded">
+                                                                        <input id="corner-rounded" class="card-rb"
+                                                                               name="corner"
+                                                                               type="radio" value="Rounded">
+                                                                        <div class="card card-input">
+                                                                            <div class="row no-gutters">
+                                                                                <div class="col-auto">
+                                                                                    <a href="//placehold.it/500"
+                                                                                       data-lightbox="image">
+                                                                                        <img src="//placehold.it/100"
+                                                                                             alt="Thumbnail">
+                                                                                        <div
+                                                                                            class="card-img-overlay d-flex">
+                                                                                            <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                                        </div>
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div class="col"
+                                                                                     onclick="productSpecs('corner', $(this).parents('label').attr('for'))">
+                                                                                    <div class="card-block p-2">
+                                                                                        <h4 class="card-title">Rounded
+                                                                                            Corner</h4>
+                                                                                        <p class="card-text">Advance
+                                                                                            cutting
+                                                                                            with rounded corner.</p>
                                                                                     </div>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div class="col"
-                                                                                 onclick="productSpecs('corner', $(this).parents('label').attr('for'))">
-                                                                                <div class="card-block p-2">
-                                                                                    <h4 class="card-title">Rounded
-                                                                                        Corner</h4>
-                                                                                    <p class="card-text">Advance cutting
-                                                                                        with rounded corner.</p>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                </label>
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading" role="tab" id="heading-lamination">
-                                                    <h4 class="panel-title">
-                                                        <a class="collapsed" role="button" data-toggle="collapse"
-                                                           href="#collapse-lamination" aria-expanded="false"
-                                                           aria-controls="collapse-lamination">
-                                                            {{__('lang.product.form.summary.lamination')}}
-                                                            <b class="show-lamination"></b>
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapse-lamination" class="panel-collapse collapse"
-                                                     role="tabpanel"
-                                                     aria-labelledby="heading-lamination" aria-expanded="false"
-                                                     style="height: 0;" data-parent="#accordion">
-                                                    <div class="panel-body">
-                                                        <div class="row">
-                                                            <div class="col-6">
-                                                                <label class="card-label" for="lamination-non">
-                                                                    <input id="lamination-non" class="card-rb"
-                                                                           name="lamination"
-                                                                           type="radio" value="Non-laminated" required>
-                                                                    <div class="card card-input">
-                                                                        <div class="row no-gutters">
-                                                                            <div class="col-auto">
-                                                                                <a href="//placehold.it/500"
-                                                                                   data-lightbox="image">
-                                                                                    <img src="//placehold.it/100"
-                                                                                         alt="Thumbnail">
-                                                                                    <div
-                                                                                        class="card-img-overlay d-flex">
-                                                                                        <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                            @endif
+
+                                            @if($specs->is_lamination == true)
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" role="tab" id="heading-lamination">
+                                                        <h4 class="panel-title">
+                                                            <a class="collapsed" role="button" data-toggle="collapse"
+                                                               href="#collapse-lamination" aria-expanded="false"
+                                                               aria-controls="collapse-lamination">
+                                                                {{__('lang.product.form.summary.lamination')}}
+                                                                <b class="show-lamination"></b>
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapse-lamination" class="panel-collapse collapse"
+                                                         role="tabpanel"
+                                                         aria-labelledby="heading-lamination" aria-expanded="false"
+                                                         style="height: 0;" data-parent="#accordion">
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <label class="card-label" for="lamination-non">
+                                                                        <input id="lamination-non" class="card-rb"
+                                                                               name="lamination"
+                                                                               type="radio" value="Non-laminated"
+                                                                               required>
+                                                                        <div class="card card-input">
+                                                                            <div class="row no-gutters">
+                                                                                <div class="col-auto">
+                                                                                    <a href="//placehold.it/500"
+                                                                                       data-lightbox="image">
+                                                                                        <img src="//placehold.it/100"
+                                                                                             alt="Thumbnail">
+                                                                                        <div
+                                                                                            class="card-img-overlay d-flex">
+                                                                                            <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                                        </div>
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div class="col"
+                                                                                     onclick="productSpecs('lamination', $(this).parents('label').attr('for'))">
+                                                                                    <div class="card-block p-2">
+                                                                                        <h4 class="card-title">
+                                                                                            Non-laminated</h4>
+                                                                                        <p class="card-text">Paper
+                                                                                            surface
+                                                                                            is not laminated.</p>
                                                                                     </div>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div class="col"
-                                                                                 onclick="productSpecs('lamination', $(this).parents('label').attr('for'))">
-                                                                                <div class="card-block p-2">
-                                                                                    <h4 class="card-title">
-                                                                                        Non-laminated</h4>
-                                                                                    <p class="card-text">Paper surface
-                                                                                        is not laminated.</p>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <label class="card-label" for="lamination-doff">
-                                                                    <input id="lamination-doff" class="card-rb"
-                                                                           name="lamination"
-                                                                           type="radio" value="Doff/Matte" checked>
-                                                                    <div class="card card-input">
-                                                                        <div class="row no-gutters">
-                                                                            <div class="col-auto">
-                                                                                <a href="//placehold.it/500"
-                                                                                   data-lightbox="image">
-                                                                                    <img src="//placehold.it/100"
-                                                                                         alt="Thumbnail">
-                                                                                    <div
-                                                                                        class="card-img-overlay d-flex">
-                                                                                        <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <label class="card-label" for="lamination-doff">
+                                                                        <input id="lamination-doff" class="card-rb"
+                                                                               name="lamination"
+                                                                               type="radio" value="Doff/Matte" checked>
+                                                                        <div class="card card-input">
+                                                                            <div class="row no-gutters">
+                                                                                <div class="col-auto">
+                                                                                    <a href="//placehold.it/500"
+                                                                                       data-lightbox="image">
+                                                                                        <img src="//placehold.it/100"
+                                                                                             alt="Thumbnail">
+                                                                                        <div
+                                                                                            class="card-img-overlay d-flex">
+                                                                                            <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                                        </div>
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div class="col"
+                                                                                     onclick="productSpecs('lamination', $(this).parents('label').attr('for'))">
+                                                                                    <div class="card-block p-2">
+                                                                                        <h4 class="card-title">
+                                                                                            Doff/Matte</h4>
+                                                                                        <p class="card-text">Paper
+                                                                                            surface
+                                                                                            is smooth, non-glossy, and
+                                                                                            looks
+                                                                                            more exclusive.</p>
                                                                                     </div>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div class="col"
-                                                                                 onclick="productSpecs('lamination', $(this).parents('label').attr('for'))">
-                                                                                <div class="card-block p-2">
-                                                                                    <h4 class="card-title">
-                                                                                        Doff/Matte</h4>
-                                                                                    <p class="card-text">Paper surface
-                                                                                        is smooth, non-glossy, and looks
-                                                                                        more exclusive.</p>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                </label>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <label class="card-label" for="lamination-glossy">
-                                                                    <input id="lamination-glossy" class="card-rb"
-                                                                           name="lamination"
-                                                                           type="radio" value="Glossy">
-                                                                    <div class="card card-input">
-                                                                        <div class="row no-gutters">
-                                                                            <div class="col-auto">
-                                                                                <a href="//placehold.it/500"
-                                                                                   data-lightbox="image">
-                                                                                    <img src="//placehold.it/100"
-                                                                                         alt="Thumbnail">
-                                                                                    <div
-                                                                                        class="card-img-overlay d-flex">
-                                                                                        <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <label class="card-label" for="lamination-glossy">
+                                                                        <input id="lamination-glossy" class="card-rb"
+                                                                               name="lamination"
+                                                                               type="radio" value="Glossy">
+                                                                        <div class="card card-input">
+                                                                            <div class="row no-gutters">
+                                                                                <div class="col-auto">
+                                                                                    <a href="//placehold.it/500"
+                                                                                       data-lightbox="image">
+                                                                                        <img src="//placehold.it/100"
+                                                                                             alt="Thumbnail">
+                                                                                        <div
+                                                                                            class="card-img-overlay d-flex">
+                                                                                            <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                                                        </div>
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div class="col"
+                                                                                     onclick="productSpecs('lamination', $(this).parents('label').attr('for'))">
+                                                                                    <div class="card-block p-2">
+                                                                                        <h4 class="card-title">
+                                                                                            Glossy</h4>
+                                                                                        <p class="card-text">Paper
+                                                                                            surface
+                                                                                            is glossy, brighter, and
+                                                                                            print
+                                                                                            colors are more visible.</p>
                                                                                     </div>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div class="col"
-                                                                                 onclick="productSpecs('lamination', $(this).parents('label').attr('for'))">
-                                                                                <div class="card-block p-2">
-                                                                                    <h4 class="card-title">Glossy</h4>
-                                                                                    <p class="card-text">Paper surface
-                                                                                        is glossy, brighter, and print
-                                                                                        colors are more visible.</p>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                </label>
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -675,31 +677,41 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody class="font-weight-bold">
-                                                <tr>
-                                                    <td>{{__('lang.product.form.summary.materials')}}</td>
-                                                    <td>:&nbsp;</td>
-                                                    <td class="show-materials"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>{{__('lang.product.form.summary.size')}}</td>
-                                                    <td>:&nbsp;</td>
-                                                    <td class="show-size"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>{{__('lang.product.form.summary.side')}}</td>
-                                                    <td>:&nbsp;</td>
-                                                    <td class="show-side"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>{{__('lang.product.form.summary.corner')}}</td>
-                                                    <td>:&nbsp;</td>
-                                                    <td class="show-corner"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>{{__('lang.product.form.summary.lamination')}}</td>
-                                                    <td>:&nbsp;</td>
-                                                    <td class="show-lamination"></td>
-                                                </tr>
+                                                @if($specs->is_material == true)
+                                                    <tr>
+                                                        <td>{{__('lang.product.form.summary.materials')}}</td>
+                                                        <td>:&nbsp;</td>
+                                                        <td class="show-materials"></td>
+                                                    </tr>
+                                                @endif
+                                                @if($specs->is_size == true)
+                                                    <tr>
+                                                        <td>{{__('lang.product.form.summary.size')}}</td>
+                                                        <td>:&nbsp;</td>
+                                                        <td class="show-size"></td>
+                                                    </tr>
+                                                @endif
+                                                @if($specs->is_side == true)
+                                                    <tr>
+                                                        <td>{{__('lang.product.form.summary.side')}}</td>
+                                                        <td>:&nbsp;</td>
+                                                        <td class="show-side"></td>
+                                                    </tr>
+                                                @endif
+                                                @if($specs->is_edge == true)
+                                                    <tr>
+                                                        <td>{{__('lang.product.form.summary.corner')}}</td>
+                                                        <td>:&nbsp;</td>
+                                                        <td class="show-corner"></td>
+                                                    </tr>
+                                                @endif
+                                                @if($specs->is_lamination == true)
+                                                    <tr>
+                                                        <td>{{__('lang.product.form.summary.lamination')}}</td>
+                                                        <td>:&nbsp;</td>
+                                                        <td class="show-lamination"></td>
+                                                    </tr>
+                                                @endif
                                                 </tbody>
                                             </table>
                                             <div class="divider divider-right mt-1 mb-0"><i class="icon-circle"></i>
@@ -807,6 +819,8 @@
                 $(this).siblings('.panel-heading').find('a').removeClass('active font-weight-bold');
                 $(this).siblings('.panel-heading').find('b').toggle(300);
             });
+
+            $(".component-accordion .panel-body .card-rb:first-child").prop('checked', true).prop('required', true);
 
             $(".show-materials").text($("input[name='materials']:checked").val());
             $(".show-size").text($("input[name='size']:checked").val());

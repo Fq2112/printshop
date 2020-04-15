@@ -12,31 +12,31 @@ class FrontSeeder extends Seeder
 
     const DATA = [
         [
-            'name' => ['5 × 5 cm', ' 5 × 5 cm'],
+            'name' => ['5 x 5 cm', ' 5 x 5 cm'],
             'description' => [
-                'Desain akan dicetak dalam ukuran 5 × 5 cm',
-                'Design will be printed on 5 × 5 cm'
+                'Desain akan dicetak dalam ukuran 5 x 5 cm.',
+                'Design will be printed on 5 x 5 cm.'
             ]
         ],
         [
-            'name' => ['10 × 10 cm', ' 10 × 10 cm'],
+            'name' => ['10 x 10 cm', ' 10 x 10 cm'],
             'description' => [
-                'Desain Akan Dicetak dalam ukuran 10 × 10 cm',
-                'Design will be printed on 10 × 10 cm'
+                'Desain Akan Dicetak dalam ukuran 10 x 10 cm.',
+                'Design will be printed on 10 x 10 cm.'
             ],
         ],
         [
-            'name' => ['10 × 20 cm', ' 10 × 20 cm'],
+            'name' => ['10 x 20 cm', ' 10 x 20 cm'],
             'description' => [
-                'Desain Akan Dicetak dalam ukuran 10 × 20 cm',
-                'Design will be printed on 10 × 20 cm'
+                'Desain Akan Dicetak dalam ukuran 10 x 20 cm.',
+                'Design will be printed on 10 x 20 cm.'
             ],
         ],
         [
             'name' => ['Kosong', 'Blank'],
             'description' => [
-                'Tanpa desain',
-                'Without design'
+                'Tanpa desain.',
+                'Without design.'
             ],
         ],
     ];

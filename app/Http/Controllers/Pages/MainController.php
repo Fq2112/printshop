@@ -180,11 +180,12 @@ class MainController extends Controller
         if (!is_null($sub)) {
             $data = $sub;
 
-            if (count($sub->getCluster) > 0) {
+            if (count($data->getCluster) > 0) {
                 return view('pages.main.produk', compact('data'));
             } else {
-                $guidelines = $sub->guidelines;
-                return view('pages.main.form-pemesanan', compact('data', 'provinces', 'address', 'guidelines'));
+                $specs = $data->getSpecs;
+                $guidelines = $data->guidelines;
+                return view('pages.main.form-pemesanan', compact('data', 'provinces', 'address', 'specs', 'guidelines'));
             }
 
         } else {

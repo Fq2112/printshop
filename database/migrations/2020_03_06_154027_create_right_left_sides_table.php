@@ -16,8 +16,8 @@ class CreateRightLeftSidesTable extends Migration
         Schema::create('right_left_sides', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->text('image');
-            $table->text('description');
+            $table->text('image')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

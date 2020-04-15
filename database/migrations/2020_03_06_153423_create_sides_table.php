@@ -16,8 +16,8 @@ class CreateSidesTable extends Migration
         Schema::create('sides', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->text('image');
-            $table->text('description');
+            $table->text('image')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

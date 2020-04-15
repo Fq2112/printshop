@@ -8,17 +8,23 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Config;
+use Spatie\Translatable\HasTranslations;
 
 class Admin extends Authenticatable
 {
     use SoftDeletes;
     use Notifiable;
+    use HasTranslations;
 
     protected $table = 'admins';
 
     protected $guarded = ['id'];
 
     protected $dates = ['deleted_at'];
+
+    public $translatable = ['about'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -59,6 +65,15 @@ class Admin extends Authenticatable
     public function getBlog()
     {
         return $this->hasMany(Blog::class, 'admin_id');
+    }
+
+    public function getLocale(): string
+    {
+        if (is_null(App::getLocale())) {
+            Config::set('app.locale', 'id');
+        }
+
+        return Config::get('app.locale');
     }
 
     /**

@@ -11,17 +11,17 @@ class RightLeftSideSeeder extends Seeder
      */
     const DATA = [
         [
-            'name' => ['5 × 5 cm', ' 5 × 5 cm'],
+            'name' => ['5 x 5 cm', ' 5 x 5 cm'],
             'description' => [
-                'Desain akan dicetak dalam ukuran 5 × 5 cm',
-                'Design will be printed on 5 × 5 cm'
+                'Desain akan dicetak dalam ukuran 5 x 5 cm.',
+                'Design will be printed on 5 x 5 cm.'
             ]
         ],
         [
             'name' => ['Kosong', 'Blank'],
             'description' => [
-                'Tanpa desain',
-                'Without design'
+                'Tanpa desain.',
+                'Without design.'
             ],
         ],
     ];

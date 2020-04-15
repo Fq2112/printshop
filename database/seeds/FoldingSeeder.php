@@ -13,22 +13,22 @@ class FoldingSeeder extends Seeder
         [
             'name' => ['Lipat Dua', 'Bifold'],
             'description' => [
-                'Satu lipatan di tengah kertas menghasilkan dua bagian yang sama',
-                'A fold in the middle of the paper produces two equal parts'
+                'Satu lipatan di tengah kertas menghasilkan dua bagian yang sama.',
+                'A fold in the middle of the paper produces two equal parts.'
             ],
         ],
         [
             'name' => ['Tri-Fold U', ' Tri-Fold U'],
             'description' => [
-                'Dua lipatan di tengah kertas dengan model lipatan ke dalam menghasilkan tiga bagian yang sama',
-                'Two folds in the middle of the paper with inward-fold model produce three equal parts'
+                'Dua lipatan di tengah kertas dengan model lipatan ke dalam menghasilkan tiga bagian yang sama.',
+                'Two folds in the middle of the paper with inward-fold model produce three equal parts.'
             ],
         ],
         [
             'name' => ['Tri-Fold Z', ' Tri-Fold Z'],
             'description' => [
-                'Dua lipatan di tengah kertas dengan model lipatan zigzag menghasilkan tiga bagian yang sama',
-                'Two folds in the middle of the paper with zigzag-fold model produce three equal parts'
+                'Dua lipatan di tengah kertas dengan model lipatan zigzag menghasilkan tiga bagian yang sama.',
+                'Two folds in the middle of the paper with zigzag-fold model produce three equal parts.'
             ],
         ]
     ];

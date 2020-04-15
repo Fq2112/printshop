@@ -26,7 +26,7 @@ class FinishingSeeder extends Seeder
         ['Laser Cut', 'Cut Laser'],
         ['Laser Ivory', 'Ivory Laser'],
         ['Klep Seng', 'Zinc Valve'],
-        ['Spiral Kalender', ''],
+        ['Spiral Kalender', 'Calendar Spiral'],
     ];
 
     public function run()
