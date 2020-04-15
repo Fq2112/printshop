@@ -31,12 +31,12 @@ class CreateDetailSubkatsTable extends Migration
             $table->string('edge_ids')->nullable();
             $table->boolean('is_color')->default(false);
             $table->string('color_ids')->nullable();
-            $table->boolean('is_front')->default(false);
-            $table->string('front_ids')->nullable();
+            $table->boolean('is_front_side')->default(false);
+            $table->string('front_side_ids')->nullable();
             $table->boolean('is_right_side')->default(false);
             $table->string('right_side_ids')->nullable();
             $table->boolean('is_left_side')->default(false);
-            $table->string('right_left_ids')->nullable();
+            $table->string('left_side_ids')->nullable();
             $table->boolean('is_back_side')->default(false);
             $table->string('back_side_ids')->nullable();
             $table->timestamps();

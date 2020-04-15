@@ -18,10 +18,10 @@ class DetailSubkat extends Model
         'edge_ids' => 'array',
         'color_ids' => 'array',
         'folding_ids' => 'array',
-        'front_ids' => 'array',
-        'right_side_ids' => 'array',
-        'right_left_ids' => 'array',
+        'front_side_ids' => 'array',
         'back_side_ids' => 'array',
+        'right_side_ids' => 'array',
+        'left_side_ids' => 'array',
     ];
 
     public function getSubKategori()

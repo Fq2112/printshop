@@ -93,14 +93,14 @@ class DetailSubkatSeeder extends Seeder
             'material_ids' => ['1'],
             'is_size' => true,
             'size_ids' => ['1', '2', '3', '4', '5'],
-            'is_front' => true,
-            'front_ids' => ['1', '2', '3', '4'],
-            'is_right_side' => true,
-            'right_side_ids' => ['1','2'],
-            'is_left_side' => true,
-            'right_left_ids' => ['1','2'],
+            'is_front_side' => true,
+            'front_side_ids' => ['1', '2', '3', '4'],
             'is_back_side' => true,
             'back_side_ids' => ['1', '2', '3', '4'],
+            'is_right_side' => true,
+            'right_side_ids' => ['1', '2'],
+            'is_left_side' => true,
+            'left_side_ids' => ['1', '2'],
         ]);
 
     }
