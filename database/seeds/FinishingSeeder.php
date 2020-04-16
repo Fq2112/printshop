@@ -89,6 +89,14 @@ class FinishingSeeder extends Seeder
                 'Binding documents with staples and duct tape.'
             ]
         ],
+
+        [
+            'name' => ['Double Wall', 'Double Wall'],
+            'description' => [
+                'Ketebalan Extra dari bahan yang sebenarnya.',
+                'Extra thickness from the actual material.'
+            ]
+        ],
     ];
 
     public function run()

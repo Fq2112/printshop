@@ -308,6 +308,10 @@ class SizeSeeder extends Seeder
             'name' => ['86 x 214 cm', '86 x 214 cm'],
             'description' => null
         ],
+        [
+            'name' => ['DL Envelope (11 X 22 cm)', 'DL Envelope (11 X 22 cm)'],
+            'description' => null
+        ],
     ];
 
     public function run()

@@ -288,6 +288,27 @@ class MaterialSeeder extends Seeder
                 'Coarse textured paper like wood grain in blue.'
             ],
         ],
+        [
+            'name' => ['Fancy Constellation Snow 240gsm', 'Fancy Constellation Snow 240gsm'],
+            'description' => [
+                'Kertas bertekstur Garis Halus',
+                'Textured paper with fine lines.'
+            ],
+        ],
+        [
+            'name' => ['Fancy Constellation Snow 240gsm', 'Fancy EggShell 270gsm'],
+            'description' => [
+                'Kertas bertekstur Kasar',
+                'Rough textured paper'
+            ],
+        ],
+        [
+            'name' => ['Concorde 90 gsm', 'Concorde 90 gsm'],
+            'description' => [
+                'Kertas bertekstur Garis-garis Halus',
+                'Textured Paper Fine Lines'
+            ],
+        ],
     ];
 
     public function run()
