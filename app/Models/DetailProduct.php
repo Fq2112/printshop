@@ -30,5 +30,6 @@ class DetailProduct extends Model
         'binding_ids' => 'array',
         'print_method_ids' => 'array',
         'finishing_ids' => 'array',
+        'folding_ids' => 'array',
     ];
 }

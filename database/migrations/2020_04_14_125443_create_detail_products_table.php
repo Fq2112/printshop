@@ -80,6 +80,7 @@ class CreateDetailProductsTable extends Migration
             $table->string('print_method_ids')->nullable();
 
             $table->boolean('is_design')->default(false);
+            $table->boolean('is_landscape')->default(false); //Default Potrait
             $table->timestamps();
         });
     }
