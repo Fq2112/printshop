@@ -242,6 +242,9 @@ return [
     "tooltip" => [
         "ava" => "Click here to change your avatar!",
         "background" => "Click here to change your background profile!",
+        "upload-design" => "Allowed extension: jpg, jpeg, png, tiff, pdf, zip, and rar. Allowed size: < 200 MB.",
+        "clear-upload" => "Click here to clear the file you selected!",
+        "cancel-upload" => "Click here to cancel your file upload process!"
     ],
     "placeholder" => [
         "search" => "What do you want to print today?",
@@ -256,6 +259,8 @@ return [
         "subject" => "Subject",
         "choose" => "-- Choose --",
         "message" => "Write something here...",
+        "drag-drop" => "Drag & drop your design file here...",
+        "click-select" => "<br>(or click to choose it)",
     ],
     "button" => [
         "cart" => "View Cart",
@@ -269,6 +274,7 @@ return [
         "download" => "Download Guidelines",
         "upload" => "UPLOAD DESIGN",
         "create" => "CREATE DESIGN",
+        "submit" => "SUBMIT DESIGN",
         "next" => "Next",
         "prev" => "Previous",
         "finish" => "Finish",
@@ -297,6 +303,16 @@ return [
             "footer-create" => "Looking to <a href='javascript:showRegisterForm()'>create an account</a>?",
             "footer-login" => "Already have an account? <a href='javascript:showLoginForm()'>Sign In</a>",
         ],
+        "upload-design" => [
+            "head" => "Choose Upload Method",
+            "upload-head" => "Upload File",
+            "upload-capt" => "<ul class='card-text ml-3 mb-0' style='text-transform:none;display:none'><li>Allowed file extension is <b>JPG</b>, <b>JPEG</b>, <b>PNG</b>, <b>TIFF</b> or <b>PDF</b>.</li><li>Maximum file size is <b>200 MB</b>.</li><li>if you'd like to upload more than 1 file, you can compress it into zip / rar.</li></ul>",
+            "link-head" => "File Link",
+            "link-capt" => "Enter the Dropbox, Google Drive, Microsoft OneDrive, or other links to your design file.",
+            "msg-required" => "You must select a file to upload!",
+            "msg-size" => "File \"{name}\" (<b>{size} KB</b>) exceeds maximum allowed upload size of <b>{maxSize} KB (200 MB)</b>, try to upload smaller file!",
+            "msg-extension" => "Invalid extension for file \"{name}\", only \"{extensions}\" files are supported!",
+        ]
     ],
     "alert" => [
         "alert" => "ALERT!",

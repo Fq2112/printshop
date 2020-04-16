@@ -165,6 +165,17 @@
             font-weight: 500;
             line-height: unset !important;
         }
+
+        .file-input > * {
+            text-transform: none;
+        }
+
+        .modal-footer button {
+            margin: 0;
+            padding: 10px 0;
+            border-radius: 0 0 4px 4px;
+            font-weight: 600;
+        }
     </style>
 @endpush
 @section('content')
@@ -348,6 +359,56 @@
                             </div>
                         </div>
                     </div>
+                    <div id="modal_upload" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal_upload"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-body">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">{{__('lang.modal.upload-design.head')}}</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <label class="card-label mb-3" for="um-upload" data-toggle="tooltip"
+                                               title="{{__('lang.tooltip.upload-design')}}" onclick="uploadMethod()">
+                                            <input id="um-upload" class="card-rb" name="upload_method" type="radio"
+                                                   checked required>
+                                            <div class="card card-input">
+                                                <div class="card-block p-2">
+                                                    <h4 class="card-title">
+                                                        {{__('lang.modal.upload-design.upload-head')}}</h4>
+                                                    {!! __('lang.modal.upload-design.upload-capt') !!}
+                                                    <input id="file" name="file" type="file"
+                                                           accept=".jpg,.jpeg,.png,.tiff,.pdf,.zip,.rar">
+                                                </div>
+                                            </div>
+                                        </label>
+                                        <label class="card-label" for="um-link" onclick="uploadMethod()">
+                                            <input id="um-link" class="card-rb" name="upload_method" type="radio">
+                                            <div class="card card-input">
+                                                <div class="card-block p-2">
+                                                    <h4 class="card-title">{{__('lang.modal.upload-design.link-head')}}</h4>
+                                                    <p class="card-text mb-0"
+                                                       style="text-transform: none">{{__('lang.modal.upload-design.link-capt')}}</p>
+                                                    <input id="link" placeholder="http://example.com" type="text"
+                                                           class="form-control" name="link" maxlength="191"
+                                                           style="display: none" disabled>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="modal-footer p-0">
+                                        <button type="submit" id="btn_submit"
+                                                class="btn btn-outline-primary btn-block noborder" disabled>
+                                            <i class="icon-drafting-compass mr-2"></i>{{__('lang.button.submit')}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -356,7 +417,7 @@
 @push('scripts')
     <script>
         var collapse = $('.panel-collapse'), range_slider = $("#range-quantity"),
-            btn_upload = $("#btn_upload"), upload_input = $("#files"),
+            btn_upload = $("#btn_upload"), upload_input = $("#file"), link_input = $("#link"),
             price_pcs = parseInt('25000'), total = 0, str_unit = ' {{$specs->getUnit->name}}';
 
         $(function () {
@@ -386,12 +447,26 @@
 
             upload_input.fileinput({
                 showUpload: false,
-                showCaption: true,
+                showBrowse: false,
+                showCaption: false,
+                browseOnZoneClick: true,
                 showPreview: true,
-                allowedFileTypes: ["image"],
+                required: true,
+                dropZoneTitle: '{{__('lang.placeholder.drag-drop')}}',
+                dropZoneClickTitle: '{!! __('lang.placeholder.click-select') !!}',
+                removeLabel: '{{__('lang.button.delete')}}',
+                removeIcon: '<i class="icon-trash-alt mr-2"></i>',
+                removeClass: 'button button-3d button-rounded button-red',
+                removeTitle: '{{__('lang.tooltip.clear-upload')}}',
+                cancelLabel: '{{__('lang.button.cancel')}}',
+                cancelIcon: '<i class="icon-line2-action-undo mr-2"></i>',
+                cancelClass: 'button button-3d button-rounded button-red',
+                cancelTitle: '{{__('lang.tooltip.cancel-upload')}}',
                 allowedFileExtensions: ["jpg", "jpeg", "png", "tiff", "pdf", "zip", "rar"],
-                maxFileSize: 204800, //200 mb
-                elErrorContainer: "#errorBlock",
+                maxFileSize: 204800,
+                msgFileRequired: '{{__('lang.modal.upload-design.msg-required')}}',
+                msgSizeTooLarge: '{!! __('lang.modal.upload-design.msg-size') !!}',
+                msgInvalidFileExtension: '{!! __('lang.modal.upload-design.msg-extension') !!}',
             });
 
             collapse.on('show.bs.collapse', function () {
@@ -479,7 +554,7 @@
         btn_upload.on('click', function () {
             @auth
             @if(!is_null($specs->is_design) && $specs->is_design)
-            // modal online design
+            $("#modal_design").modal('show');
             @else
             $("#modal_upload").modal('show');
             @endif
@@ -488,6 +563,57 @@
             @else
             openLoginModal();
             @endauth
+        });
+
+        function uploadMethod() {
+            if ($("#um-upload").is(':checked')) {
+                $(".file-input").show()
+                    .parents('label').find('.card-text').hide();
+                link_input.hide().attr('disabled', 'disabled').removeAttr('required')
+                    .parents('label').find('.card-text').show();
+
+                if (!upload_input.val()) {
+                    $("#form-pemesanan button[type=submit]").attr('disabled', 'disabled');
+                } else {
+                    $("#form-pemesanan button[type=submit]").removeAttr('disabled');
+                }
+            }
+
+            if ($("#um-link").is(':checked')) {
+                $(".file-input").hide()
+                    .parents('label').find('.card-text').show();
+                link_input.show().attr('required', 'required').removeAttr('disabled')
+                    .parents('label').find('.card-text').hide();
+
+                if (!link_input.val() || link_input.val() == 'http://') {
+                    $("#form-pemesanan button[type=submit]").attr('disabled', 'disabled');
+                } else {
+                    $("#form-pemesanan button[type=submit]").removeAttr('disabled');
+                }
+            }
+        }
+
+        upload_input.on('change', function () {
+            if (!$(this).val()) {
+                $("#form-pemesanan button[type=submit]").attr('disabled', 'disabled');
+            } else {
+                $("#form-pemesanan button[type=submit]").removeAttr('disabled');
+            }
+        });
+
+        upload_input.on('fileclear').on('fileerror', function () {
+            $("#form-pemesanan button[type=submit]").attr('disabled', 'disabled');
+        });
+
+        link_input.on("keyup", function () {
+            var $uri = $(this).val().substr(0, 4) != 'http' ? 'http://' + $(this).val() : $(this).val();
+            $(this).val($uri);
+
+            if (!$(this).val() || $(this).val() == 'http://') {
+                $("#form-pemesanan button[type=submit]").attr('disabled', 'disabled');
+            } else {
+                $("#form-pemesanan button[type=submit]").removeAttr('disabled');
+            }
         });
     </script>
 @endpush

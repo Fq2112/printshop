@@ -242,6 +242,9 @@ return [
     "tooltip" => [
         "ava" => "Klik disini untuk mengubah avatar Anda!",
         "background" => "Klik disini untuk mengubah latar belakang profil Anda!",
+        "upload-design" => "Ekstensi yang diizinkan: jpg, jpeg, png, tiff, pdf, zip, and rar. Ukuran yang diizinkan: < 200 MB.",
+        "clear-upload" => "Klik disini untuk menghapus file yang telah Anda pilih!",
+        "cancel-upload" => "Klik disini untuk membatalkan proses pengunggahan file Anda!"
     ],
     "placeholder" => [
         "search" => "Mau cetak apa hari ini?",
@@ -256,6 +259,9 @@ return [
         "subject" => "Subyek",
         "choose" => "-- Pilih --",
         "message" => "Tulis sesuatu di sini...",
+        "upload" => "Browse file atau drag & drop di sini...",
+        "drag-drop" => "Drag & drop file desain Anda di sini...",
+        "click-select" => "<br>(atau klik untuk memilihnya)",
     ],
     "button" => [
         "cart" => "Lihat Keranjang",
@@ -269,6 +275,7 @@ return [
         "download" => "Unduh Pedoman",
         "upload" => "UNGGAH DESAIN",
         "create" => "BUAT DESAIN",
+        "submit" => "SUBMIT DESAIN",
         "next" => "Selanjutnya",
         "prev" => "Sebelumnya",
         "finish" => "Selesai",
@@ -297,6 +304,16 @@ return [
             "footer-create" => "Ingin <a href='javascript:showRegisterForm()'>membuat akun</a>?",
             "footer-login" => "Sudah punya akun? <a href='javascript:showLoginForm()'>Masuk</a>",
         ],
+        "upload-design" => [
+            "head" => "Pilih Metode Unggah",
+            "upload-head" => "Unggah File",
+            "upload-capt" => "<ul class='card-text ml-3 mb-0' style='text-transform:none;display:none'><li>Ekstensi file yang diizinkan adalah <b>JPG</b>, <b>JPEG</b>, <b>PNG</b>, <b>TIFF</b> atau <b>PDF</b>.</li><li>Ukuran file maksimum sebesar <b>200 MB</b>.</li><li>Jika Anda ingin mengunggah lebih dari 1 file, Anda dapat mengompresnya ke dalam zip / rar.</li></ul>",
+            "link-head" => "Tautan File",
+            "link-capt" => "Masukkan tautan Dropbox, Google Drive, Microsoft OneDrive, atau lainnya ke file desain Anda.",
+            "msg-required" => "Anda harus memilih sebuah file untuk diunggah!",
+            "msg-size" => "File \"{name}\" (<b>{size} KB</b>) melebihi ukuran unggahan maksimum yang diizinkan sebesar <b>{maxSize} KB (200 MB)</b>, coba unggah file yang ukurannya lebih kecil!",
+            "msg-extension" => "Ekstensi tidak valid untuk file \"{name}\", hanya file \"{extensions}\" yang didukung!",
+        ]
     ],
     "alert" => [
         "alert" => "PERINGATAN!",

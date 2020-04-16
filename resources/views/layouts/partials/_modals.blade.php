@@ -305,24 +305,3 @@
         </div>
     </div>
 </div>
-
-<!-- upload design -->
-<div id="modal_upload" class="modal fade" tabindex="-1" role="dialog"
-     aria-labelledby="modal_upload" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-body">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Modal Heading</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <label>Select Multiple Items:</label><br>
-                    <input id="files" name="files[]" type="file" class="file"
-                           accept="image/*,.pdf,.zip,.rar" multiple>
-                    <div id="errorBlock" class="form-text"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
