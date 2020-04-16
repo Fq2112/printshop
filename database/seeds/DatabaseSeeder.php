@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
             CopiesSeeder::class,
             ColorsSeeder::class,
             BalanceSeeder::class,
+            UnitSeeder::class,
             DetailSubkatSeeder::class
         ]);
     }
