@@ -312,6 +312,74 @@ class SizeSeeder extends Seeder
             'name' => ['DL Envelope (11 X 22 cm)', 'DL Envelope (11 X 22 cm)'],
             'description' => null
         ],
+        [
+            'name' => ['22 cm x 22 cm x 4.5 cm', '22 cm x 22 cm x 4.5 cm'],
+            'description' => null
+        ],
+        [
+            'name' => ['26 cm x 26 cm x 4.5 cm', '26 cm x 26 cm x 4.5 cm'],
+            'description' => null
+        ],
+        [
+            'name' => ['30 cm x 30 cm x 4.5 cm', '30 cm x 30 cm x 4.5 cm'],
+            'description' => null
+        ],
+        [
+            'name' => ['Bawah (18 cm x 18 cm x 7 cm) Atas (18 cm x 18 cm x 3 cm)', 'Bottom (18 cm x 18 cm x 7 cm) Top (18 cm x 18 cm x 3 cm)'],
+            'description' => null
+        ],
+        [
+            'name' => ['Bawah (20 cm x 20 cm x 7 cm) Atas (20 cm x 20 cm x 3 cm)', 'Bottom (20 cm x 20 cm x 7 cm) Top (20 cm x 20 cm x 3 cm)'],
+            'description' => null
+        ],
+        [
+            'name' => ['Bawah (25 cm x 25 cm x 7 cm) Atas (25 cm x 25 cm x 3 cm)', 'Bottom (25 cm x 25 cm x 7 cm) Top (25 cm x 25 cm x 3 cm)'],
+            'description' => null
+        ],
+        [
+            'name' => ['L (24 cm x 15 cm x 6 cm)', 'L (24 cm x 15 cm x 6 cm)'],
+            'description' => null
+        ],
+        [
+            'name' => ['M (18 cm x 10.5 cm x 5 cm)', 'M (18 cm x 10.5 cm x 5 cm)'],
+            'description' => null
+        ],
+        [
+            'name' => ['L (39x39x9.5)', 'L (39x39x9.5))'],
+            'description' => null
+        ],
+        [
+            'name' => ['M (32.5x32.5x4.5)', 'M (32.5x32.5x4.5)'],
+            'description' => null
+        ],
+        [
+            'name' => ['S (23x23x5.5)', 'S (23x23x5.5)'],
+            'description' => null
+        ],
+        [
+            'name' => ['12 cm x 5.5 cm x 21 cm', '12 cm x 5.5 cm x 21 cm'],
+            'description' => null
+        ],
+        [
+            'name' => ['16 cm x 8 cm x 23 cm', '16 cm x 8 cm x 23 cm'],
+            'description' => null
+        ],
+        [
+            'name' => ['11 cm x 6 cm x 17 cm', '11 cm x 6 cm x 17 cm'],
+            'description' => null
+        ],
+        [
+            'name' => ['13 cm x 8 cm x 21 cm', '13 cm x 8 cm x 21 cm'],
+            'description' => null
+        ],
+        [
+            'name' => ['13 cm x 8 cm x 18.5 cm', '13 cm x 8 cm x 18.5 cm'],
+            'description' => null
+        ],
+        [
+            'name' => ['13 cm x 8 cm x 23.5 cm', '13 cm x 8 cm x 23.5 cm'],
+            'description' => null
+        ],
     ];
 
     public function run()

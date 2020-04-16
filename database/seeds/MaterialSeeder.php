@@ -309,6 +309,56 @@ class MaterialSeeder extends Seeder
                 'Textured Paper Fine Lines'
             ],
         ],
+        [
+            'name' => ['Everyday Smooth Bright White 270gsm', 'Everyday Smooth Bright White 270gsm'],
+            'description' => [
+                'Kertas bertekstur halus dan berwarna lebih putih dari Splendorgel.',
+                'Paper has a fine texture and is whiter than Splendorgel.'
+            ],
+        ],
+        [
+            'name' => ['Via Linen Bright White 216gsm', 'Via Linen Bright White 216gsm'],
+            'description' => [
+                'Kertas bertekstur dengan garis halus dan berwarna dasar lebih putih.',
+                'Textured paper with finer lines and a whiter base color.'
+            ],
+        ],
+        [
+            'name' => ['White Kraft 120gsm', 'White Kraft 120gsm'],
+            'description' => null
+        ],
+        [
+            'name' => ['Brown Craft 200 GSM', 'Brown Craft 200 GSM'],
+            'description' => null
+        ],
+        [
+            'name' => ['PET 14 Oz / 420 ml', 'PET 14 Oz / 420 ml'],
+            'description' => null
+        ],
+        [
+            'name' => ['PET 22 Oz / 660 ml', 'PET 22 Oz / 660 ml'],
+            'description' => null
+        ],
+        [
+            'name' => ['K125/M125X3/K125', 'K125/M125X3/K125'],
+            'description' => null
+        ],
+        [
+            'name' => ['WK150/M125X3/K125', 'WK150/M125X3/K125'],
+            'description' => null
+        ],
+        [
+            'name' => ['Samson Craft 50 GSM Lapis PE 12 GSM', 'Samson Craft 50 GSM Lapis PE 12 GSM'],
+            'description' => null
+        ],
+        [
+            'name' => ['Greaseproof 40 GSM', 'Greaseproof 40 GSM'],
+            'description' => null
+        ],
+        [
+            'name' => ['Greaseproof 50 GSM', 'Greaseproof 50 GSM'],
+            'description' => null
+        ],
     ];
 
     public function run()
