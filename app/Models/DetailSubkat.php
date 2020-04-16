@@ -16,7 +16,6 @@ class DetailSubkat extends Model
         'balance_ids' => 'array',
         'page_ids' => 'array',
         'copies_ids' => 'array',
-        'finishing_ids' => 'array',
         'size_ids' => 'array',
         'lamination_ids' => 'array',
         'side_ids' => 'array',
@@ -28,6 +27,7 @@ class DetailSubkat extends Model
         'left_side_ids' => 'array',
         'front_cover_ids' => 'array',
         'back_cover_ids' => 'array',
+        'binding_ids' => 'array',
         'print_method_ids' => 'array',
     ];
 

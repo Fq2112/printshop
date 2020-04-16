@@ -437,6 +437,7 @@
             $(".show-type").text($("input[name='type']:checked").val());
             $(".show-materials").text($("input[name='materials']:checked").val());
             $(".show-color").text($("input[name='color']:checked").val());
+            $(".show-print_method").text($("input[name='print_method']:checked").val());
             $(".show-size").text($("input[name='size']:checked").val());
             $(".show-side").text($("input[name='side']:checked").val());
             $(".show-corner").text($("input[name='corner']:checked").val());
@@ -447,6 +448,9 @@
             $(".show-balance").text('Rp' + thousandSeparator($("input[name='balance']:checked").val()) + ',00');
             $(".show-copies").text($("input[name='copies']:checked").val());
             $(".show-page").text($("input[name='page']:checked").val());
+            $(".show-front_cover").text($("input[name='front_cover']:checked").val());
+            $(".show-back_cover").text($("input[name='back_cover']:checked").val());
+            $(".show-binding").text($("input[name='binding']:checked").val());
             $(".show-lamination").text($("input[name='lamination']:checked").val());
         });
 

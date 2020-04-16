@@ -28,7 +28,7 @@ class LaminationSeeder extends Seeder
                 ],
         ],
         [
-            'name' => ['Doff/Matte', 'Doff/Matte'],
+            'name' => ['Doff / Matte', 'Doff / Matte'],
             'description' =>
                 [
                     'Permukaan kertas halus, tidak mengkilap, dan tampak lebih eksklusif.',

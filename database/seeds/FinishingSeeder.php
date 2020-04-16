@@ -75,6 +75,20 @@ class FinishingSeeder extends Seeder
             'name' => ['Spiral Kalender', 'Calendar Spiral'],
             'description' => null
         ],
+        [
+            'name' => ['Ring Kawat', 'Wire Ring'],
+            'description' => [
+                'Jilid dokumen dengan ring kawat (spiral).',
+                'Binding documents with wire ring (spiral).'
+            ]
+        ],
+        [
+            'name' => ['Lakban', 'Duct Tape'],
+            'description' => [
+                'Jilid dokumen dengan staples dan lakban.',
+                'Binding documents with staples and duct tape.'
+            ]
+        ],
     ];
 
     public function run()

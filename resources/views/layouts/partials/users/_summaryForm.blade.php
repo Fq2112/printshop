@@ -20,6 +20,13 @@
         <td class="show-color"></td>
     </tr>
 @endif
+@if($specs->is_print_method == true)
+    <tr>
+        <td>{{__('lang.product.form.summary.print_method')}}</td>
+        <td>:&nbsp;</td>
+        <td class="show-print_method"></td>
+    </tr>
+@endif
 @if($specs->is_size == true)
     <tr>
         <td>{{__('lang.product.form.summary.size')}}</td>
@@ -88,6 +95,27 @@
         <td>{{__('lang.product.form.summary.page')}}</td>
         <td>:&nbsp;</td>
         <td class="show-page"></td>
+    </tr>
+@endif
+@if($specs->is_front_cover == true)
+    <tr>
+        <td>{{__('lang.product.form.summary.front_cover')}}</td>
+        <td>:&nbsp;</td>
+        <td class="show-front_cover"></td>
+    </tr>
+@endif
+@if($specs->is_back_cover == true)
+    <tr>
+        <td>{{__('lang.product.form.summary.back_cover')}}</td>
+        <td>:&nbsp;</td>
+        <td class="show-back_cover"></td>
+    </tr>
+@endif
+@if($specs->is_binding == true)
+    <tr>
+        <td>{{__('lang.product.form.summary.binding')}}</td>
+        <td>:&nbsp;</td>
+        <td class="show-binding"></td>
     </tr>
 @endif
 @if($specs->is_lamination == true)

@@ -61,16 +61,19 @@ class ColorsSeeder extends Seeder
             ],
         ],
         [
-            'name' => ['#000000', '#000000'],
-            'description' => null
+            'name' => ['Hitam', 'Black'],
+            'description' => ['#000000', '#000000'],
+            'image' => null
         ],
         [
-            'name' => ['#19198c', '#19198c'],
-            'description' => null
+            'name' => ['Biru Laut', 'Navy'],
+            'description' => ['#19198c', '#19198c'],
+            'image' => null
         ],
         [
-            'name' => ['#FFFFFF', '#FFFFFF'],
-            'description' => null
+            'name' => ['Putih', 'White'],
+            'description' => ['#FFFFFF', '#FFFFFF'],
+            'image' => null
         ],
     ];
 
@@ -83,10 +86,10 @@ class ColorsSeeder extends Seeder
                     'en' => $DATUM['name'][1],
                     'id' => $DATUM['name'][0]
                 ],
-                'image' => !is_null($DATUM['description']) ? $faker->imageUrl() : null,
+                'image' => array_key_exists('image', $DATUM) ? $DATUM['image'] : $faker->imageUrl(),
                 'description' => [
-                    'en' => !is_null($DATUM['description']) ? $DATUM['description'][1] : null,
-                    'id' => !is_null($DATUM['description']) ? $DATUM['description'][0] : null
+                    'en' => $DATUM['description'][1],
+                    'id' => $DATUM['description'][0]
                 ]
             ]);
         }

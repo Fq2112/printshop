@@ -55,6 +55,8 @@ class DetailSubkatSeeder extends Seeder
             'front_cover_ids' => ['43'],
             'is_back_cover' => true,
             'back_cover_ids' => ['44', '45', '46'],
+            'is_binding' => true,
+            'binding_ids' => ['17', '18'],
             'unit_id' => 3
         ]);
         $detail4 = \App\Models\DetailSubkat::create([//Food Wrapper
@@ -127,6 +129,8 @@ class DetailSubkatSeeder extends Seeder
             'subkategori_id' => 47,
             'is_material' => true,
             'material_ids' => ['1'],
+            'is_color' => true,
+            'color_ids' => ['8', '9', '10'],
             'is_size' => true,
             'size_ids' => ['1', '2', '3', '4', '5'],
             'is_front_side' => true,

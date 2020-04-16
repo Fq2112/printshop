@@ -89,10 +89,10 @@ class MaterialSeeder extends Seeder
             ],
         ],
         [
-            'name' => ['Polyester Nilon', 'Polyester Nilon'],
+            'name' => ['Nilon Polyester', 'Polyester Nylon'],
             'description' => [
-                'Tali ID Card dengan bahan mengkilap.',
-                'ID Card Strap with shiny material.'
+                'Tali kartu identitas dengan bahan mengkilap.',
+                'Identity card strap with shiny material.'
             ],
         ],
         [
@@ -123,10 +123,10 @@ class MaterialSeeder extends Seeder
             ],
         ],
         [
-            'name' => ['Dupleks 350gsm', 'Dupleks 350gsm'],
+            'name' => ['Dupleks 350gsm', 'Duplex 350gsm'],
             'description' => [
                 'Ekonomis, berwarna putih mengkilap dengan bagian bawah abu-abu.',
-                'Economical, shiny white with a gray bottom.'
+                'Economic, shiny white with a gray bottom.'
             ],
         ],
         [
@@ -171,19 +171,19 @@ class MaterialSeeder extends Seeder
             ],
         ],
         [
-            'name' => ['Sticker ChromoSticker ', 'Sticker ChromoSticker '],
+            'name' => ['Stiker Chrome ', 'Chrome Sticker'],
             'description' => null
         ],
         [
-            'name' => ['Transparant Sticker  ', 'Transparant Sticker '],
+            'name' => ['Stiker Transparan', 'Transparent Sticker'],
             'description' => null
         ],
         [
-            'name' => ['Vinyl GlossySticker', 'Vinyl GlossySticker'],
+            'name' => ['Stiker Vinyl Glossy', 'Glossy Vinyl Sticker'],
             'description' => null
         ],
         [
-            'name' => ['Vinyl Matte', 'Vinyl Matte'],
+            'name' => ['Stiker Vinyl Matte', 'Matte Vinyl Sticker'],
             'description' => null
         ],
         [
@@ -208,7 +208,7 @@ class MaterialSeeder extends Seeder
             ],
         ],
         [
-            'name' => ['Canvas', 'Canvas'],
+            'name' => ['Kanvas', 'Canvas'],
             'description' => [
                 'Bahan terbuat dari kapas atau linen, awet dan tahan dalam segala kondisi.',
                 'Material made of cotton or linen, durable and resistant in all conditions.'
@@ -261,20 +261,32 @@ class MaterialSeeder extends Seeder
             ],
         ],
         [
-            'name' => ['Mica Plastic', 'Mica Plastic'],
-            'description' => null
+            'name' => ['Plastik Mika', 'Mica Plastic'],
+            'description' => [
+                'Plastik bening dan tebal untuk sampul.',
+                'Clear and thick plastic for the cover.'
+            ],
         ],
         [
-            'name' => ['Red Buffalo Paper', 'Red Buffalo Paper'],
-            'description' => null
+            'name' => ['Kertas Buffalo Merah', 'Red Buffalo Paper'],
+            'description' => [
+                'Kertas bertekstur kasar seperti serat kayu dengan warna merah.',
+                'Coarse textured paper like wood grain in red.'
+            ],
         ],
         [
-            'name' => ['Green Buffalo Paper', 'Green Buffalo Paper'],
-            'description' => null
+            'name' => ['Kertas Buffalo Hijau', 'Green Buffalo Paper'],
+            'description' => [
+                'Kertas bertekstur kasar seperti serat kayu dengan warna hijau.',
+                'Coarse textured paper like wood grain in green.'
+            ],
         ],
         [
-            'name' => ['Blue  Buffalo Paper', 'Blue  Buffalo Paper'],
-            'description' => null
+            'name' => ['Kertas Buffalo Biru', 'Blue Buffalo Paper'],
+            'description' => [
+                'Kertas bertekstur kasar seperti serat kayu dengan warna biru.',
+                'Coarse textured paper like wood grain in blue.'
+            ],
         ],
     ];
 
