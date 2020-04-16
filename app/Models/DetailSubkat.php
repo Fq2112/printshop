@@ -22,7 +22,6 @@ class DetailSubkat extends Model
         'side_ids' => 'array',
         'edge_ids' => 'array',
         'color_ids' => 'array',
-        'folding_ids' => 'array',
         'front_side_ids' => 'array',
         'back_side_ids' => 'array',
         'right_side_ids' => 'array',
@@ -35,5 +34,10 @@ class DetailSubkat extends Model
     public function getSubKategori()
     {
         return $this->belongsTo(SubKategori::class, 'subkategori_id');
+    }
+
+    public function getUnit()
+    {
+        return $this->belongsTo(Unit::class, 'unit_id');
     }
 }

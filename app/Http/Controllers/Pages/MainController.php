@@ -183,7 +183,7 @@ class MainController extends Controller
             if (count($data->getCluster) > 0) {
                 return view('pages.main.produk', compact('data'));
             } else {
-                $specs = $data->getSpecs;
+                $specs = $data->getSubkatSpecs;
                 $guidelines = $data->guidelines;
                 return view('pages.main.form-pemesanan', compact('data', 'provinces', 'address', 'specs', 'guidelines'));
             }

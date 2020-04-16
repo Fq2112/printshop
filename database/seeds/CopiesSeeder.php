@@ -12,28 +12,43 @@ class CopiesSeeder extends Seeder
 
     const DATA = [
         [
-            'name' => ['Ply', 'Ply'],
-            'description' => null
+            'name' => ['2 Ply', '2 Ply'],
+            'description' => [
+                'Terdiri dari dua rangkap kertas dengan warna putih dan pink.',
+                'Consists of two copies of paper in white and pink.'
+            ]
+        ],
+        [
+            'name' => ['3 Ply', '3 Ply'],
+            'description' => [
+                'Terdiri dari tiga rangkap kertas dengan warna putih, pink, dan kuning.',
+                'Consists of three copies of paper in white, pink, and yellow.'
+            ]
+        ],
+        [
+            'name' => ['4 Ply', '4 Ply'],
+            'description' => [
+                'Terdiri dari empat rangkap kertas dengan warna putih, pink, kuning, dan biru.',
+                'Consists of four copies of paper in white, pink, yellow, and blue.'
+            ]
         ],
     ];
 
     public function run()
     {
         foreach (self::DATA as $DATUM) {
-            for ($i = 1 ; $i<=3 ; $i++){
-                $faker = \Faker\Factory::create('id_ID');
-                \App\Models\Copies  ::create([
-                    'name' => [
-                        'en' => $i . " " . $DATUM['name'][1],
-                        'id' => $i . " " . $DATUM['name'][0]
-                    ],
-                    'image' => !is_null($DATUM['description']) ? $faker->imageUrl() : null,
-                    'description' => [
-                        'en' => !is_null($DATUM['description']) ? $DATUM['description'][1] : null,
-                        'id' => !is_null($DATUM['description']) ? $DATUM['description'][0] : null
-                    ]
-                ]);
-            }
+            $faker = \Faker\Factory::create('id_ID');
+            \App\Models\Copies::create([
+                'name' => [
+                    'en' => $DATUM['name'][1],
+                    'id' => $DATUM['name'][0]
+                ],
+                'image' => !is_null($DATUM['description']) ? $faker->imageUrl() : null,
+                'description' => [
+                    'en' => !is_null($DATUM['description']) ? $DATUM['description'][1] : null,
+                    'id' => !is_null($DATUM['description']) ? $DATUM['description'][0] : null
+                ]
+            ]);
         }
     }
 }

@@ -82,7 +82,7 @@ class MaterialSeeder extends Seeder
             ],
         ],
         [
-            'name' => ['Kertas NCR', 'Kertas NCR'],
+            'name' => ['Kertas NCR', 'NCR Paper'],
             'description' => [
                 'Kertas tembus warna tanpa karbon.',
                 'Colorless translucent paper.'

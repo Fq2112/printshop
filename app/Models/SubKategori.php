@@ -27,7 +27,7 @@ class SubKategori extends Model
         return $this->belongsTo(Kategori::class, 'kategoris_id');
     }
 
-    public function getSpecs()
+    public function getSubkatSpecs()
     {
         return $this->hasOne(DetailSubkat::class, 'subkategori_id');
     }

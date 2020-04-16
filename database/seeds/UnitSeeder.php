@@ -10,17 +10,22 @@ class UnitSeeder extends Seeder
      * @return void
      */
     const Units = [
-        'Pcs',
-        'Unit',
-        'Sheet',
-        'Box',
+        ['pcs', 'pcs'],
+        ['unit', 'unit(s)'],
+        ['lembar', 'sheet(s)'],
+        ['halaman', 'page(s)'],
+        ['buku', 'book(s)'],
+        ['box', 'box(es)'],
     ];
 
     public function run()
     {
         foreach (static::Units as $unit ) {
             \App\Models\Unit::create([
-                'name' => $unit
+                'name' => [
+                    'id' => $unit[0],
+                    'en' => $unit[1],
+                ]
             ]);
         }
     }

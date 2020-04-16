@@ -17,10 +17,10 @@ class DetailSubkatSeeder extends Seeder
             'size_ids' => ['50'],
             'is_side' => true,
             'side_ids' => ['1', '2'],
-            'is_type'=> true,
-            'type_ids' => ['1','2','3'],
+            'is_type' => true,
+            'type_ids' => ['1', '2', '3'],
             'is_balance' => true,
-            'balance_ids' => ['1','2','3'],
+            'balance_ids' => ['1', '2', '3'],
             'unit_id' => 1
         ]);
 
@@ -34,25 +34,27 @@ class DetailSubkatSeeder extends Seeder
             'side_ids' => ['1'],
             'is_color' => true,
             'color_ids' => ['2', '3'],
+            'is_copies' => true,
+            'copies_ids' => ['1', '2', '3'],
             'is_page' => true,
-            'page_ids' => ['16'],
+            'page_ids' => ['17'],
             'unit_id' => 1
         ]);
 
         $detail3 = \App\Models\DetailSubkat::create([ //cetak Dokumen
             'subkategori_id' => 14,
             'is_material' => true,
-            'material_ids' => ['10'],
+            'material_ids' => ['9', '10'],
             'is_size' => true,
             'size_ids' => ['9', '10', '12'],
             'is_page' => true,
-            'page_ids' => ['1','2','3','4','5','6','7','8','9','10','11'],
-             'is_color' => true,
+            'page_ids' => ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'],
+            'is_color' => true,
             'color_ids' => ['1', '2'],
             'is_front_cover' => true,
-            'front_cover_ids' =>['43'],
+            'front_cover_ids' => ['43'],
             'is_back_cover' => true,
-            'back_cover_ids' =>['44','45','46'],
+            'back_cover_ids' => ['44', '45', '46'],
             'unit_id' => 3
         ]);
         $detail4 = \App\Models\DetailSubkat::create([//Food Wrapper
