@@ -61,15 +61,15 @@ class ColorsSeeder extends Seeder
             ],
         ],
         [
-            'name' => ['Hitam', 'Black'],
+            'name' => ['#000000', '#000000'],
             'description' => null
         ],
         [
-            'name' => ['Biru Laut', 'Navy Blue'],
+            'name' => ['#19198c', '#19198c'],
             'description' => null
         ],
         [
-            'name' => ['Putih', 'White'],
+            'name' => ['#FFFFFF', '#FFFFFF'],
             'description' => null
         ],
     ];
