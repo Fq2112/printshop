@@ -324,7 +324,9 @@
                                     <div class="card-footer p-0">
                                         <button id="btn_upload" type="button" disabled
                                                 class="btn btn-primary btn-block text-uppercase text-left noborder">
-                                            {{__('lang.button.upload')}}<i class="icon-chevron-right fright"></i>
+                                            {{!is_null($specs->is_design) && $specs->is_design == true ?
+                                            __('lang.button.create') : __('lang.button.upload')}}
+                                            <i class="icon-chevron-right fright"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -343,27 +345,6 @@
                                         </table>
                                     </a>
                                 @endif
-                            </div>
-                        </div>
-                    </div>
-                    <div id="modal_upload" class="modal fade" tabindex="-1" role="dialog"
-                         aria-labelledby="modal_upload" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-body">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Modal Heading</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                            &times;
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <label>Select Multiple Items:</label><br>
-                                        <input id="files" name="files[]" type="file" class="file"
-                                               accept="image/*,.pdf,.zip,.rar" multiple>
-                                        <div id="errorBlock" class="form-text"></div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -497,7 +478,11 @@
 
         btn_upload.on('click', function () {
             @auth
+            @if(!is_null($specs->is_design) && $specs->is_design)
+            // modal online design
+            @else
             $("#modal_upload").modal('show');
+            @endif
             @elseauth('admin')
             swal('{{__('lang.alert.warning')}}', '{{__('lang.alert.feature-fail')}}', 'warning');
             @else

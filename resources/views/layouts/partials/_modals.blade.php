@@ -139,7 +139,8 @@
                                 <div class="row has-feedback">
                                     <div class="col-12">
                                         <input class="form-control" type="password" name="password" minlength="6"
-                                               placeholder="{{__('lang.placeholder.password')}}" id="reg_password" required>
+                                               placeholder="{{__('lang.placeholder.password')}}" id="reg_password"
+                                               required>
                                         <span class="glyphicon glyphicon-eye-open form-control-feedback"
                                               style="pointer-events: all;cursor: pointer"></span>
                                     </div>
@@ -270,7 +271,8 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="row {{ $errors->has('password_confirmation') ? ' has-danger' : '' }} has-feedback">
+                                <div
+                                    class="row {{ $errors->has('password_confirmation') ? ' has-danger' : '' }} has-feedback">
                                     <div class="col-12">
                                         <input id="forg_password_confirm" class="form-control" type="password"
                                                placeholder="{{__('lang.placeholder.re-password')}}"
@@ -298,6 +300,27 @@
                 </div>
                 <div class="forgot register-footer" style="display:none">
                     <span>{!! __('lang.modal.auth.footer-login') !!}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- upload design -->
+<div id="modal_upload" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="modal_upload" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-body">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <label>Select Multiple Items:</label><br>
+                    <input id="files" name="files[]" type="file" class="file"
+                           accept="image/*,.pdf,.zip,.rar" multiple>
+                    <div id="errorBlock" class="form-text"></div>
                 </div>
             </div>
         </div>
