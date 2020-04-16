@@ -371,8 +371,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <label class="card-label mb-3" for="um-upload" data-toggle="tooltip"
-                                               title="{{__('lang.tooltip.upload-design')}}" onclick="uploadMethod()">
+                                        <label class="card-label mb-3" for="um-upload" onclick="uploadMethod()">
                                             <input id="um-upload" class="card-rb" name="upload_method" type="radio"
                                                    checked required>
                                             <div class="card card-input">
@@ -401,7 +400,7 @@
                                     </div>
                                     <div class="modal-footer p-0">
                                         <button type="submit" id="btn_submit"
-                                                class="btn btn-outline-primary btn-block noborder" disabled>
+                                                class="btn btn-primary btn-block noborder" disabled>
                                             <i class="icon-drafting-compass mr-2"></i>{{__('lang.button.submit')}}
                                         </button>
                                     </div>
@@ -455,11 +454,11 @@
                 dropZoneTitle: '{{__('lang.placeholder.drag-drop')}}',
                 dropZoneClickTitle: '{!! __('lang.placeholder.click-select') !!}',
                 removeLabel: '{{__('lang.button.delete')}}',
-                removeIcon: '<i class="icon-trash-alt mr-2"></i>',
+                removeIcon: '<i class="icon-trash-alt mr-1"></i>',
                 removeClass: 'button button-3d button-rounded button-red w-100 m-0',
                 removeTitle: '{{__('lang.tooltip.clear-upload')}}',
                 cancelLabel: '{{__('lang.button.cancel')}}',
-                cancelIcon: '<i class="icon-line2-action-undo mr-2"></i>',
+                cancelIcon: '<i class="icon-line2-action-undo mr-1"></i>',
                 cancelClass: 'button button-3d button-rounded button-red w-100 m-0',
                 cancelTitle: '{{__('lang.tooltip.cancel-upload')}}',
                 allowedFileExtensions: ["jpg", "jpeg", "png", "tiff", "pdf", "zip", "rar"],
