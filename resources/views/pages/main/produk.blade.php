@@ -15,6 +15,8 @@
             display: flex;
             flex-direction: row;
             flex: 1 0 0;
+            flex-flow: row wrap;
+            align-items: stretch;
         }
 
         .card-deck .myCard {
@@ -92,7 +94,7 @@
 
             <div class="section">
                 <div class="container">
-                    <div class="row align-items-stretch grid-container clearfix" data-layout="fitRows">
+                    <div class="row clearfix" data-layout="fitRows">
                         <div class="col">
                             <div class="fancy-title title-dotted-border title-center mb-4">
                                 <h4 style="background-color: #f9f9f9">{{__('lang.how-to.head')}}</h4>

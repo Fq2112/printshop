@@ -42,5 +42,15 @@ class AdminSeeder extends Seeder
             'instagram' => 'mar_tanaya',
             'whatsapp' => '+628113051492',
         ]);
+
+        $user = \App\User::create([
+            'name' => 'Fiqy Ainuzzaqy',
+            'username' => 'jQuinn',
+            'email' => 'fiqy_a@icloud.com',
+            'password' => bcrypt('secret'),
+            'status' => true,
+        ]);
+
+        \App\Models\Bio::create(['user_id' => $user->id]);
     }
 }

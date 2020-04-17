@@ -62,7 +62,7 @@
         <div class="content-wrap">
             <div class="container clearfix">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+                    <div class="col-lg-4 col-md-5 col-sm-12 text-center">
                         <div class="myCard">
                             <form class="form-horizontal mb-0" role="form" method="POST" id="form-ava"
                                   enctype="multipart/form-data">
@@ -174,7 +174,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-lg-8 col-md-6 col-sm-12">
+                    <div class="col-lg-8 col-md-7 col-sm-12">
                         <div class="myCard">
                             <form class="form-horizontal mb-0" role="form" method="POST" id="form-password">
                                 @csrf
@@ -211,7 +211,7 @@
                                             </div>
 
                                             <div id="error_new_pass" class="row form-group has-feedback">
-                                                <div class="col">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <input placeholder="{{__('lang.placeholder.new-password')}}"
                                                            id="password" type="password" class="form-control"
                                                            name="new_password" minlength="6" required>
@@ -223,7 +223,7 @@
                                                         </span>
                                                     @endif
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <input placeholder="{{__('lang.placeholder.re-password')}}"
                                                            id="password-confirm" type="password" class="form-control"
                                                            name="password_confirmation" minlength="6" required

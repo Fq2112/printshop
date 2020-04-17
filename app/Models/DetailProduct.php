@@ -32,4 +32,14 @@ class DetailProduct extends Model
         'finishing_ids' => 'array',
         'folding_ids' => 'array',
     ];
+
+    public function getCluster()
+    {
+        return $this->belongsTo(ClusterKategori::class, 'cluster_kategoris_id');
+    }
+
+    public function getUnit()
+    {
+        return $this->belongsTo(Unit::class, 'unit_id');
+    }
 }

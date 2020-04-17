@@ -64,7 +64,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
             'as' => 'produk'
         ]);
 
-        Route::get('{produk}/submit', [
+        Route::post('{produk}/submit', [
+            'middleware' => ['auth', 'user', '503'],
             'uses' => 'MainController@submitPemesanan',
             'as' => 'produk.submit.pemesanan'
         ]);

@@ -22,6 +22,11 @@ class ClusterKategori extends Model
         return $this->belongsTo(SubKategori::class, 'subkategori_id');
     }
 
+    public function getClusterSpecs()
+    {
+        return $this->hasOne(DetailProduct::class, 'cluster_kategoris_id');
+    }
+
     public function getLocale(): string
     {
         if (is_null(App::getLocale())) {

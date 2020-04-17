@@ -18,15 +18,15 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\TypeProduct::whereIn('id', $specs->type_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}}">
-                                <label class="card-label"
+                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                                <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="type-{{$row->id}}">
                                     <input id="type-{{$row->id}}"
                                            class="card-rb"
                                            name="type" type="radio"
                                            value="{{$row->name}}">
-                                    <div class="card card-input">
-                                        <div class="row no-gutters">
+                                    <div class="card card-input {{$row->image != "" ? 'h-100' : ''}}">
+                                        <div class="row no-gutters {{$row->image != "" ? 'h-100' : ''}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
                                                     <a href="{{$row->image}}"
@@ -80,24 +80,18 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Material::whereIn('id', $specs->material_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}}">
-                                <label class="card-label"
+                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                                <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="materials-{{$row->id}}">
-                                    <input id="materials-{{$row->id}}"
-                                           class="card-rb"
-                                           name="materials" type="radio"
-                                           value="{{$row->name}}">
-                                    <div class="card card-input">
-                                        <div class="row no-gutters">
+                                    <input id="materials-{{$row->id}}" class="card-rb" name="materials"
+                                           type="radio" value="{{$row->name}}">
+                                    <div class="card card-input {{$row->image != "" ? 'h-100' : ''}}">
+                                        <div class="row no-gutters {{$row->image != "" ? 'h-100' : ''}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
-                                                       data-lightbox="image">
-                                                        <img
-                                                            src="{{$row->image}}"
-                                                            alt="Thumbnail">
-                                                        <div
-                                                            class="card-img-overlay d-flex">
+                                                    <a href="{{$row->image}}" data-lightbox="image">
+                                                        <img src="{{$row->image}}" alt="Thumbnail">
+                                                        <div class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
                                                         </div>
                                                     </a>
@@ -162,12 +156,13 @@
                                     </label>
                                 </div>
                             @else
-                                <div class="col-{{$row->image != "" ? 6 : 4}}">
-                                    <label class="card-label" for="color-{{$row->id}}">
+                                <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                                    <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
+                                           for="color-{{$row->id}}">
                                         <input id="color-{{$row->id}}" class="card-rb" name="color" type="radio"
                                                value="{{$row->name}}">
-                                        <div class="card card-input">
-                                            <div class="row no-gutters">
+                                        <div class="card card-input {{$row->image != "" ? 'h-100' : ''}}">
+                                            <div class="row no-gutters {{$row->image != "" ? 'h-100' : ''}}">
                                                 @if($row->image != "")
                                                     <div class="col-auto">
                                                         <a href="{{$row->image}}" data-lightbox="image">
@@ -218,15 +213,15 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\PrintingMethods::whereIn('id', $specs->print_method_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}}">
-                                <label class="card-label"
+                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                                <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="print_method-{{$row->id}}">
                                     <input id="print_method-{{$row->id}}"
                                            class="card-rb"
                                            name="print_method" type="radio"
                                            value="{{$row->name}}">
-                                    <div class="card card-input">
-                                        <div class="row no-gutters">
+                                    <div class="card card-input {{$row->image != "" ? 'h-100' : ''}}">
+                                        <div class="row no-gutters {{$row->image != "" ? 'h-100' : ''}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
                                                     <a href="{{$row->image}}"
@@ -282,15 +277,15 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Size::whereIn('id', $specs->size_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}}">
-                                <label class="card-label"
+                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                                <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="size-{{$row->id}}">
                                     <input id="size-{{$row->id}}"
                                            class="card-rb"
                                            name="size" type="radio"
                                            value="{{$row->name}}">
-                                    <div class="card card-input">
-                                        <div class="row no-gutters">
+                                    <div class="card card-input {{$row->image != "" ? 'h-100' : ''}}">
+                                        <div class="row no-gutters {{$row->image != "" ? 'h-100' : ''}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
                                                     <a href="{{$row->image}}"
@@ -346,15 +341,15 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Side::whereIn('id', $specs->side_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}}">
-                                <label class="card-label"
+                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                                <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="side-{{$row->id}}">
                                     <input id="side-{{$row->id}}"
                                            class="card-rb"
                                            name="side" type="radio"
                                            value="{{$row->name}}">
-                                    <div class="card card-input">
-                                        <div class="row no-gutters">
+                                    <div class="card card-input {{$row->image != "" ? 'h-100' : ''}}">
+                                        <div class="row no-gutters {{$row->image != "" ? 'h-100' : ''}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
                                                     <a href="{{$row->image}}"
@@ -409,15 +404,15 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Edge::whereIn('id', $specs->edge_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}}">
-                                <label class="card-label"
+                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                                <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="corner-{{$row->id}}">
                                     <input id="corner-{{$row->id}}"
                                            class="card-rb"
                                            name="corner" type="radio"
                                            value="{{$row->name}}">
-                                    <div class="card card-input">
-                                        <div class="row no-gutters">
+                                    <div class="card card-input {{$row->image != "" ? 'h-100' : ''}}">
+                                        <div class="row no-gutters {{$row->image != "" ? 'h-100' : ''}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
                                                     <a href="{{$row->image}}"
@@ -434,6 +429,69 @@
                                             @endif
                                             <div class="col"
                                                  onclick="productSpecs('corner', $(this).parents('label').attr('for'))">
+                                                <div class="card-block p-2">
+                                                    <h4 class="card-title {{$row->image != "" ? '' : 'text-center'}}">
+                                                        {{$row->name}}</h4>
+                                                    @if($row->image != "")
+                                                        <p class="card-text">{{$row->description}}</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if($specs->is_folding == true)
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading-folding">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse"
+                       href="#collapse-folding" aria-expanded="false"
+                       aria-controls="collapse-folding">
+                        {{__('lang.product.form.summary.folding')}}
+                        <b class="show-folding"></b>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse-folding" class="panel-collapse collapse"
+                 role="tabpanel"
+                 aria-labelledby="heading-folding" aria-expanded="false"
+                 style="height: 0;" data-parent="#accordion">
+                <div class="panel-body">
+                    <div class="row">
+                        @foreach(\App\Models\Folding::whereIn('id', $specs->folding_ids)->get() as $row)
+                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                                <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
+                                       for="folding-{{$row->id}}">
+                                    <input id="folding-{{$row->id}}"
+                                           class="card-rb"
+                                           name="folding" type="radio"
+                                           value="{{$row->name}}">
+                                    <div class="card card-input {{$row->image != "" ? 'h-100' : ''}}">
+                                        <div class="row no-gutters {{$row->image != "" ? 'h-100' : ''}}">
+                                            @if($row->image != "")
+                                                <div class="col-auto">
+                                                    <a href="{{$row->image}}"
+                                                       data-lightbox="image">
+                                                        <img
+                                                            src="{{$row->image}}"
+                                                            alt="Thumbnail">
+                                                        <div
+                                                            class="card-img-overlay d-flex">
+                                                            <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            @endif
+                                            <div class="col"
+                                                 onclick="productSpecs('folding', $(this).parents('label').attr('for'))">
                                                 <div class="card-block p-2">
                                                     <h4 class="card-title {{$row->image != "" ? '' : 'text-center'}}">
                                                         {{$row->name}}</h4>
@@ -473,15 +531,15 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Front::whereIn('id', $specs->front_side_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}}">
-                                <label class="card-label"
+                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                                <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="front_side-{{$row->id}}">
                                     <input id="front_side-{{$row->id}}"
                                            class="card-rb"
                                            name="front_side" type="radio"
                                            value="{{$row->name}}">
-                                    <div class="card card-input">
-                                        <div class="row no-gutters">
+                                    <div class="card card-input {{$row->image != "" ? 'h-100' : ''}}">
+                                        <div class="row no-gutters {{$row->image != "" ? 'h-100' : ''}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
                                                     <a href="{{$row->image}}"
@@ -537,15 +595,15 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\BackSide::whereIn('id', $specs->back_side_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}}">
-                                <label class="card-label"
+                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                                <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="back_side-{{$row->id}}">
                                     <input id="back_side-{{$row->id}}"
                                            class="card-rb"
                                            name="back_side" type="radio"
                                            value="{{$row->name}}">
-                                    <div class="card card-input">
-                                        <div class="row no-gutters">
+                                    <div class="card card-input {{$row->image != "" ? 'h-100' : ''}}">
+                                        <div class="row no-gutters {{$row->image != "" ? 'h-100' : ''}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
                                                     <a href="{{$row->image}}"
@@ -601,15 +659,15 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\RightLeftSide::whereIn('id', $specs->right_side_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}}">
-                                <label class="card-label"
+                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                                <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="right_side-{{$row->id}}">
                                     <input id="right_side-{{$row->id}}"
                                            class="card-rb"
                                            name="right_side" type="radio"
                                            value="{{$row->name}}">
-                                    <div class="card card-input">
-                                        <div class="row no-gutters">
+                                    <div class="card card-input {{$row->image != "" ? 'h-100' : ''}}">
+                                        <div class="row no-gutters {{$row->image != "" ? 'h-100' : ''}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
                                                     <a href="{{$row->image}}"
@@ -665,15 +723,15 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\RightLeftSide::whereIn('id', $specs->left_side_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}}">
-                                <label class="card-label"
+                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                                <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="left_side-{{$row->id}}">
                                     <input id="left_side-{{$row->id}}"
                                            class="card-rb"
                                            name="left_side" type="radio"
                                            value="{{$row->name}}">
-                                    <div class="card card-input">
-                                        <div class="row no-gutters">
+                                    <div class="card card-input {{$row->image != "" ? 'h-100' : ''}}">
+                                        <div class="row no-gutters {{$row->image != "" ? 'h-100' : ''}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
                                                     <a href="{{$row->image}}"
@@ -729,15 +787,15 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Balance::whereIn('id', $specs->balance_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}}">
-                                <label class="card-label"
+                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                                <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="balance-{{$row->id}}">
                                     <input id="balance-{{$row->id}}"
                                            class="card-rb"
                                            name="balance" type="radio"
                                            value="{{$row->name}}">
-                                    <div class="card card-input">
-                                        <div class="row no-gutters">
+                                    <div class="card card-input {{$row->image != "" ? 'h-100' : ''}}">
+                                        <div class="row no-gutters {{$row->image != "" ? 'h-100' : ''}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
                                                     <a href="{{$row->image}}"
@@ -793,15 +851,15 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Copies::whereIn('id', $specs->copies_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}}">
-                                <label class="card-label"
+                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                                <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="copies-{{$row->id}}">
                                     <input id="copies-{{$row->id}}"
                                            class="card-rb"
                                            name="copies" type="radio"
                                            value="{{$row->name}}">
-                                    <div class="card card-input">
-                                        <div class="row no-gutters">
+                                    <div class="card card-input {{$row->image != "" ? 'h-100' : ''}}">
+                                        <div class="row no-gutters {{$row->image != "" ? 'h-100' : ''}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
                                                     <a href="{{$row->image}}"
@@ -857,15 +915,15 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Pages::whereIn('id', $specs->page_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}}">
-                                <label class="card-label"
+                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                                <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="page-{{$row->id}}">
                                     <input id="page-{{$row->id}}"
                                            class="card-rb"
                                            name="page" type="radio"
                                            value="{{$row->name}}">
-                                    <div class="card card-input">
-                                        <div class="row no-gutters">
+                                    <div class="card card-input {{$row->image != "" ? 'h-100' : ''}}">
+                                        <div class="row no-gutters {{$row->image != "" ? 'h-100' : ''}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
                                                     <a href="{{$row->image}}"
@@ -920,15 +978,15 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Material::whereIn('id', $specs->front_cover_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}}">
-                                <label class="card-label"
+                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                                <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="front_cover-{{$row->id}}">
                                     <input id="front_cover-{{$row->id}}"
                                            class="card-rb"
                                            name="front_cover" type="radio"
                                            value="{{$row->name}}">
-                                    <div class="card card-input">
-                                        <div class="row no-gutters">
+                                    <div class="card card-input {{$row->image != "" ? 'h-100' : ''}}">
+                                        <div class="row no-gutters {{$row->image != "" ? 'h-100' : ''}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
                                                     <a href="{{$row->image}}"
@@ -982,15 +1040,15 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Material::whereIn('id', $specs->back_cover_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}}">
-                                <label class="card-label"
+                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                                <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="back_cover-{{$row->id}}">
                                     <input id="back_cover-{{$row->id}}"
                                            class="card-rb"
                                            name="back_cover" type="radio"
                                            value="{{$row->name}}">
-                                    <div class="card card-input">
-                                        <div class="row no-gutters">
+                                    <div class="card card-input {{$row->image != "" ? 'h-100' : ''}}">
+                                        <div class="row no-gutters {{$row->image != "" ? 'h-100' : ''}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
                                                     <a href="{{$row->image}}"
@@ -1044,15 +1102,15 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Finishing::whereIn('id', $specs->binding_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}}">
-                                <label class="card-label"
+                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                                <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="binding-{{$row->id}}">
                                     <input id="binding-{{$row->id}}"
                                            class="card-rb"
                                            name="binding" type="radio"
                                            value="{{$row->name}}">
-                                    <div class="card card-input">
-                                        <div class="row no-gutters">
+                                    <div class="card card-input {{$row->image != "" ? 'h-100' : ''}}">
+                                        <div class="row no-gutters {{$row->image != "" ? 'h-100' : ''}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
                                                     <a href="{{$row->image}}"
@@ -1107,15 +1165,15 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Lamination::whereIn('id', $specs->lamination_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}}">
-                                <label class="card-label"
+                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                                <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="lamination-{{$row->id}}">
                                     <input id="lamination-{{$row->id}}"
                                            class="card-rb"
                                            name="lamination" type="radio"
                                            value="{{$row->name}}">
-                                    <div class="card card-input">
-                                        <div class="row no-gutters">
+                                    <div class="card card-input {{$row->image != "" ? 'h-100' : ''}}">
+                                        <div class="row no-gutters {{$row->image != "" ? 'h-100' : ''}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
                                                     <a href="{{$row->image}}"
@@ -1132,6 +1190,66 @@
                                             @endif
                                             <div class="col"
                                                  onclick="productSpecs('lamination', $(this).parents('label').attr('for'))">
+                                                <div class="card-block p-2">
+                                                    <h4 class="card-title {{$row->image != "" ? '' : 'text-center'}}">
+                                                        {{$row->name}}</h4>
+                                                    @if($row->image != "")
+                                                        <p class="card-text">{{$row->description}}</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if($specs->is_finishing == true)
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading-finishing">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-finishing"
+                       aria-expanded="false" aria-controls="collapse-finishing">
+                        Finishing <b class="show-finishing"></b></a>
+                </h4>
+            </div>
+            <div id="collapse-finishing" class="panel-collapse collapse"
+                 role="tabpanel"
+                 aria-labelledby="heading-finishing" aria-expanded="false"
+                 style="height: 0;" data-parent="#accordion">
+                <div class="panel-body">
+                    <div class="row">
+                        @foreach(\App\Models\Finishing::whereIn('id', $specs->finishing_ids)->get() as $row)
+                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                                <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
+                                       for="finishing-{{$row->id}}">
+                                    <input id="finishing-{{$row->id}}"
+                                           class="card-rb"
+                                           name="finishing" type="radio"
+                                           value="{{$row->name}}">
+                                    <div class="card card-input {{$row->image != "" ? 'h-100' : ''}}">
+                                        <div class="row no-gutters {{$row->image != "" ? 'h-100' : ''}}">
+                                            @if($row->image != "")
+                                                <div class="col-auto">
+                                                    <a href="{{$row->image}}"
+                                                       data-lightbox="image">
+                                                        <img
+                                                            src="{{$row->image}}"
+                                                            alt="Thumbnail">
+                                                        <div
+                                                            class="card-img-overlay d-flex">
+                                                            <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            @endif
+                                            <div class="col"
+                                                 onclick="productSpecs('finishing', $(this).parents('label').attr('for'))">
                                                 <div class="card-block p-2">
                                                     <h4 class="card-title {{$row->image != "" ? '' : 'text-center'}}">
                                                         {{$row->name}}</h4>

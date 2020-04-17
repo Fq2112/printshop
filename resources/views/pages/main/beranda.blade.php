@@ -413,7 +413,7 @@
             <!-- featured product -->
             <div class="section my-2" style="padding-bottom: 5rem">
                 <div class="container">
-                    <div class="row align-items-stretch grid-container clearfix" data-layout="fitRows">
+                    <div class="row clearfix" data-layout="fitRows">
                         <div class="col">
                             <div class="fancy-title title-dotted-border title-center mb-4">
                                 <h4 style="background-color: #f9f9f9">{{__('lang.featured.head')}}</h4>

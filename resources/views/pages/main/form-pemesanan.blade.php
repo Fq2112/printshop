@@ -268,6 +268,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="sidebar sticky-sidebar-wrap col_last nobottommargin clearfix">
                         <div class="sidebar-widgets-wrap">
                             <div class="sticky-sidebar">
@@ -300,7 +301,7 @@
                                             <b class="fright show-quantity">&ndash;</b>
                                         </li>
                                         <li class="list-group-item noborder">
-                                            {{__('lang.product.form.summary.price', ['unit' => $specs->getUnit->name])}}
+                                            {{__('lang.product.form.summary.price', ['unit' => strtok($specs->getUnit->name, '(')])}}
                                             <b class="fright show-price">&ndash;</b>
                                         </li>
                                         <li class="list-group-item noborder">
@@ -335,8 +336,7 @@
                                     <div class="card-footer p-0">
                                         <button id="btn_upload" type="button" disabled
                                                 class="btn btn-primary btn-block text-uppercase text-left noborder">
-                                            {{!is_null($specs->is_design) && $specs->is_design == true ?
-                                            __('lang.button.create') : __('lang.button.upload')}}
+                                            {{$specs->is_design == true ? __('lang.button.create') : __('lang.button.upload')}}
                                             <i class="icon-chevron-right fright"></i>
                                         </button>
                                     </div>
@@ -359,6 +359,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div id="modal_upload" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal_upload"
                          aria-hidden="true">
                         <div class="modal-dialog modal-lg">
@@ -496,6 +497,7 @@
             $(".show-size").text($("input[name='size']:checked").val());
             $(".show-side").text($("input[name='side']:checked").val());
             $(".show-corner").text($("input[name='corner']:checked").val());
+            $(".show-folding").text($("input[name='folding']:checked").val());
             $(".show-front_side").text($("input[name='front_side']:checked").val());
             $(".show-back_side").text($("input[name='back_side']:checked").val());
             $(".show-right_side").text($("input[name='right_side']:checked").val());
@@ -507,6 +509,7 @@
             $(".show-back_cover").text($("input[name='back_cover']:checked").val());
             $(".show-binding").text($("input[name='binding']:checked").val());
             $(".show-lamination").text($("input[name='lamination']:checked").val());
+            $(".show-finishing").text($("input[name='finishing']:checked").val());
         });
 
         function productSpecs(check, spec) {
@@ -552,7 +555,7 @@
 
         btn_upload.on('click', function () {
             @auth
-            @if(!is_null($specs->is_design) && $specs->is_design)
+            @if($specs->is_design == true)
             $("#modal_design").modal('show');
             @else
             $("#modal_upload").modal('show');

@@ -182,16 +182,27 @@ class MainController extends Controller
 
             if (count($data->getCluster) > 0) {
                 return view('pages.main.produk', compact('data'));
+
             } else {
                 $specs = $data->getSubkatSpecs;
                 $guidelines = $data->guidelines;
-                return view('pages.main.form-pemesanan', compact('data', 'provinces', 'address', 'specs', 'guidelines'));
+
+                return view('pages.main.form-pemesanan', compact('data', 'provinces', 'address',
+                    'specs', 'guidelines'));
             }
 
         } else {
             $data = $clust;
+            $specs = $data->getClusterSpecs;
             $guidelines = $data->getSubKategori->guidelines;
-            return view('pages.main.form-pemesanan', compact('data', 'provinces', 'address', 'guidelines'));
+
+            return view('pages.main.form-pemesanan', compact('data', 'provinces', 'address',
+                'specs', 'guidelines'));
         }
+    }
+
+    public function submitPemesanan(Request $request)
+    {
+        return;
     }
 }

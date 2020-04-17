@@ -135,7 +135,7 @@
         <div class="content-wrap">
             <div class="container clearfix">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+                    <div class="col-lg-4 col-md-5 col-sm-12 text-center">
                         <div class="myCard">
                             <form class="form-horizontal mb-0" role="form" method="POST" id="form-ava"
                                   enctype="multipart/form-data">
@@ -307,7 +307,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-lg-8 col-md-6 col-sm-12">
+                    <div class="col-lg-8 col-md-7 col-sm-12">
                         <div class="row">
                             <div class="col">
                                 <div class="myCard">
@@ -475,7 +475,7 @@
                                                 </div>
                                                 <div id="address_settings" style="display: none">
                                                     <div class="row form-group">
-                                                        <div class="col-7">
+                                                        <div class="col-lg-7 col-md-12 col-sm-12">
                                                             <small>{{ucwords(__('lang.placeholder.name'))}}
                                                                 <span class="required">*</span></small>
                                                             <div class="input-group">
@@ -492,7 +492,7 @@
                                                                        required>
                                                             </div>
                                                         </div>
-                                                        <div class="col">
+                                                        <div class="col-lg-5 col-md-12 col-sm-12">
                                                             <small>{{__('lang.footer.phone')}}
                                                                 <span class="required">*</span></small>
                                                             <div class="input-group">
@@ -510,11 +510,11 @@
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-7">
+                                                        <div class="col-lg-7 col-md-12 col-sm-12">
                                                             <div id="map" class="gmap img-thumbnail"
                                                                  style="height: 420px;"></div>
                                                         </div>
-                                                        <div class="col">
+                                                        <div class="col-lg-5 col-md-12 col-sm-12">
                                                             <div class="row form-group">
                                                                 <div class="col">
                                                                     <small>{{__('lang.profile.city')}}

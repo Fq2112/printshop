@@ -48,6 +48,13 @@
         <td class="show-corner"></td>
     </tr>
 @endif
+@if($specs->is_folding == true)
+    <tr>
+        <td>{{__('lang.product.form.summary.folding')}}</td>
+        <td>:&nbsp;</td>
+        <td class="show-folding"></td>
+    </tr>
+@endif
 @if($specs->is_front_side == true)
     <tr>
         <td>{{__('lang.product.form.summary.front_side')}}</td>
@@ -123,6 +130,13 @@
         <td>{{__('lang.product.form.summary.lamination')}}</td>
         <td>:&nbsp;</td>
         <td class="show-lamination"></td>
+    </tr>
+@endif
+@if($specs->is_finishing == true)
+    <tr>
+        <td>Finishing</td>
+        <td>:&nbsp;</td>
+        <td class="show-finishing"></td>
     </tr>
 @endif
 </tbody>

@@ -22,6 +22,11 @@ class Unit extends Model
         return $this->hasMany(DetailSubkat::class, 'unit_id');
     }
 
+    public function getClusterSpecs()
+    {
+        return $this->hasMany(DetailProduct::class, 'unit_id');
+    }
+
     public function getLocale(): string
     {
         if (is_null(App::getLocale())) {
