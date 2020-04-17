@@ -106,24 +106,24 @@ class FinishingSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['Mata Ayam', 'Mata Ayam'],
-            'description' =>  [
-                'Finishing dengan mata ayam untuk memudahkan memasukan tali saat memasang spanduk.',
-                'Finishing with chicken eye to make it easy to insert the rope when installing banners.'
+            'name' => ['Mata Ayam', 'Nearsighted'],
+            'description' => [
+                'Finishing dengan mata ayam memudahkan untuk memasukan tali saat pemasangan spanduk.',
+                'Finishing with chicken eye (nearsighted) makes it easy to insert straps when mounting banners.'
             ]
         ],
         [
-            'name' => ['Selongsong Atas/Bawah', 'Upper / Lower Sleeve'],
-            'description' =>  [
-                'Selongsong untuk instalasi materi promosi dengan penempatan dari atas-bawah',
-                'The sleeves for the installation of promotional material by placement from the top-down'
+            'name' => ['Selongsong Atas / Bawah', 'Top / Bottom Sleeve'],
+            'description' => [
+                'Selongsong untuk instalasi materi promosi dengan penempatan atas-bawah.',
+                'Sleeve for installation of promotional material with top-bottom placement.'
             ]
         ],
         [
-            'name' => ['Selongsong Kiri/Kanan', 'Selongsong Kiri/Kanan'],
-            'description' =>  [
-                'Selongsong untuk pemasangan materi promosi dengan penempatan dari kiri-kanan',
-                'Sleeves for the installation of promotional material by placement from left-right'
+            'name' => ['Selongsong Kiri / Kanan', 'Selongsong Left / Right'],
+            'description' => [
+                'Selongsong untuk instalasi materi promosi dengan penempatan kiri-kanan.',
+                'Sleeve for installation of promotional material with left-right placement.'
             ]
         ],
         [
@@ -135,11 +135,11 @@ class FinishingSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['Numerator & Perforasi', 'Numerator & Perforasi'],
+            'name' => ['Numerator & Perforasi', 'Numerator & Perforation'],
             'description' => null
         ],
         [
-            'name' => ['Perforasi', 'Perforasi'],
+            'name' => ['Perforasi', 'Perforation'],
             'description' => null
         ],
     ];

@@ -21,8 +21,8 @@ class MaterialSeeder extends Seeder
         [
             'name' => ['Art Carton 260gsm', 'Art Carton 260gsm'],
             'description' => [
-                'Tebal namun ekonomis. Permukaan mengkilap di kedua sisi dengan ketebalan 260 gsm.',
-                'Thick but vey economic, Glossy Surface on both sides with thickness 260 gsm.'
+                'Tebal namun ekonomis. Permukaan mengkilap di kedua sisi dengan ketebalan 260gsm.',
+                'Thick but vey economic, Glossy Surface on both sides with thickness 260gsm.'
             ],
         ],
         [
@@ -138,7 +138,7 @@ class MaterialSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['Duplex 250 gsm + K 125 M 125 E/F', 'Duplex 250 gsm + K 125 M 125 E/F'],
+            'name' => ['Duplex 250gsm + K 125 M 125 E/F', 'Duplex 250gsm + K 125 M 125 E/F'],
             'description' => null
         ],
         [
@@ -149,11 +149,11 @@ class MaterialSeeder extends Seeder
             ],
         ],
         [
-            'name' => ['Brown Kraft 80 GSM', 'Brown Kraft 80 GSM'],
+            'name' => ['Brown Kraft 80gsm', 'Brown Kraft 80gsm'],
             'description' => null
         ],
         [
-            'name' => ['MG 40 GSM', 'MG 40 GSM'],
+            'name' => ['MG 40gsm', 'MG 40gsm'],
             'description' => null
         ],
         [
@@ -197,7 +197,7 @@ class MaterialSeeder extends Seeder
             'name' => ['Flexy China Indoor', 'Flexy China Indoor'],
             'description' => [
                 'Bahan ekonomis, bertekstur dan lebih tipis.',
-                'Economical, textured and thinner material.'
+                'Economic, textured and thinner material.'
             ],
         ],
         [
@@ -218,14 +218,14 @@ class MaterialSeeder extends Seeder
             'name' => ['Flexy China UV 280', 'Flexy China UV 280'],
             'description' => [
                 'Bahan ekonomis, bertekstur dan lebih tipis. Dicetak menggunakan tinta UV.',
-                'Economical, textured and thinner material. Printed using UV ink.'
+                'Economic, textured and thinner material. Printed using UV ink.'
             ],
         ],
         [
             'name' => ['Flexy China UV 340', 'Flexy China UV 340'],
             'description' => [
-                'Sama dengan Flexy China 280 gsm namun lebih tebal. Dicetak menggunakan tinta UV.',
-                'Same with Flexy China 280 gsm but thicker. Printed using UV ink.'
+                'Sama dengan Flexy China 280gsm namun lebih tebal. Dicetak menggunakan tinta UV.',
+                'Same with Flexy China 280gsm but thicker. Printed using UV ink.'
             ],
         ],
         [
@@ -243,7 +243,7 @@ class MaterialSeeder extends Seeder
             'name' => ['Blacu', 'Blacu'],
             'description' => [
                 'Bahan tote bag ramah lingkungan yang ekonomis. Tidak bisa digunakan untuk warna blok.',
-                'Economical eco-friendly tote bag. Cannot be used for color blocks.'
+                'Economic eco-friendly tote bag. Cannot be used for color blocks.'
             ],
         ],
         [
@@ -291,22 +291,22 @@ class MaterialSeeder extends Seeder
         [
             'name' => ['Fancy Constellation Snow 240gsm', 'Fancy Constellation Snow 240gsm'],
             'description' => [
-                'Kertas bertekstur Garis Halus',
+                'Kertas bertekstur garis halus.',
                 'Textured paper with fine lines.'
             ],
         ],
         [
-            'name' => ['Fancy Constellation Snow 240gsm', 'Fancy EggShell 270gsm'],
+            'name' => ['Fancy EggShell 270gsm', 'Fancy EggShell 270gsm'],
             'description' => [
-                'Kertas bertekstur Kasar',
-                'Rough textured paper'
+                'Kertas bertekstur kasar.',
+                'Coarse textured paper.'
             ],
         ],
         [
-            'name' => ['Concorde 90 gsm', 'Concorde 90 gsm'],
+            'name' => ['Concorde 90gsm', 'Concorde 90gsm'],
             'description' => [
-                'Kertas bertekstur Garis-garis Halus',
-                'Textured Paper Fine Lines'
+                'Kertas bertekstur garis-garis halus.',
+                'Textured paper fine lines.'
             ],
         ],
         [
@@ -328,7 +328,7 @@ class MaterialSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['Brown Craft 200 GSM', 'Brown Craft 200 GSM'],
+            'name' => ['Brown Craft 200gsm', 'Brown Craft 200gsm'],
             'description' => null
         ],
         [
@@ -340,56 +340,56 @@ class MaterialSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['K125/M125X3/K125', 'K125/M125X3/K125'],
+            'name' => ['K125 / M125X3 / K125', 'K125 / M125X3 / K125'],
             'description' => null
         ],
         [
-            'name' => ['WK150/M125X3/K125', 'WK150/M125X3/K125'],
+            'name' => ['WK150 / M125X3 / K125', 'WK150 / M125X3 / K125'],
             'description' => null
         ],
         [
-            'name' => ['Samson Craft 50 GSM Lapis PE 12 GSM', 'Samson Craft 50 GSM Lapis PE 12 GSM'],
+            'name' => ['Samson Craft 50gsm Lapis PE 12gsm', 'Samson Craft 50gsm Layer PE 12gsm'],
             'description' => null
         ],
         [
-            'name' => ['Greaseproof 40 GSM', 'Greaseproof 40 GSM'],
+            'name' => ['Greaseproof 40gsm', 'Greaseproof 40gsm'],
             'description' => null
         ],
         [
-            'name' => ['Greaseproof 50 GSM', 'Greaseproof 50 GSM'],
+            'name' => ['Greaseproof 50gsm', 'Greaseproof 50gsm'],
             'description' => null
         ],
         [
-            'name' => ['K150/M125/K125 B/F + Duplex 250 gsm', 'K150/M125/K125 B/F + Duplex 250 gsm'],
+            'name' => ['K150 / M125 / K125 B/F + Duplex 250gsm', 'K150 / M125 / K125 B/F + Duplex 250gsm'],
             'description' => null
         ],
         [
-            'name' => ['Foamboard + Sticker Vinyl', 'Foamboard + Sticker Vinyl'],
+            'name' => ['Foamboard + Stiker Vinyl', 'Foamboard + Vinyl Sticker'],
             'description' => null
         ],
         [
-            'name' => ['Foamboard Direct Print', 'Foamboard Direct Print'],
+            'name' => ['Foamboard Direct Print', 'Direct Print Foamboard'],
             'description' => null
         ],
         [
-            'name' => ['Flexy China 280 Gsm (Eco Solvent)', 'Flexy China 280 Gsm (Eco Solvent)'],
+            'name' => ['Flexy China 280gsm (Eco Solvent)', 'Flexy China 280gsm (Eco Solvent)'],
             'description' => [
-                'Ekonomis, bertekstur, dan lebih tipis dengan ketebalan 280 gsm.',
-                'Economical, textured, and thinner with a thickness of 280 gsm.'
+                'Ekonomis, bertekstur, dan lebih tipis dengan ketebalan 280gsm.',
+                'Economic, textured, and thinner with a thickness of 280gsm.'
             ],
         ],
         [
-            'name' => ['Flexy China 340 Gsm (Eco Solvent)', 'Flexy China 340 Gsm (Eco Solvent)'],
+            'name' => ['Flexy China 340gsm (Eco Solvent)', 'Flexy China 340gsm (Eco Solvent)'],
             'description' => [
-                'Ekonomis, bertekstur, dan lebih tebal dengan ketebalan 340 gsm.',
-                'Economical, textured, and thinner with a thickness of 340 gsm.'
+                'Ekonomis, bertekstur, dan lebih tebal dengan ketebalan 340gsm.',
+                'Economic, textured, and thinner with a thickness of 340gsm.'
             ],
         ],
         [
-            'name' => ['Flexy Korea 440 Gsm (Eco Solvent)', 'Flexy Korea 440 Gsm (Eco Solvent)'],
+            'name' => ['Flexy Korea 440gsm (Eco Solvent)', 'Flexy Korea 440gsm (Eco Solvent)'],
             'description' => [
-                'Berkualitas, halus dan tebal. Bisa digunakan indoor dan outdoor.',
-                'Berkualitas, halus dan tebal. Bisa digunakan indoor dan outdoor.'
+                'Berkualitas, halus dan tebal. Bisa digunakan baik indoor maupun outdoor.',
+                'Quality, smooth and thick. Can be used both indoors and outdoors.'
             ],
         ],
         [

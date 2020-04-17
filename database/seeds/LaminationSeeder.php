@@ -52,19 +52,19 @@ class LaminationSeeder extends Seeder
                 ],
         ],
         [
-            'name' => ['Laminasi Water Based', 'Laminasi Water Based'],
+            'name' => ['Laminasi Berbasis Air', 'Water Based Lamination'],
             'description' =>
                 [
                     'Permukaan tidak mudah tergores dan ramah lingkungan.',
-                    'The surface is not easily scratched and environmentally friendly'
+                    'The surface is not easily scratched and eco-friendly.'
                 ],
         ],
         [
-            'name' => ['UV Vernish', 'UV Vernish'],
+            'name' => ['Pernis UV', 'UV Varnish'],
             'description' =>
                 [
-                    'Permukaan licin, hasil print warna lebih terang dan lebih tahan terhadap air, goresan & matahari',
-                    'Slippery surface, brighter color prints and more resistant to water, scratches & sun'
+                    'Permukaan licin, warna cetak lebih terang dan tahan terhadap air, goresan, dan juga matahari.',
+                    'Slippery surface, brighter print colors and more resistant to water, scratches, and also the sun.'
                 ],
         ],
     ];
