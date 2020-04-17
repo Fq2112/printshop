@@ -60,5 +60,43 @@ class PagesSeeder extends Seeder
                 ]
             ]);
         }
+
+        foreach (self::DATA as $DATUM) {
+            for ($i = 2; $i <= 18; $i++) {
+                if ($i % 2 == 0) {
+                    $s = $i > 1 ? 's' : '';
+                    \App\Models\Pages::create([
+                        'name' => [
+                            'en' => $i . " " . $DATUM['name'][1] . $s,
+                            'id' => $i . " " . $DATUM['name'][0]
+                        ],
+                        'image' => !is_null($DATUM['description']) ? $faker->imageUrl() : null,
+                        'description' => [
+                            'en' => !is_null($DATUM['description']) ? $DATUM['description'][1] : null,
+                            'id' => !is_null($DATUM['description']) ? $DATUM['description'][0] : null
+                        ]
+                    ]);
+                }
+            }
+        }
+
+        foreach (self::DATA as $DATUM) {
+            for ($i = 64; $i <= 80; $i++) {
+                if ($i % 2 == 0) {
+                    $s = $i > 1 ? 's' : '';
+                    \App\Models\Pages::create([
+                        'name' => [
+                            'en' => $i . " " . $DATUM['name'][1] . $s,
+                            'id' => $i . " " . $DATUM['name'][0]
+                        ],
+                        'image' => !is_null($DATUM['description']) ? $faker->imageUrl() : null,
+                        'description' => [
+                            'en' => !is_null($DATUM['description']) ? $DATUM['description'][1] : null,
+                            'id' => !is_null($DATUM['description']) ? $DATUM['description'][0] : null
+                        ]
+                    ]);
+                }
+            }
+        }
     }
 }

@@ -97,6 +97,51 @@ class FinishingSeeder extends Seeder
                 'Extra thickness from the actual material.'
             ]
         ],
+        [
+            'name' => ['Pond / Die Cut', 'Pond / Die Cut'],
+            'description' => null
+        ],
+        [
+            'name' => ['Lem', 'GLue'],
+            'description' => null
+        ],
+        [
+            'name' => ['Mata Ayam', 'Mata Ayam'],
+            'description' =>  [
+                'Finishing dengan mata ayam untuk memudahkan memasukan tali saat memasang spanduk.',
+                'Finishing with chicken eye to make it easy to insert the rope when installing banners.'
+            ]
+        ],
+        [
+            'name' => ['Selongsong Atas/Bawah', 'Upper / Lower Sleeve'],
+            'description' =>  [
+                'Selongsong untuk instalasi materi promosi dengan penempatan dari atas-bawah',
+                'The sleeves for the installation of promotional material by placement from the top-down'
+            ]
+        ],
+        [
+            'name' => ['Selongsong Kiri/Kanan', 'Selongsong Kiri/Kanan'],
+            'description' =>  [
+                'Selongsong untuk pemasangan materi promosi dengan penempatan dari kiri-kanan',
+                'Sleeves for the installation of promotional material by placement from left-right'
+            ]
+        ],
+        [
+            'name' => ['Kiss Cut', 'Kiss Cut'],
+            'description' => null
+        ],
+        [
+            'name' => ['Numerator', 'Numerator'],
+            'description' => null
+        ],
+        [
+            'name' => ['Numerator & Perforasi', 'Numerator & Perforasi'],
+            'description' => null
+        ],
+        [
+            'name' => ['Perforasi', 'Perforasi'],
+            'description' => null
+        ],
     ];
 
     public function run()

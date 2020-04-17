@@ -380,7 +380,65 @@ class SizeSeeder extends Seeder
             'name' => ['13 cm x 8 cm x 23.5 cm', '13 cm x 8 cm x 23.5 cm'],
             'description' => null
         ],
+        [
+            'name' => ['32 cm x 19 cm x 11 cm', '32 cm x 19 cm x 11 cm'],
+            'description' => null
+        ],
+        [
+            'name' => ['A0 (84,1 x 118,9 cm)', 'A0 (84,1 x 118,9 cm)'],
+            'description' => null
+        ],
+        [
+            'name' => ['A1 (59,4 x 84,1 cm)', 'A1 (59,4 x 84,1 cm)'],
+            'description' => null
+        ],
+        [
+            'name' => ['A2 (59.4 x 42 cm)', 'A2 (59.4 x 42 cm)'],
+            'description' => null
+        ],
+        [
+            'name' => ['85 x 200 cm', '85 x 200 cm'],
+            'description' => null
+        ],
+        [
+            'name' => ['60 x 90 cm', '60 x 90 cm'],
+            'description' => null
+        ],
+        [
+            'name' => ['2m x 1m', '2m x 1m'],
+            'description' => null
+        ],
+        [
+            'name' => ['3m x 1m', '3m x 1m'],
+            'description' => null
+        ],
+        [
+            'name' => ['4m x 1m', '4m x 1m'],
+            'description' => null
+        ],
+        [
+            'name' => ['5m x 1m', '5m x 1m'],
+            'description' => null
+        ],
+        [
+            'name' => ['Custom', 'Custom'],
+            'description' => null
+        ],
+        [
+            'name' => ['10 cm x 10 cm', '10 cm x 10 cm'],
+            'description' => null
+        ],
+        [
+            'name' => ['25 cm x 25 cm', '25 cm x 25 cm'],
+            'description' => null
+        ],
+        [
+            'name' => ['5 cm x 5 cm', '5 cm x 5 cm'],
+            'description' => null
+        ],
+
     ];
+
 
     public function run()
     {
