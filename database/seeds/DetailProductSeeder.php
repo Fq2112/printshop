@@ -521,7 +521,7 @@ class DetailProductSeeder extends Seeder
         \App\Models\DetailProduct::create([// Satchel STD
             'cluster_kategoris_id' => 46,
             'is_material' => true,
-            'material_ids' => ['58', ],
+            'material_ids' => ['58',],
             'is_size' => true,
             'size_ids' => ['74', '75'],
             'is_color' => true,
@@ -532,7 +532,7 @@ class DetailProductSeeder extends Seeder
         \App\Models\DetailProduct::create([// Satchel Prem
             'cluster_kategoris_id' => 47,
             'is_material' => true,
-            'material_ids' => ['59', ],
+            'material_ids' => ['59',],
             'is_size' => true,
             'size_ids' => ['76', '77'],
             'is_color' => true,
@@ -543,9 +543,9 @@ class DetailProductSeeder extends Seeder
         \App\Models\DetailProduct::create([// Food Paper STD
             'cluster_kategoris_id' => 48,
             'is_material' => true,
-            'material_ids' => ['24', ],
+            'material_ids' => ['24',],
             'is_size' => true,
-            'size_ids' => ['36', '37','38'],
+            'size_ids' => ['36', '37', '38'],
             'is_color' => true,
             'color_ids' => ['2', '3', '4'],
             'unit_id' => 1,
@@ -554,23 +554,542 @@ class DetailProductSeeder extends Seeder
         \App\Models\DetailProduct::create([// Food Paper Prem
             'cluster_kategoris_id' => 49,
             'is_material' => true,
-            'material_ids' => ['60', ],
+            'material_ids' => ['60',],
             'is_size' => true,
-            'size_ids' => ['36', '78','79'],
+            'size_ids' => ['36', '78', '79'],
             'is_color' => true,
             'color_ids' => ['2', '3', '4'],
             'unit_id' => 1,
         ]);
 
-        \App\Models\DetailProduct::create([// Food Paper Prem
+        \App\Models\DetailProduct::create([// Box Duplex Kecil
             'cluster_kategoris_id' => 50,
             'is_material' => true,
-            'material_ids' => ['60', ],
+            'material_ids' => ['61',],
             'is_size' => true,
-            'size_ids' => ['36', '78','79'],
+            'size_ids' => ['80',],
+            'is_color' => true,
+            'color_ids' => ['6'],
+            'is_lamination' => true,
+            'lamination_ids' => ['2', '3'],
+            'is_finishing' => true,
+            'finishing_ids' => ['20'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// FBox Duplex Besar
+            'cluster_kategoris_id' => 51,
+            'is_material' => true,
+            'material_ids' => ['22',],
+            'is_size' => true,
+            'size_ids' => ['28', '29', '30'],
+            'is_color' => true,
+            'color_ids' => ['6'],
+            'is_lamination' => true,
+            'lamination_ids' => ['6', '7'],
+            'is_finishing' => true,
+            'finishing_ids' => ['21'],
+            'unit_id' => 1,
+        ]);
+
+
+        \App\Models\DetailProduct::create([// Flyer STD
+            'cluster_kategoris_id' => 52,
+            'is_material' => true,
+            'material_ids' => ['26', '27'],
+            'is_size' => true,
+            'size_ids' => ['10', '11'],
+            'is_side' => true,
+            'side_ids' => ['1', '2'],
+            'unit_id' => 1,
+            'is_design' => true
+        ]);
+
+        \App\Models\DetailProduct::create([// Flyer PREM
+            'cluster_kategoris_id' => 53,
+            'is_material' => true,
+            'material_ids' => ['6', '47', '48'],
+            'is_size' => true,
+            'size_ids' => ['10', '11'],
+            'is_side' => true,
+            'side_ids' => ['1', '2'],
+            'unit_id' => 1,
+            'is_design' => true
+        ]);
+
+//        \App\Models\DetailProduct::create([// Flyer Eco
+//            'cluster_kategoris_id' => 53,
+//            'is_material' => true,
+//            'material_ids' => ['6', '47', '48'],
+//            'is_size' => true,
+//            'size_ids' => ['10', '11'],
+//            'is_side' => true,
+//            'side_ids' => ['1', '2'],
+//            'unit_id' => 1,
+//            'is_design' => true
+//        ]);
+        \App\Models\DetailProduct::create([// Poster STD
+            'cluster_kategoris_id' => 55,
+            'is_material' => true,
+            'material_ids' => ['2', '3',],
+            'is_size' => true,
+            'size_ids' => ['8', '83'],
+            'is_side' => true,
+            'side_ids' => ['1'],
+            'unit_id' => 1,
+            'is_design' => true
+        ]);
+
+        \App\Models\DetailProduct::create([// Poster Back
+            'cluster_kategoris_id' => 56,
+            'is_material' => true,
+            'material_ids' => ['32'],
+            'is_size' => true,
+            'size_ids' => ['81', '82'],
+            'is_side' => true,
+            'side_ids' => ['1'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// Tent Card
+            'cluster_kategoris_id' => 57,
+            'is_material' => true,
+            'material_ids' => ['2', '3',],
+            'is_size' => true,
+            'size_ids' => ['56', '57'],
+            'is_lamination' => true,
+            'lamination_ids' => ['2', '3'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// Tent Card Sisipan
+            'cluster_kategoris_id' => 58,
+            'is_material' => true,
+            'material_ids' => ['2', '9', '27'],
+            'is_size' => true,
+            'size_ids' => ['9', '10', '11'],
+            'is_side' => true,
+            'side_ids' => ['1', '2'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// Brosur STD
+            'cluster_kategoris_id' => 59,
+            'is_material' => true,
+            'material_ids' => ['2', '3', '26', '27'],
+            'is_size' => true,
+            'size_ids' => ['9',],
+            'is_folding' => true,
+            'folding_ids' => ['1', '2', '3'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// Brosur Prem
+            'cluster_kategoris_id' => 60,
+            'is_material' => true,
+            'material_ids' => ['5', '50',],
+            'is_size' => true,
+            'size_ids' => ['9',],
+            'is_folding' => true,
+            'folding_ids' => ['1', '2', '3'],
+            'unit_id' => 1,
+        ]);
+//
+//        \App\Models\DetailProduct::create([// Brosur Eco
+//            'cluster_kategoris_id' => 61,
+//            'is_material' => true,
+//            'material_ids' => ['5', '50',],
+//            'is_size' => true,
+//            'size_ids' => ['9',],
+//            'is_folding' => true,
+//            'folding_ids' => ['1', '2', '3'],
+//            'unit_id' => 1,
+//        ]);
+
+        \App\Models\DetailProduct::create([// X Banner
+            'cluster_kategoris_id' => 62,
+            'is_material' => true,
+            'material_ids' => ['32', '33', '34'],
+            'is_size' => true,
+            'size_ids' => ['44', '45'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// Y Banner
+            'cluster_kategoris_id' => 63,
+            'is_material' => true,
+            'material_ids' => ['32', '33', '34'],
+            'is_size' => true,
+            'size_ids' => ['44', '45'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// Roll up Banner
+            'cluster_kategoris_id' => 64,
+            'is_material' => true,
+            'material_ids' => ['32', '33', '34'],
+            'is_size' => true,
+            'size_ids' => ['44', '84'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// BIg Roll up Banner
+            'cluster_kategoris_id' => 65,
+            'is_material' => true,
+            'material_ids' => ['32',],
+            'is_size' => true,
+            'size_ids' => ['44', '46'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// Tripod STD
+            'cluster_kategoris_id' => 66,
+            'is_material' => true,
+            'material_ids' => ['62',],
+            'is_size' => true,
+            'size_ids' => ['85',],
+            'is_lamination' => true,
+            'lamination_ids' => ['2', '3'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// Tripod Prem
+            'cluster_kategoris_id' => 67,
+            'is_material' => true,
+            'material_ids' => ['63',],
+            'is_size' => true,
+            'size_ids' => ['85',],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// Spanduk in STD
+            'cluster_kategoris_id' => 68,
+            'is_material' => true,
+            'material_ids' => ['35', '64', '65', '66', '67'],
+            'is_size' => true,
+            'size_ids' => ['86', '87', '88', '89', '90'],
+            'is_finishing' => true,
+            'finishing_ids' => ['22', '23', '24'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// Spanduk In Prem
+            'cluster_kategoris_id' => 69,
+            'is_material' => true,
+            'material_ids' => ['35', '36', '37', '38'],
+            'is_size' => true,
+            'size_ids' => ['86', '87', '88', '89', '90'],
+            'is_finishing' => true,
+            'finishing_ids' => ['22', '23', '24'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// Spanduk Out STD
+            'cluster_kategoris_id' => 70,
+            'is_material' => true,
+            'material_ids' => ['64', '65', '66', '67'],
+            'is_size' => true,
+            'size_ids' => ['86', '87', '88', '89', '90'],
+            'is_finishing' => true,
+            'finishing_ids' => ['22', '23', '24'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// Spanduk OUt Prem
+            'cluster_kategoris_id' => 71,
+            'is_material' => true,
+            'material_ids' => ['36', '37', '38'],
+            'is_size' => true,
+            'size_ids' => ['86', '87', '88', '89', '90'],
+            'is_finishing' => true,
+            'finishing_ids' => ['22', '23', '24'],
+            'unit_id' => 1,
+        ]);
+
+//        \App\Models\DetailProduct::create([// Booklet STD
+//            'cluster_kategoris_id' => 72,
+//            'is_material' => true,
+//            'material_ids' => ['2', '3', '26','27'],
+//            'is_size' => true,
+//            'size_ids' => ['9', '10', ],
+//            'is_finishing' => true,
+//            'finishing_ids' => ['22', '23', '24'],
+//            'unit_id' => 1,
+//        ]);
+//
+//        \App\Models\DetailProduct::create([// Booklet Prem
+//            'cluster_kategoris_id' => 73,
+//            'is_material' => true,
+//            'material_ids' => ['2', '3', '26','27'],
+//            'is_size' => true,
+//            'size_ids' => ['9', '10', ],
+//            'is_finishing' => true,
+//            'finishing_ids' => ['22', '23', '24'],
+//            'unit_id' => 1,
+//        ]);
+
+        \App\Models\DetailProduct::create([// Stiker Bulat
+            'cluster_kategoris_id' => 74,
+            'is_material' => true,
+            'material_ids' => ['28', '29', '30', '31'],
+            'is_size' => true,
+            'size_ids' => ['41', '42', '90'],
+            'is_finishing' => true,
+            'finishing_ids' => ['20', '25',],
+            'is_side' => true,
+            'side_ids' => ['1'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// Stiker Toples
+            'cluster_kategoris_id' => 75,
+            'is_material' => true,
+            'material_ids' => ['28', '29', '30', '31'],
+            'is_size' => true,
+            'size_ids' => ['41', '42', '90'],
+            'is_finishing' => true,
+            'finishing_ids' => ['20', '25',],
+            'is_side' => true,
+            'side_ids' => ['1'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// Stiker Decal
+            'cluster_kategoris_id' => 76,
+            'is_material' => true,
+            'material_ids' => ['28', '29', '30', '31'],
+            'is_size' => true,
+            'size_ids' => ['91', '92', '93', '90'],
+            'is_finishing' => true,
+            'finishing_ids' => ['20', '25',],
+            'is_side' => true,
+            'side_ids' => ['1'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// Label botol
+            'cluster_kategoris_id' => 77,
+            'is_material' => true,
+            'material_ids' => ['30', '31'],
+            'is_size' => true,
+            'size_ids' => ['91', '93', '90'],
+            'is_finishing' => true,
+            'finishing_ids' => ['20', '25',],
+            'is_side' => true,
+            'side_ids' => ['1'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// Label lunch
+            'cluster_kategoris_id' => 78,
+            'is_material' => true,
+            'material_ids' => ['30', '31'],
+            'is_size' => true,
+            'size_ids' => ['91', '93', '90'],
+            'is_finishing' => true,
+            'finishing_ids' => ['20', '25',],
+            'is_side' => true,
+            'side_ids' => ['1'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// Sertif STD
+            'cluster_kategoris_id' => 79,
+            'is_material' => true,
+            'material_ids' => ['2', '3', '4'],
+            'is_size' => true,
+            'size_ids' => ['9', '12',],
+            'is_side' => true,
+            'side_ids' => ['1', '2'],
+            'unit_id' => 1,
+        ]);
+
+
+        \App\Models\DetailProduct::create([// Sertif Prem
+            'cluster_kategoris_id' => 80,
+            'is_material' => true,
+            'material_ids' => ['5', '47', '48', '49', '50'],
+            'is_size' => true,
+            'size_ids' => ['9', '12',],
+            'is_side' => true,
+            'side_ids' => ['1', '2'],
+            'unit_id' => 1,
+        ]);
+
+//        \App\Models\DetailProduct::create([// Majalah StD
+//            'cluster_kategoris_id' => 81,
+//            'is_material' => true,
+//            'material_ids' => ['5','47', '48','49','50'],
+//            'is_size' => true,
+//            'size_ids' => ['9', '12',],
+//            'is_side' => true,
+//            'side_ids' => ['1','2'],
+//            'unit_id' => 1,
+//        ]);
+//
+//        \App\Models\DetailProduct::create([// Majalah StD
+//            'cluster_kategoris_id' => 82,
+//            'is_material' => true,
+//            'material_ids' => ['5','47', '48','49','50'],
+//            'is_size' => true,
+//            'size_ids' => ['9', '12',],
+//            'is_side' => true,
+//            'side_ids' => ['1','2'],
+//            'unit_id' => 1,
+//        ]);
+
+//        \App\Models\DetailProduct::create([// Compro STD
+//            'cluster_kategoris_id' => 83,
+//            'is_material' => true,
+//            'material_ids' => ['5','47', '48','49','50'],
+//            'is_size' => true,
+//            'size_ids' => ['9', '12',],
+//            'is_side' => true,
+//            'side_ids' => ['1','2'],
+//            'is_page' => true,
+//            'page_ids' => ['23', '25', '1', '3', '5'],
+//            'is_finishing' => true,
+//            'finishing_ids' => ['11'],
+//            'unit_id' => 1,
+//        ]);
+//
+//        \App\Models\DetailProduct::create([// Compro Prem
+//            'cluster_kategoris_id' => 84,
+//            'is_material' => true,
+//            'material_ids' => ['5','47', '48','49','50'],
+//            'is_size' => true,
+//            'size_ids' => ['9', '12',],
+//            'is_side' => true,
+//            'side_ids' => ['1','2'],
+//            'is_page' => true,
+//            'page_ids' => ['23', '25', '1', '3', '5'],
+//            'is_finishing' => true,
+//            'finishing_ids' => ['11'],
+//            'unit_id' => 1,
+//        ]);
+
+        //        \App\Models\DetailProduct::create([// Kalender meja
+//            'cluster_kategoris_id' => 85,
+//            'is_material' => true,
+//            'material_ids' => ['5','47', '48','49','50'],
+//            'is_size' => true,
+//            'size_ids' => ['9', '12',],
+//            'is_side' => true,
+//            'side_ids' => ['1','2'],
+//            'is_page' => true,
+//            'page_ids' => ['23', '25', '1', '3', '5'],
+//            'is_finishing' => true,
+//            'finishing_ids' => ['11'],
+//            'unit_id' => 1,
+//        ]);
+
+        //        \App\Models\DetailProduct::create([// Kalender Poseter
+//            'cluster_kategoris_id' => 86,
+//            'is_material' => true,
+//            'material_ids' => ['5','47', '48','49','50'],
+//            'is_size' => true,
+//            'size_ids' => ['9', '12',],
+//            'is_side' => true,
+//            'side_ids' => ['1','2'],
+//            'is_page' => true,
+//            'page_ids' => ['23', '25', '1', '3', '5'],
+//            'is_finishing' => true,
+//            'finishing_ids' => ['11'],
+//            'unit_id' => 1,
+//        ]);
+
+        //        \App\Models\DetailProduct::create([// Kalender Dinsing
+//            'cluster_kategoris_id' => 87,
+//            'is_material' => true,
+//            'material_ids' => ['5','47', '48','49','50'],
+//            'is_size' => true,
+//            'size_ids' => ['9', '12',],
+//            'is_side' => true,
+//            'side_ids' => ['1','2'],
+//            'is_page' => true,
+//            'page_ids' => ['23', '25', '1', '3', '5'],
+//            'is_finishing' => true,
+//            'finishing_ids' => ['11'],
+//            'unit_id' => 1,
+//        ]);
+
+        \App\Models\DetailProduct::create([// Voucher Buku
+            'cluster_kategoris_id' => 88,
+            'is_material' => true,
+            'material_ids' => ['2', '3',],
+            'is_size' => true,
+            'size_ids' => ['47',],
+            'is_finishing' => true,
+            'finishing_ids' => ['26', '27', '28'],
+            'is_side' => true,
+            'side_ids' => ['1', '2'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// Voucher Satuan
+            'cluster_kategoris_id' => 89,
+            'is_material' => true,
+            'material_ids' => ['4', '27',],
+            'is_size' => true,
+            'size_ids' => ['47',],
+            'is_finishing' => true,
+            'finishing_ids' => ['26', '27', '28'],
+            'is_side' => true,
+            'side_ids' => ['1', '2'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// Totebag
+            'cluster_kategoris_id' => 90,
+            'is_material' => true,
+            'material_ids' => ['40',],
+            'is_size' => true,
+            'size_ids' => ['51', '52'],
+            'is_side' => true,
+            'side_ids' => ['1', '2'],
             'is_color' => true,
             'color_ids' => ['2', '3', '4'],
             'unit_id' => 1,
         ]);
+
+        \App\Models\DetailProduct::create([// Totebag Prem
+            'cluster_kategoris_id' => 91,
+            'is_material' => true,
+            'material_ids' => ['35',],
+            'is_size' => true,
+            'size_ids' => ['51', '52'],
+            'is_side' => true,
+            'side_ids' => ['1', '2'],
+            'is_color' => true,
+            'color_ids' => ['2', '3', '4'],
+            'unit_id' => 1,
+        ]);
+//
+//        \App\Models\DetailProduct::create([// Gooddie Std
+//            'cluster_kategoris_id' => 92,
+//            'is_material' => true,
+//            'material_ids' => ['35',],
+//            'is_size' => true,
+//            'size_ids' => ['51', '52'],
+//            'is_side' => true,
+//            'side_ids' => ['1', '2'],
+//            'is_color' => true,
+//            'color_ids' => ['2', '3', '4'],
+//            'unit_id' => 1,
+//        ]);
+//
+//        \App\Models\DetailProduct::create([// Goodie Prem
+//            'cluster_kategoris_id' => 93,
+//            'is_material' => true,
+//            'material_ids' => ['35',],
+//            'is_size' => true,
+//            'size_ids' => ['51', '52'],
+//            'is_side' => true,
+//            'side_ids' => ['1', '2'],
+//            'is_color' => true,
+//            'color_ids' => ['2', '3', '4'],
+//            'unit_id' => 1,
+//        ]);
+
     }
 }

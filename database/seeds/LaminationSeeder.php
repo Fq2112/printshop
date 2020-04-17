@@ -51,6 +51,22 @@ class LaminationSeeder extends Seeder
                     'Paper surface is embossed and looks more exclusive.'
                 ],
         ],
+        [
+            'name' => ['Laminasi Water Based', 'Laminasi Water Based'],
+            'description' =>
+                [
+                    'Permukaan tidak mudah tergores dan ramah lingkungan.',
+                    'The surface is not easily scratched and environmentally friendly'
+                ],
+        ],
+        [
+            'name' => ['UV Vernish', 'UV Vernish'],
+            'description' =>
+                [
+                    'Permukaan licin, hasil print warna lebih terang dan lebih tahan terhadap air, goresan & matahari',
+                    'Slippery surface, brighter color prints and more resistant to water, scratches & sun'
+                ],
+        ],
     ];
 
     public function run()

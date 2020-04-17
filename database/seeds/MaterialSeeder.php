@@ -359,6 +359,47 @@ class MaterialSeeder extends Seeder
             'name' => ['Greaseproof 50 GSM', 'Greaseproof 50 GSM'],
             'description' => null
         ],
+        [
+            'name' => ['K150/M125/K125 B/F + Duplex 250 gsm', 'K150/M125/K125 B/F + Duplex 250 gsm'],
+            'description' => null
+        ],
+        [
+            'name' => ['Foamboard + Sticker Vinyl', 'Foamboard + Sticker Vinyl'],
+            'description' => null
+        ],
+        [
+            'name' => ['Foamboard Direct Print', 'Foamboard Direct Print'],
+            'description' => null
+        ],
+        [
+            'name' => ['Flexy China 280 Gsm (Eco Solvent)', 'Flexy China 280 Gsm (Eco Solvent)'],
+            'description' => [
+                'Ekonomis, bertekstur, dan lebih tipis dengan ketebalan 280 gsm.',
+                'Economical, textured, and thinner with a thickness of 280 gsm.'
+            ],
+        ],
+        [
+            'name' => ['Flexy China 340 Gsm (Eco Solvent)', 'Flexy China 340 Gsm (Eco Solvent)'],
+            'description' => [
+                'Ekonomis, bertekstur, dan lebih tebal dengan ketebalan 340 gsm.',
+                'Economical, textured, and thinner with a thickness of 340 gsm.'
+            ],
+        ],
+        [
+            'name' => ['Flexy Korea 440 Gsm (Eco Solvent)', 'Flexy Korea 440 Gsm (Eco Solvent)'],
+            'description' => [
+                'Berkualitas, halus dan tebal. Bisa digunakan indoor dan outdoor.',
+                'Berkualitas, halus dan tebal. Bisa digunakan indoor dan outdoor.'
+            ],
+        ],
+        [
+            'name' => ['Albatros Indoor', 'Albatros Indoor'],
+            'description' => [
+                'Bahan mengkilat dengan permukaan yang halus.',
+                'Shiny material with a smooth surface.'
+            ],
+        ],
+
     ];
 
     public function run()
