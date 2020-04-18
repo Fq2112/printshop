@@ -106,6 +106,7 @@ return [
                 "price" => "Harga /:unit",
                 "production" => "Selesai Produksi",
                 "delivery" => "Durasi Pengiriman",
+                "day" => 'hari',
                 "received" => "Tanggal Terima",
                 "alert" => "Spesifikasi dan desain produk yang tertera akan diterapkan pada <b class='show-quantity'>:quantity</b> <b>:product</b> yang Anda pesan.",
                 "layout" => "Pedoman Tata Letak",
@@ -262,6 +263,7 @@ return [
         "upload" => "Browse file atau drag & drop di sini...",
         "drag-drop" => "Drag & drop file desain Anda di sini...",
         "click-select" => "<br>(atau klik untuk memilihnya)",
+        "choose-file" => "Pilih file..."
     ],
     "button" => [
         "cart" => "Lihat Keranjang",

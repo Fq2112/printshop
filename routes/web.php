@@ -75,6 +75,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
             'as' => 'get.cari-nama.produk'
         ]);
 
+        Route::get('cari/pengiriman', [
+            'uses' => 'MainController@cekPengirimanProduk',
+            'as' => 'get.cari-pengiriman.produk'
+        ]);
+
         Route::group(['prefix' => 'info'], function () {
 
             Route::get('pro', [

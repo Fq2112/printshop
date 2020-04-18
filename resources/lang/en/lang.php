@@ -106,6 +106,7 @@ return [
                 "price" => "Price /:unit",
                 "production" => "Production Finished",
                 "delivery" => "Delivery Duration",
+                "day" => 'days',
                 "received" => "Received Date",
                 "alert" => "Product specifications and designs listed will be applied to <b class='show-quantity'>:quantity</b> of the <b>:product</b> that you ordered.",
                 "layout" => "Layout Guidelines",
@@ -261,6 +262,7 @@ return [
         "message" => "Write something here...",
         "drag-drop" => "Drag & drop your design file here...",
         "click-select" => "<br>(or click to choose it)",
+        "choose-file" => "Choose file..."
     ],
     "button" => [
         "cart" => "View Cart",

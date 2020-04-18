@@ -170,6 +170,11 @@
             text-transform: none;
         }
 
+
+        .file-input .button-3d {
+            height: 38px;
+        }
+
         .modal-footer button {
             margin: 0;
             padding: 10px 0;
@@ -418,9 +423,12 @@
     <script>
         var collapse = $('.panel-collapse'), range_slider = $("#range-quantity"),
             btn_upload = $("#btn_upload"), upload_input = $("#file"), link_input = $("#link"),
-            price_pcs = parseInt('25000'), total = 0, str_unit = ' {{$specs->getUnit->name}}';
+            price_pcs = parseInt('25000'), total = 0, str_unit = ' {{$specs->getUnit->name}}',
+            production_day = 3, etd = '';
 
         $(function () {
+            moment.locale('{{$app->getLocale()}}');
+
             range_slider.ionRangeSlider({
                 grid: true,
                 grid_num: 5,
@@ -433,9 +441,9 @@
                         total = parseInt(data.from) * price_pcs;
                         $(".show-quantity").text(data.from + str_unit);
                         $(".show-price").text("Rp" + thousandSeparator(price_pcs) + ",00");
-                        $(".show-production").text('{{now()->formatLocalized('%d %b %Y')}}');
-                        $(".show-delivery").html('2 &ndash; 3 days');
-                        $(".show-received").text('{{now()->addDays(3)->formatLocalized('%d %b %Y')}}');
+                        $(".show-production").text(moment().add(production_day, 'days').format('DD MMM YYYY'));
+                        $(".show-delivery").text(etd.replace('-', ' – ') + ' {{__('lang.product.form.summary.day')}}');
+                        $(".show-received").text(moment().add(parseInt(etd.substr(-1)) + production_day, 'days').format('DD MMM YYYY'));
                         $(".show-total").text("Rp" + thousandSeparator(total) + ",00");
                         $("#summary-alert").show();
                         btn_upload.removeAttr('disabled');
@@ -448,7 +456,7 @@
             upload_input.fileinput({
                 showUpload: false,
                 showBrowse: false,
-                showCaption: false,
+                showCaption: true,
                 browseOnZoneClick: true,
                 showPreview: true,
                 required: true,
@@ -468,6 +476,9 @@
                 msgSizeTooLarge: '{!! __('lang.modal.upload-design.msg-size') !!}',
                 msgInvalidFileExtension: '{!! __('lang.modal.upload-design.msg-extension') !!}',
             });
+
+            $(".file-input .file-caption-name").attr('placeholder', '{{__('lang.placeholder.choose-file')}}')
+                .attr('disabled', 'disabled').css('cursor', 'text');
 
             collapse.on('show.bs.collapse', function () {
                 $(this).siblings('.panel-heading').addClass('active');
@@ -537,6 +548,14 @@
             var rs = range_slider.data("ionRangeSlider");
             rs.reset();
             resetter();
+
+            $.get('{{route('get.cari-pengiriman.produk')}}?destination=' + $(this).val(), function (data) {
+                $.each(data['rajaongkir']['results'][0]['costs'], function (i, val) {
+                    if (val.service == 'REG' || val.service == 'CTCYES') {
+                        etd = val.cost[0].etd;
+                    }
+                });
+            });
 
             $("#card-quantity").show();
         });

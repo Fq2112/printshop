@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ClusterKategori;
 use App\Models\Province;
 use App\Models\SubKategori;
+use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -165,6 +166,35 @@ class MainController extends Controller
         }
 
         return collect($sub)->merge($cluster);
+    }
+
+    public function cekPengirimanProduk(Request $request)
+    {
+        $client = new \GuzzleHttp\Client([
+            'headers' => [
+                'Accept' => 'application/json',
+                'key' => '7a5350ebe62d80bfc367071ba78ecd84'
+            ],
+            'defaults' => [
+                'exceptions' => false
+            ]
+        ]);
+
+        try {
+            $response = $client->post('https://api.rajaongkir.com/starter/cost', [
+                'form_params' => [
+                    'origin' => 444,
+                    'destination' => $request->destination,
+                    'weight' => 2,
+                    'courier' => 'jne'
+                ]
+            ])->getBody()->getContents();
+
+            return json_decode($response, true);
+
+        } catch (ConnectException $e) {
+            return response()->json();
+        }
     }
 
     public function produk(Request $request)

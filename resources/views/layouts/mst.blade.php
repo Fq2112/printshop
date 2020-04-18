@@ -548,6 +548,8 @@
 <script src="{{asset('js/components/rangeslider.min.js')}}"></script>
 <!-- Bootstrap File Upload Plugin -->
 <script src="{{asset('js/components/bs-filestyle.js')}}"></script>
+<!-- moment Plugin -->
+<script src="{{asset('js/components/moment.js')}}"></script>
 <!-- toggle password -->
 <script src="{{asset('js/hideShowPassword.min.js')}}"></script>
 <!-- check-mobile -->
