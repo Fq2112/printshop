@@ -139,6 +139,47 @@ class MainController extends Controller
         return $featured;
     }
 
+    public function produk(Request $request)
+    {
+        $sub = SubKategori::where('permalink->en', $request->produk)
+            ->orwhere('permalink->id', $request->produk)->whereHas('getCluster')->first();
+        $clust = ClusterKategori::where('permalink->en', $request->produk)
+            ->orwhere('permalink->id', $request->produk)->first();
+        $provinces = Province::all();
+        $address = \App\Models\Address::where('user_id', Auth::id())->where('is_main', true)->first();
+        $guidelines = null;
+
+        if (!is_null($sub)) {
+            $data = $sub;
+
+            if (count($data->getCluster) > 0) {
+                return view('pages.main.produk', compact('data'));
+
+            } else {
+                $specs = $data->getSubkatSpecs;
+                $guidelines = $data->guidelines;
+
+                return view('pages.main.form-pemesanan', compact('data', 'provinces', 'address',
+                    'specs', 'guidelines'));
+            }
+
+        } elseif (!is_null($clust)) {
+            $data = $clust;
+            $specs = $data->getClusterSpecs;
+            $guidelines = $data->getSubKategori->guidelines;
+
+            return view('pages.main.form-pemesanan', compact('data', 'provinces', 'address',
+                'specs', 'guidelines'));
+        } else {
+            return back();
+        }
+    }
+
+    public function submitPemesanan(Request $request)
+    {
+        return;
+    }
+
     public function cariNamaProduk(Request $request)
     {
         $sub = SubKategori::where('name->en', 'LIKE', '%' . $request->produk . '%')
@@ -195,44 +236,5 @@ class MainController extends Controller
         } catch (ConnectException $e) {
             return response()->json();
         }
-    }
-
-    public function produk(Request $request)
-    {
-        $sub = SubKategori::where('permalink->en', $request->produk)
-            ->orwhere('permalink->id', $request->produk)->whereHas('getCluster')->first();
-        $clust = ClusterKategori::where('permalink->en', $request->produk)
-            ->orwhere('permalink->id', $request->produk)->first();
-        $provinces = Province::all();
-        $address = \App\Models\Address::where('user_id', Auth::id())->where('is_main', true)->first();
-        $guidelines = null;
-
-        if (!is_null($sub)) {
-            $data = $sub;
-
-            if (count($data->getCluster) > 0) {
-                return view('pages.main.produk', compact('data'));
-
-            } else {
-                $specs = $data->getSubkatSpecs;
-                $guidelines = $data->guidelines;
-
-                return view('pages.main.form-pemesanan', compact('data', 'provinces', 'address',
-                    'specs', 'guidelines'));
-            }
-
-        } else {
-            $data = $clust;
-            $specs = $data->getClusterSpecs;
-            $guidelines = $data->getSubKategori->guidelines;
-
-            return view('pages.main.form-pemesanan', compact('data', 'provinces', 'address',
-                'specs', 'guidelines'));
-        }
-    }
-
-    public function submitPemesanan(Request $request)
-    {
-        return;
     }
 }

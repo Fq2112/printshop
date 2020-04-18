@@ -243,7 +243,7 @@ return [
     "tooltip" => [
         "ava" => "Click here to change your avatar!",
         "background" => "Click here to change your background profile!",
-        "upload-design" => "Allowed extension: jpg, jpeg, png, tiff, pdf, zip, and rar. Allowed size: < 200 MB.",
+        "upload" => "Allowed extension: :ext. Allowed size: :size.",
         "clear-upload" => "Click here to clear the file you selected!",
         "cancel-upload" => "Click here to cancel your file upload process!"
     ],
@@ -286,6 +286,7 @@ return [
         "no" => "No",
         "subs" => "Subscribe",
         "contact" => "Send Message",
+        "detail" => "DETAILS",
         "add" => "ADD",
         "edit" => "EDIT",
         "delete" => "DELETE",

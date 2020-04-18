@@ -2,22 +2,15 @@
 
 namespace App\Models;
 
-use Spatie\Translatable\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Config;
 
 class Blog extends Model
 {
-    use HasTranslations;
-
     protected $table = 'blog';
 
     protected $guarded = ['id'];
 
     protected $casts = ['files' => 'array'];
-
-    public $translatable = ['title', 'permalink', 'content'];
 
     public function getAdmin()
     {
@@ -42,14 +35,5 @@ class Blog extends Model
     public function next()
     {
         return $this->where('id', '>', $this->id)->orderBy('id', 'asc')->first();
-    }
-
-    public function getLocale(): string
-    {
-        if (is_null(App::getLocale())) {
-            Config::set('app.locale', 'id');
-        }
-
-        return Config::get('app.locale');
     }
 }

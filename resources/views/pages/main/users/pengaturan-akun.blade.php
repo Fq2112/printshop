@@ -71,7 +71,7 @@
                                 <div class="img-card image-upload">
                                     <label for="file-input">
                                         <img style="width: 100%" class="show_ava" alt="Avatar" src="{{$bio->ava == "" ?
-                                        asset('images/avatar.png') : asset('storage/users/ava/'.$bio->ava)}}"
+                                        asset('admins/img/avatar/avatar-'.rand(1,5).'.png') : asset('storage/users/ava/'.$bio->ava)}}"
                                              data-placement="bottom" data-toggle="tooltip"
                                              title="{{__('lang.tooltip.ava')}}">
                                     </label>

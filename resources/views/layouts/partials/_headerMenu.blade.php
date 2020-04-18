@@ -55,12 +55,12 @@
                 <div style="text-transform: none">
                     @if(Auth::check())
                         <img alt="Ava" class="img-thumbnail show_ava" src="{{Auth::user()->getBio->ava != "" ?
-                        asset('storage/users/ava/'.Auth::user()->getBio->ava) : asset('images/avatar.png')}}">
+                        asset('storage/users/ava/'.Auth::user()->getBio->ava) : asset('admins/img/avatar/avatar-'.rand(1,5).'.png')}}">
                         <b class="show_username">{{Auth::user()->username}}</b>
                     @elseif(Auth::guard('admin')->check())
-                        <img alt="Ava" class="img-thumbnail show_ava" src="{{Auth::guard('admin')->user()->getBio->ava != "" ?
-                        asset('storage/admins/ava/'.Auth::guard('admin')->user()->getBio->ava) :
-                        asset('images/avatar.png')}}">{{Auth::guard('admin')->user()->username}}
+                        <img alt="Ava" class="img-thumbnail show_ava" src="{{Auth::guard('admin')->user()->ava != "" ?
+                        asset('storage/admins/ava/'.Auth::guard('admin')->user()->ava) :
+                        asset('admins/img/avatar/avatar-'.rand(1,5).'.png')}}">{{Auth::guard('admin')->user()->username}}
                     @endif
                 </div>
             </a>
@@ -139,11 +139,11 @@
     @endauth
 </div>
 
-@guest
+@if(!Auth::check() && !Auth::guard('admin')->check())
     <div id="top-account">
         <a href="javascript:void(0)" data-toggle="modal" onclick="openRegisterModal();">
             <i class="icon-line2-user mr-1 position-relative" style="top: 1px;"></i>
             <span class="d-none d-sm-inline-block font-primary t500 text-uppercase">
                 {{__('lang.header.sign-up-in')}}</span></a>
     </div>
-@endguest
+@endif

@@ -14,44 +14,24 @@ class BlogSeeder extends Seeder
         $faker = \Faker\Factory::create();
 
         \App\Models\BlogCategory::create([
-            'name' => [
-                'id' => 'Kategori A',
-                'en' => 'Category A',
-            ],
+            'name' => 'Category ' . ucfirst($faker->word),
         ]);
         \App\Models\BlogCategory::create([
-            'name' => [
-                'id' => 'Kategori B',
-                'en' => 'Category B',
-            ],
+            'name' => 'Category ' . ucfirst($faker->word),
         ]);
         \App\Models\BlogCategory::create([
-            'name' => [
-                'id' => 'Kategori C',
-                'en' => 'Category C',
-            ],
+            'name' => 'Category ' . ucfirst($faker->word),
         ]);
 
         $x = 1;
         for ($i = 0; $i < 9; $i++) {
             $title = $faker->words(rand(2, 3), true);
-            $permalink = preg_replace("![^a-z0-9]+!i", "-", strtolower($title));
-
             \App\Models\Blog::create([
                 'admin_id' => rand(\App\Models\Admin::where('role', \App\Support\Role::ADMIN)->min('id'), \App\Models\Admin::where('role', \App\Support\Role::ADMIN)->max('id')),
                 'category_id' => rand(\App\Models\BlogCategory::min('id'), \App\Models\BlogCategory::max('id')),
-                'title' => [
-                    'id' => strtoupper($title),
-                    'en' => strtoupper($title),
-                ],
-                'permalink' => [
-                    'id' => $permalink,
-                    'en' => $permalink,
-                ],
-                'content' => [
-                    'id' => "<p align='justify'>" . \Faker\Factory::create('id_ID')->paragraphs(rand(3, 5), true) . "</p>",
-                    'en' => "<p align='justify'>" . \Faker\Factory::create()->paragraphs(rand(3, 5), true) . "</p>",
-                ],
+                'title' => strtoupper($title),
+                'permalink' => preg_replace("![^a-z0-9]+!i", "-", strtolower($title)),
+                'content' => "<p align='justify'>" . \Faker\Factory::create('id_ID')->paragraphs(rand(3, 5), true) . "</p>",
                 'thumbnail' => $x++ . '.jpg',
             ]);
         }

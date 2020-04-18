@@ -243,7 +243,7 @@ return [
     "tooltip" => [
         "ava" => "Klik disini untuk mengubah avatar Anda!",
         "background" => "Klik disini untuk mengubah latar belakang profil Anda!",
-        "upload-design" => "Ekstensi yang diizinkan: jpg, jpeg, png, tiff, pdf, zip, and rar. Ukuran yang diizinkan: < 200 MB.",
+        "upload" => "Ekstensi yang diizinkan: :ext. Ukuran yang diizinkan: :size.",
         "clear-upload" => "Klik disini untuk menghapus file yang telah Anda pilih!",
         "cancel-upload" => "Klik disini untuk membatalkan proses pengunggahan file Anda!"
     ],
@@ -260,7 +260,6 @@ return [
         "subject" => "Subyek",
         "choose" => "-- Pilih --",
         "message" => "Tulis sesuatu di sini...",
-        "upload" => "Browse file atau drag & drop di sini...",
         "drag-drop" => "Drag & drop file desain Anda di sini...",
         "click-select" => "<br>(atau klik untuk memilihnya)",
         "choose-file" => "Pilih file..."
@@ -287,6 +286,7 @@ return [
         "no" => "Tidak",
         "subs" => "Berlangganan",
         "contact" => "Kirim Pesan",
+        "detail" => "DETAIL",
         "add" => "TAMBAH",
         "edit" => "SUNTING",
         "delete" => "HAPUS",
