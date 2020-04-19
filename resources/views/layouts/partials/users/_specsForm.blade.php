@@ -18,7 +18,8 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\TypeProduct::whereIn('id', $specs->type_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                            <div
+                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 {{$row->image != "" ? 'mb-3' : ''}}">
                                 <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="type-{{$row->id}}">
                                     <input id="type-{{$row->id}}"
@@ -80,7 +81,8 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Material::whereIn('id', $specs->material_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                            <div
+                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 {{$row->image != "" ? 'mb-3' : ''}}">
                                 <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="materials-{{$row->id}}">
                                     <input id="materials-{{$row->id}}" class="card-rb" name="materials"
@@ -156,7 +158,8 @@
                                     </label>
                                 </div>
                             @else
-                                <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                                <div
+                                    class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 {{$row->image != "" ? 'mb-3' : ''}}">
                                     <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                            for="color-{{$row->id}}">
                                         <input id="color-{{$row->id}}" class="card-rb" name="color" type="radio"
@@ -213,7 +216,8 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\PrintingMethods::whereIn('id', $specs->print_method_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                            <div
+                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 {{$row->image != "" ? 'mb-3' : ''}}">
                                 <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="print_method-{{$row->id}}">
                                     <input id="print_method-{{$row->id}}"
@@ -277,7 +281,8 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Size::whereIn('id', $specs->size_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                            <div
+                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 {{$row->image != "" ? 'mb-3' : ''}}">
                                 <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="size-{{$row->id}}">
                                     <input id="size-{{$row->id}}"
@@ -341,7 +346,8 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Side::whereIn('id', $specs->side_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                            <div
+                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 {{$row->image != "" ? 'mb-3' : ''}}">
                                 <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="side-{{$row->id}}">
                                     <input id="side-{{$row->id}}"
@@ -404,7 +410,8 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Edge::whereIn('id', $specs->edge_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                            <div
+                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 {{$row->image != "" ? 'mb-3' : ''}}">
                                 <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="corner-{{$row->id}}">
                                     <input id="corner-{{$row->id}}"
@@ -467,7 +474,8 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Folding::whereIn('id', $specs->folding_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                            <div
+                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 {{$row->image != "" ? 'mb-3' : ''}}">
                                 <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="folding-{{$row->id}}">
                                     <input id="folding-{{$row->id}}"
@@ -531,7 +539,8 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Front::whereIn('id', $specs->front_side_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                            <div
+                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 {{$row->image != "" ? 'mb-3' : ''}}">
                                 <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="front_side-{{$row->id}}">
                                     <input id="front_side-{{$row->id}}"
@@ -595,7 +604,8 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\BackSide::whereIn('id', $specs->back_side_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                            <div
+                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 {{$row->image != "" ? 'mb-3' : ''}}">
                                 <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="back_side-{{$row->id}}">
                                     <input id="back_side-{{$row->id}}"
@@ -659,7 +669,8 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\RightLeftSide::whereIn('id', $specs->right_side_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                            <div
+                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 {{$row->image != "" ? 'mb-3' : ''}}">
                                 <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="right_side-{{$row->id}}">
                                     <input id="right_side-{{$row->id}}"
@@ -723,7 +734,8 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\RightLeftSide::whereIn('id', $specs->left_side_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                            <div
+                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 {{$row->image != "" ? 'mb-3' : ''}}">
                                 <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="left_side-{{$row->id}}">
                                     <input id="left_side-{{$row->id}}"
@@ -787,7 +799,8 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Balance::whereIn('id', $specs->balance_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                            <div
+                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 {{$row->image != "" ? 'mb-3' : ''}}">
                                 <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="balance-{{$row->id}}">
                                     <input id="balance-{{$row->id}}"
@@ -851,7 +864,8 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Copies::whereIn('id', $specs->copies_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                            <div
+                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 {{$row->image != "" ? 'mb-3' : ''}}">
                                 <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="copies-{{$row->id}}">
                                     <input id="copies-{{$row->id}}"
@@ -915,7 +929,8 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Pages::whereIn('id', $specs->page_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                            <div
+                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 {{$row->image != "" ? 'mb-3' : ''}}">
                                 <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="page-{{$row->id}}">
                                     <input id="page-{{$row->id}}"
@@ -978,7 +993,8 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Material::whereIn('id', $specs->front_cover_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                            <div
+                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 {{$row->image != "" ? 'mb-3' : ''}}">
                                 <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="front_cover-{{$row->id}}">
                                     <input id="front_cover-{{$row->id}}"
@@ -1040,7 +1056,8 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Material::whereIn('id', $specs->back_cover_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                            <div
+                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 {{$row->image != "" ? 'mb-3' : ''}}">
                                 <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="back_cover-{{$row->id}}">
                                     <input id="back_cover-{{$row->id}}"
@@ -1102,7 +1119,8 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Finishing::whereIn('id', $specs->binding_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                            <div
+                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 {{$row->image != "" ? 'mb-3' : ''}}">
                                 <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="binding-{{$row->id}}">
                                     <input id="binding-{{$row->id}}"
@@ -1165,7 +1183,8 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Lamination::whereIn('id', $specs->lamination_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                            <div
+                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 {{$row->image != "" ? 'mb-3' : ''}}">
                                 <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="lamination-{{$row->id}}">
                                     <input id="lamination-{{$row->id}}"
@@ -1225,7 +1244,8 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Finishing::whereIn('id', $specs->finishing_ids)->get() as $row)
-                            <div class="col-{{$row->image != "" ? 6 : 4}} {{$row->image != "" ? 'mb-3' : ''}}">
+                            <div
+                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 {{$row->image != "" ? 'mb-3' : ''}}">
                                 <label class="card-label {{$row->image != "" ? 'h-100' : ''}}"
                                        for="finishing-{{$row->id}}">
                                     <input id="finishing-{{$row->id}}"

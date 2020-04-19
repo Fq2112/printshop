@@ -5,6 +5,7 @@
     <style>
         #content .postcontent {
             width: 70%;
+            margin-right: 1.5rem;
         }
 
         #content .sidebar {
@@ -205,7 +206,7 @@
                 <form id="form-pemesanan" class="row" method="POST" enctype="multipart/form-data"
                       action="{{route('produk.submit.pemesanan', ['produk' => $data->permalink])}}">
                     @csrf
-                    <div class="postcontent mr-4 nobottommargin clearfix">
+                    <div class="postcontent mb-0 pb-0 clearfix">
                         <div class="myCard mb-4">
                             <div class="card-content">
                                 <div class="card-title">
