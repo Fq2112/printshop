@@ -97,9 +97,9 @@
     </form>
 </div>
 
-<div id="top-cart">
-    <a href="#" id="top-cart-trigger"><i class="icon-shopping-cart1"></i><span>0</span></a>
-    @auth
+@auth
+    <div id="top-cart">
+        <a href="#" id="top-cart-trigger"><i class="icon-shopping-cart1"></i><span>0</span></a>
         <div class="top-cart-content">
             <div class="top-cart-title">
                 <h4 data-toc-skip>{{__('lang.header.cart')}}</h4>
@@ -136,8 +136,8 @@
                     class="button button-dark button-small nomargin fright">{{__('lang.button.cart')}}</button>
             </div>
         </div>
-    @endauth
-</div>
+    </div>
+@endauth
 
 @if(!Auth::check() && !Auth::guard('admin')->check())
     <div id="top-account">

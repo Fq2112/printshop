@@ -382,10 +382,10 @@
                                     <a href="#"><img width="20" src="{{asset('images/icons/flags/id.svg')}}"
                                                      alt="Indonesia"> <i class="icon-angle-down"></i></a>
                                     <ul>
-                                        <li><a href="{{LaravelLocalization::getLocalizedURL('en', '/')}}">
+                                        <li><a href="{{LaravelLocalization::getLocalizedURL('en')}}">
                                                 <img src="{{asset('images/icons/flags/en.svg')}}"
                                                      alt="English"> {{__('lang.lang.en')}}</a></li>
-                                        <li><a href="{{LaravelLocalization::getLocalizedURL('id', '/')}}">
+                                        <li><a href="{{LaravelLocalization::getLocalizedURL('id')}}">
                                                 <img src="{{asset('images/icons/flags/id.svg')}}"
                                                      alt="Indonesia"> {{__('lang.lang.id')}}</a></li>
                                     </ul>
@@ -393,10 +393,10 @@
                                     <a href="#"><img width="20" src="{{asset('images/icons/flags/en.svg')}}"
                                                      alt="English"> <i class="icon-angle-down"></i></a>
                                     <ul>
-                                        <li><a href="{{LaravelLocalization::getLocalizedURL('id', '/')}}">
+                                        <li><a href="{{LaravelLocalization::getLocalizedURL('id')}}">
                                                 <img src="{{asset('images/icons/flags/id.svg')}}"
                                                      alt="Indonesia"> {{__('lang.lang.id')}}</a></li>
-                                        <li><a href="{{LaravelLocalization::getLocalizedURL('en', '/')}}">
+                                        <li><a href="{{LaravelLocalization::getLocalizedURL('en')}}">
                                                 <img src="{{asset('images/icons/flags/en.svg')}}"
                                                      alt="English"> {{__('lang.lang.en')}}</a></li>
                                     </ul>

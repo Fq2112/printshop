@@ -7,7 +7,6 @@ return [
     "tnc" => "syarat-ketentuan",
     "pp" => "kebijakan-privasi",
     "account" => "akun",
-    "order" => "riwayat-pemesanan",
     "profile" => "sunting-profil",
     "profile-address" => "sunting-profil/alamat",
     "settings" => "pengaturan",

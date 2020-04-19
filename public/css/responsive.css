@@ -669,7 +669,6 @@
     }
 
     #top-search a,
-    #top-cart,
     #side-panel-trigger,
     #top-account {
         position: absolute;
@@ -677,6 +676,18 @@
         left: auto;
         right: 15px;
         margin: 40px 0;
+        -webkit-transition: margin .4s ease;
+        -o-transition: margin .4s ease;
+        transition: margin .4s ease;
+    }
+
+    #top-cart {
+        position: absolute;
+        top: 2px;
+        left: auto;
+        right: 71px;
+        margin: 40px 0;
+        padding-right: 25px;
         -webkit-transition: margin .4s ease;
         -o-transition: margin .4s ease;
         transition: margin .4s ease;
@@ -753,7 +764,7 @@
     }
 
     #top-account {
-        margin: 33px 0 32px;
+        margin: 36px 0 32px;
         right: 75px;
     }
 
@@ -1266,7 +1277,7 @@
         margin: 0 -20px -40px -20px;
     }
 
-    #form-pemesanan .sidebar-widgets-wrap {
+    form .sidebar-widgets-wrap {
         margin: unset;
     }
 
@@ -1342,17 +1353,6 @@
 
     .top-links > ul {
         text-align: center;
-    }
-
-    .top-links > ul > li {
-        display: inline-block;
-    }
-
-    .top-links > ul > li:nth-child(3),
-    .top-links > ul > li:nth-child(4),
-    .top-links > ul > li:nth-child(5),
-    .top-links > ul > li:nth-child(6) {
-        display: none;
     }
 
     .top-links > ul > li {
@@ -1963,7 +1963,15 @@
     }
 
     #top-cart {
-        display: none;
+        position: absolute;
+        top: 2px;
+        left: auto;
+        right: 65px;
+        margin: 40px 0;
+        padding-right: 20px !important;
+        -webkit-transition: margin .4s ease;
+        -o-transition: margin .4s ease;
+        transition: margin .4s ease;
     }
 
     #top-search a {

@@ -86,37 +86,37 @@ Route::group(['namespace' => 'Pages'], function () {
             'as' => 'pro'
         ]);
 
-        Route::get(LaravelLocalization::transRoute('routes.how-to'), [
+        Route::get('cara-pemesanan', [
             'uses' => 'InfoController@caraPemesanan',
             'as' => 'cara-pemesanan'
         ]);
 
-        Route::get(LaravelLocalization::transRoute('routes.faq'), [
+        Route::get('faq', [
             'uses' => 'InfoController@faq',
             'as' => 'faq'
         ]);
 
-        Route::get(LaravelLocalization::transRoute('routes.about'), [
+        Route::get('tentang-kami', [
             'uses' => 'InfoController@tentang',
             'as' => 'tentang'
         ]);
 
-        Route::get(LaravelLocalization::transRoute('routes.contact'), [
+        Route::get('kontak', [
             'uses' => 'InfoController@kontak',
             'as' => 'kontak'
         ]);
 
-        Route::post(LaravelLocalization::transRoute('routes.contact') . '/kirim', [
+        Route::post('kontak/kirim', [
             'uses' => 'InfoController@kirimKontak',
             'as' => 'kirim.kontak'
         ]);
 
-        Route::get(LaravelLocalization::transRoute('routes.tnc'), [
+        Route::get('syarat-ketentuan', [
             'uses' => 'InfoController@syaratKetentuan',
             'as' => 'syarat-ketentuan'
         ]);
 
-        Route::get(LaravelLocalization::transRoute('routes.pp'), [
+        Route::get('kebijakan-privasi', [
             'uses' => 'InfoController@kebijakanPrivasi',
             'as' => 'kebijakan-privasi'
         ]);
@@ -147,45 +147,44 @@ Route::group(['namespace' => 'Pages'], function () {
 
     });
 
-    Route::group(['namespace' => 'Users', 'prefix' => LaravelLocalization::transRoute('routes.account'),
-        'middleware' => ['auth', 'user']], function () {
+    Route::group(['namespace' => 'Users', 'prefix' => 'akun', 'middleware' => ['auth', 'user']], function () {
 
         Route::get('dashboard', [
             'uses' => 'UserController@dashboard',
             'as' => 'user.dashboard'
         ]);
 
-        Route::get(LaravelLocalization::transRoute('routes.profile'), [
+        Route::get('sunting-profil', [
             'uses' => 'AkunController@profil',
             'as' => 'user.profil'
         ]);
 
-        Route::put(LaravelLocalization::transRoute('routes.profile') . '/update', [
+        Route::put('sunting-profil/update', [
             'uses' => 'AkunController@updateProfil',
             'as' => 'user.update.profil'
         ]);
 
-        Route::post(LaravelLocalization::transRoute('routes.profile-address') . '/create', [
+        Route::post('sunting-profil/alamat/create', [
             'uses' => 'AkunController@createProfilAddress',
             'as' => 'user.profil-alamat.create'
         ]);
 
-        Route::put(LaravelLocalization::transRoute('routes.profile-address') . '{id}/update', [
+        Route::put('sunting-profil/alamat/{id}/update', [
             'uses' => 'AkunController@updateProfilAddress',
             'as' => 'user.profil-alamat.update'
         ]);
 
-        Route::get(LaravelLocalization::transRoute('routes.profile-address') . '{id}/delete', [
+        Route::get('sunting-profil/alamat/{id}/delete', [
             'uses' => 'AkunController@deleteProfilAddress',
             'as' => 'user.profil-alamat.delete'
         ]);
 
-        Route::get(LaravelLocalization::transRoute('routes.settings'), [
+        Route::get('pengaturan', [
             'uses' => 'AkunController@pengaturan',
             'as' => 'user.pengaturan'
         ]);
 
-        Route::put(LaravelLocalization::transRoute('routes.settings') . '/update', [
+        Route::put('pengaturan/update', [
             'uses' => 'AkunController@updatePengaturan',
             'as' => 'user.update.pengaturan'
         ]);

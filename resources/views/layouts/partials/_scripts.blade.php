@@ -21,9 +21,6 @@
     });
 
     $("#top-cart-trigger").off('click').on('click', function (e) {
-        @guest
-        openLoginModal();
-        @else
         @auth('admin')
         swal('{{__('lang.alert.warning')}}', '{{__('lang.alert.feature-fail')}}', 'warning');
         @else
@@ -32,7 +29,6 @@
         e.stopPropagation();
         e.preventDefault();
         @endauth
-        @endguest
     });
 
     var keyword = $("#keyword"), fetchQuery = null, fetchResultsCallback = null,

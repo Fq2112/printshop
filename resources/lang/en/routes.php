@@ -7,7 +7,6 @@ return [
     "tnc" => "terms-conditions",
     "pp" => "privacy-policy",
     "account" => "account",
-    "order" => "order-history",
     "profile" => "edit-profile",
     "profile-address" => "edit-profile/address",
     "settings" => "settings",

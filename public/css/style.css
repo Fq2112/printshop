@@ -834,24 +834,30 @@ html[xmlns] .slider-wrap {display: block;}
 	background: #FFF;
 	border: 0;
 	top: 44px;
-	left: 0;
-	width: 140px;
-	margin: 0;
-	border-top: 1px solid #1ABC9C;
-	border-bottom: 1px solid #EEE;
-	box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
-	-moz-box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
-	-webkit-box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+    left: 0;
+    width: 140px;
+    margin: 0;
+    border-top: 1px solid #1ABC9C;
+    border-bottom: 1px solid #EEE;
+    box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
+}
+
+.top-links ul ul {
+    pointer-events: auto;
 }
 
 .top-links li:hover ul,
-.top-links li:hover div.top-link-section { pointer-events: auto; }
+.top-links li:hover div.top-link-section {
+    pointer-events: auto;
+}
 
 .top-links ul ul li {
-	float: none;
-	height: 36px;
-	border-top: 1px solid #F5F5F5;
-	border-left: 1px solid #EEE;
+    float: none;
+    height: 36px;
+    border-top: 1px solid #F5F5F5;
+    border-left: 1px solid #EEE;
 }
 
 .top-links ul ul li:hover { background-color: #F9F9F9; }
@@ -1754,7 +1760,12 @@ body:not(.device-md):not(.device-sm):not(.device-xs) #primary-menu.style-2.cente
 	margin: 40px 0 40px 15px;
 }
 
-#top-cart { position: relative; }
+#top-cart {
+    position: relative;
+    margin-right: 0;
+    padding-right: 25px !important;
+    border-right: 1px solid #DDD;
+}
 
 #top-search a,
 #top-cart > a,
@@ -1860,9 +1871,6 @@ body:not(.device-md):not(.device-sm):not(.device-xs) #header.transparent-header:
 /* ----------------------------------------------------------------
 	Top Cart
 -----------------------------------------------------------------*/
-
-
-#top-cart { margin-right: 0; }
 
 #top-cart > a > span {
 	display: block;
