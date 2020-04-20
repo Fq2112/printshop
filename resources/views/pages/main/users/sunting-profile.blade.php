@@ -201,10 +201,10 @@
                                                 <td>{{$bio->phone != "" ? $bio->phone : __('lang.profile.empty')}}</td>
                                             </tr>
                                             <tr data-toggle="tooltip" data-placement="left"
-                                                title="{{__('lang.profile.address')}}">
+                                                title="{{__('lang.tooltip.address')}}">
                                                 <td><i class="icon-map-marked-alt"></i></td>
                                                 <td>&nbsp;</td>
-                                                <td>{{$address != "" ? $address->address.' - '.$address->postal_code.' ('.$address->save_as.').' : __('lang.profile.empty')}}</td>
+                                                <td>{{$address != "" ? $address->address.' - '.$address->postal_code.' ('.$address->getOccupancy->name.').' : __('lang.profile.empty')}}</td>
                                             </tr>
                                         </table>
                                         <div class="divider divider-center stats_personal mt-2 mb-1">
@@ -391,12 +391,10 @@
                                                                     <div class="media">
                                                                         <img class="align-self-center" alt="icon"
                                                                              width="100"
-                                                                             src="{{asset('images/icons/occupancy/'.
-                                                                     str_replace(' ', '-',strtolower($row->forgetTranslation
-                                                                     ('save_as', 'id')->save_as)).'.png')}}">
+                                                                             src="{{asset('images/icons/occupancy/'.$row->getOccupancy->image)}}">
                                                                         <div class="ml-2 media-body">
                                                                             <h5 class="mt-0 mb-1">
-                                                                                <i class="icon-building mr-1"></i>{{$row->save_as}}
+                                                                                <i class="icon-building mr-1"></i>{{$row->getOccupancy->name}}
                                                                                 {!! $row->is_main == false ? '' :
                                                                                 '<span style="font-weight: 500;color: unset">['.
                                                                                 __('lang.profile.main-address').']</span>'!!}
@@ -406,7 +404,7 @@
                                                                                    '{{$row->phone}}','{{$row->lat}}',
                                                                                    '{{$row->long}}','{{$row->city_id}}',
                                                                                    '{{$row->address}}','{{$row->postal_code}}',
-                                                                                   '{{$row->save_as}}','{{$row->is_main}}',
+                                                                                   '{{$row->getOccupancy->id}}','{{$row->is_main}}',
                                                                                    '{{route('user.profil-alamat.update', ['id' => $row->id])}}')">
                                                                                 {{__('lang.button.edit')}}
                                                                                 <i class="icon-edit ml-1"></i>
@@ -414,7 +412,7 @@
                                                                             <small style="color: #7f7f7f">&nbsp;&#124;&nbsp;</small>
                                                                             <a style="color: #dc3545;cursor: pointer;"
                                                                                onclick="deleteAddress('{{$row->is_main}}',
-                                                                                   '{{$row->save_as}}','{{$row->address}}',
+                                                                                   '{{$row->getOccupancy->name}}','{{$row->address}}',
                                                                                    '{{route('user.profil-alamat.delete', ['id' => $row->id])}}')">
                                                                                 <i class="icon-eraser mr-1"></i>
                                                                                 {{__('lang.button.delete')}}
@@ -586,14 +584,14 @@
                                                             <span class="input-group-text">
                                                                 <i class="icon-building"></i></span>
                                                                         </div>
-                                                                        <select id="save_as" name="save_as"
+                                                                        <select id="occupancy_id" name="occupancy_id"
                                                                                 data-live-search="true"
                                                                                 class="form-control selectpicker"
                                                                                 required
                                                                                 title="{{__('lang.placeholder.choose')}}">
-                                                                            @foreach(__('lang.profile.options') as $value)
+                                                                            @foreach($occupancy as $row)
                                                                                 <option
-                                                                                    value="{{$value}}">{{$value}}</option>
+                                                                                    value="{{$row->id}}">{{$row->name}}</option>
                                                                             @endforeach
                                                                         </select>
                                                                     </div>
@@ -880,7 +878,7 @@
             infoWindow.open(map, marker);
 
             $("#method, #lat, #long, #address_name, #address_phone, #address_map, #postal_code").val(null);
-            $("#city_id, #save_as").val('default').selectpicker('refresh');
+            $("#city_id, #occupancy_id").val('default').selectpicker('refresh');
             $("#form-address").attr('action', '{{route('user.profil-alamat.create')}}');
             $("#is_main").prop('checked', false);
 
@@ -891,7 +889,7 @@
             }
         }
 
-        function editAddress(name, phone, lat, long, city_id, address, postal_code, save_as, is_main, url) {
+        function editAddress(name, phone, lat, long, city_id, address, postal_code, occupancy_id, is_main, url) {
             $("#show_address_settings").hide();
             $("#hide_address_settings").show();
             $("#address_settings").toggle(300);
@@ -902,7 +900,7 @@
                 '<div id="iw-container">' +
                 '<div class="iw-title">{{__('lang.profile.address')}}</div>' +
                 '<div class="iw-content">' +
-                '<div class="iw-subTitle" style="text-transform: none">' + save_as + '</div>' +
+                '<div class="iw-subTitle" style="text-transform: none">' + occupancy_id + '</div>' +
                 '<img src="{{asset('images/searchPlace.png')}}">' +
                 '<p>' + address + '</p>' +
                 '</div><div class="iw-bottom-gradient"></div></div>'
@@ -914,7 +912,7 @@
             $("#address_map").val(address);
             $("#postal_code").val(postal_code);
             $("#city_id").val(city_id).selectpicker('refresh');
-            $("#save_as").val(save_as).selectpicker('refresh');
+            $("#occupancy_id").val(occupancy_id).selectpicker('refresh');
             if (is_main == 1) {
                 $("#is_main").prop('checked', true);
             } else {
@@ -1081,7 +1079,7 @@
                                     },
                                     success: function (data) {
                                         $("#show_bg_name").text(data);
-                                        $("#page-title").attr('background-image', 'url("{{asset('storage/users/background')}}/' + data + '")');
+                                        $("#page-title").css('background-image', 'url("{{asset('storage/users/background')}}/' + data + '")');
                                         $(".show_bg").attr('src', '{{asset('storage/users/background')}}/' + data);
                                         swal('{{__('lang.alert.success')}}', '{{__('lang.alert.upload-bg')}}', 'success');
                                         $("#progress-upload-bg").css("display", "none");

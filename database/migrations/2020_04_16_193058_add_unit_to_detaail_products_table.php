@@ -29,7 +29,8 @@ class AddUnitToDetaailProductsTable extends Migration
     public function down()
     {
         Schema::table('detail_products', function (Blueprint $table) {
-            //
+            $table->dropColumn('unit_id');
+            $table->dropForeign('unit_id');
         });
     }
 }

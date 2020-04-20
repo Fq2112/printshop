@@ -373,7 +373,7 @@
                         <ul>
                             <li><a href="{{route('pro')}}">{{__('lang.header.pro')}}</a></li>
                             <li><a href="{{route('cara-pemesanan')}}">{{__('lang.header.how-to')}}</a></li>
-                            <li><a href="{{route('faq')}}">{{__('lang.header.faq')}}</a></li>
+                            <li><a href="{{route('faq')}}">FAQ</a></li>
                             <li><a href="{{route('tentang')}}">{{__('lang.header.about')}}</a></li>
                             <li><a href="{{route('kontak')}}">{{__('lang.header.contact')}}</a></li>
                             <li><a href="{{route('blog')}}">Blog</a></li>
@@ -481,7 +481,7 @@
                             <ul class="list-unstyled iconlist ml-0">
                                 <li><a href="{{route('pro')}}">{{__('lang.header.pro')}}</a></li>
                                 <li><a href="{{route('cara-pemesanan')}}">{{__('lang.header.how-to')}}</a></li>
-                                <li><a href="{{route('faq')}}">{{__('lang.header.faq')}}</a></li>
+                                <li><a href="{{route('faq')}}">FAQ</a></li>
                                 <li><a href="{{route('tentang')}}">{{__('lang.header.about')}}</a></li>
                                 <li><a href="{{route('kontak')}}">{{__('lang.header.contact')}}</a></li>
                                 <li><a href="{{route('blog')}}">Blog</a></li>

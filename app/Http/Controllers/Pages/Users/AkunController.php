@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Pages\Users;
 
 use App\Http\Controllers\Controller;
 use App\Models\Address;
+use App\Models\OccupancyType;
 use App\Models\Province;
 use App\User;
 use Illuminate\Http\Request;
@@ -21,8 +22,10 @@ class AkunController extends Controller
         $address = Address::where('user_id', $user->id)->where('is_main', true)->first();
 
         $provinces = Province::all();
+        $occupancy = OccupancyType::all();
 
-        return view('pages.main.users.sunting-profile', compact('user', 'bio', 'addresses', 'address', 'provinces'));
+        return view('pages.main.users.sunting-profile', compact('user', 'bio', 'addresses',
+            'address', 'provinces', 'occupancy'));
     }
 
     public function updateProfil(Request $request)
@@ -54,7 +57,7 @@ class AkunController extends Controller
             'address' => $request->address,
             'lat' => $request->lat,
             'long' => $request->long,
-            'save_as' => $request->save_as,
+            'occupancy_id' => $request->occupancy_id,
             'is_main' => $request->has('is_main') ? $request->is_main : false,
         ]);
 
@@ -76,7 +79,7 @@ class AkunController extends Controller
             'address' => $request->address,
             'lat' => $request->lat,
             'long' => $request->long,
-            'save_as' => $request->save_as,
+            'occupancy_id' => $request->occupancy_id,
             'is_main' => $request->has('is_main') ? $request->is_main : false,
         ]);
 

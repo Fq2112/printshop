@@ -28,6 +28,11 @@ class Address extends Model
         return $this->belongsTo(Cities::class, 'city_id');
     }
 
+    public function getOccupancy()
+    {
+        return $this->belongsTo(OccupancyType::class, 'occupancy_id');
+    }
+
     public function getLocale(): string
     {
         if (is_null(App::getLocale())) {

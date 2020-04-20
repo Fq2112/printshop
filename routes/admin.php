@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * routing admin
+ * */
+
 Route::redirect('/', 'dashboard');
 
 Route::group(['namespace' => 'Pages\Admins'], function () {

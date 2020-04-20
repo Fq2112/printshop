@@ -86,7 +86,7 @@ Route::group(['namespace' => 'Pages'], function () {
             'as' => 'pro'
         ]);
 
-        Route::get('cara-pemesanan', [
+        Route::get('how-to', [
             'uses' => 'InfoController@caraPemesanan',
             'as' => 'cara-pemesanan'
         ]);
@@ -96,27 +96,27 @@ Route::group(['namespace' => 'Pages'], function () {
             'as' => 'faq'
         ]);
 
-        Route::get('tentang-kami', [
+        Route::get('about-us', [
             'uses' => 'InfoController@tentang',
             'as' => 'tentang'
         ]);
 
-        Route::get('kontak', [
+        Route::get('contact', [
             'uses' => 'InfoController@kontak',
             'as' => 'kontak'
         ]);
 
-        Route::post('kontak/kirim', [
+        Route::post('contact/submit', [
             'uses' => 'InfoController@kirimKontak',
             'as' => 'kirim.kontak'
         ]);
 
-        Route::get('syarat-ketentuan', [
+        Route::get('terms-conditions', [
             'uses' => 'InfoController@syaratKetentuan',
             'as' => 'syarat-ketentuan'
         ]);
 
-        Route::get('kebijakan-privasi', [
+        Route::get('privacy-policy', [
             'uses' => 'InfoController@kebijakanPrivasi',
             'as' => 'kebijakan-privasi'
         ]);
@@ -147,44 +147,44 @@ Route::group(['namespace' => 'Pages'], function () {
 
     });
 
-    Route::group(['namespace' => 'Users', 'prefix' => 'akun', 'middleware' => ['auth', 'user']], function () {
+    Route::group(['namespace' => 'Users', 'prefix' => 'account', 'middleware' => ['auth', 'user']], function () {
 
         Route::get('dashboard', [
             'uses' => 'UserController@dashboard',
             'as' => 'user.dashboard'
         ]);
 
-        Route::get('sunting-profil', [
+        Route::get('edit-profile', [
             'uses' => 'AkunController@profil',
             'as' => 'user.profil'
         ]);
 
-        Route::put('sunting-profil/update', [
+        Route::put('edit-profile/update', [
             'uses' => 'AkunController@updateProfil',
             'as' => 'user.update.profil'
         ]);
 
-        Route::post('sunting-profil/alamat/create', [
+        Route::post('edit-profile/address/create', [
             'uses' => 'AkunController@createProfilAddress',
             'as' => 'user.profil-alamat.create'
         ]);
 
-        Route::put('sunting-profil/alamat/{id}/update', [
+        Route::put('edit-profile/address/{id}/update', [
             'uses' => 'AkunController@updateProfilAddress',
             'as' => 'user.profil-alamat.update'
         ]);
 
-        Route::get('sunting-profil/alamat/{id}/delete', [
+        Route::get('edit-profile/address/{id}/delete', [
             'uses' => 'AkunController@deleteProfilAddress',
             'as' => 'user.profil-alamat.delete'
         ]);
 
-        Route::get('pengaturan', [
+        Route::get('settings', [
             'uses' => 'AkunController@pengaturan',
             'as' => 'user.pengaturan'
         ]);
 
-        Route::put('pengaturan/update', [
+        Route::put('settings/update', [
             'uses' => 'AkunController@updatePengaturan',
             'as' => 'user.update.pengaturan'
         ]);

@@ -47,12 +47,12 @@
              style="background-image:url('{{asset('images/banner/faq.jpg')}}');background-size:cover;padding:120px 0;">
         <div class="parallax-overlay"></div>
         <div class="container clearfix">
-            <h1>{{__('lang.header.faq')}}</h1>
+            <h1>FAQ</h1>
             <span>{{__('lang.faq.capt')}}</span>
             <ol class="breadcrumb text-uppercase">
                 <li class="breadcrumb-item"><a href="{{route('beranda')}}">{{__('lang.breadcrumb.home')}}</a></li>
                 <li class="breadcrumb-item"><a href="{{URL::current()}}">Info</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{__('lang.header.faq')}}</li>
+                <li class="breadcrumb-item active" aria-current="page">FAQ</li>
             </ol>
         </div>
     </section>

@@ -127,10 +127,10 @@
                                                 <td>{{$bio->phone != "" ? $bio->phone : __('lang.profile.empty')}}</td>
                                             </tr>
                                             <tr data-toggle="tooltip" data-placement="left"
-                                                title="{{__('lang.profile.address')}}">
+                                                title="{{__('lang.tooltip.address')}}">
                                                 <td><i class="icon-map-marked-alt"></i></td>
                                                 <td>&nbsp;</td>
-                                                <td>{{$address != "" ? $address->address.' - '.$address->postal_code.' ('.$address->save_as.').' : __('lang.profile.empty')}}</td>
+                                                <td>{{$address != "" ? $address->address.' - '.$address->postal_code.' ('.$address->getOccupancy->name.').' : __('lang.profile.empty')}}</td>
                                             </tr>
                                         </table>
                                         <div class="divider divider-center stats_username mt-2 mb-1">

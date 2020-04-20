@@ -53,8 +53,8 @@ class BlogController extends Controller
 
     public function cariJudulBlog(Request $request)
     {
-        $blog = Blog::where('title->en', 'LIKE', '%' . $request->title . '%')
-            ->orwhere('title->id', 'LIKE', '%' . $request->title . '%')->orderByDesc('id')->get();
+        $blog = Blog::where('title', 'LIKE', '%' . $request->title . '%')
+            ->orwhere('title', 'LIKE', '%' . $request->title . '%')->orderByDesc('id')->get();
 
         foreach ($blog as $index => $row) {
             $tgl = Carbon::parse($row->created_at);
@@ -87,7 +87,7 @@ class BlogController extends Controller
         } else {
             $blog = Blog::where('admin_id', $admin->id)->whereYear('created_at', $request->year)
                 ->whereMonth('created_at', $request->month)->whereDay('created_at', $request->date)
-                ->where('permalink->en', $request->title)->orwhere('permalink->id', $request->title)->firstOrFail();
+                ->where('permalink', $request->title)->orwhere('permalink', $request->title)->firstOrFail();
 
             $prev = is_null($blog->prev()) ? null : $blog->prev();
             $next = is_null($blog->next()) ? null : $blog->next();

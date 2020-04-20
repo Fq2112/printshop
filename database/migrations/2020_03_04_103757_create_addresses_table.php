@@ -24,7 +24,6 @@ class CreateAddressesTable extends Migration
             $table->text('lat')->nullable();
             $table->text('long')->nullable();
             $table->string('postal_code');
-            $table->string('save_as');
             $table->boolean('is_main')->default(false);
             $table->timestamps();
         });

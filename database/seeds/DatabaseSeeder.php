@@ -25,9 +25,6 @@ class DatabaseSeeder extends Seeder
             FoldingSeeder::class,
             LaminationSeeder::class,
             FinishingSeeder::class,
-            AdminSeeder::class,
-            BlogSeeder::class,
-            FaqSeeder::class,
             SizeSeeder::class,
             MaterialSeeder::class,
             TypeProductSeeder::class,
@@ -39,7 +36,11 @@ class DatabaseSeeder extends Seeder
             UnitSeeder::class,
             DetailSubkatSeeder::class,
             LidSeeder::class,
-            DetailProductSeeder::class
+            DetailProductSeeder::class,
+            OccupancyTypeSeeder::class,
+            AdminSeeder::class,
+            BlogSeeder::class,
+            FaqSeeder::class,
         ]);
     }
 }

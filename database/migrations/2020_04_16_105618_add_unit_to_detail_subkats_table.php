@@ -29,7 +29,8 @@ class AddUnitToDetailSubkatsTable extends Migration
     public function down()
     {
         Schema::table('detail_subkats', function (Blueprint $table) {
-            //
+            $table->dropColumn('unit_id');
+            $table->dropForeign('unit_id');
         });
     }
 }
