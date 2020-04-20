@@ -79,6 +79,21 @@ class CreateDetailProductsTable extends Migration
             $table->boolean('is_print_method')->default(false);
             $table->string('print_method_ids')->nullable();
 
+            $table->boolean('is_material_cover')->default(false);
+            $table->string('material_cover_ids')->nullable();
+
+            $table->boolean('is_side_cover')->default(false);
+            $table->string('side_cover_ids')->nullable();
+
+            $table->boolean('is_cover_lamination')->default(false);
+            $table->string('cover_lamination_ids')->nullable();
+
+            $table->boolean('is_lid')->default(false);
+            $table->string('lid_ids')->nullable();
+
+            $table->boolean('is_orientation')->default(false);
+            $table->string('orientation_ids')->nullable();
+
             $table->boolean('is_design')->default(false);
             $table->boolean('is_landscape')->default(false); //Default Potrait
             $table->timestamps();

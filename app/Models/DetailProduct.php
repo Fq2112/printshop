@@ -31,6 +31,11 @@ class DetailProduct extends Model
         'print_method_ids' => 'array',
         'finishing_ids' => 'array',
         'folding_ids' => 'array',
+        'material_cover_ids' => 'array',
+        'side_cover_ids' => 'array',
+        'cover_lamination_ids' => 'array',
+        'lid_ids' => 'array',
+        'orientation_ids' => 'array',
     ];
 
     public function getCluster()

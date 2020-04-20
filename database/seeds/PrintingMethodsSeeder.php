@@ -22,6 +22,14 @@ class PrintingMethodsSeeder extends Seeder
             'name' => ['Sablon (min. 120 pcs)', 'Screen-printing (min. 120 pcs)'],
             'description' => null
         ],
+        [
+            'name' => ['Bordir (Min Qty 6 pcs)', 'Bordir (Min Qty 6 pcs)'],
+            'description' => null
+        ],
+        [
+            'name' => ['Polyflex (min. qty 6 pcs)', 'Polyflex (min. qty 6 pcs)'],
+            'description' => null
+        ],
     ];
     public function run()
     {

@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
             BalanceSeeder::class,
             UnitSeeder::class,
             DetailSubkatSeeder::class,
+            LidSeeder::class,
             DetailProductSeeder::class
         ]);
     }

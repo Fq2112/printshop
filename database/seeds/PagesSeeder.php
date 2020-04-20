@@ -98,5 +98,29 @@ class PagesSeeder extends Seeder
                 }
             }
         }
+
+        \App\Models\Pages::create([
+            'name' => [
+                'en' => 7 . " " . $DATUM['name'][1] . $s,
+                'id' => 7 . " " . $DATUM['name'][0]
+            ],
+            'image' => !is_null($DATUM['description']) ? $faker->imageUrl() : null,
+            'description' => [
+                'en' => !is_null($DATUM['description']) ? $DATUM['description'][1] : null,
+                'id' => !is_null($DATUM['description']) ? $DATUM['description'][0] : null
+            ]
+        ]);
+
+        \App\Models\Pages::create([
+            'name' => [
+                'en' => 13 . " " . $DATUM['name'][1] . $s,
+                'id' => 13 . " " . $DATUM['name'][0]
+            ],
+            'image' => !is_null($DATUM['description']) ? $faker->imageUrl() : null,
+            'description' => [
+                'en' => !is_null($DATUM['description']) ? $DATUM['description'][1] : null,
+                'id' => !is_null($DATUM['description']) ? $DATUM['description'][0] : null
+            ]
+        ]);
     }
 }

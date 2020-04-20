@@ -120,7 +120,7 @@ class FinishingSeeder extends Seeder
             ]
         ],
         [
-            'name' => ['Selongsong Kiri / Kanan', 'Selongsong Left / Right'],
+            'name' => ['Selongsong Kiri / Kanan', 'Left / Right Sleeve'],
             'description' => [
                 'Selongsong untuk instalasi materi promosi dengan penempatan kiri-kanan.',
                 'Sleeve for installation of promotional material with left-right placement.'
@@ -140,6 +140,28 @@ class FinishingSeeder extends Seeder
         ],
         [
             'name' => ['Perforasi', 'Perforation'],
+            'description' => null
+        ],
+        [
+            'name' => ['Oval', 'Oval'],
+            'description' => [
+                'Pegangan dengan bentuk lubang oval di bagian depan dan belakang sisi tas.',
+                'The oval hole handles are on the front and back sides of the bag'
+            ]
+        ],
+        [
+            'name' => ['Chord', 'Chord'],
+            'description' => [
+                'Pegangan dengan bentuk tali pada umumnya yang ditempel di bagian depan dan belakang sisi tas',
+                'Grips in the form of straps are generally attached to the front and back of the bag'
+            ]
+        ],
+        [
+            'name' => ['Landscape', 'Landscape'],
+            'description' => null
+        ],
+        [
+            'name' => ['Potrait', 'Potrait'],
             'description' => null
         ],
     ];
