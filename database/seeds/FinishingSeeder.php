@@ -145,15 +145,15 @@ class FinishingSeeder extends Seeder
         [
             'name' => ['Oval', 'Oval'],
             'description' => [
-                'Pegangan dengan bentuk lubang oval di bagian depan dan belakang sisi tas.',
-                'The oval hole handles are on the front and back sides of the bag'
+                'Pegangan berbentuk lubang oval di bagian depan dan belakang sisi tas.',
+                'Oval-shaped handle on the front and back sides of the bag.'
             ]
         ],
         [
             'name' => ['Chord', 'Chord'],
             'description' => [
-                'Pegangan dengan bentuk tali pada umumnya yang ditempel di bagian depan dan belakang sisi tas',
-                'Grips in the form of straps are generally attached to the front and back of the bag'
+                'Pegangan berbentuk tali yang umumnya ditempel di bagian depan dan belakang sisi tas.',
+                'Strap-shaped handle that is generally attached to the front and back of the bag.'
             ]
         ],
         [
@@ -161,7 +161,7 @@ class FinishingSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['Potrait', 'Potrait'],
+            'name' => ['Portrait', 'Portrait'],
             'description' => null
         ],
     ];

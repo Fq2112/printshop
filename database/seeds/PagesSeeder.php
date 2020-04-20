@@ -101,7 +101,7 @@ class PagesSeeder extends Seeder
 
         \App\Models\Pages::create([
             'name' => [
-                'en' => 7 . " " . $DATUM['name'][1] . $s,
+                'en' => 7 . " " . $DATUM['name'][1] . "s",
                 'id' => 7 . " " . $DATUM['name'][0]
             ],
             'image' => !is_null($DATUM['description']) ? $faker->imageUrl() : null,
@@ -113,7 +113,7 @@ class PagesSeeder extends Seeder
 
         \App\Models\Pages::create([
             'name' => [
-                'en' => 13 . " " . $DATUM['name'][1] . $s,
+                'en' => 13 . " " . $DATUM['name'][1] . "s",
                 'id' => 13 . " " . $DATUM['name'][0]
             ],
             'image' => !is_null($DATUM['description']) ? $faker->imageUrl() : null,

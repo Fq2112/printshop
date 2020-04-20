@@ -14,50 +14,50 @@ class LidSeeder extends Seeder
         [
             'name' => ['Hitam', 'Black'],
             'description' => [
-                'Lid warna hitam untuk hot paper cup',
-                'Black lid for hot paper cup.'
+                'Lid warna hitam untuk hot paper cup.',
+                'Black lid for hot paper cups.'
             ],
         ],
         [
-            'name' => ['Tanpa Lid', ' None'],
+            'name' => ['Tanpa Tutup', 'No Lid'],
             'description' => [
                 'Paper cup tanpa tutup.',
-                'Cup Without Lid.'
+                'Paper cups without lid.'
             ],
         ],
         [
             'name' => ['Putih', 'White'],
             'description' => [
-                'Lid warna hitam untuk hot paper cup.',
-                'White lid for hot paper cup.'
+                'Lid warna putih untuk hot paper cup.',
+                'White lid for hot paper cups.'
             ],
         ],
         [
             'name' => ['Natural', 'Natural'],
             'description' => [
                 'Cold paper cup dengan tutup berwarna broken white.',
-                'Cold paper cup with broken white colored lid.'
+                'Cold paper cups with broken white colored lid.'
             ],
         ],
         [
             'name' => ['Putih', 'White'],
             'description' => [
-                'Tutup berwarna putih untuk menjaga temperatur produk yang dikemas.',
+                'Lid berwarna putih untuk menjaga suhu produk yang dikemas.',
                 'White lid to maintain the temperature of the packaged product.'
             ],
         ],
         [
             'name' => ['Lid Kubah', 'Dome Lid'],
             'description' => [
-                'Tutup gelas berbahan plastik dengan bentuk setengah lingkaran dan lubang dibagian atas untuk sedotan',
-                'Cover the glass made of plastic with a semicircular shape and hole at the top for a straw.'
+                'Lid berbahan plastik berbentuk setengah lingkaran dan lubang dibagian atas untuk sedotan.',
+                'Semicircular-shaped plastic lid with a hole in the top for straws.'
             ],
         ],
         [
             'name' => ['Lid Datar', 'Flat Lid'],
             'description' => [
-                'Tutup gelas berbahan plastik dan berbentuk pipih dengan lubang di bagian tengah untuk sedotan',
-                'Plastic and flat glass lid with a hole in the middle for a straw.'
+                'Lid berbahan plastik berbentuk pipih dengan lubang di bagian tengah untuk sedotan.',
+                'Flat-shaped plastic lid with a hole in the middle for a straw.'
             ],
         ],
 

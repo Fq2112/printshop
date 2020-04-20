@@ -628,6 +628,7 @@ class DetailProductSeeder extends Seeder
 //            'unit_id' => 1,
 //            'is_design' => true
 //        ]);
+
         \App\Models\DetailProduct::create([// Poster STD
             'cluster_kategoris_id' => 55,
             'is_material' => true,
@@ -649,6 +650,7 @@ class DetailProductSeeder extends Seeder
             'is_side' => true,
             'side_ids' => ['1'],
             'unit_id' => 1,
+            'is_design' => true
         ]);
 
         \App\Models\DetailProduct::create([// Tent Card
@@ -694,7 +696,7 @@ class DetailProductSeeder extends Seeder
             'folding_ids' => ['1', '2', '3'],
             'unit_id' => 1,
         ]);
-//
+
 //        \App\Models\DetailProduct::create([// Brosur Eco
 //            'cluster_kategoris_id' => 61,
 //            'is_material' => true,
@@ -936,7 +938,7 @@ class DetailProductSeeder extends Seeder
             'page_ids' => ['27', '28', '29', '30', '31', '32', '33', '34', '35'],
             'unit_id' => 1,
         ]);
-//
+
         \App\Models\DetailProduct::create([// Majalah Prem
             'cluster_kategoris_id' => 82,
             'is_material' => true,
@@ -974,7 +976,7 @@ class DetailProductSeeder extends Seeder
             'page_ids' => ['23', '25', '1', '3', '5',],
             'unit_id' => 1,
         ]);
-//
+
         \App\Models\DetailProduct::create([// Compro Prem
             'cluster_kategoris_id' => 84,
             'is_material' => true,
@@ -1074,6 +1076,7 @@ class DetailProductSeeder extends Seeder
             'is_color' => true,
             'color_ids' => ['2', '3', '4'],
             'unit_id' => 1,
+            'is_design' => true
         ]);
 
         \App\Models\DetailProduct::create([// Totebag Prem
@@ -1087,8 +1090,9 @@ class DetailProductSeeder extends Seeder
             'is_color' => true,
             'color_ids' => ['2', '3', '4'],
             'unit_id' => 1,
+            'is_design' => true
         ]);
-//
+
         \App\Models\DetailProduct::create([// Gooddie Std
             'cluster_kategoris_id' => 92,
             'is_material' => true,
@@ -1103,7 +1107,7 @@ class DetailProductSeeder extends Seeder
             'finishing_ids' => ['29', '30'],
             'unit_id' => 1,
         ]);
-//
+
         \App\Models\DetailProduct::create([// Goodie Prem
             'cluster_kategoris_id' => 93,
             'is_material' => true,

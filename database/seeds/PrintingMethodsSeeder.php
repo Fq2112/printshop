@@ -23,7 +23,7 @@ class PrintingMethodsSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['Bordir (Min Qty 6 pcs)', 'Bordir (Min Qty 6 pcs)'],
+            'name' => ['Bordir (min. qty 6 pcs)', 'Embroidery (min. qty 6 pcs)'],
             'description' => null
         ],
         [

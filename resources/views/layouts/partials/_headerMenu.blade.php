@@ -97,7 +97,14 @@
     </form>
 </div>
 
-@auth
+@if(!Auth::check() && !Auth::guard('admin')->check())
+    <div id="top-account">
+        <a href="#" onclick="openRegisterModal();">
+            <i class="icon-line2-user mr-1 position-relative" style="top: 1px;"></i>
+            <span class="d-none d-sm-inline-block font-primary t500 text-uppercase">
+                {{__('lang.header.sign-up-in')}}</span></a>
+    </div>
+@else
     <div id="top-cart">
         <a href="#" id="top-cart-trigger"><i class="icon-shopping-cart1"></i><span>0</span></a>
         <div class="top-cart-content">
@@ -136,14 +143,5 @@
                     class="button button-dark button-small nomargin fright">{{__('lang.button.cart')}}</button>
             </div>
         </div>
-    </div>
-@endauth
-
-@if(!Auth::check() && !Auth::guard('admin')->check())
-    <div id="top-account">
-        <a href="javascript:void(0)" data-toggle="modal" onclick="openRegisterModal();">
-            <i class="icon-line2-user mr-1 position-relative" style="top: 1px;"></i>
-            <span class="d-none d-sm-inline-block font-primary t500 text-uppercase">
-                {{__('lang.header.sign-up-in')}}</span></a>
     </div>
 @endif
