@@ -6,11 +6,39 @@
         <td class="show-type"></td>
     </tr>
 @endif
+@if($specs->is_material_cover == true)
+    <tr>
+        <td>{{__('lang.product.form.summary.cover_material')}}</td>
+        <td>:&nbsp;</td>
+        <td class="show-cover_material"></td>
+    </tr>
+@endif
+@if($specs->is_side_cover == true)
+    <tr>
+        <td>{{__('lang.product.form.summary.cover_side')}}</td>
+        <td>:&nbsp;</td>
+        <td class="show-cover_side"></td>
+    </tr>
+@endif
+@if($specs->is_cover_lamination == true)
+    <tr>
+        <td>{{__('lang.product.form.summary.cover_lamination')}}</td>
+        <td>:&nbsp;</td>
+        <td class="show-cover_lamination"></td>
+    </tr>
+@endif
 @if($specs->is_material == true)
     <tr>
         <td>{{__('lang.product.form.summary.materials')}}</td>
         <td>:&nbsp;</td>
         <td class="show-materials"></td>
+    </tr>
+@endif
+@if($specs->is_material_color == true)
+    <tr>
+        <td>{{__('lang.product.form.summary.material_color')}}</td>
+        <td>:&nbsp;</td>
+        <td class="show-material_color"></td>
     </tr>
 @endif
 @if($specs->is_color == true)
@@ -39,6 +67,20 @@
         <td>{{__('lang.product.form.summary.side')}}</td>
         <td>:&nbsp;</td>
         <td class="show-side"></td>
+    </tr>
+@endif
+@if($specs->is_holder == true)
+    <tr>
+        <td>{{__('lang.product.form.summary.holder')}}</td>
+        <td>:&nbsp;</td>
+        <td class="show-holder"></td>
+    </tr>
+@endif
+@if($specs->is_lid == true)
+    <tr>
+        <td>{{__('lang.product.form.summary.lid')}}</td>
+        <td>:&nbsp;</td>
+        <td class="show-lid"></td>
     </tr>
 @endif
 @if($specs->is_edge == true)
@@ -118,6 +160,13 @@
         <td class="show-back_cover"></td>
     </tr>
 @endif
+@if($specs->is_orientation == true)
+    <tr>
+        <td>{{__('lang.product.form.summary.orientation')}}</td>
+        <td>:&nbsp;</td>
+        <td class="show-orientation"></td>
+    </tr>
+@endif
 @if($specs->is_binding == true)
     <tr>
         <td>{{__('lang.product.form.summary.binding')}}</td>
@@ -137,6 +186,13 @@
         <td>Finishing</td>
         <td>:&nbsp;</td>
         <td class="show-finishing"></td>
+    </tr>
+@endif
+@if($specs->is_extra == true)
+    <tr>
+        <td>{{__('lang.product.form.summary.extra')}}</td>
+        <td>:&nbsp;</td>
+        <td class="show-extra"></td>
     </tr>
 @endif
 </tbody>

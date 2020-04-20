@@ -102,7 +102,7 @@ class FinishingSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['Lem', 'GLue'],
+            'name' => ['Lem', 'Glue'],
             'description' => null
         ],
         [
@@ -163,6 +163,103 @@ class FinishingSeeder extends Seeder
         [
             'name' => ['Portrait', 'Portrait'],
             'description' => null
+        ],
+        [
+            'name' => ['Lubang', 'Hole'],
+            'description' => null
+        ],
+        [
+            'name' => ['Oval', 'Oval'],
+            'description' => null
+        ],
+        [
+            'name' => ['Tidak Ada', 'None'],
+            'description' => null
+        ],
+        [
+            'name' => ['Tali Kur', 'Cord Rope'],
+            'description' => [
+                'Tali ekonomis dan relatif kuat yang dibuat dari benang rajut.',
+                'Economic and relatively strong ropes made from knitting yarn.'
+            ]
+        ],
+        [
+            'name' => ['Tali Twist', 'Twisted Rope'],
+            'description' => [
+                'Sama seperti tali kur dengan bentuk pegangan yang berbeda.',
+                'Just like the cord rope with a different handle shape.'
+            ]
+        ],
+        [
+            'name' => ['Tali', 'Rope'],
+            'description' => [
+                'Tali untuk menggantung label harga.',
+                'Ropes for hanging price tags.'
+            ]
+        ],
+        [
+            'name' => ['Tidak Ada', 'None'],
+            'description' => [
+                'Tanpa finishing apapun.',
+                'Without any finishing.'
+            ]
+        ],
+        [
+            'name' => ['Staples / Jahit Kawat', 'Staples / Wire Binding'],
+            'description' => null
+        ],
+        [
+            'name' => ['Spiral Hitam', 'Black Spiral'],
+            'description' => [
+                'Kawat spiral berwarna hitam sebagai finishing.',
+                'Black colored spiral wire as finishing.',
+            ]
+        ],
+        [
+            'name' => ['Spiral Putih', 'White Spiral'],
+            'description' => [
+                'Kawat spiral berwarna putih sebagai finishing.',
+                'White colored spiral wire as finishing.',
+            ]
+        ],
+        [
+            'name' => ['Plastik Mika', 'Mica Plastic'],
+            'description' => [
+                'Bahan holder yang lebih kaku.',
+                'Stiffer holder material.'
+            ],
+        ],
+        [
+            'name' => ['Silikon', 'Silicon'],
+            'description' => [
+                'Bahan holder yang lebih lentur dan kuat.',
+                'Flexible and stronger holder material.'
+            ],
+        ],
+        [
+            'name' => ['Tanpa Holder', 'None'],
+            'description' => [
+                'Tanpa holder.',
+                'Without holder.'
+            ],
+        ],
+        [
+            'name' => ['Stopper', 'Stopper'],
+            'description' => null,
+        ],
+        [
+            'name' => ['Yoyo ID', 'Yoyo ID'],
+            'description' => [
+                'Yoyo ID yang bisa ditarik sehingga kartu identitas menjadi lebih fleksibel.',
+                'Yoyo ID can be withdrawn so that the identity card becomes more flexible.',
+            ]
+        ],
+        [
+            'name' => ['Tanpa Yoyo', 'None'],
+            'description' => [
+                'Tanpa yoyo.',
+                'Without yoyo.'
+            ]
         ],
     ];
 

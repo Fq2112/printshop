@@ -104,11 +104,11 @@ class MaterialSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['PP 22 Oz / 480 ml', 'PP 16 22 / 480 ml'],
+            'name' => ['PP 22 Oz / 660 ml', 'PP 22 Oz / 660 ml'],
             'description' => null
         ],
         [
-            'name' => ['SPE 260 gr', 'SPE 260 gr'],
+            'name' => ['SPE 265', 'SPE 265'],
             'description' => null
         ],
         [
@@ -138,7 +138,7 @@ class MaterialSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['Duplex 250gsm + K 125 M 125 E/F', 'Duplex 250gsm + K 125 M 125 E/F'],
+            'name' => ['K125/M125 E/F + Duplex 250gsm', 'K125/M125 E/F + Duplex 250gsm'],
             'description' => null
         ],
         [
@@ -164,14 +164,14 @@ class MaterialSeeder extends Seeder
             ],
         ],
         [
-            'name' => ['Matte Paper 150gsm', 'Matte Paper 150gsm6'],
+            'name' => ['Matte Paper 150gsm', 'Matte Paper 150gsm'],
             'description' => [
                 'Kertas dengan bahan yang halus dan tidak mengkilap dengan ketebalan 150gsm.',
                 'Paper with a smooth and not shiny material with a thickness of 150gsm.'
             ],
         ],
         [
-            'name' => ['Stiker Chrome ', 'Chrome Sticker'],
+            'name' => ['Stiker Chromo ', 'Chromo Sticker'],
             'description' => null
         ],
         [
@@ -187,7 +187,7 @@ class MaterialSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['Albatros (Matte)', 'Albatros (Matte)'],
+            'name' => ['Albatros (Laminasi)', 'Albatros (Laminated)'],
             'description' => [
                 'Bahan Material yang memiliki permukaan halus, berkilau dan tipis',
                 'Shiny material, smooth and thin surface.'
@@ -240,7 +240,7 @@ class MaterialSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['Blacu', 'Blacu'],
+            'name' => ['Blacu', 'Calico'],
             'description' => [
                 'Bahan tote bag ramah lingkungan yang ekonomis. Tidak bisa digunakan untuk warna blok.',
                 'Economic eco-friendly tote bag. Cannot be used for color blocks.'
@@ -340,15 +340,15 @@ class MaterialSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['K125 / M125X3 / K125', 'K125 / M125X3 / K125'],
+            'name' => ['K125/M125X3/K125', 'K125/M125X3/K125'],
             'description' => null
         ],
         [
-            'name' => ['WK150 / M125X3 / K125', 'WK150 / M125X3 / K125'],
+            'name' => ['WK150/M125X3/K125', 'WK150/M125X3/K125'],
             'description' => null
         ],
         [
-            'name' => ['Samson Craft 50gsm Lapis PE 12gsm', 'Samson Craft 50gsm Layer PE 12gsm'],
+            'name' => ['Samson Craft 50gsm Coated PE 12gsm', 'Samson Craft 50gsm Coated PE 12gsm'],
             'description' => null
         ],
         [
@@ -360,7 +360,7 @@ class MaterialSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['K150 / M125 / K125 B/F + Duplex 250gsm', 'K150 / M125 / K125 B/F + Duplex 250gsm'],
+            'name' => ['K150/M125/K125 B/F + Duplex 250gsm', 'K150/M125/K125 B/F + Duplex 250gsm'],
             'description' => null
         ],
         [
@@ -399,7 +399,89 @@ class MaterialSeeder extends Seeder
                 'Shiny material with a smooth surface.'
             ],
         ],
-
+        [
+            'name' => ['Art Carton 210gsm', 'Art Carton 210gsm'],
+            'description' => [
+                'Tebal namun ekonomis. Permukaan mengkilap di kedua sisi dengan ketebalan 210gsm.',
+                'Thick but vey economic, Glossy Surface on both sides with thickness 210gsm.'
+            ],
+        ],
+        [
+            'name' => ['Art Carton 230gsm', 'Art Carton 230gsm'],
+            'description' => [
+                'Tebal namun ekonomis. Permukaan mengkilap di kedua sisi dengan ketebalan 230gsm.',
+                'Thick but vey economic, Glossy Surface on both sides with thickness 230gsm.'
+            ],
+        ],
+        [
+            'name' => ['SPE 260 gr', 'SPE 260 gr'],
+            'description' => null
+        ],
+        [
+            'name' => ['K150/M125/K125', 'K150/M125/K125'],
+            'description' => null
+        ],
+        [
+            'name' => ['WK150/M125/K125', 'WK150/M125/K125'],
+            'description' => null
+        ],
+        [
+            'name' => ['K150/M125/K125 E/F', 'K150/M125/K125 E/F'],
+            'description' => null
+        ],
+        [
+            'name' => ['WK150/M125/K125 E/F', 'WK150/M125/K125 E/F'],
+            'description' => null
+        ],
+        [
+            'name' => ['Art Paper 150gsm', 'Art Paper 150gsm'],
+            'description' => [
+                'Kertas mengkilap dengan ketebalan 150gsm.',
+                'Glossy paper with 150gsm thickness.'
+            ],
+        ],
+        [
+            'name' => ['Everyday Smooth Bright White 148gsm', 'Everyday Smooth Bright White 148gsm'],
+            'description' => [
+                'Kertas bertekstur halus dan berwarna lebih putih dari Splendorgel.',
+                'Paper has a fine texture and is whiter than Splendorgel.'
+            ],
+        ],
+        [
+            'name' => ['Art Paper 120gsm', 'Art Paper 120gsm'],
+            'description' => [
+                'Kertas mengkilap dengan ketebalan 120gsm.',
+                'Glossy paper with 120gsm thickness.'
+            ],
+        ],
+        [
+            'name' => ['Splendorgel Extra White 160gsm', 'Splendorgel Extra White 160gsm'],
+            'description' => [
+                'Kertas yang umum digunakan. Permukaan halus dan berwarna putih.',
+                'Commonly used paper. The surface is smooth and white.'
+            ],
+        ],
+        [
+            'name' => ['Constellation Snow 170gsm', 'Constellation Snow 170gsm'],
+            'description' => [
+                'Kertas bertekstur dan bergaris halus.',
+                'Textured and smooth-lined paper.'
+            ],
+        ],
+        [
+            'name' => ['Via Felt 118gsm', 'Via Felt 118gsm'],
+            'description' => [
+                'Kertas yang tebal dan bertekstur emboss.',
+                'Thick, embossed paper.'
+            ],
+        ],
+        [
+            'name' => ['Tissue', 'Tissue'],
+            'description' => [
+                'Tali kartu identitas dengan permukaan yang rata dan padat.',
+                'Identity card strap with a flat, solid surface.'
+            ],
+        ],
     ];
 
     public function run()

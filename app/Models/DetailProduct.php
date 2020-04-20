@@ -36,6 +36,9 @@ class DetailProduct extends Model
         'cover_lamination_ids' => 'array',
         'lid_ids' => 'array',
         'orientation_ids' => 'array',
+        'extra_ids' => 'array',
+        'material_color_ids' => 'array',
+        'holder_ids' => 'array',
     ];
 
     public function getCluster()

@@ -67,12 +67,46 @@ class ColorsSeeder extends Seeder
         ],
         [
             'name' => ['Biru Laut', 'Navy'],
-            'description' => ['#19198c', '#19198c'],
+            'description' => ['#19198C', '#19198C'],
             'image' => null
         ],
         [
             'name' => ['Putih', 'White'],
             'description' => ['#FFFFFF', '#FFFFFF'],
+            'image' => null
+        ],
+        [
+            'name' => ['Separasi', 'Separation'],
+            'description' => [
+                'Desain item dengan warna separasi.',
+                'Item design with separation colors.'
+            ],
+        ],
+        [
+            'name' => ['3 Warna', '3 Colors'],
+            'description' => [
+                'Desain item dengan tiga warna.',
+                'Item design with three colors.'
+            ],
+        ],
+        [
+            'name' => ['Merah', 'Red'],
+            'description' => ['#BC3C33', '#BC3C33'],
+            'image' => null
+        ],
+        [
+            'name' => ['Hijau', 'Green'],
+            'description' => ['#4AA524', '#4AA524'],
+            'image' => null
+        ],
+        [
+            'name' => ['Kuning', 'Yellow'],
+            'description' => ['#E8DD1C', '#E8DD1C'],
+            'image' => null
+        ],
+        [
+            'name' => ['Cyan', 'Cyan'],
+            'description' => ['#0096FF', '#0096FF'],
             'image' => null
         ],
     ];

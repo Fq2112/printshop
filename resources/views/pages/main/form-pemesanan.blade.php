@@ -503,11 +503,17 @@
             });
 
             $(".show-type").text($("input[name='type']:checked").val());
+            $(".show-cover_material").text($("input[name='cover_material']:checked").val());
+            $(".show-cover_side").text($("input[name='cover_side']:checked").val());
+            $(".show-cover_lamination").text($("input[name='cover_lamination']:checked").val());
             $(".show-materials").text($("input[name='materials']:checked").val());
+            $(".show-material_color").text($("input[name='material_color']:checked").val());
             $(".show-color").text($("input[name='color']:checked").val());
             $(".show-print_method").text($("input[name='print_method']:checked").val());
             $(".show-size").text($("input[name='size']:checked").val());
             $(".show-side").text($("input[name='side']:checked").val());
+            $(".show-holder").text($("input[name='holder']:checked").val());
+            $(".show-lid").text($("input[name='lid']:checked").val());
             $(".show-corner").text($("input[name='corner']:checked").val());
             $(".show-folding").text($("input[name='folding']:checked").val());
             $(".show-front_side").text($("input[name='front_side']:checked").val());
@@ -519,9 +525,11 @@
             $(".show-page").text($("input[name='page']:checked").val());
             $(".show-front_cover").text($("input[name='front_cover']:checked").val());
             $(".show-back_cover").text($("input[name='back_cover']:checked").val());
+            $(".show-orientation").text($("input[name='orientation']:checked").val());
             $(".show-binding").text($("input[name='binding']:checked").val());
             $(".show-lamination").text($("input[name='lamination']:checked").val());
             $(".show-finishing").text($("input[name='finishing']:checked").val());
+            $(".show-extra").text($("input[name='extra']:checked").val());
         });
 
         function productSpecs(check, spec) {

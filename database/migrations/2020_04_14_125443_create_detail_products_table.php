@@ -94,6 +94,15 @@ class CreateDetailProductsTable extends Migration
             $table->boolean('is_orientation')->default(false);
             $table->string('orientation_ids')->nullable();
 
+            $table->boolean('is_extra')->default(false);
+            $table->string('extra_ids')->nullable();
+
+            $table->boolean('is_holder')->default(false);
+            $table->string('holder_ids')->nullable();
+
+            $table->boolean('is_material_color')->default(false);
+            $table->string('material_color_ids')->nullable();
+
             $table->boolean('is_design')->default(false);
             $table->boolean('is_landscape')->default(false); //Default Potrait
             $table->timestamps();

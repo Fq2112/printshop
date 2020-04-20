@@ -87,15 +87,15 @@ class SizeSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['12 Oz', '12 Oz'],
-            'description' => null
-        ],
-        [
             'name' => ['8 Oz', '8 Oz'],
             'description' => null
         ],
         [
-            'name' => ['18 Oz', '18 Oz'],
+            'name' => ['12 Oz', '12 Oz'],
+            'description' => null
+        ],
+        [
+            'name' => ['16 Oz', '16 Oz'],
             'description' => null
         ],
         [
@@ -104,10 +104,7 @@ class SizeSeeder extends Seeder
         ],
         [
             'name' => ['FP Large (8 x 6,5 x 10,5 cm)', 'FP Large (8 x 6.5 x 10.5 cm)'],
-            'description' => [
-                'FP Large (8 x 6,5 x 10,5 cm).',
-                'FP Large (8 x 6.5 x 10.5 cm).'
-            ],
+            'description' => null,
         ],
         [
             'name' => ['16,2 x 21,6 x 5,5 cm (Sekat 3)', '16.2 x 21.6 x 5.5 cm (3 Bulkheads)'],
@@ -125,70 +122,46 @@ class SizeSeeder extends Seeder
         ],
         [
             'name' => ['S (16,5 x 8 x 20 cm)', 'S (16.5 x 8 x 20 cm)'],
-            'description' => [
-                'S (16,5 x 8 x 20 cm).',
-                'S (16.5 x 8 x 20 cm).'
-            ],
+            'description' => null,
         ],
         [
             'name' => ['M (32 x 8 x 27 cm)', 'M (32 x 8 x 27 cm)'],
-            'description' => [
-                'M (32 x 8 x 27 cm).',
-                'M (32 x 8 x 27 cm).'
-            ],
+            'description' => null,
         ],
         [
             'name' => ['L (40 x 12 x 30 cm)', 'L (40 x 12 x 30 cm)'],
-            'description' => [
-                'L (40 x 12 x 30 cm).',
-                'L (40 x 12 x 30 cm).'
-            ],
+            'description' => null,
         ],
         [
             'name' => ['17 x 10,5 x 6,5 cm', '17 x 10.5 x 6.5 cm'],
-            'description' => [
-                '17 x 10,5 x 6,5 cm.',
-                '17 x 10.5 x 6.5 cm.'
-            ],
+            'description' => null,
         ],
         [
             'name' => ['32 x 19 x 11 cm', '32 x 19 x 11 cm'],
-            'description' => [
-                '32 x 19 x 11 cm.',
-                '32 x 19 x 11 cm.'
-            ],
+            'description' => null,
         ],
         [
             'name' => ['S (22 x 12 x 11 cm)', 'S (22 x 12 x 11 cm)'],
-            'description' => [
-                'S (22 x 12 x 11 cm).',
-                'S (22 x 12 x 11 cm).'
-            ],
+            'description' => null,
         ],
         [
             'name' => ['M (36 x 23 x 19 cm)', 'M (36 x 23 x 19 cm)'],
-            'description' => [
-                'M (36 x 23 x 19 cm).',
-                'M (36 x 23 x 19 cm).'
-            ],
+            'description' => null,
         ],
         [
             'name' => ['L (45 x 27 x 30 cm)', 'L (45 x 27 x 30 cm)'],
-            'description' => [
-                'L (45 x 27 x 30 cm).',
-                'L (45 x 27 x 30 cm).'
-            ],
+            'description' => null,
         ],
         [
-            'name' => ['Lebar : 2,4 cm, Panjang : 800 cm, Ketebalan : 48 mikron', 'Width : 2.4 cm, Length : 800 cm, Thickness : 48 micron'],
+            'name' => ['Lebar: 2,4 cm, Panjang: 800 cm, Ketebalan: 48 mikron', 'Width: 2.4 cm, Length: 800 cm, Thickness: 48 micron'],
             'description' => null
         ],
         [
-            'name' => ['Lebar : 4,8 cm, Panjang : 800 cm, Ketebalan : 48 mikron', 'Width : 4.8 cm, Length : 800 cm, Thickness : 48 micron'],
+            'name' => ['Lebar: 4,8 cm, Panjang: 800 cm, Ketebalan: 48 mikron', 'Width: 4.8 cm, Length: 800 cm, Thickness: 48 micron'],
             'description' => null
         ],
         [
-            'name' => ['Lebar : 4,8 cm, Panjang : 800 cm, Ketebalan : 48 mikron', 'Width : 4.8 cm, Length : 800 cm, Thickness : 48 micron'],
+            'name' => ['Lebar: 4,8 cm, Panjang: 800 cm, Ketebalan: 48 mikron', 'Width: 4.8 cm, Length: 800 cm, Thickness: 48 micron'],
             'description' => null
         ],
         [
@@ -345,7 +318,7 @@ class SizeSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['L (39 x 39 x 9,5)', 'L (39 x 39 x 9.5))'],
+            'name' => ['L (39 x 39 x 9,5)', 'L (39 x 39 x 9.5)'],
             'description' => null
         ],
         [
@@ -421,7 +394,7 @@ class SizeSeeder extends Seeder
             'description' => null
         ],
         [
-            'name' => ['Custom', 'Custom'],
+            'name' => ['Ukuran Custom', 'Custom Size'],
             'description' => null
         ],
         [
@@ -436,7 +409,52 @@ class SizeSeeder extends Seeder
             'name' => ['5 x 5 cm', '5 x 5 cm'],
             'description' => null
         ],
-
+        [
+            'name' => ['Horisontal', 'Horizontal'],
+            'description' => [
+                'Dilipat menjadi ukuran 9 x 5 cm, ukuran produk saat dibuka adalah 9 x 10 cm.',
+                'Folded into 9 x 5 cm size, product size while opened is 9 x 10 cm.'
+            ],
+        ],
+        [
+            'name' => ['Vertikal', 'Vertical'],
+            'description' => [
+                'Dilipat menjadi ukuran 9 x 5 cm, ukuran produk saat dibuka adalah 18 x 5 cm.',
+                'Folded into 9 x 5 cm size, product size while opened is 18 x 5 cm.'
+            ],
+        ],
+        [
+            'name' => ['5 Oz', '5 Oz'],
+            'description' => null
+        ],
+        [
+            'name' => ['17 Oz', '17 Oz'],
+            'description' => null
+        ],
+        [
+            'name' => ['24 Oz', '24 Oz'],
+            'description' => null
+        ],
+        [
+            'name' => ['27 Oz', '27 Oz'],
+            'description' => null
+        ],
+        [
+            'name' => ['33 Oz', '33 Oz'],
+            'description' => null
+        ],
+        [
+            'name' => ['7 x 7 cm', '7 x 7 cm'],
+            'description' => null
+        ],
+        [
+            'name' => ['10 x 4 cm', '10 x 4 cm'],
+            'description' => null
+        ],
+        [
+            'name' => ['9 x 6 cm', '9 x 6 cm'],
+            'description' => null
+        ],
     ];
 
 

@@ -61,11 +61,13 @@ class DetailProductSeeder extends Seeder
         \App\Models\DetailProduct::create([// kartu Undangan Standar
             'cluster_kategoris_id' => 4,
             'is_material' => true,
-            'material_ids' => ['2', '3'],
+            'material_ids' => ['68', '2', '3'],
             'is_size' => true,
             'size_ids' => ['10', '11'],
             'is_side' => true,
             'side_ids' => ['1', '2'],
+            'is_orientation' => true,
+            'orientation_ids' => ['31', '32'],
             'is_lamination' => true,
             'lamination_ids' => ['1', '2', '3'],
             'unit_id' => 1,
@@ -82,6 +84,8 @@ class DetailProductSeeder extends Seeder
             'side_ids' => ['1', '2'],
             'is_edge' => true,
             'edge_ids' => ['1', '2'],
+            'is_orientation' => true,
+            'orientation_ids' => ['31', '32'],
             'is_folding' => true,
             'folding_ids' => ['1'],
             'unit_id' => 1,
@@ -90,11 +94,15 @@ class DetailProductSeeder extends Seeder
         \App\Models\DetailProduct::create([ // Kartu Terima  kasih Std
             'cluster_kategoris_id' => 6,
             'is_material' => true,
-            'material_ids' => ['2', '3'],
+            'material_ids' => ['68', '2', '3'],
             'is_size' => true,
             'size_ids' => ['10', '11'],
             'is_side' => true,
             'side_ids' => ['1', '2'],
+            'is_orientation' => true,
+            'orientation_ids' => ['31', '32'],
+            'is_lamination' => true,
+            'lamination_ids' => ['1', '2', '3'],
             'unit_id' => 1,
         ]);
 
@@ -106,6 +114,8 @@ class DetailProductSeeder extends Seeder
             'size_ids' => ['10', '11'],
             'is_side' => true,
             'side_ids' => ['1', '2'],
+            'is_orientation' => true,
+            'orientation_ids' => ['31', '32'],
             'unit_id' => 1,
         ]);
         \App\Models\DetailProduct::create([// ID Card Todo Revision need
@@ -116,8 +126,8 @@ class DetailProductSeeder extends Seeder
             'size_ids' => ['50'],
             'is_side' => true,
             'side_ids' => ['1', '2'],
-//            'is_finishing' => true,
-//            'finishing_ids' => ['19'],
+            'is_finishing' => true,
+            'finishing_ids' => ['33', '34', '35'],
             'unit_id' => 1,
         ]);
 
@@ -125,10 +135,14 @@ class DetailProductSeeder extends Seeder
             'cluster_kategoris_id' => 9,
             'is_material' => true,
             'material_ids' => ['39'],
+            'is_color' => true,
+            'color_ids' => ['7'],
             'is_size' => true,
             'size_ids' => ['50'],
             'is_side' => true,
             'side_ids' => ['1', '2'],
+            'is_finishing' => true,
+            'finishing_ids' => ['35'],
             'unit_id' => 1,
         ]);
 
@@ -136,11 +150,13 @@ class DetailProductSeeder extends Seeder
         \App\Models\DetailProduct::create([// kartu Ucapan STD
             'cluster_kategoris_id' => 10,
             'is_material' => true,
-            'material_ids' => ['2', '3'],
+            'material_ids' => ['68', '2', '3'],
             'is_size' => true,
             'size_ids' => ['10', '11'],
             'is_side' => true,
             'side_ids' => ['1', '2'],
+            'is_orientation' => true,
+            'orientation_ids' => ['31', '32'],
             'is_lamination' => true,
             'lamination_ids' => ['1', '2', '3'],
             'unit_id' => 1,
@@ -156,6 +172,8 @@ class DetailProductSeeder extends Seeder
             'size_ids' => ['10', '11'],
             'is_side' => true,
             'side_ids' => ['1', '2'],
+            'is_orientation' => true,
+            'orientation_ids' => ['31', '32'],
             'unit_id' => 1,
             'is_design' => true
         ]);
@@ -178,9 +196,9 @@ class DetailProductSeeder extends Seeder
             'is_material' => true,
             'material_ids' => ['4'],
             'is_size' => true,
-            'size_ids' => ['6'],
+            'size_ids' => ['94', '95'],
             'is_side' => true,
-            'side_ids' => ['2'],
+            'side_ids' => ['1', '2'],
             'unit_id' => 1,
         ]);
 
@@ -232,7 +250,7 @@ class DetailProductSeeder extends Seeder
         \App\Models\DetailProduct::create([//Amplop Dl
             'cluster_kategoris_id' => 18,
             'is_material' => true,
-            'material_ids' => ['10'],
+            'material_ids' => ['9'],
             'is_size' => true,
             'size_ids' => ['62'],
             'is_side' => true,
@@ -240,7 +258,7 @@ class DetailProductSeeder extends Seeder
             'unit_id' => 1,
         ]);
 
-        \App\Models\DetailProduct::create([// kartu nama Esklusif
+        \App\Models\DetailProduct::create([//Amplop F4
             'cluster_kategoris_id' => 19,
             'is_material' => true,
             'material_ids' => ['9'],
@@ -251,7 +269,43 @@ class DetailProductSeeder extends Seeder
             'unit_id' => 1,
         ]);
 
-        //Todo Lanyard masih Belum
+        \App\Models\DetailProduct::create([//lanyard std
+            'cluster_kategoris_id' => 20,
+            'is_material' => true,
+            'material_ids' => ['12'],
+            'is_size' => true,
+            'size_ids' => ['13', '14', '15'],
+            'is_color' => true,
+            'color_ids' => ['3', '4'],
+            'is_side' => true,
+            'side_ids' => ['1', '2'],
+            'is_holder' => true,
+            'holder_ids' => ['43', '44', '45'],
+            'is_finishing' => true,
+            'finishing_ids' => ['35', '46'],
+            'is_extra' => true,
+            'extra_ids' => ['47', '48'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([//lanyard prem
+            'cluster_kategoris_id' => 21,
+            'is_material' => true,
+            'material_ids' => ['12', '81'],
+            'is_size' => true,
+            'size_ids' => ['13', '14', '15'],
+            'is_color' => true,
+            'color_ids' => ['7'],
+            'is_side' => true,
+            'side_ids' => ['1', '2'],
+            'is_holder' => true,
+            'holder_ids' => ['43', '44', '45'],
+            'is_finishing' => true,
+            'finishing_ids' => ['35', '46'],
+            'is_extra' => true,
+            'extra_ids' => ['47', '48'],
+            'unit_id' => 1,
+        ]);
 
         \App\Models\DetailProduct::create([// Map Folder Standar
             'cluster_kategoris_id' => 22,
@@ -262,14 +316,14 @@ class DetailProductSeeder extends Seeder
             'is_side' => true,
             'side_ids' => ['1'],
             'is_lamination' => true,
-            'lamination_ids' => ['1', '2', '3'],
+            'lamination_ids' => ['2', '3'],
             'unit_id' => 1,
         ]);
 
         \App\Models\DetailProduct::create([// Map Folder Prem
             'cluster_kategoris_id' => 23,
             'is_material' => true,
-            'material_ids' => ['5', '8', '52', '50', ''],
+            'material_ids' => ['5', '8', '50', '51'],
             'is_size' => true,
             'size_ids' => ['9'],
             'unit_id' => 1,
@@ -279,48 +333,58 @@ class DetailProductSeeder extends Seeder
             'cluster_kategoris_id' => 24,
             'is_size' => true,
             'size_ids' => ['16', '17', '18', '19'],
-            'is_side' => true,
-            'side_ids' => ['1', '2'],
+            'is_color' => true,
+            'color_ids' => ['3', '4', '7'],
+            'is_lid' => true,
+            'lid_ids' => ['1', '2', '3'],
             'unit_id' => 1,
         ]);
 
         \App\Models\DetailProduct::create([// cold Paper Cup
             'cluster_kategoris_id' => 25,
             'is_size' => true,
-            'size_ids' => ['16', '17', '18', '19'],
-            'is_side' => true,
-            'side_ids' => ['1', '2'],
+            'size_ids' => ['17', '18', '19'],
+            'is_color' => true,
+            'color_ids' => ['3', '4', '7'],
+            'is_lid' => true,
+            'lid_ids' => ['2', '4'],
             'unit_id' => 1,
         ]);
 
         \App\Models\DetailProduct::create([// Ice Cream Cup
             'cluster_kategoris_id' => 26,
             'is_size' => true,
-            'size_ids' => ['16', '17', '18', '19'],
-            'is_side' => true,
-            'side_ids' => ['1', '2'],
+            'size_ids' => ['16', '17', '96'],
+            'is_color' => true,
+            'color_ids' => ['3', '4', '7'],
+            'is_lid' => true,
+            'lid_ids' => ['2', '4'],
             'unit_id' => 1,
         ]);
 
         \App\Models\DetailProduct::create([// Bowl Paper Cup
             'cluster_kategoris_id' => 27,
             'is_size' => true,
-            'size_ids' => ['16', '17', '18', '19'],
-            'is_side' => true,
-            'side_ids' => ['1', '2'],
+            'size_ids' => ['17', '97', '98', '99', '100'],
+            'is_color' => true,
+            'color_ids' => ['3', '4', '7'],
+            'is_lid' => true,
+            'lid_ids' => ['2', '5'],
             'unit_id' => 1,
         ]);
 
         \App\Models\DetailProduct::create([// Shopping bag STD
             'cluster_kategoris_id' => 28,
             'is_material' => true,
-            'material_ids' => ['2'],
+            'material_ids' => ['69'],
             'is_size' => true,
             'size_ids' => ['23', '24', '25'],
             'is_color' => true,
             'color_ids' => ['2', '3', '4'],
             'is_lamination' => true,
-            'lamination_ids' => ['1', '2', '3'],
+            'lamination_ids' => ['2', '3'],
+            'is_extra' => true,
+            'extra_ids' => ['36'],
             'unit_id' => 1,
         ]);
 
@@ -332,6 +396,21 @@ class DetailProductSeeder extends Seeder
             'size_ids' => ['23', '24', '25'],
             'is_color' => true,
             'color_ids' => ['2', '3', '4'],
+            'is_extra' => true,
+            'extra_ids' => ['36', '37'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// Shopping bag brown
+            'cluster_kategoris_id' => 30,
+            'is_material' => true,
+            'material_ids' => ['53'],
+            'is_size' => true,
+            'size_ids' => ['23', '24', '25'],
+            'is_color' => true,
+            'color_ids' => ['2', '3', '4'],
+            'is_extra' => true,
+            'extra_ids' => ['36', '37'],
             'unit_id' => 1,
         ]);
 
@@ -365,8 +444,12 @@ class DetailProductSeeder extends Seeder
             'cluster_kategoris_id' => 33,
             'is_material' => true,
             'material_ids' => ['13', '14', '15'],
+            'is_color' => true,
+            'color_ids' => ['3', '4', '11'],
             'is_side' => true,
-            'side_ids' => ['1', '2'],
+            'side_ids' => ['1'],
+            'is_lid' => true,
+            'lid_ids' => ['2', '6'],
             'unit_id' => 1,
         ]);
 
@@ -374,8 +457,10 @@ class DetailProductSeeder extends Seeder
             'cluster_kategoris_id' => 34,
             'is_material' => true,
             'material_ids' => ['54', '55'],
-            'is_side' => true,
-            'side_ids' => ['1', '2'],
+            'is_color' => true,
+            'color_ids' => ['3', '4', '11'],
+            'is_lid' => true,
+            'lid_ids' => ['2', '6', '7'],
             'unit_id' => 1,
         ]);
 
@@ -421,20 +506,22 @@ class DetailProductSeeder extends Seeder
         \App\Models\DetailProduct::create([// Label Harga STD
             'cluster_kategoris_id' => 38,
             'is_material' => true,
-            'material_ids' => ['2', '3'],
+            'material_ids' => ['68', '2', '3'],
             'is_size' => true,
             'size_ids' => ['34', '35'],
             'is_color' => true,
             'color_ids' => ['2'],
             'is_side' => true,
             'side_ids' => ['1', '2'],
+            'is_finishing' => true,
+            'finishing_ids' => ['38', '39'],
             'unit_id' => 1,
         ]);
 
         \App\Models\DetailProduct::create([// Label Harga Prem
             'cluster_kategoris_id' => 39,
             'is_material' => true,
-            'material_ids' => ['2', '3'],
+            'material_ids' => ['68', '2', '3'],
             'is_size' => true,
             'size_ids' => ['34', '35'],
             'is_color' => true,
@@ -443,28 +530,30 @@ class DetailProductSeeder extends Seeder
             'side_ids' => ['1', '2'],
             'is_lamination' => true,
             'lamination_ids' => ['2', '3'],
+            'is_finishing' => true,
+            'finishing_ids' => ['38', '39'],
             'unit_id' => 1,
         ]);
 
         \App\Models\DetailProduct::create([// Lunch Box STD
             'cluster_kategoris_id' => 40,
             'is_material' => true,
-            'material_ids' => ['16'],
+            'material_ids' => ['70'],
             'is_size' => true,
             'size_ids' => ['69', '70'],
-            'is_side' => true,
-            'side_ids' => ['1'],
+            'is_color' => true,
+            'color_ids' => ['3', '4', '7'],
             'unit_id' => 1,
         ]);
 
         \App\Models\DetailProduct::create([// Lunch Box bento
             'cluster_kategoris_id' => 41,
             'is_material' => true,
-            'material_ids' => ['14'],
+            'material_ids' => ['17'],
             'is_size' => true,
             'size_ids' => ['21', '22'],
-            'is_side' => true,
-            'side_ids' => ['1'],
+            'is_color' => true,
+            'color_ids' => ['11'],
             'unit_id' => 1,
         ]);
 
@@ -474,8 +563,8 @@ class DetailProductSeeder extends Seeder
             'material_ids' => ['16'],
             'is_size' => true,
             'size_ids' => ['20'],
-            'is_side' => true,
-            'side_ids' => ['1'],
+            'is_color' => true,
+            'color_ids' => ['3', '4', '7'],
             'unit_id' => 1,
         ]);
 
@@ -488,33 +577,33 @@ class DetailProductSeeder extends Seeder
             'is_side' => true,
             'side_ids' => ['1'],
             'is_color' => true,
-            'color_ids' => ['2', '3', '4'],
+            'color_ids' => ['3', '4', '5'],
             'unit_id' => 1,
         ]);
 
         \App\Models\DetailProduct::create([// Kardus box STD
             'cluster_kategoris_id' => 44,
             'is_material' => true,
-            'material_ids' => ['20', '21', '56', '57'],
+            'material_ids' => ['56', '57', '71', '72'],
             'is_size' => true,
             'size_ids' => ['28', '29', '30'],
             'is_side' => true,
             'side_ids' => ['1'],
             'is_color' => true,
-            'color_ids' => ['2', '3', '4'],
+            'color_ids' => ['3', '4', '5'],
             'unit_id' => 1,
         ]);
 
         \App\Models\DetailProduct::create([// Kardus box Pengiriman
             'cluster_kategoris_id' => 45,
             'is_material' => true,
-            'material_ids' => ['20', '21'],
+            'material_ids' => ['73', '74'],
             'is_size' => true,
             'size_ids' => ['71', '72', '73'],
             'is_side' => true,
             'side_ids' => ['1'],
             'is_color' => true,
-            'color_ids' => ['2', '3', '4'],
+            'color_ids' => ['3', '4', '5'],
             'unit_id' => 1,
         ]);
 
@@ -525,7 +614,7 @@ class DetailProductSeeder extends Seeder
             'is_size' => true,
             'size_ids' => ['74', '75'],
             'is_color' => true,
-            'color_ids' => ['2', '3', '4'],
+            'color_ids' => ['3', '4', '6', '12'],
             'unit_id' => 1,
         ]);
 
@@ -536,7 +625,7 @@ class DetailProductSeeder extends Seeder
             'is_size' => true,
             'size_ids' => ['76', '77'],
             'is_color' => true,
-            'color_ids' => ['2', '3', '4'],
+            'color_ids' => ['3', '4', '6', '12'],
             'unit_id' => 1,
         ]);
 
@@ -546,8 +635,10 @@ class DetailProductSeeder extends Seeder
             'material_ids' => ['24'],
             'is_size' => true,
             'size_ids' => ['36', '37', '38'],
+            'is_side' => true,
+            'side_ids' => ['1'],
             'is_color' => true,
-            'color_ids' => ['2', '3', '4'],
+            'color_ids' => ['3', '4', '6', '12'],
             'unit_id' => 1,
         ]);
 
@@ -557,8 +648,10 @@ class DetailProductSeeder extends Seeder
             'material_ids' => ['60'],
             'is_size' => true,
             'size_ids' => ['36', '78', '79'],
+            'is_side' => true,
+            'side_ids' => ['1'],
             'is_color' => true,
-            'color_ids' => ['2', '3', '4'],
+            'color_ids' => ['3', '4', '6', '12'],
             'unit_id' => 1,
         ]);
 
@@ -596,9 +689,9 @@ class DetailProductSeeder extends Seeder
         \App\Models\DetailProduct::create([// Flyer STD
             'cluster_kategoris_id' => 52,
             'is_material' => true,
-            'material_ids' => ['26', '27'],
+            'material_ids' => ['27', '75'],
             'is_size' => true,
-            'size_ids' => ['10', '11'],
+            'size_ids' => ['9', '10'],
             'is_side' => true,
             'side_ids' => ['1', '2'],
             'unit_id' => 1,
@@ -608,31 +701,31 @@ class DetailProductSeeder extends Seeder
         \App\Models\DetailProduct::create([// Flyer PREM
             'cluster_kategoris_id' => 53,
             'is_material' => true,
-            'material_ids' => ['6', '47', '48'],
+            'material_ids' => ['5', '6', '76'],
             'is_size' => true,
-            'size_ids' => ['10', '11'],
+            'size_ids' => ['9', '10'],
             'is_side' => true,
             'side_ids' => ['1', '2'],
             'unit_id' => 1,
             'is_design' => true
         ]);
 
-//        \App\Models\DetailProduct::create([// Flyer Eco
-//            'cluster_kategoris_id' => 53,
-//            'is_material' => true,
-//            'material_ids' => ['6', '47', '48'],
-//            'is_size' => true,
-//            'size_ids' => ['10', '11'],
-//            'is_side' => true,
-//            'side_ids' => ['1', '2'],
-//            'unit_id' => 1,
-//            'is_design' => true
-//        ]);
+        \App\Models\DetailProduct::create([// Flyer Eco
+            'cluster_kategoris_id' => 54,
+            'is_material' => true,
+            'material_ids' => ['75'],
+            'is_size' => true,
+            'size_ids' => ['9', '10'],
+            'is_side' => true,
+            'side_ids' => ['1'],
+            'unit_id' => 1,
+            'is_design' => true
+        ]);
 
         \App\Models\DetailProduct::create([// Poster STD
             'cluster_kategoris_id' => 55,
             'is_material' => true,
-            'material_ids' => ['2', '3'],
+            'material_ids' => ['2', '68'],
             'is_size' => true,
             'size_ids' => ['8', '83'],
             'is_side' => true,
@@ -667,7 +760,7 @@ class DetailProductSeeder extends Seeder
         \App\Models\DetailProduct::create([// Tent Card Sisipan
             'cluster_kategoris_id' => 58,
             'is_material' => true,
-            'material_ids' => ['2', '9', '27'],
+            'material_ids' => ['9', '27', '75'],
             'is_size' => true,
             'size_ids' => ['9', '10', '11'],
             'is_side' => true,
@@ -678,7 +771,7 @@ class DetailProductSeeder extends Seeder
         \App\Models\DetailProduct::create([// Brosur STD
             'cluster_kategoris_id' => 59,
             'is_material' => true,
-            'material_ids' => ['2', '3', '26', '27'],
+            'material_ids' => ['26', '27', '75', '77'],
             'is_size' => true,
             'size_ids' => ['9'],
             'is_folding' => true,
@@ -689,7 +782,7 @@ class DetailProductSeeder extends Seeder
         \App\Models\DetailProduct::create([// Brosur Prem
             'cluster_kategoris_id' => 60,
             'is_material' => true,
-            'material_ids' => ['5', '50'],
+            'material_ids' => ['76', '78'],
             'is_size' => true,
             'size_ids' => ['9'],
             'is_folding' => true,
@@ -697,16 +790,16 @@ class DetailProductSeeder extends Seeder
             'unit_id' => 1,
         ]);
 
-//        \App\Models\DetailProduct::create([// Brosur Eco
-//            'cluster_kategoris_id' => 61,
-//            'is_material' => true,
-//            'material_ids' => ['5', '50'],
-//            'is_size' => true,
-//            'size_ids' => ['9'],
-//            'is_folding' => true,
-//            'folding_ids' => ['1', '2', '3'],
-//            'unit_id' => 1,
-//        ]);
+        \App\Models\DetailProduct::create([// Brosur Eco
+            'cluster_kategoris_id' => 61,
+            'is_material' => true,
+            'material_ids' => ['26', '75'],
+            'is_size' => true,
+            'size_ids' => ['9'],
+            'is_folding' => true,
+            'folding_ids' => ['1', '2', '3'],
+            'unit_id' => 1,
+        ]);
 
         \App\Models\DetailProduct::create([// X Banner
             'cluster_kategoris_id' => 62,
@@ -740,7 +833,7 @@ class DetailProductSeeder extends Seeder
             'is_material' => true,
             'material_ids' => ['32'],
             'is_size' => true,
-            'size_ids' => ['44', '46'],
+            'size_ids' => ['46'],
             'unit_id' => 1,
         ]);
 
@@ -789,7 +882,7 @@ class DetailProductSeeder extends Seeder
         \App\Models\DetailProduct::create([// Spanduk Out STD
             'cluster_kategoris_id' => 70,
             'is_material' => true,
-            'material_ids' => ['64', '65', '66', '67'],
+            'material_ids' => ['64', '65', '66'],
             'is_size' => true,
             'size_ids' => ['86', '87', '88', '89', '90'],
             'is_finishing' => true,
@@ -808,27 +901,39 @@ class DetailProductSeeder extends Seeder
             'unit_id' => 1,
         ]);
 
-//        \App\Models\DetailProduct::create([// Booklet STD
-//            'cluster_kategoris_id' => 72,
-//            'is_material' => true,
-//            'material_ids' => ['2', '3', '26','27'],
-//            'is_size' => true,
-//            'size_ids' => ['9', '10', ],
-//            'is_finishing' => true,
-//            'finishing_ids' => ['22', '23', '24'],
-//            'unit_id' => 1,
-//        ]);
-//
-//        \App\Models\DetailProduct::create([// Booklet Prem
-//            'cluster_kategoris_id' => 73,
-//            'is_material' => true,
-//            'material_ids' => ['2', '3', '26','27'],
-//            'is_size' => true,
-//            'size_ids' => ['9', '10', ],
-//            'is_finishing' => true,
-//            'finishing_ids' => ['22', '23', '24'],
-//            'unit_id' => 1,
-//        ]);
+        \App\Models\DetailProduct::create([// Booklet STD
+            'cluster_kategoris_id' => 72,
+            'is_material_cover' => true,
+            'material_cover_ids' => ['2', '68'],
+            'is_material' => true,
+            'material_ids' => ['26', '27', '75', '77'],
+            'is_cover_lamination' => true,
+            'cover_lamination_ids' => ['1', '2', '3'],
+            'is_size' => true,
+            'size_ids' => ['9', '10'],
+            'is_page' => true,
+            'page_ids' => ['1', '3', '5', '23', '25'],
+            'is_binding' => true,
+            'binding_ids' => ['40'],
+            'unit_id' => 1,
+        ]);
+
+        \App\Models\DetailProduct::create([// Booklet Prem
+            'cluster_kategoris_id' => 73,
+            'is_material_cover' => true,
+            'material_cover_ids' => ['47', '50'],
+            'is_material' => true,
+            'material_ids' => ['76', '79'],
+            'is_size' => true,
+            'size_ids' => ['9', '10'],
+            'is_page' => true,
+            'page_ids' => ['1', '3', '5', '23', '25'],
+            'is_orientation' => true,
+            'orientation_ids' => ['32'],
+            'is_binding' => true,
+            'binding_ids' => ['40'],
+            'unit_id' => 1,
+        ]);
 
         \App\Models\DetailProduct::create([// Stiker Bulat
             'cluster_kategoris_id' => 74,
@@ -848,7 +953,9 @@ class DetailProductSeeder extends Seeder
             'is_material' => true,
             'material_ids' => ['28', '29', '30', '31'],
             'is_size' => true,
-            'size_ids' => ['41', '42', '90'],
+            'size_ids' => ['90', '93'],
+            'is_edge' => true,
+            'edge_ids' => ['1', '2'],
             'is_finishing' => true,
             'finishing_ids' => ['20', '25'],
             'is_side' => true,
@@ -859,22 +966,20 @@ class DetailProductSeeder extends Seeder
         \App\Models\DetailProduct::create([// Stiker Decal
             'cluster_kategoris_id' => 76,
             'is_material' => true,
-            'material_ids' => ['28', '29', '30', '31'],
+            'material_ids' => ['29', '30'],
             'is_size' => true,
             'size_ids' => ['91', '92', '93', '90'],
             'is_finishing' => true,
             'finishing_ids' => ['20', '25'],
-            'is_side' => true,
-            'side_ids' => ['1'],
             'unit_id' => 1,
         ]);
 
         \App\Models\DetailProduct::create([// Label botol
             'cluster_kategoris_id' => 77,
             'is_material' => true,
-            'material_ids' => ['30', '31'],
+            'material_ids' => ['29', '30'],
             'is_size' => true,
-            'size_ids' => ['91', '93', '90'],
+            'size_ids' => ['90', '93', '101', '102'],
             'is_finishing' => true,
             'finishing_ids' => ['20', '25'],
             'is_side' => true,
@@ -885,9 +990,9 @@ class DetailProductSeeder extends Seeder
         \App\Models\DetailProduct::create([// Label lunch
             'cluster_kategoris_id' => 78,
             'is_material' => true,
-            'material_ids' => ['30', '31'],
+            'material_ids' => ['28', '30'],
             'is_size' => true,
-            'size_ids' => ['91', '93', '90'],
+            'size_ids' => ['90', '93', '103'],
             'is_finishing' => true,
             'finishing_ids' => ['20', '25'],
             'is_side' => true,
@@ -910,7 +1015,7 @@ class DetailProductSeeder extends Seeder
         \App\Models\DetailProduct::create([// Sertif Prem
             'cluster_kategoris_id' => 80,
             'is_material' => true,
-            'material_ids' => ['5', '47', '48', '49', '50'],
+            'material_ids' => ['5', '47', '8', '49', '50'],
             'is_size' => true,
             'size_ids' => ['9', '12'],
             'is_side' => true,
@@ -921,83 +1026,79 @@ class DetailProductSeeder extends Seeder
         \App\Models\DetailProduct::create([// Majalah StD
             'cluster_kategoris_id' => 81,
             'is_material' => true,
-            'material_ids' => ['5', '47', '48', '49', '50'],
+            'material_ids' => ['26', '27', '75', '77'],
             'is_size' => true,
-            'size_ids' => ['9', '12'],
+            'size_ids' => ['9'],
             'is_side' => true,
             'side_ids' => ['1', '2'],
             'is_material_cover' => true,
-            'material_cover_ids' => ['2', '3'],
+            'material_cover_ids' => ['2', '68'],
             'is_side_cover' => true,
             'side_cover_ids' => ['1', '2'],
             'is_cover_lamination' => true,
-            'cover_lamination_ids' => ['1', '2'],
-            'is_finishing' => true,
-            'finishing_ids' => ['6'],
+            'cover_lamination_ids' => ['2', '3'],
             'is_page' => true,
-            'page_ids' => ['27', '28', '29', '30', '31', '32', '33', '34', '35'],
+            'page_ids' => ['27', '29', '31', '33', '35'],
             'unit_id' => 1,
         ]);
 
         \App\Models\DetailProduct::create([// Majalah Prem
             'cluster_kategoris_id' => 82,
             'is_material' => true,
-            'material_ids' => ['5', '47', '48', '49', '50'],
+            'material_ids' => ['79', '80'],
             'is_size' => true,
-            'size_ids' => ['9', '12'],
+            'size_ids' => ['9'],
             'is_side' => true,
             'side_ids' => ['1', '2'],
             'is_material_cover' => true,
-            'material_cover_ids' => ['2', '3'],
+            'material_cover_ids' => ['6', '7'],
             'is_side_cover' => true,
             'side_cover_ids' => ['1', '2'],
-            'is_cover_lamination' => true,
-            'cover_lamination_ids' => ['1', '2'],
-            'is_finishing' => true,
-            'finishing_ids' => ['6'],
             'is_page' => true,
-            'page_ids' => ['27', '28', '29', '30', '31', '32', '33', '34', '35'],
+            'page_ids' => ['16', '27', '28', '29'],
             'unit_id' => 1,
         ]);
 
         \App\Models\DetailProduct::create([// Compro STD
             'cluster_kategoris_id' => 83,
             'is_material' => true,
-            'material_ids' => ['5', '2', '3'],
+            'material_ids' => ['26', '27', '75', '77'],
             'is_size' => true,
-            'size_ids' => ['9', '12'],
+            'size_ids' => ['9', '10'],
             'is_material_cover' => true,
-            'material_cover_ids' => ['2', '3'],
+            'material_cover_ids' => ['2', '68'],
             'is_cover_lamination' => true,
-            'cover_lamination_ids' => ['1', '2'],
+            'cover_lamination_ids' => ['1', '2', '3'],
             'is_finishing' => true,
-            'finishing_ids' => ['11'],
+            'finishing_ids' => ['40'],
             'is_page' => true,
-            'page_ids' => ['23', '25', '1', '3', '5',],
+            'page_ids' => ['23', '25', '1', '3', '5'],
+            'is_orientation' => true,
+            'orientation_ids' => ['32'],
             'unit_id' => 1,
         ]);
 
         \App\Models\DetailProduct::create([// Compro Prem
             'cluster_kategoris_id' => 84,
             'is_material' => true,
-            'material_ids' => ['50', '6'],
+            'material_ids' => ['76', '79'],
             'is_size' => true,
-            'size_ids' => ['9', '12'],
+            'size_ids' => ['9', '10'],
             'is_material_cover' => true,
             'material_cover_ids' => ['50', '6'],
-            'is_cover_lamination' => true,
-            'cover_lamination_ids' => ['1', '2'],
             'is_finishing' => true,
-            'finishing_ids' => ['11'],
+            'finishing_ids' => ['40'],
             'is_page' => true,
-            'page_ids' => ['23', '25', '1', '3', '5',],
+            'page_ids' => ['23', '25', '1', '3', '5'],
+            'is_orientation' => true,
+            'orientation_ids' => ['32'],
             'unit_id' => 1,
         ]);
 
         \App\Models\DetailProduct::create([// Kalender meja
             'cluster_kategoris_id' => 85,
             'is_material' => true,
-            'material_ids' => ['2', '3',],
+            'material_ids' => ['2', '3'],
             'is_size' => true,
             'size_ids' => ['10'],
             'is_side' => true,
@@ -1005,57 +1106,59 @@ class DetailProductSeeder extends Seeder
             'is_orientation' => true,
             'orientation_ids' => ['31', '32'],
             'is_page' => true,
-            'page_ids' => ['24', '4',],
+            'page_ids' => ['24', '4'],
+            'is_lamination' => true,
+            'lamination_ids' => ['2', '3'],
             'is_finishing' => true,
-            'finishing_ids' => ['16'],
+            'finishing_ids' => ['41', '42'],
             'unit_id' => 1,
         ]);
 
-        \App\Models\DetailProduct::create([// Kalender Poseter
+        \App\Models\DetailProduct::create([// Kalender Poster
             'cluster_kategoris_id' => 86,
             'is_material' => true,
-            'material_ids' => ['2', '3',],
+            'material_ids' => ['2', '68'],
             'is_size' => true,
             'size_ids' => ['43'],
             'is_side' => true,
             'side_ids' => ['1'],
             'is_finishing' => true,
-            'finishing_ids' => ['22'],
+            'finishing_ids' => ['15', '33', '35'],
             'unit_id' => 1,
         ]);
 
         \App\Models\DetailProduct::create([// Kalender Dinding
             'cluster_kategoris_id' => 87,
             'is_material' => true,
-            'material_ids' => ['26', '27', '9'],
+            'material_ids' => ['27', '75', '9'],
             'is_size' => true,
-            'size_ids' => ['43'],
+            'size_ids' => ['8'],
             'is_page' => true,
-            'page_ids' => ['36', '37',],
-            'is_finishing' => true,
+            'page_ids' => ['36', '37'],
             'is_orientation' => true,
             'orientation_ids' => ['32'],
-            'finishing_ids' => ['16'],
+            'is_finishing' => true,
+            'finishing_ids' => ['41', '42'],
             'unit_id' => 1,
         ]);
 
-        \App\Models\DetailProduct::create([// Voucher Buku
+        \App\Models\DetailProduct::create([// Voucher satuan
             'cluster_kategoris_id' => 88,
             'is_material' => true,
-            'material_ids' => ['2', '3'],
+            'material_ids' => ['4', '27'],
             'is_size' => true,
             'size_ids' => ['47'],
             'is_finishing' => true,
-            'finishing_ids' => ['26', '27', '28'],
+            'finishing_ids' => ['26', '27', '28', '35'],
             'is_side' => true,
             'side_ids' => ['1', '2'],
             'unit_id' => 1,
         ]);
 
-        \App\Models\DetailProduct::create([// Voucher Satuan
+        \App\Models\DetailProduct::create([// Voucher buku
             'cluster_kategoris_id' => 89,
             'is_material' => true,
-            'material_ids' => ['4', '27'],
+            'material_ids' => ['26', '77'],
             'is_size' => true,
             'size_ids' => ['47'],
             'is_finishing' => true,
@@ -1074,7 +1177,7 @@ class DetailProductSeeder extends Seeder
             'is_side' => true,
             'side_ids' => ['1', '2'],
             'is_color' => true,
-            'color_ids' => ['2', '3', '4'],
+            'color_ids' => ['3', '4', '7', '12'],
             'unit_id' => 1,
             'is_design' => true
         ]);
@@ -1088,7 +1191,7 @@ class DetailProductSeeder extends Seeder
             'is_side' => true,
             'side_ids' => ['1', '2'],
             'is_color' => true,
-            'color_ids' => ['2', '3', '4'],
+            'color_ids' => ['3', '4', '7', '12'],
             'unit_id' => 1,
             'is_design' => true
         ]);
@@ -1097,12 +1200,14 @@ class DetailProductSeeder extends Seeder
             'cluster_kategoris_id' => 92,
             'is_material' => true,
             'material_ids' => ['41'],
+            'is_material_color' => true,
+            'material_color_ids' => ['8', '9', '10', '13'],
             'is_size' => true,
             'size_ids' => ['53', '54', '55'],
             'is_side' => true,
             'side_ids' => ['1', '2'],
             'is_color' => true,
-            'color_ids' => ['3', '4'],
+            'color_ids' => ['3', '4', '12'],
             'is_finishing' => true,
             'finishing_ids' => ['29', '30'],
             'unit_id' => 1,
@@ -1112,12 +1217,14 @@ class DetailProductSeeder extends Seeder
             'cluster_kategoris_id' => 93,
             'is_material' => true,
             'material_ids' => ['41'],
+            'is_material_color' => true,
+            'material_color_ids' => ['8', '9', '10', '13', '14', '15'],
             'is_size' => true,
-            'size_ids' => ['53', '54',],
+            'size_ids' => ['53', '54'],
             'is_side' => true,
             'side_ids' => ['1', '2'],
             'is_color' => true,
-            'color_ids' => ['2'],
+            'color_ids' => ['7'],
             'is_finishing' => true,
             'finishing_ids' => ['29', '30'],
             'unit_id' => 1,
@@ -1127,8 +1234,10 @@ class DetailProductSeeder extends Seeder
             'cluster_kategoris_id' => 94,
             'is_material' => true,
             'material_ids' => ['42'],
+            'is_material_color' => true,
+            'material_color_ids' => ['8', '10', '16'],
             'is_color' => true,
-            'color_ids' => ['8', '9', '10'],
+            'color_ids' => ['8', '9', '10', '13'],
             'is_size' => true,
             'size_ids' => ['1', '2', '3', '4', '5'],
             'is_front_side' => true,
@@ -1144,12 +1253,14 @@ class DetailProductSeeder extends Seeder
             'unit_id' => 1,
         ]);
 
-        \App\Models\DetailProduct::create([// Goodie Prem
+        \App\Models\DetailProduct::create([// polo polyflex
             'cluster_kategoris_id' => 95,
             'is_material' => true,
             'material_ids' => ['42'],
+            'is_material_color' => true,
+            'material_color_ids' => ['8', '10', '16'],
             'is_color' => true,
-            'color_ids' => ['8', '9', '10'],
+            'color_ids' => ['8', '9', '10', '13'],
             'is_size' => true,
             'size_ids' => ['1', '2', '3', '4', '5'],
             'is_front_side' => true,

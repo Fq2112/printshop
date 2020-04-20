@@ -11,7 +11,7 @@ class FoldingSeeder extends Seeder
      */
     const DATA = [
         [
-            'name' => ['Lipat Dua', 'Bifold'],
+            'name' => ['Bifold', 'Bifold'],
             'description' => [
                 'Satu lipatan di tengah kertas menghasilkan dua bagian yang sama.',
                 'A fold in the middle of the paper produces two equal parts.'

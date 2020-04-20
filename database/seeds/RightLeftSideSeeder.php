@@ -18,7 +18,7 @@ class RightLeftSideSeeder extends Seeder
             ],
         ],
         [
-            'name' => ['Kosong', 'Blank'],
+            'name' => ['Kosong', 'None'],
             'description' => [
                 'Tidak ada area cetak pada bagian depan.',
                 'No print area at the front side.'

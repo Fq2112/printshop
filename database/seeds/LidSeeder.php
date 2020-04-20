@@ -19,7 +19,7 @@ class LidSeeder extends Seeder
             ],
         ],
         [
-            'name' => ['Tanpa Tutup', 'No Lid'],
+            'name' => ['Tanpa Tutup', 'None'],
             'description' => [
                 'Paper cup tanpa tutup.',
                 'Paper cups without lid.'

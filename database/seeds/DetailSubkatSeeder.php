@@ -33,7 +33,7 @@ class DetailSubkatSeeder extends Seeder
             'is_side' => true,
             'side_ids' => ['1'],
             'is_color' => true,
-            'color_ids' => ['2', '3'],
+            'color_ids' => ['3', '7'],
             'is_copies' => true,
             'copies_ids' => ['1', '2', '3'],
             'is_page' => true,
