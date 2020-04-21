@@ -270,6 +270,11 @@
                                             <input id="range-quantity" name="quantity" class="input-range-slider">
                                         </div>
                                     </div>
+                                    <input id="price_pcs" type="hidden" name="price_pcs">
+                                    <input id="production_finished" type="hidden" name="production_finished">
+                                    <input id="delivery_duration" type="hidden" name="delivery_duration">
+                                    <input id="received_date" type="hidden" name="received_date">
+                                    <input id="total" type="hidden" name="total">
                                 </div>
                             </div>
                         </div>
@@ -380,7 +385,7 @@
                                     <div class="modal-body">
                                         <label class="card-label mb-3" for="um-upload" onclick="uploadMethod()">
                                             <input id="um-upload" class="card-rb" name="upload_method" type="radio"
-                                                   checked required>
+                                                   value="upload_file" checked required>
                                             <div class="card card-input">
                                                 <div class="card-block p-2">
                                                     <h4 class="card-title">
@@ -392,7 +397,8 @@
                                             </div>
                                         </label>
                                         <label class="card-label" for="um-link" onclick="uploadMethod()">
-                                            <input id="um-link" class="card-rb" name="upload_method" type="radio">
+                                            <input id="um-link" class="card-rb" name="upload_method" type="radio"
+                                                   value="file_link">
                                             <div class="card card-input">
                                                 <div class="card-block p-2">
                                                     <h4 class="card-title">{{__('lang.modal.upload-design.link-head')}}</h4>
@@ -440,12 +446,20 @@
                 onChange: function (data) {
                     if (data.from > 0) {
                         total = parseInt(data.from) * price_pcs;
+
                         $(".show-quantity").text(data.from + str_unit);
                         $(".show-price").text("Rp" + thousandSeparator(price_pcs) + ",00");
                         $(".show-production").text(moment().add(production_day, 'days').format('DD MMM YYYY'));
                         $(".show-delivery").text(etd.replace('-', ' – ') + ' {{__('lang.product.form.summary.day')}}');
                         $(".show-received").text(moment().add(parseInt(etd.substr(-1)) + production_day, 'days').format('DD MMM YYYY'));
                         $(".show-total").text("Rp" + thousandSeparator(total) + ",00");
+
+                        $("#price_pcs").val(price_pcs);
+                        $("#production_finished").val(moment().add(production_day, 'days').format('YYYY-MM-DD'));
+                        $("#delivery_duration").val(etd);
+                        $("#received_date").val(moment().add(parseInt(etd.substr(-1)) + production_day, 'days').format('YYYY-MM-DD'));
+                        $("#total").val(total);
+
                         $("#summary-alert").show();
                         btn_upload.removeAttr('disabled');
                     } else {
@@ -460,7 +474,6 @@
                 showCaption: true,
                 browseOnZoneClick: true,
                 showPreview: true,
-                required: true,
                 dropZoneTitle: '{{__('lang.placeholder.drag-drop')}}',
                 dropZoneClickTitle: '{!! __('lang.placeholder.click-select') !!}',
                 removeLabel: '{{__('lang.button.delete')}}',
@@ -502,38 +515,38 @@
                     .attr('checked', 'checked').attr('required', 'required');
             });
 
-            $(".show-type").text($("input[name='type']:checked").val());
-            $(".show-cover_material").text($("input[name='cover_material']:checked").val());
-            $(".show-cover_side").text($("input[name='cover_side']:checked").val());
-            $(".show-cover_lamination").text($("input[name='cover_lamination']:checked").val());
-            $(".show-materials").text($("input[name='materials']:checked").val());
-            $(".show-material_color").text($("input[name='material_color']:checked").val());
-            $(".show-color").text($("input[name='color']:checked").val());
-            $(".show-print_method").text($("input[name='print_method']:checked").val());
-            $(".show-size").text($("input[name='size']:checked").val());
-            $(".show-side").text($("input[name='side']:checked").val());
-            $(".show-holder").text($("input[name='holder']:checked").val());
-            $(".show-lid").text($("input[name='lid']:checked").val());
-            $(".show-corner").text($("input[name='corner']:checked").val());
-            $(".show-folding").text($("input[name='folding']:checked").val());
-            $(".show-front_side").text($("input[name='front_side']:checked").val());
-            $(".show-back_side").text($("input[name='back_side']:checked").val());
-            $(".show-right_side").text($("input[name='right_side']:checked").val());
-            $(".show-left_side").text($("input[name='left_side']:checked").val());
-            $(".show-balance").text('Rp' + thousandSeparator($("input[name='balance']:checked").val()) + ',00');
-            $(".show-copies").text($("input[name='copies']:checked").val());
-            $(".show-page").text($("input[name='page']:checked").val());
-            $(".show-front_cover").text($("input[name='front_cover']:checked").val());
-            $(".show-back_cover").text($("input[name='back_cover']:checked").val());
-            $(".show-orientation").text($("input[name='orientation']:checked").val());
-            $(".show-binding").text($("input[name='binding']:checked").val());
-            $(".show-lamination").text($("input[name='lamination']:checked").val());
-            $(".show-finishing").text($("input[name='finishing']:checked").val());
-            $(".show-extra").text($("input[name='extra']:checked").val());
+            $(".show-type").text($("input[name='type']:checked").data('name'));
+            $(".show-cover_material").text($("input[name='cover_material']:checked").data('name'));
+            $(".show-cover_side").text($("input[name='cover_side']:checked").data('name'));
+            $(".show-cover_lamination").text($("input[name='cover_lamination']:checked").data('name'));
+            $(".show-materials").text($("input[name='materials']:checked").data('name'));
+            $(".show-material_color").text($("input[name='material_color']:checked").data('name'));
+            $(".show-color").text($("input[name='color']:checked").data('name'));
+            $(".show-print_method").text($("input[name='print_method']:checked").data('name'));
+            $(".show-size").text($("input[name='size']:checked").data('name'));
+            $(".show-side").text($("input[name='side']:checked").data('name'));
+            $(".show-holder").text($("input[name='holder']:checked").data('name'));
+            $(".show-lid").text($("input[name='lid']:checked").data('name'));
+            $(".show-corner").text($("input[name='corner']:checked").data('name'));
+            $(".show-folding").text($("input[name='folding']:checked").data('name'));
+            $(".show-front_side").text($("input[name='front_side']:checked").data('name'));
+            $(".show-back_side").text($("input[name='back_side']:checked").data('name'));
+            $(".show-right_side").text($("input[name='right_side']:checked").data('name'));
+            $(".show-left_side").text($("input[name='left_side']:checked").data('name'));
+            $(".show-balance").text('Rp' + thousandSeparator($("input[name='balance']:checked").data('name')) + ',00');
+            $(".show-copies").text($("input[name='copies']:checked").data('name'));
+            $(".show-page").text($("input[name='page']:checked").data('name'));
+            $(".show-front_cover").text($("input[name='front_cover']:checked").data('name'));
+            $(".show-back_cover").text($("input[name='back_cover']:checked").data('name'));
+            $(".show-orientation").text($("input[name='orientation']:checked").data('name'));
+            $(".show-binding").text($("input[name='binding']:checked").data('name'));
+            $(".show-lamination").text($("input[name='lamination']:checked").data('name'));
+            $(".show-finishing").text($("input[name='finishing']:checked").data('name'));
+            $(".show-extra").text($("input[name='extra']:checked").data('name'));
         });
 
         function productSpecs(check, spec, custom) {
-            var rs = range_slider.data("ionRangeSlider"), spec_val = $("#" + spec).val(), str_spec = '';
+            var rs = range_slider.data("ionRangeSlider"), spec_val = $("#" + spec).data('name'), str_spec = '';
             rs.reset();
             resetter();
 
@@ -601,6 +614,13 @@
             $(".show-delivery").html('&ndash;');
             $(".show-received").html('&ndash;');
             $(".show-total").html('&ndash;');
+
+            $("#price_pcs").val(null);
+            $("#production_finished").val(null);
+            $("#delivery_duration").val(null);
+            $("#received_date").val(null);
+            $("#total").val(null);
+
             $("#summary-alert").hide();
             btn_upload.attr('disabled', 'disabled');
         }

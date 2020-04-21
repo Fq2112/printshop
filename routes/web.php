@@ -63,7 +63,7 @@ Route::group(['namespace' => 'Pages'], function () {
     ]);
 
     Route::post('{produk}/submit', [
-        'middleware' => ['auth', 'user', '503'],
+        'middleware' => ['auth', 'user'],
         'uses' => 'MainController@submitPemesanan',
         'as' => 'produk.submit.pemesanan'
     ]);

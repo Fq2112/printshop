@@ -177,7 +177,7 @@ class MainController extends Controller
 
     public function submitPemesanan(Request $request)
     {
-        return;
+        dd($request);
     }
 
     public function cariNamaProduk(Request $request)

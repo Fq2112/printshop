@@ -22,10 +22,8 @@
                                 class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="type-{{$row->id}}">
-                                    <input id="type-{{$row->id}}"
-                                           class="card-rb"
-                                           name="type" type="radio"
-                                           value="{{$row->name}}">
+                                    <input id="type-{{$row->id}}" class="card-rb" name="type" type="radio"
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -87,7 +85,7 @@
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="cover_material-{{$row->id}}">
                                     <input id="cover_material-{{$row->id}}" class="card-rb" name="cover_material"
-                                           type="radio" value="{{$row->name}}">
+                                           type="radio" value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -147,7 +145,7 @@
                                     <input id="cover_side-{{$row->id}}"
                                            class="card-rb"
                                            name="cover_side" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -213,7 +211,7 @@
                                     <input id="cover_lamination-{{$row->id}}"
                                            class="card-rb"
                                            name="cover_lamination" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -276,7 +274,7 @@
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="materials-{{$row->id}}">
                                     <input id="materials-{{$row->id}}" class="card-rb" name="materials"
-                                           type="radio" value="{{$row->name}}">
+                                           type="radio" value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -334,7 +332,7 @@
                                     <label class="card-label" for="material_color-{{$row->id}}">
                                         <input id="material_color-{{$row->id}}" class="card-rb" name="material_color"
                                                type="radio"
-                                               value="{{$row->name}}">
+                                               value="{{$row->id}}" data-name="{{$row->name}}">
                                         <div class="card card-input">
                                             <div class="row no-gutters">
                                                 <div class="col" style="background-color: {{$row->name}}"
@@ -356,7 +354,7 @@
                                            for="material_color-{{$row->id}}">
                                         <input id="material_color-{{$row->id}}" class="card-rb" name="material_color"
                                                type="radio"
-                                               value="{{$row->name}}">
+                                               value="{{$row->id}}" data-name="{{$row->name}}">
                                         <div class="card card-input h-100">
                                             <div
                                                 class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -414,7 +412,7 @@
                                 <div class="col">
                                     <label class="card-label" for="color-{{$row->id}}">
                                         <input id="color-{{$row->id}}" class="card-rb" name="color" type="radio"
-                                               value="{{$row->name}}">
+                                               value="{{$row->id}}" data-name="{{$row->name}}">
                                         <div class="card card-input">
                                             <div class="row no-gutters">
                                                 <div class="col" style="background-color: {{$row->name}}"
@@ -435,7 +433,7 @@
                                     <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                            for="color-{{$row->id}}">
                                         <input id="color-{{$row->id}}" class="card-rb" name="color" type="radio"
-                                               value="{{$row->name}}">
+                                               value="{{$row->id}}" data-name="{{$row->name}}">
                                         <div class="card card-input h-100">
                                             <div
                                                 class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -496,7 +494,7 @@
                                     <input id="print_method-{{$row->id}}"
                                            class="card-rb"
                                            name="print_method" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -561,7 +559,7 @@
                                     <input id="size-{{$row->id}}"
                                            class="card-rb"
                                            name="size" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -616,11 +614,11 @@
                 </div>
             </div>
         </div>
-        @endif
+    @endif
 
-        @if($specs->is_side == true)
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="heading-side">
+    @if($specs->is_side == true)
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading-side">
                 <h4 class="panel-title">
                     <a class="collapsed" role="button" data-toggle="collapse"
                        href="#collapse-side" aria-expanded="false"
@@ -644,7 +642,7 @@
                                     <input id="side-{{$row->id}}"
                                            class="card-rb"
                                            name="side" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -709,7 +707,7 @@
                                     <input id="holder-{{$row->id}}"
                                            class="card-rb"
                                            name="holder" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -774,7 +772,7 @@
                                     <input id="lid-{{$row->id}}"
                                            class="card-rb"
                                            name="lid" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -839,7 +837,7 @@
                                     <input id="corner-{{$row->id}}"
                                            class="card-rb"
                                            name="corner" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -904,7 +902,7 @@
                                     <input id="folding-{{$row->id}}"
                                            class="card-rb"
                                            name="folding" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -970,7 +968,7 @@
                                     <input id="front_side-{{$row->id}}"
                                            class="card-rb"
                                            name="front_side" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1036,7 +1034,7 @@
                                     <input id="back_side-{{$row->id}}"
                                            class="card-rb"
                                            name="back_side" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1102,7 +1100,7 @@
                                     <input id="right_side-{{$row->id}}"
                                            class="card-rb"
                                            name="right_side" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1168,7 +1166,7 @@
                                     <input id="left_side-{{$row->id}}"
                                            class="card-rb"
                                            name="left_side" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1234,7 +1232,7 @@
                                     <input id="balance-{{$row->id}}"
                                            class="card-rb"
                                            name="balance" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1300,7 +1298,7 @@
                                     <input id="copies-{{$row->id}}"
                                            class="card-rb"
                                            name="copies" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1366,7 +1364,7 @@
                                     <input id="page-{{$row->id}}"
                                            class="card-rb"
                                            name="page" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1431,7 +1429,7 @@
                                     <input id="front_cover-{{$row->id}}"
                                            class="card-rb"
                                            name="front_cover" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1495,7 +1493,7 @@
                                     <input id="back_cover-{{$row->id}}"
                                            class="card-rb"
                                            name="back_cover" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1559,7 +1557,7 @@
                                     <input id="orientation-{{$row->id}}"
                                            class="card-rb"
                                            name="orientation" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1623,7 +1621,7 @@
                                     <input id="binding-{{$row->id}}"
                                            class="card-rb"
                                            name="binding" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1688,7 +1686,7 @@
                                     <input id="lamination-{{$row->id}}"
                                            class="card-rb"
                                            name="lamination" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1750,7 +1748,7 @@
                                     <input id="finishing-{{$row->id}}"
                                            class="card-rb"
                                            name="finishing" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1812,7 +1810,7 @@
                                     <input id="extra-{{$row->id}}"
                                            class="card-rb"
                                            name="extra" type="radio"
-                                           value="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}">
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
