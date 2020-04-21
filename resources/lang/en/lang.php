@@ -257,6 +257,8 @@ return [
         "subject" => "Subject",
         "choose" => "-- Choose --",
         "message" => "Write something here...",
+        "length" => "Length",
+        "width" => "Width",
         "drag-drop" => "Drag & drop your design file here...",
         "click-select" => "<br>(or click to choose it)",
         "choose-file" => "Choose file..."

@@ -532,7 +532,7 @@
             $(".show-extra").text($("input[name='extra']:checked").val());
         });
 
-        function productSpecs(check, spec) {
+        function productSpecs(check, spec, custom) {
             var rs = range_slider.data("ionRangeSlider"), spec_val = $("#" + spec).val(), str_spec = '';
             rs.reset();
             resetter();
@@ -548,9 +548,33 @@
             } else {
                 str_spec = spec_val;
             }
-            $(".show-" + check).text(str_spec);
 
-            $('#collapse-' + check).collapse('toggle');
+            if (custom == '1') {
+                var length = $("#length"), width = $("#width");
+                $("#custom_size").show();
+
+                $("#length, #width").on("keyup", function () {
+                    if (parseInt(length.val()) > 0 && parseInt(width.val()) > 0) {
+                        $("#custom_size button").removeAttr('disabled');
+                    } else {
+                        $("#custom_size button").attr('disabled', 'disabled');
+                    }
+                });
+
+                $("#custom_size button").on("click", function () {
+                    $(".show-" + check).text(str_spec + " (" + length.val() + " x " + width.val() + " cm)");
+                    $('#collapse-' + check).collapse('toggle');
+                });
+
+            } else if (custom == '0') {
+                $("#custom_size").hide();
+                $(".show-" + check).text(str_spec);
+                $('#collapse-' + check).collapse('toggle')
+
+            } else {
+                $(".show-" + check).text(str_spec);
+                $('#collapse-' + check).collapse('toggle');
+            }
         }
 
         $("#city_id").on("change", function () {

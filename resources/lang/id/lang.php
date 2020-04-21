@@ -257,6 +257,8 @@ return [
         "subject" => "Subyek",
         "choose" => "-- Pilih --",
         "message" => "Tulis sesuatu di sini...",
+        "length" => "Panjang",
+        "width" => "Lebar",
         "drag-drop" => "Drag & drop file desain Anda di sini...",
         "click-select" => "<br>(atau klik untuk memilihnya)",
         "choose-file" => "Pilih file..."

@@ -555,8 +555,7 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Size::whereIn('id', $specs->size_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="size-{{$row->id}}">
                                     <input id="size-{{$row->id}}"
@@ -581,7 +580,7 @@
                                                 </div>
                                             @endif
                                             <div class="col"
-                                                 onclick="productSpecs('size', $(this).parents('label').attr('for'))">
+                                                 onclick="productSpecs('size', $(this).parents('label').attr('for'), '{{$row->id == 90 ? 1 : 0}}')">
                                                 <div
                                                     class="card-block p-2">
                                                     <h4 class="card-title {{$row->image != "" ? '' : 'text-center'}}">
@@ -595,16 +594,33 @@
                                     </div>
                                 </label>
                             </div>
+                            @if($row->id == 90)
+                                <div id="custom_size" class="col-12" style="display: none">
+                                    <div class="input-group">
+                                        <input id="length" type="number" placeholder="{{__('lang.placeholder.length')}}"
+                                               class="form-control" name="length" min="1">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text text-lowercase"><b>x</b></span>
+                                        </div>
+                                        <input id="width" type="number" placeholder="{{__('lang.placeholder.width')}}"
+                                               class="form-control" name="width" min="1">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text text-lowercase"><b>cm</b></span>
+                                            <button class="btn btn-primary" type="button" disabled>SET</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         @endforeach
                     </div>
                 </div>
             </div>
         </div>
-    @endif
+        @endif
 
-    @if($specs->is_side == true)
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="heading-side">
+        @if($specs->is_side == true)
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading-side">
                 <h4 class="panel-title">
                     <a class="collapsed" role="button" data-toggle="collapse"
                        href="#collapse-side" aria-expanded="false"
