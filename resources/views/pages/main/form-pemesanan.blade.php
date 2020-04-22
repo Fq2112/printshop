@@ -242,8 +242,7 @@
                                                     @foreach($provinces as $province)
                                                         <optgroup label="{{$province->name}}">
                                                             @foreach($province->getCity as $city)
-                                                                <option
-                                                                    value="{{$city->id}}" {{!is_null($address) && $address->city_id == $city->id ? 'selected' : ''}}>{{$city->name}}</option>
+                                                                <option value="{{$city->id}}">{{$city->name}}</option>
                                                             @endforeach
                                                         </optgroup>
                                                     @endforeach
@@ -446,24 +445,9 @@
                 onChange: function (data) {
                     if (data.from > 0) {
                         total = parseInt(data.from) * price_pcs;
-
-                        $(".show-quantity").text(data.from + str_unit);
-                        $(".show-price").text("Rp" + thousandSeparator(price_pcs) + ",00");
-                        $(".show-production").text(moment().add(production_day, 'days').format('DD MMM YYYY'));
-                        $(".show-delivery").text(etd.replace('-', ' – ') + ' {{__('lang.product.form.summary.day')}}');
-                        $(".show-received").text(moment().add(parseInt(etd.substr(-1)) + production_day, 'days').format('DD MMM YYYY'));
-                        $(".show-total").text("Rp" + thousandSeparator(total) + ",00");
-
-                        $("#price_pcs").val(price_pcs);
-                        $("#production_finished").val(moment().add(production_day, 'days').format('YYYY-MM-DD'));
-                        $("#delivery_duration").val(etd);
-                        $("#received_date").val(moment().add(parseInt(etd.substr(-1)) + production_day, 'days').format('YYYY-MM-DD'));
-                        $("#total").val(total);
-
-                        $("#summary-alert").show();
-                        btn_upload.removeAttr('disabled');
+                        resetter(1, data.from, total);
                     } else {
-                        resetter();
+                        resetter(0);
                     }
                 }
             });
@@ -543,12 +527,16 @@
             $(".show-lamination").text($("input[name='lamination']:checked").data('name'));
             $(".show-finishing").text($("input[name='finishing']:checked").data('name'));
             $(".show-extra").text($("input[name='extra']:checked").data('name'));
+
+            @if(!is_null($address))
+            $("#city_id").val('{{$address}}').selectpicker('refresh');
+            getShipping('{{$address}}');
+            @endif
         });
 
         function productSpecs(check, spec, custom) {
-            var rs = range_slider.data("ionRangeSlider"), spec_val = $("#" + spec).data('name'), str_spec = '';
-            rs.reset();
-            resetter();
+            var spec_val = $("#" + spec).data('name'), str_spec = '';
+            resetter(0);
 
             if (check == 'balance') {
                 var val = parseInt(spec_val);
@@ -591,38 +579,66 @@
         }
 
         $("#city_id").on("change", function () {
-            var rs = range_slider.data("ionRangeSlider");
-            rs.reset();
-            resetter();
+            resetter(0);
+            getShipping($(this).val());
+        });
 
-            $.get('{{route('get.cari-pengiriman.produk')}}?destination=' + $(this).val(), function (data) {
+        function getShipping(city) {
+            $.get('{{route('get.cari-pengiriman.produk')}}?destination=' + city, function (data) {
                 $.each(data['rajaongkir']['results'][0]['costs'], function (i, val) {
                     if (val.service == 'REG' || val.service == 'CTCYES') {
                         etd = val.cost[0].etd;
                     }
                 });
+
+                @if($qty)
+                range_slider.data("ionRangeSlider").update({from: '{{$qty}}'});
+                total = parseInt('{{$qty}}') * price_pcs;
+                resetter(1, '{{$qty}}', total);
+                @endif
             });
 
             $("#card-quantity").show();
-        });
+        }
 
-        function resetter() {
-            total = 0;
-            $(".show-quantity").html('&ndash;');
-            $(".show-price").html('&ndash;');
-            $(".show-production").html('&ndash;');
-            $(".show-delivery").html('&ndash;');
-            $(".show-received").html('&ndash;');
-            $(".show-total").html('&ndash;');
+        function resetter(check, qty, total) {
+            if (check == '0') {
+                range_slider.data("ionRangeSlider").update({from: 0});
 
-            $("#price_pcs").val(null);
-            $("#production_finished").val(null);
-            $("#delivery_duration").val(null);
-            $("#received_date").val(null);
-            $("#total").val(null);
+                total = 0;
+                $(".show-quantity").html('&ndash;');
+                $(".show-price").html('&ndash;');
+                $(".show-production").html('&ndash;');
+                $(".show-delivery").html('&ndash;');
+                $(".show-received").html('&ndash;');
+                $(".show-total").html('&ndash;');
 
-            $("#summary-alert").hide();
-            btn_upload.attr('disabled', 'disabled');
+                $("#price_pcs").val(null);
+                $("#production_finished").val(null);
+                $("#delivery_duration").val(null);
+                $("#received_date").val(null);
+                $("#total").val(null);
+
+                $("#summary-alert").hide();
+                btn_upload.attr('disabled', 'disabled');
+
+            } else {
+                $(".show-quantity").text(qty + str_unit);
+                $(".show-price").text("Rp" + thousandSeparator(price_pcs) + ",00");
+                $(".show-production").text(moment().add(production_day, 'days').format('DD MMM YYYY'));
+                $(".show-delivery").text(etd.replace('-', ' – ') + ' {{__('lang.product.form.summary.day')}}');
+                $(".show-received").text(moment().add(parseInt(etd.substr(-1)) + production_day, 'days').format('DD MMM YYYY'));
+                $(".show-total").text("Rp" + thousandSeparator(total) + ",00");
+
+                $("#price_pcs").val(price_pcs);
+                $("#production_finished").val(moment().add(production_day, 'days').format('YYYY-MM-DD'));
+                $("#delivery_duration").val(etd);
+                $("#received_date").val(moment().add(parseInt(etd.substr(-1)) + production_day, 'days').format('YYYY-MM-DD'));
+                $("#total").val(total);
+
+                $("#summary-alert").show();
+                btn_upload.removeAttr('disabled');
+            }
         }
 
         btn_upload.on('click', function () {

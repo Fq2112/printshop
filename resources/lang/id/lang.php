@@ -115,7 +115,7 @@ return [
                 "production" => "Selesai Produksi",
                 "delivery" => "Durasi Pengiriman",
                 "day" => 'hari',
-                "received" => "Tanggal Terima",
+                "received" => "Tanggal Diterima",
                 "alert" => "Spesifikasi dan desain produk yang tertera akan diterapkan pada <b class='show-quantity'>:quantity</b> <b>:product</b> yang Anda pesan.",
                 "layout" => "Pedoman Tata Letak",
             ],

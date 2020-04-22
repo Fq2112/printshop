@@ -113,15 +113,16 @@
             </div>
             <div class="top-cart-items use-nicescroll" style="max-height: 200px">
                 @foreach(\App\Models\SubKategori::find(32)->getCluster as $row)
+                    @php $qty = rand(1,100); @endphp
                     <div class="top-cart-item clearfix">
-                        <a href="{{route('produk', ['produk' => $row->permalink])}}">
+                        <a href="{{route('produk', ['produk' => $row->permalink, 'city' => rand(1,501), 'qty' => $qty])}}">
                             <div class="top-cart-item-image">
                                 <img src="{{asset('storage/products/thumb/'.$row->thumbnail)}}" alt="Thumbnail">
                             </div>
                             <div class="top-cart-item-desc">
                                 <span class="top-cart-item-title">{{$row->name}}</span>
                                 <span class="top-cart-item-price">Rp{{number_format('25000',2,',','.')}}</span>
-                                <span class="top-cart-item-quantity t600">x 1</span>
+                                <span class="top-cart-item-quantity t600">x {{$qty}}</span>
                             </div>
                         </a>
                     </div>
