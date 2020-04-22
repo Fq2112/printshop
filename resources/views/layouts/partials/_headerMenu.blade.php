@@ -106,41 +106,32 @@
     </div>
 @else
     <div id="top-cart">
-        <a href="#" id="top-cart-trigger"><i class="icon-shopping-cart1"></i><span>0</span></a>
+        <a href="#" id="top-cart-trigger"><i class="icon-shopping-cart1"></i><span>9+</span></a>
         <div class="top-cart-content">
             <div class="top-cart-title">
                 <h4 data-toc-skip>{{__('lang.header.cart')}}</h4>
             </div>
-            <div class="top-cart-items">
-                <div class="top-cart-item clearfix">
-                    <div class="top-cart-item-image">
-                        <a href="#">
-                            <img src="{{asset('demos/shop/images/items/featured/5.jpg')}}"
-                                 alt="Blue Shoulder Bag"/></a>
+            <div class="top-cart-items use-nicescroll" style="max-height: 200px">
+                @foreach(\App\Models\SubKategori::find(32)->getCluster as $row)
+                    <div class="top-cart-item clearfix">
+                        <a href="{{route('produk', ['produk' => $row->permalink])}}">
+                            <div class="top-cart-item-image">
+                                <img src="{{asset('storage/products/thumb/'.$row->thumbnail)}}" alt="Thumbnail">
+                            </div>
+                            <div class="top-cart-item-desc">
+                                <span class="top-cart-item-title">{{$row->name}}</span>
+                                <span class="top-cart-item-price">Rp{{number_format('25000',2,',','.')}}</span>
+                                <span class="top-cart-item-quantity t600">x 1</span>
+                            </div>
+                        </a>
                     </div>
-                    <div class="top-cart-item-desc">
-                        <a href="#" class="t400">White athletic shoe</a>
-                        <span class="top-cart-item-price">$35.00</span>
-                        <span class="top-cart-item-quantity t600">x 1</span>
-                    </div>
-                </div>
-                <div class="top-cart-item clearfix">
-                    <div class="top-cart-item-image">
-                        <a href="#" class="t400"><img
-                                src="{{asset('demos/shop/images/items/featured/1.jpg')}}"
-                                alt="Leather Bag"/></a>
-                    </div>
-                    <div class="top-cart-item-desc">
-                        <a href="#" class="t400">Round Neck Solid Light Blue Colour T-shirts</a>
-                        <span class="top-cart-item-price">$12.49</span>
-                        <span class="top-cart-item-quantity t600">x 2</span>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <div class="top-cart-action clearfix">
-                <span class="fleft top-checkout-price t600 text-dark">$59.98</span>
-                <button
-                    class="button button-dark button-small nomargin fright">{{__('lang.button.cart')}}</button>
+                <span class="top-checkout-price t600 text-dark">
+                    Rp{{\App\Support\Facades\NumberShorten::redenominate('989898989')}}</span>
+                <a href="{{route('user.cart')}}" class="button button-3d button-primary button-small m-0 fright">
+                    {{__('lang.button.view')}}</a>
             </div>
         </div>
     </div>

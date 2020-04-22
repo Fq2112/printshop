@@ -32,5 +32,6 @@ class AppServiceProvider extends ServiceProvider
         setlocale(LC_TIME, config('app.locale'));
 
         $this->app->bind('GlobalAuth', 'App\Support\GlobalAuth');
+        $this->app->bind('NumberShorten', 'App\Support\NumberShorten');
     }
 }

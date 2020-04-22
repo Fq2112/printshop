@@ -285,6 +285,7 @@ return [
         "no" => "No",
         "subs" => "Subscribe",
         "contact" => "Send Message",
+        "view" => "VIEW ALL",
         "detail" => "DETAILS",
         "add" => "ADD",
         "edit" => "EDIT",

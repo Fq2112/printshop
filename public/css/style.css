@@ -1930,29 +1930,32 @@ body:not(.device-md):not(.device-sm):not(.device-xs) #header.transparent-header:
 	letter-spacing: 1px;
 }
 
-.top-cart-items { padding: 15px; }
-
 .top-cart-item {
-	padding-top: 15px;
-	margin-top: 15px;
-	border-top: 1px solid #F5F5F5;
+    padding: 15px;
+    border-top: 1px solid #F5F5F5;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 
 .top-cart-item:first-child {
-	padding-top: 0;
-	margin-top: 0;
-	border-top: 0;
+    border-top: 0;
+}
+
+.top-cart-item:hover {
+    background-color: #F9F9F9;
+    padding-left: 1.5rem;
 }
 
 .top-cart-item-image {
-	float: left;
-	margin-right: 15px;
-	width: 48px !important;
-	height: 48px !important;
-	border: 2px solid #EEE;
-	-webkit-transition: border-color .2s linear;
-	-o-transition: border-color .2s linear;
-	transition: border-color .2s linear;
+    float: left;
+    margin-right: 15px;
+    width: 48px !important;
+    height: 48px !important;
+    border: 2px solid #EEE;
+    -webkit-transition: border-color .2s linear;
+    -o-transition: border-color .2s linear;
+    transition: border-color .2s linear;
 }
 
 .top-cart-item-image a,
@@ -1962,25 +1965,32 @@ body:not(.device-md):not(.device-sm):not(.device-xs) #header.transparent-header:
 	height: 44px !important;
 }
 
-.top-cart-item-image:hover { border-color: #1ABC9C; }
+.top-cart-item:hover .top-cart-item-image {
+    border-color: #f89406;
+}
 
 .top-cart-item-desc {
 	position: relative;
 	overflow: hidden;
 }
 
-.top-cart-item-desc a {
-	max-width: 85%;
-	display: block;
-	text-align: left !important;
-	font-size: 13px !important;
-	width: auto !important;
-	height: auto !important;
-	color: #333;
-	font-weight: 700;
+.top-cart-item-desc span.top-cart-item-title {
+    max-width: 85%;
+    display: block;
+    text-align: left !important;
+    font-size: 13px !important;
+    width: auto !important;
+    height: auto !important;
+    color: #333;
+    font-weight: 500;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 
-.top-cart-item-desc a:hover { color: #1ABC9C !important; }
+.top-cart-item:hover .top-cart-item-title {
+    color: #f89406;
+}
 
 .top-cart-item-desc span.top-cart-item-price {
 	display: block;

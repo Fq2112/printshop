@@ -285,6 +285,7 @@ return [
         "no" => "Tidak",
         "subs" => "Berlangganan",
         "contact" => "Kirim Pesan",
+        "view" => "LIHAT SEMUA",
         "detail" => "DETAIL",
         "add" => "TAMBAH",
         "edit" => "SUNTING",
