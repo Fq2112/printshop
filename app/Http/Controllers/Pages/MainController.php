@@ -147,15 +147,9 @@ class MainController extends Controller
             ->orwhere('permalink->id', $request->produk)->first();
         $provinces = Province::all();
         $guidelines = null;
-        $main_address = \App\Models\Address::where('user_id', Auth::id())->where('is_main', true)->first();
-
-        if ($request->has('city')) {
-            $address = $request->city;
-        } else {
-            $address = !is_null($main_address) ? $main_address->city_id : null;
-        }
-
+        $addresses = \App\Models\Address::where('user_id', Auth::id())->get();
         $qty = $request->qty;
+        $shipping = $request->shipping;
 
         if (!is_null($sub)) {
             $data = $sub;
@@ -167,8 +161,8 @@ class MainController extends Controller
                 $specs = $data->getSubkatSpecs;
                 $guidelines = $data->guidelines;
 
-                return view('pages.main.form-pemesanan', compact('data', 'provinces', 'specs',
-                    'address', 'qty', 'guidelines'));
+                return view('pages.main.form-pemesanan', compact('data', 'provinces', 'specs', 'guidelines',
+                    'addresses', 'qty', 'shipping'));
             }
 
         } elseif (!is_null($clust)) {
@@ -176,11 +170,11 @@ class MainController extends Controller
             $specs = $data->getClusterSpecs;
             $guidelines = $data->getSubKategori->guidelines;
 
-            return view('pages.main.form-pemesanan', compact('data', 'provinces', 'specs',
-                'address', 'qty', 'guidelines'));
-        } else {
-            return back();
+            return view('pages.main.form-pemesanan', compact('data', 'provinces', 'specs', 'guidelines',
+                'addresses', 'qty', 'shipping'));
         }
+
+        return back();
     }
 
     public function submitPemesanan(Request $request)

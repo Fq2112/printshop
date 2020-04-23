@@ -50,7 +50,7 @@ return [
         "step-1" => "Pilih Produk Cetak",
         "desc-1" => "<ul><li>Cari produk cetak yang Anda inginkan berdasarkan kategori atau filter lain yang tersedia.</li><li>Pilih produk cetak yang akan Anda cetak.</li></ul>",
         "step-2" => "Spesifikasi Pesanan",
-        "desc-2" => "<ul><li>Tentukan spesifikasi produk cetak yang Anda pilih, seperti material, ukuran, warna, laminasi, dan lainnya.</li><li>Masukkan alamat pengiriman, kemana produk cetak Anda akan dikirim.</li><li>Pilih jumlah produk cetak sesuai yang Anda inginkan.</li></ul>",
+        "desc-2" => "<ul><li>Tentukan spesifikasi produk cetak yang Anda pilih, seperti material, ukuran, warna, laminasi, dan lainnya.</li><li>Pilih jumlah produk cetak sesuai yang Anda inginkan.</li><li>Masukkan alamat pengiriman, kemana produk cetak Anda akan dikirim.</li></ul>",
         "step-3" => "Buat atau Unggah Desain",
         "desc-3" => "<ul><li>Pilih template desain yang tersedia.</li><li>Desain template tersebut menggunakan visual editor online sesuai yang Anda inginkan.</li><li>Atau juga bisa langsung mengunggah file desain Anda sendiri yang telah disesuaikan dengan pedoman desain kami.</li></ul>",
         "step-4" => "Selesaikan Pembayaran",
@@ -113,6 +113,7 @@ return [
                 "quantity" => "Kuantitas",
                 "price" => "Harga /:unit",
                 "production" => "Selesai Produksi",
+                "ongkir" => "Ongkir",
                 "delivery" => "Durasi Pengiriman",
                 "day" => 'hari',
                 "received" => "Tanggal Diterima",
@@ -121,7 +122,7 @@ return [
             ],
             "shipping" => [
                 "head" => "Alamat Pengiriman",
-                "capt" => "Tentukan kabupaten/kota mana produk cetak Anda akan dikirim",
+                "capt" => "Tentukan kemana produk cetak Anda akan dikirim",
             ],
             "quantity" => [
                 "head" => "Kuantitas Produk",

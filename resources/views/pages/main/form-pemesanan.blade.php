@@ -225,7 +225,26 @@
                             <div class="card-content">
                                 <div class="card-title" style="text-transform: none">
                                     <h4 class="text-center"
-                                        style="color: #f89406">{{__('lang.product.form.shipping.head')}}</h4>
+                                        style="color: #f89406">{{__('lang.product.form.quantity.head')}}</h4>
+                                    <h5 class="text-center mb-2" style="text-transform: none">
+                                        {{__('lang.product.form.quantity.capt')}}</h5>
+                                    <div class="divider divider-center mt-1 mb-1"><i class="icon-circle"></i></div>
+                                    <div class="row form-group">
+                                        <div class="col">
+                                            <small>{{__('lang.product.form.summary.quantity')}}
+                                                <span class="required">*</span></small>
+                                            <input id="range-quantity" name="quantity" class="input-range-slider">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="card-shipping" class="myCard" style="display: none">
+                            <div class="card-content">
+                                <div class="card-title" style="text-transform: none">
+                                    <h4 class="text-center" style="color: #f89406">
+                                        {{__('lang.product.form.shipping.head')}}</h4>
                                     <h5 class="text-center mb-2" style="text-transform: none">
                                         {{__('lang.product.form.shipping.capt')}}</h5>
                                     <div class="divider divider-center mt-1 mb-1"><i class="icon-circle"></i></div>
@@ -249,31 +268,13 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <input id="price_pcs" type="hidden" name="price_pcs">
+                                        <input id="production_finished" type="hidden" name="production_finished">
+                                        <input id="ongkir" type="hidden" name="ongkir">
+                                        <input id="delivery_duration" type="hidden" name="delivery_duration">
+                                        <input id="received_date" type="hidden" name="received_date">
+                                        <input id="total" type="hidden" name="total">
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="card-quantity" class="myCard" style="display: none">
-                            <div class="card-content">
-                                <div class="card-title" style="text-transform: none">
-                                    <h4 class="text-center"
-                                        style="color: #f89406">{{__('lang.product.form.quantity.head')}}</h4>
-                                    <h5 class="text-center mb-2" style="text-transform: none">
-                                        {{__('lang.product.form.quantity.capt')}}</h5>
-                                    <div class="divider divider-center mt-1 mb-1"><i class="icon-circle"></i></div>
-                                    <div class="row form-group">
-                                        <div class="col">
-                                            <small>{{__('lang.product.form.summary.quantity')}}
-                                                <span class="required">*</span></small>
-                                            <input id="range-quantity" name="quantity" class="input-range-slider">
-                                        </div>
-                                    </div>
-                                    <input id="price_pcs" type="hidden" name="price_pcs">
-                                    <input id="production_finished" type="hidden" name="production_finished">
-                                    <input id="delivery_duration" type="hidden" name="delivery_duration">
-                                    <input id="received_date" type="hidden" name="received_date">
-                                    <input id="total" type="hidden" name="total">
                                 </div>
                             </div>
                         </div>
@@ -306,6 +307,11 @@
                                         </div>
                                     </div>
                                     <ul class="list-group list-group-flush">
+                                        <div class="css3-spinner" style="z-index: 1;top: -3em;display: none">
+                                            <div class="css3-spinner-bounce1"></div>
+                                            <div class="css3-spinner-bounce2"></div>
+                                            <div class="css3-spinner-bounce3"></div>
+                                        </div>
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.quantity')}}
                                             <b class="fright show-quantity">&ndash;</b>
@@ -317,6 +323,10 @@
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.production')}}
                                             <b class="fright show-production">&ndash;</b>
+                                        </li>
+                                        <li class="list-group-item noborder">
+                                            {{__('lang.product.form.summary.ongkir')}}
+                                            <b class="fright show-ongkir">&ndash;</b>
                                         </li>
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.delivery')}}
@@ -429,8 +439,8 @@
     <script>
         var collapse = $('.panel-collapse'), range_slider = $("#range-quantity"),
             btn_upload = $("#btn_upload"), upload_input = $("#file"), link_input = $("#link"),
-            price_pcs = parseInt('25000'), total = 0, str_unit = ' {{$specs->getUnit->name}}',
-            production_day = 3, etd = '';
+            qty = '{{!$qty ? 0 : $qty}}', price_pcs = parseInt('25000'), str_unit = ' {{$specs->getUnit->name}}',
+            production_day = 3, ongkir = 0, etd = '', str_etd = '', total = 0;
 
         $(function () {
             moment.locale('{{$app->getLocale()}}');
@@ -440,14 +450,23 @@
                 grid_num: 5,
                 min: 0,
                 max: 100,
-                from: 0,
+                from: qty,
                 postfix: str_unit,
                 onChange: function (data) {
                     if (data.from > 0) {
-                        total = parseInt(data.from) * price_pcs;
-                        resetter(1, data.from, total);
+                        total = (parseInt(data.from) * price_pcs) + ongkir;
+                        $(".show-quantity").text(data.from + str_unit);
+                        $(".show-price").text("Rp" + thousandSeparator(price_pcs) + ",00");
+                        $(".show-production").text(moment().add(production_day, 'days').format('DD MMM YYYY'));
+                        $("#price_pcs").val(price_pcs);
+                        $("#production_finished").val(moment().add(production_day, 'days').format('YYYY-MM-DD'));
+                        $(".show-total").text("Rp" + thousandSeparator(total) + ",00");
+
+                        $("#card-shipping").show();
+
                     } else {
-                        resetter(0);
+                        resetter();
+                        $("#card-shipping").hide();
                     }
                 }
             });
@@ -528,15 +547,16 @@
             $(".show-finishing").text($("input[name='finishing']:checked").data('name'));
             $(".show-extra").text($("input[name='extra']:checked").data('name'));
 
-            @if(!is_null($address))
-            $("#city_id").val('{{$address}}').selectpicker('refresh');
-            getShipping('{{$address}}');
+            @if(!is_null($shipping))
+            $("#city_id").val('{{$shipping}}').selectpicker('refresh');
+            getShipping('{{$shipping}}');
             @endif
         });
 
         function productSpecs(check, spec, custom) {
             var spec_val = $("#" + spec).data('name'), str_spec = '';
-            resetter(0);
+            resetter();
+            $("#card-shipping").hide();
 
             if (check == 'balance') {
                 var val = parseInt(spec_val);
@@ -579,66 +599,84 @@
         }
 
         $("#city_id").on("change", function () {
-            resetter(0);
             getShipping($(this).val());
         });
 
         function getShipping(city) {
-            $.get('{{route('get.cari-pengiriman.produk')}}?destination=' + city, function (data) {
-                $.each(data['rajaongkir']['results'][0]['costs'], function (i, val) {
-                    if (val.service == 'REG' || val.service == 'CTCYES') {
-                        etd = val.cost[0].etd;
+            clearTimeout(this.delay);
+            this.delay = setTimeout(function () {
+                $.ajax({
+                    url: "{{route('get.cari-pengiriman.produk')}}?destination=" + city,
+                    type: "GET",
+                    beforeSend: function () {
+                        $('.css3-spinner').show();
+                        $(".list-group-flush").css('opacity', '.3');
+                    },
+                    complete: function () {
+                        $('.css3-spinner').hide();
+                        $(".list-group-flush").css('opacity', '1');
+                    },
+                    success: function (data) {
+                        $.each(data['rajaongkir']['results'][0]['costs'], function (i, val) {
+                            if (val.service == 'REG' || val.service == 'CTCYES') {
+                                ongkir = val.cost[0].value;
+                                etd = val.cost[0].etd;
+                            }
+                        });
+
+                        total += parseInt(ongkir);
+
+                        if (etd == '1-1') {
+                            str_etd = '&le; 1 {{__('lang.product.form.summary.day', ['s' => null])}}'
+                        } else {
+                            str_etd = etd.replace('-', ' – ') + ' {{__('lang.product.form.summary.day', ['s' => 's'])}}';
+                        }
+
+                        $(".show-ongkir").text("Rp" + thousandSeparator(ongkir) + ",00");
+                        $(".show-delivery").html(str_etd);
+                        $(".show-received").text(moment().add(parseInt(etd.substr(-1)) + production_day, 'days').format('DD MMM YYYY'));
+                        $(".show-total").text("Rp" + thousandSeparator(total) + ",00");
+
+                        $("#ongkir").val(ongkir);
+                        $("#delivery_duration").val(etd);
+                        $("#received_date").val(moment().add(parseInt(etd.substr(-1)) + production_day, 'days').format('YYYY-MM-DD'));
+                        $("#total").val(total);
+
+                        $("#summary-alert").show();
+                        btn_upload.removeAttr('disabled');
+                    },
+                    error: function () {
+                        swal('{{__('lang.alert.error')}}', '{{__('lang.alert.error-capt')}}', 'error');
                     }
                 });
+            }.bind(this), 800);
 
-                @if($qty)
-                range_slider.data("ionRangeSlider").update({from: '{{$qty}}'});
-                total = parseInt('{{$qty}}') * price_pcs;
-                resetter(1, '{{$qty}}', total);
-                @endif
-            });
-
-            $("#card-quantity").show();
+            return false;
         }
 
-        function resetter(check, qty, total) {
-            if (check == '0') {
-                range_slider.data("ionRangeSlider").update({from: 0});
+        function resetter() {
+            range_slider.data("ionRangeSlider").update({from: 0});
+            qty = 0;
+            ongkir = 0;
+            total = 0;
 
-                total = 0;
-                $(".show-quantity").html('&ndash;');
-                $(".show-price").html('&ndash;');
-                $(".show-production").html('&ndash;');
-                $(".show-delivery").html('&ndash;');
-                $(".show-received").html('&ndash;');
-                $(".show-total").html('&ndash;');
+            $(".show-quantity").html('&ndash;');
+            $(".show-price").html('&ndash;');
+            $(".show-production").html('&ndash;');
+            $(".show-ongkir").html('&ndash;');
+            $(".show-delivery").html('&ndash;');
+            $(".show-received").html('&ndash;');
+            $(".show-total").html('&ndash;');
 
-                $("#price_pcs").val(null);
-                $("#production_finished").val(null);
-                $("#delivery_duration").val(null);
-                $("#received_date").val(null);
-                $("#total").val(null);
+            $("#price_pcs").val(null);
+            $("#production_finished").val(null);
+            $("#ongkir").val(null);
+            $("#delivery_duration").val(null);
+            $("#received_date").val(null);
+            $("#total").val(null);
 
-                $("#summary-alert").hide();
-                btn_upload.attr('disabled', 'disabled');
-
-            } else {
-                $(".show-quantity").text(qty + str_unit);
-                $(".show-price").text("Rp" + thousandSeparator(price_pcs) + ",00");
-                $(".show-production").text(moment().add(production_day, 'days').format('DD MMM YYYY'));
-                $(".show-delivery").text(etd.replace('-', ' – ') + ' {{__('lang.product.form.summary.day')}}');
-                $(".show-received").text(moment().add(parseInt(etd.substr(-1)) + production_day, 'days').format('DD MMM YYYY'));
-                $(".show-total").text("Rp" + thousandSeparator(total) + ",00");
-
-                $("#price_pcs").val(price_pcs);
-                $("#production_finished").val(moment().add(production_day, 'days').format('YYYY-MM-DD'));
-                $("#delivery_duration").val(etd);
-                $("#received_date").val(moment().add(parseInt(etd.substr(-1)) + production_day, 'days').format('YYYY-MM-DD'));
-                $("#total").val(total);
-
-                $("#summary-alert").show();
-                btn_upload.removeAttr('disabled');
-            }
+            $("#summary-alert").hide();
+            btn_upload.attr('disabled', 'disabled');
         }
 
         btn_upload.on('click', function () {

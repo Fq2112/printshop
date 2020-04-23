@@ -112,10 +112,11 @@
                 <h4 data-toc-skip>{{__('lang.header.cart')}}</h4>
             </div>
             <div class="top-cart-items use-nicescroll" style="max-height: 200px">
+                @php $total = 0; @endphp
                 @foreach(\App\Models\SubKategori::find(32)->getCluster as $row)
-                    @php $qty = rand(1,100); @endphp
+                    @php $qty = rand(1,100);$total += $qty*25000;@endphp
                     <div class="top-cart-item clearfix">
-                        <a href="{{route('produk', ['produk' => $row->permalink, 'city' => rand(1,501), 'qty' => $qty])}}">
+                        <a href="{{route('produk', ['produk' => $row->permalink, 'qty' => $qty, 'shipping' => rand(1,501)])}}">
                             <div class="top-cart-item-image">
                                 <img src="{{asset('storage/products/thumb/'.$row->thumbnail)}}" alt="Thumbnail">
                             </div>
@@ -130,7 +131,7 @@
             </div>
             <div class="top-cart-action clearfix">
                 <span class="top-checkout-price t600 text-dark">
-                    Rp{{\App\Support\Facades\NumberShorten::redenominate('989898989')}}</span>
+                    Rp{{\App\Support\Facades\NumberShorten::redenominate($total)}}</span>
                 <a href="{{route('user.cart')}}" class="button button-3d button-primary button-small m-0 fright">
                     {{__('lang.button.view')}}</a>
             </div>
