@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\ClusterKategori;
 use App\Models\Province;
 use App\Models\SubKategori;
@@ -179,7 +180,56 @@ class MainController extends Controller
 
     public function submitPemesanan(Request $request)
     {
-        dd($request);
+        $sub = SubKategori::find($request->id);
+        $clust = ClusterKategori::find($request->id);
+
+        Cart::create([
+            'user_id' => Auth::id(),
+            'subkategori_id' => !is_null($sub) ? $sub->id : null,
+            'cluster_id' => !is_null($clust) ? $clust->id : null,
+            'address_id' => $request->address_id,
+            'material_id' => $request->materials,
+            'type_id' => $request->type,
+            'balance_id' => $request->balance,
+            'page_id' => $request->page,
+            'copies_id' => $request->copies,
+            'size_id' => $request->size,
+            'width' => $request->width,
+            'length' => $request->length,
+            'lamination_id' => $request->lamination,
+            'side_id' => $request->side,
+            'edge_id' => $request->corner,
+            'color_id' => $request->color,
+            'finishing_id' => $request->finishing,
+            'folding_id' => $request->folding,
+            'front_side_id' => $request->front_side,
+            'right_side_id' => $request->right_side,
+            'left_side_id' => $request->left_side,
+            'back_side_id' => $request->back_side,
+            'front_cover_id' => $request->front_cover,
+            'back_cover_id' => $request->back_cover,
+            'binding_id' => $request->binding,
+            'print_method_id' => $request->print_method,
+            'material_cover_id' => $request->cover_material,
+            'side_cover_id' => $request->cover_side,
+            'cover_lamination_id' => $request->cover_lamination,
+            'lid_id' => $request->lid,
+            'orientation_id' => $request->orientation,
+            'extra_id' => $request->extra,
+            'holder_id' => $request->holder,
+            'material_color_id' => $request->material_color,
+            'qty' => $request->qty,
+            'price_pcs' => $request->price_pcs,
+            'production_finished' => $request->production_finished,
+            'ongkir' => $request->ongkir,
+            'delivery_duration' => $request->delivery_duration,
+            'received_date' => $request->received_date,
+            'total' => $request->total,
+            'file' => $request->file,
+            'link' => $request->link,
+        ]);
+
+        return back()->with('order', __('lang.alert.order', ['param' => !is_null($sub) ? $sub->name : $clust->name]));
     }
 
     public function cariNamaProduk(Request $request)

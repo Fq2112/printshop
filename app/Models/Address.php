@@ -33,6 +33,11 @@ class Address extends Model
         return $this->belongsTo(OccupancyType::class, 'occupancy_id');
     }
 
+    public function getCart()
+    {
+        return $this->hasMany(Cart::class, 'address_id');
+    }
+
     public function getLocale(): string
     {
         if (is_null(App::getLocale())) {

@@ -206,6 +206,7 @@
                 <form id="form-pemesanan" class="row" method="POST" enctype="multipart/form-data"
                       action="{{route('produk.submit.pemesanan', ['produk' => $data->permalink])}}">
                     @csrf
+                    <input type="hidden" name="id" value="{{$data->id}}">
                     <div class="postcontent mb-0 pb-0 clearfix">
                         <div class="myCard mb-4">
                             <div class="card-content">
@@ -233,7 +234,7 @@
                                         <div class="col">
                                             <small>{{__('lang.product.form.summary.quantity')}}
                                                 <span class="required">*</span></small>
-                                            <input id="range-quantity" name="quantity" class="input-range-slider">
+                                            <input id="range-quantity" name="qty" class="input-range-slider">
                                         </div>
                                     </div>
                                 </div>
@@ -248,33 +249,190 @@
                                     <h5 class="text-center mb-2" style="text-transform: none">
                                         {{__('lang.product.form.shipping.capt')}}</h5>
                                     <div class="divider divider-center mt-1 mb-1"><i class="icon-circle"></i></div>
-                                    <div class="row form-group">
-                                        <div class="col">
-                                            <small>{{__('lang.profile.city')}} <span class="required">*</span></small>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="icon-city"></i></span>
+                                    <div class="component-accordion">
+                                        <div class="panel-group" id="accordion2" role="tablist">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" role="tab" id="heading-address">
+                                                    <h4 class="panel-title">
+                                                        <a role="button" data-toggle="collapse"
+                                                           href="#collapse-address" aria-expanded="false"
+                                                           aria-controls="collapse-address" class="collapsed">
+                                                            {{__('lang.profile.address-head')}}
+                                                            <b class="show-address"></b>
+                                                        </a>
+                                                    </h4>
                                                 </div>
-                                                <select id="city_id" name="city_id" data-live-search="true"
-                                                        class="form-control selectpicker" required
-                                                        title="{{__('lang.placeholder.choose')}}">
-                                                    @foreach($provinces as $province)
-                                                        <optgroup label="{{$province->name}}">
-                                                            @foreach($province->getCity as $city)
-                                                                <option value="{{$city->id}}">{{$city->name}}</option>
-                                                            @endforeach
-                                                        </optgroup>
-                                                    @endforeach
-                                                </select>
+                                                <div id="collapse-address" class="panel-collapse collapse"
+                                                     role="tabpanel"
+                                                     aria-labelledby="heading-address" aria-expanded="false"
+                                                     style="height: 0;" data-parent="#accordion2">
+                                                    <div class="panel-body">
+                                                        @if(count($addresses) > 0)
+                                                            <div class="row">
+                                                                @foreach($addresses as $row)
+                                                                    <div class="col-12 mb-3">
+                                                                        <label class="card-label"
+                                                                               for="address_{{$row->id}}"
+                                                                               onclick="getShipping('{{$row->city_id}}',
+                                                                                   'address','{{$row->is_main == false ? $row->getOccupancy->name :
+                                                                                   $row->getOccupancy->name.' ['.__('lang.profile.main-address').']'}}')">
+                                                                            <input id="address_{{$row->id}}"
+                                                                                   class="card-rb address-rb"
+                                                                                   type="radio" name="address_id"
+                                                                                   value="{{$row->id}}"
+                                                                                {{!is_null($shipping) && $shipping == $row->city_id ? 'checked' : ''}}>
+                                                                            <div class="card card-input p-3">
+                                                                                <div class="row">
+                                                                                    <div class="col-lg-12">
+                                                                                        <div class="media">
+                                                                                            <img
+                                                                                                class="align-self-center"
+                                                                                                alt="icon" width="100"
+                                                                                                src="{{asset('images/icons/occupancy/'.$row->getOccupancy->image)}}">
+                                                                                            <div
+                                                                                                class="ml-2 media-body">
+                                                                                                <h5 class="mt-0 mb-1">
+                                                                                                    <i class="icon-building mr-1"></i>{{$row->getOccupancy->name}}
+                                                                                                    {!! $row->is_main == false ? '' :
+                                                                                                    '<span style="font-weight: 500;color: unset">['.
+                                                                                                    __('lang.profile.main-address').']</span>'!!}
+                                                                                                </h5>
+                                                                                                <blockquote class="mb-0"
+                                                                                                            style="font-size: 14px;text-transform: none">
+                                                                                                    <table class="m-0"
+                                                                                                           style="font-size: 14px">
+                                                                                                        <tr data-toggle="tooltip"
+                                                                                                            data-placement="left"
+                                                                                                            title="{{ucwords(__('lang.placeholder.name'))}}">
+                                                                                                            <td>
+                                                                                                                <i class="icon-id-card"></i>
+                                                                                                            </td>
+                                                                                                            <td>&nbsp;
+                                                                                                            </td>
+                                                                                                            <td>{{$row->name}}</td>
+                                                                                                        </tr>
+                                                                                                        <tr data-toggle="tooltip"
+                                                                                                            data-placement="left"
+                                                                                                            title="{{__('lang.footer.phone')}}">
+                                                                                                            <td>
+                                                                                                                <i class="icon-phone"></i>
+                                                                                                            </td>
+                                                                                                            <td>&nbsp;
+                                                                                                            </td>
+                                                                                                            <td>{{$row->phone}}</td>
+                                                                                                        </tr>
+                                                                                                        <tr data-toggle="tooltip"
+                                                                                                            data-placement="left"
+                                                                                                            title="{{__('lang.profile.city')}}">
+                                                                                                            <td>
+                                                                                                                <i class="icon-city"></i>
+                                                                                                            </td>
+                                                                                                            <td>&nbsp;
+                                                                                                            </td>
+                                                                                                            <td>{{$row->getCity->getProvince->name.
+                                                                                ', '.$row->getCity->name}}</td>
+                                                                                                        </tr>
+                                                                                                        <tr data-toggle="tooltip"
+                                                                                                            data-placement="left"
+                                                                                                            title="{{__('lang.profile.address')}}">
+                                                                                                            <td>
+                                                                                                                <i class="icon-map-marker-alt"></i>
+                                                                                                            </td>
+                                                                                                            <td>&nbsp;
+                                                                                                            </td>
+                                                                                                            <td>{{$row->address.' - '.
+                                                                                $row->postal_code}}</td>
+                                                                                                        </tr>
+                                                                                                    </table>
+                                                                                                </blockquote>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </label>
+                                                                    </div>
+                                                                @endforeach
+                                                            </div>
+                                                        @else
+                                                            <div class="row justify-content-center text-center">
+                                                                <div class="col">
+                                                                    <img width="256" class="img-fluid" alt="Empty"
+                                                                         src="{{asset('images/loader-image.gif')}}">
+                                                                    <h3 class="mt-0 mb-1">
+                                                                        {{__('lang.product.form.shipping.empty-head')}}
+                                                                    </h3>
+                                                                    <h4 class="mt-0 mb-3" style="text-transform: none">
+                                                                        {{__('lang.product.form.shipping.empty-capt')}}
+                                                                    </h4>
+                                                                    <button type="button"
+                                                                            class="button button-rounded button-reveal button-border button-primary tright mb-4"
+                                                                            onclick="@auth window.location.href='{{route('user.profil')}}' @else openLoginModal() @endauth">
+                                                                        <i class="icon-angle-right"></i><span>{{__('lang.header.profile')}}</span>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
                                             </div>
+
+                                        @auth
+                                            <!-- add address -->
+                                            @else
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" role="tab" id="heading-city">
+                                                        <h4 class="panel-title">
+                                                            <a role="button" data-toggle="collapse"
+                                                               href="#collapse-city" aria-expanded="false"
+                                                               aria-controls="collapse-city" class="collapsed">
+                                                                {{__('lang.product.form.shipping.estimate')}}
+                                                                <b class="show-city"></b>
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapse-city" class="panel-collapse collapse"
+                                                         role="tabpanel"
+                                                         aria-labelledby="heading-city" aria-expanded="false"
+                                                         style="height: 0;" data-parent="#accordion2">
+                                                        <div class="panel-body">
+                                                            <div class="row form-group">
+                                                                <div class="col">
+                                                                    <small>{{__('lang.profile.city')}}</small>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <span class="input-group-text"><i
+                                                                                    class="icon-city"></i></span>
+                                                                        </div>
+                                                                        <select id="city_id" name="address_id"
+                                                                                data-live-search="true"
+                                                                                class="form-control selectpicker"
+                                                                                title="{{__('lang.placeholder.choose')}}">
+                                                                            @foreach($provinces as $province)
+                                                                                <optgroup label="{{$province->name}}">
+                                                                                    @foreach($province->getCity as $city)
+                                                                                        <option value="{{$city->id}}"
+                                                                                                data-name="{{$city->name.', '.$city->getProvince->name}}">
+                                                                                            {{$city->name}}</option>
+                                                                                    @endforeach
+                                                                                </optgroup>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endauth
                                         </div>
-                                        <input id="price_pcs" type="hidden" name="price_pcs">
-                                        <input id="production_finished" type="hidden" name="production_finished">
-                                        <input id="ongkir" type="hidden" name="ongkir">
-                                        <input id="delivery_duration" type="hidden" name="delivery_duration">
-                                        <input id="received_date" type="hidden" name="received_date">
-                                        <input id="total" type="hidden" name="total">
                                     </div>
+                                    <input id="price_pcs" type="hidden" name="price_pcs">
+                                    <input id="production_finished" type="hidden" name="production_finished">
+                                    <input id="ongkir" type="hidden" name="ongkir">
+                                    <input id="delivery_duration" type="hidden" name="delivery_duration">
+                                    <input id="received_date" type="hidden" name="received_date">
+                                    <input id="total" type="hidden" name="total">
                                 </div>
                             </div>
                         </div>
@@ -307,7 +465,7 @@
                                         </div>
                                     </div>
                                     <ul class="list-group list-group-flush">
-                                        <div class="css3-spinner" style="z-index: 1;top: -3em;display: none">
+                                        <div class="css3-spinner" style="z-index: 1;top: -1rem;display: none">
                                             <div class="css3-spinner-bounce1"></div>
                                             <div class="css3-spinner-bounce2"></div>
                                             <div class="css3-spinner-bounce3"></div>
@@ -510,7 +668,7 @@
             });
 
             $($.unique(
-                $('.component-accordion .panel-body INPUT:radio').map(function (i, e) {
+                $('.component-accordion .panel-body INPUT:radio:not(.address-rb)').map(function (i, e) {
                     return $(e).attr('name')
                 }).get()
             )).each(function (i, e) {
@@ -548,8 +706,9 @@
             $(".show-extra").text($("input[name='extra']:checked").data('name'));
 
             @if(!is_null($shipping))
-            $("#city_id").val('{{$shipping}}').selectpicker('refresh');
-            getShipping('{{$shipping}}');
+            @php $find = \App\Models\Address::find($shipping); @endphp
+            getShipping('{{$shipping}}', 'address',
+                '{{$find->is_main == false ? $find->getOccupancy->name : $find->getOccupancy->name.' ['.__('lang.profile.main-address').']'}}');
             @endif
         });
 
@@ -599,10 +758,13 @@
         }
 
         $("#city_id").on("change", function () {
-            getShipping($(this).val());
+            getShipping($(this).val(), 'city', $('option:selected', this).attr("data-name"));
         });
 
-        function getShipping(city) {
+        function getShipping(city, check, name) {
+            $(".show-" + check).text(name);
+            $('#collapse-' + check).collapse('toggle');
+
             clearTimeout(this.delay);
             this.delay = setTimeout(function () {
                 $.ajax({
@@ -656,6 +818,7 @@
 
         function resetter() {
             range_slider.data("ionRangeSlider").update({from: 0});
+            $("#card-shipping input[type=radio]").prop('checked', false);
             qty = 0;
             ongkir = 0;
             total = 0;

@@ -123,6 +123,9 @@ return [
             "shipping" => [
                 "head" => "Shipping Address",
                 "capt" => "Decide where your print products will be sent",
+                "empty-head" => "You haven't made any addresses",
+                "empty-capt" => "Open \"Edit Profile\" page and manage your address list now",
+                "estimate" => "Shipping Estimation",
             ],
             "quantity" => [
                 "head" => "Product Quantity",
@@ -341,6 +344,7 @@ return [
         "logout-head" => "Sign Out",
         "logout-capt" => "Are you sure to end your session?",
         "logout-message" => "You will be redirected to the Home page.",
+        "order" => "Your print product [:param] is successfully added to your shopping cart!",
         "browser" => "The browser you are using does not support! Please update or use another browser.",
         "upload" => "Your avatar is successfully updated!",
         "upload-bg" => "Your background profile is successfully updated!",

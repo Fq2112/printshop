@@ -123,6 +123,9 @@ return [
             "shipping" => [
                 "head" => "Alamat Pengiriman",
                 "capt" => "Tentukan kemana produk cetak Anda akan dikirim",
+                "empty-head" => "Anda belum membuat alamat manapun",
+                "empty-capt" => "Buka halaman \"Sunting Profil\" dan kelola daftar alamat Anda sekarang",
+                "estimate" => "Estimasi Pengiriman",
             ],
             "quantity" => [
                 "head" => "Kuantitas Produk",
@@ -341,6 +344,7 @@ return [
         "logout-head" => "Keluar",
         "logout-capt" => "Apakah Anda yakin untuk mengakhiri sesi Anda?",
         "logout-message" => "Anda akan dialihkan ke halaman Beranda.",
+        "order" => "Produk cetak [:param] Anda berhasil ditambahkan ke keranjang belanja Anda!",
         "browser" => "Browser yang Anda gunakan tidak support! Silahkan perbarui atau gunakan browser yang lainnya.",
         "upload" => "Avatar Anda berhasil diperbarui!",
         "upload-bg" => "Latar belakang profil Anda berhasil diperbarui!",

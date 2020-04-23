@@ -4,6 +4,7 @@ namespace App;
 
 use App\Models\Address;
 use App\Models\Bio;
+use App\Models\Cart;
 use App\Models\SocialProvider;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Database\Eloquent\Builder;
@@ -53,6 +54,11 @@ class User extends Authenticatable
     public function getAddress()
     {
         return $this->hasMany(Address::class, 'user_id');
+    }
+
+    public function getCart()
+    {
+        return $this->hasMany(Cart::class, 'user_id');
     }
 
     /**
