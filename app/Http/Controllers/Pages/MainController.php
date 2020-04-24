@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
 use App\Models\Cart;
 use App\Models\ClusterKategori;
 use App\Models\Province;
@@ -148,9 +149,10 @@ class MainController extends Controller
             ->orwhere('permalink->id', $request->produk)->first();
         $provinces = Province::all();
         $guidelines = null;
-        $addresses = \App\Models\Address::where('user_id', Auth::id())->get();
+        $addresses = Address::where('user_id', Auth::id())->get();
+
         $qty = $request->qty;
-        $shipping = $request->shipping;
+        $shipping = Address::where('user_id', Auth::id())->where('id', $request->shipping)->first();
 
         if (!is_null($sub)) {
             $data = $sub;
