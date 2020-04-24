@@ -14,23 +14,37 @@
                     @if(count($addresses) > 0)
                         @foreach($addresses as $row)
                             <div class="col-12 mb-3">
-                                <label class="card-label" for="address_{{$row->id}}"
-                                       onclick="getShipping('{{$row->city_id}}','address','{{$row->is_main == false ? $row->getOccupancy->name : $row->getOccupancy->name.' ['.__('lang.profile.main-address').']'}}')">
+                                <label class="card-label" for="address_{{$row->id}}">
                                     <input id="address_{{$row->id}}" class="card-rb address-rb" type="radio"
                                            name="address_id" value="{{$row->id}}"
                                         {{!is_null($shipping) && $shipping == $row->city_id ? 'checked' : ''}}>
-                                    <div class="card card-input p-3">
+                                    <div class="card card-input">
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="media">
-                                                    <img class="align-self-center" alt="icon" width="100"
-                                                         src="{{asset('images/icons/occupancy/'.$row->getOccupancy->image)}}">
-                                                    <div class="ml-2 media-body">
-                                                        <h5 class="mt-0 mb-1">
+                                                    <div class="content-area align-self-center ml-3"
+                                                         data-toggle="tooltip" data-placement="bottom"
+                                                         title="{{__('lang.tooltip.edit-address')}}"
+                                                         style="cursor: pointer" onclick="editAddress('{{$row->name}}',
+                                                        '{{$row->phone}}','{{$row->lat}}','{{$row->long}}',
+                                                        '{{$row->city_id}}','{{$row->address}}','{{$row->postal_code}}',
+                                                        '{{$row->getOccupancy->id}}','{{$row->getOccupancy->name}}',
+                                                        '{{$row->is_main}}','{{route('user.profil-alamat.update', ['id' => $row->id])}}')">
+                                                        <img alt="icon" width="100"
+                                                             src="{{asset('images/icons/occupancy/'.$row->getOccupancy->image)}}">
+                                                        <div class="custom-overlay">
+                                                            <div class="custom-text">
+                                                                <i class="icon-edit icon-2x"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ml-3 media-body"
+                                                         onclick="getShipping('{{$row->city_id}}','address','{{$row->is_main == false ? $row->getOccupancy->name : $row->getOccupancy->name.' ['.__('lang.profile.main-address').']'}}')">
+                                                        <h5 class="mt-3 mb-1">
                                                             <i class="icon-building mr-1"></i>{{$row->getOccupancy->name}}
                                                             {!! $row->is_main == false ? '' : '<span style="font-weight: 500;color: unset">['.__('lang.profile.main-address').']</span>'!!}
                                                         </h5>
-                                                        <blockquote class="mb-0"
+                                                        <blockquote class="mb-3"
                                                                     style="font-size: 14px;text-transform: none">
                                                             <table class="m-0" style="font-size: 14px">
                                                                 <tr data-toggle="tooltip" data-placement="left"

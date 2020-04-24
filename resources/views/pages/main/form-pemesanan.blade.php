@@ -167,6 +167,14 @@
             line-height: unset !important;
         }
 
+        .content-area {
+            cursor: pointer;
+        }
+
+        .custom-overlay {
+            background: rgba(0, 0, 0, 0.4);
+        }
+
         .gm-style-iw {
             width: 350px !important;
             top: 15px;
@@ -278,7 +286,6 @@
                 <form id="form-pemesanan" class="row" method="POST" enctype="multipart/form-data"
                       action="{{route('produk.submit.pemesanan', ['produk' => $data->permalink])}}">
                     @csrf
-                    <input type="hidden" name="id" value="{{$data->id}}">
                     <div class="postcontent mb-0 pb-0 clearfix">
                         <div class="myCard mb-4">
                             <div class="card-content">
@@ -651,8 +658,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer p-0">
-                                            <button type="submit" id="btn_save_address"
-                                                    class="btn btn-primary btn-block noborder" disabled>
+                                            <button type="submit" class="btn btn-primary btn-block noborder">
                                                 <i class="icon-map-marked-alt mr-2"></i>{{__('lang.button.save')}}
                                             </button>
                                         </div>
@@ -835,6 +841,16 @@
             $(".show-" + check).text(name);
             $('#collapse-' + check).collapse('toggle');
 
+            if (check == 'address') {
+                $("#shipping_estimation").val('default').selectpicker('refresh');
+                $(".show-city").html('&ndash;');
+            } else {
+                $(".address-rb").prop('checked', false);
+                $(".show-address").html('&ndash;');
+                $("#summary-alert").hide();
+                btn_upload.attr('disabled', 'disabled');
+            }
+
             clearTimeout(this.delay);
             this.delay = setTimeout(function () {
                 $.ajax({
@@ -877,9 +893,6 @@
                         if (check == 'address') {
                             $("#summary-alert").show();
                             btn_upload.removeAttr('disabled');
-                        } else {
-                            $("#summary-alert").hide();
-                            btn_upload.attr('disabled', 'disabled');
                         }
                     },
                     error: function () {
@@ -906,17 +919,6 @@
 
             $("#summary-alert").hide();
             btn_upload.attr('disabled', 'disabled');
-        }
-
-        function addAddress() {
-            @auth
-            $("#modal_address").modal('show');
-            resetterAddress();
-            @elseauth('admin')
-            swal('{{__('lang.alert.warning')}}', '{{__('lang.alert.feature-fail')}}', 'warning');
-            @else
-            openLoginModal();
-            @endauth
         }
 
         var google, myLatlng, geocoder, map, marker, infoWindow;
@@ -1099,6 +1101,16 @@
             });
         }
 
+        function addAddress() {
+            @auth
+            resetterAddress();
+            @elseauth('admin')
+            swal('{{__('lang.alert.warning')}}', '{{__('lang.alert.feature-fail')}}', 'warning');
+            @else
+            openLoginModal();
+            @endauth
+        }
+
         function resetterAddress() {
             init(-7.250445, 112.768845);
             infoWindow.setContent(
@@ -1116,20 +1128,20 @@
             $("#form-address").attr('action', '{{route('user.profil-alamat.create')}}');
             $("#is_main").prop('checked', false);
 
-            if ($("#btn_save_address").attr('disabled')) {
-                $("#btn_save_address").removeAttr('disabled');
-            } else {
-                $("#btn_save_address").attr('disabled', 'disabled');
-            }
+            $("#modal_address").modal('show');
         }
 
-        function editAddress(name, phone, lat, long, city_id, address, postal_code, occupancy_id, is_main, url) {
+        function editAddress(name, phone, lat, long, city_id, address, postal_code, occupancy_id, occupancy, is_main, url) {
+            var main_str = is_main == 1 ? ' <span class="font-weight-normal">[{{__('lang.profile.main-address')}}]</span>' : '';
+
+            $(".address-rb").prop('checked', false);
+
             init(lat, long);
             infoWindow.setContent(
                 '<div id="iw-container">' +
                 '<div class="iw-title">{{__('lang.profile.address')}}</div>' +
                 '<div class="iw-content">' +
-                '<div class="iw-subTitle" style="text-transform: none">' + occupancy_id + '</div>' +
+                '<div class="iw-subTitle" style="text-transform: none">' + occupancy + main_str + '</div>' +
                 '<img src="{{asset('images/searchPlace.png')}}">' +
                 '<p>' + address + '</p>' +
                 '</div><div class="iw-bottom-gradient"></div></div>'
@@ -1153,11 +1165,7 @@
             $("#long").val(long);
             $("#form-address").attr('action', url);
 
-            if ($("#btn_save_address").attr('disabled')) {
-                $("#btn_save_address").removeAttr('disabled');
-            } else {
-                $("#btn_save_address").attr('disabled', 'disabled');
-            }
+            $("#modal_address").modal('show');
         }
 
         btn_upload.on('click', function () {

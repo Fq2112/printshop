@@ -241,12 +241,13 @@ return [
         "confirm-password" => "Konfirmasi kata sandi harus sama dengan kata sandi baru Anda!",
     ],
     "tooltip" => [
-        "ava" => "Klik disini untuk mengubah avatar Anda!",
-        "background" => "Klik disini untuk mengubah latar belakang profil Anda!",
+        "ava" => "Klik di sini untuk mengubah avatar Anda!",
+        "background" => "Klik di sini untuk mengubah latar belakang profil Anda!",
         "address" => "Alamat Utama",
         "upload" => "Ekstensi yang diizinkan: :ext. Ukuran yang diizinkan: :size.",
-        "clear-upload" => "Klik disini untuk menghapus file yang telah Anda pilih!",
-        "cancel-upload" => "Klik disini untuk membatalkan proses pengunggahan file Anda!"
+        "edit-address" => "Klik di sini untuk menyunting alamat Anda!",
+        "clear-upload" => "Klik di sini untuk menghapus file yang telah Anda pilih!",
+        "cancel-upload" => "Klik di sini untuk membatalkan proses pengunggahan file Anda!"
     ],
     "placeholder" => [
         "search" => "Mau cetak apa hari ini?",
@@ -344,7 +345,9 @@ return [
         "logout-head" => "Keluar",
         "logout-capt" => "Apakah Anda yakin untuk mengakhiri sesi Anda?",
         "logout-message" => "Anda akan dialihkan ke halaman Beranda.",
-        "order" => "Produk cetak [:param] Anda berhasil ditambahkan ke keranjang belanja Anda!",
+        "order" => "Produk cetak [:param] Anda berhasil ditambahkan ke dalam keranjang belanja Anda! Apakah Anda ingin menyelesaikan pembayarannya sekarang?",
+        "order-cart" => "Anda akan dialihkan ke halaman Keranjang (Cart).",
+        "order-shop" => "Silahkan pilih produk cetak yang Anda inginkan dan mulai mencetaknya lagi :).",
         "browser" => "Browser yang Anda gunakan tidak support! Silahkan perbarui atau gunakan browser yang lainnya.",
         "upload" => "Avatar Anda berhasil diperbarui!",
         "upload-bg" => "Latar belakang profil Anda berhasil diperbarui!",

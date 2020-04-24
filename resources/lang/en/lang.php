@@ -245,6 +245,7 @@ return [
         "background" => "Click here to change your background profile!",
         "address" => "Main Address",
         "upload" => "Allowed extension: :ext. Allowed size: :size.",
+        "edit-address" => "Click here to edit your address!",
         "clear-upload" => "Click here to clear the file you selected!",
         "cancel-upload" => "Click here to cancel your file upload process!"
     ],
@@ -344,7 +345,9 @@ return [
         "logout-head" => "Sign Out",
         "logout-capt" => "Are you sure to end your session?",
         "logout-message" => "You will be redirected to the Home page.",
-        "order" => "Your print product [:param] is successfully added to your shopping cart!",
+        "order" => "Your print product [:param] is successfully added to your shopping cart! Do you want to complete the payment now?",
+        "order-cart" => "You will be redirected to the Cart page.",
+        "order-shop" => "Please select the print product you want and start printing again :).",
         "browser" => "The browser you are using does not support! Please update or use another browser.",
         "upload" => "Your avatar is successfully updated!",
         "upload-bg" => "Your background profile is successfully updated!",

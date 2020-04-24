@@ -404,8 +404,9 @@
                                                                                    '{{$row->phone}}','{{$row->lat}}',
                                                                                    '{{$row->long}}','{{$row->city_id}}',
                                                                                    '{{$row->address}}','{{$row->postal_code}}',
-                                                                                   '{{$row->getOccupancy->id}}','{{$row->is_main}}',
-                                                                                   '{{route('user.profil-alamat.update', ['id' => $row->id])}}')">
+                                                                                   '{{$row->getOccupancy->id}}',
+                                                                                   '{{$row->getOccupancy->name}}',
+                                                                                   '{{$row->is_main}}','{{route('user.profil-alamat.update', ['id' => $row->id])}}')">
                                                                                 {{__('lang.button.edit')}}
                                                                                 <i class="icon-edit ml-1"></i>
                                                                             </a>
@@ -889,7 +890,9 @@
             }
         }
 
-        function editAddress(name, phone, lat, long, city_id, address, postal_code, occupancy_id, is_main, url) {
+        function editAddress(name, phone, lat, long, city_id, address, postal_code, occupancy_id, occupancy, is_main, url) {
+            var main_str = is_main == 1 ? ' <span class="font-weight-normal">[{{__('lang.profile.main-address')}}]</span>' : '';
+
             $("#show_address_settings").hide();
             $("#hide_address_settings").show();
             $("#address_settings").toggle(300);
@@ -900,7 +903,7 @@
                 '<div id="iw-container">' +
                 '<div class="iw-title">{{__('lang.profile.address')}}</div>' +
                 '<div class="iw-content">' +
-                '<div class="iw-subTitle" style="text-transform: none">' + occupancy_id + '</div>' +
+                '<div class="iw-subTitle" style="text-transform: none">' + occupancy + main_str + '</div>' +
                 '<img src="{{asset('images/searchPlace.png')}}">' +
                 '<p>' + address + '</p>' +
                 '</div><div class="iw-bottom-gradient"></div></div>'
