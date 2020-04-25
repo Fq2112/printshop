@@ -249,6 +249,10 @@ return [
         "clear-upload" => "Klik di sini untuk menghapus file yang telah Anda pilih!",
         "cancel-upload" => "Klik di sini untuk membatalkan proses pengunggahan file Anda!"
     ],
+    "popover" => [
+        "production_finished" => "Proses produksi dimulai setelah Anda menyelesaikan pembayarannya (±3 hari).",
+        "received_date" => "Anda akan menerima produk cetak tersebut setelah proses produksi selesai ditambah dengan durasi pengirimannya.",
+    ],
     "placeholder" => [
         "search" => "Mau cetak apa hari ini?",
         "useremail" => "Username atau email",
@@ -346,8 +350,9 @@ return [
         "logout-capt" => "Apakah Anda yakin untuk mengakhiri sesi Anda?",
         "logout-message" => "Anda akan dialihkan ke halaman Beranda.",
         "order" => "Produk cetak [:param] Anda berhasil ditambahkan ke dalam keranjang belanja Anda! Apakah Anda ingin menyelesaikan pembayarannya sekarang?",
+        "order-update" => "Pesanan produk cetak [:param] Anda berhasil diperbarui! Apakah Anda ingin menyelesaikan pembayarannya sekarang?",
         "order-cart" => "Anda akan dialihkan ke halaman Keranjang (Cart).",
-        "order-shop" => "Silahkan pilih produk cetak yang Anda inginkan dan mulai mencetaknya lagi :).",
+        "order-shop" => "Silahkan pilih produk cetak yang Anda inginkan dan mulai mencetaknya lagi :)",
         "browser" => "Browser yang Anda gunakan tidak support! Silahkan perbarui atau gunakan browser yang lainnya.",
         "upload" => "Avatar Anda berhasil diperbarui!",
         "upload-bg" => "Latar belakang profil Anda berhasil diperbarui!",

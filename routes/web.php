@@ -62,10 +62,16 @@ Route::group(['namespace' => 'Pages'], function () {
         'as' => 'produk'
     ]);
 
-    Route::post('{produk}/submit', [
+    Route::post('{produk}/order/submit', [
         'middleware' => ['auth', 'user'],
         'uses' => 'MainController@submitPemesanan',
         'as' => 'produk.submit.pemesanan'
+    ]);
+
+    Route::put('{produk}/order/{id}/update', [
+        'middleware' => ['auth', 'user'],
+        'uses' => 'MainController@updatePemesanan',
+        'as' => 'produk.update.pemesanan'
     ]);
 
     Route::get('cari/nama', [

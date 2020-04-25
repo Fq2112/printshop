@@ -51,7 +51,7 @@
 
     @if(Auth::check() || Auth::guard('admin')->check())
         <li class="avatar">
-            <a href="#">
+            <a href="javascript:void(0)">
                 <div style="text-transform: none">
                     @if(Auth::check())
                         <img alt="Ava" class="img-thumbnail show_ava" src="{{Auth::user()->getBio->ava != "" ?
@@ -76,7 +76,7 @@
                     </a></li>
                 <li class="dropdown-divider"></li>
                 <li>
-                    <a href="#" class="btn_signOut">
+                    <a href="javascript:void(0)" class="btn_signOut">
                         <div><i class="icon-sign-out-alt"></i>{{__('lang.header.sign-out')}}</div>
                     </a>
                     <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
@@ -89,7 +89,7 @@
 </ul>
 
 <div id="top-search">
-    <a href="#" id="top-search-trigger">
+    <a href="javascript:void(0)" id="top-search-trigger">
         <i class="icon-line-search"></i><i class="icon-line-cross"></i></a>
     <form action="#">
         <input id="keyword" type="text" class="form-control" autocomplete="off" spellcheck="false"
@@ -99,42 +99,73 @@
 
 @if(!Auth::check() && !Auth::guard('admin')->check())
     <div id="top-account">
-        <a href="#" onclick="openRegisterModal();">
+        <a href="javascript:void(0)" onclick="openRegisterModal();">
             <i class="icon-line2-user mr-1 position-relative" style="top: 1px;"></i>
             <span class="d-none d-sm-inline-block font-primary t500 text-uppercase">
                 {{__('lang.header.sign-up-in')}}</span></a>
     </div>
 @else
+    @php
+        $total = 0;
+        $carts = \App\Models\Cart::where('user_id', Auth::id())->orderByDesc('id')->get();
+        if(!is_null($carts)){
+            $cart_amount = count($carts) > 9 ? '9+' : count($carts);
+        } else {
+            $cart_amount = 0;
+        }
+    @endphp
     <div id="top-cart">
-        <a href="#" id="top-cart-trigger"><i class="icon-shopping-cart1"></i><span>9+</span></a>
+        <a href="javascript:void(0)" id="top-cart-trigger">
+            <i class="icon-shopping-cart1"></i>
+            <span>{{$cart_amount}}</span>
+        </a>
         <div class="top-cart-content">
             <div class="top-cart-title">
                 <h4 data-toc-skip>{{__('lang.header.cart')}}</h4>
             </div>
-            <div class="top-cart-items use-nicescroll" style="max-height: 200px">
-                @php $total = 0; @endphp
-                @foreach(\App\Models\SubKategori::find(32)->getCluster as $row)
-                    @php $qty = rand(1,100);$total += $qty*25000;@endphp
-                    <div class="top-cart-item clearfix">
-                        <a href="{{route('produk', ['produk' => $row->permalink, 'qty' => $qty, 'shipping' => rand(1,501)])}}">
-                            <div class="top-cart-item-image">
-                                <img src="{{asset('storage/products/thumb/'.$row->thumbnail)}}" alt="Thumbnail">
-                            </div>
-                            <div class="top-cart-item-desc">
-                                <span class="top-cart-item-title">{{$row->name}}</span>
-                                <span class="top-cart-item-price">Rp{{number_format('25000',2,',','.')}}</span>
-                                <span class="top-cart-item-quantity t600">x {{$qty}}</span>
-                            </div>
-                        </a>
-                    </div>
-                @endforeach
-            </div>
-            <div class="top-cart-action clearfix">
+            @if(count($carts) > 0)
+                <div class="top-cart-items use-nicescroll" style="max-height: 200px">
+                    @foreach($carts as $row)
+                        @php
+                            $data = !is_null($row->subkategori_id) ? $row->getSubKategori : $row->getCluster;
+                            $image = !is_null($row->subkategori_id) ? asset('storage/products/banner/'.$row->getSubKategori->banner) :
+                                     asset('storage/products/thumb/'.$row->getCluster->thumbnail);
+                            $total += $row->total;
+                        @endphp
+                        <div class="top-cart-item clearfix">
+                            <a href="{{route('produk', ['produk' => $data->permalink, 'cart_id' => encrypt($row->id)])}}">
+                                <div class="top-cart-item-image">
+                                    <img src="{{$image}}" alt="Thumbnail">
+                                </div>
+                                <div class="top-cart-item-desc">
+                                    <span class="top-cart-item-title">{{$data->name}}</span>
+                                    <span
+                                        class="top-cart-item-price">Rp{{number_format($row->price_pcs,2,',','.')}}</span>
+                                    <span class="top-cart-item-quantity t600">x {{$row->qty}}</span>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="top-cart-action clearfix">
                 <span class="top-checkout-price t600 text-dark">
                     Rp{{\App\Support\Facades\NumberShorten::redenominate($total)}}</span>
-                <a href="{{route('user.cart')}}" class="button button-3d button-primary button-small m-0 fright">
-                    {{__('lang.button.view')}}</a>
-            </div>
+                    <a href="{{route('user.cart')}}" class="button button-3d button-primary button-small m-0 fright">
+                        {{__('lang.button.view')}}</a>
+                </div>
+            @else
+                <div class="row justify-content-center text-center m-0">
+                    <div class="col">
+                        <img width="150" class="img-fluid" src="{{asset('images/loader-image.gif')}}" alt="">
+                        <h5 class="mt-0 mb-1">{{__('lang.order.empty-head')}}</h5>
+                        <h6 class="mt-0 mb-3">{{__('lang.order.empty-capt')}}</h6>
+                        <a href="{{route('beranda')}}"
+                           class="button button-rounded button-reveal button-border button-primary button-small tright nomargin mb-3">
+                            <i class="icon-angle-right"></i><span>{{__('lang.button.shop')}}</span>
+                        </a>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 @endif

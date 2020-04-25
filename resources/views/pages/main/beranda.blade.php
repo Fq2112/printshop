@@ -707,10 +707,10 @@
                 closeOnClickOutside: false,
             }).then((confirm) => {
                 if (confirm) {
-                    swal('{{__('lang.alert.order-cart')}}', '', 'success');
+                    swal('{{__('lang.alert.warning')}}', '{{__('lang.alert.order-cart')}}', 'warning');
                     window.location.href = '{{route('user.cart')}}';
                 } else {
-                    swal('{{__('lang.alert.order-shop')}}', '', 'success');
+                    swal('{{__('lang.alert.order-shop')}}', '', 'info');
                 }
             });
             @endif
