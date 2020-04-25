@@ -695,6 +695,25 @@
                 $("#processTabs").tabs("option", "active", $(this).attr('rel') - 1);
                 return false;
             });
+
+            @if(session('order'))
+            swal({
+                title: "{{__('lang.alert.success')}}",
+                text: "{{session('order')}}",
+                icon: 'success',
+                dangerMode: true,
+                buttons: ["{{__('lang.button.no')}}", "{{__('lang.button.yes')}}"],
+                closeOnEsc: false,
+                closeOnClickOutside: false,
+            }).then((confirm) => {
+                if (confirm) {
+                    swal('{{__('lang.alert.order-cart')}}', '', 'success');
+                    window.location.href = '{{route('user.cart')}}';
+                } else {
+                    swal('{{__('lang.alert.order-shop')}}', '', 'success');
+                }
+            });
+            @endif
         });
     </script>
 @endpush

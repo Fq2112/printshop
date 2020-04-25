@@ -147,7 +147,7 @@ Route::group(['namespace' => 'Pages'], function () {
 
     });
 
-    Route::group(['namespace' => 'Users', 'middleware' => ['auth', 'user']], function () {
+    Route::group(['namespace' => 'Users', 'prefix' => 'account', 'middleware' => ['auth', 'user']], function () {
 
         Route::group(['prefix' => 'cart'], function () {
 
@@ -158,49 +158,45 @@ Route::group(['namespace' => 'Pages'], function () {
 
         });
 
-        Route::group(['prefix' => 'account'], function () {
+        Route::get('dashboard', [
+            'uses' => 'UserController@dashboard',
+            'as' => 'user.dashboard'
+        ]);
 
-            Route::get('dashboard', [
-                'uses' => 'UserController@dashboard',
-                'as' => 'user.dashboard'
-            ]);
+        Route::get('edit-profile', [
+            'uses' => 'AkunController@profil',
+            'as' => 'user.profil'
+        ]);
 
-            Route::get('edit-profile', [
-                'uses' => 'AkunController@profil',
-                'as' => 'user.profil'
-            ]);
+        Route::put('edit-profile/update', [
+            'uses' => 'AkunController@updateProfil',
+            'as' => 'user.update.profil'
+        ]);
 
-            Route::put('edit-profile/update', [
-                'uses' => 'AkunController@updateProfil',
-                'as' => 'user.update.profil'
-            ]);
+        Route::post('edit-profile/address/create', [
+            'uses' => 'AkunController@createProfilAddress',
+            'as' => 'user.profil-alamat.create'
+        ]);
 
-            Route::post('edit-profile/address/create', [
-                'uses' => 'AkunController@createProfilAddress',
-                'as' => 'user.profil-alamat.create'
-            ]);
+        Route::put('edit-profile/address/{id}/update', [
+            'uses' => 'AkunController@updateProfilAddress',
+            'as' => 'user.profil-alamat.update'
+        ]);
 
-            Route::put('edit-profile/address/{id}/update', [
-                'uses' => 'AkunController@updateProfilAddress',
-                'as' => 'user.profil-alamat.update'
-            ]);
+        Route::get('edit-profile/address/{id}/delete', [
+            'uses' => 'AkunController@deleteProfilAddress',
+            'as' => 'user.profil-alamat.delete'
+        ]);
 
-            Route::get('edit-profile/address/{id}/delete', [
-                'uses' => 'AkunController@deleteProfilAddress',
-                'as' => 'user.profil-alamat.delete'
-            ]);
+        Route::get('settings', [
+            'uses' => 'AkunController@pengaturan',
+            'as' => 'user.pengaturan'
+        ]);
 
-            Route::get('settings', [
-                'uses' => 'AkunController@pengaturan',
-                'as' => 'user.pengaturan'
-            ]);
-
-            Route::put('settings/update', [
-                'uses' => 'AkunController@updatePengaturan',
-                'as' => 'user.update.pengaturan'
-            ]);
-
-        });
+        Route::put('settings/update', [
+            'uses' => 'AkunController@updatePengaturan',
+            'as' => 'user.update.pengaturan'
+        ]);
 
     });
 

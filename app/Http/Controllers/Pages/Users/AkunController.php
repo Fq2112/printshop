@@ -18,7 +18,7 @@ class AkunController extends Controller
     {
         $user = Auth::user();
         $bio = $user->getBio;
-        $addresses = $user->getAddress;
+        $addresses = Address::where('user_id', Auth::id())->orderByDesc('id')->get();
         $address = Address::where('user_id', $user->id)->where('is_main', true)->first();
 
         $provinces = Province::all();

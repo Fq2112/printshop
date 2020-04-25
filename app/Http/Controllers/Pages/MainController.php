@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
 use App\Models\Cart;
 use App\Models\ClusterKategori;
 use App\Models\Province;
@@ -148,9 +149,10 @@ class MainController extends Controller
             ->orwhere('permalink->id', $request->produk)->first();
         $provinces = Province::all();
         $guidelines = null;
-        $addresses = \App\Models\Address::where('user_id', Auth::id())->get();
+        $addresses = Address::where('user_id', Auth::id())->orderByDesc('id')->get();
+
         $qty = $request->qty;
-        $shipping = $request->shipping;
+        $shipping = Address::where('user_id', Auth::id())->where('id', $request->shipping)->first();
 
         if (!is_null($sub)) {
             $data = $sub;
@@ -180,8 +182,18 @@ class MainController extends Controller
 
     public function submitPemesanan(Request $request)
     {
-        $sub = SubKategori::find($request->id);
-        $clust = ClusterKategori::find($request->id);
+        $sub = SubKategori::where('permalink->en', $request->produk)
+            ->orwhere('permalink->id', $request->produk)->whereHas('getCluster')->first();
+        $clust = ClusterKategori::where('permalink->en', $request->produk)
+            ->orwhere('permalink->id', $request->produk)->first();
+
+        if ($request->hasFile('file')) {
+            $this->validate($request, ['file' => 'required|mimes:jpg,jpeg,png,tiff,pdf,zip,rar|max:204800']);
+            $file = $request->file('file')->getClientOriginalName();
+            $request->file('file')->storeAs('public/users/order/design/' . Auth::id(), $file);
+        } else {
+            $file = null;
+        }
 
         Cart::create([
             'user_id' => Auth::id(),
@@ -225,11 +237,12 @@ class MainController extends Controller
             'delivery_duration' => $request->delivery_duration,
             'received_date' => $request->received_date,
             'total' => $request->total,
-            'file' => $request->file,
+            'file' => $file,
             'link' => $request->link,
         ]);
 
-        return back()->with('order', __('lang.alert.order', ['param' => !is_null($sub) ? $sub->name : $clust->name]));
+        return redirect()->route('beranda')
+            ->with('order', __('lang.alert.order', ['param' => !is_null($sub) ? $sub->name : $clust->name]));
     }
 
     public function cariNamaProduk(Request $request)
