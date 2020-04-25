@@ -5,6 +5,8 @@
         $('[data-toggle="tooltip"]').tooltip();
         $('[data-toggle="popover"]').popover();
 
+        moment.locale('{{$app->getLocale()}}');
+
         $('.datepicker').datepicker({format: "yyyy-mm-dd", autoclose: true, todayHighlight: true, todayBtn: true});
         $(".bt-switch").bootstrapSwitch();
 

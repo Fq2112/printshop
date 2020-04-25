@@ -51,7 +51,7 @@
 
     @if(Auth::check() || Auth::guard('admin')->check())
         <li class="avatar">
-            <a href="javascript:void(0)">
+            <a href="#">
                 <div style="text-transform: none">
                     @if(Auth::check())
                         <img alt="Ava" class="img-thumbnail show_ava" src="{{Auth::user()->getBio->ava != "" ?

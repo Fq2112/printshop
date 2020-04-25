@@ -199,6 +199,9 @@ return [
         "empty-head" => "You haven't made any orders",
         "empty-capt" => "Complete your printing needs now",
     ],
+    "cart" => [
+        "capt" => "Here you can manage your shopping cart and complete the payment.",
+    ],
     "profile" => [
         "capt" => "Here you can manage your avatar and background profile, personal data, and also your address list.",
         "gender" => "Gender",

@@ -500,7 +500,8 @@
                                         <div class="modal-footer p-0">
                                             <button type="submit" id="btn_submit"
                                                     class="btn btn-primary btn-block noborder" disabled>
-                                                <i class="icon-drafting-compass mr-2"></i>{{__('lang.button.submit')}}
+                                                <i class="icon-drafting-compass mr-1"></i>
+                                                {{!is_null($cart) ? __('lang.button.save') : __('lang.button.submit')}}
                                             </button>
                                         </div>
                                     </div>
@@ -695,8 +696,6 @@
             str_unit = ' {{$specs->getUnit->name}}', production_day = 3, ongkir = 0, etd = '', str_etd = '', total = 0;
 
         $(function () {
-            moment.locale('{{$app->getLocale()}}');
-
             range_slider.ionRangeSlider({
                 grid: true,
                 grid_num: 5,
@@ -751,6 +750,11 @@
 
             $(".file-input .file-caption-name").attr('placeholder', '{{__('lang.placeholder.choose-file')}}')
                 .attr('disabled', 'disabled').css('cursor', 'text');
+            @if(is_null($cart))
+            $(".file-input .file-caption").removeClass('icon-visible');
+            $(".file-input .file-caption-name").removeAttr('title');
+            $(".file-input .file-caption-icon").remove();
+            @endif
 
             collapse.on('show.bs.collapse', function () {
                 $(this).siblings('.panel-heading').addClass('active');

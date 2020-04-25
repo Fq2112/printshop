@@ -199,6 +199,9 @@ return [
         "empty-head" => "Anda belum membuat pesanan apapun",
         "empty-capt" => "Lengkapi kebutuhan cetak Anda sekarang",
     ],
+    "cart" => [
+        "capt" => "Di sini Anda dapat mengelola keranjang belanja Anda dan menyelesaikan pembayarannya.",
+    ],
     "profile" => [
         "capt" => "Di sini Anda dapat mengatur avatar dan latar belakang profil Anda, data personal dan juga daftar alamat Anda.",
         "gender" => "Jenis Kelamin",
