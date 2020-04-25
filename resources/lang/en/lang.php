@@ -249,6 +249,10 @@ return [
         "clear-upload" => "Click here to clear the file you selected!",
         "cancel-upload" => "Click here to cancel your file upload process!"
     ],
+    "popover" => [
+        "production_finished" => "The production process starts after you complete the payment (±3 days).",
+        "received_date" => "You will receive the print product after the production process is finished plus the delivery duration.",
+    ],
     "placeholder" => [
         "search" => "What do you want to print today?",
         "useremail" => "Username or email",
@@ -346,8 +350,9 @@ return [
         "logout-capt" => "Are you sure to end your session?",
         "logout-message" => "You will be redirected to the Home page.",
         "order" => "Your print product [:param] is successfully added to your shopping cart! Do you want to complete the payment now?",
+        "order-update" => "Your print product [:param] order is successfully updated! Do you want to complete the payment now?",
         "order-cart" => "You will be redirected to the Cart page.",
-        "order-shop" => "Please select the print product you want and start printing again :).",
+        "order-shop" => "Please select the print product you want and start printing again :)",
         "browser" => "The browser you are using does not support! Please update or use another browser.",
         "upload" => "Your avatar is successfully updated!",
         "upload-bg" => "Your background profile is successfully updated!",

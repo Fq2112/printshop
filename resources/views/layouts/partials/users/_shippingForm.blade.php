@@ -17,7 +17,7 @@
                                 <label class="card-label" for="address_{{$row->id}}">
                                     <input id="address_{{$row->id}}" class="card-rb address-rb" type="radio"
                                            name="address_id" value="{{$row->id}}"
-                                        {{!is_null($shipping) && $shipping == $row->city_id ? 'checked' : ''}}>
+                                        {{!is_null($shipping) && $shipping->city_id == $row->city_id ? 'checked' : ''}}>
                                     <div class="card card-input">
                                         <div class="row">
                                             <div class="col-lg-12">
@@ -124,7 +124,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="icon-city"></i></span>
                             </div>
-                            <select id="shipping_estimation" name="address_id" data-live-search="true"
+                            <select id="shipping_estimation" data-live-search="true"
                                     class="form-control selectpicker" title="{{__('lang.placeholder.choose')}}"
                                     onchange="getShipping($(this).val(), 'city', $('option:selected', this).attr('data-name'))">
                                 @foreach($provinces as $province)

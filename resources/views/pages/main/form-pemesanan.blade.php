@@ -284,8 +284,10 @@
         <div class="content-wrap">
             <div class="container clearfix">
                 <form id="form-pemesanan" class="row" method="POST" enctype="multipart/form-data"
-                      action="{{route('produk.submit.pemesanan', ['produk' => $data->permalink])}}">
+                      action="{{!is_null($cart) ? route('produk.update.pemesanan', ['produk' => $data->permalink, 'id' => $cart->id])
+                      : route('produk.submit.pemesanan', ['produk' => $data->permalink])}}">
                     @csrf
+                    {{!is_null($cart) ? method_field('PUT') : ''}}
                     <div class="postcontent mb-0 pb-0 clearfix">
                         <div class="myCard mb-4">
                             <div class="card-content">
@@ -384,6 +386,11 @@
                                         </li>
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.production')}}
+                                            <span data-toggle="popover" data-placement="top"
+                                                  title="{{__('lang.alert.warning')}}"
+                                                  data-content="{{__('lang.popover.production_finished')}}">
+                                                <i class="i-plain i-small icon-line2-info ml-1"
+                                                   style="cursor: help;float: none"></i></span>
                                             <b class="fright show-production">&ndash;</b>
                                         </li>
                                         <li class="list-group-item noborder">
@@ -396,6 +403,11 @@
                                         </li>
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.received')}}
+                                            <span data-toggle="popover" data-placement="top"
+                                                  title="{{__('lang.alert.warning')}}"
+                                                  data-content="{{__('lang.popover.received_date')}}">
+                                                <i class="i-plain i-small icon-line2-info ml-1"
+                                                   style="cursor: help;float: none"></i></span>
                                             <b class="fright show-received">&ndash;</b>
                                         </li>
                                     </ul>
@@ -444,8 +456,7 @@
 
                     @auth
                         <div id="modal_upload" class="modal fade" tabindex="-1" role="dialog"
-                             aria-labelledby="modal_upload"
-                             aria-hidden="true">
+                             aria-labelledby="modal_upload" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-body">
                                     <div class="modal-content">
@@ -458,7 +469,8 @@
                                         <div class="modal-body">
                                             <label class="card-label mb-3" for="um-upload" onclick="uploadMethod()">
                                                 <input id="um-upload" class="card-rb" name="upload_method" type="radio"
-                                                       value="upload_file" checked required>
+                                                       value="upload_file"
+                                                       {{!is_null($cart) && !is_null($cart->file) ? 'checked' : ''}} required>
                                                 <div class="card card-input">
                                                     <div class="card-block p-2">
                                                         <h4 class="card-title">
@@ -471,7 +483,7 @@
                                             </label>
                                             <label class="card-label" for="um-link" onclick="uploadMethod()">
                                                 <input id="um-link" class="card-rb" name="upload_method" type="radio"
-                                                       value="file_link">
+                                                       value="file_link" {{!is_null($cart) && !is_null($cart->link) ? 'checked' : ''}}>
                                                 <div class="card card-input">
                                                     <div class="card-block p-2">
                                                         <h4 class="card-title">{{__('lang.modal.upload-design.link-head')}}</h4>
@@ -479,7 +491,8 @@
                                                            style="text-transform: none">{{__('lang.modal.upload-design.link-capt')}}</p>
                                                         <input id="link" placeholder="http://example.com" type="text"
                                                                class="form-control" name="link" maxlength="191"
-                                                               style="display: none" disabled>
+                                                               style="display: none" disabled
+                                                               value="{{!is_null($cart) ? $cart->link : null}}">
                                                     </div>
                                                 </div>
                                             </label>
@@ -678,8 +691,8 @@
     <script>
         var collapse = $('.panel-collapse'), range_slider = $("#range-quantity"),
             btn_upload = $("#btn_upload"), upload_input = $("#file"), link_input = $("#link"),
-            qty = '{{!$qty ? 0 : $qty}}', price_pcs = parseInt('25000'), str_unit = ' {{$specs->getUnit->name}}',
-            production_day = 3, ongkir = 0, etd = '', str_etd = '', total = 0;
+            qty = '{{!is_null($cart) ? $cart->qty : 0}}', price_pcs = '{{!is_null($cart) ? $cart->price_pcs : 25000}}',
+            str_unit = ' {{$specs->getUnit->name}}', production_day = 3, ongkir = 0, etd = '', str_etd = '', total = 0;
 
         $(function () {
             moment.locale('{{$app->getLocale()}}');
@@ -693,18 +706,9 @@
                 postfix: str_unit,
                 onChange: function (data) {
                     if (data.from > 0) {
-                        total = (parseInt(data.from) * price_pcs) + ongkir;
-                        $(".show-quantity").text(data.from + str_unit);
-                        $(".show-price").text("Rp" + thousandSeparator(price_pcs) + ",00");
-                        $(".show-production").text(moment().add(production_day, 'days').format('DD MMM YYYY'));
-                        $("#price_pcs").val(price_pcs);
-                        $("#production_finished").val(moment().add(production_day, 'days').format('YYYY-MM-DD'));
-                        $(".show-total").text("Rp" + thousandSeparator(total) + ",00");
-
-                        $("#card-shipping").show();
-
+                        resetter(1, data.from);
                     } else {
-                        resetter();
+                        resetter(0);
                         $("#card-shipping").hide();
                     }
                 }
@@ -716,6 +720,18 @@
                 showCaption: true,
                 browseOnZoneClick: true,
                 showPreview: true,
+                initialPreviewAsData: true,
+                overwriteInitial: true,
+                initialPreview: ['{{!is_null($cart) && !is_null($cart->file) ? asset('storage/users/order/design/'.Auth::id().'/'.$cart->file) : ''}}'],
+                initialPreviewConfig: [
+                    {
+                        caption: "{{!is_null($cart) && !is_null($cart->file) ? $cart->file : ''}}",
+                        filename: "{{!is_null($cart) && !is_null($cart->file) ? $cart->file : ''}}",
+                        downloadUrl: '{{!is_null($cart) && !is_null($cart->file) ? asset('storage/users/order/design/'.Auth::id().'/'.$cart->file) : ''}}',
+                        size: '{{!is_null($cart) && !is_null($cart->file) ? \Illuminate\Support\Facades\Storage::size('public/users/order/design/'.Auth::id().'/'.$cart->file) : ''}}',
+                    },
+                ],
+                initialCaption: "{{!is_null($cart) && !is_null($cart->file) ? $cart->file : __('lang.placeholder.choose-file')}}",
                 dropZoneTitle: '{{__('lang.placeholder.drag-drop')}}',
                 dropZoneClickTitle: '{!! __('lang.placeholder.click-select') !!}',
                 removeLabel: '{{__('lang.button.delete')}}',
@@ -748,6 +764,7 @@
                 $(this).siblings('.panel-heading').find('b').toggle(300);
             });
 
+            @if(is_null($cart))
             $($.unique(
                 $('.component-accordion .panel-body INPUT:radio:not(.address-rb)').map(function (i, e) {
                     return $(e).attr('name')
@@ -756,6 +773,7 @@
                 $('.component-accordion .panel-body INPUT:radio[name="' + e + '"]:first')
                     .attr('checked', 'checked').attr('required', 'required');
             });
+            @endif
 
             $(".show-type").text($("input[name='type']:checked").data('name'));
             $(".show-cover_material").text($("input[name='cover_material']:checked").data('name'));
@@ -789,12 +807,13 @@
             @if(!is_null($shipping))
             getShipping('{{$shipping->city_id}}', 'address', '{{$shipping->is_main == false ?
             $shipping->getOccupancy->name : $shipping->getOccupancy->name.' ['.__('lang.profile.main-address').']'}}');
+            resetter(1, '{{$cart->qty}}');
             @endif
         });
 
         function productSpecs(check, spec, custom) {
             var spec_val = $("#" + spec).data('name'), str_spec = '';
-            resetter();
+            resetter(0);
             $("#card-shipping").hide();
 
             if (check == 'balance') {
@@ -839,7 +858,7 @@
 
         function getShipping(city, check, name) {
             $(".show-" + check).text(name);
-            $('#collapse-' + check).collapse('toggle');
+            $('#collapse-' + check).collapse('hide');
 
             if (check == 'address') {
                 $("#shipping_estimation").val('default').selectpicker('refresh');
@@ -904,21 +923,34 @@
             return false;
         }
 
-        function resetter() {
-            range_slider.data("ionRangeSlider").update({from: 0});
-            $("#card-shipping div[role=tabpanel]").collapse('hide');
-            $("#card-shipping input[type=radio]").prop('checked', false);
-            $("#shipping_estimation").val('default').selectpicker('refresh');
+        function resetter(check, quantity) {
+            if (check == 1) {
+                total = (parseInt(quantity) * parseInt(price_pcs)) + ongkir;
+                $(".show-quantity").text(quantity + str_unit);
+                $(".show-price").text("Rp" + thousandSeparator(parseInt(price_pcs)) + ",00");
+                $(".show-production").text(moment().add(production_day, 'days').format('DD MMM YYYY'));
+                $("#price_pcs").val(parseInt(price_pcs));
+                $("#production_finished").val(moment().add(production_day, 'days').format('YYYY-MM-DD'));
+                $(".show-total").text("Rp" + thousandSeparator(total) + ",00");
 
-            qty = 0;
-            ongkir = 0;
-            total = 0;
+                $("#card-shipping").show();
 
-            $(".show-address, .show-city, .show-quantity, .show-price, .show-production, .show-ongkir, .show-delivery, .show-received, .show-total").html('&ndash;');
-            $("#price_pcs, #production_finished, #ongkir, #delivery_duration, #received_date, #total").val(null);
+            } else {
+                range_slider.data("ionRangeSlider").update({from: 0});
+                $("#card-shipping div[role=tabpanel]").collapse('hide');
+                $("#card-shipping input[type=radio]").prop('checked', false);
+                $("#shipping_estimation").val('default').selectpicker('refresh');
 
-            $("#summary-alert").hide();
-            btn_upload.attr('disabled', 'disabled');
+                qty = 0;
+                ongkir = 0;
+                total = 0;
+
+                $(".show-address, .show-city, .show-quantity, .show-price, .show-production, .show-ongkir, .show-delivery, .show-received, .show-total").html('&ndash;');
+                $("#price_pcs, #production_finished, #ongkir, #delivery_duration, #received_date, #total").val(null);
+
+                $("#summary-alert").hide();
+                btn_upload.attr('disabled', 'disabled');
+            }
         }
 
         var google, myLatlng, geocoder, map, marker, infoWindow;
@@ -1173,6 +1205,20 @@
             @if($specs->is_design == true)
             $("#modal_design").modal('show');
             @else
+            @if(!is_null($cart))
+            @if(!is_null($cart->file))
+            $(".file-input").show()
+                .parents('label').find('.card-text').hide();
+            link_input.hide().attr('disabled', 'disabled').removeAttr('required')
+                .parents('label').find('.card-text').show();
+            @else
+            $(".file-input").hide()
+                .parents('label').find('.card-text').show();
+            link_input.show().attr('required', 'required').removeAttr('disabled')
+                .parents('label').find('.card-text').hide();
+            @endif
+            $("#form-pemesanan button[type=submit]").removeAttr('disabled');
+            @endif
             $("#modal_upload").modal('show');
             @endif
             @elseauth('admin')

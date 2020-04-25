@@ -18,12 +18,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\TypeProduct::whereIn('id', $specs->type_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="type-{{$row->id}}">
                                     <input id="type-{{$row->id}}" class="card-rb" name="type" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->type_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -80,12 +80,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Material::whereIn('id', $specs->material_cover_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="cover_material-{{$row->id}}">
                                     <input id="cover_material-{{$row->id}}" class="card-rb" name="cover_material"
-                                           type="radio" value="{{$row->id}}" data-name="{{$row->name}}">
+                                           type="radio" value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->material_cover_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -138,14 +138,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Side::whereIn('id', $specs->side_cover_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="cover_side-{{$row->id}}">
-                                    <input id="cover_side-{{$row->id}}"
-                                           class="card-rb"
-                                           name="cover_side" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="cover_side-{{$row->id}}" class="card-rb" name="cover_side" type="radio"
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->side_cover_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -204,14 +202,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Lamination::whereIn('id', $specs->cover_lamination_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="cover_lamination-{{$row->id}}">
-                                    <input id="cover_lamination-{{$row->id}}"
-                                           class="card-rb"
-                                           name="cover_lamination" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="cover_lamination-{{$row->id}}" class="card-rb" name="cover_lamination"
+                                           type="radio" value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->cover_lamination_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -269,12 +265,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Material::whereIn('id', $specs->material_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="materials-{{$row->id}}">
                                     <input id="materials-{{$row->id}}" class="card-rb" name="materials"
-                                           type="radio" value="{{$row->id}}" data-name="{{$row->name}}">
+                                           type="radio" value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->material_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -331,8 +327,8 @@
                                 <div class="col">
                                     <label class="card-label" for="material_color-{{$row->id}}">
                                         <input id="material_color-{{$row->id}}" class="card-rb" name="material_color"
-                                               type="radio"
-                                               value="{{$row->id}}" data-name="{{$row->name}}">
+                                               type="radio" value="{{$row->id}}" data-name="{{$row->name}}"
+                                            {{!is_null($cart) && $cart->material_color_id == $row->id ? 'checked' :''}}>
                                         <div class="card card-input">
                                             <div class="row no-gutters">
                                                 <div class="col" style="background-color: {{$row->name}}"
@@ -348,13 +344,12 @@
                                     </label>
                                 </div>
                             @else
-                                <div
-                                    class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                                <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                     <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                            for="material_color-{{$row->id}}">
                                         <input id="material_color-{{$row->id}}" class="card-rb" name="material_color"
-                                               type="radio"
-                                               value="{{$row->id}}" data-name="{{$row->name}}">
+                                               type="radio" value="{{$row->id}}" data-name="{{$row->name}}"
+                                            {{!is_null($cart) && $cart->material_color_id == $row->id ? 'checked' :''}}>
                                         <div class="card card-input h-100">
                                             <div
                                                 class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -412,7 +407,8 @@
                                 <div class="col">
                                     <label class="card-label" for="color-{{$row->id}}">
                                         <input id="color-{{$row->id}}" class="card-rb" name="color" type="radio"
-                                               value="{{$row->id}}" data-name="{{$row->name}}">
+                                               value="{{$row->id}}" data-name="{{$row->name}}"
+                                            {{!is_null($cart) && $cart->color_id == $row->id ? 'checked' : ''}}>
                                         <div class="card card-input">
                                             <div class="row no-gutters">
                                                 <div class="col" style="background-color: {{$row->name}}"
@@ -433,7 +429,8 @@
                                     <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                            for="color-{{$row->id}}">
                                         <input id="color-{{$row->id}}" class="card-rb" name="color" type="radio"
-                                               value="{{$row->id}}" data-name="{{$row->name}}">
+                                               value="{{$row->id}}" data-name="{{$row->name}}"
+                                            {{!is_null($cart) && $cart->color_id == $row->id ? 'checked' : ''}}>
                                         <div class="card card-input h-100">
                                             <div
                                                 class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -487,14 +484,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\PrintingMethods::whereIn('id', $specs->print_method_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="print_method-{{$row->id}}">
-                                    <input id="print_method-{{$row->id}}"
-                                           class="card-rb"
-                                           name="print_method" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="print_method-{{$row->id}}" class="card-rb" name="print_method"
+                                           type="radio" value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->print_method_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -556,10 +551,9 @@
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="size-{{$row->id}}">
-                                    <input id="size-{{$row->id}}"
-                                           class="card-rb"
-                                           name="size" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="size-{{$row->id}}" class="card-rb" name="size" type="radio"
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->size_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -596,12 +590,14 @@
                                 <div id="custom_size" class="col-12" style="display: none">
                                     <div class="input-group">
                                         <input id="length" type="number" placeholder="{{__('lang.placeholder.length')}}"
-                                               class="form-control" name="length" min="1">
+                                               class="form-control" name="length" min="1"
+                                               value="{{!is_null($cart) ? $cart->length : null}}">
                                         <div class="input-group-append">
                                             <span class="input-group-text text-lowercase"><b>x</b></span>
                                         </div>
                                         <input id="width" type="number" placeholder="{{__('lang.placeholder.width')}}"
-                                               class="form-control" name="width" min="1">
+                                               class="form-control" name="width" min="1"
+                                               value="{{!is_null($cart) ? $cart->width : null}}">
                                         <div class="input-group-append">
                                             <span class="input-group-text text-lowercase"><b>cm</b></span>
                                             <button class="btn btn-primary" type="button" disabled>SET</button>
@@ -635,14 +631,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Side::whereIn('id', $specs->side_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="side-{{$row->id}}">
-                                    <input id="side-{{$row->id}}"
-                                           class="card-rb"
-                                           name="side" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="side-{{$row->id}}" class="card-rb" name="side" type="radio"
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->side_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -700,14 +694,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Finishing::whereIn('id', $specs->holder_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="holder-{{$row->id}}">
-                                    <input id="holder-{{$row->id}}"
-                                           class="card-rb"
-                                           name="holder" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="holder-{{$row->id}}" class="card-rb" name="holder" type="radio"
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->holder_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -765,14 +757,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Lid::whereIn('id', $specs->lid_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="lid-{{$row->id}}">
-                                    <input id="lid-{{$row->id}}"
-                                           class="card-rb"
-                                           name="lid" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="lid-{{$row->id}}" class="card-rb" name="lid" type="radio"
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->lid_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -830,14 +820,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Edge::whereIn('id', $specs->edge_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="corner-{{$row->id}}">
-                                    <input id="corner-{{$row->id}}"
-                                           class="card-rb"
-                                           name="corner" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="corner-{{$row->id}}" class="card-rb" name="corner" type="radio"
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->edge_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -895,14 +883,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Folding::whereIn('id', $specs->folding_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="folding-{{$row->id}}">
-                                    <input id="folding-{{$row->id}}"
-                                           class="card-rb"
-                                           name="folding" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="folding-{{$row->id}}" class="card-rb" name="folding" type="radio"
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->folding_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -961,14 +947,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Front::whereIn('id', $specs->front_side_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="front_side-{{$row->id}}">
-                                    <input id="front_side-{{$row->id}}"
-                                           class="card-rb"
-                                           name="front_side" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="front_side-{{$row->id}}" class="card-rb" name="front_side" type="radio"
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->front_side_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1027,14 +1011,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\BackSide::whereIn('id', $specs->back_side_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="back_side-{{$row->id}}">
-                                    <input id="back_side-{{$row->id}}"
-                                           class="card-rb"
-                                           name="back_side" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="back_side-{{$row->id}}" class="card-rb" name="back_side" type="radio"
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->back_side_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1093,14 +1075,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\RightLeftSide::whereIn('id', $specs->right_side_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="right_side-{{$row->id}}">
-                                    <input id="right_side-{{$row->id}}"
-                                           class="card-rb"
-                                           name="right_side" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="right_side-{{$row->id}}" class="card-rb" name="right_side" type="radio"
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->right_side_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1159,14 +1139,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\RightLeftSide::whereIn('id', $specs->left_side_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="left_side-{{$row->id}}">
-                                    <input id="left_side-{{$row->id}}"
-                                           class="card-rb"
-                                           name="left_side" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="left_side-{{$row->id}}" class="card-rb" name="left_side" type="radio"
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->left_side_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1225,14 +1203,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Balance::whereIn('id', $specs->balance_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="balance-{{$row->id}}">
-                                    <input id="balance-{{$row->id}}"
-                                           class="card-rb"
-                                           name="balance" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="balance-{{$row->id}}" class="card-rb" name="balance" type="radio"
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->balance_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1291,14 +1267,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Copies::whereIn('id', $specs->copies_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="copies-{{$row->id}}">
-                                    <input id="copies-{{$row->id}}"
-                                           class="card-rb"
-                                           name="copies" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="copies-{{$row->id}}" class="card-rb" name="copies" type="radio"
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->copies_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1357,14 +1331,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Pages::whereIn('id', $specs->page_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="page-{{$row->id}}">
-                                    <input id="page-{{$row->id}}"
-                                           class="card-rb"
-                                           name="page" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="page-{{$row->id}}" class="card-rb" name="page" type="radio"
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->page_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1422,14 +1394,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Material::whereIn('id', $specs->front_cover_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="front_cover-{{$row->id}}">
-                                    <input id="front_cover-{{$row->id}}"
-                                           class="card-rb"
-                                           name="front_cover" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="front_cover-{{$row->id}}" class="card-rb" name="front_cover" type="radio"
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->front_cover_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1486,14 +1456,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Material::whereIn('id', $specs->back_cover_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="back_cover-{{$row->id}}">
-                                    <input id="back_cover-{{$row->id}}"
-                                           class="card-rb"
-                                           name="back_cover" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="back_cover-{{$row->id}}" class="card-rb" name="back_cover" type="radio"
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->back_cover_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1550,14 +1518,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Finishing::whereIn('id', $specs->orientation_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="orientation-{{$row->id}}">
-                                    <input id="orientation-{{$row->id}}"
-                                           class="card-rb"
-                                           name="orientation" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="orientation-{{$row->id}}" class="card-rb" name="orientation" type="radio"
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->orientation_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1614,14 +1580,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Finishing::whereIn('id', $specs->binding_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="binding-{{$row->id}}">
-                                    <input id="binding-{{$row->id}}"
-                                           class="card-rb"
-                                           name="binding" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="binding-{{$row->id}}" class="card-rb" name="binding" type="radio"
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->binding_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1679,14 +1643,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Lamination::whereIn('id', $specs->lamination_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="lamination-{{$row->id}}">
-                                    <input id="lamination-{{$row->id}}"
-                                           class="card-rb"
-                                           name="lamination" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="lamination-{{$row->id}}" class="card-rb" name="lamination" type="radio"
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->lamination_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1741,14 +1703,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Finishing::whereIn('id', $specs->finishing_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="finishing-{{$row->id}}">
-                                    <input id="finishing-{{$row->id}}"
-                                           class="card-rb"
-                                           name="finishing" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="finishing-{{$row->id}}" class="card-rb" name="finishing" type="radio"
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->finishing_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
@@ -1803,14 +1763,12 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach(\App\Models\Finishing::whereIn('id', $specs->extra_ids)->get() as $row)
-                            <div
-                                class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
+                            <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="extra-{{$row->id}}">
-                                    <input id="extra-{{$row->id}}"
-                                           class="card-rb"
-                                           name="extra" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}">
+                                    <input id="extra-{{$row->id}}" class="card-rb" name="extra" type="radio"
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                        {{!is_null($cart) && $cart->extra_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
