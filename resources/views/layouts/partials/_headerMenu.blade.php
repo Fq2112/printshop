@@ -133,7 +133,9 @@
                             $total += $row->total;
                         @endphp
                         <div class="top-cart-item clearfix">
-                            <a href="{{route('produk', ['produk' => $data->permalink, 'cart_id' => encrypt($row->id)])}}">
+                            <a href="javascript:void(0)" onclick="actionOrder('{{$data->name}}',
+                                '{{route('produk', ['produk' => $data->permalink, 'cart_id' => encrypt($row->id)])}}',
+                                '{{route('produk.delete.pemesanan', ['produk' => $data->permalink, 'id' => encrypt($row->id)])}}')">
                                 <div class="top-cart-item-image">
                                     <img src="{{$image}}" alt="Thumbnail">
                                 </div>

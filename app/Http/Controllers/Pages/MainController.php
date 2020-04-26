@@ -153,7 +153,7 @@ class MainController extends Controller
         $addresses = Address::where('user_id', Auth::id())->orderByDesc('id')->get();
 
         $cart = $request->has('cart_id') ? Cart::find(decrypt($request->cart_id)) : null;
-        $shipping = $request->has('cart_id') ? Address::find($cart->address_id) : null;
+        $shipping = !is_null($cart) ? Address::find($cart->address_id) : null;
 
         if (!is_null($sub)) {
             $data = $sub;
@@ -312,6 +312,18 @@ class MainController extends Controller
         ]);
 
         return redirect()->route('beranda')->with('order', __('lang.alert.order-update',
+            ['param' => !is_null($cart->subkategori_id) ? $cart->getSubKategori->name : $cart->getCluster->name]));
+    }
+
+    public function deletePemesanan(Request $request)
+    {
+        $cart = Cart::find(decrypt($request->id));
+        if ($cart->file != '') {
+            Storage::delete('public/users/order/design/' . Auth::id() . '/' . $cart->file);
+        }
+        $cart->delete();
+
+        return back()->with('delete', __('lang.alert.cart-delete',
             ['param' => !is_null($cart->subkategori_id) ? $cart->getSubKategori->name : $cart->getCluster->name]));
     }
 

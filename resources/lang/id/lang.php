@@ -356,6 +356,8 @@ return [
         "order-update" => "Pesanan produk cetak [:param] Anda berhasil diperbarui! Apakah Anda ingin menyelesaikan pembayarannya sekarang?",
         "order-cart" => "Anda akan dialihkan ke halaman Keranjang (Cart).",
         "order-shop" => "Silahkan pilih produk cetak yang Anda inginkan dan mulai mencetaknya lagi :)",
+        "cart" => "Apakah Anda ingin menyunting pesanan produk cetak ['+name+'] ini atau menghapusnya dari keranjang Anda?",
+        "cart-delete" => "Pesanan produk cetak [:param] Anda berhasil dihapuskan dari keranjang Anda!",
         "browser" => "Browser yang Anda gunakan tidak support! Silahkan perbarui atau gunakan browser yang lainnya.",
         "upload" => "Avatar Anda berhasil diperbarui!",
         "upload-bg" => "Latar belakang profil Anda berhasil diperbarui!",

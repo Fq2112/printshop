@@ -356,6 +356,8 @@ return [
         "order-update" => "Your print product [:param] order is successfully updated! Do you want to complete the payment now?",
         "order-cart" => "You will be redirected to the Cart page.",
         "order-shop" => "Please select the print product you want and start printing again :)",
+        "cart" => "Do you want to edit this print product ['+name+'] order or delete it from your cart?",
+        "cart-delete" => "Your print product [:param] order is successfully deleted from your cart!",
         "browser" => "The browser you are using does not support! Please update or use another browser.",
         "upload" => "Your avatar is successfully updated!",
         "upload-bg" => "Your background profile is successfully updated!",

@@ -35,4 +35,48 @@
         });
         return false;
     });
+
+    function actionOrder(name, edit_uri, delete_uri) {
+        swal({
+            title: '{{__('lang.header.cart')}}',
+            text: '{!! __('lang.alert.cart') !!}',
+            icon: 'warning',
+            dangerMode: true,
+            buttons: {
+                cancel: '{{__('lang.button.cancel')}}',
+                edit: {
+                    text: '{{__('lang.button.edit')}}',
+                    value: 'edit',
+                },
+                delete: {
+                    text: '{{__('lang.button.delete')}}',
+                    value: 'delete',
+                }
+            },
+            closeOnEsc: false,
+            closeOnClickOutside: false,
+        }).then((value) => {
+            if (value == 'edit') {
+                swal({icon: "success", buttons: false});
+                window.location.href = edit_uri;
+            } else if (value == 'delete') {
+                swal({
+                    title: "{{__('lang.alert.delete-head')}}",
+                    text: "{{__('lang.alert.delete-capt')}}",
+                    icon: 'warning',
+                    dangerMode: true,
+                    buttons: ["{{__('lang.button.no')}}", "{{__('lang.button.yes')}}"],
+                    closeOnEsc: false,
+                    closeOnClickOutside: false,
+                }).then((confirm) => {
+                    if (confirm) {
+                        swal({icon: "success", buttons: false});
+                        window.location.href = delete_uri;
+                    }
+                });
+            } else {
+                swal.close();
+            }
+        });
+    }
 </script>

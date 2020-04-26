@@ -74,6 +74,12 @@ Route::group(['namespace' => 'Pages'], function () {
         'as' => 'produk.update.pemesanan'
     ]);
 
+    Route::get('{produk}/order/{id}/delete', [
+        'middleware' => ['auth', 'user'],
+        'uses' => 'MainController@deletePemesanan',
+        'as' => 'produk.delete.pemesanan'
+    ]);
+
     Route::get('cari/nama', [
         'uses' => 'MainController@cariNamaProduk',
         'as' => 'get.cari-nama.produk'
