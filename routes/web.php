@@ -168,6 +168,11 @@ Route::group(['namespace' => 'Pages'], function () {
                 'as' => 'user.cart',
             ]);
 
+            Route::get('cari/promo', [
+                'uses' => 'UserController@cariPromo',
+                'as' => 'get.cari-promo.cart'
+            ]);
+
         });
 
         Route::get('dashboard', [

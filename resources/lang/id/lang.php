@@ -133,6 +133,18 @@ return [
             ],
         ],
     ],
+    "cart" => [
+        "capt" => "Di sini Anda dapat mengelola pesanan Anda dan menyelesaikan pembayarannya.",
+        "order" => [
+            "head" => "Daftar Pesanan",
+            "capt" => "Kelola pesanan Anda terlebih dahulu sebelum menyelesaikan pembayarannya",
+        ],
+        "summary" => [
+            "promo" => "Kode Promo",
+            "subtotal" => "Subtotal (:qty produk)",
+            "discount" => "Diskon",
+        ],
+    ],
     "pro" => [
         "capt" => "Dapatkan akun PRO " . env('APP_TITLE') . ", ubah kebutuhan cetak bisnis Anda jadi lebih mudah!",
     ],
@@ -198,9 +210,6 @@ return [
         "tab-ir" => "Barang Diterima",
         "empty-head" => "Anda belum membuat pesanan apapun",
         "empty-capt" => "Lengkapi kebutuhan cetak Anda sekarang",
-    ],
-    "cart" => [
-        "capt" => "Di sini Anda dapat mengelola keranjang belanja Anda dan menyelesaikan pembayarannya.",
     ],
     "profile" => [
         "capt" => "Di sini Anda dapat mengatur avatar dan latar belakang profil Anda, data personal dan juga daftar alamat Anda.",
@@ -271,6 +280,7 @@ return [
         "message" => "Tulis sesuatu di sini...",
         "length" => "Panjang",
         "width" => "Lebar",
+        "promo" => "Masukkan kode promo Anda...",
         "drag-drop" => "Drag & drop file desain Anda di sini...",
         "click-select" => "<br>(atau klik untuk memilihnya)",
         "choose-file" => "Pilih file..."
@@ -358,6 +368,7 @@ return [
         "order-shop" => "Silahkan pilih produk cetak yang Anda inginkan dan mulai mencetaknya lagi :)",
         "cart" => "Apakah Anda ingin menyunting pesanan produk cetak ['+name+'] ini atau menghapusnya dari keranjang Anda?",
         "cart-delete" => "Pesanan produk cetak [:param] Anda berhasil dihapuskan dari keranjang Anda!",
+        "promo" => "Kode promo yang Anda masukkan tidak ditemukan.",
         "browser" => "Browser yang Anda gunakan tidak support! Silahkan perbarui atau gunakan browser yang lainnya.",
         "upload" => "Avatar Anda berhasil diperbarui!",
         "upload-bg" => "Latar belakang profil Anda berhasil diperbarui!",

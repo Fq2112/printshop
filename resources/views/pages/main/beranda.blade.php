@@ -707,7 +707,12 @@
                 closeOnClickOutside: false,
             }).then((confirm) => {
                 if (confirm) {
-                    swal('{{__('lang.alert.warning')}}', '{{__('lang.alert.order-cart')}}', 'warning');
+                    swal({
+                        title: '{{__('lang.alert.warning')}}',
+                        text: '{{__('lang.alert.order-cart')}}',
+                        icon: 'warning',
+                        buttons: false
+                    });
                     window.location.href = '{{route('user.cart')}}';
                 } else {
                     swal('{{__('lang.alert.order-shop')}}', '', 'info');

@@ -133,6 +133,18 @@ return [
             ],
         ],
     ],
+    "cart" => [
+        "capt" => "Here you can manage your orders and complete the payment.",
+        "order" => [
+            "head" => "Order List",
+            "capt" => "Manage your order first before completing the payment",
+        ],
+        "summary" => [
+            "promo" => "Promo Code",
+            "subtotal" => "Subtotal (:qty product:s)",
+            "discount" => "Discount",
+        ],
+    ],
     "pro" => [
         "capt" => "Meet " . env('APP_TITLE') . " PRO Account, transform your business printing needs easier!",
     ],
@@ -198,9 +210,6 @@ return [
         "tab-ir" => "Item Received",
         "empty-head" => "You haven't made any orders",
         "empty-capt" => "Complete your printing needs now",
-    ],
-    "cart" => [
-        "capt" => "Here you can manage your shopping cart and complete the payment.",
     ],
     "profile" => [
         "capt" => "Here you can manage your avatar and background profile, personal data, and also your address list.",
@@ -271,6 +280,7 @@ return [
         "message" => "Write something here...",
         "length" => "Length",
         "width" => "Width",
+        "promo" => "Enter your promo code...",
         "drag-drop" => "Drag & drop your design file here...",
         "click-select" => "<br>(or click to choose it)",
         "choose-file" => "Choose file..."
@@ -358,6 +368,7 @@ return [
         "order-shop" => "Please select the print product you want and start printing again :)",
         "cart" => "Do you want to edit this print product ['+name+'] order or delete it from your cart?",
         "cart-delete" => "Your print product [:param] order is successfully deleted from your cart!",
+        "promo" => "The promo code you entered was not found.",
         "browser" => "The browser you are using does not support! Please update or use another browser.",
         "upload" => "Your avatar is successfully updated!",
         "upload-bg" => "Your background profile is successfully updated!",

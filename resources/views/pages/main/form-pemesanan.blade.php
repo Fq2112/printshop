@@ -721,7 +721,7 @@
                 showPreview: true,
                 initialPreviewAsData: true,
                 overwriteInitial: true,
-                initialPreview: ['{{!is_null($cart) && !is_null($cart->file) ? asset('storage/users/order/design/'.Auth::id().'/'.$cart->file) : ''}}'],
+                initialPreview: '{{!is_null($cart) && !is_null($cart->file) ? asset('storage/users/order/design/'.Auth::id().'/'.$cart->file) : ''}}',
                 initialPreviewConfig: [
                     {
                         caption: "{{!is_null($cart) && !is_null($cart->file) ? $cart->file : ''}}",
@@ -753,7 +753,6 @@
             @if(is_null($cart))
             $(".file-input .file-caption").removeClass('icon-visible');
             $(".file-input .file-caption-name").removeAttr('title');
-            $(".file-input .file-caption-icon").remove();
             @endif
 
             collapse.on('show.bs.collapse', function () {

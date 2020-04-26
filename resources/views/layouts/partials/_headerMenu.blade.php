@@ -162,7 +162,7 @@
                         <h5 class="mt-0 mb-1">{{__('lang.order.empty-head')}}</h5>
                         <h6 class="mt-0 mb-3">{{__('lang.order.empty-capt')}}</h6>
                         <a href="{{route('beranda')}}"
-                           class="button button-rounded button-reveal button-border button-primary button-small tright nomargin mb-3">
+                           class="button button-rounded button-reveal button-border button-primary button-small tright mb-3">
                             <i class="icon-angle-right"></i><span>{{__('lang.button.shop')}}</span>
                         </a>
                     </div>
