@@ -783,7 +783,7 @@
                 var val = parseInt(spec_val);
                 str_spec = 'Rp' + thousandSeparator(val) + ',00';
                 if (val > 0) {
-                    price_pcs += val;
+                    price_pcs = parseInt('25000') + val;
                 } else {
                     price_pcs = parseInt('25000');
                 }
