@@ -39,6 +39,7 @@ class DatabaseSeeder extends Seeder
             DetailProductSeeder::class,
             OccupancyTypeSeeder::class,
             AdminSeeder::class,
+            KontakSeeder::class,
             BlogSeeder::class,
             FaqSeeder::class,
         ]);
