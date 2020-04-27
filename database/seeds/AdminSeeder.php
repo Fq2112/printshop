@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Factory;
 
 class AdminSeeder extends Seeder
 {
@@ -52,5 +53,31 @@ class AdminSeeder extends Seeder
         ]);
 
         \App\Models\Bio::create(['user_id' => $user->id]);
+
+        for ($i = 0; $i < 3; $i++) {
+            $faker = Factory::create('id_ID');
+            $dataUser = \App\User::create([
+                'name' => $faker->name,
+                'username' => $faker->name,
+                'email' => $faker->safeEmail,
+                'password' => bcrypt('secret'),
+                'status' => true,
+            ]);
+            \App\Models\Bio::create([
+                'user_id' => $dataUser->id,
+            ]);
+            for ($a = 0; $a < 2; $a++) {
+               \App\Models\Address::create([
+                   'user_id' => $dataUser->id,
+                   'phone' => '+62 '.$faker->phoneNumber,
+                   'address' => $faker->address,
+                   'postal_code' => $faker->postcode,
+                   'name' => $faker->sentence,
+                   'is_main' => false,
+                   'city_id' => rand(\App\Models\Cities::min('id'),\App\Models\Cities::max('id')),
+                   'occupancy_id' => rand(\App\Models\OccupancyType::min('id'),\App\Models\OccupancyType::max('id'))
+               ]);
+            }
+        }
     }
 }

@@ -21,6 +21,7 @@ class CreateKontakTable extends Migration
             $table->string('phone')->nullable();
             $table->string('subject');
             $table->text('message');
+            $table->boolean('is_reply')->default(false);
             $table->timestamps();
         });
     }
