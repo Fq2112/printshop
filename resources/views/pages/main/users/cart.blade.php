@@ -271,7 +271,8 @@
                                                                                          data-toggle="tooltip"
                                                                                          title="{{__('lang.tooltip.edit-design')}}"
                                                                                          style="cursor: pointer"
-                                                                                         onclick="editDesign('{{route('user.edit-design.cart', ['id' => $row->id])}}')">
+                                                                                         onclick="editDesign('{{route('user.edit-design.cart', ['id' => $row->id])}}',
+                                                                                             '{{route('user.update-order.cart', ['id' => $row->id])}}')">
                                                                                         <img alt="icon" width="150"
                                                                                              src="{{$image}}">
                                                                                         <div class="custom-overlay">
@@ -284,6 +285,14 @@
                                                                                         <h5 class="mt-3 mb-1">
                                                                                             <i class="icon-drafting-compass mr-1"></i>
                                                                                             {{$data->name}}
+                                                                                            <i class="i-plain i-small icon-line2-note ml-1"
+                                                                                               data-toggle="tooltip"
+                                                                                               data-placement="right"
+                                                                                               title="{{__('lang.tooltip.note')}}"
+                                                                                               style="cursor: pointer;float: none"
+                                                                                               onclick="manageNote('{{$row->note}}','{{$data->name}}',
+                                                                                                   '{{route('user.update-order.cart', ['id' => $row->id])}}',
+                                                                                                   '{{route('user.delete-note.cart', ['id' => $row->id])}}')"></i>
                                                                                             <span class="fright">
                                                                                                 <a style="color: #f89406;cursor: pointer;"
                                                                                                    href="{{route('produk', ['produk' => $data->permalink, 'cart_id' => encrypt($row->id)])}}">
@@ -568,7 +577,7 @@
                                                                                             </div>
 
                                                                                             <div
-                                                                                                class="toggle toggle-border mb-0">
+                                                                                                class="toggle toggle-border {{$row->note != "" ? 'mb-3' : ''}}">
                                                                                                 <div
                                                                                                     class="togglet toggleta font-weight-normal text-uppercase">
                                                                                                     <i class="toggle-closed icon-chevron-down1"></i>
@@ -646,6 +655,25 @@
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
+
+                                                                                            @if($row->note != "")
+                                                                                                <div
+                                                                                                    class="toggle toggle-border mb-0">
+                                                                                                    <div
+                                                                                                        class="togglet toggleta font-weight-normal text-uppercase">
+                                                                                                        <i class="toggle-closed icon-chevron-down1"></i>
+                                                                                                        <i class="toggle-open icon-chevron-up1"></i>
+                                                                                                        {{__('lang.tooltip.note')}}
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                        class="togglec">
+                                                                                                        <p class="m-0"
+                                                                                                           align="justify">
+                                                                                                            {{$row->note}}
+                                                                                                        </p>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            @endif
                                                                                         </blockquote>
                                                                                     </div>
                                                                                 </div>
@@ -764,89 +792,100 @@
                     </div>
                 </form>
 
-                <div id="modal_upload" class="modal fade" tabindex="-1" role="dialog"
-                     aria-labelledby="modal_upload" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-body">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">{{__('lang.modal.upload-design.head')}}</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                        &times;
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <label class="card-label mb-3" for="um-upload" onclick="uploadMethod()">
-                                        <input id="um-upload" class="card-rb" name="upload_method" type="radio"
-                                               value="upload_file" required>
-                                        <div class="card card-input">
-                                            <div class="card-block p-2">
-                                                <h4 class="card-title">
-                                                    {{__('lang.modal.upload-design.upload-head')}}</h4>
-                                                {!! __('lang.modal.upload-design.upload-capt') !!}
-                                                <input id="file" name="file" type="file"
-                                                       accept=".jpg,.jpeg,.png,.tiff,.pdf,.zip,.rar">
+                <form id="form-design" action="#" method="post" enctype="multipart/form-data">
+                    @csrf
+                    {{method_field('PUT')}}
+                    <div id="modal_upload" class="modal fade" tabindex="-1" role="dialog"
+                         aria-labelledby="modal_upload" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-body">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">{{__('lang.modal.upload-design.head')}}</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <label class="card-label mb-3" for="um-upload" onclick="uploadMethod()">
+                                            <input id="um-upload" class="card-rb" name="upload_method" type="radio"
+                                                   value="upload_file" required>
+                                            <div class="card card-input">
+                                                <div class="card-block p-2">
+                                                    <h4 class="card-title">
+                                                        {{__('lang.modal.upload-design.upload-head')}}</h4>
+                                                    {!! __('lang.modal.upload-design.upload-capt') !!}
+                                                    <input id="file" name="file" type="file"
+                                                           accept=".jpg,.jpeg,.png,.tiff,.pdf,.zip,.rar">
+                                                </div>
                                             </div>
-                                        </div>
-                                    </label>
-                                    <label class="card-label" for="um-link" onclick="uploadMethod()">
-                                        <input id="um-link" class="card-rb" name="upload_method" type="radio">
-                                        <div class="card card-input">
-                                            <div class="card-block p-2">
-                                                <h4 class="card-title">{{__('lang.modal.upload-design.link-head')}}</h4>
-                                                <p class="card-text mb-0"
-                                                   style="text-transform: none">{{__('lang.modal.upload-design.link-capt')}}</p>
-                                                <input id="link" placeholder="http://example.com" type="text"
-                                                       class="form-control" name="link" maxlength="191"
-                                                       style="display: none" disabled>
+                                        </label>
+                                        <label class="card-label" for="um-link" onclick="uploadMethod()">
+                                            <input id="um-link" class="card-rb" name="upload_method" type="radio">
+                                            <div class="card card-input">
+                                                <div class="card-block p-2">
+                                                    <h4 class="card-title">{{__('lang.modal.upload-design.link-head')}}</h4>
+                                                    <p class="card-text mb-0"
+                                                       style="text-transform: none">{{__('lang.modal.upload-design.link-capt')}}</p>
+                                                    <input id="link" placeholder="http://example.com" type="text"
+                                                           class="form-control" name="link" maxlength="191"
+                                                           style="display: none" disabled>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </label>
-                                </div>
-                                <div class="modal-footer p-0">
-                                    <button type="submit" id="btn_submit"
-                                            class="btn btn-primary btn-block noborder" disabled>
-                                        <i class="icon-drafting-compass mr-2"></i>{{__('lang.button.save')}}
-                                    </button>
+                                        </label>
+                                    </div>
+                                    <div class="modal-footer p-0">
+                                        <button type="submit" id="btn_submit"
+                                                class="btn btn-primary btn-block noborder" disabled>
+                                            <i class="icon-drafting-compass mr-2"></i>{{__('lang.button.save')}}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
+
+                <form id="form-note" action="#" method="post">
+                    @csrf
+                    {{method_field('PUT')}}
+                    <div id="modal_note" class="modal fade" tabindex="-1" role="dialog"
+                         aria-labelledby="modal_note" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-body">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title text-capitalize"></h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <label for="note">{{strtolower(ucfirst(__('lang.tooltip.note')))}}
+                                            <span class="required">*</span></label>
+                                        <textarea class="sm-form-control" id="note"
+                                                  name="note" placeholder="{{__('lang.placeholder.note')}}"
+                                                  rows="6" cols="30" required></textarea>
+                                    </div>
+                                    <div class="modal-footer p-0">
+                                        <button type="submit" class="btn btn-primary btn-block noborder">
+                                            <i class="icon-line2-note mr-2"></i>{{__('lang.button.save')}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </section>
 @endsection
 @push('scripts')
     <script>
-        var collapse = $('.panel-collapse'), upload_input = $("#file"), link_input = $("#link");
+        var collapse = $('.panel-collapse'), upload_input = $("#file"), link_input = $("#link"), check_file = null;
 
         $(function () {
-            upload_input.fileinput({
-                showUpload: false,
-                showBrowse: false,
-                showCaption: true,
-                browseOnZoneClick: true,
-                showPreview: true,
-                initialPreviewAsData: true,
-                overwriteInitial: true,
-                dropZoneTitle: '{{__('lang.placeholder.drag-drop')}}',
-                dropZoneClickTitle: '{!! __('lang.placeholder.click-select') !!}',
-                removeLabel: '{{__('lang.button.delete')}}',
-                removeIcon: '<i class="icon-trash-alt mr-1"></i>',
-                removeClass: 'button button-3d button-rounded button-red w-100 m-0',
-                removeTitle: '{{__('lang.tooltip.clear-upload')}}',
-                cancelLabel: '{{__('lang.button.cancel')}}',
-                cancelIcon: '<i class="icon-line2-action-undo mr-1"></i>',
-                cancelClass: 'button button-3d button-rounded button-red w-100 m-0',
-                cancelTitle: '{{__('lang.tooltip.cancel-upload')}}',
-                allowedFileExtensions: ["jpg", "jpeg", "png", "tiff", "pdf", "zip", "rar"],
-                maxFileSize: 204800,
-                msgFileRequired: '{{__('lang.modal.upload-design.msg-required')}}',
-                msgSizeTooLarge: '{!! __('lang.modal.upload-design.msg-size') !!}',
-                msgInvalidFileExtension: '{!! __('lang.modal.upload-design.msg-extension') !!}',
-            });
-
             collapse.on('show.bs.collapse', function () {
                 $(this).siblings('.panel-heading').addClass('active');
                 $(this).siblings('.panel-heading').find('a').addClass('active font-weight-bold');
@@ -860,17 +899,63 @@
             });
         });
 
-        function editDesign(url) {
+        function editDesign(url_edit, url_update) {
             clearTimeout(this.delay);
             this.delay = setTimeout(function () {
-                $.get(url, function (data) {
+                $.get(url_edit, function (data) {
                     if (data.is_design == 1) {
+                        $("#form-design").attr('action', '#');
+                        $("#modal_upload button[type=submit]").attr('disabled', 'disabled');
                         $("#modal_design").modal('show');
+
                     } else {
                         if (data.link == null) {
                             $("#um-upload").prop('checked', true);
                             $("#um-link").prop('checked', false);
                             link_input.val(null);
+
+                            upload_input.fileinput('destroy').fileinput({
+                                showUpload: false,
+                                showBrowse: false,
+                                showCaption: true,
+                                browseOnZoneClick: true,
+                                showPreview: true,
+                                initialPreviewAsData: true,
+                                overwriteInitial: true,
+                                initialPreview: data.path,
+                                initialPreviewConfig: [{
+                                    caption: data.file,
+                                    filename: data.file,
+                                    size: data.size,
+                                    downloadUrl: data.path
+                                }],
+                                initialCaption: data.file,
+                                dropZoneTitle: '{{__('lang.placeholder.drag-drop')}}',
+                                dropZoneClickTitle: '{!! __('lang.placeholder.click-select') !!}',
+                                removeLabel: '{{__('lang.button.delete')}}',
+                                removeIcon: '<i class="icon-trash-alt mr-1"></i>',
+                                removeClass: 'button button-3d button-rounded button-red w-100 m-0',
+                                removeTitle: '{{__('lang.tooltip.clear-upload')}}',
+                                cancelLabel: '{{__('lang.button.cancel')}}',
+                                cancelIcon: '<i class="icon-line2-action-undo mr-1"></i>',
+                                cancelClass: 'button button-3d button-rounded button-red w-100 m-0',
+                                cancelTitle: '{{__('lang.tooltip.cancel-upload')}}',
+                                allowedFileExtensions: ["jpg", "jpeg", "png", "tiff", "pdf", "zip", "rar"],
+                                maxFileSize: 204800,
+                                msgFileRequired: '{{__('lang.modal.upload-design.msg-required')}}',
+                                msgSizeTooLarge: '{!! __('lang.modal.upload-design.msg-size') !!}',
+                                msgInvalidFileExtension: '{!! __('lang.modal.upload-design.msg-extension') !!}',
+                            }).on('change', function () {
+                                if (!$(this).val()) {
+                                    $("#modal_upload button[type=submit]").attr('disabled', 'disabled');
+                                } else {
+                                    $("#modal_upload button[type=submit]").removeAttr('disabled');
+                                }
+                            }).on('fileclear').on('fileerror', function () {
+                                $("#modal_upload button[type=submit]").attr('disabled', 'disabled');
+                            });
+
+                            check_file = data.file;
 
                             $(".file-input .file-caption-name").attr('placeholder', '{{__('lang.placeholder.choose-file')}}')
                                 .attr('disabled', 'disabled').css('cursor', 'text');
@@ -885,6 +970,40 @@
                             $("#um-upload").prop('checked', false);
                             link_input.val(data.link);
 
+                            upload_input.fileinput();
+                            upload_input.fileinput('destroy').fileinput({
+                                showUpload: false,
+                                showBrowse: false,
+                                showCaption: true,
+                                browseOnZoneClick: true,
+                                showPreview: true,
+                                dropZoneTitle: '{{__('lang.placeholder.drag-drop')}}',
+                                dropZoneClickTitle: '{!! __('lang.placeholder.click-select') !!}',
+                                removeLabel: '{{__('lang.button.delete')}}',
+                                removeIcon: '<i class="icon-trash-alt mr-1"></i>',
+                                removeClass: 'button button-3d button-rounded button-red w-100 m-0',
+                                removeTitle: '{{__('lang.tooltip.clear-upload')}}',
+                                cancelLabel: '{{__('lang.button.cancel')}}',
+                                cancelIcon: '<i class="icon-line2-action-undo mr-1"></i>',
+                                cancelClass: 'button button-3d button-rounded button-red w-100 m-0',
+                                cancelTitle: '{{__('lang.tooltip.cancel-upload')}}',
+                                allowedFileExtensions: ["jpg", "jpeg", "png", "tiff", "pdf", "zip", "rar"],
+                                maxFileSize: 204800,
+                                msgFileRequired: '{{__('lang.modal.upload-design.msg-required')}}',
+                                msgSizeTooLarge: '{!! __('lang.modal.upload-design.msg-size') !!}',
+                                msgInvalidFileExtension: '{!! __('lang.modal.upload-design.msg-extension') !!}',
+                            }).on('change', function () {
+                                if (!$(this).val()) {
+                                    $("#modal_upload button[type=submit]").attr('disabled', 'disabled');
+                                } else {
+                                    $("#modal_upload button[type=submit]").removeAttr('disabled');
+                                }
+                            }).on('fileclear').on('fileerror', function () {
+                                $("#modal_upload button[type=submit]").attr('disabled', 'disabled');
+                            });
+
+                            check_file = null;
+
                             $(".file-input .file-caption").removeClass('icon-visible');
                             $(".file-input .file-caption-name").attr('placeholder', '{{__('lang.placeholder.choose-file')}}')
                                 .attr('disabled', 'disabled').css('cursor', 'text').removeAttr('title');
@@ -895,6 +1014,7 @@
                                 .parents('label').find('.card-text').hide();
                         }
 
+                        $("#form-design").attr('action', url_update);
                         $("#modal_upload button[type=submit]").removeAttr('disabled');
                         $("#modal_upload").modal('show');
                     }
@@ -911,8 +1031,12 @@
                 link_input.hide().attr('disabled', 'disabled').removeAttr('required')
                     .parents('label').find('.card-text').show();
 
-                if (!upload_input.val()) {
-                    $("#modal_upload button[type=submit]").attr('disabled', 'disabled');
+                if (check_file == null) {
+                    if (!upload_input.val()) {
+                        $("#modal_upload button[type=submit]").attr('disabled', 'disabled');
+                    } else {
+                        $("#modal_upload button[type=submit]").removeAttr('disabled');
+                    }
                 } else {
                     $("#modal_upload button[type=submit]").removeAttr('disabled');
                 }
@@ -932,18 +1056,6 @@
             }
         }
 
-        upload_input.on('change', function () {
-            if (!$(this).val()) {
-                $("#modal_upload button[type=submit]").attr('disabled', 'disabled');
-            } else {
-                $("#modal_upload button[type=submit]").removeAttr('disabled');
-            }
-        });
-
-        upload_input.on('fileclear').on('fileerror', function () {
-            $("#modal_upload button[type=submit]").attr('disabled', 'disabled');
-        });
-
         link_input.on("keyup", function () {
             var $uri = $(this).val().substr(0, 4) != 'http' ? 'http://' + $(this).val() : $(this).val();
             $(this).val($uri);
@@ -954,6 +1066,63 @@
                 $("#modal_upload button[type=submit]").removeAttr('disabled');
             }
         });
+
+        function manageNote(note, name, url_update, url_delete) {
+            if (note != "") {
+                swal({
+                    title: '{{__('lang.tooltip.note')}}',
+                    text: '{!! __('lang.alert.note') !!}',
+                    icon: 'warning',
+                    dangerMode: true,
+                    buttons: {
+                        cancel: '{{__('lang.button.cancel')}}',
+                        edit: {
+                            text: '{{__('lang.button.edit')}}',
+                            value: 'edit',
+                        },
+                        delete: {
+                            text: '{{__('lang.button.delete')}}',
+                            value: 'delete',
+                        }
+                    },
+                    closeOnEsc: false,
+                    closeOnClickOutside: false,
+                }).then((value) => {
+                    if (value == 'edit') {
+                        $("#form-note .modal-title").html("{{strtolower(__('lang.button.edit').' '.__('lang.tooltip.note'))}}: " +
+                            "<b style='text-transform: none'>" + name + "</b>");
+                        $("#form-note").attr('action', url_update);
+                        $("#note").val(note);
+                        $("#modal_note").modal('show');
+
+                    } else if (value == 'delete') {
+                        swal({
+                            title: "{{__('lang.alert.delete-head')}}",
+                            text: "{{__('lang.alert.delete-capt')}}",
+                            icon: 'warning',
+                            dangerMode: true,
+                            buttons: ["{{__('lang.button.no')}}", "{{__('lang.button.yes')}}"],
+                            closeOnEsc: false,
+                            closeOnClickOutside: false,
+                        }).then((confirm) => {
+                            if (confirm) {
+                                swal({icon: "success", buttons: false});
+                                window.location.href = url_delete;
+                            }
+                        });
+                    } else {
+                        swal.close();
+                    }
+                });
+
+            } else {
+                $("#form-note .modal-title").html("{{strtolower(__('lang.button.add').' '.__('lang.tooltip.note'))}}: " +
+                    "<b style='text-transform: none'>" + name + "</b>");
+                $("#form-note").attr('action', url_update);
+                $("#note").val(null);
+                $("#modal_note").modal('show');
+            }
+        }
 
         $("#promo_code").on('keyup', function (e) {
             if (!$(this).val()) {

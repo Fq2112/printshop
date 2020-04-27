@@ -261,11 +261,16 @@ class MainController extends Controller
             $request->file('file')->storeAs('public/users/order/design/' . Auth::id(), $file);
             $link = null;
         } else {
-            if ($cart->file != '') {
-                Storage::delete('public/users/order/design/' . Auth::id() . '/' . $cart->file);
+            if (is_null($request->link)) {
+                $file = $cart->file;
+                $link = null;
+            } else {
+                if ($cart->file != '') {
+                    Storage::delete('public/users/order/design/' . Auth::id() . '/' . $cart->file);
+                }
+                $file = null;
+                $link = $request->link;
             }
-            $file = null;
-            $link = $request->link;
         }
 
         $cart->update([

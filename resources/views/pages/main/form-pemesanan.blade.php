@@ -386,11 +386,10 @@
                                         </li>
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.production')}}
-                                            <span data-toggle="popover" data-placement="top"
-                                                  title="{{__('lang.alert.warning')}}"
-                                                  data-content="{{__('lang.popover.production_finished')}}">
-                                                <i class="i-plain i-small icon-line2-info ml-1"
-                                                   style="cursor: help;float: none"></i></span>
+                                            <i class="i-plain i-small icon-line2-info ml-1" data-toggle="popover"
+                                               data-placement="top" title="{{__('lang.alert.warning')}}"
+                                               data-content="{{__('lang.popover.production_finished')}}"
+                                               style="cursor: help;float: none"></i>
                                             <b class="fright show-production">&ndash;</b>
                                         </li>
                                         <li class="list-group-item noborder">
@@ -403,11 +402,10 @@
                                         </li>
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.received')}}
-                                            <span data-toggle="popover" data-placement="top"
-                                                  title="{{__('lang.alert.warning')}}"
-                                                  data-content="{{__('lang.popover.received_date')}}">
-                                                <i class="i-plain i-small icon-line2-info ml-1"
-                                                   style="cursor: help;float: none"></i></span>
+                                            <i class="i-plain i-small icon-line2-info ml-1" data-toggle="popover"
+                                               data-placement="top" title="{{__('lang.alert.warning')}}"
+                                               data-content="{{__('lang.popover.received_date')}}"
+                                               style="cursor: help;float: none"></i>
                                             <b class="fright show-received">&ndash;</b>
                                         </li>
                                     </ul>
@@ -430,7 +428,11 @@
                                     <div class="card-footer p-0">
                                         <button id="btn_upload" type="button" disabled
                                                 class="btn btn-primary btn-block text-uppercase text-left noborder">
-                                            {{$specs->is_design == true ? __('lang.button.create') : __('lang.button.upload')}}
+                                            @if(!is_null($cart))
+                                                {{__('lang.button.update')}}
+                                            @else
+                                                {{$specs->is_design == true ? __('lang.button.create') : __('lang.button.upload')}}
+                                            @endif
                                             <i class="icon-chevron-right fright"></i>
                                         </button>
                                     </div>
@@ -712,48 +714,6 @@
                     }
                 }
             });
-
-            upload_input.fileinput({
-                showUpload: false,
-                showBrowse: false,
-                showCaption: true,
-                browseOnZoneClick: true,
-                showPreview: true,
-                initialPreviewAsData: true,
-                overwriteInitial: true,
-                initialPreview: '{{!is_null($cart) && !is_null($cart->file) ? asset('storage/users/order/design/'.Auth::id().'/'.$cart->file) : ''}}',
-                initialPreviewConfig: [
-                    {
-                        caption: "{{!is_null($cart) && !is_null($cart->file) ? $cart->file : ''}}",
-                        filename: "{{!is_null($cart) && !is_null($cart->file) ? $cart->file : ''}}",
-                        downloadUrl: '{{!is_null($cart) && !is_null($cart->file) ? asset('storage/users/order/design/'.Auth::id().'/'.$cart->file) : ''}}',
-                        size: '{{!is_null($cart) && !is_null($cart->file) ? \Illuminate\Support\Facades\Storage::size('public/users/order/design/'.Auth::id().'/'.$cart->file) : ''}}',
-                    },
-                ],
-                initialCaption: "{{!is_null($cart) && !is_null($cart->file) ? $cart->file : __('lang.placeholder.choose-file')}}",
-                dropZoneTitle: '{{__('lang.placeholder.drag-drop')}}',
-                dropZoneClickTitle: '{!! __('lang.placeholder.click-select') !!}',
-                removeLabel: '{{__('lang.button.delete')}}',
-                removeIcon: '<i class="icon-trash-alt mr-1"></i>',
-                removeClass: 'button button-3d button-rounded button-red w-100 m-0',
-                removeTitle: '{{__('lang.tooltip.clear-upload')}}',
-                cancelLabel: '{{__('lang.button.cancel')}}',
-                cancelIcon: '<i class="icon-line2-action-undo mr-1"></i>',
-                cancelClass: 'button button-3d button-rounded button-red w-100 m-0',
-                cancelTitle: '{{__('lang.tooltip.cancel-upload')}}',
-                allowedFileExtensions: ["jpg", "jpeg", "png", "tiff", "pdf", "zip", "rar"],
-                maxFileSize: 204800,
-                msgFileRequired: '{{__('lang.modal.upload-design.msg-required')}}',
-                msgSizeTooLarge: '{!! __('lang.modal.upload-design.msg-size') !!}',
-                msgInvalidFileExtension: '{!! __('lang.modal.upload-design.msg-extension') !!}',
-            });
-
-            $(".file-input .file-caption-name").attr('placeholder', '{{__('lang.placeholder.choose-file')}}')
-                .attr('disabled', 'disabled').css('cursor', 'text');
-            @if(is_null($cart))
-            $(".file-input .file-caption").removeClass('icon-visible');
-            $(".file-input .file-caption-name").removeAttr('title');
-            @endif
 
             collapse.on('show.bs.collapse', function () {
                 $(this).siblings('.panel-heading').addClass('active');
@@ -1208,6 +1168,7 @@
             @if($specs->is_design == true)
             $("#modal_design").modal('show');
             @else
+
             @if(!is_null($cart))
             @if(!is_null($cart->file))
             $(".file-input").show()
@@ -1222,10 +1183,63 @@
             @endif
             $("#form-pemesanan button[type=submit]").removeAttr('disabled');
             @endif
+
+            upload_input.fileinput('destroy').fileinput({
+                showUpload: false,
+                showBrowse: false,
+                showCaption: true,
+                browseOnZoneClick: true,
+                showPreview: true,
+                initialPreviewAsData: true,
+                overwriteInitial: true,
+                initialPreview: '{{!is_null($cart) && !is_null($cart->file) ? asset('storage/users/order/design/'.Auth::id().'/'.$cart->file) : ''}}',
+                initialPreviewConfig: [
+                    {
+                        caption: "{{!is_null($cart) && !is_null($cart->file) ? $cart->file : ''}}",
+                        filename: "{{!is_null($cart) && !is_null($cart->file) ? $cart->file : ''}}",
+                        downloadUrl: '{{!is_null($cart) && !is_null($cart->file) ? asset('storage/users/order/design/'.Auth::id().'/'.$cart->file) : ''}}',
+                        size: '{{!is_null($cart) && !is_null($cart->file) ? \Illuminate\Support\Facades\Storage::size('public/users/order/design/'.Auth::id().'/'.$cart->file) : ''}}',
+                    },
+                ],
+                initialCaption: "{{!is_null($cart) && !is_null($cart->file) ? $cart->file : __('lang.placeholder.choose-file')}}",
+                dropZoneTitle: '{{__('lang.placeholder.drag-drop')}}',
+                dropZoneClickTitle: '{!! __('lang.placeholder.click-select') !!}',
+                removeLabel: '{{__('lang.button.delete')}}',
+                removeIcon: '<i class="icon-trash-alt mr-1"></i>',
+                removeClass: 'button button-3d button-rounded button-red w-100 m-0',
+                removeTitle: '{{__('lang.tooltip.clear-upload')}}',
+                cancelLabel: '{{__('lang.button.cancel')}}',
+                cancelIcon: '<i class="icon-line2-action-undo mr-1"></i>',
+                cancelClass: 'button button-3d button-rounded button-red w-100 m-0',
+                cancelTitle: '{{__('lang.tooltip.cancel-upload')}}',
+                allowedFileExtensions: ["jpg", "jpeg", "png", "tiff", "pdf", "zip", "rar"],
+                maxFileSize: 204800,
+                msgFileRequired: '{{__('lang.modal.upload-design.msg-required')}}',
+                msgSizeTooLarge: '{!! __('lang.modal.upload-design.msg-size') !!}',
+                msgInvalidFileExtension: '{!! __('lang.modal.upload-design.msg-extension') !!}',
+            }).on('change', function () {
+                if (!$(this).val()) {
+                    $("#form-pemesanan button[type=submit]").attr('disabled', 'disabled');
+                } else {
+                    $("#form-pemesanan button[type=submit]").removeAttr('disabled');
+                }
+            }).on('fileclear').on('fileerror', function () {
+                $("#form-pemesanan button[type=submit]").attr('disabled', 'disabled');
+            });
+
+            $(".file-input .file-caption-name").attr('placeholder', '{{__('lang.placeholder.choose-file')}}')
+                .attr('disabled', 'disabled').css('cursor', 'text');
+            @if(is_null($cart) || (!is_null($cart) && is_null($cart->file)))
+            $(".file-input .file-caption").removeClass('icon-visible');
+            $(".file-input .file-caption-name").removeAttr('title');
+            @endif
+
             $("#modal_upload").modal('show');
             @endif
+
             @elseauth('admin')
             swal('{{__('lang.alert.warning')}}', '{{__('lang.alert.feature-fail')}}', 'warning');
+
             @else
             openLoginModal();
             @endauth
@@ -1238,11 +1252,15 @@
                 link_input.hide().attr('disabled', 'disabled').removeAttr('required')
                     .parents('label').find('.card-text').show();
 
+                @if(is_null($cart) || (!is_null($cart) && is_null($cart->file)))
                 if (!upload_input.val()) {
                     $("#form-pemesanan button[type=submit]").attr('disabled', 'disabled');
                 } else {
                     $("#form-pemesanan button[type=submit]").removeAttr('disabled');
                 }
+                @else
+                $("#form-pemesanan button[type=submit]").removeAttr('disabled');
+                @endif
             }
 
             if ($("#um-link").is(':checked')) {
@@ -1258,18 +1276,6 @@
                 }
             }
         }
-
-        upload_input.on('change', function () {
-            if (!$(this).val()) {
-                $("#form-pemesanan button[type=submit]").attr('disabled', 'disabled');
-            } else {
-                $("#form-pemesanan button[type=submit]").removeAttr('disabled');
-            }
-        });
-
-        upload_input.on('fileclear').on('fileerror', function () {
-            $("#form-pemesanan button[type=submit]").attr('disabled', 'disabled');
-        });
 
         link_input.on("keyup", function () {
             var $uri = $(this).val().substr(0, 4) != 'http' ? 'http://' + $(this).val() : $(this).val();
