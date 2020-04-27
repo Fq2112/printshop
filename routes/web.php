@@ -168,6 +168,11 @@ Route::group(['namespace' => 'Pages'], function () {
                 'as' => 'user.cart',
             ]);
 
+            Route::get('edit/{id}/design', [
+                'uses' => 'UserController@editDesign',
+                'as' => 'user.edit-design.cart',
+            ]);
+
             Route::get('cari/promo', [
                 'uses' => 'UserController@cariPromo',
                 'as' => 'get.cari-promo.cart'

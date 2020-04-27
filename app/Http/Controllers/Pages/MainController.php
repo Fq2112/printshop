@@ -336,7 +336,7 @@ class MainController extends Controller
             $sub[$x] = [
                 'name' => $row->name,
                 'link' => route('produk', ['produk' => $row->permalink]),
-                'image' => asset('storage/products/menu/' . $row->getKategori->image),
+                'image' => asset('storage/products/banner/' . $row->banner),
             ];
             $x++;
         }
@@ -348,7 +348,7 @@ class MainController extends Controller
             $cluster[$y] = [
                 'name' => $row->name,
                 'link' => route('produk', ['produk' => $row->permalink]),
-                'image' => asset('storage/products/menu/' . $row->getSubKategori->getKategori->image),
+                'image' => asset('storage/products/thumb/' . $row->thumbnail),
             ];
             $y++;
         }

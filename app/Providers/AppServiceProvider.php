@@ -28,9 +28,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Carbon::setLocale(config('app.locale'));
-        setlocale(LC_TIME, config('app.locale'));
-
         $this->app->bind('GlobalAuth', 'App\Support\GlobalAuth');
         $this->app->bind('NumberShorten', 'App\Support\NumberShorten');
     }

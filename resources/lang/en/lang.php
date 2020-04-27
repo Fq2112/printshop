@@ -138,10 +138,11 @@ return [
         "order" => [
             "head" => "Order List",
             "capt" => "Manage your order first before completing the payment",
+            "product" => ":qty item:s",
+            "calc" => "Calculation",
         ],
         "summary" => [
             "promo" => "Promo Code",
-            "subtotal" => "Subtotal (:qty product:s)",
             "discount" => "Discount",
         ],
     ],
@@ -258,6 +259,7 @@ return [
         "address" => "Main Address",
         "upload" => "Allowed extension: :ext. Allowed size: :size.",
         "edit-address" => "Click here to edit your address!",
+        "edit-design" => "Click here to edit your design file!",
         "clear-upload" => "Click here to clear the file you selected!",
         "cancel-upload" => "Click here to cancel your file upload process!"
     ],

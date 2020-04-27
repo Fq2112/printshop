@@ -138,10 +138,11 @@ return [
         "order" => [
             "head" => "Daftar Pesanan",
             "capt" => "Kelola pesanan Anda terlebih dahulu sebelum menyelesaikan pembayarannya",
+            "product" => ":qty item",
+            "calc" => "Kalkulasi",
         ],
         "summary" => [
             "promo" => "Kode Promo",
-            "subtotal" => "Subtotal (:qty produk)",
             "discount" => "Diskon",
         ],
     ],
@@ -258,6 +259,7 @@ return [
         "address" => "Alamat Utama",
         "upload" => "Ekstensi yang diizinkan: :ext. Ukuran yang diizinkan: :size.",
         "edit-address" => "Klik di sini untuk menyunting alamat Anda!",
+        "edit-design" => "Klik di sini untuk menyunting file desain Anda!",
         "clear-upload" => "Klik di sini untuk menghapus file yang telah Anda pilih!",
         "cancel-upload" => "Klik di sini untuk membatalkan proses pengunggahan file Anda!"
     ],

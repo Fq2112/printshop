@@ -59,12 +59,12 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::middleware(['web', 'localeSessionRedirect', 'localizationRedirect', 'localize'])
+        Route::middleware(['web', 'localeSessionRedirect', 'localizationRedirect', 'localize', 'localizeDateTime'])
             ->prefix(LaravelLocalization::setLocale())
             ->namespace($this->namespace)
             ->group(base_path('routes/web.php'));
 
-        Route::middleware(['web', 'localeSessionRedirect', 'localizationRedirect', 'localize', 'auth:admin'])
+        Route::middleware(['web', 'localeSessionRedirect', 'localizationRedirect', 'localize', 'localizeDateTime', 'auth:admin'])
             ->prefix(LaravelLocalization::setLocale() . '/scott.royce')
             ->namespace($this->namespace)
             ->group(base_path('routes/admin.php'));
