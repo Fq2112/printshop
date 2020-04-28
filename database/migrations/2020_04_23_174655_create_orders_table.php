@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->foreign('cart_id')->references('id')->on('carts')
                 ->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->string('progress_status');
+            $table->string('uni_code')->unique();
             $table->timestamps();
         });
     }
