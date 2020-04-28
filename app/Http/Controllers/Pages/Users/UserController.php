@@ -121,10 +121,9 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $bio = $user->getBio;
-        $address = Address::where('user_id', $user->id)->where('is_main', true)->first();
         $keyword = $request->q;
         $category = $request->filter;
 
-        return view('pages.main.users.dashboard', compact('user', 'bio', 'address', 'keyword', 'category'));
+        return view('pages.main.users.dashboard', compact('user', 'bio', 'keyword', 'category'));
     }
 }

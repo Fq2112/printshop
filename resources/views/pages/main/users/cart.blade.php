@@ -339,7 +339,7 @@
                                                                                                         </li>
                                                                                                         <li class="list-group-item noborder">
                                                                                                             {{__('lang.product.form.summary.delivery')}}
-                                                                                                            <b class="fright">{{$etd}}</b>
+                                                                                                            <b class="fright">{!! $etd !!}</b>
                                                                                                         </li>
                                                                                                         <li class="list-group-item noborder">
                                                                                                             {{__('lang.product.form.summary.received')}}
