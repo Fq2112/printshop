@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder
             KontakSeeder::class,
             BlogSeeder::class,
             FaqSeeder::class,
+            CartSeeder::class
         ]);
     }
 }
