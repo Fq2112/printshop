@@ -339,7 +339,7 @@
                                                                                                         </li>
                                                                                                         <li class="list-group-item noborder">
                                                                                                             {{__('lang.product.form.summary.delivery')}}
-                                                                                                            <b class="fright">{{$etd}}</b>
+                                                                                                            <b class="fright">{!! $etd !!}</b>
                                                                                                         </li>
                                                                                                         <li class="list-group-item noborder">
                                                                                                             {{__('lang.product.form.summary.received')}}
@@ -890,12 +890,16 @@
                 $(this).siblings('.panel-heading').addClass('active');
                 $(this).siblings('.panel-heading').find('a').addClass('active font-weight-bold');
                 $(this).siblings('.panel-heading').find('b').toggle(300);
+
+                $('html,body').animate({scrollTop: $(this).parent().offset().top}, 0);
             });
 
             collapse.on('hide.bs.collapse', function () {
                 $(this).siblings('.panel-heading').removeClass('active');
                 $(this).siblings('.panel-heading').find('a').removeClass('active font-weight-bold');
                 $(this).siblings('.panel-heading').find('b').toggle(300);
+
+                $('html,body').animate({scrollTop: $(this).parent().offset().top}, 0);
             });
         });
 

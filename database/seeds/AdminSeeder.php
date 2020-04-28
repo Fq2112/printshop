@@ -12,6 +12,8 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Factory::create('id_ID');
+
         \App\Models\Admin::create([
             'name' => 'Fiqy Ainuzzaqy',
             'username' => 'fq_whysoserious',
@@ -53,9 +55,32 @@ class AdminSeeder extends Seeder
         ]);
 
         \App\Models\Bio::create(['user_id' => $user->id]);
+        \App\Models\Address::create([
+            'user_id' => $user->id,
+            'phone' => '081356598237',
+            'address' => 'Jl. Hikmat 50A Betro, Sedati, Sidoarjo',
+            'lat' => '-7.3857584',
+            'long' => '112.7574375',
+            'postal_code' => '61253',
+            'name' => 'Fiqy Ainuzzaqy',
+            'is_main' => true,
+            'city_id' => 409,
+            'occupancy_id' => 8
+        ]);
+        \App\Models\Address::create([
+            'user_id' => $user->id,
+            'phone' => '082234389870',
+            'address' => 'Desa Pakel, Tulungagung',
+            'lat' => '-8.1501485',
+            'long' => '111.7990778',
+            'postal_code' => '61253',
+            'name' => 'Fiqy Ainuzzaqy',
+            'is_main' => false,
+            'city_id' => 492,
+            'occupancy_id' => 7
+        ]);
 
         for ($i = 0; $i < 3; $i++) {
-            $faker = Factory::create('id_ID');
             $dataUser = \App\User::create([
                 'name' => $faker->name,
                 'username' => $faker->name,
@@ -63,9 +88,7 @@ class AdminSeeder extends Seeder
                 'password' => bcrypt('secret'),
                 'status' => true,
             ]);
-            \App\Models\Bio::create([
-                'user_id' => $dataUser->id,
-            ]);
+            \App\Models\Bio::create(['user_id' => $dataUser->id]);
             for ($a = 0; $a < 2; $a++) {
                \App\Models\Address::create([
                    'user_id' => $dataUser->id,
