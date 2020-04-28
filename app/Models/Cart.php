@@ -30,4 +30,9 @@ class Cart extends Model
     {
         return $this->belongsTo(Address::class, 'address_id');
     }
+
+    public function getOrder()
+    {
+        return $this->hasOne(Order::class, 'cart_id');
+    }
 }
