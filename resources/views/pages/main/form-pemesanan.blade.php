@@ -719,12 +719,16 @@
                 $(this).siblings('.panel-heading').addClass('active');
                 $(this).siblings('.panel-heading').find('a').addClass('active font-weight-bold');
                 $(this).siblings('.panel-heading').find('b').toggle(300);
+
+                $('html,body').animate({scrollTop: $(this).parent().offset().top}, 0);
             });
 
             collapse.on('hide.bs.collapse', function () {
                 $(this).siblings('.panel-heading').removeClass('active');
                 $(this).siblings('.panel-heading').find('a').removeClass('active font-weight-bold');
-                $(this).siblings('.panel-heading').find('b').toggle(300);
+                $(this).siblings('.panel-heading').find('b').toggle(300)
+
+                $('html,body').animate({scrollTop: $(this).parent().offset().top}, 0);
             });
 
             @if(is_null($cart))
