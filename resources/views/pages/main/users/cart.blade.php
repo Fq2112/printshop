@@ -256,10 +256,16 @@
                                                                         asset('storage/products/banner/'.$row->getSubKategori->banner) :
                                                                         asset('storage/products/thumb/'.$row->getCluster->thumbnail);
                                                                         $specs = !is_null($row->subkategori_id) ? $data->getSubkatSpecs : $data->getClusterSpecs;
-                                                                        if($row->delivery_duration == '1-1') {
-                                                                            $etd = '&le; 1 ' . __(__('lang.product.form.summary.day', ['s' => null]));
+                                                                        if(strpos($row->delivery_duration, '+')) {
+                                                                            $etd = '&ge; '. str_replace('+','',$row->delivery_duration) .' '.__(__('lang.product.form.summary.day', ['s' => 's']));
+                                                                            $received = str_replace('+','',$row->delivery_duration);
                                                                         } else {
-                                                                            $etd = str_replace('-', ' – ',$row->delivery_duration) . ' ' . __('lang.product.form.summary.day', ['s' => 's']);
+                                                                            if($row->delivery_duration == '1-1') {
+                                                                                $etd = '&le; 1 ' . __(__('lang.product.form.summary.day', ['s' => null]));
+                                                                            } else {
+                                                                                $etd = str_replace('-', ' – ',$row->delivery_duration) . ' ' . __('lang.product.form.summary.day', ['s' => 's']);
+                                                                            }
+                                                                            $received = substr($row->delivery_duration,-1);
                                                                         }
                                                                     @endphp
                                                                     <div class="myCard mb-3">
@@ -343,7 +349,7 @@
                                                                                                         </li>
                                                                                                         <li class="list-group-item noborder">
                                                                                                             {{__('lang.product.form.summary.received')}}
-                                                                                                            <b class="fright">{{now()->addDays(3+substr($row->delivery_duration,-1))->formatLocalized('%d %b %Y')}}</b>
+                                                                                                            <b class="fright">{{now()->addDays(3+$received)->formatLocalized('%d %b %Y')}}</b>
                                                                                                         </li>
                                                                                                     </ul>
                                                                                                     <div

@@ -73,8 +73,8 @@ class AdminSeeder extends Seeder
             'address' => 'Desa Pakel, Tulungagung',
             'lat' => '-8.1501485',
             'long' => '111.7990778',
-            'postal_code' => '61253',
-            'name' => 'Fiqy Ainuzzaqy',
+            'postal_code' => '66273',
+            'name' => 'Laras Sulistyorini',
             'is_main' => false,
             'city_id' => 492,
             'occupancy_id' => 7

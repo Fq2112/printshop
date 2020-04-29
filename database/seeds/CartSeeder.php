@@ -22,31 +22,37 @@ class CartSeeder extends Seeder
         ]);
 
         foreach (\App\User::all() as $user) {
-            $address = \App\Models\Address::where('user_id', $user->id)->inRandomOrder()->first();
-            $shipping = $client->post('https://api.rajaongkir.com/starter/cost', [
-                'form_params' => [
-                    'origin' => 444,
-                    'destination' => $address->city_id,
-                    'weight' => 2,
-                    'courier' => 'jne'
-                ]
-            ]);
+            for ($i = 1; $i < 3; $i++) {
+                $address = \App\Models\Address::where('user_id', $user->id)->inRandomOrder()->first();
+                $shipping = $client->post('https://api.rajaongkir.com/starter/cost', [
+                    'form_params' => [
+                        'origin' => 444,
+                        'destination' => $address->city_id,
+                        'weight' => 2,
+                        'courier' => 'jne'
+                    ]
+                ]);
 
-            $ongkir = 0;
-            $etd = '';
-            foreach (json_decode($shipping->getBody()->getContents(), true) as $row) {
-                foreach ($row['results'][0]['costs'] as $val) {
-                    if ($val['service'] == 'REG' || $val['service'] == 'CTCYES') {
-                        $ongkir = $val['cost'][0]['value'];
-                        $etd = $val['cost'][0]['etd'];
+                $ongkir = 0;
+                $etd = '';
+                foreach (json_decode($shipping->getBody()->getContents(), true) as $row) {
+                    foreach ($row['results'][0]['costs'] as $val) {
+                        if ($val['service'] == 'REG' || $val['service'] == 'CTCYES') {
+                            $ongkir = $val['cost'][0]['value'];
+                            $etd = $val['cost'][0]['etd'];
+                        }
                     }
                 }
-            }
 
-            $qty = rand(1, 100);
-            $total = ($qty * 25000) + $ongkir;
+                if (strpos($etd, '+')) {
+                    $received_date = now()->addDays(3 + str_replace('+', '', $etd))->format('Y-m-d');
+                } else {
+                    $received_date = now()->addDays(3 + substr($etd, -1))->format('Y-m-d');
+                }
 
-            for ($i = 1; $i < 3; $i++) {
+                $qty = rand(1, 100);
+                $total = ($qty * 25000) + $ongkir;
+
                 $cluster = \App\Models\ClusterKategori::inRandomOrder()->first();
                 \App\Models\Cart::create([
                     'user_id' => $user->id,
@@ -57,7 +63,7 @@ class CartSeeder extends Seeder
                     'production_finished' => now()->addDays(3)->format('Y-m-d'),
                     'ongkir' => $ongkir,
                     'delivery_duration' => $etd,
-                    'received_date' => now()->addDays(3 + substr($etd, -1))->format('Y-m-d'),
+                    'received_date' => $received_date,
                     'total' => $total,
 
                     'material_id' => $cluster->getClusterSpecs->material_ids == null ? null : $cluster->getClusterSpecs->material_ids[0],
@@ -103,7 +109,7 @@ class CartSeeder extends Seeder
                     'production_finished' => now()->addDays(3)->format('Y-m-d'),
                     'ongkir' => $ongkir,
                     'delivery_duration' => $etd,
-                    'received_date' => now()->addDays(3 + substr($etd, -1))->format('Y-m-d'),
+                    'received_date' => $received_date,
                     'total' => $total,
 
                     'material_id' => $subkat->getSubkatSpecs->material_ids == null ? null : $subkat->getSubkatSpecs->material_ids[0],
