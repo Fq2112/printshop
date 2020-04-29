@@ -107,7 +107,7 @@
 @else
     @php
         $total = 0;
-        $carts = \App\Models\Cart::where('user_id', Auth::id())->orderByDesc('id')->get();
+        $carts = \App\Models\Cart::where('user_id', Auth::id())->where('isCheckout', false)->orderByDesc('id')->get();
         if(!is_null($carts)){
             $cart_amount = count($carts) > 9 ? '9+' : count($carts);
         } else {

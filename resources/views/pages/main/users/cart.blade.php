@@ -226,7 +226,7 @@
                                     <h5 class="text-center mb-2" style="text-transform: none">
                                         {{__('lang.cart.order.capt')}}</h5>
                                     <div class="divider divider-center mt-1 mb-1"><i class="icon-circle"></i></div>
-                                    @if(count($user->getCart) > 0)
+                                    @if(count($carts) > 0)
                                         <div class="component-accordion">
                                             <div class="panel-group" id="accordion" role="tablist">
                                                 @foreach($carts as $monthYear => $archive)
@@ -733,7 +733,7 @@
                                                         <input id="promo_code" type="text" class="form-control"
                                                                name="promo_code"
                                                                placeholder="{{__('lang.placeholder.promo')}}"
-                                                            {{count($user->getCart) > 0 ? '' : 'disabled'}}>
+                                                            {{count($carts) > 0 ? '' : 'disabled'}}>
                                                         <div class="input-group-append">
                                                             <button id="btn_set" class="btn btn-primary"
                                                                     type="button" disabled>SET
@@ -755,16 +755,16 @@
                                         </div>
                                         <li class="list-group-item noborder">
                                             Subtotal
-                                            ({{__('lang.cart.order.product', ['qty' => count($user->getCart), 's' => count($user->getCart) > 1 ? 's' : null])}}
-                                            )
+                                            ({{__('lang.cart.order.product', ['qty' => count($carts), 's' =>
+                                            count($carts) > 1 ? 's' : null])}})
                                             <b class="fright">
-                                                {!! count($user->getCart) > 0 ? 'Rp'.number_format($subtotal,2,',','.') : '&ndash;' !!}
+                                                {!! count($carts) > 0 ? 'Rp'.number_format($subtotal,2,',','.') : '&ndash;' !!}
                                             </b>
                                         </li>
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.ongkir')}}
                                             <b class="fright">
-                                                {!! count($user->getCart) > 0 ? 'Rp'.number_format($ongkir,2,',','.') : '&ndash;' !!}
+                                                {!! count($carts) > 0 ? 'Rp'.number_format($ongkir,2,',','.') : '&ndash;' !!}
                                             </b>
                                         </li>
                                         <li id="discount" class="list-group-item noborder" style="display: none">
@@ -782,12 +782,12 @@
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item noborder">
                                             TOTAL<b class="fright show-total" style="font-size: large">
-                                                {!!count($user->getCart) > 0 ? 'Rp'.number_format($subtotal + $ongkir,2,',','.') : '&ndash;'!!}</b>
+                                                {!!count($carts) > 0 ? 'Rp'.number_format($subtotal + $ongkir,2,',','.') : '&ndash;'!!}</b>
                                         </li>
                                     </ul>
                                     <div class="card-footer p-0">
                                         <button id="btn_pay" type="button"
-                                                {{count($user->getCart) > 0 ? '' : 'disabled'}}
+                                                {{count($carts) > 0 ? '' : 'disabled'}}
                                                 class="btn btn-primary btn-block text-uppercase text-left noborder">
                                             CHECKOUT <i class="icon-chevron-right fright"></i>
                                         </button>
