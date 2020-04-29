@@ -73,6 +73,7 @@ class CreateCartsTable extends Migration
             $table->text('file')->nullable();
             $table->text('link')->nullable();
             $table->text('note')->nullable();
+            $table->boolean('isCheckout')->default(false);
             $table->timestamps();
         });
     }
