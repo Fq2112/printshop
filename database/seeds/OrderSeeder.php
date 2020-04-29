@@ -12,14 +12,14 @@ class OrderSeeder extends Seeder
     public function run()
     {
         foreach (\App\Models\Cart::all() as $item) {
-            $cluster_name = $item->getCluster->getTranslation('name', 'en');
-            $trim_name = explode(' ', trim($cluster_name));
+            $item_name = $item->subkategori_id != null ? $item->getSubKategori->getTranslation('name', 'en') : $item->getCluster->getTranslation('name', 'en');
+            $trim_name = explode(' ', trim($item_name));
             $initial = '';
-            foreach ($trim_name as $key =>  $trimItem ) {
-                $name = substr($trim_name[$key],0,1);
-                $initial = $initial.$name;
+            foreach ($trim_name as $key => $trimItem) {
+                $name = substr($trim_name[$key], 0, 1);
+                $initial = $initial . $name;
             }
-            $uni_code =  strtoupper(uniqid($initial)) . $item->id;
+            $uni_code = strtoupper(uniqid($initial)) . $item->id;
             \App\Models\Order::create([
                 'cart_id' => $item->id,
                 'progress_status' => \App\Support\StatusProgress::NEW,

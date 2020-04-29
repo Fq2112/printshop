@@ -821,11 +821,16 @@
                 $(".show-" + check).text(str_spec);
                 $('#collapse-' + check).collapse('toggle');
             }
+
+            $('html,body').animate({scrollTop: $('#collapse-' + check).parents('#accordion').offset().top}, 0);
         }
 
         function getShipping(city, check, name) {
+            var add_receive;
+
             $(".show-" + check).text(name);
             $('#collapse-' + check).collapse('hide');
+            $('html,body').animate({scrollTop: $('#collapse-' + check).parents('#accordion2').offset().top}, 0);
 
             if (check == 'address') {
                 $("#shipping_estimation").val('default').selectpicker('refresh');
@@ -860,20 +865,26 @@
 
                         total += parseInt(ongkir);
 
-                        if (etd == '1-1') {
-                            str_etd = '&le; 1 {{__('lang.product.form.summary.day', ['s' => null])}}'
+                        if (etd.includes('+')) {
+                            str_etd = '&ge; ' + etd.replace('+', '') + ' {{__('lang.product.form.summary.day', ['s' => 's'])}}';
+                            add_receive = etd.replace('+', '');
                         } else {
-                            str_etd = etd.replace('-', ' – ') + ' {{__('lang.product.form.summary.day', ['s' => 's'])}}';
+                            if (etd == '1-1') {
+                                str_etd = '&le; 1 {{__('lang.product.form.summary.day', ['s' => null])}}'
+                            } else {
+                                str_etd = etd.replace('-', ' – ') + ' {{__('lang.product.form.summary.day', ['s' => 's'])}}';
+                            }
+                            add_receive = etd.substr(-1);
                         }
 
                         $(".show-ongkir").text("Rp" + thousandSeparator(ongkir) + ",00");
                         $(".show-delivery").html(str_etd);
-                        $(".show-received").text(moment().add(parseInt(etd.substr(-1)) + production_day, 'days').format('DD MMM YYYY'));
+                        $(".show-received").text(moment().add(parseInt(production_day) + parseInt(add_receive), 'days').format('DD MMM YYYY'));
                         $(".show-total").text("Rp" + thousandSeparator(total) + ",00");
 
                         $("#ongkir").val(ongkir);
                         $("#delivery_duration").val(etd);
-                        $("#received_date").val(moment().add(parseInt(etd.substr(-1)) + production_day, 'days').format('YYYY-MM-DD'));
+                        $("#received_date").val(moment().add(parseInt(production_day) + parseInt(add_receive), 'days').format('YYYY-MM-DD'));
                         $("#total").val(total);
 
                         if (check == 'address') {
