@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class PaymentCart extends Model
@@ -13,4 +14,9 @@ class PaymentCart extends Model
     protected $casts = [
         'cart_ids' => 'array',
     ];
+
+    public function getUser()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

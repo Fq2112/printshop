@@ -15,6 +15,9 @@ class CreatePaymentCartsTable extends Migration
     {
         Schema::create('payment_carts', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->string('cart_ids');
             $table->text('token')->unique();
             $table->string('price_total');
