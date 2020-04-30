@@ -26,8 +26,7 @@ class BlogController extends Controller
     public function getDataBlog(Request $request)
     {
         if (is_null($request->filter)) {
-            $blog = Blog::where('title', 'LIKE', '%' . $request->q . '%')
-                ->orderByDesc('id')->paginate(12);
+            $blog = Blog::where('title', 'LIKE', '%' . $request->q . '%')->orderByDesc('id')->paginate(12);
         } else {
             $blog = Blog::where('title', 'LIKE', '%' . $request->q . '%')
                 ->where('category_id', $request->filter)->orderByDesc('id')->paginate(12);
@@ -53,8 +52,7 @@ class BlogController extends Controller
 
     public function cariJudulBlog(Request $request)
     {
-        $blog = Blog::where('title', 'LIKE', '%' . $request->title . '%')
-            ->orwhere('title', 'LIKE', '%' . $request->title . '%')->orderByDesc('id')->get();
+        $blog = Blog::where('title', 'LIKE', '%' . $request->title . '%')->orderByDesc('id')->get();
 
         foreach ($blog as $index => $row) {
             $tgl = Carbon::parse($row->created_at);

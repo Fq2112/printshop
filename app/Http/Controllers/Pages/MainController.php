@@ -334,8 +334,7 @@ class MainController extends Controller
 
     public function cariNamaProduk(Request $request)
     {
-        $sub = SubKategori::where('name->en', 'LIKE', '%' . $request->produk . '%')
-            ->orWhere('name->id', 'LIKE', '%' . $request->produk . '%')->get();
+        $sub = SubKategori::where('name', 'LIKE', '%' . $request->produk . '%')->get();
         $x = 0;
         foreach ($sub as $row) {
             $sub[$x] = [
@@ -346,8 +345,7 @@ class MainController extends Controller
             $x++;
         }
 
-        $cluster = ClusterKategori::where('name->en', 'LIKE', '%' . $request->produk . '%')
-            ->orWhere('name->id', 'LIKE', '%' . $request->produk . '%')->get();
+        $cluster = ClusterKategori::where('name', 'LIKE', '%' . $request->produk . '%')->get();
         $y = 0;
         foreach ($cluster as $row) {
             $cluster[$y] = [

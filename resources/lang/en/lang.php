@@ -211,6 +211,10 @@ return [
         "tab-ir" => "Item Received",
         "empty-head" => "You haven't made any orders",
         "empty-capt" => "Complete your printing needs now",
+        "payment" => "Payment ID #<span class='font-weight-600'>:id</span>",
+        "unpaid" => "UNPAID",
+        "paid" => "PAID",
+        "invoice" => "Invoice",
     ],
     "profile" => [
         "capt" => "Here you can manage your avatar and background profile, personal data, and also your address list.",
@@ -260,6 +264,7 @@ return [
         "upload" => "Allowed extension: :ext. Allowed size: :size.",
         "edit-address" => "Click here to edit your address!",
         "edit-design" => "Click here to edit your design file!",
+        "download-design" => "Click here to download your design file!",
         "note" => "NOTE",
         "clear-upload" => "Click here to clear the file you selected!",
         "cancel-upload" => "Click here to cancel your file upload process!"

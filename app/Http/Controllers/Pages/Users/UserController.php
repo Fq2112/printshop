@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Pages\Users;
 use App\Http\Controllers\Controller;
 use App\Models\Address;
 use App\Models\Cart;
+use App\Models\PaymentCart;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use function foo\func;
 
 class UserController extends Controller
 {
@@ -17,9 +19,10 @@ class UserController extends Controller
         $user = Auth::user();
         $bio = $user->getBio;
 
-        $archive = Cart::where('user_id', $user->id)->orderByDesc('address_id')->get()->groupBy(function ($q) {
-            return Carbon::parse($q->created_at)->formatLocalized('%B %Y');
-        });
+        $archive = Cart::where('user_id', $user->id)->where('isCheckout', false)
+            ->orderByDesc('address_id')->get()->groupBy(function ($q) {
+                return Carbon::parse($q->created_at)->formatLocalized('%B %Y');
+            });
         $carts = $archive;
 
         $a = 1;
@@ -30,8 +33,8 @@ class UserController extends Controller
         $subtotal = 0;
         $ongkir = 0;
 
-        return view('pages.main.users.cart', compact('user', 'bio', 'archive',
-            'carts', 'a', 'b', 'c', 'd', 'e', 'subtotal', 'ongkir'));
+        return view('pages.main.users.cart', compact('user', 'bio', 'carts',
+            'a', 'b', 'c', 'd', 'e', 'subtotal', 'ongkir'));
     }
 
     public function editDesign(Request $request)
@@ -124,6 +127,35 @@ class UserController extends Controller
         $keyword = $request->q;
         $category = $request->filter;
 
-        return view('pages.main.users.dashboard', compact('user', 'bio', 'keyword', 'category'));
+        $unpaid = PaymentCart::where('user_id', $user->id)->where('finish_payment', false)
+            ->when($keyword, function ($q) use ($keyword, $user) {
+                $q->where('uni_code_payment', 'LIKE', '%' . $keyword . '%')
+                    ->orWhereHas('getCart', function ($q) use ($keyword, $user) {
+                        $q->whereHas('getSubKategori', function ($q) use ($keyword) {
+                            $q->where('name', 'LIKE', '%' . $keyword . '%');
+                        })->where('user_id', $user->id)->where('isCheckout', true)
+                            ->orWhereHas('getCluster', function ($q) use ($keyword) {
+                                $q->where('name', 'LIKE', '%' . $keyword . '%');
+                            })->where('user_id', $user->id)->where('isCheckout', true);
+                    });
+            })->orderByDesc('id')->get();
+
+        $paid = PaymentCart::where('user_id', $user->id)->where('finish_payment', true)
+            ->when($keyword, function ($q) use ($keyword, $user) {
+                $q->where('uni_code_payment', 'LIKE', '%' . $keyword . '%')
+                    ->orWhereHas('getCart', function ($q) use ($keyword, $user) {
+                        $q->whereHas('getSubKategori', function ($q) use ($keyword) {
+                            $q->where('name', 'LIKE', '%' . $keyword . '%');
+                        })->where('user_id', $user->id)->where('isCheckout', true)
+                            ->orWhereHas('getCluster', function ($q) use ($keyword) {
+                                $q->where('name', 'LIKE', '%' . $keyword . '%');
+                            })->where('user_id', $user->id)->where('isCheckout', true);
+                    });
+            })->orderByDesc('id')->get();
+
+        $all = collect($unpaid)->merge(collect($paid));
+
+        return view('pages.main.users.dashboard', compact('user', 'bio', 'keyword', 'category',
+            'unpaid', 'paid', 'all'));
     }
 }

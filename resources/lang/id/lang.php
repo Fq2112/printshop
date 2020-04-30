@@ -211,6 +211,10 @@ return [
         "tab-ir" => "Barang Diterima",
         "empty-head" => "Anda belum membuat pesanan apapun",
         "empty-capt" => "Lengkapi kebutuhan cetak Anda sekarang",
+        "payment" => "ID Pembayaran #<span class=\"font-weight-600\">:id</span>",
+        "unpaid" => "BELUM DIBAYAR",
+        "paid" => "DIBAYAR",
+        "invoice" => "Faktur",
     ],
     "profile" => [
         "capt" => "Di sini Anda dapat mengatur avatar dan latar belakang profil Anda, data personal dan juga daftar alamat Anda.",
@@ -260,6 +264,7 @@ return [
         "upload" => "Ekstensi yang diizinkan: :ext. Ukuran yang diizinkan: :size.",
         "edit-address" => "Klik di sini untuk menyunting alamat Anda!",
         "edit-design" => "Klik di sini untuk menyunting file desain Anda!",
+        "download-design" => "Klik di sini untuk mengunduh file desain Anda",
         "note" => "CATATAN",
         "clear-upload" => "Klik di sini untuk menghapus file yang telah Anda pilih!",
         "cancel-upload" => "Klik di sini untuk membatalkan proses pengunggahan file Anda!"
