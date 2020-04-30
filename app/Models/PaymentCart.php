@@ -19,4 +19,9 @@ class PaymentCart extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function getCart()
+    {
+        return $this->belongsTo(Cart::class, 'cart_id');
+    }
 }

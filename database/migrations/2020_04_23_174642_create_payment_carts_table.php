@@ -18,7 +18,10 @@ class CreatePaymentCartsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')
                 ->onDelete('CASCADE')->onUpdate('CASCADE');
-            $table->string('cart_ids');
+            $table->unsignedBigInteger('cart_id');
+            $table->foreign('cart_id')->references('id')->on('carts')
+                ->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->text('uni_code_payment');
             $table->text('token')->unique();
             $table->string('price_total');
             $table->boolean('finish_payment')->default(false);

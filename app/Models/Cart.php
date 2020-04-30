@@ -35,4 +35,9 @@ class Cart extends Model
     {
         return $this->hasOne(Order::class, 'cart_id');
     }
+
+    public function getPayment()
+    {
+        return $this->hasOne(PaymentCart::class, 'cart_id');
+    }
 }
