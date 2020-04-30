@@ -34,7 +34,7 @@ class CartSeeder extends Seeder
                 ]);
 
                 $ongkir = 0;
-                $etd = '';
+                $etd = 'n/a';
                 foreach (json_decode($shipping->getBody()->getContents(), true) as $row) {
                     foreach ($row['results'][0]['costs'] as $val) {
                         if ($val['service'] == 'REG' || $val['service'] == 'CTCYES') {
@@ -44,10 +44,16 @@ class CartSeeder extends Seeder
                     }
                 }
 
-                if (strpos($etd, '+')) {
+                if ($etd == 'n/a') {
+                    $ongkir = 78000;
+                    $etd = '10+';
                     $received_date = now()->addDays(3 + str_replace('+', '', $etd))->format('Y-m-d');
                 } else {
-                    $received_date = now()->addDays(3 + substr($etd, -1))->format('Y-m-d');
+                    if (strpos($etd, '+')) {
+                        $received_date = now()->addDays(3 + str_replace('+', '', $etd))->format('Y-m-d');
+                    } else {
+                        $received_date = now()->addDays(3 + substr($etd, -1))->format('Y-m-d');
+                    }
                 }
 
                 $qty = rand(1, 100);

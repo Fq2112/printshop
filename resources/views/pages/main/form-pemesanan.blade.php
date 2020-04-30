@@ -856,40 +856,48 @@
                         $(".list-group-flush").css('opacity', '1');
                     },
                     success: function (data) {
-                        $.each(data['rajaongkir']['results'][0]['costs'], function (i, val) {
-                            if (val.service == 'REG' || val.service == 'CTCYES') {
-                                ongkir = val.cost[0].value;
-                                etd = val.cost[0].etd;
-                            }
-                        });
+                        if (data['rajaongkir']['results'][0]['costs'].length > 0) {
+                            $.each(data['rajaongkir']['results'][0]['costs'], function (i, val) {
+                                if (val.service == 'REG' || val.service == 'CTCYES') {
+                                    ongkir = val.cost[0].value;
+                                    etd = val.cost[0].etd;
+                                }
+                            });
 
-                        total += parseInt(ongkir);
+                            total += parseInt(ongkir);
 
-                        if (etd.includes('+')) {
-                            str_etd = '&ge; ' + etd.replace('+', '') + ' {{__('lang.product.form.summary.day', ['s' => 's'])}}';
-                            add_receive = etd.replace('+', '');
-                        } else {
-                            if (etd == '1-1') {
-                                str_etd = '&le; 1 {{__('lang.product.form.summary.day', ['s' => null])}}'
+                            if (etd.includes('+')) {
+                                str_etd = '&ge; ' + etd.replace('+', '') + ' {{__('lang.product.form.summary.day', ['s' => 's'])}}';
+                                add_receive = etd.replace('+', '');
                             } else {
-                                str_etd = etd.replace('-', ' – ') + ' {{__('lang.product.form.summary.day', ['s' => 's'])}}';
+                                if (etd == '1-1') {
+                                    str_etd = '&le; 1 {{__('lang.product.form.summary.day', ['s' => null])}}'
+                                } else {
+                                    str_etd = etd.replace('-', ' – ') + ' {{__('lang.product.form.summary.day', ['s' => 's'])}}';
+                                }
+                                add_receive = etd.substr(-1);
                             }
-                            add_receive = etd.substr(-1);
-                        }
 
-                        $(".show-ongkir").text("Rp" + thousandSeparator(ongkir) + ",00");
-                        $(".show-delivery").html(str_etd);
-                        $(".show-received").text(moment().add(parseInt(production_day) + parseInt(add_receive), 'days').format('DD MMM YYYY'));
-                        $(".show-total").text("Rp" + thousandSeparator(total) + ",00");
+                            $(".show-ongkir").text("Rp" + thousandSeparator(ongkir) + ",00");
+                            $(".show-delivery").html(str_etd);
+                            $(".show-received").text(moment().add(parseInt(production_day) + parseInt(add_receive), 'days').format('DD MMM YYYY'));
+                            $(".show-total").text("Rp" + thousandSeparator(total) + ",00");
 
-                        $("#ongkir").val(ongkir);
-                        $("#delivery_duration").val(etd);
-                        $("#received_date").val(moment().add(parseInt(production_day) + parseInt(add_receive), 'days').format('YYYY-MM-DD'));
-                        $("#total").val(total);
+                            $("#ongkir").val(ongkir);
+                            $("#delivery_duration").val(etd);
+                            $("#received_date").val(moment().add(parseInt(production_day) + parseInt(add_receive), 'days').format('YYYY-MM-DD'));
+                            $("#total").val(total);
 
-                        if (check == 'address') {
-                            $("#summary-alert").show();
-                            btn_upload.removeAttr('disabled');
+                            if (check == 'address') {
+                                $("#summary-alert").show();
+                                btn_upload.removeAttr('disabled');
+                            }
+
+                        } else {
+                            $(".show-ongkir, .show-delivery, .show-received").text('N/A');
+                            $("#ongkir, #delivery_duration, #received_date, #total").val(null);
+                            $("#summary-alert").hide();
+                            btn_upload.attr('disabled', 'disabled');
                         }
                     },
                     error: function () {
