@@ -50,7 +50,7 @@
                 <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
             </ul>
             <ul class="navbar-nav navbar-right">
-                @if($role->isRoot())
+                @if($role->isRoot() || $role->isOwner())
                     <li class="dropdown dropdown-list-toggle">
                         <a href="#" data-toggle="dropdown"
                            class="nav-link nav-link-lg message-toggle {{count($contacts) > 0 ? 'beep' : ''}}">

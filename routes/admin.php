@@ -56,9 +56,28 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
 
     });
 
+    Route::group(['prefix' => 'invoice', 'middleware' => 'owner'], function () {
+
+        Route::get('/', [
+            'uses' => 'InvoiceController@index',
+            'as' => 'admin.invoice'
+        ]);
+
+        Route::post('compose', [
+            'uses' => 'InvoiceController@getDataInvoice',
+            'as' => 'admin.invoice.data'
+        ]);
+//
+////        Route::get('{id}/delete', [
+////            'uses' => 'AdminController@deleteInbox',
+////            'as' => 'admin.delete.inbox'
+////        ]);
+
+    });
+
     Route::group(['namespace' => 'DataMaster', 'prefix' => 'tables'], function () {
 
-        Route::group(['prefix' => 'blog', 'middleware' => 'admin'], function () {
+        Route::group(['prefix' => 'blog', 'middleware' => ['admin']], function () {
 
             Route::group(['prefix' => 'categories'], function () {
 

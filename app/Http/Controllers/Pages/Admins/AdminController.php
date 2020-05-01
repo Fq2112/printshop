@@ -7,6 +7,7 @@ use App\Models\Admin;
 use App\Models\Blog;
 use App\Models\Cart;
 use App\Models\Kontak;
+use App\Models\Order;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -30,7 +31,9 @@ class AdminController extends Controller
 //            ->get()
 //            ->groupBy('address_id');
 
-//        $data = Cart::all()->groupBy('address_id');
+//        $order = Order::whereMonth('created_at',date('m'))->get();
+
+        $order = Order::wherebetween('created_at',  [ now()->firstOfMonth()->subDay()->format('Y-m-d H:i:s'),now()->lastOfMonth()->addDay()->format('Y-m-d H:i:s')]);
 
         if ($request->has('period')) {
             $period = $request->period;
@@ -44,7 +47,7 @@ class AdminController extends Controller
             $latest = Blog::where('admin_id', $role->id)->orderByDesc('id')->take(6)->get();
         }
 
-        return view('pages.main.admins.dashboard', compact('role', 'admins', 'users', 'blog', 'period', 'latest'));
+        return view('pages.main.admins.dashboard', compact('role', 'admins', 'users', 'blog', 'period', 'latest', 'order'));
     }
 
     public function showInbox(Request $request)
