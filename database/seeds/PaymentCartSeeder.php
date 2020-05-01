@@ -13,6 +13,7 @@ class PaymentCartSeeder extends Seeder
     {
         foreach (\App\Models\Cart::whereNotNull('cluster_id')->get()->groupBy('user_id') as $item) {
             foreach ($item as $datum) {
+
                 $code = uniqid('PYM') . now()->format('dmy');
                 \App\Models\PaymentCart::create([
                     'user_id' => $datum->user_id,
