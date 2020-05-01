@@ -583,7 +583,7 @@
                                                                                             </div>
 
                                                                                             <div
-                                                                                                class="toggle toggle-border {{$row->note != "" ? 'mb-3' : ''}}">
+                                                                                                class="toggle toggle-border {{$row->note != "" ? 'mb-3' : 'mb-0'}}">
                                                                                                 <div
                                                                                                     class="togglet toggleta font-weight-normal text-uppercase">
                                                                                                     <i class="toggle-closed icon-chevron-down1"></i>
@@ -905,7 +905,7 @@
                 $(this).siblings('.panel-heading').find('a').removeClass('active font-weight-bold');
                 $(this).siblings('.panel-heading').find('b').toggle(300);
 
-                $('html,body').animate({scrollTop: $(this).parent().offset().top}, 0);
+                $('html,body').animate({scrollTop: $(this).parent().parent().offset().top}, 0);
             });
         });
 
