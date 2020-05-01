@@ -203,7 +203,7 @@ return [
     ],
     "order" => [
         "capt" => "Di sini Anda dapat melihat riwayat pemesanan Anda beserta statusnya.",
-        "search" => "Masukkan nomor pesanan Anda atau nama produk cetak yang Anda pesan...",
+        "search" => "Masukkan nomor pembayaran/pesanan atau nama produk cetak yang Anda pesan...",
         "tab-or" => "Pesanan Diterima",
         "tab-pr" => "Pembayaran Diterima",
         "tab-bp" => "Sedang Diproduksi",

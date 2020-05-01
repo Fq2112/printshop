@@ -634,6 +634,10 @@
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIljHbKjgtTrpZhEiHum734tF1tolxI68&libraries=geometry,places"></script>
     <script>
+        $(function () {
+            $(".stats_address .divider:last-child").remove();
+        });
+
         var google, myLatlng, geocoder, map, marker, infoWindow;
 
         function init(lat, long) {

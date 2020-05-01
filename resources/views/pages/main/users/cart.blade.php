@@ -268,423 +268,406 @@
                                                                             $received = substr($row->delivery_duration,-1);
                                                                         }
                                                                     @endphp
-                                                                    <div class="myCard mb-3">
-                                                                        <div class="card-content">
-                                                                            <div class="card-title">
-                                                                                <div class="media">
-                                                                                    <div data-placement="bottom"
-                                                                                         class="content-area align-self-center"
-                                                                                         data-toggle="tooltip"
-                                                                                         title="{{__('lang.tooltip.edit-design')}}"
-                                                                                         style="cursor: pointer"
-                                                                                         onclick="editDesign('{{route('user.edit-design.cart', ['id' => $row->id])}}',
-                                                                                             '{{route('user.update-order.cart', ['id' => $row->id])}}')">
-                                                                                        <img alt="icon" width="150"
-                                                                                             src="{{$image}}">
-                                                                                        <div class="custom-overlay">
-                                                                                            <div class="custom-text">
-                                                                                                <i class="icon-edit icon-2x"></i>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="ml-3 media-body">
-                                                                                        <h5 class="mt-3 mb-1">
-                                                                                            <i class="icon-drafting-compass mr-1"></i>
-                                                                                            {{$data->name}}
-                                                                                            <i class="i-plain i-small icon-line2-note ml-1"
-                                                                                               data-toggle="tooltip"
-                                                                                               data-placement="right"
-                                                                                               title="{{__('lang.tooltip.note')}}"
-                                                                                               style="cursor: pointer;float: none"
-                                                                                               onclick="manageNote('{{$row->note}}','{{$data->name}}',
-                                                                                                   '{{route('user.update-order.cart', ['id' => $row->id])}}',
-                                                                                                   '{{route('user.delete-note.cart', ['id' => $row->id])}}')"></i>
-                                                                                            <span class="fright">
-                                                                                                <a style="color: #f89406;cursor: pointer;"
-                                                                                                   href="{{route('produk', ['produk' => $data->permalink, 'cart_id' => encrypt($row->id)])}}">
-                                                                                                    {{__('lang.button.edit')}}
-                                                                                                    <i class="icon-edit ml-1"></i>
-                                                                                                </a>
-                                                                                                <small
-                                                                                                    style="color: #7f7f7f">&nbsp;&#124;&nbsp;</small>
-                                                                                                <a class="delete-data"
-                                                                                                   style="color: #dc3545;cursor: pointer;"
-                                                                                                   href="{{route('produk.delete.pemesanan', ['produk' => $data->permalink, 'id' => encrypt($row->id)])}}">
-                                                                                                    <i class="icon-eraser mr-1"></i>
-                                                                                                    {{__('lang.button.delete')}}
-                                                                                                </a>
-                                                                                            </span>
-                                                                                        </h5>
-                                                                                        <blockquote class="mb-3 pr-0"
-                                                                                                    style="font-size: 14px;text-transform: none">
-                                                                                            <div
-                                                                                                class="toggle toggle-border mb-3">
-                                                                                                <div
-                                                                                                    class="togglet toggleta font-weight-normal text-uppercase">
-                                                                                                    <i class="toggle-closed icon-chevron-down1"></i>
-                                                                                                    <i class="toggle-open icon-chevron-up1"></i>
-                                                                                                    {{__('lang.cart.order.calc')}}
-                                                                                                </div>
-                                                                                                <div class="togglec">
-                                                                                                    <ul class="list-group list-group-flush">
-                                                                                                        <li class="list-group-item noborder">
-                                                                                                            {{__('lang.product.form.summary.quantity')}}
-                                                                                                            <b class="fright">{{$row->qty.' '.$specs->getUnit->name}}</b>
-                                                                                                        </li>
-                                                                                                        <li class="list-group-item noborder">
-                                                                                                            {{__('lang.product.form.summary.price', ['unit' => strtok($specs->getUnit->name, '(')])}}
-                                                                                                            <b class="fright">Rp{{number_format($row->price_pcs,2,',','.')}}</b>
-                                                                                                        </li>
-                                                                                                        <li class="list-group-item noborder">
-                                                                                                            {{__('lang.product.form.summary.production')}}
-                                                                                                            <b class="fright">{{now()->addDays(3)->formatLocalized('%d %b %Y')}}</b>
-                                                                                                        </li>
-                                                                                                        <li class="list-group-item noborder">
-                                                                                                            {{__('lang.product.form.summary.ongkir')}}
-                                                                                                            <b class="fright">Rp{{number_format($row->ongkir,2,',','.')}}</b>
-                                                                                                        </li>
-                                                                                                        <li class="list-group-item noborder">
-                                                                                                            {{__('lang.product.form.summary.delivery')}}
-                                                                                                            <b class="fright">{!! $etd !!}</b>
-                                                                                                        </li>
-                                                                                                        <li class="list-group-item noborder">
-                                                                                                            {{__('lang.product.form.summary.received')}}
-                                                                                                            <b class="fright">{{now()->addDays(3+$received)->formatLocalized('%d %b %Y')}}</b>
-                                                                                                        </li>
-                                                                                                    </ul>
-                                                                                                    <div
-                                                                                                        class="divider divider-right mt-0 mb-0">
-                                                                                                        <i class="icon-plus-sign"></i>
-                                                                                                    </div>
-                                                                                                    <ul class="list-group list-group-flush">
-                                                                                                        <li class="list-group-item noborder">
-                                                                                                            TOTAL
-                                                                                                            <b class="fright"
-                                                                                                               style="font-size: large">Rp{{number_format($row->total,2,',','.')}}</b>
-                                                                                                        </li>
-                                                                                                    </ul>
-                                                                                                </div>
-                                                                                            </div>
-
-                                                                                            <div
-                                                                                                class="toggle toggle-border mb-3">
-                                                                                                <div
-                                                                                                    class="togglet toggleta font-weight-normal text-uppercase">
-                                                                                                    <i class="toggle-closed icon-chevron-down1"></i>
-                                                                                                    <i class="toggle-open icon-chevron-up1"></i>
-                                                                                                    {{__('lang.product.form.summary.specification')}}
-                                                                                                </div>
-                                                                                                <div class="togglec">
-                                                                                                    <table
-                                                                                                        style="margin: 0;font-size: 14px;">
-                                                                                                        <tbody
-                                                                                                            class="font-weight-bold">
-                                                                                                        @if($specs->is_type == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.type')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\TypeProduct::find($row->type_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_material_cover == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.cover_material')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Material::find($row->material_cover_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_side_cover == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.cover_side')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Side::find($row->side_cover_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_cover_lamination == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.cover_lamination')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Lamination::find($row->cover_lamination_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_material == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.materials')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Material::find($row->material_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_material_color == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.material_color')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Colors::find($row->material_color_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_color == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.color')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Colors::find($row->color_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_print_method == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.print_method')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\PrintingMethods::find($row->print_method_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_size == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.size')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Size::find($row->size_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_side == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.side')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Side::find($row->side_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_holder == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.holder')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Finishing::find($row->holder_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_lid == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.lid')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Lid::find($row->lid_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_edge == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.corner')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Edge::find($row->edge_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_folding == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.folding')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Folding::find($row->folding_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_front_side == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.front_side')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Front::find($row->front_side_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_back_side == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.back_side')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\BackSide::find($row->back_side_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_right_side == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.right_side')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\RightLeftSide::find($row->right_side_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_left_side == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.left_side')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\RightLeftSide::find($row->left_side_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_balance == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.balance')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Balance::find($row->balance_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_copies == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.copies')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Copies::find($row->copies_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_page == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.page')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Pages::find($row->page_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_front_cover == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.front_cover')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Material::find($row->front_cover_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_back_cover == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.back_cover')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Material::find($row->back_cover_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_orientation == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.orientation')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Finishing::find($row->orientation_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_binding == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.binding')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Finishing::find($row->binding_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_lamination == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.lamination')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Lamination::find($row->lamination_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_finishing == true)
-                                                                                                            <tr>
-                                                                                                                <td>
-                                                                                                                    Finishing
-                                                                                                                </td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Finishing::find($row->finishing_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        @if($specs->is_extra == true)
-                                                                                                            <tr>
-                                                                                                                <td>{{__('lang.product.form.summary.extra')}}</td>
-                                                                                                                <td>:&nbsp;</td>
-                                                                                                                <td>{{\App\Models\Finishing::find($row->extra_id)->name}}</td>
-                                                                                                            </tr>
-                                                                                                        @endif
-                                                                                                        </tbody>
-                                                                                                    </table>
-                                                                                                </div>
-                                                                                            </div>
-
-                                                                                            <div
-                                                                                                class="toggle toggle-border {{$row->note != "" ? 'mb-3' : 'mb-0'}}">
-                                                                                                <div
-                                                                                                    class="togglet toggleta font-weight-normal text-uppercase">
-                                                                                                    <i class="toggle-closed icon-chevron-down1"></i>
-                                                                                                    <i class="toggle-open icon-chevron-up1"></i>
-                                                                                                    {{__('lang.product.form.shipping.head')}}
-                                                                                                </div>
-                                                                                                <div class="togglec">
-                                                                                                    <div class="media">
-                                                                                                        <div
-                                                                                                            class="align-self-center ml-3">
-                                                                                                            <img
-                                                                                                                alt="icon"
-                                                                                                                width="80"
-                                                                                                                src="{{asset('images/icons/occupancy/'.$row->getAddress->getOccupancy->image)}}">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="ml-3 media-body">
-                                                                                                            <h5 class="mt-3 mb-1">
-                                                                                                                <i class="icon-building mr-1"></i>{{$row->getAddress->getOccupancy->name}}
-                                                                                                                {!! $row->getAddress->is_main == false ? '' : '<span style="font-weight: 500;color: unset">['.__('lang.profile.main-address').']</span>'!!}
-                                                                                                            </h5>
-                                                                                                            <blockquote
-                                                                                                                class="mb-3"
-                                                                                                                style="font-size: 14px;text-transform: none">
-                                                                                                                <table
-                                                                                                                    class="m-0"
-                                                                                                                    style="font-size: 14px">
-                                                                                                                    <tr data-toggle="tooltip"
-                                                                                                                        data-placement="left"
-                                                                                                                        title="{{ucwords(__('lang.placeholder.name'))}}">
-                                                                                                                        <td>
-                                                                                                                            <i class="icon-id-card"></i>
-                                                                                                                        </td>
-                                                                                                                        <td>
-                                                                                                                            &nbsp;
-                                                                                                                        </td>
-                                                                                                                        <td>{{$row->getAddress->name}}</td>
-                                                                                                                    </tr>
-                                                                                                                    <tr data-toggle="tooltip"
-                                                                                                                        data-placement="left"
-                                                                                                                        title="{{__('lang.footer.phone')}}">
-                                                                                                                        <td>
-                                                                                                                            <i class="icon-phone"></i>
-                                                                                                                        </td>
-                                                                                                                        <td>
-                                                                                                                            &nbsp;
-                                                                                                                        </td>
-                                                                                                                        <td>{{$row->getAddress->phone}}</td>
-                                                                                                                    </tr>
-                                                                                                                    <tr data-toggle="tooltip"
-                                                                                                                        data-placement="left"
-                                                                                                                        title="{{__('lang.profile.city')}}">
-                                                                                                                        <td>
-                                                                                                                            <i class="icon-city"></i>
-                                                                                                                        </td>
-                                                                                                                        <td>
-                                                                                                                            &nbsp;
-                                                                                                                        </td>
-                                                                                                                        <td>{{$row->getAddress->getCity->getProvince->name.', '.$row->getAddress->getCity->name}}</td>
-                                                                                                                    </tr>
-                                                                                                                    <tr data-toggle="tooltip"
-                                                                                                                        data-placement="left"
-                                                                                                                        title="{{__('lang.profile.address')}}">
-                                                                                                                        <td>
-                                                                                                                            <i class="icon-map-marker-alt"></i>
-                                                                                                                        </td>
-                                                                                                                        <td>
-                                                                                                                            &nbsp;
-                                                                                                                        </td>
-                                                                                                                        <td>{{$row->getAddress->address.' - '.$row->getAddress->postal_code}}</td>
-                                                                                                                    </tr>
-                                                                                                                </table>
-                                                                                                            </blockquote>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-
-                                                                                            @if($row->note != "")
-                                                                                                <div
-                                                                                                    class="toggle toggle-border mb-0">
-                                                                                                    <div
-                                                                                                        class="togglet toggleta font-weight-normal text-uppercase">
-                                                                                                        <i class="toggle-closed icon-chevron-down1"></i>
-                                                                                                        <i class="toggle-open icon-chevron-up1"></i>
-                                                                                                        {{__('lang.tooltip.note')}}
-                                                                                                    </div>
-                                                                                                    <div
-                                                                                                        class="togglec">
-                                                                                                        <p class="m-0"
-                                                                                                           align="justify">
-                                                                                                            {{$row->note}}
-                                                                                                        </p>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            @endif
-                                                                                        </blockquote>
-                                                                                    </div>
+                                                                    <div class="media">
+                                                                        <div data-placement="bottom"
+                                                                             class="content-area align-self-center"
+                                                                             data-toggle="tooltip"
+                                                                             title="{{__('lang.tooltip.edit-design')}}"
+                                                                             style="cursor: pointer"
+                                                                             onclick="editDesign('{{route('user.edit-design.cart', ['id' => $row->id])}}',
+                                                                                 '{{route('user.update-order.cart', ['id' => $row->id])}}')">
+                                                                            <img alt="ico" width="150" src="{{$image}}">
+                                                                            <div class="custom-overlay">
+                                                                                <div class="custom-text">
+                                                                                    <i class="icon-edit icon-2x"></i>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
+                                                                        <div class="ml-3 media-body">
+                                                                            <h5 class="mt-3 mb-1">
+                                                                                <i class="icon-drafting-compass mr-1"></i>
+                                                                                {{$data->name}}
+                                                                                <i class="i-plain i-small icon-line2-note ml-1"
+                                                                                   data-toggle="tooltip"
+                                                                                   data-placement="right"
+                                                                                   title="{{__('lang.tooltip.note')}}"
+                                                                                   style="cursor: pointer;float: none"
+                                                                                   onclick="manageNote('{{$row->note}}','{{$data->name}}',
+                                                                                       '{{route('user.update-order.cart', ['id' => $row->id])}}',
+                                                                                       '{{route('user.delete-note.cart', ['id' => $row->id])}}')"></i>
+                                                                                <span class="fright">
+                                                                                    <a style="color: #f89406;cursor: pointer;"
+                                                                                       href="{{route('produk', ['produk' => $data->permalink, 'cart_id' => encrypt($row->id)])}}">
+                                                                                        {{__('lang.button.edit')}}
+                                                                                        <i class="icon-edit ml-1"></i>
+                                                                                    </a>
+                                                                                    <small style="color: #7f7f7f">&nbsp;&#124;&nbsp;</small>
+                                                                                    <a class="delete-data"
+                                                                                       style="color: #dc3545;cursor: pointer;"
+                                                                                       href="{{route('produk.delete.pemesanan', ['produk' => $data->permalink, 'id' => encrypt($row->id)])}}">
+                                                                                        <i class="icon-eraser mr-1"></i>
+                                                                                        {{__('lang.button.delete')}}
+                                                                                    </a>
+                                                                                </span>
+                                                                            </h5>
+                                                                            <blockquote class="mb-3 pr-0"
+                                                                                        style="font-size: 14px;text-transform: none">
+                                                                                <div class="toggle toggle-border mb-3">
+                                                                                    <div
+                                                                                        class="togglet toggleta font-weight-normal text-uppercase">
+                                                                                        <i class="toggle-closed icon-chevron-down1"></i>
+                                                                                        <i class="toggle-open icon-chevron-up1"></i>
+                                                                                        {{__('lang.cart.order.calc')}}
+                                                                                    </div>
+                                                                                    <div class="togglec">
+                                                                                        <ul class="list-group list-group-flush">
+                                                                                            <li class="list-group-item noborder">
+                                                                                                {{__('lang.product.form.summary.quantity')}}
+                                                                                                <b class="fright">{{$row->qty.' '.$specs->getUnit->name}}</b>
+                                                                                            </li>
+                                                                                            <li class="list-group-item noborder">
+                                                                                                {{__('lang.product.form.summary.price', ['unit' => strtok($specs->getUnit->name, '(')])}}
+                                                                                                <b class="fright">Rp{{number_format($row->price_pcs,2,',','.')}}</b>
+                                                                                            </li>
+                                                                                            <li class="list-group-item noborder">
+                                                                                                {{__('lang.product.form.summary.production')}}
+                                                                                                <b class="fright">{{now()->addDays(3)->formatLocalized('%d %b %Y')}}</b>
+                                                                                            </li>
+                                                                                            <li class="list-group-item noborder">
+                                                                                                {{__('lang.product.form.summary.ongkir')}}
+                                                                                                <b class="fright">Rp{{number_format($row->ongkir,2,',','.')}}</b>
+                                                                                            </li>
+                                                                                            <li class="list-group-item noborder">
+                                                                                                {{__('lang.product.form.summary.delivery')}}
+                                                                                                <b class="fright">{!! $etd !!}</b>
+                                                                                            </li>
+                                                                                            <li class="list-group-item noborder">
+                                                                                                {{__('lang.product.form.summary.received')}}
+                                                                                                <b class="fright">{{now()->addDays(3+$received)->formatLocalized('%d %b %Y')}}</b>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                        <div
+                                                                                            class="divider divider-right mt-0 mb-0">
+                                                                                            <i class="icon-plus-sign"></i>
+                                                                                        </div>
+                                                                                        <ul class="list-group list-group-flush">
+                                                                                            <li class="list-group-item noborder">
+                                                                                                TOTAL
+                                                                                                <b class="fright"
+                                                                                                   style="font-size: large">Rp{{number_format($row->total,2,',','.')}}</b>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="toggle toggle-border mb-3">
+                                                                                    <div
+                                                                                        class="togglet toggleta font-weight-normal text-uppercase">
+                                                                                        <i class="toggle-closed icon-chevron-down1"></i>
+                                                                                        <i class="toggle-open icon-chevron-up1"></i>
+                                                                                        {{__('lang.product.form.summary.specification')}}
+                                                                                    </div>
+                                                                                    <div class="togglec">
+                                                                                        <table
+                                                                                            style="margin: 0;font-size: 14px;">
+                                                                                            <tbody
+                                                                                                class="font-weight-bold">
+                                                                                            @if($specs->is_type == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.type')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\TypeProduct::find($row->type_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_material_cover == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.cover_material')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Material::find($row->material_cover_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_side_cover == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.cover_side')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Side::find($row->side_cover_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_cover_lamination == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.cover_lamination')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Lamination::find($row->cover_lamination_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_material == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.materials')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Material::find($row->material_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_material_color == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.material_color')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Colors::find($row->material_color_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_color == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.color')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Colors::find($row->color_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_print_method == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.print_method')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\PrintingMethods::find($row->print_method_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_size == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.size')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Size::find($row->size_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_side == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.side')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Side::find($row->side_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_holder == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.holder')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Finishing::find($row->holder_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_lid == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.lid')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Lid::find($row->lid_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_edge == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.corner')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Edge::find($row->edge_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_folding == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.folding')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Folding::find($row->folding_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_front_side == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.front_side')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Front::find($row->front_side_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_back_side == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.back_side')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\BackSide::find($row->back_side_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_right_side == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.right_side')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\RightLeftSide::find($row->right_side_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_left_side == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.left_side')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\RightLeftSide::find($row->left_side_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_balance == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.balance')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Balance::find($row->balance_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_copies == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.copies')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Copies::find($row->copies_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_page == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.page')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Pages::find($row->page_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_front_cover == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.front_cover')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Material::find($row->front_cover_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_back_cover == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.back_cover')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Material::find($row->back_cover_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_orientation == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.orientation')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Finishing::find($row->orientation_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_binding == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.binding')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Finishing::find($row->binding_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_lamination == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.lamination')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Lamination::find($row->lamination_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_finishing == true)
+                                                                                                <tr>
+                                                                                                    <td>Finishing</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Finishing::find($row->finishing_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            @if($specs->is_extra == true)
+                                                                                                <tr>
+                                                                                                    <td>{{__('lang.product.form.summary.extra')}}</td>
+                                                                                                    <td>:&nbsp;</td>
+                                                                                                    <td>{{\App\Models\Finishing::find($row->extra_id)->name}}</td>
+                                                                                                </tr>
+                                                                                            @endif
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div
+                                                                                    class="toggle toggle-border {{$row->note != "" ? 'mb-3' : 'mb-0'}}">
+                                                                                    <div
+                                                                                        class="togglet toggleta font-weight-normal text-uppercase">
+                                                                                        <i class="toggle-closed icon-chevron-down1"></i>
+                                                                                        <i class="toggle-open icon-chevron-up1"></i>
+                                                                                        {{__('lang.product.form.shipping.head')}}
+                                                                                    </div>
+                                                                                    <div class="togglec">
+                                                                                        <div class="media">
+                                                                                            <div
+                                                                                                class="align-self-center ml-3">
+                                                                                                <img alt="icon"
+                                                                                                     width="80"
+                                                                                                     src="{{asset('images/icons/occupancy/'.$row->getAddress->getOccupancy->image)}}">
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="ml-3 media-body">
+                                                                                                <h5 class="mt-3 mb-1">
+                                                                                                    <i class="icon-building mr-1"></i>{{$row->getAddress->getOccupancy->name}}
+                                                                                                    {!! $row->getAddress->is_main == false ? '' : '<span style="font-weight: 500;color: unset">['.__('lang.profile.main-address').']</span>'!!}
+                                                                                                </h5>
+                                                                                                <blockquote class="mb-3"
+                                                                                                            style="font-size: 14px;text-transform: none">
+                                                                                                    <table class="m-0"
+                                                                                                           style="font-size: 14px">
+                                                                                                        <tr data-toggle="tooltip"
+                                                                                                            data-placement="left"
+                                                                                                            title="{{ucwords(__('lang.placeholder.name'))}}">
+                                                                                                            <td>
+                                                                                                                <i class="icon-id-card"></i>
+                                                                                                            </td>
+                                                                                                            <td>&nbsp;
+                                                                                                            </td>
+                                                                                                            <td>{{$row->getAddress->name}}</td>
+                                                                                                        </tr>
+                                                                                                        <tr data-toggle="tooltip"
+                                                                                                            data-placement="left"
+                                                                                                            title="{{__('lang.footer.phone')}}">
+                                                                                                            <td>
+                                                                                                                <i class="icon-phone"></i>
+                                                                                                            </td>
+                                                                                                            <td>&nbsp;
+                                                                                                            </td>
+                                                                                                            <td>{{$row->getAddress->phone}}</td>
+                                                                                                        </tr>
+                                                                                                        <tr data-toggle="tooltip"
+                                                                                                            data-placement="left"
+                                                                                                            title="{{__('lang.profile.city')}}">
+                                                                                                            <td>
+                                                                                                                <i class="icon-city"></i>
+                                                                                                            </td>
+                                                                                                            <td>&nbsp;
+                                                                                                            </td>
+                                                                                                            <td>{{$row->getAddress->getCity->getProvince->name.', '.$row->getAddress->getCity->name}}</td>
+                                                                                                        </tr>
+                                                                                                        <tr data-toggle="tooltip"
+                                                                                                            data-placement="left"
+                                                                                                            title="{{__('lang.profile.address')}}">
+                                                                                                            <td>
+                                                                                                                <i class="icon-map-marker-alt"></i>
+                                                                                                            </td>
+                                                                                                            <td>&nbsp;
+                                                                                                            </td>
+                                                                                                            <td>{{$row->getAddress->address.' - '.$row->getAddress->postal_code}}</td>
+                                                                                                        </tr>
+                                                                                                    </table>
+                                                                                                </blockquote>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                @if($row->note != "")
+                                                                                    <div
+                                                                                        class="toggle toggle-border mb-0">
+                                                                                        <div
+                                                                                            class="togglet toggleta font-weight-normal text-uppercase">
+                                                                                            <i class="toggle-closed icon-chevron-down1"></i>
+                                                                                            <i class="toggle-open icon-chevron-up1"></i>
+                                                                                            {{__('lang.tooltip.note')}}
+                                                                                        </div>
+                                                                                        <div class="togglec">
+                                                                                            <p class="m-0"
+                                                                                               align="justify">
+                                                                                                {{$row->note}}
+                                                                                            </p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                @endif
+                                                                            </blockquote>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="divider mt-1 mb-2">
+                                                                        <i class="icon-circle"></i>
                                                                     </div>
                                                                 @endforeach
                                                             </div>
@@ -907,6 +890,8 @@
 
                 $('html,body').animate({scrollTop: $(this).parent().parent().offset().top}, 0);
             });
+
+            $(".panel-body .divider:last-child").remove();
         });
 
         function editDesign(url_edit, url_update) {

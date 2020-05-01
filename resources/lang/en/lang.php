@@ -203,7 +203,7 @@ return [
     ],
     "order" => [
         "capt" => "Here you can see your order history and its status.",
-        "search" => "Enter your order number or the print product name you ordered...",
+        "search" => "Enter the payment/order number or the print product name you ordered...",
         "tab-or" => "Order Received",
         "tab-pr" => "Payment Received",
         "tab-bp" => "Being Produced",
