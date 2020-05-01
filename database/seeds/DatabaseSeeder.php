@@ -43,8 +43,8 @@ class DatabaseSeeder extends Seeder
             BlogSeeder::class,
             FaqSeeder::class,
             CartSeeder::class,
+            PaymentCartSeeder::class,
             OrderSeeder::class,
-            PaymentCartSeeder::class
         ]);
     }
 }

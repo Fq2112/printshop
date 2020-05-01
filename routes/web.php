@@ -190,10 +190,19 @@ Route::group(['namespace' => 'Pages'], function () {
 
         });
 
-        Route::get('dashboard', [
-            'uses' => 'UserController@dashboard',
-            'as' => 'user.dashboard'
-        ]);
+        Route::group(['prefix' => 'dashboard'], function () {
+
+            Route::get('/', [
+                'uses' => 'UserController@dashboard',
+                'as' => 'user.dashboard'
+            ]);
+
+            Route::get('{code}/reorder', [
+                'uses' => 'UserController@reorder',
+                'as' => 'user.reorder'
+            ]);
+
+        });
 
         Route::get('edit-profile', [
             'uses' => 'AkunController@profil',

@@ -22,7 +22,7 @@ class CartSeeder extends Seeder
         ]);
 
         foreach (\App\User::all() as $user) {
-            for ($i = 1; $i < 4; $i++) {
+            for ($i = 1; $i < 5; $i++) {
                 $address = \App\Models\Address::where('user_id', $user->id)->inRandomOrder()->first();
                 $shipping = $client->post('https://api.rajaongkir.com/starter/cost', [
                     'form_params' => [
