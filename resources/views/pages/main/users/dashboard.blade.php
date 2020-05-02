@@ -385,6 +385,10 @@
             $(this).find('span').addClass('badge-primary').removeClass('badge-secondary');
         });
 
+        function downloadFile(path) {
+            window.open(path, '_blank');
+        }
+
         function reOrder(name, url) {
             swal({
                 title: '{{__('lang.order.reorder')}}',

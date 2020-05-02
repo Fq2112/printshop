@@ -129,12 +129,12 @@
                             @endphp
                             <div class="media">
                                 <a data-placement="bottom" class="content-area align-self-center" data-toggle="tooltip"
-                                   style="cursor: pointer" href="{{$design}}" target="_blank"
-                                   title="{{__('lang.tooltip.download-design')}}">
+                                   style="cursor: pointer" href="javascript:void(0)"
+                                   title="{{__('lang.tooltip.download-design')}}" onclick="downloadFile('{{$design}}')">
                                     <img alt="icon" width="150" src="{{$image}}">
                                     <div class="custom-overlay">
                                         <div class="custom-text">
-                                            <i class="icon-cloud-download icon-2x"></i>
+                                            <i class="icon-drafting-compass icon-2x"></i>
                                         </div>
                                     </div>
                                 </a>
@@ -143,7 +143,8 @@
                                         <i class="icon-drafting-compass mr-2"></i>{{$data->name}}
                                         <span class="fright text-uppercase">
                                             @if($acc == 'received')
-                                                <a style="color: #17a2b8;" href="#">
+                                                <a style="color: #17a2b8;" href="javascript:void(0)"
+                                                   onclick="downloadFile('{{asset('storage/users/invoice/'.$user->id.'/'.$cart->getPayment->uni_code_payment.'.pdf')}}')">
                                                     {{__('lang.order.invoice')}}
                                                     <i class="icon-file-invoice-dollar ml-1"></i>
                                                 </a>
@@ -154,7 +155,8 @@
                                                     {{__('lang.order.reorder')}}
                                                 </a>
                                             @else
-                                                <a style="color: #17a2b8;" href="#">
+                                                <a style="color: #17a2b8;" href="javascript:void(0)"
+                                                   onclick="downloadFile('{{asset('storage/users/invoice/'.$user->id.'/'.$cart->getPayment->uni_code_payment.'.pdf')}}')">
                                                     <i class="icon-file-invoice-dollar mr-1"></i>
                                                     {{__('lang.order.invoice')}}
                                                 </a>

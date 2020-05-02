@@ -271,7 +271,7 @@ return [
         "upload" => "Ekstensi yang diizinkan: :ext. Ukuran yang diizinkan: :size.",
         "edit-address" => "Klik di sini untuk menyunting alamat Anda!",
         "edit-design" => "Klik di sini untuk menyunting file desain Anda!",
-        "download-design" => "Klik di sini untuk mengunduh file desain Anda",
+        "download-design" => "Klik di sini untuk melihat/mengunduh file desain Anda",
         "note" => "CATATAN",
         "clear-upload" => "Klik di sini untuk menghapus file yang telah Anda pilih!",
         "cancel-upload" => "Klik di sini untuk membatalkan proses pengunggahan file Anda!"
