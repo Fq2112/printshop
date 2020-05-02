@@ -22,7 +22,7 @@ class CartSeeder extends Seeder
         ]);
 
         foreach (\App\User::all() as $user) {
-            for ($i = 1; $i < 5; $i++) {
+            for ($i = 0; $i < 12; $i++) {
                 $address = \App\Models\Address::where('user_id', $user->id)->inRandomOrder()->first();
                 $shipping = $client->post('https://api.rajaongkir.com/starter/cost', [
                     'form_params' => [
@@ -102,6 +102,8 @@ class CartSeeder extends Seeder
                     'material_color_id' => $cluster->getClusterSpecs->material_color_ids == null ? null : $cluster->getClusterSpecs->material_color_ids[0],
 
                     'link' => \Faker\Factory::create()->imageUrl(),
+                    'note' => rand(0, 1) ? \Faker\Factory::create()->paragraph : null,
+                    'isCheckout' => rand(0, 1) ? true : false,
 
                     'created_at' => now()->subMonths(rand(1, 5)),
                     'updated_at' => now()->subMonths(rand(1, 5)),
@@ -150,6 +152,8 @@ class CartSeeder extends Seeder
                     'material_color_id' => $subkat->getSubkatSpecs->material_color_ids == null ? null : $subkat->getSubkatSpecs->material_color_ids[0],
 
                     'link' => \Faker\Factory::create()->imageUrl(),
+                    'note' => rand(0, 1) ? \Faker\Factory::create()->paragraph : null,
+                    'isCheckout' => rand(0, 1) ? true : false,
 
                     'created_at' => now()->subMonths(rand(1, 5)),
                     'updated_at' => now()->subMonths(rand(1, 5)),

@@ -11,9 +11,9 @@ class PaymentCartSeeder extends Seeder
      */
     public function run()
     {
-        foreach (\App\Models\Cart::whereNotNull('subkategori_id')->get()->groupBy('user_id') as $item) {
+        foreach (\App\Models\Cart::whereNotNull('subkategori_id')->where('isCheckout', true)->get()->groupBy('user_id') as $item) {
             $code = uniqid('PYM') . now()->format('dmy');
-            foreach ($item->take(2) as $datum) {
+            foreach ($item as $datum) {
                 \App\Models\PaymentCart::create([
                     'user_id' => $datum->user_id,
                     'cart_id' => $datum->id,
@@ -29,9 +29,9 @@ class PaymentCartSeeder extends Seeder
             }
         }
 
-        foreach (\App\Models\Cart::whereNotNull('cluster_id')->get()->groupBy('user_id') as $item) {
+        foreach (\App\Models\Cart::whereNotNull('cluster_id')->where('isCheckout', true)->get()->groupBy('user_id') as $item) {
             $code = uniqid('PYM') . now()->format('dmy');
-            foreach ($item->take(2) as $datum) {
+            foreach ($item as $datum) {
                 \App\Models\PaymentCart::create([
                     'user_id' => $datum->user_id,
                     'cart_id' => $datum->id,
