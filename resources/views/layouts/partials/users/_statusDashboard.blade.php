@@ -69,11 +69,6 @@
                         @foreach($data as $row)
                             @php
                                 $cart = $row->getCart;
-                                if(!is_null($cart->file)) {
-                                    $design = asset('storage/users/order/design/' . $user->id. '/'. $cart->file);
-                                } else {
-                                    $design = $cart->link;
-                                }
                                 $data = !is_null($cart->subkategori_id) ? $cart->getSubKategori : $cart->getCluster;
                                 $image = !is_null($cart->subkategori_id) ?
                                 asset('storage/products/banner/'.$cart->getSubKategori->banner) :
@@ -129,8 +124,8 @@
                             @endphp
                             <div class="media">
                                 <a data-placement="bottom" class="content-area align-self-center" data-toggle="tooltip"
-                                   style="cursor: pointer" href="javascript:void(0)"
-                                   title="{{__('lang.tooltip.download-design')}}" onclick="downloadFile('{{$design}}')">
+                                   style="cursor: pointer" target="{{!is_null($cart->file) ? '' : '_blank'}}"
+                                   href="{{route('user.download.file',['id'=>encrypt($cart->id),'file'=>'design'])}}">
                                     <img alt="icon" width="150" src="{{$image}}">
                                     <div class="custom-overlay">
                                         <div class="custom-text">
@@ -143,8 +138,8 @@
                                         <i class="icon-drafting-compass mr-2"></i>{{$data->name}}
                                         <span class="fright text-uppercase">
                                             @if($acc == 'received')
-                                                <a style="color: #17a2b8;" href="javascript:void(0)"
-                                                   onclick="downloadFile('{{asset('storage/users/invoice/'.$user->id.'/'.$cart->getPayment->uni_code_payment.'.pdf')}}')">
+                                                <a style="color: #17a2b8;"
+                                                   href="{{route('user.download.file',['id'=>encrypt($cart->id),'file'=>'invoice'])}}">
                                                     {{__('lang.order.invoice')}}
                                                     <i class="icon-file-invoice-dollar ml-1"></i>
                                                 </a>
@@ -155,8 +150,8 @@
                                                     {{__('lang.order.reorder')}}
                                                 </a>
                                             @else
-                                                <a style="color: #17a2b8;" href="javascript:void(0)"
-                                                   onclick="downloadFile('{{asset('storage/users/invoice/'.$user->id.'/'.$cart->getPayment->uni_code_payment.'.pdf')}}')">
+                                                <a style="color: #17a2b8;"
+                                                   href="{{route('user.download.file',['id'=>encrypt($cart->id),'file'=>'invoice'])}}">
                                                     <i class="icon-file-invoice-dollar mr-1"></i>
                                                     {{__('lang.order.invoice')}}
                                                 </a>

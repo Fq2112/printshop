@@ -399,6 +399,7 @@ return [
         "upload-fail" => "total size ' + file_name + ' is ' + humanFileSize(files_size) + ', allowed file size is ' + humanFileSize(max_file_size) + ', try to upload smaller file!",
         "upload-fail2" => "File type ' + file_name + ' does not support!",
         "upload-fail3" => "No file selected!",
+        "download-fail" => "The file you requested is unavailable!",
         "auth-expire" => "The page you requested requires authentication, please sign in to your account.",
         "token-fail" => "The page has expired due to inactivity, please try again.",
         "feature-fail" => "This feature only works when you`re signed in as a Customer.",

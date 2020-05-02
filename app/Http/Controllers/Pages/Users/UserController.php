@@ -11,6 +11,7 @@ use App\Support\StatusProgress;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -227,6 +228,37 @@ class UserController extends Controller
 
         return view('pages.main.users.dashboard', compact('user', 'bio', 'keyword', 'category',
             'unpaid', 'paid', 'produced', 'shipped', 'received', 'all'));
+    }
+
+    public function downloadFile(Request $request)
+    {
+        $cart = Cart::find(decrypt($request->id));
+
+        if ($request->file == 'design') {
+            if (!is_null($cart->file)) {
+                $file_path = storage_path('app/public/users/order/design/' . $cart->user_id . '/' . $cart->file);
+                if (file_exists($file_path)) {
+                    return Response::download($file_path, $cart->file, [
+                        'Content-Length: ' . filesize($file_path)
+                    ]);
+                } else {
+                    return back()->with('warning', __('lang.alert.download-fail'));
+                }
+            } else {
+                return redirect()->to($cart->link);
+            }
+
+        } else {
+            $invoice = $cart->getPayment->uni_code_payment . '.pdf';
+            $file_path = storage_path('app/public/users/order/invoice/' . $cart->user_id . '/' . $invoice);
+            if (file_exists($file_path)) {
+                return Response::download($file_path, $invoice, [
+                    'Content-Length: ' . filesize($file_path)
+                ]);
+            } else {
+                return back()->with('warning', __('lang.alert.download-fail'));
+            }
+        }
     }
 
     public function reOrder(Request $request)

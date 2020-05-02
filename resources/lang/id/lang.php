@@ -399,6 +399,7 @@ return [
         "upload-fail" => "Ukuran total ' + file_name + ' adalah ' + humanFileSize(files_size) + ', ukuran file yang diperbolehkan adalah ' + humanFileSize(max_file_size) + ', coba unggah file yang ukurannya lebih kecil!",
         "upload-fail2" => "Tipe file ' + file_name + ' tidak support!",
         "upload-fail3" => "Tidak ada file yang dipilih!",
+        "download-fail" => "File yang Anda minta tidak tersedia!",
         "auth-expire" => "Halaman yang Anda minta memerlukan otentikasi, silahkan masuk ke akun Anda.",
         "token-fail" => "Halaman telah kedaluwarsa karena tidak aktif, silakan coba lagi.",
         "feature-fail" => "Fitur ini hanya berfungsi ketika Anda masuk sebagai Pelanggan.",

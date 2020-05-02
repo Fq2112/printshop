@@ -197,6 +197,11 @@ Route::group(['namespace' => 'Pages'], function () {
                 'as' => 'user.dashboard'
             ]);
 
+            Route::get('download/{id}/{file}', [
+                'uses' => 'UserController@downloadFile',
+                'as' => 'user.download.file'
+            ]);
+
             Route::get('{code}/reorder', [
                 'uses' => 'UserController@reOrder',
                 'as' => 'user.reorder'
