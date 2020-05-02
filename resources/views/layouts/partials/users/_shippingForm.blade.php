@@ -13,11 +13,13 @@
                 <div class="row {{count($addresses) > 0 ? '' : 'justify-content-center text-center'}}">
                     @if(count($addresses) > 0)
                         @foreach($addresses as $row)
+                            @php $occupancy = $row->is_main == false ? $row->getOccupancy->name : $row->getOccupancy->name.' ['.__('lang.profile.main-address').']'; @endphp
                             <div class="col-12 mb-3">
                                 <label class="card-label" for="address_{{$row->id}}">
                                     <input id="address_{{$row->id}}" class="card-rb address-rb" type="radio"
-                                           name="address_id" value="{{$row->id}}"
-                                        {{!is_null($shipping) && $shipping->city_id == $row->city_id ? 'checked' : ''}}>
+                                           name="address_id" value="{{$row->id}}" data-name="{{$occupancy}}"
+                                        {{!\Illuminate\Support\Facades\Request::is('*cart*') &&
+                                        (!is_null($shipping) && $shipping->city_id) == $row->city_id ? 'checked' : ''}}>
                                     <div class="card card-input">
                                         <div class="row">
                                             <div class="col-lg-12">
@@ -39,7 +41,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="ml-3 media-body"
-                                                         onclick="getShipping('{{$row->city_id}}','address','{{$row->is_main == false ? $row->getOccupancy->name : $row->getOccupancy->name.' ['.__('lang.profile.main-address').']'}}')">
+                                                         onclick="getShipping('{{$row->city_id}}','address','{{$occupancy}}')">
                                                         <h5 class="mt-3 mb-1">
                                                             <i class="icon-building mr-1"></i>{{$row->getOccupancy->name}}
                                                             {!! $row->is_main == false ? '' : '<span style="font-weight: 500;color: unset">['.__('lang.profile.main-address').']</span>'!!}
@@ -106,41 +108,43 @@
         </div>
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="heading-city">
-            <h4 class="panel-title">
-                <a role="button" data-toggle="collapse" href="#collapse-city" aria-expanded="false"
-                   aria-controls="collapse-city" class="collapsed">
-                    {{__('lang.product.form.shipping.estimate')}}<b class="show-city">&ndash;</b></a>
-            </h4>
-        </div>
-        <div id="collapse-city" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-city"
-             aria-expanded="false" style="height: 0;" data-parent="#accordion2">
-            <div class="panel-body">
-                <div class="row form-group">
-                    <div class="col">
-                        <small>{{__('lang.profile.city')}}</small>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="icon-city"></i></span>
+    @if(!\Illuminate\Support\Facades\Request::is('*cart*'))
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading-city">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" href="#collapse-city" aria-expanded="false"
+                       aria-controls="collapse-city" class="collapsed">
+                        {{__('lang.product.form.shipping.estimate')}}<b class="show-city">&ndash;</b></a>
+                </h4>
+            </div>
+            <div id="collapse-city" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-city"
+                 aria-expanded="false" style="height: 0;" data-parent="#accordion2">
+                <div class="panel-body">
+                    <div class="row form-group">
+                        <div class="col">
+                            <small>{{__('lang.profile.city')}}</small>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="icon-city"></i></span>
+                                </div>
+                                <select id="shipping_estimation" data-live-search="true"
+                                        class="form-control selectpicker" title="{{__('lang.placeholder.choose')}}"
+                                        onchange="getShipping($(this).val(), 'city', $('option:selected', this).attr('data-name'))">
+                                    @foreach($provinces as $province)
+                                        <optgroup label="{{$province->name}}">
+                                            @foreach($province->getCity as $city)
+                                                <option value="{{$city->id}}"
+                                                        data-name="{{$city->name.', '.$city->getProvince->name}}">
+                                                    {{$city->name}}</option>
+                                            @endforeach
+                                        </optgroup>
+                                    @endforeach
+                                </select>
                             </div>
-                            <select id="shipping_estimation" data-live-search="true"
-                                    class="form-control selectpicker" title="{{__('lang.placeholder.choose')}}"
-                                    onchange="getShipping($(this).val(), 'city', $('option:selected', this).attr('data-name'))">
-                                @foreach($provinces as $province)
-                                    <optgroup label="{{$province->name}}">
-                                        @foreach($province->getCity as $city)
-                                            <option value="{{$city->id}}"
-                                                    data-name="{{$city->name.', '.$city->getProvince->name}}">
-                                                {{$city->name}}</option>
-                                        @endforeach
-                                    </optgroup>
-                                @endforeach
-                            </select>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
 </div>

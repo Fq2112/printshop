@@ -91,6 +91,79 @@
             background: rgba(0, 0, 0, 0.4);
         }
 
+        .gm-style-iw {
+            width: 350px !important;
+            top: 15px;
+            left: 22px;
+            background-color: #fff;
+            box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
+            border: 1px solid rgba(248, 148, 6, 0.6);
+            border-radius: 2px 2px 10px 10px;
+        }
+
+        .gm-style-iw > div:first-child {
+            max-width: 350px !important;
+        }
+
+        .pac-container {
+            z-index: 1051 !important;
+        }
+
+        #iw-container {
+            margin-bottom: 10px;
+        }
+
+        #iw-container .iw-title {
+            font-family: 'Open Sans Condensed', sans-serif;
+            font-size: 22px;
+            font-weight: 400;
+            padding: 10px;
+            background-color: #f89406;
+            color: white;
+            margin: 0;
+            border-radius: 2px 2px 0 0;
+        }
+
+        #iw-container .iw-content {
+            font-size: 13px;
+            line-height: 18px;
+            font-weight: 400;
+            margin-right: 1px;
+            padding: 15px 5px 20px 15px;
+            max-height: 140px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .iw-content a {
+            color: #f89406;
+            text-decoration: none;
+        }
+
+        .iw-content img {
+            float: right;
+            margin: 0 5px 5px 10px;
+            width: 30%;
+        }
+
+        .iw-subTitle {
+            font-size: 16px;
+            font-weight: 700;
+            padding: 5px 0;
+        }
+
+        .iw-bottom-gradient {
+            position: absolute;
+            width: 326px;
+            height: 25px;
+            bottom: 10px;
+            right: 18px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+            background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+            background: -ms-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+        }
+
         .toggle-border {
             border-color: #E5E5E5 !important;
         }
@@ -218,7 +291,7 @@
                 <form id="form-pembayaran" class="row" method="POST" action="#">
                     @csrf
                     <div class="postcontent mb-0 pb-0 clearfix">
-                        <div class="myCard">
+                        <div class="myCard mb-4">
                             <div class="card-content">
                                 <div class="card-title">
                                     <h4 class="text-center"
@@ -695,6 +768,21 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="myCard">
+                            <div class="card-content">
+                                <div class="card-title" style="text-transform: none">
+                                    <h4 class="text-center" style="color: #f89406">
+                                        {{__('lang.cart.billing.head')}}</h4>
+                                    <h5 class="text-center mb-2" style="text-transform: none">
+                                        {{__('lang.cart.billing.capt')}}</h5>
+                                    <div class="divider divider-center mt-1 mb-1"><i class="icon-circle"></i></div>
+                                    <div class="component-accordion">
+                                        @include('layouts.partials.users._shippingForm')
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="sidebar sticky-sidebar-wrap col_last nobottommargin clearfix">
@@ -769,8 +857,7 @@
                                         </li>
                                     </ul>
                                     <div class="card-footer p-0">
-                                        <button id="btn_pay" type="button"
-                                                {{count($carts) > 0 ? '' : 'disabled'}}
+                                        <button id="btn_pay" type="button" disabled
                                                 class="btn btn-primary btn-block text-uppercase text-left noborder">
                                             CHECKOUT <i class="icon-chevron-right fright"></i>
                                         </button>
@@ -871,8 +958,11 @@
     </section>
 @endsection
 @push('scripts')
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIljHbKjgtTrpZhEiHum734tF1tolxI68&libraries=geometry,places"></script>
     <script>
-        var collapse = $('.panel-collapse'), upload_input = $("#file"), link_input = $("#link"), check_file = null;
+        var collapse = $('.panel-collapse'), upload_input = $("#file"), link_input = $("#link"), check_file = null,
+            btn_pay = $("#btn_pay");
 
         $(function () {
             collapse.on('show.bs.collapse', function () {
@@ -1119,6 +1209,14 @@
             }
         }
 
+        function getShipping(city, check, name) {
+            $(".show-" + check).text(name);
+            $('#collapse-' + check).collapse('hide');
+            btn_pay.removeAttr('disabled');
+
+            $('html,body').animate({scrollTop: $("#accordion2").parent().parent().offset().top}, 0);
+        }
+
         $("#promo_code").on('keyup', function (e) {
             if (!$(this).val()) {
                 $("#btn_set").attr('disabled', 'disabled');
@@ -1191,8 +1289,9 @@
             });
         });
 
-        $("#btn_pay").on("click", function () {
+        btn_pay.on("click", function () {
             // midtrans
         });
     </script>
+    @include('layouts.partials.users._scriptsAddress')
 @endpush

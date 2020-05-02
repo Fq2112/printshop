@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pages\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\PaymentCart;
@@ -25,6 +26,8 @@ class UserController extends Controller
             });
         $carts = $archive;
 
+        $addresses = Address::where('user_id', $user->id)->orderByDesc('id')->get();
+
         $a = 1;
         $b = 1;
         $c = 1;
@@ -33,7 +36,7 @@ class UserController extends Controller
         $subtotal = 0;
         $ongkir = 0;
 
-        return view('pages.main.users.cart', compact('user', 'bio', 'carts',
+        return view('pages.main.users.cart', compact('user', 'bio', 'carts', 'addresses',
             'a', 'b', 'c', 'd', 'e', 'subtotal', 'ongkir'));
     }
 

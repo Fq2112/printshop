@@ -141,6 +141,10 @@ return [
             "product" => ":qty item",
             "calc" => "Kalkulasi",
         ],
+        "billing" => [
+            "head" => "Alamat Penagihan",
+            "capt" => "Tentukan kemana kami harus mengirimkan tagihan Anda",
+        ],
         "summary" => [
             "promo" => "Kode Promo",
             "discount" => "Diskon",

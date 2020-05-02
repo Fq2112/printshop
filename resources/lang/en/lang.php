@@ -141,6 +141,10 @@ return [
             "product" => ":qty item:s",
             "calc" => "Calculation",
         ],
+        "billing" => [
+            "head" => "Billing Address",
+            "capt" => "Decide where we should send your bills",
+        ],
         "summary" => [
             "promo" => "Promo Code",
             "discount" => "Discount",
