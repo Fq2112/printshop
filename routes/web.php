@@ -198,7 +198,7 @@ Route::group(['namespace' => 'Pages'], function () {
             ]);
 
             Route::get('{code}/reorder', [
-                'uses' => 'UserController@reorder',
+                'uses' => 'UserController@reOrder',
                 'as' => 'user.reorder'
             ]);
 

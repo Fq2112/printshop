@@ -128,29 +128,33 @@ class UserController extends Controller
         $category = $request->filter;
 
         $archive_unpaid = PaymentCart::where('user_id', $user->id)->where('finish_payment', false)
-            ->when($keyword, function ($q) use ($keyword, $user) {
+            ->whereHas('getCart', function ($q) use ($user) {
+                $q->where('user_id', $user->id)->where('isCheckout', true)->doesntHave('getOrder');
+            })->when($keyword, function ($q) use ($keyword, $user) {
                 $q->where('uni_code_payment', 'LIKE', '%' . $keyword . '%')
                     ->orWhereHas('getCart', function ($q) use ($keyword, $user) {
                         $q->whereHas('getSubKategori', function ($q) use ($keyword) {
                             $q->where('name', 'LIKE', '%' . $keyword . '%');
-                        })->where('user_id', $user->id)->where('isCheckout', true)
+                        })->where('user_id', $user->id)->where('isCheckout', true)->doesntHave('getOrder')
                             ->orWhereHas('getCluster', function ($q) use ($keyword) {
                                 $q->where('name', 'LIKE', '%' . $keyword . '%');
-                            })->where('user_id', $user->id)->where('isCheckout', true);
+                            })->where('user_id', $user->id)->where('isCheckout', true)->doesntHave('getOrder');
                     })->where('user_id', $user->id)->where('finish_payment', false);
             })->orderByDesc('id')->get()->groupBy('uni_code_payment');
         $unpaid = $archive_unpaid;
 
         $archive_paid = PaymentCart::where('user_id', $user->id)->where('finish_payment', true)
-            ->when($keyword, function ($q) use ($keyword, $user) {
+            ->whereHas('getCart', function ($q) use ($user) {
+                $q->where('user_id', $user->id)->where('isCheckout', true)->doesntHave('getOrder');
+            })->when($keyword, function ($q) use ($keyword, $user) {
                 $q->where('uni_code_payment', 'LIKE', '%' . $keyword . '%')
                     ->orWhereHas('getCart', function ($q) use ($keyword, $user) {
                         $q->whereHas('getSubKategori', function ($q) use ($keyword) {
                             $q->where('name', 'LIKE', '%' . $keyword . '%');
-                        })->where('user_id', $user->id)->where('isCheckout', true)
+                        })->where('user_id', $user->id)->where('isCheckout', true)->doesntHave('getOrder')
                             ->orWhereHas('getCluster', function ($q) use ($keyword) {
                                 $q->where('name', 'LIKE', '%' . $keyword . '%');
-                            })->where('user_id', $user->id)->where('isCheckout', true);
+                            })->where('user_id', $user->id)->where('isCheckout', true)->doesntHave('getOrder');
                     })->where('user_id', $user->id)->where('finish_payment', true);
             })->orderByDesc('id')->get()->groupBy('uni_code_payment');
         $paid = $archive_paid;
@@ -220,5 +224,60 @@ class UserController extends Controller
 
         return view('pages.main.users.dashboard', compact('user', 'bio', 'keyword', 'category',
             'unpaid', 'paid', 'produced', 'shipped', 'received', 'all'));
+    }
+
+    public function reOrder(Request $request)
+    {
+        $order = Order::where('uni_code', $request->code)->first();
+        $cart = $order->getCart;
+
+        Cart::create([
+            'user_id' => $cart->user_id,
+            'subkategori_id' => !is_null($cart->subkategori_id) ? $cart->subkategori_id : null,
+            'cluster_id' => !is_null($cart->cluster_id) ? $cart->cluster_id : null,
+            'address_id' => $cart->address_id,
+            'material_id' => $cart->material_id,
+            'type_id' => $cart->type_id,
+            'balance_id' => $cart->balance_id,
+            'page_id' => $cart->page_id,
+            'copies_id' => $cart->copies_id,
+            'size_id' => $cart->size_id,
+            'width' => $cart->width,
+            'length' => $cart->length,
+            'lamination_id' => $cart->lamination_id,
+            'side_id' => $cart->side_id,
+            'edge_id' => $cart->edge_id,
+            'color_id' => $cart->color_id,
+            'finishing_id' => $cart->finishing_id,
+            'folding_id' => $cart->folding_id,
+            'front_side_id' => $cart->front_side_id,
+            'right_side_id' => $cart->right_side_id,
+            'left_side_id' => $cart->left_side_id,
+            'back_side_id' => $cart->back_side_id,
+            'front_cover_id' => $cart->front_cover_id,
+            'back_cover_id' => $cart->back_cover_id,
+            'binding_id' => $cart->binding_id,
+            'print_method_id' => $cart->print_method_id,
+            'material_cover_id' => $cart->material_cover_id,
+            'side_cover_id' => $cart->side_cover_id,
+            'cover_lamination_id' => $cart->cover_lamination_id,
+            'lid_id' => $cart->lid_id,
+            'orientation_id' => $cart->orientation_id,
+            'extra_id' => $cart->extra_id,
+            'holder_id' => $cart->holder_id,
+            'material_color_id' => $cart->material_color_id,
+            'qty' => $cart->qty,
+            'price_pcs' => $cart->price_pcs,
+            'production_finished' => $cart->production_finished,
+            'ongkir' => $cart->ongkir,
+            'delivery_duration' => $cart->delivery_duration,
+            'received_date' => $cart->received_date,
+            'total' => $cart->total,
+            'file' => $cart->file,
+            'link' => $cart->link,
+        ]);
+
+        return redirect()->route('user.cart')->with('add', __('lang.alert.reorder-cart',
+            ['param' => !is_null($cart->subkategori_id) ? $cart->getSubKategori->name : $cart->getCluster->name]));
     }
 }

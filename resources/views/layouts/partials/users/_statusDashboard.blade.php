@@ -143,17 +143,22 @@
                                         <i class="icon-drafting-compass mr-2"></i>{{$data->name}}
                                         <span class="fright text-uppercase">
                                             @if($acc == 'received')
-                                                <a style="color: #f89406;" href="javascript:void(0)"
-                                                   onclick="reOrder('{{$data->name}}','{{route('user.reorder.dashboard', ['code' => $code])}}')">
-                                                    {{__('lang.order.reorder')}}
-                                                    <i class="icon-shopping-cart1 ml-1"></i>
+                                                <a style="color: #17a2b8;" href="#">
+                                                    {{__('lang.order.invoice')}}
+                                                    <i class="icon-file-invoice-dollar ml-1"></i>
                                                 </a>
                                                 <small style="color: #7f7f7f">&nbsp;&#124;&nbsp;</small>
+                                                <a style="color: #f89406;" href="javascript:void(0)"
+                                                   onclick="reOrder('{{$data->name}}','{{route('user.reorder', ['code' => $code])}}')">
+                                                    <i class="icon-shopping-cart1 mr-1"></i>
+                                                    {{__('lang.order.reorder')}}
+                                                </a>
+                                            @else
+                                                <a style="color: #17a2b8;" href="#">
+                                                    <i class="icon-file-invoice-dollar mr-1"></i>
+                                                    {{__('lang.order.invoice')}}
+                                                </a>
                                             @endif
-                                            <a style="color: #17a2b8;" href="#">
-                                                <i class="icon-file-invoice-dollar mr-1"></i>
-                                                {{__('lang.order.invoice')}}
-                                            </a>
                                         </span>
                                     </h5>
                                     <blockquote class="mb-3 pr-0" style="font-size: 14px;text-transform: none">
