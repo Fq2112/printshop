@@ -20,7 +20,7 @@ class UserController extends Controller
         $bio = $user->getBio;
 
         $archive = Cart::where('user_id', $user->id)->where('isCheckout', false)
-            ->orderByDesc('address_id')->get()->groupBy(function ($q) {
+            ->orderByDesc('created_at')->get()->groupBy(function ($q) {
                 return Carbon::parse($q->created_at)->formatLocalized('%B %Y');
             });
         $carts = $archive;
