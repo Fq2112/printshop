@@ -38,10 +38,10 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>{{__('admin.sidebar.inbox')}}</h1>
+            <h1>Invoice</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{route('admin.dashboard')}}">Dashboard</a></div>
-                <div class="breadcrumb-item">{{__('admin.sidebar.inbox')}}</div>
+                <div class="breadcrumb-item">Invoice</div>
             </div>
         </div>
 
@@ -50,11 +50,11 @@
                 <div class="col-md-12">
                     <div class="card" id="inbox">
                         <div class="card-header">
-                            <h4>Messages</h4>
+                            <h4>List</h4>
                             <div class="card-header-action">
-                                <button id="compose" class="btn btn-sm btn-primary" type="button">
-                                    <strong><i class="fas fa-filter"></i>&ensp;FILTER</strong>
-                                </button>
+{{--                                <button id="compose" class="btn btn-sm btn-primary" type="button">--}}
+{{--                                    <strong><i class="fas fa-filter"></i>&ensp;FILTER</strong>--}}
+{{--                                </button>--}}
                             </div>
                         </div>
                         <div class="card-body">

@@ -46,8 +46,12 @@
                             </tr>
                             <?php
                             $total = 0;
+                            $ongkir = 0;
                             ?>
                             @foreach($data as $datum)
+                                <?php
+                                $ongkir = $ongkir + $datum->getCart->ongkir;
+                                ?>
                                 <tr>
                                     <td>
                                         @if(!empty($datum->getCart->subkategori_id))
@@ -57,10 +61,10 @@
                                         @endif
 
                                     </td>
-                                    <td class="text-center">Rp. {{number_format($datum->getCart->price_pcs)}}</td>
+                                    <td class="text-center">Rp {{number_format($datum->getCart->price_pcs)}}</td>
                                     <td class="text-center">{{number_format($datum->getCart->qty)}}</td>
-                                    <td class="text-center">Rp. {{number_format($datum->getCart->ongkir)}}</td>
-                                    <td class="text-right">Rp. {{number_format($datum->price_total)}}</td>
+                                    <td class="text-center">Rp {{number_format($datum->getCart->ongkir)}}</td>
+                                    <td class="text-right">Rp {{number_format($datum->price_total)}}</td>
                                     <?php
                                     $total = $total + $datum->price_total;
                                     ?>
@@ -175,6 +179,8 @@
                                             <strong>Material Color :</strong>  {{\App\Models\Colors::find($datum->getCart->material_color_id)->name}} <br>
                                             @endif
 
+                                            <br>
+                                            <strong>Send To :</strong>  {{$datum->getCart->getAddress->address}}
 
                                     </td>
                                 </tr>
@@ -195,18 +201,18 @@
                             </div>
                         </div>
                         <div class="col-lg-4 text-right">
-{{--                            <div class="invoice-detail-item">--}}
-{{--                                <div class="invoice-detail-name">Subtotal</div>--}}
-{{--                                <div class="invoice-detail-value">$670.99</div>--}}
-{{--                            </div>--}}
-{{--                            <div class="invoice-detail-item">--}}
-{{--                                <div class="invoice-detail-name">Shipping</div>--}}
-{{--                                <div class="invoice-detail-value">$15</div>--}}
-{{--                            </div>--}}
+                            <div class="invoice-detail-item">
+                                <div class="invoice-detail-name">Subtotal</div>
+                                <div class="invoice-detail-value">Rp {{number_format($total - $ongkir)}}</div>
+                            </div>
+                            <div class="invoice-detail-item">
+                                <div class="invoice-detail-name">Shipping Cost</div>
+                                <div class="invoice-detail-value">Rp {{number_format($ongkir)}}</div>
+                            </div>
                             <hr class="mt-2 mb-2">
                             <div class="invoice-detail-item">
                                 <div class="invoice-detail-name">Total</div>
-                                <div class="invoice-detail-value invoice-detail-value-lg">Rp. {{number_format($total)}}</div>
+                                <div class="invoice-detail-value invoice-detail-value-lg">Rp {{number_format($total)}}</div>
                             </div>
                         </div>
                     </div>
@@ -214,13 +220,13 @@
             </div>
         </div>
         <hr>
-        <div class="text-md-right">
-            <div class="float-lg-left mb-lg-0 mb-3">
-                <button class="btn btn-primary btn-icon icon-left"><i class="fas fa-credit-card"></i> Process Payment
-                </button>
-                <button class="btn btn-danger btn-icon icon-left"><i class="fas fa-times"></i> Cancel</button>
-            </div>
-            <button class="btn btn-warning btn-icon icon-left"><i class="fas fa-print"></i> Print</button>
-        </div>
+{{--        <div class="text-md-right">--}}
+{{--            <div class="float-lg-left mb-lg-0 mb-3">--}}
+{{--                <button class="btn btn-primary btn-icon icon-left"><i class="fas fa-credit-card"></i> Process Payment--}}
+{{--                </button>--}}
+{{--                <button class="btn btn-danger btn-icon icon-left"><i class="fas fa-times"></i> Cancel</button>--}}
+{{--            </div>--}}
+{{--            <button class="btn btn-warning btn-icon icon-left"><i class="fas fa-print"></i> Print</button>--}}
+{{--        </div>--}}
     </div>
 </div>
