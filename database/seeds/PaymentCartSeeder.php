@@ -14,7 +14,7 @@ class PaymentCartSeeder extends Seeder
         foreach (\App\Models\Cart::whereNotNull('subkategori_id')->where('isCheckout', true)->get()->groupBy('user_id') as $item) {
             $code = uniqid('PYM') . now()->format('dmy');
             foreach ($item as $datum) {
-                $address = \App\Models\Address::where('user_id', $datum->user_id)->where('is_main', true)->first();
+                $address = \App\Models\Address::where('user_id', $datum->user_id)->first();
 
                 \App\Models\PaymentCart::create([
                     'user_id' => $datum->user_id,
