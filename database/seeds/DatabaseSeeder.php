@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
             BlogSeeder::class,
             FaqSeeder::class,
             CartSeeder::class,
+            PromoCodeSeeder::class,
             PaymentCartSeeder::class,
             OrderSeeder::class,
         ]);
