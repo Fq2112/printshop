@@ -617,7 +617,7 @@
                         @endphp
                         @foreach($dates as $item)
                         <?php
-                        $valPayment = \App\Models\PaymentCart::whereDate('created_at',\Carbon\Carbon::parse($item))->get()->count();
+                        $valPayment = \App\Models\Order::whereDate('created_at',\Carbon\Carbon::parse($item))->get()->count();
                         ?>
 
                         '{{$valPayment}}',
