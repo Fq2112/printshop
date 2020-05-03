@@ -8,6 +8,7 @@ use App\Models\Blog;
 use App\Models\Cart;
 use App\Models\Kontak;
 use App\Models\Order;
+use App\Models\PaymentCart;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -32,9 +33,13 @@ class AdminController extends Controller
 //            ->groupBy('address_id');
 
 //        $order = Order::whereMonth('created_at',date('m'))->get();
+        $order = Order::wherebetween('created_at', [now()->firstOfMonth()->subDay()->format('Y-m-d H:i:s'), now()->lastOfMonth()->addDay()->format('Y-m-d H:i:s')]);
+        $payment = PaymentCart::select('uni_code_payment', 'user_id', 'updated_at', 'finish_payment')->distinct('uni_code_payment')->orderByDesc('updated_at')->get();
 
-        $order = Order::wherebetween('created_at',  [ now()->firstOfMonth()->subDay()->format('Y-m-d H:i:s'),now()->lastOfMonth()->addDay()->format('Y-m-d H:i:s')]);
-
+        $incomePerdays = PaymentCart::whereBetween('created_at', [now()->firstOfMonth()->subDay()->format('Y-m-d H:i:s'), now()->lastOfMonth()->addDay()->format('Y-m-d H:i:s')])
+            ->get()->groupBy(function ($val) {
+                return Carbon::parse($val->created_at)->format('d');
+            });
         if ($request->has('period')) {
             $period = $request->period;
         } else {
@@ -47,7 +52,7 @@ class AdminController extends Controller
             $latest = Blog::where('admin_id', $role->id)->orderByDesc('id')->take(6)->get();
         }
 
-        return view('pages.main.admins.dashboard', compact('role', 'admins', 'users', 'blog', 'period', 'latest', 'order'));
+        return view('pages.main.admins.dashboard', compact('role', 'admins', 'users', 'blog', 'period', 'latest', 'order', 'payment'));
     }
 
     public function showInbox(Request $request)
