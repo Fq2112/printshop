@@ -7,7 +7,9 @@ use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\PaymentCart;
+use App\Models\PromoCode;
 use App\Support\StatusProgress;
+use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -112,14 +114,23 @@ class UserController extends Controller
 
     public function cariPromo(Request $request)
     {
-        $discount = 10;
-        $total = $request->total - ($request->total * $discount / 100);
+        $promo = PromoCode::where('promo_code', $request->kode)->first();
+        $payment = PaymentCart::where('promo_code', $request->kode)->where('user_id', Auth::id())->first();
 
-        if ($request->kode == 'versapremier') {
-            return [
-                'discount' => $discount, 'total' => $total,
-                'str_total' => 'Rp' . number_format($total, 2, ',', '.')
-            ];
+        if ($promo) {
+            if ($payment) {
+                return 1;
+            } else {
+                if (now() > $promo->end) {
+                    return 2;
+                } else {
+                    $total = $request->total - ($request->total * $promo->discount / 100);
+                    return [
+                        'caption' => $promo->description, 'discount' => $promo->discount, 'total' => $total,
+                        'str_total' => 'Rp' . number_format($total, 2, ',', '.')
+                    ];
+                }
+            }
         } else {
             return 0;
         }
@@ -129,7 +140,7 @@ class UserController extends Controller
     {
         $carts = Cart::whereIn('id', explode(',', $request->cart_ids))->get();
         $code = strtoupper(uniqid('PYM' . (PaymentCart::max('id') + 1)) . now()->format('dmy'));
-
+        dd($code);
         foreach ($carts as $cart) {
             PaymentCart::create([
                 'user_id' => $cart->user_id,
@@ -138,12 +149,17 @@ class UserController extends Controller
                 'uni_code_payment' => $code,
                 'token' => uniqid(),
                 'price_total' => $cart->total,
+                'promo_code' => $request->promo_code,
+                'is_discount' => !is_null($request->discount) ? 1 : 0,
+                'discount' => $request->discount,
             ]);
 
             $cart->update(['isCheckout' => true]);
         }
 
-        // generate invoice + attach to mail notif
+        $filename = $code . '.pdf';
+        $pdf = PDF::loadView('exports.invoice', compact('carts', 'code'));
+        Storage::put('public/users/order/design/' . Auth::id() . '/' . $filename, $pdf->output());
 
         return redirect()->route('user.dashboard')->with('add', __('lang.alert.checkout',
             ['qty' => $carts, 's' => count($carts) > 1 ? 's' : '', 'code' => $code]));

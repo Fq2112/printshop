@@ -867,7 +867,7 @@
                                     <input type="hidden" name="total"
                                            value="{{count($carts) > 0 ? $subtotal + $ongkir : null}}">
                                     <div class="card-footer p-0">
-                                        <button id="btn_pay" type="submit" disabled
+                                        <button id="btn_pay" type="button" disabled
                                                 class="btn btn-primary btn-block text-uppercase text-left noborder">
                                             CHECKOUT <i class="icon-chevron-right fright"></i>
                                         </button>
@@ -1259,17 +1259,27 @@
                         if (data == 0) {
                             swal('{{__('lang.cart.summary.promo')}}', '{{__('lang.alert.promo')}}', 'error');
                             $("#promo_code").css('border-color', '#dc3545');
-                            $("#error_promo").show().find('b').text("{{__('lang.alert.promo')}}");
+                            $("#error_promo").show().find('b').text("{{__('lang.alert.promo')}}").css('color', '#dc3545');
                             $("#btn_set").attr('disabled', 'disabled');
+                            resetter();
 
-                            $("#discount").hide().find('b').text(null);
-                            $(".show-total").text('Rp{{number_format($subtotal + $ongkir,2,',','.')}}');
-                            $("#form-pembayaran input[name=discount]").val(null);
-                            $("#form-pembayaran input[name=total]").val('{{$subtotal + $ongkir}}');
+                        } else if (data == 1) {
+                            swal('{{__('lang.cart.summary.promo')}}', '{{__('lang.alert.promo1')}}', 'error');
+                            $("#promo_code").css('border-color', '#dc3545');
+                            $("#error_promo").show().find('b').text("{{__('lang.alert.promo1')}}").css('color', '#dc3545');
+                            $("#btn_set").attr('disabled', 'disabled');
+                            resetter();
+
+                        } else if (data == 2) {
+                            swal('{{__('lang.cart.summary.promo')}}', '{{__('lang.alert.promo2')}}', 'error');
+                            $("#promo_code").css('border-color', '#dc3545');
+                            $("#error_promo").show().find('b').text("{{__('lang.alert.promo2')}}").css('color', '#dc3545');
+                            $("#btn_set").attr('disabled', 'disabled');
+                            resetter();
 
                         } else {
                             $("#promo_code").css('border-color', '#ced4da');
-                            $("#error_promo").hide().find('b').text(null);
+                            $("#error_promo").show().find('b').text(data.caption).css('color', '#f89406');
                             $("#btn_set").removeAttr('disabled');
 
                             $("#discount").show().find('b').text(data.discount + '%');
@@ -1297,16 +1307,38 @@
             }).then((confirm) => {
                 if (confirm) {
                     swal({icon: "success", buttons: false});
-                    $("#discount").hide().find('b').text(null);
-                    $(".show-total").text('Rp{{number_format($subtotal + $ongkir,2,',','.')}}');
-                    $("#form-pembayaran input[name=discount]").val(null);
-                    $("#form-pembayaran input[name=total]").val('{{$subtotal + $ongkir}}');
+                    resetter();
                 }
             });
         });
 
+        function resetter() {
+            $("#discount").hide().find('b').text(null);
+            $(".show-total").text('Rp{{number_format($subtotal + $ongkir,2,',','.')}}');
+            $("#form-pembayaran input[name=discount]").val(null);
+            $("#form-pembayaran input[name=total]").val('{{$subtotal + $ongkir}}');
+        }
+
         btn_pay.on("click", function () {
-            // midtrans
+            swal({
+                title: "{{__('lang.alert.delete-head')}}",
+                text: "{{__('lang.alert.delete-capt')}}",
+                icon: 'warning',
+                dangerMode: true,
+                buttons: ["{{__('lang.button.no')}}", "{{__('lang.button.yes')}}"],
+                closeOnEsc: false,
+                closeOnClickOutside: false,
+            }).then((confirm) => {
+                if (confirm) {
+                    swal({
+                        title: '{{__('lang.alert.warning')}}',
+                        text: '{{__('lang.alert.checkout-dashboard')}}',
+                        icon: 'warning',
+                        buttons: false
+                    });
+                    $("#form-pembayaran")[0].submit();
+                }
+            });
         });
     </script>
     @include('layouts.partials.users._scriptsAddress')
