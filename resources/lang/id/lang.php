@@ -393,6 +393,7 @@ return [
         "cart-note2" => "Catatan untuk pesanan produk cetak [:param] Anda berhasil diperbarui!",
         "cart-note3" => "Catatan untuk pesanan produk cetak [:param] Anda berhasil dihapus!",
         "promo" => "Kode promo yang Anda masukkan tidak ditemukan.",
+        "checkout" => ":qty produk cetak Anda dengan ID Pembayaran #:code berhasil di checkout! Kami akan langsung mengeksekusi permintaan Anda sesaat setelah Anda menyelesaikan pembayarannya, terima kasih banyak :)",
         "received" => "Dengan melanjutkan ini, Anda mengakui bahwa Anda telah menerima pesanan ['+code+'] produk cetak ['+name+'] dan tidak ada masalah.",
         "reorder" => "Apakah Anda yakin untuk memesan ulang produk cetak ['+name+'] ini?",
         "browser" => "Browser yang Anda gunakan tidak support! Silahkan perbarui atau gunakan browser yang lainnya.",

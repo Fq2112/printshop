@@ -38,6 +38,11 @@ class Address extends Model
         return $this->hasMany(Cart::class, 'address_id');
     }
 
+    public function getPayment()
+    {
+        return $this->hasMany(PaymentCart::class, 'address_id');
+    }
+
     public function getLocale(): string
     {
         if (is_null(App::getLocale())) {

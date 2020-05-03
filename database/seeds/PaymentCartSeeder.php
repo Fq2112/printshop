@@ -14,8 +14,11 @@ class PaymentCartSeeder extends Seeder
         foreach (\App\Models\Cart::whereNotNull('subkategori_id')->where('isCheckout', true)->get()->groupBy('user_id') as $item) {
             $code = uniqid('PYM') . now()->format('dmy');
             foreach ($item as $datum) {
+                $address = \App\Models\Address::where('user_id', $datum->user_id)->where('is_main', true)->first();
+
                 \App\Models\PaymentCart::create([
                     'user_id' => $datum->user_id,
+                    'address_id' => $address->id,
                     'cart_id' => $datum->id,
                     'uni_code_payment' => strtoupper($code),
                     'token' => uniqid(),
@@ -23,26 +26,25 @@ class PaymentCartSeeder extends Seeder
                     'finish_payment' => true,
                 ]);
 
-                $datum->update([
-                    'isCheckout' => true
-                ]);
+                $datum->update(['isCheckout' => true]);
             }
         }
 
         foreach (\App\Models\Cart::whereNotNull('cluster_id')->where('isCheckout', true)->get()->groupBy('user_id') as $item) {
             $code = uniqid('PYM') . now()->format('dmy');
             foreach ($item as $datum) {
+                $address = \App\Models\Address::where('user_id', $datum->user_id)->where('is_main', true)->first();
+
                 \App\Models\PaymentCart::create([
                     'user_id' => $datum->user_id,
+                    'address_id' => $address->id,
                     'cart_id' => $datum->id,
                     'uni_code_payment' => strtoupper($code),
                     'token' => uniqid(),
                     'price_total' => $datum->total,
                 ]);
 
-                $datum->update([
-                    'isCheckout' => true
-                ]);
+                $datum->update(['isCheckout' => true]);
             }
         }
     }

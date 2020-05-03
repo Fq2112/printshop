@@ -18,6 +18,9 @@ class CreatePaymentCartsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')
                 ->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->unsignedBigInteger('address_id');
+            $table->foreign('address_id')->references('id')->on('addresses')
+                ->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->unsignedBigInteger('cart_id');
             $table->foreign('cart_id')->references('id')->on('carts')
                 ->onDelete('CASCADE')->onUpdate('CASCADE');

@@ -288,10 +288,11 @@
     <section id="content" style="background-color: #F9F9F9">
         <div class="content-wrap">
             <div class="container clearfix">
-                <form id="form-pembayaran" class="row" method="POST" action="#">
+                <form id="form-pembayaran" class="row" method="POST" action="{{route('user.checkout.cart')}}"
+                      onkeydown="return event.key != 'Enter';">
                     @csrf
                     <div class="postcontent mb-0 pb-0 clearfix">
-                        <div class="myCard mb-4">
+                        <div class="myCard {{count($carts) > 0 ? 'mb-4' : ''}}">
                             <div class="card-content">
                                 <div class="card-title">
                                     <h4 class="text-center"
@@ -320,8 +321,9 @@
                                                              aria-expanded="false" style="height: 0;"
                                                              data-parent="#accordion">
                                                             <div class="panel-body">
-                                                                @foreach($archive as $row)
+                                                                @foreach($archive as $i => $row)
                                                                     @php
+                                                                        $ids[$i] = $row->id;
                                                                         $data = !is_null($row->subkategori_id) ? $row->getSubKategori : $row->getCluster;
                                                                         $subtotal += ($row->total - $row->ongkir);
                                                                         $ongkir += $row->ongkir;
@@ -769,20 +771,22 @@
                             </div>
                         </div>
 
-                        <div class="myCard">
-                            <div class="card-content">
-                                <div class="card-title" style="text-transform: none">
-                                    <h4 class="text-center" style="color: #f89406">
-                                        {{__('lang.cart.billing.head')}}</h4>
-                                    <h5 class="text-center mb-2" style="text-transform: none">
-                                        {{__('lang.cart.billing.capt')}}</h5>
-                                    <div class="divider divider-center mt-1 mb-1"><i class="icon-circle"></i></div>
-                                    <div class="component-accordion">
-                                        @include('layouts.partials.users._shippingForm')
+                        @if(count($carts) > 0)
+                            <div class="myCard">
+                                <div class="card-content">
+                                    <div class="card-title" style="text-transform: none">
+                                        <h4 class="text-center" style="color: #f89406">
+                                            {{__('lang.cart.billing.head')}}</h4>
+                                        <h5 class="text-center mb-2" style="text-transform: none">
+                                            {{__('lang.cart.billing.capt')}}</h5>
+                                        <div class="divider divider-center mt-1 mb-1"><i class="icon-circle"></i></div>
+                                        <div class="component-accordion">
+                                            @include('layouts.partials.users._shippingForm')
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
 
                     <div class="sidebar sticky-sidebar-wrap col_last nobottommargin clearfix">
@@ -802,9 +806,8 @@
                                                     <small>{{__('lang.cart.summary.promo')}}</small>
                                                     <div class="input-group">
                                                         <input id="promo_code" type="text" class="form-control"
-                                                               name="promo_code"
-                                                               placeholder="{{__('lang.placeholder.promo')}}"
-                                                            {{count($carts) > 0 ? '' : 'disabled'}}>
+                                                               name="promo_code" disabled
+                                                               placeholder="{{__('lang.placeholder.promo')}}">
                                                         <div class="input-group-append">
                                                             <button id="btn_set" class="btn btn-primary"
                                                                     type="button" disabled>SET
@@ -856,8 +859,15 @@
                                                 {!!count($carts) > 0 ? 'Rp'.number_format($subtotal + $ongkir,2,',','.') : '&ndash;'!!}</b>
                                         </li>
                                     </ul>
+                                    <input type="hidden" name="cart_ids" value="{{implode(',', $ids)}}">
+                                    <input type="hidden" name="subtotal"
+                                           value="{{count($carts) > 0 ? $subtotal : null}}">
+                                    <input type="hidden" name="ongkir" value="{{count($carts) > 0 ? $ongkir : null}}">
+                                    <input type="hidden" name="discount">
+                                    <input type="hidden" name="total"
+                                           value="{{count($carts) > 0 ? $subtotal + $ongkir : null}}">
                                     <div class="card-footer p-0">
-                                        <button id="btn_pay" type="button" disabled
+                                        <button id="btn_pay" type="submit" disabled
                                                 class="btn btn-primary btn-block text-uppercase text-left noborder">
                                             CHECKOUT <i class="icon-chevron-right fright"></i>
                                         </button>
@@ -1212,7 +1222,7 @@
         function getShipping(city, check, name) {
             $(".show-" + check).text(name);
             $('#collapse-' + check).collapse('hide');
-            btn_pay.removeAttr('disabled');
+            $("#promo_code, #btn_pay").removeAttr('disabled');
 
             $('html,body').animate({scrollTop: $("#accordion2").parent().parent().offset().top}, 0);
         }
@@ -1222,14 +1232,13 @@
                 $("#btn_set").attr('disabled', 'disabled');
             } else {
                 $("#btn_set").removeAttr('disabled');
+                if (e.keyCode === 13) {
+                    $("#btn_set").click();
+                }
             }
 
             $("#promo_code").css('border-color', '#ced4da');
             $("#error_promo").hide().find('b').text(null);
-
-            if (e.keyCode === 13) {
-                $("#btn_set").click();
-            }
         });
 
         $("#btn_set").on('click', function () {
@@ -1255,6 +1264,9 @@
 
                             $("#discount").hide().find('b').text(null);
                             $(".show-total").text('Rp{{number_format($subtotal + $ongkir,2,',','.')}}');
+                            $("#form-pembayaran input[name=discount]").val(null);
+                            $("#form-pembayaran input[name=total]").val('{{$subtotal + $ongkir}}');
+
                         } else {
                             $("#promo_code").css('border-color', '#ced4da');
                             $("#error_promo").hide().find('b').text(null);
@@ -1262,6 +1274,8 @@
 
                             $("#discount").show().find('b').text(data.discount + '%');
                             $(".show-total").text(data.str_total);
+                            $("#form-pembayaran input[name=discount]").val(data.discount);
+                            $("#form-pembayaran input[name=total]").val(data.total);
                         }
                     },
                     error: function () {
@@ -1285,6 +1299,8 @@
                     swal({icon: "success", buttons: false});
                     $("#discount").hide().find('b').text(null);
                     $(".show-total").text('Rp{{number_format($subtotal + $ongkir,2,',','.')}}');
+                    $("#form-pembayaran input[name=discount]").val(null);
+                    $("#form-pembayaran input[name=total]").val('{{$subtotal + $ongkir}}');
                 }
             });
         });

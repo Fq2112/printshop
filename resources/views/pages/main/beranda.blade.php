@@ -151,7 +151,7 @@
                                class="button button-border button-large button-rounded tright nomargin">
                                 <span>{{__('lang.button.shop')}}</span><i class="icon-angle-right"></i></a>
                         </div>
-                        <div class="tp-caption utb tp-resizeme revo-slider-caps-text uppercase"
+                        {{--<div class="tp-caption utb tp-resizeme revo-slider-caps-text uppercase"
                              data-x="510"
                              data-y="0"
                              data-transform_in="x:0;y:-236;z:0;rotationZ:0;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
@@ -165,7 +165,7 @@
                              data-endspeed="1000"
                              data-endeasing="Power4.easeIn" style="">
                             <img src="{{asset('images/slider/rev/shop/tag.png')}}" alt="Bag">
-                        </div>
+                        </div>--}}
                     </li>
 
                     <li data-transition="slideup" data-slotamount="1" data-masterspeed="1500" data-delay="5000"
@@ -247,7 +247,7 @@
                                class="button button-border button-large button-rounded tright nomargin">
                                 <span>{{__('lang.button.shop')}}</span><i class="icon-angle-right"></i></a>
                         </div>
-                        <div class="tp-caption utb tp-resizeme revo-slider-caps-text uppercase"
+                        {{--<div class="tp-caption utb tp-resizeme revo-slider-caps-text uppercase"
                              data-x="510"
                              data-y="0"
                              data-transform_in="x:0;y:-236;z:0;rotationZ:0;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
@@ -261,7 +261,7 @@
                              data-endspeed="1000"
                              data-endeasing="Power4.easeIn" style="">
                             <img src="{{asset('images/slider/rev/shop/tag.png')}}" alt="Bag">
-                        </div>
+                        </div>--}}
                     </li>
 
                     <li data-transition="slideup" data-slotamount="1" data-masterspeed="1500" data-delay="5000"
@@ -343,7 +343,7 @@
                                class="button button-border button-large button-rounded tright nomargin">
                                 <span>{{__('lang.button.shop')}}</span><i class="icon-angle-right"></i></a>
                         </div>
-                        <div class="tp-caption utb tp-resizeme revo-slider-caps-text uppercase"
+                        {{--<div class="tp-caption utb tp-resizeme revo-slider-caps-text uppercase"
                              data-x="510"
                              data-y="0"
                              data-transform_in="x:0;y:-236;z:0;rotationZ:0;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
@@ -357,7 +357,7 @@
                              data-endspeed="1000"
                              data-endeasing="Power4.easeIn" style="">
                             <img src="{{asset('images/slider/rev/shop/tag.png')}}" alt="Bag">
-                        </div>
+                        </div>--}}
                     </li>
                 </ul>
             </div>

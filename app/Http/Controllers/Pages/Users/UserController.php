@@ -29,6 +29,7 @@ class UserController extends Controller
 
         $addresses = Address::where('user_id', $user->id)->orderByDesc('id')->get();
 
+        $ids = [];
         $a = 1;
         $b = 1;
         $c = 1;
@@ -38,7 +39,7 @@ class UserController extends Controller
         $ongkir = 0;
 
         return view('pages.main.users.cart', compact('user', 'bio', 'carts', 'addresses',
-            'a', 'b', 'c', 'd', 'e', 'subtotal', 'ongkir'));
+            'ids', 'a', 'b', 'c', 'd', 'e', 'subtotal', 'ongkir'));
     }
 
     public function editDesign(Request $request)
@@ -122,6 +123,30 @@ class UserController extends Controller
         } else {
             return 0;
         }
+    }
+
+    public function checkout(Request $request)
+    {
+        $carts = Cart::whereIn('id', explode(',', $request->cart_ids))->get();
+        $code = strtoupper(uniqid('PYM' . (PaymentCart::max('id') + 1)) . now()->format('dmy'));
+
+        foreach ($carts as $cart) {
+            PaymentCart::create([
+                'user_id' => $cart->user_id,
+                'address_id' => $request->address_id,
+                'cart_id' => $cart->id,
+                'uni_code_payment' => $code,
+                'token' => uniqid(),
+                'price_total' => $cart->total,
+            ]);
+
+            $cart->update(['isCheckout' => true]);
+        }
+
+        // generate invoice + attach to mail notif
+
+        return redirect()->route('user.dashboard')->with('add', __('lang.alert.checkout',
+            ['qty' => $carts, 's' => count($carts) > 1 ? 's' : '', 'code' => $code]));
     }
 
     public function dashboard(Request $request)
