@@ -261,7 +261,18 @@ class UserController extends Controller
         }
     }
 
-    public function reOrder(Request $request)
+    public function received(Request $request)
+    {
+        $order = Order::where('uni_code', $request->code)->first();
+        $data = !is_null($order->getCart->subkategori_id) ? $order->getCart->getSubKategori : $order->getCart->getCluster;
+
+        $order->update(['progress_status' => StatusProgress::RECEIVED]);
+
+        return back()
+            ->with('update', __('lang.alert.order-received', ['code' => $order->uni_code, 'name' => $data->name]));
+    }
+
+    public function reorder(Request $request)
     {
         $order = Order::where('uni_code', $request->code)->first();
         $cart = $order->getCart;

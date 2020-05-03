@@ -137,18 +137,26 @@
                                     <h5 class="mt-3 mb-1">
                                         <i class="icon-drafting-compass mr-2"></i>{{$data->name}}
                                         <span class="fright text-uppercase">
-                                            @if($acc == 'received')
+                                            @if($acc == 'shipped' || $acc == 'received')
                                                 <a style="color: #17a2b8;"
                                                    href="{{route('user.download.file',['id'=>encrypt($cart->id),'file'=>'invoice'])}}">
                                                     {{__('lang.order.invoice')}}
                                                     <i class="icon-file-invoice-dollar ml-1"></i>
                                                 </a>
                                                 <small style="color: #7f7f7f">&nbsp;&#124;&nbsp;</small>
-                                                <a style="color: #f89406;" href="javascript:void(0)"
-                                                   onclick="reOrder('{{$data->name}}','{{route('user.reorder', ['code' => $code])}}')">
-                                                    <i class="icon-shopping-cart1 mr-1"></i>
-                                                    {{__('lang.order.reorder')}}
-                                                </a>
+                                                @if($acc == 'shipped')
+                                                    <a style="color: #f89406;" href="javascript:void(0)"
+                                                       onclick="received('{{$data->name}}','{{$code}}','{{route('user.received', ['code' => $code])}}')">
+                                                        <i class="icon-box-open mr-1"></i>
+                                                        {{__('lang.order.tab-ir')}}
+                                                    </a>
+                                                @else
+                                                    <a style="color: #f89406;" href="javascript:void(0)"
+                                                       onclick="reOrder('{{$data->name}}','{{route('user.reorder', ['code' => $code])}}')">
+                                                        <i class="icon-shopping-cart1 mr-1"></i>
+                                                        {{__('lang.order.reorder')}}
+                                                    </a>
+                                                @endif
                                             @else
                                                 <a style="color: #17a2b8;"
                                                    href="{{route('user.download.file',['id'=>encrypt($cart->id),'file'=>'invoice'])}}">

@@ -385,6 +385,23 @@
             $(this).find('span').addClass('badge-primary').removeClass('badge-secondary');
         });
 
+        function received(name, code, url) {
+            swal({
+                title: '{{__('lang.order.tab-ir')}}',
+                text: '{!! __('lang.alert.received') !!}',
+                icon: 'warning',
+                dangerMode: true,
+                buttons: ["{{__('lang.button.no')}}", "{{__('lang.button.yes')}}"],
+                closeOnEsc: false,
+                closeOnClickOutside: false,
+            }).then((confirm) => {
+                if (confirm) {
+                    swal({icon: "success", buttons: false});
+                    window.location.href = url;
+                }
+            });
+        }
+
         function reOrder(name, url) {
             swal({
                 title: '{{__('lang.order.reorder')}}',

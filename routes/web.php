@@ -202,8 +202,13 @@ Route::group(['namespace' => 'Pages'], function () {
                 'as' => 'user.download.file'
             ]);
 
+            Route::get('{code}/received', [
+                'uses' => 'UserController@received',
+                'as' => 'user.received'
+            ]);
+
             Route::get('{code}/reorder', [
-                'uses' => 'UserController@reOrder',
+                'uses' => 'UserController@reorder',
                 'as' => 'user.reorder'
             ]);
 
