@@ -323,7 +323,6 @@
                                                             <div class="panel-body">
                                                                 @foreach($archive as $i => $row)
                                                                     @php
-                                                                        $ids[$i] = $row->id;
                                                                         $data = !is_null($row->subkategori_id) ? $row->getSubKategori : $row->getCluster;
                                                                         $subtotal += ($row->total - $row->ongkir);
                                                                         $ongkir += $row->ongkir;
@@ -829,24 +828,24 @@
                                         </div>
                                         <li class="list-group-item noborder">
                                             Subtotal
-                                            ({{__('lang.cart.order.product', ['qty' => count($carts), 's' =>
-                                            count($carts) > 1 ? 's' : null])}})
+                                            ({{__('lang.cart.order.product', ['qty' => count($total_item), 's' =>
+                                            count($total_item) > 1 ? 's' : null])}})
                                             <b class="fright">
                                                 {!! count($carts) > 0 ? 'Rp'.number_format($subtotal,2,',','.') : '&ndash;' !!}
                                             </b>
+                                        </li>
+                                        <li id="discount" class="list-group-item noborder" style="display: none">
+                                            {{__('lang.cart.summary.discount')}} <strong></strong>
+                                            <i class="i-plain i-small icon-trash2" data-toggle="tooltip"
+                                               data-placement="right" title="{{__('lang.button.delete')}}"
+                                               style="cursor:pointer;float:none"></i>
+                                            <b class="fright"></b>
                                         </li>
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.ongkir')}}
                                             <b class="fright">
                                                 {!! count($carts) > 0 ? 'Rp'.number_format($ongkir,2,',','.') : '&ndash;' !!}
                                             </b>
-                                        </li>
-                                        <li id="discount" class="list-group-item noborder" style="display: none">
-                                            {{__('lang.cart.summary.discount')}}
-                                            <i class="i-plain i-small icon-trash2" data-toggle="tooltip"
-                                               data-placement="right" title="{{__('lang.button.delete')}}"
-                                               style="cursor:pointer;float:none"></i>
-                                            <b class="fright"></b>
                                         </li>
                                     </ul>
                                     <div class="card-content pt-0 pb-0">
@@ -859,7 +858,8 @@
                                                 {!!count($carts) > 0 ? 'Rp'.number_format($subtotal + $ongkir,2,',','.') : '&ndash;'!!}</b>
                                         </li>
                                     </ul>
-                                    <input type="hidden" name="cart_ids" value="{{implode(',', $ids)}}">
+                                    <input type="hidden" name="cart_ids"
+                                           value="{{implode(',', $total_item->pluck('id')->toArray())}}">
                                     <input type="hidden" name="subtotal"
                                            value="{{count($carts) > 0 ? $subtotal : null}}">
                                     <input type="hidden" name="ongkir" value="{{count($carts) > 0 ? $ongkir : null}}">
@@ -1245,7 +1245,7 @@
             clearTimeout(this.delay);
             this.delay = setTimeout(function () {
                 $.ajax({
-                    url: "{{route('get.cari-promo.cart',['total' => $subtotal + $ongkir])}}&kode=" + $("#promo_code").val(),
+                    url: "{!! route('get.cari-promo.cart',['subtotal' => $subtotal, 'ongkir' => $ongkir])!!}&kode=" + $("#promo_code").val(),
                     type: "GET",
                     beforeSend: function () {
                         $('.css3-spinner').show();
@@ -1282,7 +1282,8 @@
                             $("#error_promo").show().find('b').text(data.caption).css('color', '#f89406');
                             $("#btn_set").removeAttr('disabled');
 
-                            $("#discount").show().find('b').text(data.discount + '%');
+                            $("#discount").show().find('strong').text(data.discount + '%');
+                            $("#discount b").text(data.str_discount);
                             $(".show-total").text(data.str_total);
                             $("#form-pembayaran input[name=discount]").val(data.discount);
                             $("#form-pembayaran input[name=total]").val(data.total);

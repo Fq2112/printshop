@@ -150,6 +150,13 @@ return [
             "discount" => "Diskon",
         ],
     ],
+    "invoice" => [
+        "bill-to" => "Kepada Yth.",
+        "ship-to" => "Dikirim Ke",
+        "invoice-date" => "Tanggal Faktur",
+        "due-date" => "Tanggal Jatuh Tempo",
+        "tnc" => "Pembayaran jatuh tempo dalam 1x24 jam",
+    ],
     "pro" => [
         "capt" => "Dapatkan akun PRO " . env('APP_TITLE') . ", ubah kebutuhan cetak bisnis Anda jadi lebih mudah!",
     ],
@@ -425,7 +432,9 @@ return [
     "mail" => [
         "subject" => [
             "activate" => "Akun " . env('APP_NAME') . ": Aktivasi Email",
-            "reset" => "Akun " . env('APP_NAME') . ": Reset Kata Sandi"
+            "reset" => "Akun " . env('APP_NAME') . ": Reset Kata Sandi",
+            "unpaid" => "Menunggu Pembayaran #:code",
+            "paid" => "Checkout Pesanan dengan ID Pembayaran #:code Berhasil Dikonfirmasi pada :datetime",
         ],
         "content" => [
             "hello" => "Halo",

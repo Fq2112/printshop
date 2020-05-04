@@ -150,6 +150,13 @@ return [
             "discount" => "Discount",
         ],
     ],
+    "invoice" => [
+        "bill-to" => "BILL TO",
+        "ship-to" => "SHIP TO",
+        "invoice-date" => "Invoice Date",
+        "due-date" => "Due Date",
+        "tnc" => "Payments is due within 1x24 hours",
+    ],
     "pro" => [
         "capt" => "Meet " . env('APP_TITLE') . " PRO Account, transform your business printing needs easier!",
     ],
@@ -426,6 +433,8 @@ return [
         "subject" => [
             "activate" => env('APP_NAME') . " Account: Activation Email",
             "reset" => env('APP_NAME') . " Account: Reset Password",
+            "unpaid" => "Waiting for Payment #:code",
+            "paid" => "Checkout Orders with Payment ID #:code is Successfully Confirmed on :datetime",
         ],
         "content" => [
             "hello" => "Hello",

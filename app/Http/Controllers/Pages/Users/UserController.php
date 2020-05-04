@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pages\Users;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Users\InvoiceMail;
 use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Order;
@@ -13,6 +14,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 
@@ -31,17 +33,17 @@ class UserController extends Controller
 
         $addresses = Address::where('user_id', $user->id)->orderByDesc('id')->get();
 
-        $ids = [];
         $a = 1;
         $b = 1;
         $c = 1;
         $d = 1;
         $e = 1;
+        $total_item = Cart::where('user_id', $user->id)->where('isCheckout', false)->get();
         $subtotal = 0;
         $ongkir = 0;
 
         return view('pages.main.users.cart', compact('user', 'bio', 'carts', 'addresses',
-            'ids', 'a', 'b', 'c', 'd', 'e', 'subtotal', 'ongkir'));
+            'a', 'b', 'c', 'd', 'e', 'total_item', 'subtotal', 'ongkir'));
     }
 
     public function editDesign(Request $request)
@@ -124,9 +126,14 @@ class UserController extends Controller
                 if (now() > $promo->end) {
                     return 2;
                 } else {
-                    $total = $request->total - ($request->total * $promo->discount / 100);
+                    $discount_price = $request->subtotal * $promo->discount / 100;
+                    $subtotal = $request->subtotal - $discount_price;
+                    $total = $subtotal + $request->ongkir;
                     return [
-                        'caption' => $promo->description, 'discount' => $promo->discount, 'total' => $total,
+                        'caption' => $promo->description,
+                        'discount' => $promo->discount,
+                        'total' => $total,
+                        'str_discount' => '-Rp' . number_format($discount_price, 2, ',', '.'),
                         'str_total' => 'Rp' . number_format($total, 2, ',', '.')
                     ];
                 }
@@ -138,9 +145,10 @@ class UserController extends Controller
 
     public function checkout(Request $request)
     {
-        $carts = Cart::whereIn('id', explode(',', $request->cart_ids))->get();
+        $carts = Cart::whereIn('id', explode(',', $request->cart_ids))
+            ->orderByRaw('FIELD (id, ' . $request->cart_ids . ') ASC')->get();
         $code = strtoupper(uniqid('PYM' . (PaymentCart::max('id') + 1)) . now()->format('dmy'));
-        dd($code);
+
         foreach ($carts as $cart) {
             PaymentCart::create([
                 'user_id' => $cart->user_id,
@@ -157,12 +165,17 @@ class UserController extends Controller
             $cart->update(['isCheckout' => true]);
         }
 
+        $check = PaymentCart::where('uni_code_payment', $code)->where('user_id', Auth::id())->orderByDesc('id')->first();
+        $data = PaymentCart::where('uni_code_payment', $code)->where('user_id', Auth::id())->orderByDesc('id')->get();
+
         $filename = $code . '.pdf';
-        $pdf = PDF::loadView('exports.invoice', compact('carts', 'code'));
-        Storage::put('public/users/order/design/' . Auth::id() . '/' . $filename, $pdf->output());
+        $pdf = PDF::loadView('exports.invoice', compact('code', 'data', 'check'));
+        Storage::put('public/users/order/invoice/' . Auth::id() . '/' . $filename, $pdf->output());
+
+        Mail::to(Auth::user()->email)->send(new InvoiceMail($code, $check, $data, $filename));
 
         return redirect()->route('user.dashboard')->with('add', __('lang.alert.checkout',
-            ['qty' => $carts, 's' => count($carts) > 1 ? 's' : '', 'code' => $code]));
+            ['qty' => count($data), 's' => count($data) > 1 ? 's' : '', 'code' => $code]));
     }
 
     public function dashboard(Request $request)
