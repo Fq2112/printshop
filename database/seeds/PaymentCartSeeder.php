@@ -1,6 +1,8 @@
 <?php
 
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class PaymentCartSeeder extends Seeder
 {
@@ -12,7 +14,7 @@ class PaymentCartSeeder extends Seeder
     public function run()
     {
         foreach (\App\Models\Cart::whereNotNull('subkategori_id')->where('isCheckout', true)->get()->groupBy('user_id') as $item) {
-            $code = uniqid('PYM') . now()->format('dmy');
+            $code = strtoupper(uniqid('PYM') . now()->timestamp);
             foreach ($item as $datum) {
                 $address = \App\Models\Address::where('user_id', $datum->user_id)->first();
 
@@ -20,18 +22,25 @@ class PaymentCartSeeder extends Seeder
                     'user_id' => $datum->user_id,
                     'address_id' => $address->id,
                     'cart_id' => $datum->id,
-                    'uni_code_payment' => strtoupper($code),
+                    'uni_code_payment' => $code,
                     'token' => uniqid(),
                     'price_total' => $datum->total,
-                    'finish_payment' => true,
+                    'finish_payment' => rand(0, 1) ? true : false,
                 ]);
 
                 $datum->update(['isCheckout' => true]);
             }
+
+            $check = \App\Models\PaymentCart::where('user_id', $item->take(1)->toArray()[0]['user_id'])->orderByDesc('id')->first();
+            $data = \App\Models\PaymentCart::where('uni_code_payment', $code)->where('user_id', $check->user_id)->orderByDesc('id')->get();
+
+            $code = $check->uni_code_payment;
+            $pdf = PDF::loadView('exports.invoice', compact('code', 'data', 'check'));
+            Storage::put('public/users/order/invoice/' . $check->user_id . '/' . $code . '.pdf', $pdf->output());
         }
 
         foreach (\App\Models\Cart::whereNotNull('cluster_id')->where('isCheckout', true)->get()->groupBy('user_id') as $item) {
-            $code = uniqid('PYM') . now()->format('dmy');
+            $code = strtoupper(uniqid('PYM') . now()->timestamp);
             foreach ($item as $datum) {
                 $address = \App\Models\Address::where('user_id', $datum->user_id)->first();
 
@@ -39,13 +48,21 @@ class PaymentCartSeeder extends Seeder
                     'user_id' => $datum->user_id,
                     'address_id' => $address->id,
                     'cart_id' => $datum->id,
-                    'uni_code_payment' => strtoupper($code),
+                    'uni_code_payment' => $code,
                     'token' => uniqid(),
                     'price_total' => $datum->total,
+                    'finish_payment' => rand(0, 1) ? true : false,
                 ]);
 
                 $datum->update(['isCheckout' => true]);
             }
+
+            $check = \App\Models\PaymentCart::where('user_id', $item->take(1)->toArray()[0]['user_id'])->orderByDesc('id')->first();
+            $data = \App\Models\PaymentCart::where('uni_code_payment', $code)->where('user_id', $check->user_id)->orderByDesc('id')->get();
+
+            $code = $check->uni_code_payment;
+            $pdf = PDF::loadView('exports.invoice', compact('code', 'data', 'check'));
+            Storage::put('public/users/order/invoice/' . $check->user_id . '/' . $code . '.pdf', $pdf->output());
         }
     }
 }

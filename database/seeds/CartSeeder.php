@@ -14,7 +14,7 @@ class CartSeeder extends Seeder
         $client = new \GuzzleHttp\Client([
             'headers' => [
                 'Accept' => 'application/json',
-                'key' => '7a5350ebe62d80bfc367071ba78ecd84'
+                'key' => env('RajaOngkir_KEY')
             ],
             'defaults' => [
                 'exceptions' => false
@@ -22,7 +22,7 @@ class CartSeeder extends Seeder
         ]);
 
         foreach (\App\User::all() as $user) {
-            for ($i = 0; $i < 12; $i++) {
+            for ($i = 0; $i < 8; $i++) {
                 $address = \App\Models\Address::where('user_id', $user->id)->inRandomOrder()->first();
                 $shipping = $client->post('https://api.rajaongkir.com/starter/cost', [
                     'form_params' => [

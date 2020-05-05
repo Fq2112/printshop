@@ -271,11 +271,11 @@
                          id="tabContent-all" role="tabpanel" aria-labelledby="nav-all-tab" style="border: none">
                         @if($all > 0)
                             @if(count($unpaid) > 0)
-                                @php $item = $unpaid; $all = 'all-'; $acc = 'unpaid'; @endphp
+                                @php $item = $unpaid; $all = 'all-unpaid-'; $acc = 'unpaid'; @endphp
                                 @include('layouts.partials.users._statusDashboard')
                             @endif
                             @if(count($paid) > 0)
-                                @php $item = $paid; $all = 'all-'; $acc = 'paid'; @endphp
+                                @php $item = $paid; $all = 'all-paid-'; $acc = 'paid'; @endphp
                                 @include('layouts.partials.users._statusDashboard')
                             @endif
                             @if(count($produced) > 0)
@@ -298,7 +298,7 @@
                     <div class="tab-pane fade {{$category == 'unpaid' ? 'show active' : ''}}"
                          id="tabContent-or" role="tabpanel" aria-labelledby="nav-or-tab" style="border: none">
                         @if(count($unpaid) > 0)
-                            @php $item = $unpaid; $all = null; $acc = 'unpaid'; @endphp
+                            @php $item = $unpaid; $all = 'unpaid'; $acc = 'unpaid'; @endphp
                             @include('layouts.partials.users._statusDashboard')
                         @else
                             @include('layouts.partials.users._emptyDashboard')
@@ -308,7 +308,7 @@
                     <div class="tab-pane fade {{$category == 'paid' ? 'show active' : ''}}"
                          id="tabContent-pr" role="tabpanel" aria-labelledby="nav-pr-tab" style="border: none">
                         @if(count($paid) > 0)
-                            @php $item = $paid; $all = null; $acc = 'paid'; @endphp
+                            @php $item = $paid; $all = 'paid'; $acc = 'paid'; @endphp
                             @include('layouts.partials.users._statusDashboard')
                         @else
                             @include('layouts.partials.users._emptyDashboard')

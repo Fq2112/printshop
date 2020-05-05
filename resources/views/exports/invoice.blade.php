@@ -115,7 +115,7 @@
     <table id="company">
         <tr>
             <td>
-                <img src="{{asset('images/logotype-invoice.png')}}" alt="logo">
+                <img src="{{public_path('images/logotype-invoice.png')}}" alt="logo">
                 <div id="co-left">
                     {{env('APP_TITLE')}}<br>Raya Kenjeran 469 Gading, Tambaksari<br>
                     Surabaya, Jawa Timur &ndash; 60134<br>
@@ -127,8 +127,8 @@
                 <div class="uppercase">{{__('lang.order.invoice')}}</div>
                 <br><br><br><br><br>
                 <div style="background: none">
-                    <img src="{{$check->finish_payment == true ? asset('images/stamp_paid.png') :
-                    asset('images/stamp_unpaid.png')}}" alt="logo">
+                    <img src="{{$check->finish_payment == true ? public_path('images/stamp_paid.png') :
+                    public_path('images/stamp_unpaid.png')}}" alt="logo">
                 </div>
             </td>
         </tr>

@@ -11,7 +11,7 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
-        foreach (\App\Models\PaymentCart::where('finish_payment', true)->whereNotIn('id', [1, 2])->get() as $data) {
+        foreach (\App\Models\PaymentCart::where('finish_payment', true)->get() as $data) {
             $item = $data->getCart;
             $item_name = $item->subkategori_id != null ? $item->getSubKategori->getTranslation('name', 'en') : $item->getCluster->getTranslation('name', 'en');
             $trim_name = explode(' ', trim($item_name));
@@ -20,7 +20,7 @@ class OrderSeeder extends Seeder
                 $name = substr($trim_name[$key], 0, 1);
                 $initial = $initial . $name;
             }
-            $uni_code = strtoupper(uniqid($initial)) . $item->id;
+            $uni_code = strtoupper(uniqid($initial)) . now()->timestamp;
 
             $arr = \App\Support\StatusProgress::ALL;
             \App\Models\Order::create([

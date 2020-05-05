@@ -15,7 +15,7 @@ class CitiesSeeder extends Seeder
         $response = $client->request('GET', 'https://api.rajaongkir.com/starter/city', [
             'headers' => [
                 'Accept' => 'application/json',
-                'key' => '7a5350ebe62d80bfc367071ba78ecd84'
+                'key' => env('RajaOngkir_KEY')
             ],
         ]);
         $data = json_decode($response->getBody()->getContents(), true);

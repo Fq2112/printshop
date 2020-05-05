@@ -364,7 +364,7 @@ class MainController extends Controller
         $client = new \GuzzleHttp\Client([
             'headers' => [
                 'Accept' => 'application/json',
-                'key' => '7a5350ebe62d80bfc367071ba78ecd84'
+                'key' => env('RajaOngkir_KEY')
             ],
             'defaults' => [
                 'exceptions' => false

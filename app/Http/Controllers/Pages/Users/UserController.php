@@ -147,7 +147,7 @@ class UserController extends Controller
     {
         $carts = Cart::whereIn('id', explode(',', $request->cart_ids))
             ->orderByRaw('FIELD (id, ' . $request->cart_ids . ') ASC')->get();
-        $code = strtoupper(uniqid('PYM' . (PaymentCart::max('id') + 1)) . now()->format('dmy'));
+        $code = strtoupper(uniqid('PYM') . now()->timestamp);
 
         foreach ($carts as $cart) {
             PaymentCart::create([
