@@ -25,16 +25,15 @@ class PaymentCartSeeder extends Seeder
                     'uni_code_payment' => $code,
                     'token' => uniqid(),
                     'price_total' => $datum->total,
-                    'finish_payment' => rand(0, 1) ? true : false,
+                    'finish_payment' => true,
                 ]);
 
                 $datum->update(['isCheckout' => true]);
             }
 
-            $check = \App\Models\PaymentCart::where('user_id', $item->take(1)->toArray()[0]['user_id'])->orderByDesc('id')->first();
+            $check = \App\Models\PaymentCart::where('uni_code_payment', $code)->where('user_id', $item->take(1)->toArray()[0]['user_id'])->orderByDesc('id')->first();
             $data = \App\Models\PaymentCart::where('uni_code_payment', $code)->where('user_id', $check->user_id)->orderByDesc('id')->get();
 
-            $code = $check->uni_code_payment;
             $pdf = PDF::loadView('exports.invoice', compact('code', 'data', 'check'));
             Storage::put('public/users/order/invoice/' . $check->user_id . '/' . $code . '.pdf', $pdf->output());
         }
@@ -51,16 +50,14 @@ class PaymentCartSeeder extends Seeder
                     'uni_code_payment' => $code,
                     'token' => uniqid(),
                     'price_total' => $datum->total,
-                    'finish_payment' => rand(0, 1) ? true : false,
                 ]);
 
                 $datum->update(['isCheckout' => true]);
             }
 
-            $check = \App\Models\PaymentCart::where('user_id', $item->take(1)->toArray()[0]['user_id'])->orderByDesc('id')->first();
+            $check = \App\Models\PaymentCart::where('uni_code_payment', $code)->where('user_id', $item->take(1)->toArray()[0]['user_id'])->orderByDesc('id')->first();
             $data = \App\Models\PaymentCart::where('uni_code_payment', $code)->where('user_id', $check->user_id)->orderByDesc('id')->get();
 
-            $code = $check->uni_code_payment;
             $pdf = PDF::loadView('exports.invoice', compact('code', 'data', 'check'));
             Storage::put('public/users/order/invoice/' . $check->user_id . '/' . $code . '.pdf', $pdf->output());
         }

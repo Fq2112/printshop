@@ -1,8 +1,188 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no">
-    <title>Reset Password</title>
+    <title>{{strtoupper(__('lang.order.invoice')).' #'.$code}}</title>
     <style type="text/css">
+        .alert {
+            padding: 15px;
+            margin: 0 1.5em 1em 1.5em;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .alert h4 {
+            margin-top: 0;
+            color: inherit;
+        }
+
+        .alert .alert-link {
+            font-weight: bold;
+        }
+
+        .alert > p,
+        .alert > ul {
+            margin-bottom: 0;
+        }
+
+        .alert > p + p {
+            margin-top: 5px;
+        }
+
+        .alert-dismissable,
+        .alert-dismissible {
+            padding-right: 35px;
+        }
+
+        .alert-dismissable .close,
+        .alert-dismissible .close {
+            position: relative;
+            top: -2px;
+            right: -21px;
+            color: inherit;
+        }
+
+        .alert-success {
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+            color: #3c763d;
+        }
+
+        .alert-success hr {
+            border-top-color: #c9e2b3;
+        }
+
+        .alert-success .alert-link {
+            color: #2b542c;
+        }
+
+        .alert-info {
+            background-color: #d9edf7;
+            border-color: #bce8f1;
+            color: #31708f;
+        }
+
+        .alert-info hr {
+            border-top-color: #a6e1ec;
+        }
+
+        .alert-info .alert-link {
+            color: #245269;
+        }
+
+        .alert-warning {
+            background-color: #fcf8e3;
+            border-color: #faebcc;
+            color: #8a6d3b;
+        }
+
+        .alert-warning hr {
+            border-top-color: #f7e1b5;
+        }
+
+        .alert-warning .alert-link {
+            color: #66512c;
+        }
+
+        .alert-danger {
+            background-color: #f2dede;
+            border-color: #ebccd1;
+            color: #a94442;
+        }
+
+        .alert-danger hr {
+            border-top-color: #e4b9c0;
+        }
+
+        .alert-danger .alert-link {
+            color: #843534;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        blockquote {
+            padding: 10px 20px;
+            margin: 0 0 20px;
+            font-size: 17.5px;
+            border-left: 5px solid #eeeeee;
+        }
+
+        blockquote p:last-child,
+        blockquote ul:last-child,
+        blockquote ol:last-child {
+            margin-bottom: 0;
+        }
+
+        blockquote footer,
+        blockquote small,
+        blockquote .small {
+            display: block;
+            font-size: 80%;
+            line-height: 1.42857;
+            color: #777777;
+        }
+
+        blockquote footer:before,
+        blockquote small:before,
+        blockquote .small:before {
+            content: '\2014 \00A0';
+        }
+
+        .blockquote-reverse,
+        blockquote.pull-right {
+            padding-right: 15px;
+            padding-left: 0;
+            border-right: 5px solid #eeeeee;
+            border-left: 0;
+            text-align: right;
+        }
+
+        .blockquote-reverse footer:before,
+        .blockquote-reverse small:before,
+        .blockquote-reverse .small:before,
+        blockquote.pull-right footer:before,
+        blockquote.pull-right small:before,
+        blockquote.pull-right .small:before {
+            content: '';
+        }
+
+        .blockquote-reverse footer:after,
+        .blockquote-reverse small:after,
+        .blockquote-reverse .small:after,
+        blockquote.pull-right footer:after,
+        blockquote.pull-right small:after,
+        blockquote.pull-right .small:after {
+            content: '\00A0 \2014';
+        }
+
+        .list-inline {
+            padding-left: 0;
+            list-style: none;
+            margin-left: -5px;
+        }
+
+        .list-inline > li {
+            display: inline-block;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        .hr-divider {
+            margin: 0 0 .5em 0;
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, .4), rgba(0, 0, 0, .1), rgba(0, 0, 0, 0));
+        }
+
         #activate {
             color: #FFFFFF;
             background: #f89406;
@@ -162,6 +342,7 @@
     </tr>
     </tbody>
 </table>
+
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FAFAFA">
     <tbody>
     <tr>
@@ -199,148 +380,184 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div style="font-size:30px;line-height:29px;">&nbsp;</div>
+                                                <table border="0" cellpadding="10" cellspacing="0"
+                                                       style="margin: .5em 1em">
+                                                    <tr>
+                                                        <td>
+                                                            <small style="line-height: 2em">
+                                                                @if($check->finish_payment == false)
+                                                                    <b style="font-size: 22px">
+                                                                        {{__('lang.mail.content.unpaid')}}</b><br>
+                                                                    {{__('lang.mail.content.unpaid2', ['datetime' => now()->formatLocalized('%d %B %Y – %H:%M')])}}
+                                                                @else
+                                                                    <b style="font-size: 22px">
+                                                                        {{__('lang.mail.content.paid')}}</b><br>
+                                                                    {{__('lang.mail.content.paid2')}}
+                                                                @endif
+                                                            </small>
+                                                        </td>
+                                                    </tr>
+                                                </table>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td align="center" width="660">
-                                                <img src="{{asset('images/mail.jpg')}}"
-                                                     style="display: block;width: 70%" border="0"></td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <div style="font-size:30px;line-height:30px;">&nbsp;</div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td align="center" valign="top"
-                                                style="font-family:helvetica,arial,sans-serif; color:#646464; font-size:14px; line-height:22px;">
-                                                <span
-                                                    style="font-size:22px; font-weight:bold; line-height:26px;">{{__('lang.mail.content.activate')}}</span>
-                                            </td>
-                                        </tr>
                                         </tbody>
                                     </table>
-                                    <table width="660" border="0" align="center" cellspacing="0" cellpadding="0"
-                                           bgcolor="#FFFFFF" class="full-width">
-                                        <tbody>
+                                    @php
+                                        $subtotal = 0;
+                                        $ongkir = 0;
+                                        foreach($data as $row) {
+                                            $cart = $row->getCart;
+                                            $subtotal += ($cart->total - $cart->ongkir);
+                                            $ongkir += $cart->ongkir;
+                                        }
+
+                                        if($check->is_discount == true) {
+                                            $discount = $check->discount;
+                                            $discount_price = $subtotal * $discount / 100;
+                                        } else {
+                                            $discount = 0;
+                                            $discount_price = 0;
+                                        }
+                                    @endphp
+                                    <table bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" width="660"
+                                           align="center">
                                         <tr>
-                                            <td>
-                                                <div style="font-size:20px;line-height:20px;">&nbsp;</div>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-
-                                    <!-- BEGIN Body Content -->
-
-                                    <table width="660" border="0" align="center" cellspacing="0" cellpadding="0"
-                                           bgcolor="#FFFFFF" class="full-width">
-                                        <tbody>
-                                        <tr>
-                                            <td align="center" valign="top" style="font-family:helvetica,arial,sans-serif;
-                color:#646464; font-size:16px; line-height:22px;
-                padding-left:20px; padding-right:20px" class="body">
-                                                {!! __('lang.mail.content.activate2') !!}
-                                                <strong>{{$user->email}}</strong> {{__('lang.mail.content.activate3')}}
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-
-                                    <!-- Body Content END-->
-
-                                    <table width="660" border="0" align="center" cellspacing="0" cellpadding="0"
-                                           bgcolor="#FFFFFF" class="full-width">
-                                        <tbody>
-                                        <tr>
-                                            <td>
-                                                <div style="font-size:20px;line-height:20px;">&nbsp;</div>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-
-                                    <table width="660" border="0" align="center" cellspacing="0" cellpadding="0"
-                                           bgcolor="#FFFFFF" class="full-width">
-                                        <tbody>
-
-                                        <tr>
-                                            <td align="center" width="600" class="full-width"
-                                                style="padding-left: 20px; padding-right:20px" valign="top">
-                                                <a class="zoom" id="activate"
-                                                   href="{{route('activate',['verifyToken' => $user->verifyToken,
-                                                   'email' => $user->email])}}" target="_blank">
-                                                    {{__('lang.button.activate')}}</a>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-
-                                    <table width="660" border="0" align="center" cellspacing="0" cellpadding="0"
-                                           bgcolor="#FFFFFF" class="full-width">
-
-                                        <tbody>
-                                        <tr>
-                                            <td>
-                                                <div style="font-size:20px;line-height:19px;">&nbsp;</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="660">
-                                                <div style="border-bottom: 1px solid #e0e0e0; width: 660px; height:2px;"
-                                                     class="full-width"></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div style="font-size:20px;line-height:40px;">&nbsp;</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <table width="660" border="0" align="center" cellspacing="0"
-                                                       cellpadding="0" bgcolor="#FFFFFF" class="full-width"
-                                                       style="color: #949494">
-                                                    <tbody>
-
-                                                    <tr>
-                                                        <td align="center">
-                                                            <span
-                                                                style="font-family : helvetica, arial; font-weight : bold; font-size: 16px; ">{{__('lang.mail.content.activate4')}}</span>
-                                                        </td>
-                                                    </tr>
-
+                                            <td valign="top" width="60%">
+                                                <table border="0" cellpadding="10" cellspacing="0" width="100%"
+                                                       style="margin-left: 1em">
                                                     <tr>
                                                         <td>
-                                                            <div style="font-size:15px;line-height:15px;">&nbsp;</div>
+                                                            <small>
+                                                                <a style="text-decoration: none;color: #f89406;"
+                                                                   href="{{route('user.download.file',['id'=>encrypt($check->cart_id),'file'=>'invoice'])}}">
+                                                                    #<b>{{$code}}</b></a>
+                                                            </small>
+                                                            <hr class="hr-divider">
+                                                            <table>
+                                                                <tr>
+                                                                    <td><b>Subtotal ({{__('lang.cart.order.product',
+                                                                    ['qty' => count($data),
+                                                                    's' => count($data) > 1 ? 's' : null])}})</b>
+                                                                    </td>
+                                                                    <td>&emsp;</td>
+                                                                    <td align="right">
+                                                                        <b>Rp{{number_format($subtotal,2,',','.')}}</b>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <b>{{__('lang.cart.summary.discount').' '.$discount.'%'}}</b>
+                                                                    </td>
+                                                                    <td>&emsp;</td>
+                                                                    <td align="right">
+                                                                        <b>-Rp{{number_format($discount_price,2,',','.')}}</b>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <b>
+                                                                            {{__('lang.product.form.summary.ongkir')}}
+                                                                        </b>
+                                                                    </td>
+                                                                    <td>&emsp;</td>
+                                                                    <td align="right">
+                                                                        <b>Rp{{number_format($ongkir,2,',','.')}}</b>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr style="border-top: 1px solid #eee">
+                                                                    <td><b>TOTAL</b></td>
+                                                                    <td>&emsp;</td>
+                                                                    <td align="right" style="font-size: large">
+                                                                        <b>Rp{{number_format($subtotal - $discount_price + $ongkir,2,',','.')}}</b>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
                                                         </td>
                                                     </tr>
-
+                                                </table>
+                                            </td>
+                                            <td valign="top" width="40%">
+                                                <table border="0" cellpadding="10" cellspacing="0" width="100%"
+                                                       style="margin-left: 1em">
+                                                    @if($check->finish_payment == false)
+                                                        <tr>
+                                                            <td>
+                                                                <small><b>{{__('lang.mail.content.unpaid3')}}</b></small>
+                                                                <hr class="hr-divider">
+                                                                <span>
+                                                                    {{now()->formatLocalized('%d %B %Y – %H:%M')}}
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                    @endif
                                                     <tr>
-                                                        <td align="center">
-                                                            <span class="pw-note" style="font-family: helvetica, arial;
-                                                         font-size: 15px;
-                                                         line-height: 22px;
-                                                         display: block;">
-                                                                {!! __('lang.mail.content.reset3') !!}
-                                                            </span>
+                                                        <td>
+                                                            <small><b>{{__('lang.mail.content.payment')}}</b></small>
+                                                            <hr class="hr-divider">
+                                                            <span>{{$check->finish_payment == false ? __('lang.mail.content.payment2') : __('lang.mail.content.payment3')}}</span>
                                                         </td>
                                                     </tr>
-
-                                                    <tr>
-                                                        <td class="show">
-                                                            <div style="font-size:20px;line-height:0px;" class="line40">
-                                                                &nbsp;
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-
-                                                    </tbody>
                                                 </table>
                                             </td>
                                         </tr>
-                                        </tbody>
+                                    </table>
+                                    <table bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" width="660"
+                                           align="center">
+                                        <tr>
+                                            <td>
+                                                <div style="font-size:20px;line-height:20px;">&nbsp;</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div style="font-size:20px;line-height:20px;">&nbsp;</div>
+                                            </td>
+                                        </tr>
+                                        @if($check->finish_payment == false)
+                                            <tr>
+                                                <td>
+                                                    <div class="alert alert-warning text-center">
+                                                        {!! __('lang.mail.content.alert') !!}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                        <tr>
+                                            <td>
+                                                <div style="font-size:20px;line-height:20px;">&nbsp;</div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" width="660"
+                                           align="center" style="border-top: 2px solid #f3f3f3">
+                                        <tr>
+                                            <td>
+                                                <table border="0" cellpadding="10" cellspacing="0"
+                                                       style="margin: .5em 1em">
+                                                    <tr>
+                                                        <td>
+                                                            <small style="line-height: 2em">
+                                                                <b style="font-size: 20px">
+                                                                    {{__('lang.mail.content.dashboard')}}</b><br>
+                                                                {{__('lang.mail.content.dashboard2')}}
+                                                            </small>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="center" width="600" class="full-width"
+                                                            style="padding-left: 20px; padding-right:20px" valign="top">
+                                                            <a class="zoom" id="activate" target="_blank"
+                                                               href="{{route('user.dashboard')}}">DASHBOARD</a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
                                     </table>
                                 </td>
                                 <td width="2" bgcolor="#f3f3f3"></td>

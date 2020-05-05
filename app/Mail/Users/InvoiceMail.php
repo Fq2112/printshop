@@ -36,16 +36,17 @@ class InvoiceMail extends Mailable
     {
         $check = $this->check;
         $data = $this->data;
+        $code = $this->code;
 
         if ($check->finish_payment == false) {
-            $subject = __('lang.mail.subject.unpaid', ['code' => $this->code]);
+            $subject = __('lang.mail.subject.unpaid', ['code' => $code]);
         } else {
-            $subject = __('lang.mail.subject.paid', ['code' => $this->code,
+            $subject = __('lang.mail.subject.paid', ['code' => $code,
                 'datetime' => Carbon::parse($check->created_at)->formatLocalized('%d %B %Y – %H:%M')]);
         }
 
         return $this->from(env('MAIL_USERNAME'), __('lang.title'))->subject($subject)
-            ->view('emails.users.invoice', compact('data', 'check'))
-            ->attach(public_path('storage/users/order/design/' . $check->user_id . '/' . $this->filename));
+            ->view('emails.users.invoice', compact('code', 'data', 'check'))
+            ->attach(public_path('storage/users/order/invoice/' . $check->user_id . '/' . $this->filename));
     }
 }

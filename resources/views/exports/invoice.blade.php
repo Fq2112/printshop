@@ -397,8 +397,10 @@
         @endforeach
         @php
             if($check->is_discount == true) {
-                $discount_price = $subtotal * $check->discount / 100;
+                $discount = $check->discount;
+                $discount_price = $subtotal * $discount / 100;
             } else {
+                $discount = 0;
                 $discount_price = 0;
             }
         @endphp
@@ -406,13 +408,11 @@
             <td class="right" colspan="4">SUBTOTAL</td>
             <td class="right">Rp{{number_format($subtotal,2,',','.')}}</td>
         </tr>
-        @if($check->is_discount == true)
-            <tr class="ttl">
-                <td class="right uppercase"
-                    colspan="4">{{__('lang.cart.summary.discount').' '.$check->discount.'%'}}</td>
-                <td class="right">-Rp{{number_format($discount_price,2,',','.')}}</td>
-            </tr>
-        @endif
+        <tr class="ttl">
+            <td class="right uppercase"
+                colspan="4">{{__('lang.cart.summary.discount').' '.$discount.'%'}}</td>
+            <td class="right">-Rp{{number_format($discount_price,2,',','.')}}</td>
+        </tr>
         <tr class="ttl">
             <td class="right uppercase" colspan="4">{{__('lang.product.form.summary.ongkir')}}</td>
             <td class="right">Rp{{number_format($ongkir,2,',','.')}}</td>
