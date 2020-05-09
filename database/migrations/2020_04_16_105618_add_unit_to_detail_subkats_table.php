@@ -18,6 +18,7 @@ class AddUnitToDetailSubkatsTable extends Migration
             $table->foreign('unit_id')->references('id')
                 ->on('units')->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
+            $table->string('price')->default('10000');
         });
     }
 
