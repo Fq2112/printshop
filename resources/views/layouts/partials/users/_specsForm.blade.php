@@ -23,6 +23,7 @@
                                        for="type-{{$row->id}}">
                                     <input id="type-{{$row->id}}" class="card-rb" name="type" type="radio"
                                            value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->type_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -85,6 +86,7 @@
                                        for="cover_material-{{$row->id}}">
                                     <input id="cover_material-{{$row->id}}" class="card-rb" name="cover_material"
                                            type="radio" value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->material_cover_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -143,6 +145,7 @@
                                        for="cover_side-{{$row->id}}">
                                     <input id="cover_side-{{$row->id}}" class="card-rb" name="cover_side" type="radio"
                                            value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->side_cover_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -207,6 +210,7 @@
                                        for="cover_lamination-{{$row->id}}">
                                     <input id="cover_lamination-{{$row->id}}" class="card-rb" name="cover_lamination"
                                            type="radio" value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->cover_lamination_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -270,6 +274,7 @@
                                        for="materials-{{$row->id}}">
                                     <input id="materials-{{$row->id}}" class="card-rb" name="materials"
                                            type="radio" value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->material_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -328,6 +333,7 @@
                                     <label class="card-label" for="material_color-{{$row->id}}">
                                         <input id="material_color-{{$row->id}}" class="card-rb" name="material_color"
                                                type="radio" value="{{$row->id}}" data-name="{{$row->name}}"
+                                               data-price="{{round(rand(25000,50000))}}"
                                             {{!is_null($cart) && $cart->material_color_id == $row->id ? 'checked' :''}}>
                                         <div class="card card-input">
                                             <div class="row no-gutters">
@@ -349,6 +355,7 @@
                                            for="material_color-{{$row->id}}">
                                         <input id="material_color-{{$row->id}}" class="card-rb" name="material_color"
                                                type="radio" value="{{$row->id}}" data-name="{{$row->name}}"
+                                               data-price="{{round(rand(25000,50000))}}"
                                             {{!is_null($cart) && $cart->material_color_id == $row->id ? 'checked' :''}}>
                                         <div class="card card-input h-100">
                                             <div
@@ -408,6 +415,7 @@
                                     <label class="card-label" for="color-{{$row->id}}">
                                         <input id="color-{{$row->id}}" class="card-rb" name="color" type="radio"
                                                value="{{$row->id}}" data-name="{{$row->name}}"
+                                               data-price="{{round(rand(25000,50000))}}"
                                             {{!is_null($cart) && $cart->color_id == $row->id ? 'checked' : ''}}>
                                         <div class="card card-input">
                                             <div class="row no-gutters">
@@ -430,6 +438,7 @@
                                            for="color-{{$row->id}}">
                                         <input id="color-{{$row->id}}" class="card-rb" name="color" type="radio"
                                                value="{{$row->id}}" data-name="{{$row->name}}"
+                                               data-price="{{round(rand(25000,50000))}}"
                                             {{!is_null($cart) && $cart->color_id == $row->id ? 'checked' : ''}}>
                                         <div class="card card-input h-100">
                                             <div
@@ -489,6 +498,7 @@
                                        for="print_method-{{$row->id}}">
                                     <input id="print_method-{{$row->id}}" class="card-rb" name="print_method"
                                            type="radio" value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->print_method_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -553,6 +563,7 @@
                                        for="size-{{$row->id}}">
                                     <input id="size-{{$row->id}}" class="card-rb" name="size" type="radio"
                                            value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->size_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -636,6 +647,7 @@
                                        for="side-{{$row->id}}">
                                     <input id="side-{{$row->id}}" class="card-rb" name="side" type="radio"
                                            value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->side_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -699,6 +711,7 @@
                                        for="holder-{{$row->id}}">
                                     <input id="holder-{{$row->id}}" class="card-rb" name="holder" type="radio"
                                            value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->holder_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -762,6 +775,7 @@
                                        for="lid-{{$row->id}}">
                                     <input id="lid-{{$row->id}}" class="card-rb" name="lid" type="radio"
                                            value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->lid_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -825,6 +839,7 @@
                                        for="corner-{{$row->id}}">
                                     <input id="corner-{{$row->id}}" class="card-rb" name="corner" type="radio"
                                            value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->edge_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -888,6 +903,7 @@
                                        for="folding-{{$row->id}}">
                                     <input id="folding-{{$row->id}}" class="card-rb" name="folding" type="radio"
                                            value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->folding_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -952,6 +968,7 @@
                                        for="front_side-{{$row->id}}">
                                     <input id="front_side-{{$row->id}}" class="card-rb" name="front_side" type="radio"
                                            value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->front_side_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -1016,6 +1033,7 @@
                                        for="back_side-{{$row->id}}">
                                     <input id="back_side-{{$row->id}}" class="card-rb" name="back_side" type="radio"
                                            value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->back_side_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -1080,6 +1098,7 @@
                                        for="right_side-{{$row->id}}">
                                     <input id="right_side-{{$row->id}}" class="card-rb" name="right_side" type="radio"
                                            value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->right_side_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -1144,6 +1163,7 @@
                                        for="left_side-{{$row->id}}">
                                     <input id="left_side-{{$row->id}}" class="card-rb" name="left_side" type="radio"
                                            value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->left_side_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -1208,6 +1228,7 @@
                                        for="balance-{{$row->id}}">
                                     <input id="balance-{{$row->id}}" class="card-rb" name="balance" type="radio"
                                            value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->balance_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -1272,6 +1293,7 @@
                                        for="copies-{{$row->id}}">
                                     <input id="copies-{{$row->id}}" class="card-rb" name="copies" type="radio"
                                            value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->copies_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -1336,6 +1358,7 @@
                                        for="page-{{$row->id}}">
                                     <input id="page-{{$row->id}}" class="card-rb" name="page" type="radio"
                                            value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->page_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -1399,6 +1422,7 @@
                                        for="front_cover-{{$row->id}}">
                                     <input id="front_cover-{{$row->id}}" class="card-rb" name="front_cover" type="radio"
                                            value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->front_cover_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -1461,6 +1485,7 @@
                                        for="back_cover-{{$row->id}}">
                                     <input id="back_cover-{{$row->id}}" class="card-rb" name="back_cover" type="radio"
                                            value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->back_cover_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -1523,6 +1548,7 @@
                                        for="orientation-{{$row->id}}">
                                     <input id="orientation-{{$row->id}}" class="card-rb" name="orientation" type="radio"
                                            value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->orientation_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -1585,6 +1611,7 @@
                                        for="binding-{{$row->id}}">
                                     <input id="binding-{{$row->id}}" class="card-rb" name="binding" type="radio"
                                            value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->binding_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -1648,6 +1675,7 @@
                                        for="lamination-{{$row->id}}">
                                     <input id="lamination-{{$row->id}}" class="card-rb" name="lamination" type="radio"
                                            value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->lamination_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -1708,6 +1736,7 @@
                                        for="finishing-{{$row->id}}">
                                     <input id="finishing-{{$row->id}}" class="card-rb" name="finishing" type="radio"
                                            value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->finishing_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div
@@ -1768,6 +1797,7 @@
                                        for="extra-{{$row->id}}">
                                     <input id="extra-{{$row->id}}" class="card-rb" name="extra" type="radio"
                                            value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{round(rand(25000,50000))}}"
                                         {{!is_null($cart) && $cart->extra_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div

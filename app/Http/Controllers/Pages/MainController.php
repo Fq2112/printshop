@@ -165,7 +165,7 @@ class MainController extends Controller
                 $specs = $data->getSubkatSpecs;
                 $guidelines = $data->guidelines;
 
-                return view('pages.main.form-pemesanan', compact('data', 'provinces', 'specs',
+                return view('pages.main.form-pemesanan', compact('clust', 'data', 'provinces', 'specs',
                     'guidelines', 'addresses', 'cart', 'shipping'));
             }
 
@@ -174,7 +174,7 @@ class MainController extends Controller
             $specs = $data->getClusterSpecs;
             $guidelines = $data->getSubKategori->guidelines;
 
-            return view('pages.main.form-pemesanan', compact('data', 'provinces', 'specs',
+            return view('pages.main.form-pemesanan', compact('clust', 'data', 'provinces', 'specs',
                 'guidelines', 'addresses', 'cart', 'shipping'));
         }
 

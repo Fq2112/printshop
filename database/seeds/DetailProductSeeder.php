@@ -1275,5 +1275,9 @@ class DetailProductSeeder extends Seeder
             'print_method_ids' => ['5'],
             'unit_id' => 1,
         ]);
+
+        foreach (\App\Models\DetailProduct::all() as $row) {
+            $row->update(['price' => round(rand(25000, 50000))]);
+        }
     }
 }
