@@ -8,7 +8,8 @@
 
     @if(Auth::user()->isRoot() || Auth::user()->isOwner())
         <li class="dropdown {{\Illuminate\Support\Facades\Request::is('scott.royce/inbox*') ? 'active' : ''}}">
-            <a href="{{route('admin.inbox')}}" class="nav-link"><i class="fas fa-envelope"></i><span>{{__('admin.sidebar.inbox')}}</span></a>
+            <a href="{{route('admin.inbox')}}" class="nav-link"><i
+                    class="fas fa-envelope"></i><span>{{__('admin.sidebar.inbox')}}</span></a>
         </li>
         <li class="dropdown {{\Illuminate\Support\Facades\Request::is('scott.royce/invoice*') ? 'active' : ''}}">
             <a href="{{route('admin.invoice')}}" class="nav-link"><i class="fas fa-money-bill"></i><span>Invoices</span></a>
@@ -25,11 +26,107 @@
             <i class="fas fa-blog"></i><span>Blog</span></a>
         <ul class="dropdown-menu">
             <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/categories*') ?
-            'active' : ''}}"><a href="{{route('table.blog.categories')}}" class="nav-link">{{__('admin.sidebar.blog-category')}}</a></li>
+            'active' : ''}}"><a href="{{route('table.blog.categories')}}"
+                                class="nav-link">{{__('admin.sidebar.blog-category')}}</a></li>
             <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
-            'active' : ''}}"><a href="{{route('table.blog.posts')}}" class="nav-link">{{__('admin.sidebar.blog-post')}}</a></li>
+            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+                                class="nav-link">{{__('admin.sidebar.blog-post')}}</a></li>
         </ul>
     </li>
+    @if(Auth::user()->isRoot() || Auth::user()->isOwner())
+
+        <li class="dropdown {{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog*') ? 'active' : ''}}">
+            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+                <i class="fas fa-database"></i><span>Category</span></a>
+            <ul class="dropdown-menu">
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/categories*') ?
+            'active' : ''}}"><a href="{{route('table.categories.main')}}"
+                                class="nav-link">Main Category</a></li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
+            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+                                class="nav-link">Sub-Category</a></li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
+            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+                                class="nav-link">Cluster-Category</a></li>
+            </ul>
+        </li>
+
+        <li class="dropdown {{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog*') ? 'active' : ''}}">
+            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+                <i class="fas fa-database"></i><span>Specification</span></a>
+            <ul class="dropdown-menu">
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/categories*') ?
+            'active' : ''}}"><a href="{{route('table.blog.categories')}}"
+                                class="nav-link">Back Side</a></li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
+            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+                                class="nav-link">Balances</a></li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
+            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+                                class="nav-link">Colors</a></li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
+            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+                                class="nav-link">Copies</a></li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
+            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+                                class="nav-link">Edges</a></li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
+            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+                                class="nav-link">Finishing</a></li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
+            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+                                class="nav-link">Folding</a></li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
+            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+                                class="nav-link">Front Side</a></li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
+            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+                                class="nav-link">Lamination</a></li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
+            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+                                class="nav-link">Lid</a></li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
+            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+                                class="nav-link">Materials</a></li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
+            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+                                class="nav-link">Pages</a></li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
+            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+                                class="nav-link">Printing Method</a></li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
+            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+                                class="nav-link">Right & Left Side</a></li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
+            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+                                class="nav-link">Side</a></li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
+            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+                                class="nav-link">Size</a></li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
+            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+                                class="nav-link">Product Type</a></li>
+            </ul>
+        </li>
+
+        <li class="dropdown {{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog*') ? 'active' : ''}}">
+            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+                <i class="fas fa-database"></i><span>Miscellaneous</span></a>
+            <ul class="dropdown-menu">
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/categories*') ?
+            'active' : ''}}"><a href="{{route('table.blog.categories')}}"
+                                class="nav-link">Promo Code</a></li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
+            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+                                class="nav-link">Privacy & Term</a></li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
+            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+                                class="nav-link">Maintenance</a></li>
+            </ul>
+        </li>
+
+    @endif
+
 </ul>
 
 <div class="mt-4 mb-4 p-3 hide-sidebar-mini">

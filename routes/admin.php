@@ -77,6 +77,34 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
 
     Route::group(['namespace' => 'DataMaster', 'prefix' => 'tables'], function () {
 
+        Route::group(['prefix' => 'categories'], function () {
+
+            Route::get('/main', [
+                'uses' => 'CategoryController@show_main',
+                'as' => 'table.categories.main'
+            ]);
+
+            Route::get('edit/{id}', [
+                'uses' => 'CategoryController@editCategory',
+                'as' => 'edit.categories.posts'
+            ]);
+
+            Route::post('create', [
+                'uses' => 'CategoryController@createCategory',
+                'as' => 'create.categories'
+            ]);
+
+            Route::put('update', [
+                'uses' => 'CategoryController@updateCategory',
+                'as' => 'update.categories'
+            ]);
+
+            Route::get('{id}/delete', [
+                'uses' => 'CategoryController@deleteCategory',
+                'as' => 'delete.categories'
+            ]);
+        });
+
         Route::group(['prefix' => 'blog', 'middleware' => ['admin']], function () {
 
             Route::group(['prefix' => 'categories'], function () {
