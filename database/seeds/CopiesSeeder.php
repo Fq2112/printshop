@@ -47,7 +47,8 @@ class CopiesSeeder extends Seeder
                 'description' => [
                     'en' => !is_null($DATUM['description']) ? $DATUM['description'][1] : null,
                     'id' => !is_null($DATUM['description']) ? $DATUM['description'][0] : null
-                ]
+                ],
+                'price' => round(rand(5000, 15000))
             ]);
         }
     }

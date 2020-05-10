@@ -276,7 +276,8 @@ class FinishingSeeder extends Seeder
                 'description' => [
                     'en' => !is_null($item['description']) ? $item['description'][1] : null,
                     'id' => !is_null($item['description']) ? $item['description'][0] : null
-                ]
+                ],
+                'price' => round(rand(5000, 15000))
             ]);
         }
     }

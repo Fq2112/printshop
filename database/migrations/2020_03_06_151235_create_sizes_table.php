@@ -18,6 +18,7 @@ class CreateSizesTable extends Migration
             $table->string('name');
             $table->text('image')->nullable();
             $table->text('description')->nullable();
+            $table->string('price')->default('10000');
             $table->timestamps();
         });
     }

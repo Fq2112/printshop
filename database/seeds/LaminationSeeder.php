@@ -81,7 +81,8 @@ class LaminationSeeder extends Seeder
                 'description' => [
                     'id' => $item['description'][0],
                     'en' => $item['description'][1],
-                ]
+                ],
+                'price' => round(rand(5000, 15000))
             ]);
         }
     }

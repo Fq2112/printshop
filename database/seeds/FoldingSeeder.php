@@ -46,7 +46,8 @@ class FoldingSeeder extends Seeder
                 'description' => [
                     'en' => $DATUM['description'][1],
                     'id' => $DATUM['description'][0]
-                ]
+                ],
+                'price' => round(rand(1000, 1500))
             ]);
         }
     }
