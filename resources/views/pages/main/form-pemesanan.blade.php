@@ -274,7 +274,13 @@
             <span>{{$data->caption}}</span>
             <ol class="breadcrumb text-uppercase">
                 <li class="breadcrumb-item"><a href="{{route('beranda')}}">{{__('lang.breadcrumb.home')}}</a></li>
-                <li class="breadcrumb-item"><a href="{{URL::current()}}">{{__('lang.breadcrumb.product')}}</a></li>
+                @if(!is_null($clust))
+                    <li class="breadcrumb-item">
+                        <a href="{{route('produk', ['produk' => $data->getSubKategori->permalink])}}">
+                            {{$data->getSubKategori->name}}</a></li>
+                @else
+                    <li class="breadcrumb-item"><a href="{{URL::current()}}">{{__('lang.breadcrumb.product')}}</a></li>
+                @endif
                 <li class="breadcrumb-item active" aria-current="page">{{$data->name}}</li>
             </ol>
         </div>
@@ -522,7 +528,8 @@
     <script>
         var collapse = $('.panel-collapse'), range_slider = $("#range-quantity"),
             btn_upload = $("#btn_upload"), upload_input = $("#file"), link_input = $("#link"),
-            qty = '{{!is_null($cart) ? $cart->qty : 0}}', price_pcs = '{{!is_null($cart) ? $cart->price_pcs : 25000}}',
+            qty = '{{!is_null($cart) ? $cart->qty : 0}}',
+            price_pcs = parseInt('{{!is_null($cart) ? $cart->price_pcs : $specs->price}}'),
             str_unit = ' {{$specs->getUnit->name}}', production_day = 3, ongkir = 0, etd = '', str_etd = '', total = 0;
 
         $(function () {
@@ -599,6 +606,36 @@
             $(".show-finishing").text($("input[name='finishing']:checked").data('name'));
             $(".show-extra").text($("input[name='extra']:checked").data('name'));
 
+            price_pcs +=
+                parseInt($("input[name='type']").length ? $("input[name='type']:checked").data('price') : 0) +
+                parseInt($("input[name='cover_material']").length ? $("input[name='cover_material']:checked").data('price') : 0) +
+                parseInt($("input[name='cover_side']").length ? $("input[name='cover_side']:checked").data('price') : 0) +
+                parseInt($("input[name='cover_lamination']").length ? $("input[name='cover_lamination']:checked").data('price') : 0) +
+                parseInt($("input[name='materials']").length ? $("input[name='materials']:checked").data('price') : 0) +
+                parseInt($("input[name='material_color']").length ? $("input[name='material_color']:checked").data('price') : 0) +
+                parseInt($("input[name='color']").length ? $("input[name='color']:checked").data('price') : 0) +
+                parseInt($("input[name='print_method']").length ? $("input[name='print_method']:checked").data('price') : 0) +
+                parseInt($("input[name='size']").length ? $("input[name='size']:checked").data('price') : 0) +
+                parseInt($("input[name='side']").length ? $("input[name='side']:checked").data('price') : 0) +
+                parseInt($("input[name='holder']").length ? $("input[name='holder']:checked").data('price') : 0) +
+                parseInt($("input[name='lid']").length ? $("input[name='lid']:checked").data('price') : 0) +
+                parseInt($("input[name='corner']").length ? $("input[name='corner']:checked").data('price') : 0) +
+                parseInt($("input[name='folding']").length ? $("input[name='folding']:checked").data('price') : 0) +
+                parseInt($("input[name='front_side']").length ? $("input[name='front_side']:checked").data('price') : 0) +
+                parseInt($("input[name='back_side']").length ? $("input[name='back_side']:checked").data('price') : 0) +
+                parseInt($("input[name='right_side']").length ? $("input[name='right_side']:checked").data('price') : 0) +
+                parseInt($("input[name='left_side']").length ? $("input[name='left_side']:checked").data('price') : 0) +
+                parseInt($("input[name='balance']").length ? $("input[name='balance']:checked").data('price') : 0) +
+                parseInt($("input[name='copies']").length ? $("input[name='copies']:checked").data('price') : 0) +
+                parseInt($("input[name='page']").length ? $("input[name='page']:checked").data('price') : 0) +
+                parseInt($("input[name='front_cover']").length ? $("input[name='front_cover']:checked").data('price') : 0) +
+                parseInt($("input[name='back_cover']").length ? $("input[name='back_cover']:checked").data('price') : 0) +
+                parseInt($("input[name='orientation']").length ? $("input[name='orientation']:checked").data('price') : 0) +
+                parseInt($("input[name='binding']").length ? $("input[name='binding']:checked").data('price') : 0) +
+                parseInt($("input[name='lamination']").length ? $("input[name='lamination']:checked").data('price') : 0) +
+                parseInt($("input[name='finishing']").length ? $("input[name='finishing']:checked").data('price') : 0) +
+                parseInt($("input[name='extra']").length ? $("input[name='extra']:checked").data('price') : 0)
+
             @if(!is_null($shipping))
             getShipping('{{$shipping->city_id}}', 'address', '{{$shipping->is_main == false ?
             $shipping->getOccupancy->name : $shipping->getOccupancy->name.' ['.__('lang.profile.main-address').']'}}');
@@ -607,21 +644,12 @@
         });
 
         function productSpecs(check, spec, custom) {
-            var spec_val = $("#" + spec).data('name'), str_spec = '';
+            var spec_val = $("#" + spec).data('name'), spec_price = $("#" + spec).data('price'), str_spec = '';
             resetter(0);
             $("#card-shipping").hide();
 
-            if (check == 'balance') {
-                var val = parseInt(spec_val);
-                str_spec = 'Rp' + thousandSeparator(val) + ',00';
-                if (val > 0) {
-                    price_pcs = parseInt('25000') + val;
-                } else {
-                    price_pcs = parseInt('25000');
-                }
-            } else {
-                str_spec = spec_val;
-            }
+            price_pcs = parseInt('{{$specs->price}}') + parseInt(spec_price);
+            str_spec = check == 'balance' ? 'Rp' + thousandSeparator(parseInt(spec_val)) + ',00' : spec_val;
 
             if (custom == '1') {
                 var length = $("#length"), width = $("#width");
@@ -739,11 +767,11 @@
 
         function resetter(check, quantity) {
             if (check == 1) {
-                total = (parseInt(quantity) * parseInt(price_pcs)) + ongkir;
+                total = (parseInt(quantity) * price_pcs) + ongkir;
                 $(".show-quantity").text(quantity + str_unit);
-                $(".show-price").text("Rp" + thousandSeparator(parseInt(price_pcs)) + ",00");
+                $(".show-price").text("Rp" + thousandSeparator(price_pcs) + ",00");
                 $(".show-production").text(moment().add(production_day, 'days').format('DD MMM YYYY'));
-                $("#price_pcs").val(parseInt(price_pcs));
+                $("#price_pcs").val(price_pcs);
                 $("#production_finished").val(moment().add(production_day, 'days').format('YYYY-MM-DD'));
                 $(".show-total").text("Rp" + thousandSeparator(total) + ",00");
 

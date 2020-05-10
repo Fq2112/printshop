@@ -75,7 +75,7 @@
                                         <h4 class="text-center" style="color: #f89406">
                                             {{$row->name}}</h4></a>
                                     <h5 class="text-center mb-2" style="text-transform: none">
-                                        {{__('lang.product.price', ['price' => number_format(25000,2,',','.')])}}
+                                        {{__('lang.product.price', ['price' => number_format($row->getClusterSpecs->price,2,',','.')])}}
                                     </h5>
                                     <div class="divider divider-center mt-1 mb-1"><i class="icon-circle"></i></div>
                                     {!! $row->features !!}
