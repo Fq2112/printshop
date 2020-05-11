@@ -575,9 +575,9 @@
     <script>
         var collapse = $('.panel-collapse'), range_slider = $("#range-quantity"),
             btn_upload = $("#btn_upload"), upload_input = $("#file"), link_input = $("#link"),
-            range_max = 100, qty = parseInt('{{!is_null($cart) ? $cart->qty : 0}}'),
+            range_max = 100, qty = Number('{{!is_null($cart) ? $cart->qty : 0}}'),
             pricing_specs = 0, disc_1 = 0, disc_2 = 0, disc_3 = 0,
-            price_pcs = parseInt('{{!is_null($cart) ? $cart->price_pcs : $specs->price}}'),
+            price_pcs = Number('{{!is_null($cart) ? $cart->price_pcs : $specs->price}}'),
             str_unit = ' {{$specs->getUnit->name}}', production_day = 3, ongkir = 0, etd = '', str_etd = '', total = 0;
 
         $(function () {
@@ -600,7 +600,7 @@
 
                             if (qty >= 1 && qty <= 20) {
                                 pricing_specs = 0;
-                                price_pcs = parseInt('{{!is_null($cart) ? $cart->price_pcs : $specs->price}}');
+                                price_pcs = Number('{{!is_null($cart) ? $cart->price_pcs : $specs->price}}');
                                 setPrice();
                             } else if (qty >= 21 && qty <= 50) {
                                 price_pcs = disc_1;
@@ -610,11 +610,12 @@
                                 price_pcs = disc_3;
                             }
 
-                            resetter(1, qty);
+                            resetter(1);
                         }
 
                     } else {
                         resetter(0);
+                        setPrice();
                         $("#card-shipping").hide();
                     }
                 }
@@ -681,7 +682,7 @@
             @if(!is_null($shipping))
             getShipping('{{$shipping->city_id}}', 'address', '{{$shipping->is_main == false ?
             $shipping->getOccupancy->name : $shipping->getOccupancy->name.' ['.__('lang.profile.main-address').']'}}');
-            resetter(1, qty);
+            resetter(1);
             @endif
         });
 
@@ -689,19 +690,21 @@
             var spec = $(this).attr('for'),
                 check = $(this).find('input[type=radio]').attr('name'),
                 custom = $(this).find('input[type=radio]').val() == 90 ? 1 : 0,
-                spec_val = $("#" + spec).data('name'), spec_price = $("#" + spec).data('price'), str_spec = '';
+                spec_val = $("#" + spec).data('name'), str_spec = '';
 
-            resetter(0);
             $("#card-shipping").hide();
-            str_spec = check == 'balance' ? 'Rp' + number_format(parseInt(spec_val), 2, ',', '.') : spec_val;
+            str_spec = check == 'balance' ? 'Rp' + number_format(Number(spec_val), 2, ',', '.') : spec_val;
 
-            if (custom == '1') {
+            if (custom == 1) {
                 var length = $("#length"), width = $("#width");
                 $("#custom_size").show();
 
-                $("#length, #width").on("keyup", function () {
+                $("#length, #width").on("keyup", function (e) {
                     if (parseInt(length.val()) > 0 && parseInt(width.val()) > 0) {
                         $("#custom_size button").removeAttr('disabled');
+                        if (e.keyCode === 13) {
+                            $("#custom_size button").click();
+                        }
                     } else {
                         $("#custom_size button").attr('disabled', 'disabled');
                     }
@@ -710,22 +713,28 @@
                 $("#custom_size button").on("click", function () {
                     $(".show-" + check).text(str_spec + " (" + length.val() + " x " + width.val() + " cm)");
                     $('#collapse-' + check).collapse('toggle');
+                    resetter(0);
+                    setPrice();
                 });
 
-            } else if (custom == '0') {
+            } else if (custom == 0) {
                 $("#custom_size").hide();
                 $(".show-" + check).text(str_spec);
-                $('#collapse-' + check).collapse('toggle')
+                $('#collapse-' + check).collapse('toggle');
+                resetter(0);
+                setPrice();
 
             } else {
                 $(".show-" + check).text(str_spec);
                 $('#collapse-' + check).collapse('toggle');
+                resetter(0);
+                setPrice();
             }
 
             $('html,body').animate({scrollTop: $('#collapse-' + check).parents('#accordion').offset().top}, 0);
         });
 
-        function resetter(check, quantity) {
+        function resetter(check) {
             if (check == 1) {
                 total = (qty * price_pcs) + ongkir;
                 $(".show-quantity").text(qty + str_unit);
@@ -747,8 +756,7 @@
                 qty = 0;
                 ongkir = 0;
                 pricing_specs = 0;
-                price_pcs = parseInt('{{!is_null($cart) ? $cart->price_pcs : $specs->price}}');
-                setPrice();
+                price_pcs = Number('{{!is_null($cart) ? $cart->price_pcs : $specs->price}}');
                 total = 0;
 
                 $(".show-address, .show-city, .show-quantity, .show-price, .show-production, .show-ongkir, .show-delivery, .show-received, .show-total").html('&ndash;');
@@ -761,34 +769,42 @@
 
         function setPrice() {
             pricing_specs +=
-                parseInt($("input[name='type']").length ? $("input[name='type']:checked").data('price') : 0) +
-                parseInt($("input[name='cover_material']").length ? $("input[name='cover_material']:checked").data('price') : 0) +
-                parseInt($("input[name='cover_side']").length ? $("input[name='cover_side']:checked").data('price') : 0) +
-                parseInt($("input[name='cover_lamination']").length ? $("input[name='cover_lamination']:checked").data('price') : 0) +
-                parseInt($("input[name='materials']").length ? $("input[name='materials']:checked").data('price') : 0) +
-                parseInt($("input[name='material_color']").length ? $("input[name='material_color']:checked").data('price') : 0) +
-                parseInt($("input[name='color']").length ? $("input[name='color']:checked").data('price') : 0) +
-                parseInt($("input[name='print_method']").length ? $("input[name='print_method']:checked").data('price') : 0) +
-                parseInt($("input[name='size']").length ? $("input[name='size']:checked").data('price') : 0) +
-                parseInt($("input[name='side']").length ? $("input[name='side']:checked").data('price') : 0) +
-                parseInt($("input[name='holder']").length ? $("input[name='holder']:checked").data('price') : 0) +
-                parseInt($("input[name='lid']").length ? $("input[name='lid']:checked").data('price') : 0) +
-                parseInt($("input[name='corner']").length ? $("input[name='corner']:checked").data('price') : 0) +
-                parseInt($("input[name='folding']").length ? $("input[name='folding']:checked").data('price') : 0) +
-                parseInt($("input[name='front_side']").length ? $("input[name='front_side']:checked").data('price') : 0) +
-                parseInt($("input[name='back_side']").length ? $("input[name='back_side']:checked").data('price') : 0) +
-                parseInt($("input[name='right_side']").length ? $("input[name='right_side']:checked").data('price') : 0) +
-                parseInt($("input[name='left_side']").length ? $("input[name='left_side']:checked").data('price') : 0) +
-                parseInt($("input[name='balance']").length ? $("input[name='balance']:checked").data('price') : 0) +
-                parseInt($("input[name='copies']").length ? $("input[name='copies']:checked").data('price') : 0) +
-                parseInt($("input[name='page']").length ? $("input[name='page']:checked").data('price') : 0) +
-                parseInt($("input[name='front_cover']").length ? $("input[name='front_cover']:checked").data('price') : 0) +
-                parseInt($("input[name='back_cover']").length ? $("input[name='back_cover']:checked").data('price') : 0) +
-                parseInt($("input[name='orientation']").length ? $("input[name='orientation']:checked").data('price') : 0) +
-                parseInt($("input[name='binding']").length ? $("input[name='binding']:checked").data('price') : 0) +
-                parseInt($("input[name='lamination']").length ? $("input[name='lamination']:checked").data('price') : 0) +
-                parseInt($("input[name='finishing']").length ? $("input[name='finishing']:checked").data('price') : 0) +
-                parseInt($("input[name='extra']").length ? $("input[name='extra']:checked").data('price') : 0);
+                Number($("input[name='type']").length ? $("input[name='type']:checked").data('price') : 0) +
+                Number($("input[name='cover_material']").length ? $("input[name='cover_material']:checked").data('price') : 0) +
+                Number($("input[name='cover_side']").length ? $("input[name='cover_side']:checked").data('price') : 0) +
+                Number($("input[name='cover_lamination']").length ? $("input[name='cover_lamination']:checked").data('price') : 0) +
+                Number($("input[name='materials']").length ? $("input[name='materials']:checked").data('price') : 0) +
+                Number($("input[name='material_color']").length ? $("input[name='material_color']:checked").data('price') : 0) +
+                Number($("input[name='color']").length ? $("input[name='color']:checked").data('price') : 0) +
+                Number($("input[name='print_method']").length ? $("input[name='print_method']:checked").data('price') : 0) +
+                Number($("input[name='side']").length ? $("input[name='side']:checked").data('price') : 0) +
+                Number($("input[name='holder']").length ? $("input[name='holder']:checked").data('price') : 0) +
+                Number($("input[name='lid']").length ? $("input[name='lid']:checked").data('price') : 0) +
+                Number($("input[name='corner']").length ? $("input[name='corner']:checked").data('price') : 0) +
+                Number($("input[name='folding']").length ? $("input[name='folding']:checked").data('price') : 0) +
+                Number($("input[name='front_side']").length ? $("input[name='front_side']:checked").data('price') : 0) +
+                Number($("input[name='back_side']").length ? $("input[name='back_side']:checked").data('price') : 0) +
+                Number($("input[name='right_side']").length ? $("input[name='right_side']:checked").data('price') : 0) +
+                Number($("input[name='left_side']").length ? $("input[name='left_side']:checked").data('price') : 0) +
+                Number($("input[name='balance']").length ? $("input[name='balance']:checked").data('price') : 0) +
+                Number($("input[name='copies']").length ? $("input[name='copies']:checked").data('price') : 0) +
+                Number($("input[name='page']").length ? $("input[name='page']:checked").data('price') : 0) +
+                Number($("input[name='front_cover']").length ? $("input[name='front_cover']:checked").data('price') : 0) +
+                Number($("input[name='back_cover']").length ? $("input[name='back_cover']:checked").data('price') : 0) +
+                Number($("input[name='orientation']").length ? $("input[name='orientation']:checked").data('price') : 0) +
+                Number($("input[name='binding']").length ? $("input[name='binding']:checked").data('price') : 0) +
+                Number($("input[name='lamination']").length ? $("input[name='lamination']:checked").data('price') : 0) +
+                Number($("input[name='finishing']").length ? $("input[name='finishing']:checked").data('price') : 0) +
+                Number($("input[name='extra']").length ? $("input[name='extra']:checked").data('price') : 0);
+
+            if ($("input[name='size']").length) {
+                if ($("input[name='size']:checked").val() == 90) {
+                    pricing_specs += parseInt($("#length").val()) * parseInt($("#width").val()) *
+                        Number($("input[name='size']:checked").data('price'));
+                } else {
+                    pricing_specs += Number($("input[name='size']:checked").data('price'));
+                }
+            }
 
             price_pcs += pricing_specs;
             disc_1 = price_pcs - (price_pcs * 0.15);
@@ -840,7 +856,7 @@
                                 }
                             });
 
-                            total += parseInt(ongkir);
+                            total += Number(ongkir);
 
                             if (etd.includes('+')) {
                                 str_etd = '&ge; ' + etd.replace('+', '') + ' {{__('lang.product.form.summary.day', ['s' => 's'])}}';

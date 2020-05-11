@@ -474,5 +474,12 @@ class SizeSeeder extends Seeder
                 'price' => round(rand(5000, 60000))
             ]);
         }
+
+        $per_meter = 15000;
+        \App\Models\Size::find(86)->update(['price' => $per_meter * 2]);
+        \App\Models\Size::find(87)->update(['price' => $per_meter * 3]);
+        \App\Models\Size::find(88)->update(['price' => $per_meter * 4]);
+        \App\Models\Size::find(89)->update(['price' => $per_meter * 5]);
+        \App\Models\Size::find(90)->update(['price' => $per_meter / 10000]); // price per cm2
     }
 }
