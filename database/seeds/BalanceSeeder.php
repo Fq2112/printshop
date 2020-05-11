@@ -34,7 +34,7 @@ class BalanceSeeder extends Seeder
                     'en' => !is_null($DATUM['description']) ? $DATUM['description'][1] : null,
                     'id' => !is_null($DATUM['description']) ? $DATUM['description'][0] : null
                 ],
-                'price' => round(rand(5000, 150000))
+                'price' => (int)$DATUM['name'][0]
             ]);
         }
     }

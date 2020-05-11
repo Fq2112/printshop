@@ -175,6 +175,27 @@
             background: rgba(0, 0, 0, 0.4);
         }
 
+        .irs-single, .irs-handle {
+            cursor: grab;
+        }
+
+        .irs-single:focus, .irs-handle:focus,
+        .irs-single:active, .irs-handle:active {
+            cursor: grabbing;
+        }
+
+        .irs-line, .irs-bar {
+            cursor: pointer;
+        }
+
+        #pricing tbody tr:last-child {
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        #pricing th:first-child, #pricing td:first-child {
+            text-align: right;
+        }
+
         .gm-style-iw {
             width: 350px !important;
             top: 15px;
@@ -322,6 +343,32 @@
                                             <small>{{__('lang.product.form.summary.quantity')}}
                                                 <span class="required">*</span></small>
                                             <input id="range-quantity" name="qty" class="input-range-slider">
+                                            <table id="pricing" class="table table-hover table-striped mt-3 mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th>{{__('lang.product.form.summary.quantity')}}</th>
+                                                    <th>{{__('lang.product.form.summary.price', ['unit' => strtok($specs->getUnit->name, '(')])}}</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>1 &ndash; 20 {{$specs->getUnit->name}}</td>
+                                                    <td id="qty-120"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>21 &ndash; 50 {{$specs->getUnit->name}}</td>
+                                                    <td id="qty-2150"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>51 &ndash; 100 {{$specs->getUnit->name}}</td>
+                                                    <td id="qty-51100"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&ge; 100 {{$specs->getUnit->name}}</td>
+                                                    <td id="qty-100"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -528,7 +575,8 @@
     <script>
         var collapse = $('.panel-collapse'), range_slider = $("#range-quantity"),
             btn_upload = $("#btn_upload"), upload_input = $("#file"), link_input = $("#link"),
-            qty = '{{!is_null($cart) ? $cart->qty : 0}}',
+            range_max = 100, qty = parseInt('{{!is_null($cart) ? $cart->qty : 0}}'),
+            pricing_specs = 0, disc_1 = 0, disc_2 = 0, disc_3 = 0,
             price_pcs = parseInt('{{!is_null($cart) ? $cart->price_pcs : $specs->price}}'),
             str_unit = ' {{$specs->getUnit->name}}', production_day = 3, ongkir = 0, etd = '', str_etd = '', total = 0;
 
@@ -537,12 +585,34 @@
                 grid: true,
                 grid_num: 5,
                 min: 0,
-                max: 100,
+                max: range_max,
                 from: qty,
                 postfix: str_unit,
                 onChange: function (data) {
+                    if (data.from > range_max - 1) {
+                        range_max += 100;
+                        range_slider.data("ionRangeSlider").update({max: range_max});
+                    }
+
                     if (data.from > 0) {
-                        resetter(1, data.from);
+                        if (data.from != qty) {
+                            qty = data.from;
+
+                            if (qty >= 1 && qty <= 20) {
+                                pricing_specs = 0;
+                                price_pcs = parseInt('{{!is_null($cart) ? $cart->price_pcs : $specs->price}}');
+                                setPrice();
+                            } else if (qty >= 21 && qty <= 50) {
+                                price_pcs = disc_1;
+                            } else if (qty >= 51 && qty <= 100) {
+                                price_pcs = disc_2;
+                            } else if (qty > 100) {
+                                price_pcs = disc_3;
+                            }
+
+                            resetter(1, qty);
+                        }
+
                     } else {
                         resetter(0);
                         $("#card-shipping").hide();
@@ -595,7 +665,7 @@
             $(".show-back_side").text($("input[name='back_side']:checked").data('name'));
             $(".show-right_side").text($("input[name='right_side']:checked").data('name'));
             $(".show-left_side").text($("input[name='left_side']:checked").data('name'));
-            $(".show-balance").text('Rp' + thousandSeparator($("input[name='balance']:checked").data('name')) + ',00');
+            $(".show-balance").text('Rp' + number_format($("input[name='balance']:checked").data('name'), 2, ',', '.'));
             $(".show-copies").text($("input[name='copies']:checked").data('name'));
             $(".show-page").text($("input[name='page']:checked").data('name'));
             $(".show-front_cover").text($("input[name='front_cover']:checked").data('name'));
@@ -606,50 +676,24 @@
             $(".show-finishing").text($("input[name='finishing']:checked").data('name'));
             $(".show-extra").text($("input[name='extra']:checked").data('name'));
 
-            price_pcs +=
-                parseInt($("input[name='type']").length ? $("input[name='type']:checked").data('price') : 0) +
-                parseInt($("input[name='cover_material']").length ? $("input[name='cover_material']:checked").data('price') : 0) +
-                parseInt($("input[name='cover_side']").length ? $("input[name='cover_side']:checked").data('price') : 0) +
-                parseInt($("input[name='cover_lamination']").length ? $("input[name='cover_lamination']:checked").data('price') : 0) +
-                parseInt($("input[name='materials']").length ? $("input[name='materials']:checked").data('price') : 0) +
-                parseInt($("input[name='material_color']").length ? $("input[name='material_color']:checked").data('price') : 0) +
-                parseInt($("input[name='color']").length ? $("input[name='color']:checked").data('price') : 0) +
-                parseInt($("input[name='print_method']").length ? $("input[name='print_method']:checked").data('price') : 0) +
-                parseInt($("input[name='size']").length ? $("input[name='size']:checked").data('price') : 0) +
-                parseInt($("input[name='side']").length ? $("input[name='side']:checked").data('price') : 0) +
-                parseInt($("input[name='holder']").length ? $("input[name='holder']:checked").data('price') : 0) +
-                parseInt($("input[name='lid']").length ? $("input[name='lid']:checked").data('price') : 0) +
-                parseInt($("input[name='corner']").length ? $("input[name='corner']:checked").data('price') : 0) +
-                parseInt($("input[name='folding']").length ? $("input[name='folding']:checked").data('price') : 0) +
-                parseInt($("input[name='front_side']").length ? $("input[name='front_side']:checked").data('price') : 0) +
-                parseInt($("input[name='back_side']").length ? $("input[name='back_side']:checked").data('price') : 0) +
-                parseInt($("input[name='right_side']").length ? $("input[name='right_side']:checked").data('price') : 0) +
-                parseInt($("input[name='left_side']").length ? $("input[name='left_side']:checked").data('price') : 0) +
-                parseInt($("input[name='balance']").length ? $("input[name='balance']:checked").data('price') : 0) +
-                parseInt($("input[name='copies']").length ? $("input[name='copies']:checked").data('price') : 0) +
-                parseInt($("input[name='page']").length ? $("input[name='page']:checked").data('price') : 0) +
-                parseInt($("input[name='front_cover']").length ? $("input[name='front_cover']:checked").data('price') : 0) +
-                parseInt($("input[name='back_cover']").length ? $("input[name='back_cover']:checked").data('price') : 0) +
-                parseInt($("input[name='orientation']").length ? $("input[name='orientation']:checked").data('price') : 0) +
-                parseInt($("input[name='binding']").length ? $("input[name='binding']:checked").data('price') : 0) +
-                parseInt($("input[name='lamination']").length ? $("input[name='lamination']:checked").data('price') : 0) +
-                parseInt($("input[name='finishing']").length ? $("input[name='finishing']:checked").data('price') : 0) +
-                parseInt($("input[name='extra']").length ? $("input[name='extra']:checked").data('price') : 0)
+            setPrice();
 
             @if(!is_null($shipping))
             getShipping('{{$shipping->city_id}}', 'address', '{{$shipping->is_main == false ?
             $shipping->getOccupancy->name : $shipping->getOccupancy->name.' ['.__('lang.profile.main-address').']'}}');
-            resetter(1, '{{$cart->qty}}');
+            resetter(1, qty);
             @endif
         });
 
-        function productSpecs(check, spec, custom) {
-            var spec_val = $("#" + spec).data('name'), spec_price = $("#" + spec).data('price'), str_spec = '';
+        $("#accordion").on('click', 'label.card-label', function () {
+            var spec = $(this).attr('for'),
+                check = $(this).find('input[type=radio]').attr('name'),
+                custom = $(this).find('input[type=radio]').val() == 90 ? 1 : 0,
+                spec_val = $("#" + spec).data('name'), spec_price = $("#" + spec).data('price'), str_spec = '';
+
             resetter(0);
             $("#card-shipping").hide();
-
-            price_pcs = parseInt('{{$specs->price}}') + parseInt(spec_price);
-            str_spec = check == 'balance' ? 'Rp' + thousandSeparator(parseInt(spec_val)) + ',00' : spec_val;
+            str_spec = check == 'balance' ? 'Rp' + number_format(parseInt(spec_val), 2, ',', '.') : spec_val;
 
             if (custom == '1') {
                 var length = $("#length"), width = $("#width");
@@ -679,6 +723,82 @@
             }
 
             $('html,body').animate({scrollTop: $('#collapse-' + check).parents('#accordion').offset().top}, 0);
+        });
+
+        function resetter(check, quantity) {
+            if (check == 1) {
+                total = (qty * price_pcs) + ongkir;
+                $(".show-quantity").text(qty + str_unit);
+                $(".show-price").text("Rp" + number_format(price_pcs, 2, ',', '.'));
+                $(".show-production").text(moment().add(production_day, 'days').format('DD MMM YYYY'));
+                $("#price_pcs").val(price_pcs);
+                $("#production_finished").val(moment().add(production_day, 'days').format('YYYY-MM-DD'));
+                $(".show-total").text("Rp" + number_format(total, 2, ',', '.'));
+
+                $("#card-shipping").show();
+
+            } else {
+                range_max = 100;
+                range_slider.data("ionRangeSlider").update({max: range_max, from: 0});
+                $("#card-shipping div[role=tabpanel]").collapse('hide');
+                $("#card-shipping input[type=radio]").prop('checked', false);
+                $("#shipping_estimation").val('default').selectpicker('refresh');
+
+                qty = 0;
+                ongkir = 0;
+                pricing_specs = 0;
+                price_pcs = parseInt('{{!is_null($cart) ? $cart->price_pcs : $specs->price}}');
+                setPrice();
+                total = 0;
+
+                $(".show-address, .show-city, .show-quantity, .show-price, .show-production, .show-ongkir, .show-delivery, .show-received, .show-total").html('&ndash;');
+                $("#price_pcs, #production_finished, #ongkir, #delivery_duration, #received_date, #total").val(null);
+
+                $("#summary-alert").hide();
+                btn_upload.attr('disabled', 'disabled');
+            }
+        }
+
+        function setPrice() {
+            pricing_specs +=
+                parseInt($("input[name='type']").length ? $("input[name='type']:checked").data('price') : 0) +
+                parseInt($("input[name='cover_material']").length ? $("input[name='cover_material']:checked").data('price') : 0) +
+                parseInt($("input[name='cover_side']").length ? $("input[name='cover_side']:checked").data('price') : 0) +
+                parseInt($("input[name='cover_lamination']").length ? $("input[name='cover_lamination']:checked").data('price') : 0) +
+                parseInt($("input[name='materials']").length ? $("input[name='materials']:checked").data('price') : 0) +
+                parseInt($("input[name='material_color']").length ? $("input[name='material_color']:checked").data('price') : 0) +
+                parseInt($("input[name='color']").length ? $("input[name='color']:checked").data('price') : 0) +
+                parseInt($("input[name='print_method']").length ? $("input[name='print_method']:checked").data('price') : 0) +
+                parseInt($("input[name='size']").length ? $("input[name='size']:checked").data('price') : 0) +
+                parseInt($("input[name='side']").length ? $("input[name='side']:checked").data('price') : 0) +
+                parseInt($("input[name='holder']").length ? $("input[name='holder']:checked").data('price') : 0) +
+                parseInt($("input[name='lid']").length ? $("input[name='lid']:checked").data('price') : 0) +
+                parseInt($("input[name='corner']").length ? $("input[name='corner']:checked").data('price') : 0) +
+                parseInt($("input[name='folding']").length ? $("input[name='folding']:checked").data('price') : 0) +
+                parseInt($("input[name='front_side']").length ? $("input[name='front_side']:checked").data('price') : 0) +
+                parseInt($("input[name='back_side']").length ? $("input[name='back_side']:checked").data('price') : 0) +
+                parseInt($("input[name='right_side']").length ? $("input[name='right_side']:checked").data('price') : 0) +
+                parseInt($("input[name='left_side']").length ? $("input[name='left_side']:checked").data('price') : 0) +
+                parseInt($("input[name='balance']").length ? $("input[name='balance']:checked").data('price') : 0) +
+                parseInt($("input[name='copies']").length ? $("input[name='copies']:checked").data('price') : 0) +
+                parseInt($("input[name='page']").length ? $("input[name='page']:checked").data('price') : 0) +
+                parseInt($("input[name='front_cover']").length ? $("input[name='front_cover']:checked").data('price') : 0) +
+                parseInt($("input[name='back_cover']").length ? $("input[name='back_cover']:checked").data('price') : 0) +
+                parseInt($("input[name='orientation']").length ? $("input[name='orientation']:checked").data('price') : 0) +
+                parseInt($("input[name='binding']").length ? $("input[name='binding']:checked").data('price') : 0) +
+                parseInt($("input[name='lamination']").length ? $("input[name='lamination']:checked").data('price') : 0) +
+                parseInt($("input[name='finishing']").length ? $("input[name='finishing']:checked").data('price') : 0) +
+                parseInt($("input[name='extra']").length ? $("input[name='extra']:checked").data('price') : 0);
+
+            price_pcs += pricing_specs;
+            disc_1 = price_pcs - (price_pcs * 0.15);
+            disc_2 = disc_1 - (disc_1 * 0.15);
+            disc_3 = disc_2 - (disc_2 * 0.15);
+
+            $("#qty-120").text('Rp' + number_format(price_pcs, 2, ',', '.'));
+            $("#qty-2150").text('Rp' + number_format(disc_1, 2, ',', '.'));
+            $("#qty-51100").text('Rp' + number_format(disc_2, 2, ',', '.'));
+            $("#qty-100").text('Rp' + number_format(disc_3, 2, ',', '.'));
         }
 
         function getShipping(city, check, name) {
@@ -734,10 +854,10 @@
                                 add_receive = etd.substr(-1);
                             }
 
-                            $(".show-ongkir").text("Rp" + thousandSeparator(ongkir) + ",00");
+                            $(".show-ongkir").text("Rp" + number_format(ongkir, 2, ',', '.'));
                             $(".show-delivery").html(str_etd);
                             $(".show-received").text(moment().add(parseInt(production_day) + parseInt(add_receive), 'days').format('DD MMM YYYY'));
-                            $(".show-total").text("Rp" + thousandSeparator(total) + ",00");
+                            $(".show-total").text("Rp" + number_format(total, 2, ',', '.'));
 
                             $("#ongkir").val(ongkir);
                             $("#delivery_duration").val(etd);
@@ -763,36 +883,6 @@
             }.bind(this), 800);
 
             return false;
-        }
-
-        function resetter(check, quantity) {
-            if (check == 1) {
-                total = (parseInt(quantity) * price_pcs) + ongkir;
-                $(".show-quantity").text(quantity + str_unit);
-                $(".show-price").text("Rp" + thousandSeparator(price_pcs) + ",00");
-                $(".show-production").text(moment().add(production_day, 'days').format('DD MMM YYYY'));
-                $("#price_pcs").val(price_pcs);
-                $("#production_finished").val(moment().add(production_day, 'days').format('YYYY-MM-DD'));
-                $(".show-total").text("Rp" + thousandSeparator(total) + ",00");
-
-                $("#card-shipping").show();
-
-            } else {
-                range_slider.data("ionRangeSlider").update({from: 0});
-                $("#card-shipping div[role=tabpanel]").collapse('hide');
-                $("#card-shipping input[type=radio]").prop('checked', false);
-                $("#shipping_estimation").val('default').selectpicker('refresh');
-
-                qty = 0;
-                ongkir = 0;
-                total = 0;
-
-                $(".show-address, .show-city, .show-quantity, .show-price, .show-production, .show-ongkir, .show-delivery, .show-received, .show-total").html('&ndash;');
-                $("#price_pcs, #production_finished, #ongkir, #delivery_duration, #received_date, #total").val(null);
-
-                $("#summary-alert").hide();
-                btn_upload.attr('disabled', 'disabled');
-            }
         }
 
         btn_upload.on('click', function () {
