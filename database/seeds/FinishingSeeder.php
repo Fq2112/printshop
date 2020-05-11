@@ -266,13 +266,12 @@ class FinishingSeeder extends Seeder
     public function run()
     {
         foreach (self::DATA as $item) {
-            $faker = \Faker\Factory::create('id_ID');
             \App\Models\Finishing::create([
                 'name' => [
                     'id' => $item['name'][0],
                     'en' => $item['name'][1],
                 ],
-                'image' => !is_null($item['description']) ? $faker->imageUrl() : null,
+                'image' => !is_null($item['description']) ? 'placeholder.png' : null,
                 'description' => [
                     'en' => !is_null($item['description']) ? $item['description'][1] : null,
                     'id' => !is_null($item['description']) ? $item['description'][0] : null

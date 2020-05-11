@@ -29,10 +29,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -91,8 +91,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}" data-lightbox="image">
-                                                        <img src="{{$row->image}}" alt="Thumbnail">
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
+                                                       data-lightbox="image">
+                                                        <img src="{{asset('storage/products/specs/'.$row->image)}}"
+                                                             alt="Thumbnail">
                                                         <div class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
                                                         </div>
@@ -148,10 +150,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -212,10 +214,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -275,8 +277,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}" data-lightbox="image">
-                                                        <img src="{{$row->image}}" alt="Thumbnail">
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
+                                                       data-lightbox="image">
+                                                        <img src="{{asset('storage/products/specs/'.$row->image)}}"
+                                                             alt="Thumbnail">
                                                         <div class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
                                                         </div>
@@ -354,8 +358,10 @@
                                                 class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                                 @if($row->image != "")
                                                     <div class="col-auto">
-                                                        <a href="{{$row->image}}" data-lightbox="image">
-                                                            <img src="{{$row->image}}" alt="Thumbnail">
+                                                        <a href="{{asset('storage/products/specs/'.$row->image)}}"
+                                                           data-lightbox="image">
+                                                            <img src="{{asset('storage/products/specs/'.$row->image)}}"
+                                                                 alt="Thumbnail">
                                                             <div class="card-img-overlay d-flex">
                                                                 <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
                                                             </div>
@@ -435,8 +441,10 @@
                                                 class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                                 @if($row->image != "")
                                                     <div class="col-auto">
-                                                        <a href="{{$row->image}}" data-lightbox="image">
-                                                            <img src="{{$row->image}}" alt="Thumbnail">
+                                                        <a href="{{asset('storage/products/specs/'.$row->image)}}"
+                                                           data-lightbox="image">
+                                                            <img src="{{asset('storage/products/specs/'.$row->image)}}"
+                                                                 alt="Thumbnail">
                                                             <div class="card-img-overlay d-flex">
                                                                 <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
                                                             </div>
@@ -494,10 +502,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -557,10 +565,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -639,10 +647,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -701,10 +709,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -763,10 +771,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -825,10 +833,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -887,10 +895,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -950,10 +958,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -1013,10 +1021,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -1076,10 +1084,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -1139,10 +1147,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -1202,10 +1210,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -1265,10 +1273,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -1328,10 +1336,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -1390,10 +1398,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -1451,10 +1459,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -1512,10 +1520,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -1573,10 +1581,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -1635,10 +1643,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -1694,10 +1702,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">
@@ -1753,10 +1761,10 @@
                                             class="row no-gutters h-100 {{$row->image != "" ? '' : 'align-items-center'}}">
                                             @if($row->image != "")
                                                 <div class="col-auto">
-                                                    <a href="{{$row->image}}"
+                                                    <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img
-                                                            src="{{$row->image}}"
+                                                            src="{{asset('storage/products/specs/'.$row->image)}}"
                                                             alt="Thumbnail">
                                                         <div
                                                             class="card-img-overlay d-flex">

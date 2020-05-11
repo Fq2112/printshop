@@ -77,7 +77,7 @@ class LaminationSeeder extends Seeder
                     'id' => $item['name'][0],
                     'en' => $item['name'][1],
                 ],
-                'image' => \Faker\Factory::create()->imageUrl(),
+                'image' => 'placeholder.png',
                 'description' => [
                     'id' => $item['description'][0],
                     'en' => $item['description'][1],

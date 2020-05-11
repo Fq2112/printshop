@@ -37,13 +37,12 @@ class CopiesSeeder extends Seeder
     public function run()
     {
         foreach (self::DATA as $DATUM) {
-            $faker = \Faker\Factory::create('id_ID');
             \App\Models\Copies::create([
                 'name' => [
                     'en' => $DATUM['name'][1],
                     'id' => $DATUM['name'][0]
                 ],
-                'image' => !is_null($DATUM['description']) ? $faker->imageUrl() : null,
+                'image' => !is_null($DATUM['description']) ? 'placeholder.png' : null,
                 'description' => [
                     'en' => !is_null($DATUM['description']) ? $DATUM['description'][1] : null,
                     'id' => !is_null($DATUM['description']) ? $DATUM['description'][0] : null

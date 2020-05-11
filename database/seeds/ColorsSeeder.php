@@ -114,13 +114,12 @@ class ColorsSeeder extends Seeder
     public function run()
     {
         foreach (self::DATA as $DATUM) {
-            $faker = \Faker\Factory::create('id_ID');
             \App\Models\Colors::create([
                 'name' => [
                     'en' => $DATUM['name'][1],
                     'id' => $DATUM['name'][0]
                 ],
-                'image' => array_key_exists('image', $DATUM) ? $DATUM['image'] : $faker->imageUrl(),
+                'image' => array_key_exists('image', $DATUM) ? $DATUM['image'] : 'placeholder.png',
                 'description' => [
                     'en' => $DATUM['description'][1],
                     'id' => $DATUM['description'][0]

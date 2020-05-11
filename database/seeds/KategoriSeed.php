@@ -50,7 +50,6 @@ class KategoriSeed extends Seeder
     public function run()
     {
         foreach (self::NAME as $item) {
-            $faker = \Faker\Factory::create('id_ID');
             $kat = Kategori::create([
                 'name' => [
                     'id' => $item[0],
