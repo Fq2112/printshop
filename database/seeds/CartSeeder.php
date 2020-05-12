@@ -56,21 +56,21 @@ class CartSeeder extends Seeder
                     }
                 }
 
-                $qty = rand(1, 100);
-                $total = ($qty * 25000) + $ongkir;
+                $qty = rand(1, 20);
 
                 $cluster = \App\Models\ClusterKategori::inRandomOrder()->first();
+                $price_pcs = $this->specs($cluster->getClusterSpecs);
                 \App\Models\Cart::create([
                     'user_id' => $user->id,
                     'cluster_id' => $cluster->id,
                     'address_id' => $address->id,
                     'qty' => $qty,
-                    'price_pcs' => 25000,
+                    'price_pcs' => $price_pcs,
                     'production_finished' => now()->addDays(3)->format('Y-m-d'),
                     'ongkir' => $ongkir,
                     'delivery_duration' => $etd,
                     'received_date' => $received_date,
-                    'total' => $total,
+                    'total' => ($qty * $price_pcs) + $ongkir,
 
                     'material_id' => $cluster->getClusterSpecs->material_ids == null ? null : $cluster->getClusterSpecs->material_ids[0],
                     'type_id' => $cluster->getClusterSpecs->type_ids == null ? null : $cluster->getClusterSpecs->type_ids[0],
@@ -110,17 +110,18 @@ class CartSeeder extends Seeder
                 ]);
 
                 $subkat = \App\Models\SubKategori::doesnthave('getCluster')->inRandomOrder()->first();
+                $price_pcs = $this->specs($subkat->getSubkatSpecs);
                 \App\Models\Cart::create([
                     'user_id' => $user->id,
                     'subkategori_id' => $subkat->id,
                     'address_id' => $address->id,
                     'qty' => $qty,
-                    'price_pcs' => 25000,
+                    'price_pcs' => $price_pcs,
                     'production_finished' => now()->addDays(3)->format('Y-m-d'),
                     'ongkir' => $ongkir,
                     'delivery_duration' => $etd,
                     'received_date' => $received_date,
-                    'total' => $total,
+                    'total' => ($qty * $price_pcs) + $ongkir,
 
                     'material_id' => $subkat->getSubkatSpecs->material_ids == null ? null : $subkat->getSubkatSpecs->material_ids[0],
                     'type_id' => $subkat->getSubkatSpecs->type_ids == null ? null : $subkat->getSubkatSpecs->type_ids[0],
@@ -160,5 +161,96 @@ class CartSeeder extends Seeder
                 ]);
             }
         }
+    }
+
+    private function specs($specs)
+    {
+        $price_pcs = $specs->price;
+        if ($specs->is_type == true) {
+            $price_pcs += \App\Models\TypeProduct::whereIn('id', $specs->type_ids)->first()->price;
+        }
+        if ($specs->is_material_cover == true) {
+            $price_pcs += \App\Models\Material::whereIn('id', $specs->material_cover_ids)->first()->price;
+        }
+        if ($specs->is_side_cover == true) {
+            $price_pcs += \App\Models\Side::whereIn('id', $specs->side_cover_ids)->first()->price;
+        }
+        if ($specs->is_cover_lamination == true) {
+            $price_pcs += \App\Models\Lamination::whereIn('id', $specs->cover_lamination_ids)->first()->price;
+        }
+        if ($specs->is_material == true) {
+            $price_pcs += \App\Models\Material::whereIn('id', $specs->material_ids)->first()->price;
+        }
+        if ($specs->is_material_color == true) {
+            $price_pcs += \App\Models\Colors::whereIn('id', $specs->material_color_ids)->first()->price;
+        }
+        if ($specs->is_color == true) {
+            $price_pcs += \App\Models\Colors::whereIn('id', $specs->color_ids)->first()->price;
+        }
+        if ($specs->is_print_method == true) {
+            $price_pcs += \App\Models\PrintingMethods::whereIn('id', $specs->print_method_ids)->first()->price;
+        }
+        if ($specs->is_size == true) {
+            $price_pcs += \App\Models\Size::whereIn('id', $specs->size_ids)->first()->price;
+        }
+        if ($specs->is_side == true) {
+            $price_pcs += \App\Models\Side::whereIn('id', $specs->side_ids)->first()->price;
+        }
+        if ($specs->is_holder == true) {
+            $price_pcs += \App\Models\Finishing::whereIn('id', $specs->holder_ids)->first()->price;
+        }
+        if ($specs->is_lid == true) {
+            $price_pcs += \App\Models\Lid::whereIn('id', $specs->lid_ids)->first()->price;
+        }
+        if ($specs->is_edge == true) {
+            $price_pcs += \App\Models\Edge::whereIn('id', $specs->edge_ids)->first()->price;
+        }
+        if ($specs->is_folding == true) {
+            $price_pcs += \App\Models\Folding::whereIn('id', $specs->folding_ids)->first()->price;
+        }
+        if ($specs->is_front_side == true) {
+            $price_pcs += \App\Models\Front::whereIn('id', $specs->front_side_ids)->first()->price;
+        }
+        if ($specs->is_back_side == true) {
+            $price_pcs += \App\Models\BackSide::whereIn('id', $specs->back_side_ids)->first()->price;
+        }
+        if ($specs->is_right_side == true) {
+            $price_pcs += \App\Models\RightLeftSide::whereIn('id', $specs->right_side_ids)->first()->price;
+        }
+        if ($specs->is_left_side == true) {
+            $price_pcs += \App\Models\RightLeftSide::whereIn('id', $specs->left_side_ids)->first()->price;
+        }
+        if ($specs->is_balance == true) {
+            $price_pcs += \App\Models\Balance::whereIn('id', $specs->balance_ids)->first()->price;
+        }
+        if ($specs->is_copies == true) {
+            $price_pcs += \App\Models\Copies::whereIn('id', $specs->copies_ids)->first()->price;
+        }
+        if ($specs->is_page == true) {
+            $price_pcs += \App\Models\Pages::whereIn('id', $specs->page_ids)->first()->price;
+        }
+        if ($specs->is_front_cover == true) {
+            $price_pcs += \App\Models\Material::whereIn('id', $specs->front_cover_ids)->first()->price;
+        }
+        if ($specs->is_back_cover == true) {
+            $price_pcs += \App\Models\Material::whereIn('id', $specs->back_cover_ids)->first()->price;
+        }
+        if ($specs->is_orientation == true) {
+            $price_pcs += \App\Models\Finishing::whereIn('id', $specs->orientation_ids)->first()->price;
+        }
+        if ($specs->is_binding == true) {
+            $price_pcs += \App\Models\Finishing::whereIn('id', $specs->binding_ids)->first()->price;
+        }
+        if ($specs->is_lamination == true) {
+            $price_pcs += \App\Models\Lamination::whereIn('id', $specs->lamination_ids)->first()->price;
+        }
+        if ($specs->is_finishing == true) {
+            $price_pcs += \App\Models\Finishing::whereIn('id', $specs->finishing_ids)->first()->price;
+        }
+        if ($specs->is_extra == true) {
+            $price_pcs += \App\Models\Finishing::whereIn('id', $specs->extra_ids)->first()->price;
+        }
+
+        return $price_pcs;
     }
 }

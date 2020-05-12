@@ -576,8 +576,7 @@
         var collapse = $('.panel-collapse'), range_slider = $("#range-quantity"),
             btn_upload = $("#btn_upload"), upload_input = $("#file"), link_input = $("#link"),
             range_max = 100, qty = Number('{{!is_null($cart) ? $cart->qty : 0}}'),
-            pricing_specs = 0, disc_1 = 0, disc_2 = 0, disc_3 = 0,
-            price_pcs = Number('{{!is_null($cart) ? $cart->price_pcs : $specs->price}}'),
+            pricing_specs = 0, disc_1 = 0, disc_2 = 0, disc_3 = 0, price_pcs = Number('{{$specs->price}}'),
             str_unit = ' {{$specs->getUnit->name}}', production_day = 3, ongkir = 0, etd = '', str_etd = '', total = 0;
 
         $(function () {
@@ -600,7 +599,7 @@
 
                             if (qty >= 1 && qty <= 20) {
                                 pricing_specs = 0;
-                                price_pcs = Number('{{!is_null($cart) ? $cart->price_pcs : $specs->price}}');
+                                price_pcs = Number('{{$specs->price}}');
                                 setPrice();
                             } else if (qty >= 21 && qty <= 50) {
                                 price_pcs = disc_1;
@@ -756,7 +755,7 @@
                 qty = 0;
                 ongkir = 0;
                 pricing_specs = 0;
-                price_pcs = Number('{{!is_null($cart) ? $cart->price_pcs : $specs->price}}');
+                price_pcs = Number('{{$specs->price}}');
                 total = 0;
 
                 $(".show-address, .show-city, .show-quantity, .show-price, .show-production, .show-ongkir, .show-delivery, .show-received, .show-total").html('&ndash;');
