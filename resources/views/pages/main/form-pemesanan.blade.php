@@ -596,19 +596,6 @@
                     if (data.from > 0) {
                         if (data.from != qty) {
                             qty = data.from;
-
-                            if (qty >= 1 && qty <= 20) {
-                                pricing_specs = 0;
-                                price_pcs = Number('{{$specs->price}}');
-                                setPrice();
-                            } else if (qty >= 21 && qty <= 50) {
-                                price_pcs = disc_1;
-                            } else if (qty >= 51 && qty <= 100) {
-                                price_pcs = disc_2;
-                            } else if (qty > 100) {
-                                price_pcs = disc_3;
-                            }
-
                             resetter(1);
                         }
 
@@ -735,6 +722,18 @@
 
         function resetter(check) {
             if (check == 1) {
+                if (qty >= 1 && qty <= 20) {
+                    pricing_specs = 0;
+                    price_pcs = Number('{{$specs->price}}');
+                    setPrice();
+                } else if (qty >= 21 && qty <= 50) {
+                    price_pcs = disc_1;
+                } else if (qty >= 51 && qty <= 100) {
+                    price_pcs = disc_2;
+                } else if (qty > 100) {
+                    price_pcs = disc_3;
+                }
+
                 total = (qty * price_pcs) + ongkir;
                 $(".show-quantity").text(qty + str_unit);
                 $(".show-price").text("Rp" + number_format(price_pcs, 2, ',', '.'));
