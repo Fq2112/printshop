@@ -397,6 +397,34 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                     'as' => 'delete.lid'
                 ]);
             });
+
+            Route::group(['prefix' => 'material'], function () {
+
+                Route::get('/main', [
+                    'uses' => 'MaterialsController@show_data',
+                    'as' => 'table.material'
+                ]);
+
+                Route::get('edit/{id}', [
+                    'uses' => 'MaterialsController@edit_data',
+                    'as' => 'edit.material.posts'
+                ]);
+
+                Route::post('create', [
+                    'uses' => 'MaterialsController@create_data',
+                    'as' => 'create.material'
+                ]);
+
+                Route::put('update', [
+                    'uses' => 'MaterialsController@update_data',
+                    'as' => 'update.material'
+                ]);
+
+                Route::get('{id}/delete', [
+                    'uses' => 'MaterialsController@delete_data',
+                    'as' => 'delete.material'
+                ]);
+            });
         });
 
         Route::group(['prefix' => 'blog', 'middleware' => ['admin']], function () {
