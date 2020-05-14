@@ -201,6 +201,34 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                     'as' => 'delete.colors'
                 ]);
             });
+
+            Route::group(['prefix' => 'copies'], function () {
+
+                Route::get('/main', [
+                    'uses' => 'CopiesController@show_data',
+                    'as' => 'table.copies'
+                ]);
+
+                Route::get('edit/{id}', [
+                    'uses' => 'CopiesController@edit_data',
+                    'as' => 'edit.copies.posts'
+                ]);
+
+                Route::post('create', [
+                    'uses' => 'CopiesController@create_data',
+                    'as' => 'create.copies'
+                ]);
+
+                Route::put('update', [
+                    'uses' => 'CopiesController@update_data',
+                    'as' => 'update.copies'
+                ]);
+
+                Route::get('{id}/delete', [
+                    'uses' => 'CopiesController@delete_data',
+                    'as' => 'delete.copies'
+                ]);
+            });
         });
 
         Route::group(['prefix' => 'blog', 'middleware' => ['admin']], function () {
