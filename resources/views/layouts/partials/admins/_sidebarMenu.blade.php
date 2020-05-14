@@ -43,7 +43,7 @@
             'active' : ''}}"><a href="{{route('table.categories.main')}}"
                                 class="nav-link">Main Category</a></li>
                 <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
-            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+            'active' : ''}}"><a href="{{route('table.categories.subkat')}}"
                                 class="nav-link">Sub-Category</a></li>
                 <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
             'active' : ''}}"><a href="{{route('table.blog.posts')}}"
@@ -56,7 +56,7 @@
                 <i class="fas fa-database"></i><span>Specification</span></a>
             <ul class="dropdown-menu">
                 <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/categories*') ?
-            'active' : ''}}"><a href="{{route('table.blog.categories')}}"
+            'active' : ''}}"><a href="{{route('table.backside')}}"
                                 class="nav-link">Back Side</a></li>
                 <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
             'active' : ''}}"><a href="{{route('table.blog.posts')}}"

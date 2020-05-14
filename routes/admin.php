@@ -103,6 +103,48 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                 'uses' => 'CategoryController@deleteCategory',
                 'as' => 'delete.categories'
             ]);
+
+            Route::get('/sub', [
+                'uses' => 'CategoryController@show_subkategori',
+                'as' => 'table.categories.subkat'
+            ]);
+
+            Route::get('edit/sub/{id}', [
+                'uses' => 'CategoryController@editSubCategory',
+                'as' => 'edit.categories.sub.posts'
+            ]);
+
+        });
+
+        Route::group(['prefix' => 'spec', 'namespace' => 'Spec'], function () {
+
+            Route::group(['prefix' => 'backside'], function () {
+
+                Route::get('/main', [
+                    'uses' => 'BackSideController@show_data',
+                    'as' => 'table.backside'
+                ]);
+
+                Route::get('edit/{id}', [
+                    'uses' => 'BackSideController@edit_data',
+                    'as' => 'edit.backside.posts'
+                ]);
+
+                Route::post('create', [
+                    'uses' => 'BackSideController@create_data',
+                    'as' => 'create.backside'
+                ]);
+
+                Route::put('update', [
+                    'uses' => 'BackSideController@update_data',
+                    'as' => 'update.backside'
+                ]);
+
+                Route::get('{id}/delete', [
+                    'uses' => 'BackSideController@delete_data',
+                    'as' => 'delete.backside'
+                ]);
+            });
         });
 
         Route::group(['prefix' => 'blog', 'middleware' => ['admin']], function () {
