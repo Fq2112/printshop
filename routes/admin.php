@@ -341,6 +341,34 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                     'as' => 'delete.front'
                 ]);
             });
+
+            Route::group(['prefix' => 'lamination'], function () {
+
+                Route::get('/main', [
+                    'uses' => 'LaminationsController@show_data',
+                    'as' => 'table.lamination'
+                ]);
+
+                Route::get('edit/{id}', [
+                    'uses' => 'LaminationsController@edit_data',
+                    'as' => 'edit.lamination.posts'
+                ]);
+
+                Route::post('create', [
+                    'uses' => 'LaminationsController@create_data',
+                    'as' => 'create.lamination'
+                ]);
+
+                Route::put('update', [
+                    'uses' => 'LaminationsController@update_data',
+                    'as' => 'update.lamination'
+                ]);
+
+                Route::get('{id}/delete', [
+                    'uses' => 'LaminationsController@delete_data',
+                    'as' => 'delete.lamination'
+                ]);
+            });
         });
 
         Route::group(['prefix' => 'blog', 'middleware' => ['admin']], function () {
