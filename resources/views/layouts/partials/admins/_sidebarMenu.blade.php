@@ -74,7 +74,7 @@
             'active' : ''}}"><a href="{{route('table.finishing')}}"
                                 class="nav-link">Finishing</a></li>
                 <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
-            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+            'active' : ''}}"><a href="{{route('table.folding')}}"
                                 class="nav-link">Folding</a></li>
                 <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
             'active' : ''}}"><a href="{{route('table.blog.posts')}}"

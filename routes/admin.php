@@ -285,6 +285,34 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                     'as' => 'delete.finishing'
                 ]);
             });
+
+            Route::group(['prefix' => 'folding'], function () {
+
+                Route::get('/main', [
+                    'uses' => 'FoldingController@show_data',
+                    'as' => 'table.folding'
+                ]);
+
+                Route::get('edit/{id}', [
+                    'uses' => 'FoldingController@edit_data',
+                    'as' => 'edit.folding.posts'
+                ]);
+
+                Route::post('create', [
+                    'uses' => 'FoldingController@create_data',
+                    'as' => 'create.folding'
+                ]);
+
+                Route::put('update', [
+                    'uses' => 'FoldingController@update_data',
+                    'as' => 'update.folding'
+                ]);
+
+                Route::get('{id}/delete', [
+                    'uses' => 'FoldingController@delete_data',
+                    'as' => 'delete.folding'
+                ]);
+            });
         });
 
         Route::group(['prefix' => 'blog', 'middleware' => ['admin']], function () {
