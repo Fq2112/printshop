@@ -145,6 +145,34 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                     'as' => 'delete.backside'
                 ]);
             });
+
+            Route::group(['prefix' => 'balance'], function () {
+
+                Route::get('/main', [
+                    'uses' => 'BalanceController@show_data',
+                    'as' => 'table.balance'
+                ]);
+
+                Route::get('edit/{id}', [
+                    'uses' => 'BalanceController@edit_data',
+                    'as' => 'edit.balance.posts'
+                ]);
+
+                Route::post('create', [
+                    'uses' => 'BalanceController@create_data',
+                    'as' => 'create.balance'
+                ]);
+
+                Route::put('update', [
+                    'uses' => 'BalanceController@update_data',
+                    'as' => 'update.balance'
+                ]);
+
+                Route::get('{id}/delete', [
+                    'uses' => 'BalanceController@delete_data',
+                    'as' => 'delete.balance'
+                ]);
+            });
         });
 
         Route::group(['prefix' => 'blog', 'middleware' => ['admin']], function () {

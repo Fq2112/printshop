@@ -59,7 +59,7 @@
             'active' : ''}}"><a href="{{route('table.backside')}}"
                                 class="nav-link">Back Side</a></li>
                 <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
-            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+            'active' : ''}}"><a href="{{route('table.balance')}}"
                                 class="nav-link">Balances</a></li>
                 <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
             'active' : ''}}"><a href="{{route('table.blog.posts')}}"
