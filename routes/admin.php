@@ -425,6 +425,34 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                     'as' => 'delete.material'
                 ]);
             });
+
+            Route::group(['prefix' => 'pages'], function () {
+
+                Route::get('/main', [
+                    'uses' => 'PagesController@show_data',
+                    'as' => 'table.pages'
+                ]);
+
+                Route::get('edit/{id}', [
+                    'uses' => 'PagesController@edit_data',
+                    'as' => 'edit.pages.posts'
+                ]);
+
+                Route::post('create', [
+                    'uses' => 'PagesController@create_data',
+                    'as' => 'create.pages'
+                ]);
+
+                Route::put('update', [
+                    'uses' => 'PagesController@update_data',
+                    'as' => 'update.pages'
+                ]);
+
+                Route::get('{id}/delete', [
+                    'uses' => 'PagesController@delete_data',
+                    'as' => 'delete.pages'
+                ]);
+            });
         });
 
         Route::group(['prefix' => 'blog', 'middleware' => ['admin']], function () {
