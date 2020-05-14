@@ -481,6 +481,34 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                     'as' => 'delete.print'
                 ]);
             });
+
+            Route::group(['prefix' => 'right'], function () {
+
+                Route::get('/main', [
+                    'uses' => 'RightLeftSideController@show_data',
+                    'as' => 'table.right'
+                ]);
+
+                Route::get('edit/{id}', [
+                    'uses' => 'RightLeftSideController@edit_data',
+                    'as' => 'edit.right.posts'
+                ]);
+
+                Route::post('create', [
+                    'uses' => 'RightLeftSideController@create_data',
+                    'as' => 'create.right'
+                ]);
+
+                Route::put('update', [
+                    'uses' => 'RightLeftSideController@update_data',
+                    'as' => 'update.right'
+                ]);
+
+                Route::get('{id}/delete', [
+                    'uses' => 'RightLeftSideController@delete_data',
+                    'as' => 'delete.right'
+                ]);
+            });
         });
 
         Route::group(['prefix' => 'blog', 'middleware' => ['admin']], function () {

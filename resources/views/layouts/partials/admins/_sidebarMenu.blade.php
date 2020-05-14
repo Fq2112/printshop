@@ -95,7 +95,7 @@
             'active' : ''}}"><a href="{{route('table.print')}}"
                                 class="nav-link">Printing Method</a></li>
                 <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
-            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+            'active' : ''}}"><a href="{{route('table.right')}}"
                                 class="nav-link">Right & Left Side</a></li>
                 <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
             'active' : ''}}"><a href="{{route('table.blog.posts')}}"
