@@ -313,6 +313,34 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                     'as' => 'delete.folding'
                 ]);
             });
+
+            Route::group(['prefix' => 'front'], function () {
+
+                Route::get('/main', [
+                    'uses' => 'FrontSideController@show_data',
+                    'as' => 'table.front'
+                ]);
+
+                Route::get('edit/{id}', [
+                    'uses' => 'FrontSideController@edit_data',
+                    'as' => 'edit.front.posts'
+                ]);
+
+                Route::post('create', [
+                    'uses' => 'FrontSideController@create_data',
+                    'as' => 'create.front'
+                ]);
+
+                Route::put('update', [
+                    'uses' => 'FrontSideController@update_data',
+                    'as' => 'update.front'
+                ]);
+
+                Route::get('{id}/delete', [
+                    'uses' => 'FrontSideController@delete_data',
+                    'as' => 'delete.front'
+                ]);
+            });
         });
 
         Route::group(['prefix' => 'blog', 'middleware' => ['admin']], function () {
