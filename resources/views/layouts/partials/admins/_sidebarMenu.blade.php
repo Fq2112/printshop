@@ -101,11 +101,8 @@
             'active' : ''}}"><a href="{{route('table.side')}}"
                                 class="nav-link">Side</a></li>
                 <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
-            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+            'active' : ''}}"><a href="{{route('table.size')}}"
                                 class="nav-link">Size</a></li>
-                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
-            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
-                                class="nav-link">Product Type</a></li>
             </ul>
         </li>
 

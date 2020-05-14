@@ -537,6 +537,34 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                     'as' => 'delete.side'
                 ]);
             });
+
+            Route::group(['prefix' => 'size'], function () {
+
+                Route::get('/main', [
+                    'uses' => 'SizeController@show_data',
+                    'as' => 'table.size'
+                ]);
+
+                Route::get('edit/{id}', [
+                    'uses' => 'SizeController@edit_data',
+                    'as' => 'edit.size.posts'
+                ]);
+
+                Route::post('create', [
+                    'uses' => 'SizeController@create_data',
+                    'as' => 'create.size'
+                ]);
+
+                Route::put('update', [
+                    'uses' => 'SizeController@update_data',
+                    'as' => 'update.size'
+                ]);
+
+                Route::get('{id}/delete', [
+                    'uses' => 'SizeController@delete_data',
+                    'as' => 'delete.size'
+                ]);
+            });
         });
 
         Route::group(['prefix' => 'blog', 'middleware' => ['admin']], function () {
