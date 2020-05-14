@@ -257,6 +257,34 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                     'as' => 'delete.edge'
                 ]);
             });
+
+            Route::group(['prefix' => 'finishing'], function () {
+
+                Route::get('/main', [
+                    'uses' => 'FinishingController@show_data',
+                    'as' => 'table.finishing'
+                ]);
+
+                Route::get('edit/{id}', [
+                    'uses' => 'FinishingController@edit_data',
+                    'as' => 'edit.finishing.posts'
+                ]);
+
+                Route::post('create', [
+                    'uses' => 'FinishingController@create_data',
+                    'as' => 'create.finishing'
+                ]);
+
+                Route::put('update', [
+                    'uses' => 'FinishingController@update_data',
+                    'as' => 'update.finishing'
+                ]);
+
+                Route::get('{id}/delete', [
+                    'uses' => 'FinishingController@delete_data',
+                    'as' => 'delete.finishing'
+                ]);
+            });
         });
 
         Route::group(['prefix' => 'blog', 'middleware' => ['admin']], function () {
