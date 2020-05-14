@@ -369,6 +369,34 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                     'as' => 'delete.lamination'
                 ]);
             });
+
+            Route::group(['prefix' => 'lid'], function () {
+
+                Route::get('/main', [
+                    'uses' => 'LidController@show_data',
+                    'as' => 'table.lid'
+                ]);
+
+                Route::get('edit/{id}', [
+                    'uses' => 'LidController@edit_data',
+                    'as' => 'edit.lid.posts'
+                ]);
+
+                Route::post('create', [
+                    'uses' => 'LidController@create_data',
+                    'as' => 'create.lid'
+                ]);
+
+                Route::put('update', [
+                    'uses' => 'LidController@update_data',
+                    'as' => 'update.lid'
+                ]);
+
+                Route::get('{id}/delete', [
+                    'uses' => 'LidController@delete_data',
+                    'as' => 'delete.lid'
+                ]);
+            });
         });
 
         Route::group(['prefix' => 'blog', 'middleware' => ['admin']], function () {
