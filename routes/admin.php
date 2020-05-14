@@ -453,6 +453,34 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                     'as' => 'delete.pages'
                 ]);
             });
+
+            Route::group(['prefix' => 'print'], function () {
+
+                Route::get('/main', [
+                    'uses' => 'PrintMethodController@show_data',
+                    'as' => 'table.print'
+                ]);
+
+                Route::get('edit/{id}', [
+                    'uses' => 'PrintMethodController@edit_data',
+                    'as' => 'edit.print.posts'
+                ]);
+
+                Route::post('create', [
+                    'uses' => 'PrintMethodController@create_data',
+                    'as' => 'create.print'
+                ]);
+
+                Route::put('update', [
+                    'uses' => 'PrintMethodController@update_data',
+                    'as' => 'update.print'
+                ]);
+
+                Route::get('{id}/delete', [
+                    'uses' => 'PrintMethodController@delete_data',
+                    'as' => 'delete.print'
+                ]);
+            });
         });
 
         Route::group(['prefix' => 'blog', 'middleware' => ['admin']], function () {
