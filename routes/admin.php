@@ -229,6 +229,34 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                     'as' => 'delete.copies'
                 ]);
             });
+
+            Route::group(['prefix' => 'edge'], function () {
+
+                Route::get('/main', [
+                    'uses' => 'EdgesController@show_data',
+                    'as' => 'table.edge'
+                ]);
+
+                Route::get('edit/{id}', [
+                    'uses' => 'EdgesController@edit_data',
+                    'as' => 'edit.edge.posts'
+                ]);
+
+                Route::post('create', [
+                    'uses' => 'EdgesController@create_data',
+                    'as' => 'create.edge'
+                ]);
+
+                Route::put('update', [
+                    'uses' => 'EdgesController@update_data',
+                    'as' => 'update.edge'
+                ]);
+
+                Route::get('{id}/delete', [
+                    'uses' => 'EdgesController@delete_data',
+                    'as' => 'delete.edge'
+                ]);
+            });
         });
 
         Route::group(['prefix' => 'blog', 'middleware' => ['admin']], function () {
