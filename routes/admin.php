@@ -173,6 +173,34 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                     'as' => 'delete.balance'
                 ]);
             });
+
+            Route::group(['prefix' => 'colors'], function () {
+
+                Route::get('/main', [
+                    'uses' => 'ColorsController@show_data',
+                    'as' => 'table.colors'
+                ]);
+
+                Route::get('edit/{id}', [
+                    'uses' => 'ColorsController@edit_data',
+                    'as' => 'edit.colors.posts'
+                ]);
+
+                Route::post('create', [
+                    'uses' => 'ColorsController@create_data',
+                    'as' => 'create.colors'
+                ]);
+
+                Route::put('update', [
+                    'uses' => 'ColorsController@update_data',
+                    'as' => 'update.colors'
+                ]);
+
+                Route::get('{id}/delete', [
+                    'uses' => 'ColorsController@delete_data',
+                    'as' => 'delete.colors'
+                ]);
+            });
         });
 
         Route::group(['prefix' => 'blog', 'middleware' => ['admin']], function () {
