@@ -219,6 +219,10 @@
         } else return false;
     }
 
+    $(document).on('mouseover', '.use-nicescroll', function () {
+        $(this).getNiceScroll().resize();
+    });
+
         @if(!\Illuminate\Support\Facades\Request::is('scott.royce/tables*'))
     var title = document.getElementsByTagName("title")[0].innerHTML;
     (function titleScroller(text) {
