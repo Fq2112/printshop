@@ -296,10 +296,10 @@ class UserController extends Controller
                         'Content-Length: ' . filesize($file_path)
                     ]);
                 } else {
-                    return back()->with('warning', __('lang.alert.download-fail'));
+                    return 0;
                 }
             } else {
-                return redirect()->to($cart->link);
+                return $cart->link;
             }
 
         } else {
@@ -310,7 +310,7 @@ class UserController extends Controller
                     'Content-Length: ' . filesize($file_path)
                 ]);
             } else {
-                return back()->with('warning', __('lang.alert.download-fail'));
+                return 0;
             }
         }
     }
