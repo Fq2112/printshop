@@ -106,6 +106,12 @@ body::-webkit-scrollbar-thumb:active {
     border-color: #f89406 !important;
 }
 
+.form-control-feedback {
+    position: absolute;
+    top: 3em;
+    right: 2em;
+}
+
 a {
     color: #f89406;
     font-weight: 500;
