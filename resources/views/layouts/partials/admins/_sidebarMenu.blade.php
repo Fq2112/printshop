@@ -111,7 +111,7 @@
                 <i class="fas fa-database"></i><span>Miscellaneous</span></a>
             <ul class="dropdown-menu">
                 <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/categories*') ?
-            'active' : ''}}"><a href="{{route('table.blog.categories')}}"
+            'active' : ''}}"><a href="{{route('admin.promo')}}"
                                 class="nav-link">Promo Code</a></li>
                 <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
             'active' : ''}}"><a href="{{route('table.blog.posts')}}"

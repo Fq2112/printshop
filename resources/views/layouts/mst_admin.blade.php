@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{asset('admins/modules/bootstrap-select/dist/css/bootstrap-select.min.css')}}">
     <link rel="stylesheet" href="{{asset('js/plugins/sweetalert/sweetalert2.css')}}">
     <link rel="stylesheet" href="{{asset('admins/modules/izitoast/css/iziToast.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admins/modules/bootstrap-datepicker/bootstrap-datepicker.css')}}">
 @stack('styles')
 
 <!-- Template CSS -->
@@ -190,6 +191,7 @@
 <script src="{{asset('js/plugins/sweetalert/sweetalert.min.js')}}"></script>
 <script src="{{asset('admins/modules/izitoast/js/iziToast.min.js')}}"></script>
 <script src="{{asset('js/checkMobileDevice.js')}}"></script>
+<script src="{{asset('admins/modules/bootstrap-datepicker/bootstrap-datepicker.js')}}"></script>
 @stack('scripts')
 
 <!-- Template JS File -->

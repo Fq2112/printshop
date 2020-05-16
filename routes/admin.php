@@ -62,6 +62,24 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
 
     });
 
+
+    Route::group(['prefix' => 'promo',  'middleware' => 'owner'], function () {
+        Route::get('show', [
+            'uses' => 'PromoController@show_promo',
+            'as' => 'admin.promo'
+        ]);
+
+        Route::post('create', [
+            'uses' => 'PromoController@create_data',
+            'as' => 'add.promo'
+        ]);
+
+        Route::get('{id}/delete', [
+            'uses' => 'PromoController@delete_admin',
+            'as' => 'delete.promo'
+        ]);
+    });
+
     Route::group(['prefix' => 'inbox', 'middleware' => 'owner'], function () {
 
         Route::get('/', [
