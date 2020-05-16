@@ -37,7 +37,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-header-form">
-                                <button id="btn_create" class="btn btn-primary text-uppercase">
+                                <button onclick="createBlogCategory()" class="btn btn-primary text-uppercase">
                                     <strong><i class="fas fa-plus mr-2"></i>Create</strong>
                                 </button>
                             </div>
@@ -88,7 +88,8 @@
                                             <td style="vertical-align: middle" align="center">
                                                 {{$row->updated_at->diffForHumans()}}</td>
                                             <td style="vertical-align: middle" align="center">
-                                                <button data-placement="left" data-toggle="tooltip" title="Reset Password"
+                                                <button data-placement="left" data-toggle="tooltip"
+                                                        title="Reset Password"
                                                         type="button" class="btn btn-warning mr-1"
                                                         onclick="show_swal_reset('{{$row->id}}')">
                                                     <i class="fa fa-user-lock"></i></button>
@@ -97,10 +98,14 @@
                                                     @CSRF
                                                     <input type="hidden" name="id" value="{{$row->id}}">
                                                 </form>
-                                                <a href="{{route('delete.balance', ['id' => encrypt($row->id)])}}"
-                                                   class="btn btn-danger delete-data" data-toggle="tooltip"
-                                                   title="Delete" data-placement="right">
-                                                    <i class="fas fa-trash-alt"></i></a>
+                                                @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Support\Role::OWNER)
+                                                    @if($row->id != \Illuminate\Support\Facades\Auth::user()->id)
+                                                    <a href="{{route('delete.admin', ['id' => encrypt($row->id)])}}"
+                                                       class="btn btn-danger delete-data" data-toggle="tooltip"
+                                                       title="Delete" data-placement="right">
+                                                        <i class="fas fa-trash-alt"></i></a>
+                                                        @endif
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -219,17 +224,17 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="form-blogCategory" method="post" action="{{route('create.balance')}}">
+                <form id="form-blogCategory" method="post" action="{{route('admin.add')}}">
                     {{csrf_field()}}
                     <input type="hidden" name="_method">
                     <input type="hidden" name="id">
                     <div class="modal-body">
                         <div class="row">
                             <div class="col">
-                                <label for="name">Name <small>(En)</small></label>
+                                <label for="name">Name <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-tag"></i></span>
+                                        <span class="input-group-text"><i class="fa fa-user"></i></span>
                                     </div>
                                     <input id="name" type="text" maxlength="191" name="name" class="form-control"
                                            placeholder="Write its name here&hellip;" required>
@@ -238,41 +243,25 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <label for="name">Name <small>(Id)</small></label>
+                                <label for="name">Username <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-tag"></i></span>
+                                        <span class="input-group-text"><i class="fa fa-user"></i></span>
                                     </div>
-                                    <input id="name_id" type="text" maxlength="191" name="name_id" class="form-control"
+                                    <input id="name_id" type="text" maxlength="191" name="username" class="form-control"
                                            placeholder="Write its name here&hellip;" required>
                                 </div>
                             </div>
                         </div>
-                        <div class="row form-group has-feedback">
+                        <div class="row">
                             <div class="col">
-                                <label for="_content">Caption</label>
-                                <textarea id="_content" type="text" name="_content"
-                                          class="summernote form-control"
-                                          placeholder="Write something about your post here&hellip;"></textarea>
-                                <span class="glyphicon glyphicon-text-height form-control-feedback"></span>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col">
-                                <label for="thumbnail">Image</label>
+                                <label for="name">email <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-images"></i></span>
+                                        <span class="input-group-text"><i class="fa fa-envelope"></i></span>
                                     </div>
-                                    <div class="custom-file">
-                                        <input type="file" name="thumbnail" class="custom-file-input"
-                                               id="thumbnail" accept="image/*" required>
-                                        <label class="custom-file-label" id="txt_thumbnail">Choose
-                                            File</label>
-                                    </div>
-                                </div>
-                                <div class="form-text text-muted">
-                                    Allowed extension: jpg, jpeg, gif, png. Allowed size: < 5 MB
+                                    <input id="name_id" type="email" maxlength="191" name="email" class="form-control"
+                                           placeholder="Write its name here&hellip;" required>
                                 </div>
                             </div>
                         </div>
@@ -424,12 +413,6 @@
         });
 
         function createBlogCategory() {
-            $("#blogCategoryModal .modal-title").text('Create Form');
-            $("#form-blogCategory").attr('action', '{{route('create.balance')}}');
-            $("#form-blogCategory input[name=_method]").val('');
-            $("#form-blogCategory input[name=id]").val('');
-            $("#form-blogCategory button[type=submit]").text('Submit');
-            $("#name").val('');
             $("#blogCategoryModal").modal('show');
         }
 

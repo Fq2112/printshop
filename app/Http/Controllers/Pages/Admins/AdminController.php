@@ -172,12 +172,41 @@ class AdminController extends Controller
 
     public function show_admin()
     {
-        $data = Admin::whereNotIn('role',[Role::ROOT])->get();
+        $data = Admin::whereNotIn('role', [Role::ROOT])->get();
 
         return view('pages.main.admins.privilege.admin', [
             'title' => 'Admins List',
             'kategori' => $data
         ]);
+    }
+
+    public function admin_add(Request $request)
+    {
+        $check = Admin::where('username', $request->username)->orwhere('email', $request->email)->first();
+
+        if (empty($check)) {
+            Admin::create([
+                'email' => $request->email,
+                'name' => $request->name,
+                'username' => $request->username,
+                'password' => bcrypt($request->username),
+                'role' => Role::ADMIN
+            ]);
+            return back()->with('success', 'Successfully add new admin!');
+        }else{
+            return back()->with('error', 'Email / Username already taken');
+        }
+
+
+    }
+
+    public function delete_admin($id)
+    {
+        $post = Admin::find(decrypt($id));
+
+        $post->delete();
+
+        return back()->with('success','Admin Successfully deleted');
     }
 
     public function reset_password(Request $request)
@@ -188,5 +217,15 @@ class AdminController extends Controller
         ]);
 
         return back()->with('success', 'Successfully Reset Password!');
+    }
+
+    public function show_user()
+    {
+        $data = Admin::whereNotIn('role', [Role::ROOT])->get();
+
+        return view('pages.main.admins.privilege.admin', [
+            'title' => 'Admins List',
+            'kategori' => $data
+        ]);
     }
 }

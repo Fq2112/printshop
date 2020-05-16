@@ -40,9 +40,19 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             'as' => 'admin.show.list'
         ]);
 
-        Route::get('reset', [
+        Route::post('admin/add', [
+            'uses' => 'AdminController@admin_add',
+            'as' => 'admin.add'
+        ]);
+
+        Route::post('reset', [
             'uses' => 'AdminController@reset_password',
             'as' => 'admin.reset'
+        ]);
+
+        Route::get('{id}/delete', [
+            'uses' => 'AdminController@delete_admin',
+            'as' => 'delete.admin'
         ]);
 
     });
