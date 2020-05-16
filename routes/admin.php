@@ -139,6 +139,11 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                 'as' => 'table.subkat.add'
             ]);
 
+            Route::post('/sub/update', [
+                'uses' => 'CategoryController@update_data',
+                'as' => 'table.subkat.update'
+            ]);
+
             Route::get('edit/sub/{id}', [
                 'uses' => 'CategoryController@editSubCategory',
                 'as' => 'edit.categories.sub.posts'

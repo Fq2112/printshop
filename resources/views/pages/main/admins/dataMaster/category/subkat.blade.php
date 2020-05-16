@@ -87,10 +87,10 @@
                                                         type="button" class="btn btn-warning mr-1"
                                                         onclick="editBlogPost('{{$row->id}}','{{route('edit.categories.sub.posts', ['id' => $row->id])}}')">
                                                     <i class="fa fa-edit"></i></button>
-                                                <a href="{{route('delete.categories', ['id' => encrypt($row->id)])}}"
-                                                   class="btn btn-danger delete-data" data-toggle="tooltip"
-                                                   title="Delete" data-placement="right">
-                                                    <i class="fas fa-trash-alt"></i></a>
+{{--                                                <a href="{{route('delete.categories', ['id' => encrypt($row->id)])}}"--}}
+{{--                                                   class="btn btn-danger delete-data" data-toggle="tooltip"--}}
+{{--                                                   title="Delete" data-placement="right">--}}
+{{--                                                    <i class="fas fa-trash-alt"></i></a>--}}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -954,7 +954,7 @@
 
         function editBlogCategory(id, name, name_id, caption) {
             $("#blogCategoryModal .modal-title").text('Edit Form');
-            $("#form-blogCategory").attr('action', '{{route('update.categories')}}');
+            $("#form-blogCategory").attr('action', '{{route('table.subkat.update')}}');
             $("#form-blogCategory input[name=_method]").val('PUT');
             $("#form-blogCategory input[name=id]").val(id);
             $("#form-blogCategory button[type=submit]").text('Save Changes');
@@ -976,7 +976,7 @@
             $(".fix-label-group .bootstrap-select").addClass('p-0');
             $(".fix-label-group .bootstrap-select button").css('border-color', '#e4e6fc');
 
-            $("#form-blogPost").attr('action', '{{route('update.categories')}}');
+            $("#form-blogPost").attr('action', '{{route('table.subkat.update')}}');
             $("#form-blogPost input[name=_method]").val('PUT');
             $("#form-blogPost input[name=id]").val(id);
             $(".input-files").hide();
