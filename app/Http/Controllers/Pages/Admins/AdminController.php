@@ -221,10 +221,10 @@ class AdminController extends Controller
 
     public function show_user()
     {
-        $data = Admin::whereNotIn('role', [Role::ROOT])->get();
+        $data =User::all();
 
-        return view('pages.main.admins.privilege.admin', [
-            'title' => 'Admins List',
+        return view('pages.main.admins.privilege.user', [
+            'title' => 'Users List',
             'kategori' => $data
         ]);
     }

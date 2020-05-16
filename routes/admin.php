@@ -55,6 +55,11 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             'as' => 'delete.admin'
         ]);
 
+        Route::get('admins/user', [
+            'uses' => 'AdminController@show_user',
+            'as' => 'admin.user.list'
+        ]);
+
     });
 
     Route::group(['prefix' => 'inbox', 'middleware' => 'owner'], function () {

@@ -130,7 +130,7 @@
             'active' : ''}}"><a href="{{route('admin.show.list')}}"
                                 class="nav-link">Admin</a></li>
                 <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
-            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+            'active' : ''}}"><a href="{{route('admin.user.list')}}"
                                 class="nav-link">User</a></li>
                 <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
             'active' : ''}}"><a href="{{route('admin.profil')}}"
