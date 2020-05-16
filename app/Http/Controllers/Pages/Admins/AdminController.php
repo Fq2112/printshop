@@ -9,6 +9,7 @@ use App\Models\Cart;
 use App\Models\Kontak;
 use App\Models\Order;
 use App\Models\PaymentCart;
+use App\Support\Role;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -167,5 +168,25 @@ class AdminController extends Controller
                 return back()->with('success', 'Successfully update your account!');
             }
         }
+    }
+
+    public function show_admin()
+    {
+        $data = Admin::whereNotIn('role',[Role::ROOT])->get();
+
+        return view('pages.main.admins.privilege.admin', [
+            'title' => 'Admins List',
+            'kategori' => $data
+        ]);
+    }
+
+    public function reset_password(Request $request)
+    {
+        $data = Admin::find($request->id);
+        $data->update([
+            'password' => bcrypt($data->username)
+        ]);
+
+        return back()->with('success', 'Successfully Reset Password!');
     }
 }

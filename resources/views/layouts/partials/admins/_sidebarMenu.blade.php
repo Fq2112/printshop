@@ -122,6 +122,22 @@
             </ul>
         </li>
 
+        <li class="dropdown {{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog*') ? 'active' : ''}}">
+            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+                <i class="fas fa-user-cog"></i><span>Privilege</span></a>
+            <ul class="dropdown-menu">
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/categories*') ?
+            'active' : ''}}"><a href="{{route('admin.show.list')}}"
+                                class="nav-link">Admin</a></li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
+            'active' : ''}}"><a href="{{route('table.blog.posts')}}"
+                                class="nav-link">User</a></li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('scott.royce/tables/blog/posts*') ?
+            'active' : ''}}"><a href="{{route('admin.profil')}}"
+                                class="nav-link">Edit Profile</a></li>
+            </ul>
+        </li>
+
     @endif
 
 </ul>

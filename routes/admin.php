@@ -35,6 +35,16 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             'as' => 'admin.update.pengaturan'
         ]);
 
+        Route::get('admins', [
+            'uses' => 'AdminController@show_admin',
+            'as' => 'admin.show.list'
+        ]);
+
+        Route::get('reset', [
+            'uses' => 'AdminController@reset_password',
+            'as' => 'admin.reset'
+        ]);
+
     });
 
     Route::group(['prefix' => 'inbox', 'middleware' => 'owner'], function () {
@@ -662,6 +672,7 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             });
 
         });
+
 
     });
 
