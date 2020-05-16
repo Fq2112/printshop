@@ -12,6 +12,7 @@ use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 
 class MainController extends Controller
@@ -179,6 +180,18 @@ class MainController extends Controller
         }
 
         return back();
+    }
+
+    public function downloadGuidelines(Request $request)
+    {
+        $file_path = storage_path('app/public/products/guidelines/' . $request->file);
+        if (file_exists($file_path)) {
+            return Response::download($file_path, $request->file, [
+                'Content-Length: ' . filesize($file_path)
+            ]);
+        } else {
+            return 0;
+        }
     }
 
     public function submitPemesanan(Request $request)

@@ -492,8 +492,8 @@
                                 </div>
 
                                 @if($guidelines != "")
-                                    <a class="button button-desc button-border button-primary button-rounded"
-                                       href="{{asset('storage/products/guidelines/'. $guidelines)}}">
+                                    <a class="button button-desc button-border button-primary button-rounded btn_guide"
+                                       href="{{route('produk.download.guideline', ['produk' => $data->permalink, 'file' => $guidelines])}}">
                                         <table>
                                             <tr>
                                                 <td>
@@ -1022,6 +1022,16 @@
             } else {
                 $("#form-pemesanan button[type=submit]").removeAttr('disabled');
             }
+        });
+
+        $(".btn_guide").on('click', function () {
+            $.get($(this).attr("href"), function (data) {
+                if (data == 0) {
+                    swal('{{__('lang.alert.warning')}}', '{{__('lang.alert.download-fail')}}', 'warning')
+                }
+            });
+
+            return false;
         });
     </script>
     @include('layouts.partials.users._scriptsAddress')

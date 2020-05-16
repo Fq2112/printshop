@@ -57,28 +57,37 @@ Route::group(['namespace' => 'Pages'], function () {
         'as' => 'beranda'
     ]);
 
-    Route::get('{produk}', [
-        'uses' => 'MainController@produk',
-        'as' => 'produk'
-    ]);
+    Route::group(['prefix' => '{produk}'], function () {
 
-    Route::post('{produk}/order/submit', [
-        'middleware' => ['auth', 'user'],
-        'uses' => 'MainController@submitPemesanan',
-        'as' => 'produk.submit.pemesanan'
-    ]);
+        Route::get('/', [
+            'uses' => 'MainController@produk',
+            'as' => 'produk'
+        ]);
 
-    Route::put('{produk}/order/{id}/update', [
-        'middleware' => ['auth', 'user'],
-        'uses' => 'MainController@updatePemesanan',
-        'as' => 'produk.update.pemesanan'
-    ]);
+        Route::get('guidelines/{file}/download', [
+            'uses' => 'MainController@downloadGuidelines',
+            'as' => 'produk.download.guideline'
+        ]);
 
-    Route::get('{produk}/order/{id}/delete', [
-        'middleware' => ['auth', 'user'],
-        'uses' => 'MainController@deletePemesanan',
-        'as' => 'produk.delete.pemesanan'
-    ]);
+        Route::post('order/submit', [
+            'middleware' => ['auth', 'user'],
+            'uses' => 'MainController@submitPemesanan',
+            'as' => 'produk.submit.pemesanan'
+        ]);
+
+        Route::put('order/{id}/update', [
+            'middleware' => ['auth', 'user'],
+            'uses' => 'MainController@updatePemesanan',
+            'as' => 'produk.update.pemesanan'
+        ]);
+
+        Route::get('order/{id}/delete', [
+            'middleware' => ['auth', 'user'],
+            'uses' => 'MainController@deletePemesanan',
+            'as' => 'produk.delete.pemesanan'
+        ]);
+
+    });
 
     Route::get('cari/nama', [
         'uses' => 'MainController@cariNamaProduk',
