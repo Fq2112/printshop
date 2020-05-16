@@ -115,6 +115,31 @@
                                     <input type="hidden" name="admin_id">
 
                                     <div class="row form-group">
+                                        <div class="col">
+                                            <div class="col fix-label-group">
+                                                <label for="category_id">Category Parent</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                            <span class="input-group-text fix-label-item"
+                                                                  style="height: 2.25rem">
+                                                                <i class="fa fa-tag"></i></span>
+                                                    </div>
+                                                    <select id="kategori_id"
+                                                            class="form-control selectpicker"
+                                                            title="-- Choose --"
+                                                            name="kategori_id" data-live-search="true"
+                                                    >
+                                                        @foreach(\App\Models\Kategori::all() as $material)
+                                                            <option
+                                                                value="{{$material->id}}">{{$material->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row form-group">
                                         <div class="col-6 has-feedback">
                                             <label for="title">Name ( En )</label>
                                             <input id="name_en" type="text" maxlength="191" name="name_en"
@@ -150,7 +175,7 @@
 
                                     <div class="row form-group">
                                         <div class="col">
-                                            <label for="thumbnail">Thumbnail</label>
+                                            <label for="thumbnail">Banner</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fa fa-images"></i></span>
@@ -168,10 +193,30 @@
                                         </div>
                                     </div>
 
+                                    <div class="row form-group">
+                                        <div class="col">
+                                            <label for="thumbnail">Guidelines <small>( optional )</small></label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-images"></i></span>
+                                                </div>
+                                                <div class="custom-file">
+                                                    <input type="file" name="guidelines" class="custom-file-input"
+                                                           id="thumbnail" accept="image/*">
+                                                    <label class="custom-file-label" id="txt_thumbnail">Choose
+                                                        File</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-text text-muted">
+                                                Allowed extension: jpg, jpeg, gif, png. Allowed size: < 5 MB
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="row form-group" id="advance_check">
                                         <div class="col">
                                             <div class="custom-checkbox custom-control">
-                                                <input type="checkbox" id="advance"
+                                                <input type="checkbox" id="advance" name="advance"
                                                        class="custom-control-input dt-checkboxes">
                                                 <label for="advance"
                                                        class="custom-control-label">Advance</label>
@@ -628,7 +673,7 @@
                                                         <label for="title">Base Price </label>
                                                         <input id="price" type="number" maxlength="191" name="price"
                                                                class="form-control"
-                                                               placeholder="Write its title here&hellip;" required>
+                                                               placeholder="Write its price here&hellip;">
                                                         <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
                                                     </div>
                                                 </div>
@@ -850,7 +895,7 @@
             $(".fix-label-group .bootstrap-select").addClass('p-0');
             $(".fix-label-group .bootstrap-select button").css('border-color', '#e4e6fc');
 
-            $("#form-blogPost").attr('action', '{{route('create.blog.posts')}}');
+            $("#form-blogPost").attr('action', '{{route('table.subkat.add')}}');
             $("#form-blogPost input[name=_method], #form-blogPost input[name=id], #form-blogPost input[name=admin_id], #title").val('');
             $(".input-files").show();
             $("#form-blogPost button[type=submit]").text('Submit');
@@ -943,6 +988,7 @@
                 $("#category_id").val(data.category_id).selectpicker('refresh');
                 $("#name_en").val(data.data.name.en);
                 $("#name_id").val(data.data.name.id);
+                $('#kategori_id').selectpicker('val', data.data.kategoris_id);
                 $('#_content_en').summernote('code', data.data.caption.en);
                 $('#_content_id').summernote('code', data.data.caption.id);
                 $("#thumbnail").removeAttr('required', 'required');
