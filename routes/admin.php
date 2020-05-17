@@ -74,8 +74,19 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             'as' => 'add.promo'
         ]);
 
+        Route::get('edit/{id}', [
+            'uses' => 'PromoController@ger_data',
+            'as' => 'get.promo'
+        ]);
+
+        Route::put('update', [
+            'uses' => 'PromoController@update_data',
+            'as' => 'update.promo'
+        ]);
+
+
         Route::get('{id}/delete', [
-            'uses' => 'PromoController@delete_admin',
+            'uses' => 'PromoController@delete_data',
             'as' => 'delete.promo'
         ]);
     });
@@ -96,6 +107,7 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             'uses' => 'AdminController@deleteInbox',
             'as' => 'admin.delete.inbox'
         ]);
+
 
     });
 

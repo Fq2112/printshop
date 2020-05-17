@@ -60,6 +60,7 @@
                                         <th>Amount of Promo</th>
                                         <th class="text-center" width="15%">Start at</th>
                                         <th class="text-center" width="15%">End at</th>
+                                        <th class="text-center" width="15%">Status</th>
                                         <th width="25%">Action</th>
                                     </tr>
                                     </thead>
@@ -83,32 +84,45 @@
                                                 {{$row->description}}
                                             </td>
                                             <td style="vertical-align: middle">
-                                               {{$row->discount}} %
+                                                {{$row->discount}} %
                                             </td>
 
                                             <td style="vertical-align: middle" align="center">
                                                 {{\Carbon\Carbon::parse($row->start)->format('j F Y')}}</td>
                                             <td style="vertical-align: middle" align="center">
                                                 {{\Carbon\Carbon::parse($row->end)->format('j F Y')}}</td>
+                                            <td style="vertical-align: middle">
+                                                @if(now() < $row->start || now() > $row->end)
+                                                    <span class="badge badge-warning"> Promo already / not running yet</span>
+                                                @else
+                                                    <span class="badge badge-info"> Promo is running</span>
+                                                @endif
+                                            </td>
                                             <td style="vertical-align: middle" align="center">
-{{--                                                <button data-placement="left" data-toggle="tooltip"--}}
-{{--                                                        title="Reset Password"--}}
-{{--                                                        type="button" class="btn btn-warning mr-1"--}}
-{{--                                                        onclick="show_swal_reset('{{$row->id}}')">--}}
-{{--                                                    <i class="fa fa-user-lock"></i></button>--}}
-{{--                                                <form action="{{route('admin.reset')}}" id="update_form_{{$row->id}}"--}}
-{{--                                                      method="post">--}}
-{{--                                                    @CSRF--}}
-{{--                                                    <input type="hidden" name="id" value="{{$row->id}}">--}}
-{{--                                                </form>--}}
-{{--                                                @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Support\Role::OWNER)--}}
-{{--                                                    @if($row->id != \Illuminate\Support\Facades\Auth::user()->id)--}}
-{{--                                                    <a href="{{route('delete.admin', ['id' => encrypt($row->id)])}}"--}}
-{{--                                                       class="btn btn-danger delete-data" data-toggle="tooltip"--}}
-{{--                                                       title="Delete" data-placement="right">--}}
-{{--                                                        <i class="fas fa-trash-alt"></i></a>--}}
-{{--                                                        @endif--}}
-{{--                                                @endif--}}
+                                                @if(now() < $row->start || now() > $row->end)
+                                                    <button data-placement="left" data-toggle="tooltip" title="Edit"
+                                                            type="button" class="btn btn-warning mr-1"
+                                                            onclick="editBlogPost('{{$row->id}}','{{route('get.promo', ['id' => $row->id])}}')">
+                                                        <i class="fa fa-edit"></i></button>
+                                                @endif
+                                                {{--                                                <form action="{{route('admin.reset')}}" id="update_form_{{$row->id}}"--}}
+                                                {{--                                                      method="post">--}}
+                                                {{--                                                    @CSRF--}}
+                                                {{--                                                    <input type="hidden" name="id" value="{{$row->id}}">--}}
+                                                {{--                                                </form>--}}
+                                                @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Support\Role::OWNER)
+                                                    @if(now() < $row->start || now() > $row->end)
+                                                        <a href="{{route('delete.promo', ['id' => encrypt($row->id)])}}"
+                                                           class="btn btn-danger delete-data" data-toggle="tooltip"
+                                                           title="Delete" data-placement="right">
+                                                            <i class="fas fa-trash-alt"></i></a>
+                                                    @else
+                                                        <button data-placement="left" data-toggle="tooltip"
+                                                                title="Promo is running"
+                                                                type="button" class="btn btn-success mr-1">
+                                                            <i class="fa fa-info"></i></button>
+                                                    @endif
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -135,7 +149,7 @@
                                     <div class="row form-group">
                                         <div class="col has-feedback">
                                             <label for="title">Promo Code</label>
-                                            <input id="name_en" type="text" maxlength="191" name="promo_code"
+                                            <input id="promo_code" type="text" maxlength="191" name="promo_code"
                                                    class="form-control"
                                                    placeholder="Write its promo code here&hellip;" required>
                                             <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
@@ -145,7 +159,7 @@
                                     <div class="row form-group has-feedback">
                                         <div class="col">
                                             <label for="_content">Description</label>
-                                            <textarea id="_content_en" type="text" name="description"
+                                            <textarea id="description" type="text" name="description"
                                                       class="summernote form-control"
                                                       placeholder="Write something about your post here&hellip;"></textarea>
                                             <span class="glyphicon glyphicon-text-height form-control-feedback"></span>
@@ -159,7 +173,8 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                 </div>
-                                                <input type="date" name="start" class="form-control" onblur="set_end_date(this.value)"
+                                                <input type="date" name="start" class="form-control"
+                                                       onblur="set_end_date(this.value)"
                                                        id="start-date" required>
                                             </div>
                                         </div>
@@ -169,8 +184,8 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                 </div>
-                                                    <input type="date" name="end" class="form-control"
-                                                           id="end-date"  required>
+                                                <input type="date" name="end" class="form-control"
+                                                       id="end-date" required>
 
                                             </div>
                                         </div>
@@ -405,10 +420,10 @@
             $('#_content_id').summernote('code', "");
         });
 
-        function set_end_date(value){
+        function set_end_date(value) {
 
             $('#end-date').attr({
-                "min" : value
+                "min": value
             });
         }
 
@@ -455,7 +470,7 @@
             $(".fix-label-group .bootstrap-select").addClass('p-0');
             $(".fix-label-group .bootstrap-select button").css('border-color', '#e4e6fc');
 
-            $("#form-blogPost").attr('action', '{{route('update.balance')}}');
+            $("#form-blogPost").attr('action', '{{route('update.promo')}}');
             $("#form-blogPost input[name=_method]").val('PUT');
             $("#form-blogPost input[name=id]").val(id);
             $(".input-files").hide();
@@ -464,14 +479,16 @@
             $.get(url, function (data) {
                 // console.log(data.name.id);
                 $("#form-blogPost input[name=admin_id]").val(data.admin_id);
-                $("#category_id").val(data.category_id).selectpicker('refresh');
-                $("#name_en").val(data.name.en);
-                $("#name_id").val(data.name.id);
+                $("#promo_code").val(data.promo_code);
+                $("#discount").val(data.discount);
                 $("#price").val(data.price);
-                $('#_content_en').summernote('code', data.caption.en);
-                $('#_content_id').summernote('code', data.caption.id);
-                $("#thumbnail").removeAttr('required', 'required');
-                $("#txt_thumbnail").text(data.image.length > 60 ? data.image.slice(0, 60) + "..." : data.thumbnail);
+                $("#start-date").val(data.start);
+                $("#end-date").attr({
+                    "min": data.start,
+                    "value": data.end
+                });
+                $('#description').summernote('code', data.description);
+
             }).fail(function () {
                 swal("Error!", "There's no any selected record!", "error");
             });
