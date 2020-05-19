@@ -91,6 +91,39 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
         ]);
     });
 
+    Route::group(['prefix' => 'order',  'middleware' => 'owner'], function () {
+        Route::get('show/{condition}', [
+            'uses' => 'OrderController@show_promo',
+            'as' => 'admin.order'
+        ]);
+
+        Route::post('create', [
+            'uses' => 'OrderController@create_data',
+            'as' => 'add.order'
+        ]);
+
+        Route::get('edit/{id}', [
+            'uses' => 'OrderController@ger_data',
+            'as' => 'get.order'
+        ]);
+
+        Route::put('update', [
+            'uses' => 'OrderController@update_data',
+            'as' => 'update.order'
+        ]);
+
+
+        Route::get('{id}/delete', [
+            'uses' => 'OrderController@delete_data',
+            'as' => 'delete.order'
+        ]);
+
+        Route::get('download/file', [
+            'uses' => 'OrderController@get_file',
+            'as' => 'admin.order.download'
+        ]);
+    });
+
     Route::group(['prefix' => 'inbox', 'middleware' => 'owner'], function () {
 
         Route::get('/', [
