@@ -75,6 +75,23 @@ class OrderController extends Controller
         }
     }
 
+    public function proceed_order(Request $request)
+    {
+        $order = Order::find($request->id);
+
+        if ($order->progress_status == StatusProgress::NEW){
+            $order->update([
+                'progress_status' => StatusProgress::START_PRODUCTION
+            ]);
+        }elseif ($order->progress_status == StatusProgress::START_PRODUCTION || $order->progress_status == StatusProgress::FINISH_PRODUCTION){
+            $order->update([
+                'progress_status' => StatusProgress::SHIPPING
+            ]);
+        }
+        return back()->with('success', 'Order Successfully Updated!');
+
+    }
+
     public function ger_data($id)
     {
         $data = Order::find($id);

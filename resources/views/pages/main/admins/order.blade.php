@@ -291,12 +291,12 @@
                                             <td style="vertical-align: middle" align="center">
                                                 @if($status == \App\Support\StatusProgress::NEW)
                                                     <button data-placement="left" data-toggle="tooltip"
-                                                            title="Proceed this order"
+                                                            title="Proceed this order" onclick="proceed_order('{{$row->id}}')"
                                                             type="button" class="btn btn-warning mr-1">
                                                         <i class="fa fa-paper-plane"></i></button>
                                                 @elseif($status == \App\Support\StatusProgress::START_PRODUCTION || $status == \App\Support\StatusProgress::FINISH_PRODUCTION)
                                                     <button data-placement="left" data-toggle="tooltip"
-                                                            title="Send this order"
+                                                            title="Send this order" onclick="proceed_order('{{$row->id}}')"
                                                             type="button" class="btn btn-warning mr-1">
                                                         <i class="fa fa-shipping-fast"></i></button>
                                                 @endif
@@ -619,6 +619,29 @@
                 success: function (data) {
 
 
+                }, error: function (xhr, ajaxOptions, thrownError) {
+                    if (xhr.status == 404) {
+                        console.log(xhr);
+                        swal('Error', xhr.responseJSON.error, 'error');
+                    }
+                }
+            });
+        }
+
+        function proceed_order(order_id) {
+            $.ajax({
+                type: 'post',
+                url: '{{route('update.order.status')}}',
+                data: {
+                    id: order_id,
+                    _token : '{{csrf_token()}}'
+                },
+                success: function (data) {
+                    // console.log(data);
+                    swal('Success', "Order Successfully Updated!", 'success');
+                    setTimeout(function () {// wait for 5 secs(2)
+                        location.reload(); // then reload the page.(3)
+                    }, 1500);
                 }, error: function (xhr, ajaxOptions, thrownError) {
                     if (xhr.status == 404) {
                         console.log(xhr);
