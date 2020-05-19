@@ -24,7 +24,7 @@ class ColorsController extends Controller
         if ($request->hasFile('thumbnail')) {
             $this->validate($request, ['thumbnail' => 'required|image|mimes:jpg,jpeg,gif,png|max:5120']);
             $thumbnail = uniqid().$request->file('thumbnail')->getClientOriginalName();
-            $request->file('thumbnail')->storeAs('public/spec/', $thumbnail);
+            $request->file('thumbnail')->storeAs('public/products/specs/', $thumbnail);
 
         }
 
@@ -57,8 +57,8 @@ class ColorsController extends Controller
         if ($request->hasFile('thumbnail')) {
             $this->validate($request, ['thumbnail' => 'required|image|mimes:jpg,jpeg,gif,png|max:5120']);
             $thumbnail = uniqid().$request->file('thumbnail')->getClientOriginalName();;
-            Storage::delete('public/spec/' . $thumbnail);
-            $request->file('thumbnail')->storeAs('public/spec/', $thumbnail);
+            Storage::delete('public/products/specs/' . $thumbnail);
+            $request->file('thumbnail')->storeAs('public/products/specs/', $thumbnail);
 
         } else {
             $thumbnail = $category->image;
@@ -83,7 +83,7 @@ class ColorsController extends Controller
     {
         $post = Colors::find(decrypt($id));
 
-        Storage::delete('public/spec/' . $post->image);
+        Storage::delete('public/products/specs/' . $post->image);
 
         $post->delete();
 
