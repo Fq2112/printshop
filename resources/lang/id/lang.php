@@ -371,7 +371,7 @@ return [
         "success" => "SUKSES!",
         "login" => "Anda telah masuk.",
         "login-inactive" => "Akun Anda belum aktif! Silahkan aktivasi akun Anda terlebih dahulu.",
-        "login-fail" => "Email atau password Anda salah.",
+        "login-fail" => "Username/email atau password Anda salah.",
         "username" => "Username tersebut telah digunakan!",
         "confirm-password" => "Konfirmasi kata sandi Anda tidak cocok!",
         "socialite-fail" => "Silahkan masuk/daftar dengan akun " . env('APP_NAME') . ".",

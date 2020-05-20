@@ -125,72 +125,64 @@
 
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <a href="javascript:void(0)" onclick="openDataUsers('#')">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon bg-primary">
-                            <i class="fas fa-users"></i>
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-primary">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>{{__('admin.dashboard.card-stats.customer')}}</h4>
                         </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>{{__('admin.dashboard.card-stats.customer')}}</h4>
-                            </div>
-                            <div class="card-body">
-                                {{count($users)}}
-                            </div>
+                        <div class="card-body">
+                            {{count($users)}}
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <a href="javascript:void(0)" onclick="openDataAdmins('#')">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon bg-info">
-                            <i class="fas fa-users"></i>
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-info">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>{{__('admin.dashboard.card-stats.admin')}}</h4>
                         </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>{{__('admin.dashboard.card-stats.admin')}}</h4>
-                            </div>
-                            <div class="card-body">
-                                {{count($admins)}}
-                            </div>
+                        <div class="card-body">
+                            {{count($admins)}}
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <a href="javascript:void(0)" onclick="openDataOrders('#')">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon bg-success">
-                            <i class="fas fa-tools"></i>
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-success">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>{{__('admin.dashboard.card-stats.order')}}</h4>
                         </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>{{__('admin.dashboard.card-stats.order')}}</h4>
-                            </div>
-                            <div class="card-body">
-                                {{count(\App\Models\Order::all())}}
-                            </div>
+                        <div class="card-body">
+                            {{count(\App\Models\Order::all())}}
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <a href="javascript:void(0)" onclick="openDataBlog('#')">
-                    <div class="card card-statistic-1">
-                        <div class="card-icon bg-danger">
-                            <i class="fas fa-blog"></i>
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-danger">
+                        <i class="fas fa-blog"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Blog</h4>
                         </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Blog</h4>
-                            </div>
-                            <div class="card-body">
-                                {{count($blog)}}
-                            </div>
+                        <div class="card-body">
+                            {{count($blog)}}
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
         </div>
 
@@ -244,38 +236,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-4">
-                <div class="card card-hero">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="far fa-question-circle"></i>
-                        </div>
-                        <h4>{{count(\App\Models\Kontak::where('is_reply',false)->get())}}</h4>
-                        <div class="card-description">Customers need help</div>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="tickets-list">
-                            @foreach(\App\Models\Kontak::where('is_reply',false)->get()->take(3) as $item)
-                                <a href="#" class="ticket-item">
-                                    <div class="ticket-title">
-                                        <h4>{{$item->subject}}</h4>
-                                    </div>
-                                    <div class="ticket-info">
-                                        <div>{{$item->name}}</div>
-                                        <div class="bullet"></div>
-                                        <div
-                                            class="text-primary">{{\Carbon\Carbon::parse($item->created_at)->diffForHumans()}}</div>
-                                    </div>
-                                </a>
-                            @endforeach
-                            <a href="{{route('admin.inbox')}}" class="ticket-item ticket-more">
-                                View All <i class="fas fa-chevron-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8">
+            <div class="col">
                 <div class="card">
                     <div class="card-header">
                         <h4>Invoices Today</h4>
@@ -326,7 +287,7 @@
                         <h4>{{__('lang.blog.latest')}}</h4>
                         <div class="card-header-action">
                             <a href="{{route('table.blog.posts')}}" class="btn btn-primary text-uppercase">
-                                <b><i class="fa fa-blog mr-1"></i>{{__('lang.blog.tabs')}}</b>
+                                <b><i class="fa fa-blog mr-1"></i>{{__('lang.button.view')}}</b>
                             </a>
                             <button type="button" class="btn btn-outline-primary text-uppercase" style="display: none">
                                 <b><i class="fa fa-undo mr-1"></i>{{__('lang.button.cancel')}}</b>
@@ -344,7 +305,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($latest as $row)
+                                @if(count($latest) > 0)
+                                    @foreach($latest as $row)
                                     @php
                                         $date = \Carbon\Carbon::parse($row->created_at);
                                         $url = route('detail.blog', ['author' => $row->getAdmin->username,
@@ -390,7 +352,12 @@
                                             @endif
                                         </td>
                                     </tr>
-                                @endforeach
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="3" align="center">No data available in table</td>
+                                    </tr>
+                                @endif
                                 </tbody>
                             </table>
                         </div>
@@ -492,7 +459,7 @@
                                     </a>
                                 @endforeach
                                 <a href="{{route('admin.inbox')}}" class="ticket-item ticket-more">
-                                    {{__('lang.blog.tabs')}} <i class="fas fa-chevron-right"></i></a>
+                                    {{__('lang.button.view')}} <i class="fas fa-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -667,30 +634,6 @@
         $("#period").on('change', function () {
             $("#form-filter")[0].submit();
         });
-
-        function openDataAdmins(href) {
-            window.location.href = href;
-        }
-
-        function openDataGalleries(href) {
-            @if($role->isOwner() || $role->isRoot())
-                window.location.href = href;
-            @else
-            swal('{{__('lang.alert.warning')}}', '{{__('admin.alert.feature-fail', ['param' => 'ROOT / Owner'])}}', 'warning');
-            @endif
-        }
-
-        function openDataInstallers(href) {
-            @if($role->isOwner() || $role->isRoot())
-                window.location.href = href;
-            @else
-            swal('{{__('lang.alert.warning')}}', '{{__('admin.alert.feature-fail', ['param' => 'ROOT / Owner'])}}', 'warning');
-            @endif
-        }
-
-        function openDataBlog(href) {
-            window.location.href = href;
-        }
 
         function editBlogPost(id, url) {
             $("#div-blog").removeClass('p-0');

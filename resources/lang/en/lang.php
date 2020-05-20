@@ -371,7 +371,7 @@ return [
         "success" => "SUCCESS!",
         "login" => "You`ve signed in.",
         "login-inactive" => "Your account is not active yet! Please activate your account first.",
-        "login-fail" => "Your email or password is incorrect.",
+        "login-fail" => "Your username/email or password is incorrect.",
         "username" => "Username is already in used!",
         "confirm-password" => "Your confirmation password doesn`t match!",
         "socialite-fail" => "Please sign up/in with a " . env('APP_NAME') . " account.",
