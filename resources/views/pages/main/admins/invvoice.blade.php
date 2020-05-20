@@ -159,7 +159,7 @@
                 cursoropacitymax: .8,
                 cursorwidth: 7,
                 cursorcolor: "#f89406",
-                cursorborder: "1px solid #592f83",
+                cursorborder: "none",
             });
         });
 
