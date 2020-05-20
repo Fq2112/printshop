@@ -91,7 +91,7 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
         ]);
     });
 
-    Route::group(['prefix' => 'order',  'middleware' => 'owner'], function () {
+    Route::group(['prefix' => 'order'], function () {
         Route::get('show/{condition}', [
             'uses' => 'OrderController@show_promo',
             'as' => 'admin.order'
