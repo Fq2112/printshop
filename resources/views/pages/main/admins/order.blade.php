@@ -37,9 +37,9 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-header-form">
-{{--                                <button id="btn_create" class="btn btn-primary text-uppercase">--}}
-{{--                                    <strong><i class="fas fa-plus mr-2"></i>Create</strong>--}}
-{{--                                </button>--}}
+                                {{--                                <button id="btn_create" class="btn btn-primary text-uppercase">--}}
+                                {{--                                    <strong><i class="fas fa-plus mr-2"></i>Create</strong>--}}
+                                {{--                                </button>--}}
                             </div>
                         </div>
 
@@ -291,19 +291,30 @@
                                             <td style="vertical-align: middle" align="center">
                                                 @if($status == \App\Support\StatusProgress::NEW)
                                                     <button data-placement="left" data-toggle="tooltip"
-                                                            title="Proceed this order" onclick="proceed_order('{{$row->id}}')"
+                                                            title="Proceed this order"
+                                                            onclick="proceed_order('{{$row->id}}')"
                                                             type="button" class="btn btn-warning mr-1">
                                                         <i class="fa fa-paper-plane"></i></button>
                                                 @elseif($status == \App\Support\StatusProgress::START_PRODUCTION || $status == \App\Support\StatusProgress::FINISH_PRODUCTION)
                                                     <button data-placement="left" data-toggle="tooltip"
-                                                            title="Send this order" onclick="proceed_order('{{$row->id}}')"
+                                                            title="Send this order"
+                                                            onclick="proceed_order('{{$row->id}}')"
                                                             type="button" class="btn btn-warning mr-1">
                                                         <i class="fa fa-shipping-fast"></i></button>
                                                 @endif
-                                                <button data-placement="right" data-toggle="tooltip"
-                                                        title="Design" onclick="get_design('{{$row->getCart->id}}')"
-                                                        type="button" class="btn btn-info mr-1">
-                                                    <i class="fa fa-file-download"></i></button>
+                                                @if($row->getCart->link)
+                                                    <a href="{{$row->getCart->link}}" target="_blank">
+                                                        <button data-placement="right" data-toggle="tooltip"
+                                                                title="Design"
+                                                                type="button" class="btn btn-info mr-1">
+                                                            <i class="fa fa-link"></i></button>
+                                                    </a>
+                                                @elseif($row->getChart->file)
+                                                    <button data-placement="right" data-toggle="tooltip"
+                                                            title="Design" onclick="get_design('{{$row->getCart->id}}')"
+                                                            type="button" class="btn btn-info mr-1">
+                                                        <i class="fa fa-file-download"></i></button>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -634,7 +645,7 @@
                 url: '{{route('update.order.status')}}',
                 data: {
                     id: order_id,
-                    _token : '{{csrf_token()}}'
+                    _token: '{{csrf_token()}}'
                 },
                 success: function (data) {
                     // console.log(data);
