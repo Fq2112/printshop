@@ -218,6 +218,26 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                 'as' => 'edit.categories.sub.posts'
             ]);
 
+            Route::get('/cluster', [
+                'uses' => 'CategoryController@show_cluster',
+                'as' => 'table.categories.cluster'
+            ]);
+
+            Route::post('/cluster/add', [
+                'uses' => 'CategoryController@create_data',
+                'as' => 'table.cluster.add'
+            ]);
+
+            Route::post('/cluster/update', [
+                'uses' => 'CategoryController@update_data',
+                'as' => 'table.cluster.update'
+            ]);
+
+            Route::get('edit/cluster/{id}', [
+                'uses' => 'CategoryController@editcluster',
+                'as' => 'edit.categories.cluster.posts'
+            ]);
+
         });
 
         Route::group(['prefix' => 'spec', 'namespace' => 'Spec'], function () {

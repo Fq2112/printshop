@@ -22,7 +22,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Sub-Categories Product Table</h1>
+            <h1>Cluster-Categories Product Table</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{route('admin.dashboard')}}">Dashboard</a></div>
                 <div class="breadcrumb-item">Data Master</div>
@@ -85,7 +85,7 @@
                                             <td style="vertical-align: middle" align="center">
                                                 <button data-placement="left" data-toggle="tooltip" title="Edit"
                                                         type="button" class="btn btn-warning mr-1"
-                                                        onclick="editBlogPost('{{$row->id}}','{{route('edit.categories.sub.posts', ['id' => $row->id])}}')">
+                                                        onclick="editBlogPost('{{$row->id}}','{{route('edit.categories.cluster.posts', ['id' => $row->id])}}')">
                                                     <i class="fa fa-edit"></i></button>
 {{--                                                <a href="{{route('delete.categories', ['id' => encrypt($row->id)])}}"--}}
 {{--                                                   class="btn btn-danger delete-data" data-toggle="tooltip"--}}
@@ -117,19 +117,19 @@
                                     <div class="row form-group">
                                         <div class="col">
                                             <div class="col fix-label-group">
-                                                <label for="category_id">Category Parent</label>
+                                                <label for="category_id">Sub-Category Parent</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
                                                             <span class="input-group-text fix-label-item"
                                                                   style="height: 2.25rem">
                                                                 <i class="fa fa-tag"></i></span>
                                                     </div>
-                                                    <select id="kategori_id"
+                                                    <select id="category_id"
                                                             class="form-control selectpicker"
                                                             title="-- Choose --"
                                                             name="kategori_id" data-live-search="true"
                                                     >
-                                                        @foreach(\App\Models\Kategori::all() as $material)
+                                                        @foreach(\App\Models\SubKategori::all() as $material)
                                                             <option
                                                                 value="{{$material->id}}">{{$material->name}}</option>
                                                         @endforeach
@@ -696,83 +696,6 @@
             </div>
         </div>
     </section>
-
-    <div class="modal fade " id="blogCategoryModal" tabindex="-1" role="dialog"
-         aria-labelledby="blogCategoryModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document" style="width: 100%">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Create Form</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form id="form-blogCategory" method="post" action="{{route('create.blog.categories')}}">
-                    {{csrf_field()}}
-                    <input type="hidden" name="_method">
-                    <input type="hidden" name="id">
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col">
-                                <label for="name">Name <small>(En)</small></label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-tag"></i></span>
-                                    </div>
-                                    <input id="name" type="text" maxlength="191" name="name" class="form-control"
-                                           placeholder="Write its name here&hellip;" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label for="name">Name <small>(Id)</small></label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-tag"></i></span>
-                                    </div>
-                                    <input id="name_id" type="text" maxlength="191" name="name_id" class="form-control"
-                                           placeholder="Write its name here&hellip;" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row form-group has-feedback">
-                            <div class="col">
-                                <label for="_content">Caption</label>
-                                <textarea id="_content" type="text" name="_content"
-                                          class="summernote form-control"
-                                          placeholder="Write something about your post here&hellip;"></textarea>
-                                <span class="glyphicon glyphicon-text-height form-control-feedback"></span>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col">
-                                <label for="thumbnail">Image</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-images"></i></span>
-                                    </div>
-                                    <div class="custom-file">
-                                        <input type="file" name="thumbnail" class="custom-file-input"
-                                               id="thumbnail" accept="image/*" required>
-                                        <label class="custom-file-label" id="txt_thumbnail">Choose
-                                            File</label>
-                                    </div>
-                                </div>
-                                <div class="form-text text-muted">
-                                    Allowed extension: jpg, jpeg, gif, png. Allowed size: < 5 MB
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 @endsection
 @push("scripts")
     <script src="{{asset('admins/modules/datatables/datatables.min.js')}}"></script>
@@ -896,7 +819,7 @@
             $(".fix-label-group .bootstrap-select").addClass('p-0');
             $(".fix-label-group .bootstrap-select button").css('border-color', '#e4e6fc');
 
-            $("#form-blogPost").attr('action', '{{route('table.subkat.add')}}');
+            $("#form-blogPost").attr('action', '{{route('table.cluster.add')}}');
             $("#form-blogPost input[name=_method], #form-blogPost input[name=id], #form-blogPost input[name=admin_id], #title").val('');
             $(".input-files").show();
             $("#form-blogPost button[type=submit]").text('Submit');
@@ -917,7 +840,7 @@
 
         function createBlogCategory() {
             $("#blogCategoryModal .modal-title").text('Create Form');
-            $("#form-blogCategory").attr('action', '{{route('create.categories')}}');
+            $("#form-blogCategory").attr('action', '{{route('table.cluster.add')}}');
             $("#form-blogCategory input[name=_method]").val('');
             $("#form-blogCategory input[name=id]").val('');
             $("#form-blogCategory button[type=submit]").text('Submit');
@@ -955,7 +878,7 @@
 
         function editBlogCategory(id, name, name_id, caption) {
             $("#blogCategoryModal .modal-title").text('Edit Form');
-            $("#form-blogCategory").attr('action', '{{route('table.subkat.update')}}');
+            $("#form-blogCategory").attr('action', '{{route('table.cluster.update')}}');
             $("#form-blogCategory input[name=_method]").val('PUT');
             $("#form-blogCategory input[name=id]").val(id);
             $("#form-blogCategory button[type=submit]").text('Save Changes');
@@ -977,16 +900,16 @@
             $(".fix-label-group .bootstrap-select").addClass('p-0');
             $(".fix-label-group .bootstrap-select button").css('border-color', '#e4e6fc');
 
-            $("#form-blogPost").attr('action', '{{route('table.subkat.update')}}');
+            $("#form-blogPost").attr('action', '{{route('table.cluster.add')}}');
             $("#form-blogPost input[name=_method]").val('PUT');
             $("#form-blogPost input[name=id]").val(id);
             $(".input-files").hide();
             $("#form-blogPost button[type=submit]").text('Save Changes');
 
             $.get(url, function (data) {
-                console.log(data.detail);
+                console.log(data.data.subkategori_id);
                 $("#form-blogPost input[name=admin_id]").val(data.admin_id);
-                $("#category_id").val(data.category_id).selectpicker('refresh');
+                $("#category_id").val(data.data.subkategori_id).selectpicker('refresh');
                 $("#name_en").val(data.data.name.en);
                 $("#name_id").val(data.data.name.id);
                 $('#kategori_id').selectpicker('val', data.data.kategoris_id);

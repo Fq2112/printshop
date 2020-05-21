@@ -60,7 +60,7 @@
                 <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/categories/sub*') ?
                 'active' : ''}}"><a href="{{route('table.categories.subkat')}}" class="nav-link">Subs</a></li>
                 <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/categories/cluster*') ?
-                'active' : ''}}"><a href="{{route('table.blog.posts')}}" class="nav-link">Clusters</a></li>
+                'active' : ''}}"><a href="{{route('table.categories.cluster')}}" class="nav-link">Clusters</a></li>
             </ul>
         </li>
 
