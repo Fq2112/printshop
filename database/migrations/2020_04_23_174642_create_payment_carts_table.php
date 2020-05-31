@@ -25,7 +25,7 @@ class CreatePaymentCartsTable extends Migration
             $table->foreign('cart_id')->references('id')->on('carts')
                 ->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->text('uni_code_payment');
-            $table->text('token')->unique();
+            $table->string('token')->unique();
             $table->string('price_total');
             $table->boolean('finish_payment')->default(false);
             $table->timestamps();

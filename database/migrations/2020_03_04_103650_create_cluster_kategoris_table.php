@@ -20,7 +20,7 @@ class CreateClusterKategorisTable extends Migration
                 ->on('sub_kategoris')->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
             $table->string('name');
-            $table->text('permalink')->unique();
+            $table->string('permalink')->unique();
             $table->text('banner');
             $table->text('caption');
             $table->text('thumbnail');

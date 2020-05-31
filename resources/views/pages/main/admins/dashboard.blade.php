@@ -21,7 +21,7 @@
             <h1>Welcome to Dashboard</h1>
         </div>
         <div class="row">
-            <div class="col-lg-5 col-md-4 col-sm-12">
+            <div class="col-lg-6 col-md-4 col-sm-12">
                 <div class="card card-statistic-2">
                     <div class="card-stats">
                         <div class="card-stats-title">Order Statistics on {{date('F - Y')}}
@@ -81,7 +81,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="col-lg-6 col-md-4 col-sm-12">
                 <div class="card card-statistic-2">
                     <div class="card-chart">
                         <canvas id="balance-chart" height="80"></canvas>
@@ -94,33 +94,16 @@
                             <h4>Income {{date('F - Y')}}</h4>
                         </div>
                         <div class="card-body">
-                           <?php
+                            <?php
                             $today = today()->format('m');
-                            $income = \App\Models\PaymentCart::whereMonth('created_at',$today)->get()->sum('price_total');
-                            echo "Rp".number_format($income)
+                            $income = \App\Models\PaymentCart::whereMonth('created_at', $today)->get()->sum('price_total');
+                            echo "Rp" . number_format($income)
                             ?>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-12">
-                <div class="card card-statistic-2">
-                    <div class="card-chart">
-                        <canvas id="sales-chart" height="80"></canvas>
-                    </div>
-                    <div class="card-icon shadow-primary bg-primary">
-                        <i class="fas fa-shopping-bag"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Sales</h4>
-                        </div>
-                        <div class="card-body">
-                            4,732
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
 
         <div class="row">
@@ -255,24 +238,37 @@
                                     <th>Due Date</th>
                                     <th>Action</th>
                                 </tr>
-                                @foreach($payment->take(5) as $item)
+                                @if(empty($payment))
                                     <tr>
-                                        <td><a href="javascript:void(0)">#{{$item->uni_code_payment}}</a></td>
-                                        <td class="font-weight-600">{{$item->getUser->name}}</td>
-                                        <td>
-                                            @if($item->finish_payment == 1)
-                                                <div class="badge badge-success">Paid</div>
-                                            @else
-                                                <div class="badge badge-warning">Unpaid</div>
-                                            @endif
-                                        </td>
-                                        <td>{{\Carbon\Carbon::parse($item->updated_at)->format('d  F Y')}}</td>
-                                        <td>
-                                            <a href="#" class="btn btn-primary">Detail</a>
+                                        <td colspan="5">
+                                            <div class="dropdown-item-avatar">
+                                                <img src="{{asset('images/searchPlace.png')}}" class="img-fluid">
+                                            </div>
+                                            <div class="dropdown-item-desc">
+                                                <p>There seem none payment data for a while,please staty toon</p>
+                                            </div>
                                         </td>
                                     </tr>
+                                @else
+                                    @foreach($payment->take(5) as $item)
+                                        <tr>
+                                            <td><a href="javascript:void(0)">#{{$item->uni_code_payment}}</a></td>
+                                            <td class="font-weight-600">{{$item->getUser->name}}</td>
+                                            <td>
+                                                @if($item->finish_payment == 1)
+                                                    <div class="badge badge-success">Paid</div>
+                                                @else
+                                                    <div class="badge badge-warning">Unpaid</div>
+                                                @endif
+                                            </td>
+                                            <td>{{\Carbon\Carbon::parse($item->updated_at)->format('d  F Y')}}</td>
+                                            <td>
+                                                <a href="{{route('admin.invoice')}}" class="btn btn-primary">Detail</a>
+                                            </td>
+                                        </tr>
 
-                                @endforeach
+                                    @endforeach
+                                @endif
                             </table>
                         </div>
                     </div>
@@ -307,51 +303,52 @@
                                 <tbody>
                                 @if(count($latest) > 0)
                                     @foreach($latest as $row)
-                                    @php
-                                        $date = \Carbon\Carbon::parse($row->created_at);
-                                        $url = route('detail.blog', ['author' => $row->getAdmin->username,
-                                        'y' => $date->format('Y'), 'm' => $date->format('m'), 'd' => $date->format('d'),
-                                        'title' => $row->permalink]);
-                                    @endphp
-                                    <tr>
-                                        <td>
-                                            {{$row->title}}
-                                            <div class="table-links">
-                                                {{$row->getBlogCategory->name}}
-                                                <div class="bullet"></div>
-                                                {{$date->formatLocalized('%b %d, %Y')}}
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <a href="{{route('detail.blog', ['author' => $row->getAdmin->username])}}"
-                                               class="font-weight-600">
-                                                <img alt="avatar" width="30" class="rounded-circle mr-2" src="{{$row
+                                        @php
+                                            $date = \Carbon\Carbon::parse($row->created_at);
+                                            $url = route('detail.blog', ['author' => $row->getAdmin->username,
+                                            'y' => $date->format('Y'), 'm' => $date->format('m'), 'd' => $date->format('d'),
+                                            'title' => $row->permalink]);
+                                        @endphp
+                                        <tr>
+                                            <td>
+                                                {{$row->title}}
+                                                <div class="table-links">
+                                                    {{$row->getBlogCategory->name}}
+                                                    <div class="bullet"></div>
+                                                    {{$date->formatLocalized('%b %d, %Y')}}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <a href="{{route('detail.blog', ['author' => $row->getAdmin->username])}}"
+                                                   class="font-weight-600">
+                                                    <img alt="avatar" width="30" class="rounded-circle mr-2" src="{{$row
                                                 ->getAdmin->ava != "" ? asset('storage/admins/ava/'.$row->getAdmin->ava) :
                                                 asset('admins/img/avatar/avatar-'.rand(1,5).'.png')}}">{{$row->getAdmin->name}}
-                                            </a>
-                                        </td>
-                                        <td align="center">
-                                            <a class="btn btn-info btn-action {{$role->isRoot() ||
-                                            ($role->isAdmin() && $row->admin_id == $role->id) ? 'mr-1' : ''}}"
-                                               href="{{$url}}" data-toggle="tooltip"
-                                               title="{{ucfirst(strtolower(__('lang.button.detail')))}}">
-                                                <i class="fas fa-info-circle"></i>
-                                            </a>
-                                            @if($role->isRoot() || ($role->isAdmin() && $row->admin_id == $role->id))
-                                                <button class="btn btn-warning btn-action mr-1" data-toggle="tooltip"
-                                                        title="{{ucfirst(strtolower(__('lang.button.edit')))}}"
-                                                        type="button" onclick="editBlogPost('{{$row->id}}',
-                                                    '{{route('edit.blog.posts', ['id' => $row->id])}}')">
-                                                    <i class="fas fa-pencil-alt"></i>
-                                                </button>
-                                                <a href="{{route('delete.blog.posts', ['id' => encrypt($row->id)])}}"
-                                                   class="btn btn-danger delete-data" data-toggle="tooltip"
-                                                   title="{{ucfirst(strtolower(__('lang.button.delete')))}}">
-                                                    <i class="fas fa-trash-alt"></i>
                                                 </a>
-                                            @endif
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td align="center">
+                                                <a class="btn btn-info btn-action {{$role->isRoot() ||
+                                            ($role->isAdmin() && $row->admin_id == $role->id) ? 'mr-1' : ''}}"
+                                                   href="{{$url}}" data-toggle="tooltip"
+                                                   title="{{ucfirst(strtolower(__('lang.button.detail')))}}">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </a>
+                                                @if($role->isRoot() || ($role->isAdmin() && $row->admin_id == $role->id))
+                                                    <button class="btn btn-warning btn-action mr-1"
+                                                            data-toggle="tooltip"
+                                                            title="{{ucfirst(strtolower(__('lang.button.edit')))}}"
+                                                            type="button" onclick="editBlogPost('{{$row->id}}',
+                                                        '{{route('edit.blog.posts', ['id' => $row->id])}}')">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </button>
+                                                    <a href="{{route('delete.blog.posts', ['id' => encrypt($row->id)])}}"
+                                                       class="btn btn-danger delete-data" data-toggle="tooltip"
+                                                       title="{{ucfirst(strtolower(__('lang.button.delete')))}}">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </a>
+                                                @endif
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 @else
                                     <tr>
@@ -566,9 +563,9 @@
                             $dates[] = \Carbon\Carbon::createFromDate($today->year, $today->month, $i)->formatLocalized('%d %b %Y');
                         }
                     @endphp
-                    @foreach($dates as $item)
+                        @foreach($dates as $item)
 
-                    '{{$item}}',
+                        '{{$item}}',
                     @endforeach
                 ],
                 datasets: [{
@@ -582,13 +579,13 @@
                                 $dates[] = \Carbon\Carbon::createFromDate($today->year, $today->month, $i)->format('F-d-Y');
                             }
                         @endphp
-                        @foreach($dates as $item)
+                            @foreach($dates as $item)
                         <?php
-                        $valPayment = \App\Models\Order::whereDate('created_at',\Carbon\Carbon::parse($item))->get()->count();
-                        ?>
+                            $valPayment = \App\Models\Order::whereDate('created_at', \Carbon\Carbon::parse($item))->get()->count();
+                            ?>
 
-                        '{{$valPayment}}',
-                    @endforeach
+                            '{{$valPayment}}',
+                        @endforeach
                     ],
                     borderWidth: 2,
                     backgroundColor: 'rgb(248,148,6)',
@@ -700,10 +697,26 @@
         var myChart = new Chart(balance_chart, {
             type: 'bar',
             data: {
-                labels: ['16-07-2018', '17-07-2018', '18-07-2018', '19-07-2018', '20-07-2018', '21-07-2018', '22-07-2018', '23-07-2018', '24-07-2018', '25-07-2018', '26-07-2018', '27-07-2018', '28-07-2018', '29-07-2018', '30-07-2018', '31-07-2018'],
+                labels: [
+                    @foreach(__('admin.months') as $month)
+                        '{{$month}}',
+                    @endforeach
+                ],
                 datasets: [{
-                    label: 'Balance',
-                    data: [50, 61, 80, 50, 72, 52, 60, 41, 30, 45, 70, 40, 93, 63, 50, 62],
+                    label: 'Income (Rp)',
+                    data: [
+                        @php $total = 0; @endphp
+                        @for($i=1;$i<=12;$i++)
+                        @php
+                            $total = 0;
+                            $visitors = \App\Models\PaymentCart::whereMonth('created_at',$i)->get();
+                            foreach ($visitors as $row){
+                                $total += $row->getCart->total;
+                            }
+                        @endphp
+                        {{$total}},
+                        @endfor
+                    ],
                     backgroundColor: balance_chart_bg_color,
                     borderWidth: 3,
                     borderColor: 'rgb(248,148,6)',

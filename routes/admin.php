@@ -63,32 +63,34 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
     });
 
 
-    Route::group(['prefix' => 'promo',  'middleware' => 'owner'], function () {
-        Route::get('show', [
-            'uses' => 'PromoController@show_promo',
-            'as' => 'admin.promo'
-        ]);
+    Route::group(['prefix' => 'msc'], function () {
+        Route::group(['prefix' => 'promo', 'middleware' => 'owner'], function () {
+            Route::get('show', [
+                'uses' => 'PromoController@show_promo',
+                'as' => 'admin.promo'
+            ]);
 
-        Route::post('create', [
-            'uses' => 'PromoController@create_data',
-            'as' => 'add.promo'
-        ]);
+            Route::post('create', [
+                'uses' => 'PromoController@create_data',
+                'as' => 'add.promo'
+            ]);
 
-        Route::get('edit/{id}', [
-            'uses' => 'PromoController@ger_data',
-            'as' => 'get.promo'
-        ]);
+            Route::get('edit/{id}', [
+                'uses' => 'PromoController@ger_data',
+                'as' => 'get.promo'
+            ]);
 
-        Route::put('update', [
-            'uses' => 'PromoController@update_data',
-            'as' => 'update.promo'
-        ]);
+            Route::put('update', [
+                'uses' => 'PromoController@update_data',
+                'as' => 'update.promo'
+            ]);
 
 
-        Route::get('{id}/delete', [
-            'uses' => 'PromoController@delete_data',
-            'as' => 'delete.promo'
-        ]);
+            Route::get('{id}/delete', [
+                'uses' => 'PromoController@delete_data',
+                'as' => 'delete.promo'
+            ]);
+        });
     });
 
     Route::group(['prefix' => 'order'], function () {
@@ -214,6 +216,26 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             Route::get('edit/sub/{id}', [
                 'uses' => 'CategoryController@editSubCategory',
                 'as' => 'edit.categories.sub.posts'
+            ]);
+
+            Route::get('/cluster', [
+                'uses' => 'CategoryController@show_cluster',
+                'as' => 'table.categories.cluster'
+            ]);
+
+            Route::post('/cluster/add', [
+                'uses' => 'CategoryController@create_data',
+                'as' => 'table.cluster.add'
+            ]);
+
+            Route::post('/cluster/update', [
+                'uses' => 'CategoryController@update_data',
+                'as' => 'table.cluster.update'
+            ]);
+
+            Route::get('edit/cluster/{id}', [
+                'uses' => 'CategoryController@editcluster',
+                'as' => 'edit.categories.cluster.posts'
             ]);
 
         });

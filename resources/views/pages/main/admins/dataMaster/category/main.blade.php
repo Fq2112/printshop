@@ -302,10 +302,11 @@
                                 columns: [0, 2, 3, 4]
                             },
                             className: 'btn btn-info assets-select-btn export-print'
-                        }, {
-                            text: '<strong class="text-uppercase"><i class="fa fa-trash-alt mr-2"></i>Deletes</strong>',
-                            className: 'btn btn-danger btn_massDelete'
-                        }
+                        },
+                        // {
+                        //     text: '<strong class="text-uppercase"><i class="fa fa-trash-alt mr-2"></i>Deletes</strong>',
+                        //     className: 'btn btn-danger btn_massDelete'
+                        // }
                     ],
                     fnDrawCallback: function (oSettings) {
                         $('.use-nicescroll').getNiceScroll().resize();
