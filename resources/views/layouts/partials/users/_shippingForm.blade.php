@@ -1,4 +1,7 @@
 <div class="panel-group" id="accordion2" role="tablist">
+    @if(!\Illuminate\Support\Facades\Request::is('*cart*'))
+        <small style="text-transform: none">{{__('lang.product.form.shipping.choose-shipping')}}</small>
+    @endif
     <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="heading-address">
             <h4 class="panel-title">
@@ -109,6 +112,7 @@
     </div>
 
     @if(!\Illuminate\Support\Facades\Request::is('*cart*'))
+        <small style="text-transform: none">{{__('lang.product.form.shipping.estimate-shipping')}}</small>
         <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="heading-city">
                 <h4 class="panel-title">

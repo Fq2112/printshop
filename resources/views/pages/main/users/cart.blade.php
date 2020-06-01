@@ -866,8 +866,15 @@
                                     <input type="hidden" name="discount">
                                     <input type="hidden" name="total"
                                            value="{{count($carts) > 0 ? $subtotal + $ongkir : null}}">
+                                    <div id="summary-alert" class="card-content pb-0">
+                                        <div class="alert alert-warning text-justify">
+                                            <i class="icon-exclamation-sign"></i><b>{{__('lang.alert.warning')}}</b>
+                                            {{__('lang.cart.summary.choose-billing')}}
+                                        </div>
+                                    </div>
                                     <div class="card-footer p-0">
-                                        <button id="btn_pay" type="button" disabled
+                                        <button id="btn_pay" type="button" data-toggle="tooltip"
+                                                data-placement="bottom" title="jasndjs" disabled
                                                 class="btn btn-primary btn-block text-uppercase text-left noborder">
                                             CHECKOUT <i class="icon-chevron-right fright"></i>
                                         </button>
@@ -1223,6 +1230,7 @@
             $(".show-" + check).text(name);
             $('#collapse-' + check).collapse('hide');
             $("#promo_code, #btn_pay").removeAttr('disabled');
+            $("#summary-alert").hide();
 
             $('html,body').animate({scrollTop: $("#accordion2").parent().parent().offset().top}, 0);
         }

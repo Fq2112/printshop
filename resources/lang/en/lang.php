@@ -123,6 +123,8 @@ return [
             "shipping" => [
                 "head" => "Shipping Address",
                 "capt" => "Decide where your print products will be sent",
+                "choose-shipping" => "Choose the shipping address",
+                "estimate-shipping" => "or you can just calculate it here",
                 "empty-head" => "You haven't made any addresses",
                 "empty-capt" => "Open \"Edit Profile\" page and manage your address list now",
                 "estimate" => "Shipping Estimation",
@@ -130,6 +132,8 @@ return [
             "quantity" => [
                 "head" => "Product Quantity",
                 "capt" => "Make sure the product quantity that you order matches your needs",
+                "enter-qty" => "Enter the product quantity",
+                "slide-qty" => "or you can just slide it here",
             ],
         ],
     ],
@@ -148,6 +152,7 @@ return [
         "summary" => [
             "promo" => "Promo Code",
             "discount" => "Discount",
+            "choose-billing" => "Please choose the billing address for your order first.",
         ],
     ],
     "invoice" => [
@@ -454,6 +459,7 @@ return [
             "payment2" => "Waiting for Payment",
             "payment3" => "Payment Received",
             "alert" => "Make sure not to inform payment details and proof to any party <b>except</b> " . env('APP_TITLE') . ".",
+            "alert2" => "Please download the <b>attached</b> invoice pdf file to see your order details.",
             "dashboard" => "Keep an eye for your order on the Dashboard [Order History] page",
             "dashboard2" => "To redirect you to that page, click the Dashboard button below",
             "footer" => "Get in touch with us :)",
