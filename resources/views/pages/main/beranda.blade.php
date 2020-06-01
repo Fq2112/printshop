@@ -479,7 +479,8 @@
                             <h5>{{__('lang.how-to.step-2')}}</h5>
                         </li>
                         <li>
-                            <a href="#ptab3" class="i-circled i-bordered i-alt divcenter icon-drafting-compass"></a>
+                            <a href="#ptab3"
+                               class="i-circled i-bordered i-alt divcenter icon-drafting-compass"></a>
                             <h5>{{__('lang.how-to.step-3')}}</h5>
                         </li>
                         <li>
@@ -487,98 +488,90 @@
                             <h5>{{__('lang.how-to.step-4')}}</h5>
                         </li>
                         <li>
-                            <a href="#ptab5" class="i-circled i-bordered i-alt divcenter icon-shipping-fast"></a>
+                            <a href="#ptab5"
+                               class="i-circled i-bordered i-alt divcenter icon-shipping-fast"></a>
                             <h5>{{__('lang.how-to.step-5')}}</h5>
                         </li>
                     </ul>
-                    <div>
+                    <div class="process-content">
                         <div id="ptab1">
                             <div class="media">
-                                <img class="step-1 align-self-center mr-3" alt="{{__('lang.how-to.step-1')}}"
+                                <img class="step-1 align-self-center mr-3"
+                                     alt="{{__('lang.how-to.step-1')}}"
                                      src="{{asset('images/how-to/choose-product.png')}}">
                                 <div class="media-body">
                                     <h5 class="m-0"><span>{{__('lang.how-to.step')}} 1</span></h5>
                                     <h2 class="mb-2">{{__('lang.how-to.step-1')}}</h2>
                                     {!! __('lang.how-to.desc-1') !!}
-                                    <a class="button button-rounded button-reveal button-border button-primary tright fright tab-linker"
-                                       href="#" rel="2"><i
-                                            class="icon-angle-right"></i><span>{{__('lang.button.next')}}</span>
-                                    </a>
                                 </div>
                             </div>
                         </div>
                         <div id="ptab2">
                             <div class="media">
-                                <img class="step-2 align-self-center mr-3" alt="{{__('lang.how-to.step-2')}}"
+                                <img class="step-2 align-self-center mr-3"
+                                     alt="{{__('lang.how-to.step-2')}}"
                                      src="{{asset('images/how-to/order-spec.png')}}">
                                 <div class="media-body">
                                     <h5 class="m-0"><span>{{__('lang.how-to.step')}} 2</span></h5>
                                     <h2 class="mb-2">{{__('lang.how-to.step-2')}}</h2>
                                     {!! __('lang.how-to.desc-2') !!}
-                                    <a class="button button-rounded button-reveal button-border button-primary tleft tab-linker"
-                                       href="#" rel="1"><i
-                                            class="icon-angle-left"></i><span>{{__('lang.button.prev')}}</span>
-                                    </a>
-                                    <a class="button button-rounded button-reveal button-border button-primary tright fright tab-linker"
-                                       href="#" rel="3"><i
-                                            class="icon-angle-right"></i><span>{{__('lang.button.next')}}</span>
-                                    </a>
                                 </div>
                             </div>
                         </div>
                         <div id="ptab3">
                             <div class="media">
-                                <img class="step-3 align-self-center mr-3" alt="{{__('lang.how-to.step-3')}}"
+                                <img class="step-3 align-self-center mr-3"
+                                     alt="{{__('lang.how-to.step-3')}}"
                                      src="{{asset('images/how-to/create-design.png')}}">
                                 <div class="media-body">
                                     <h5 class="m-0"><span>{{__('lang.how-to.step')}} 3</span></h5>
                                     <h2 class="mb-2">{{__('lang.how-to.step-3')}}</h2>
                                     {!! __('lang.how-to.desc-3') !!}
-                                    <a class="button button-rounded button-reveal button-border button-primary tleft tab-linker"
-                                       href="#" rel="2"><i
-                                            class="icon-angle-left"></i><span>{{__('lang.button.prev')}}</span>
-                                    </a>
-                                    <a class="button button-rounded button-reveal button-border button-primary tright fright tab-linker"
-                                       href="#" rel="4"><i
-                                            class="icon-angle-right"></i><span>{{__('lang.button.next')}}</span>
-                                    </a>
                                 </div>
                             </div>
                         </div>
                         <div id="ptab4">
                             <div class="media">
-                                <img class="step-4 align-self-center mr-3" alt="{{__('lang.how-to.step-4')}}"
+                                <img class="step-4 align-self-center mr-3"
+                                     alt="{{__('lang.how-to.step-4')}}"
                                      src="{{asset('images/how-to/payment.png')}}">
                                 <div class="media-body">
                                     <h5 class="m-0"><span>{{__('lang.how-to.step')}} 4</span></h5>
                                     <h2 class="mb-2">{{__('lang.how-to.step-4')}}</h2>
                                     {!! __('lang.how-to.desc-4') !!}
-                                    <a class="button button-rounded button-reveal button-border button-primary tleft tab-linker"
-                                       href="#" rel="3"><i
-                                            class="icon-angle-left"></i><span>{{__('lang.button.prev')}}</span>
-                                    </a>
-                                    <a class="button button-rounded button-reveal button-border button-primary tright fright tab-linker"
-                                       href="#" rel="5"><i
-                                            class="icon-angle-right"></i><span>{{__('lang.button.finish')}}</span>
-                                    </a>
                                 </div>
                             </div>
                         </div>
                         <div id="ptab5">
                             <div class="media">
-                                <img class="step-5 align-self-center mr-3" alt="{{__('lang.how-to.step-5')}}"
+                                <img class="step-5 align-self-center mr-3"
+                                     alt="{{__('lang.how-to.step-5')}}"
                                      src="{{asset('images/how-to/shipping.png')}}">
                                 <div class="media-body">
                                     <h5 class="m-0"><span>{{__('lang.how-to.step')}} 5</span></h5>
                                     <h2 class="mb-2">{{__('lang.how-to.step-5')}}</h2>
                                     {!! __('lang.how-to.desc-5') !!}
-                                    <a class="button button-rounded button-reveal button-border button-primary tleft tab-linker"
-                                       href="#" rel="4"><i
-                                            class="icon-angle-left"></i><span>{{__('lang.button.back')}}</span>
-                                    </a>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <button
+                            class="button button-rounded button-reveal button-border button-primary tleft prev-linker"
+                            style="display: none"><i class="icon-angle-left"></i>
+                            <span>{{__('lang.button.prev')}}</span>
+                        </button>
+                        <button
+                            class="button button-rounded button-reveal button-border button-primary tright next-linker">
+                            <i class="icon-angle-right"></i><span>{{__('lang.button.next')}}</span>
+                        </button>
+                        <button
+                            class="button button-rounded button-reveal button-border button-primary tright finish-linker"
+                            style="display: none"><i class="icon-angle-right"></i>
+                            <span>{{__('lang.button.shop')}}</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -690,10 +683,59 @@
                 $(this).append(',');
             });
 
-            $("#processTabs").tabs({show: {effect: "slide", duration: 500}});
-            $(".tab-linker").on("click", function () {
-                $("#processTabs").tabs("option", "active", $(this).attr('rel') - 1);
-                return false;
+            var how_to = $("#processTabs"), activeIDX;
+            how_to.tabs({show: {effect: "slide", duration: 500}});
+            activeIDX = how_to.tabs("option", "active");
+
+            $("a[href='#ptab1']").on("click", function () {
+                $(".prev-linker, .finish-linker").hide();
+                $(".next-linker").show();
+                activeIDX = 0;
+            });
+
+            $("a[href='#ptab2'], a[href='#ptab3'], a[href='#ptab4']").on("click", function () {
+                $(".prev-linker, .next-linker").show();
+                $(".finish-linker").hide();
+                activeIDX = 0;
+            });
+
+            $("a[href='#ptab5']").on("click", function () {
+                $(".prev-linker, .finish-linker").show();
+                $(".next-linker").hide();
+                activeIDX = 4;
+            });
+
+            $(".prev-linker").on("click", function () {
+                activeIDX -= 1;
+                $(".next-linker").show();
+                $(".finish-linker").hide();
+
+                if (activeIDX == 0) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+
+                how_to.tabs("option", "active", activeIDX);
+            });
+
+            $(".next-linker").on("click", function () {
+                activeIDX += 1;
+                $(".prev-linker").show();
+
+                if (activeIDX == 4) {
+                    $(this).hide();
+                    $(".finish-linker").show();
+                } else {
+                    $(this).show();
+                    $(".finish-linker").hide();
+                }
+
+                how_to.tabs("option", "active", activeIDX);
+            });
+
+            $(".finish-linker").on("click", function () {
+                $('html,body').animate({scrollTop: 0}, 500);
             });
 
             @if(session('order'))
