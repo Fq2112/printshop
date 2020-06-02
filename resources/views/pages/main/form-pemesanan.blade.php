@@ -479,11 +479,15 @@
                                             TOTAL<b class="fright show-total" style="font-size: large">&ndash;</b>
                                         </li>
                                     </ul>
-                                    <div id="summary-alert" class="card-content pb-0" style="display: none">
+                                    <div class="card-content pb-0">
                                         <div class="alert alert-warning text-justify">
                                             <i class="icon-exclamation-sign"></i><b>{{__('lang.alert.warning')}}</b>
-                                            {!! __('lang.product.form.summary.alert', ['quantity' => '1 '.
-                                            $specs->getUnit->name, 'product' => $data->name]) !!}
+                                            <span id="alert-quantity">{{__('lang.product.form.summary.alert3')}}</span>
+                                            <span id="alert-shipping" style="display: none">
+                                                {{__('lang.product.form.summary.alert2')}}</span>
+                                            <span id="alert-order" style="display: none">
+                                                {!! __('lang.product.form.summary.alert', ['quantity' => '1 '.
+                                                $specs->getUnit->name, 'product' => $data->name]) !!}</span>
                                         </div>
                                     </div>
                                     <div class="card-footer p-0">
@@ -772,6 +776,11 @@
                 $("#production_finished").val(moment().add(production_day, 'days').format('YYYY-MM-DD'));
                 $(".show-total").text("Rp" + number_format(total, 2, ',', '.'));
 
+                if ($("#alert-order").css('display') == 'none') {
+                    $("#alert-shipping").show();
+                    $("#alert-order, #alert-quantity").hide();
+                }
+
                 $("#card-shipping").show();
 
             } else {
@@ -791,7 +800,8 @@
                 $(".show-address, .show-city, .show-quantity, .show-price, .show-production, .show-ongkir, .show-delivery, .show-received, .show-total").html('&ndash;');
                 $("#price_pcs, #production_finished, #ongkir, #delivery_duration, #received_date, #total").val(null);
 
-                $("#summary-alert").hide();
+                $("#alert-quantity").show();
+                $("#alert-order, #alert-shipping").hide();
                 btn_upload.attr('disabled', 'disabled');
             }
         }
@@ -859,7 +869,8 @@
             } else {
                 $(".address-rb").prop('checked', false);
                 $(".show-address").html('&ndash;');
-                $("#summary-alert").hide();
+                $("#alert-shipping").show();
+                $("#alert-order, #alert-quantity").hide();
                 btn_upload.attr('disabled', 'disabled');
             }
 
@@ -910,14 +921,16 @@
                             $("#total").val(total);
 
                             if (check == 'address') {
-                                $("#summary-alert").show();
+                                $("#alert-shipping, #alert-quantity").hide();
+                                $("#alert-order").show();
                                 btn_upload.removeAttr('disabled');
                             }
 
                         } else {
                             $(".show-ongkir, .show-delivery, .show-received").text('N/A');
                             $("#ongkir, #delivery_duration, #received_date, #total").val(null);
-                            $("#summary-alert").hide();
+                            $("#alert-shipping").show();
+                            $("#alert-order, #alert-quantity").hide();
                             btn_upload.attr('disabled', 'disabled');
                         }
                     },
