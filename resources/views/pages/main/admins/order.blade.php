@@ -22,7 +22,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>{{$title}}</h1>
+            <h1>Order History & Status</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{route('admin.dashboard')}}">Dashboard</a></div>
                 <div class="breadcrumb-item">Data Master</div>
@@ -35,13 +35,83 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <div class="card-header-form">
-                                {{--                                <button id="btn_create" class="btn btn-primary text-uppercase">--}}
-                                {{--                                    <strong><i class="fas fa-plus mr-2"></i>Create</strong>--}}
-                                {{--                                </button>--}}
-                            </div>
+                        <div class="card-body">
+                            <form action="{{route('admin.order',['condition' => \App\Support\StatusProgress::NEW])}}"
+                                  method="get">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="row form-group">
+                                                <div class="col">
+                                                    <div class="fix-label-group">
+                                                        <label for="category_id">Time Period</label>
+                                                        <div class="">
+                                                            <select id="period"
+                                                                    class="form-control selectpicker"
+                                                                    title="-- Choose --"
+                                                                    name="period" data-live-search="true"
+                                                            >
+
+                                                                <option value="99999">{{strtoupper('all')}}</option>
+                                                                <option value="7">{{strtoupper('One Week')}}</option>
+                                                                <option
+                                                                    value="30">{{strtoupper('One Month')}}</option>
+                                                                <option
+                                                                    value="90">{{strtoupper('Three Months')}}</option>
+                                                                <option
+                                                                    value="180">{{strtoupper('Six Months')}}</option>
+                                                                <option value="360">{{strtoupper('One Year')}}</option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="row form-group">
+                                                <div class="col">
+                                                    <div class="fix-label-group">
+                                                        <label for="category_id">Status Order</label>
+                                                        <div class="input-group">
+                                                            <select id="status"
+                                                                    class="form-control selectpicker"
+                                                                    title="-- Choose --"
+                                                                    name="status" data-live-search="true"
+                                                            >
+                                                                <option
+                                                                    value="">{{strtoupper('all')}}</option>
+                                                                @foreach(\App\Support\StatusProgress::ALL as $material)
+                                                                    <option
+                                                                        value="{{$material}}">{{strtoupper($material)}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            <button data-placement="right" data-toggle="tooltip"
+                                                                    title="Submit Filter"
+                                                                    type="submit" class="btn btn-warning mr-1">
+                                                                <i class="fa fa-filter"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        {{--                        <div class="card-header">--}}
+                        {{--                            <div class="card-header-form">--}}
+                        {{--                                --}}{{--                                <button id="btn_create" class="btn btn-primary text-uppercase">--}}
+                        {{--                                --}}{{--                                    <strong><i class="fas fa-plus mr-2"></i>Create</strong>--}}
+                        {{--                                --}}{{--                                </button>--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
 
                         <div class="card-body">
                             <div id="content1" class="table-responsive">
@@ -275,27 +345,27 @@
                                                 @endif
                                             </td>
                                             <td style="vertical-align: middle" align="center">
-                                                @if($status == \App\Support\StatusProgress::NEW)
+                                                @if($row->progress_status == \App\Support\StatusProgress::NEW)
                                                     <span class="badge badge-info"><span
                                                             class="fa fa-shopping-basket"></span> New</span>
-                                                @elseif($status == \App\Support\StatusProgress::START_PRODUCTION || $status == \App\Support\StatusProgress::FINISH_PRODUCTION)
+                                                @elseif($row->progress_status == \App\Support\StatusProgress::START_PRODUCTION || $row->progress_status == \App\Support\StatusProgress::FINISH_PRODUCTION)
                                                     <span class="badge badge-warning"><span class="fa fa-cogs"></span> On Produce</span>
-                                                @elseif($status == \App\Support\StatusProgress::SHIPPING)
+                                                @elseif($row->progress_status == \App\Support\StatusProgress::SHIPPING)
                                                     <span class="badge badge-info"><span
                                                             class="fa fa-shipping-fast"></span>  Shipping</span>
-                                                @elseif($status == \App\Support\StatusProgress::RECEIVED)
+                                                @elseif($row->progress_status == \App\Support\StatusProgress::RECEIVED)
                                                     <span class="badge badge-success"><span
                                                             class="fa fa-clipboard-check"></span>  Received</span>
                                                 @endif
                                             </td>
                                             <td style="vertical-align: middle" align="center">
-                                                @if($status == \App\Support\StatusProgress::NEW)
+                                                @if($row->progress_status == \App\Support\StatusProgress::NEW)
                                                     <button data-placement="left" data-toggle="tooltip"
                                                             title="Proceed this order"
                                                             onclick="proceed_order('{{$row->id}}')"
                                                             type="button" class="btn btn-warning mr-1">
                                                         <i class="fa fa-paper-plane"></i></button>
-                                                @elseif($status == \App\Support\StatusProgress::START_PRODUCTION || $status == \App\Support\StatusProgress::FINISH_PRODUCTION)
+                                                @elseif($row->progress_status == \App\Support\StatusProgress::START_PRODUCTION || $row->progress_status  == \App\Support\StatusProgress::FINISH_PRODUCTION)
                                                     <button data-placement="left" data-toggle="tooltip"
                                                             title="Send this order"
                                                             onclick="proceed_order('{{$row->id}}')"
@@ -584,6 +654,14 @@
                     },
                 });
         });
+
+        @if(request()->has('period'))
+        $('#period').val('{{ request()->get('period') }}');
+        @endif
+
+        @if(request()->has('status'))
+        $('#status').val('{{ request()->get('status') }}');
+        @endif
 
         $("#btn_create").on('click', function () {
             $("#content1").toggle(300);
