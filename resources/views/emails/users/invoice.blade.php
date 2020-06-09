@@ -515,7 +515,9 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div style="font-size:20px;line-height:20px;">&nbsp;</div>
+                                                <div class="alert alert-info text-center">
+                                                    {!! __('lang.mail.content.alert2') !!}
+                                                </div>
                                             </td>
                                         </tr>
                                         @if($check->finish_payment == false)

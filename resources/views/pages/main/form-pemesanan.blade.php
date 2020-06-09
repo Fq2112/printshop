@@ -340,8 +340,16 @@
                                     <div class="divider divider-center mt-1 mb-1"><i class="icon-circle"></i></div>
                                     <div class="row form-group">
                                         <div class="col">
-                                            <small>{{__('lang.product.form.summary.quantity')}}
-                                                <span class="required">*</span></small>
+                                            <small style="text-transform: none">
+                                                {{__('lang.product.form.quantity.enter-qty')}}</small>
+                                            <input id="input-quantity" class="form-control" type="number" min="1"
+                                                   placeholder="0">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col">
+                                            <small style="text-transform: none">
+                                                {{__('lang.product.form.quantity.slide-qty')}}</small>
                                             <input id="range-quantity" name="qty" class="input-range-slider">
                                             <table id="pricing" class="table table-hover table-striped mt-3 mb-0">
                                                 <thead>
@@ -471,11 +479,15 @@
                                             TOTAL<b class="fright show-total" style="font-size: large">&ndash;</b>
                                         </li>
                                     </ul>
-                                    <div id="summary-alert" class="card-content pb-0" style="display: none">
+                                    <div class="card-content pb-0">
                                         <div class="alert alert-warning text-justify">
                                             <i class="icon-exclamation-sign"></i><b>{{__('lang.alert.warning')}}</b>
-                                            {!! __('lang.product.form.summary.alert', ['quantity' => '1 '.
-                                            $specs->getUnit->name, 'product' => $data->name]) !!}
+                                            <span id="alert-quantity">{{__('lang.product.form.summary.alert3')}}</span>
+                                            <span id="alert-shipping" style="display: none">
+                                                {{__('lang.product.form.summary.alert2')}}</span>
+                                            <span id="alert-order" style="display: none">
+                                                {!! __('lang.product.form.summary.alert', ['quantity' => '1 '.
+                                                $specs->getUnit->name, 'product' => $data->name]) !!}</span>
                                         </div>
                                     </div>
                                     <div class="card-footer p-0">
@@ -573,7 +585,7 @@
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIljHbKjgtTrpZhEiHum734tF1tolxI68&libraries=geometry,places"></script>
     <script>
-        var collapse = $('.panel-collapse'), range_slider = $("#range-quantity"),
+        var collapse = $('.panel-collapse'), input_qty = $("#input-quantity"), range_slider = $("#range-quantity"),
             btn_upload = $("#btn_upload"), upload_input = $("#file"), link_input = $("#link"),
             range_max = 100, qty = Number('{{!is_null($cart) ? $cart->qty : 0}}'),
             pricing_specs = 0, disc_1 = 0, disc_2 = 0, disc_3 = 0, price_pcs = Number('{{$specs->price}}'),
@@ -720,6 +732,27 @@
             $('html,body').animate({scrollTop: $('#collapse-' + check).parents('#accordion').offset().top}, 0);
         });
 
+        input_qty.on("change keyup", function () {
+            var val = parseInt($(this).val());
+
+            if (val > range_max - 1) {
+                range_max += val;
+                range_slider.data("ionRangeSlider").update({max: range_max});
+            }
+
+            if (val > 0) {
+                if (val != qty) {
+                    qty = val;
+                    range_slider.data("ionRangeSlider").update({from: qty});
+                    resetter(1);
+                }
+            } else {
+                resetter(0);
+                setPrice();
+                $("#card-shipping").hide();
+            }
+        });
+
         function resetter(check) {
             if (check == 1) {
                 if (qty >= 1 && qty <= 20) {
@@ -735,12 +768,18 @@
                 }
 
                 total = (qty * price_pcs) + ongkir;
+                input_qty.val(qty);
                 $(".show-quantity").text(qty + str_unit);
                 $(".show-price").text("Rp" + number_format(price_pcs, 2, ',', '.'));
                 $(".show-production").text(moment().add(production_day, 'days').format('DD MMM YYYY'));
                 $("#price_pcs").val(price_pcs);
                 $("#production_finished").val(moment().add(production_day, 'days').format('YYYY-MM-DD'));
                 $(".show-total").text("Rp" + number_format(total, 2, ',', '.'));
+
+                if ($("#alert-order").css('display') == 'none') {
+                    $("#alert-shipping").show();
+                    $("#alert-order, #alert-quantity").hide();
+                }
 
                 $("#card-shipping").show();
 
@@ -757,10 +796,12 @@
                 price_pcs = Number('{{$specs->price}}');
                 total = 0;
 
+                input_qty.val(qty);
                 $(".show-address, .show-city, .show-quantity, .show-price, .show-production, .show-ongkir, .show-delivery, .show-received, .show-total").html('&ndash;');
                 $("#price_pcs, #production_finished, #ongkir, #delivery_duration, #received_date, #total").val(null);
 
-                $("#summary-alert").hide();
+                $("#alert-quantity").show();
+                $("#alert-order, #alert-shipping").hide();
                 btn_upload.attr('disabled', 'disabled');
             }
         }
@@ -828,7 +869,8 @@
             } else {
                 $(".address-rb").prop('checked', false);
                 $(".show-address").html('&ndash;');
-                $("#summary-alert").hide();
+                $("#alert-shipping").show();
+                $("#alert-order, #alert-quantity").hide();
                 btn_upload.attr('disabled', 'disabled');
             }
 
@@ -879,14 +921,16 @@
                             $("#total").val(total);
 
                             if (check == 'address') {
-                                $("#summary-alert").show();
+                                $("#alert-shipping, #alert-quantity").hide();
+                                $("#alert-order").show();
                                 btn_upload.removeAttr('disabled');
                             }
 
                         } else {
                             $(".show-ongkir, .show-delivery, .show-received").text('N/A');
                             $("#ongkir, #delivery_duration, #received_date, #total").val(null);
-                            $("#summary-alert").hide();
+                            $("#alert-shipping").show();
+                            $("#alert-order, #alert-quantity").hide();
                             btn_upload.attr('disabled', 'disabled');
                         }
                     },

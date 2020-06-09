@@ -24,7 +24,7 @@ class DetailProductSeeder extends Seeder
             'is_lamination' => true,
             'lamination_ids' => ['1', '2', '3'],
             'unit_id' => 6,
-            'is_design' => true
+            'is_design' => false
         ]);
 
         \App\Models\DetailProduct::create([// kartu nama Premium
@@ -38,7 +38,7 @@ class DetailProductSeeder extends Seeder
             'is_edge' => true,
             'edge_ids' => ['1', '2'],
             'unit_id' => 6,
-            'is_design' => true
+            'is_design' => false
         ]);
 
 
@@ -55,7 +55,7 @@ class DetailProductSeeder extends Seeder
             'is_finishing' => true,
             'finishing_ids' => ['19'],
             'unit_id' => 6,
-            'is_design' => true
+            'is_design' => false
         ]);
 
         \App\Models\DetailProduct::create([// kartu Undangan Standar
@@ -160,7 +160,7 @@ class DetailProductSeeder extends Seeder
             'is_lamination' => true,
             'lamination_ids' => ['1', '2', '3'],
             'unit_id' => 1,
-            'is_design' => true
+            'is_design' => false
         ]);
 
 
@@ -175,7 +175,7 @@ class DetailProductSeeder extends Seeder
             'is_orientation' => true,
             'orientation_ids' => ['31', '32'],
             'unit_id' => 1,
-            'is_design' => true
+            'is_design' => false
         ]);
 
 
@@ -695,7 +695,7 @@ class DetailProductSeeder extends Seeder
             'is_side' => true,
             'side_ids' => ['1', '2'],
             'unit_id' => 1,
-            'is_design' => true
+            'is_design' => false
         ]);
 
         \App\Models\DetailProduct::create([// Flyer PREM
@@ -707,7 +707,7 @@ class DetailProductSeeder extends Seeder
             'is_side' => true,
             'side_ids' => ['1', '2'],
             'unit_id' => 1,
-            'is_design' => true
+            'is_design' => false
         ]);
 
         \App\Models\DetailProduct::create([// Flyer Eco
@@ -719,7 +719,7 @@ class DetailProductSeeder extends Seeder
             'is_side' => true,
             'side_ids' => ['1'],
             'unit_id' => 1,
-            'is_design' => true
+            'is_design' => false
         ]);
 
         \App\Models\DetailProduct::create([// Poster STD
@@ -731,7 +731,7 @@ class DetailProductSeeder extends Seeder
             'is_side' => true,
             'side_ids' => ['1'],
             'unit_id' => 1,
-            'is_design' => true
+            'is_design' => false
         ]);
 
         \App\Models\DetailProduct::create([// Poster Back
@@ -743,7 +743,7 @@ class DetailProductSeeder extends Seeder
             'is_side' => true,
             'side_ids' => ['1'],
             'unit_id' => 1,
-            'is_design' => true
+            'is_design' => false
         ]);
 
         \App\Models\DetailProduct::create([// Tent Card
@@ -1179,7 +1179,7 @@ class DetailProductSeeder extends Seeder
             'is_color' => true,
             'color_ids' => ['3', '4', '7', '12'],
             'unit_id' => 1,
-            'is_design' => true
+            'is_design' => false
         ]);
 
         \App\Models\DetailProduct::create([// Totebag Prem
@@ -1193,7 +1193,7 @@ class DetailProductSeeder extends Seeder
             'is_color' => true,
             'color_ids' => ['3', '4', '7', '12'],
             'unit_id' => 1,
-            'is_design' => true
+            'is_design' => false
         ]);
 
         \App\Models\DetailProduct::create([// Gooddie Std

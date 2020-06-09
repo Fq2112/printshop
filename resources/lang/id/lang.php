@@ -118,6 +118,8 @@ return [
                 "day" => 'hari',
                 "received" => "Tanggal Diterima",
                 "alert" => "Spesifikasi dan desain produk yang tertera akan diterapkan pada <b class='show-quantity'>:quantity</b> <b>:product</b> yang Anda pesan.",
+                "alert2" => "Silahkan pilih alamat pengiriman pesanan Anda terlebih dahulu.",
+                "alert3" => "Silakan masukkan jumlah produk yang Anda pesan terlebih dahulu.",
                 "layout" => "Pedoman Tata Letak",
             ],
             "shipping" => [
@@ -130,6 +132,8 @@ return [
             "quantity" => [
                 "head" => "Kuantitas Produk",
                 "capt" => "Pastikan jumlah produk yang Anda pesan sesuai kebutuhan Anda",
+                "enter-qty" => "Masukkan jumlah produk",
+                "slide-qty" => "atau Anda dapat menggesernya saja di sini",
             ],
         ],
     ],
@@ -148,6 +152,7 @@ return [
         "summary" => [
             "promo" => "Kode Promo",
             "discount" => "Diskon",
+            "choose-billing" => "Silahkan pilih alamat penagihan pesanan Anda terlebih dahulu.",
         ],
     ],
     "invoice" => [
@@ -454,6 +459,7 @@ return [
             "payment2" => "Menunggu Pembayaran",
             "payment3" => "Pembayaran Diterima",
             "alert" => "Pastikan untuk tidak menginformasikan detail pembayaran dan bukti kepada pihak manapun <b>kecuali</b> " . env('APP_TITLE') . ".",
+            "alert2" => "Silahkan unduh file pdf faktur yang <b>terlampir</b> untuk melihat detail pesanan Anda.",
             "dashboard" => "Tetap awasi pesanan Anda di halaman Dashboard [Riwayat Pemesanan]",
             "dashboard2" => "Untuk mengalihkan Anda ke halaman tersebut, klik tombol Dashboard di bawah ini",
             "footer" => "Hubungi kami :)",

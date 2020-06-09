@@ -3,6 +3,10 @@
   ##Screen = 1440px to higher resolution desktops
 */
 @media (min-width: 1440px) {
+    #processTabs .process-content {
+        height: 200px;
+    }
+
     #processTabs .media img.step-1 {
         width: 250px;
     }
@@ -29,6 +33,10 @@
   ##Screen = 1281px to 1439px
 */
 @media (min-width: 1281px) and (max-width: 1439px) {
+    #processTabs .process-content {
+        height: 200px;
+    }
+
     #processTabs .media img.step-1 {
         width: 250px;
     }
@@ -58,6 +66,10 @@
     .tp-caption .button span {
         font-size: 14px !important;
         line-height: 42px !important;
+    }
+
+    #processTabs .process-content {
+        height: 220px;
     }
 
     #processTabs .media img.step-1 {
@@ -91,6 +103,10 @@
         line-height: 42px !important;
     }
 
+    #processTabs .process-content {
+        height: 240px;
+    }
+
     #processTabs .media img.step-1 {
         width: 200px;
     }
@@ -120,6 +136,10 @@
     .tp-caption .button span {
         font-size: 14px !important;
         line-height: 42px !important;
+    }
+
+    #processTabs .process-content {
+        height: 240px;
     }
 
     #processTabs .media img.step-1 {
@@ -155,6 +175,10 @@
     .tp-caption .button span {
         font-size: 10px !important;
         line-height: 28px !important;
+    }
+
+    #processTabs .process-content {
+        height: 340px;
     }
 
     #processTabs .media img.step-1 {
@@ -214,6 +238,10 @@
 }
 
 @media (max-width: 480px) {
+    #processTabs .process-content {
+        height: 300px;
+    }
+
     .top-links > ul > li:nth-child(1),
     .top-links > ul > li:nth-child(4),
     .top-links > ul > li:nth-child(5) {
@@ -229,6 +257,10 @@
 }
 
 @media (max-width: 360px) {
+    #processTabs .process-content {
+        height: 540px;
+    }
+
     .top-links > ul > li:nth-child(1),
     .top-links > ul > li:nth-child(4),
     .top-links > ul > li:nth-child(5),
