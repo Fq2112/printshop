@@ -125,6 +125,7 @@
                                             </div>
                                         </th>
                                         <th class="text-center">ID</th>
+                                        <th width="15%">Code</th>
                                         <th width="15%">Customer</th>
                                         <th width="20%">Description</th>
                                         <th width="20%">Shipping</th>
@@ -151,6 +152,9 @@
                                                 </div>
                                             </td>
                                             <td style="vertical-align: middle" align="center">{{$row->id}}</td>
+                                            <td style="vertical-align: middle">
+                                                <strong>{{$row->getCart->getPayment->uni_code_payment}}</strong>
+                                            </td>
                                             <td style="vertical-align: middle">
                                                 <strong>{{$row->getCart->getUser->name}}</strong>
                                             </td>
