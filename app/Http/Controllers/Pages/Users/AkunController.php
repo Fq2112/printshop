@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class AkunController extends Controller
 {
@@ -145,7 +146,7 @@ class AkunController extends Controller
 
                 if (!$check || $request->username == Auth::user()->username) {
                     $user->update(['username' => $request->username]);
-                    return $user->username;
+                    return ['username' => $user->username, 'limit' => Str::limit($user->username, 15)];
                 } else {
                     return 0;
                 }
