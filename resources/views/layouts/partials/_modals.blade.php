@@ -307,174 +307,176 @@
 </div>
 
 <!-- addresses -->
-@auth
-    @php $user = Auth::user(); $bio = $user->getBio; $provinces = \App\Models\Province::all(); @endphp
-    <div id="modal_address" class="modal fade" tabindex="-1" role="dialog"
-         aria-labelledby="modal_address" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-body">
-                <form class="form-horizontal mb-0" role="form" method="POST" id="form-address"
-                      action="{{route('user.profil-alamat.create')}}">
-                    @csrf
-                    <input id="method" type="hidden" name="_method">
-                    <input id="lat" type="hidden" name="lat">
-                    <input id="long" type="hidden" name="long">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title text-capitalize">
-                                {{strtolower(__('lang.button.add').' '.__('lang.profile.address'))}}
-                            </h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                &times;
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row form-group">
-                                <div class="col-lg-7 col-md-12 col-sm-12">
-                                    <small>{{ucwords(__('lang.placeholder.name'))}}
-                                        <span class="required">*</span></small>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
+@if(!Request::is('*account/edit-profile*'))
+    @auth
+        @php $user = Auth::user(); $bio = $user->getBio; $provinces = \App\Models\Province::all(); @endphp
+        <div id="modal_address" class="modal fade" tabindex="-1" role="dialog"
+             aria-labelledby="modal_address" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-body">
+                    <form class="form-horizontal mb-0" role="form" method="POST" id="form-address"
+                          action="{{route('user.profil-alamat.create')}}">
+                        @csrf
+                        <input id="method" type="hidden" name="_method">
+                        <input id="lat" type="hidden" name="lat">
+                        <input id="long" type="hidden" name="long">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title text-capitalize">
+                                    {{strtolower(__('lang.button.add').' '.__('lang.profile.address'))}}
+                                </h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row form-group">
+                                    <div class="col-lg-7 col-md-12 col-sm-12">
+                                        <small>{{ucwords(__('lang.placeholder.name'))}}
+                                            <span class="required">*</span></small>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
                                                             <span class="input-group-text">
                                                                 <i class="icon-id-card"></i></span>
+                                            </div>
+                                            <input placeholder="{{__('lang.placeholder.name')}}"
+                                                   type="text"
+                                                   id="address_name" maxlength="191"
+                                                   value="{{$user->name}}"
+                                                   class="form-control" name="address_name"
+                                                   spellcheck="false" autocomplete="off" autofocus
+                                                   required>
                                         </div>
-                                        <input placeholder="{{__('lang.placeholder.name')}}"
-                                               type="text"
-                                               id="address_name" maxlength="191"
-                                               value="{{$user->name}}"
-                                               class="form-control" name="address_name"
-                                               spellcheck="false" autocomplete="off" autofocus
-                                               required>
                                     </div>
-                                </div>
-                                <div class="col-lg-5 col-md-12 col-sm-12">
-                                    <small>{{__('lang.footer.phone')}}
-                                        <span class="required">*</span></small>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
+                                    <div class="col-lg-5 col-md-12 col-sm-12">
+                                        <small>{{__('lang.footer.phone')}}
+                                            <span class="required">*</span></small>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
                                                             <span class="input-group-text">
                                                                 <i class="icon-phone"></i></span>
+                                            </div>
+                                            <input placeholder="{{__('lang.placeholder.phone')}}"
+                                                   id="address_phone" class="form-control"
+                                                   name="address_phone" type="text"
+                                                   onkeypress="return numberOnly(event, false)"
+                                                   value="{{$bio->phone != "" ? $bio->phone : ''}}"
+                                                   spellcheck="false" autocomplete="off" required>
                                         </div>
-                                        <input placeholder="{{__('lang.placeholder.phone')}}"
-                                               id="address_phone" class="form-control"
-                                               name="address_phone" type="text"
-                                               onkeypress="return numberOnly(event, false)"
-                                               value="{{$bio->phone != "" ? $bio->phone : ''}}"
-                                               spellcheck="false" autocomplete="off" required>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-7 col-md-12 col-sm-12">
-                                    <div id="map" class="gmap img-thumbnail"
-                                         style="height: 420px;"></div>
-                                </div>
-                                <div class="col-lg-5 col-md-12 col-sm-12">
-                                    <div class="row form-group">
-                                        <div class="col">
-                                            <small>{{__('lang.profile.city')}}
-                                                <span class="required">*</span></small>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
+                                <div class="row">
+                                    <div class="col-lg-7 col-md-12 col-sm-12">
+                                        <div id="map" class="gmap img-thumbnail"
+                                             style="height: 420px;"></div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-12 col-sm-12">
+                                        <div class="row form-group">
+                                            <div class="col">
+                                                <small>{{__('lang.profile.city')}}
+                                                    <span class="required">*</span></small>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
                                                             <span class="input-group-text">
                                                                 <i class="icon-city"></i></span>
+                                                    </div>
+                                                    <select id="city_id" name="city_id"
+                                                            data-live-search="true"
+                                                            class="form-control selectpicker" required
+                                                            title="{{__('lang.placeholder.choose')}}">
+                                                        @foreach($provinces as $province)
+                                                            <optgroup label="{{$province->name}}">
+                                                                @foreach($province->getCity as $city)
+                                                                    <option value="{{$city->id}}">
+                                                                        {{$city->name}}</option>
+                                                                @endforeach
+                                                            </optgroup>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
-                                                <select id="city_id" name="city_id"
-                                                        data-live-search="true"
-                                                        class="form-control selectpicker" required
-                                                        title="{{__('lang.placeholder.choose')}}">
-                                                    @foreach($provinces as $province)
-                                                        <optgroup label="{{$province->name}}">
-                                                            @foreach($province->getCity as $city)
-                                                                <option value="{{$city->id}}">
-                                                                    {{$city->name}}</option>
-                                                            @endforeach
-                                                        </optgroup>
-                                                    @endforeach
-                                                </select>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col">
-                                            <small>{{__('lang.profile.address')}}
-                                                <span class="required">*</span></small>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
+                                        <div class="row form-group">
+                                            <div class="col">
+                                                <small>{{__('lang.profile.address')}}
+                                                    <span class="required">*</span></small>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
                                                             <span class="input-group-text">
                                                                 <i class="icon-map-marker-alt"></i></span>
+                                                    </div>
+                                                    <textarea id="address_map" class="form-control"
+                                                              placeholder="{{__('lang.profile.address')}}"
+                                                              name="address" rows="5"
+                                                              spellcheck="false"
+                                                              autocomplete="off"
+                                                              required></textarea>
                                                 </div>
-                                                <textarea id="address_map" class="form-control"
-                                                          placeholder="{{__('lang.profile.address')}}"
-                                                          name="address" rows="5"
-                                                          spellcheck="false"
-                                                          autocomplete="off"
-                                                          required></textarea>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col">
-                                            <small>{{__('lang.profile.zip')}}
-                                                <span class="required">*</span></small>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
+                                        <div class="row form-group">
+                                            <div class="col">
+                                                <small>{{__('lang.profile.zip')}}
+                                                    <span class="required">*</span></small>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
                                                             <span class="input-group-text">
                                                                 <i class="icon-hashtag"></i></span>
+                                                    </div>
+                                                    <input spellcheck="false" autocomplete="off"
+                                                           placeholder="{{ucfirst(strtolower(__('lang.profile.zip')))}}"
+                                                           id="postal_code" type="text"
+                                                           class="form-control"
+                                                           name="postal_code" maxlength="5" required
+                                                           onkeypress="return numberOnly(event, false)">
                                                 </div>
-                                                <input spellcheck="false" autocomplete="off"
-                                                       placeholder="{{ucfirst(strtolower(__('lang.profile.zip')))}}"
-                                                       id="postal_code" type="text"
-                                                       class="form-control"
-                                                       name="postal_code" maxlength="5" required
-                                                       onkeypress="return numberOnly(event, false)">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col">
-                                            <small>{{__('lang.profile.save-as')}}
-                                                <span class="required">*</span></small>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
+                                        <div class="row form-group">
+                                            <div class="col">
+                                                <small>{{__('lang.profile.save-as')}}
+                                                    <span class="required">*</span></small>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
                                                             <span class="input-group-text">
                                                                 <i class="icon-building"></i></span>
+                                                    </div>
+                                                    <select id="occupancy_id" name="occupancy_id"
+                                                            data-live-search="true"
+                                                            class="form-control selectpicker"
+                                                            required
+                                                            title="{{__('lang.placeholder.choose')}}">
+                                                        @foreach(\App\Models\OccupancyType::all() as $row)
+                                                            <option
+                                                                value="{{$row->id}}">{{$row->name}}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
-                                                <select id="occupancy_id" name="occupancy_id"
-                                                        data-live-search="true"
-                                                        class="form-control selectpicker"
-                                                        required
-                                                        title="{{__('lang.placeholder.choose')}}">
-                                                    @foreach(\App\Models\OccupancyType::all() as $row)
-                                                        <option
-                                                            value="{{$row->id}}">{{$row->name}}</option>
-                                                    @endforeach
-                                                </select>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col">
-                                            <div>
-                                                <input id="is_main" class="checkbox-style"
-                                                       name="is_main" value="1" type="checkbox">
-                                                <label for="is_main"
-                                                       class="checkbox-style-2-label checkbox-small"
-                                                       style="text-transform: none">{{__('lang.profile.cb-main')}}</label>
+                                        <div class="row form-group">
+                                            <div class="col">
+                                                <div>
+                                                    <input id="is_main" class="checkbox-style"
+                                                           name="is_main" value="1" type="checkbox">
+                                                    <label for="is_main"
+                                                           class="checkbox-style-2-label checkbox-small"
+                                                           style="text-transform: none">{{__('lang.profile.cb-main')}}</label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="modal-footer p-0">
+                                <button type="submit" class="btn btn-primary btn-block noborder">
+                                    <i class="icon-map-marked-alt mr-2"></i>{{__('lang.button.save')}}
+                                </button>
+                            </div>
                         </div>
-                        <div class="modal-footer p-0">
-                            <button type="submit" class="btn btn-primary btn-block noborder">
-                                <i class="icon-map-marked-alt mr-2"></i>{{__('lang.button.save')}}
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-@endauth
+    @endauth
+@endif
