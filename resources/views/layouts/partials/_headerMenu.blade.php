@@ -56,12 +56,12 @@
                     @if(Auth::check())
                         <img alt="Ava" class="img-thumbnail show_ava" src="{{Auth::user()->getBio->ava != "" ?
                         asset('storage/users/ava/'.Auth::user()->getBio->ava) : asset('admins/img/avatar/avatar-'.rand(1,5).'.png')}}">
-                        <b class="show_username">{{\Illuminate\Support\Str::words(Auth::user()->username,18,'...')}}</b>
+                        <b class="show_username">{{\Illuminate\Support\Str::limit(Auth::user()->username,15)}}</b>
                     @elseif(Auth::guard('admin')->check())
                         <img alt="Ava" class="img-thumbnail show_ava" src="{{Auth::guard('admin')->user()->ava != "" ?
                         asset('storage/admins/ava/'.Auth::guard('admin')->user()->ava) :
                         asset('admins/img/avatar/avatar-'.rand(1,5).'.png')}}">
-                        {{\Illuminate\Support\Str::words(Auth::guard('admin')->user()->username,18,'...')}}
+                        {{\Illuminate\Support\Str::limit(Auth::guard('admin')->user()->username,15)}}
                     @endif
                 </div>
             </a>
