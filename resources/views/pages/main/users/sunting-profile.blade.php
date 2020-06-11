@@ -636,6 +636,20 @@
     <script>
         $(function () {
             $(".stats_address .divider:last-child").remove();
+
+            @if($check == 'false')
+            swal({
+                title: "{{__('lang.alert.warning')}}",
+                text: "{{__('lang.alert.login-bio3')}}",
+                icon: 'warning',
+                closeOnEsc: false,
+                closeOnClickOutside: false,
+            }).then((confirm) => {
+                if (confirm) {
+                    $('html,body').animate({scrollTop: $("#form-ava").offset().top}, 500);
+                }
+            });
+            @endif
         });
 
         var google, myLatlng, geocoder, map, marker, infoWindow;

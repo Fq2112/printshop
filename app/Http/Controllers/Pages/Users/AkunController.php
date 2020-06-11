@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
 
 class AkunController extends Controller
 {
-    public function profil()
+    public function profil(Request $request)
     {
         $user = Auth::user();
         $bio = $user->getBio;
@@ -24,8 +24,10 @@ class AkunController extends Controller
         $provinces = Province::all();
         $occupancy = OccupancyType::all();
 
+        $check = $request->check;
+
         return view('pages.main.users.sunting-profile', compact('user', 'bio', 'addresses',
-            'address', 'provinces', 'occupancy'));
+            'address', 'provinces', 'occupancy', 'check'));
     }
 
     public function updateProfil(Request $request)

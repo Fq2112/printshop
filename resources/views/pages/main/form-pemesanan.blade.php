@@ -682,6 +682,23 @@
             $shipping->getOccupancy->name : $shipping->getOccupancy->name.' ['.__('lang.profile.main-address').']'}}');
             resetter(1);
             @endif
+
+            @auth
+            @if(Auth::user()->getBio->dob == null && Auth::user()->getBio->gender == null && Auth::user()->getBio->phone == null)
+            swal({
+                title: "{{__('lang.alert.warning')}}",
+                text: "{{__('lang.alert.login-bio4')}}",
+                icon: 'warning',
+                closeOnEsc: false,
+                closeOnClickOutside: false,
+            }).then((confirm) => {
+                if (confirm) {
+                    swal({icon: "success", text: '{{__('lang.alert.login-bio2')}}', buttons: false});
+                    window.location.href = '{{route('user.profil', ['check' => 'false'])}}';
+                }
+            });
+            @endif
+            @endauth
         });
 
         $("#accordion").on('click', 'label.card-label', function () {

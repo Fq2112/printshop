@@ -70,19 +70,19 @@ Route::group(['namespace' => 'Pages'], function () {
         ]);
 
         Route::post('order/submit', [
-            'middleware' => ['auth', 'user'],
+            'middleware' => ['auth', 'user', 'user.bio'],
             'uses' => 'MainController@submitPemesanan',
             'as' => 'produk.submit.pemesanan'
         ]);
 
         Route::put('order/{id}/update', [
-            'middleware' => ['auth', 'user'],
+            'middleware' => ['auth', 'user', 'user.bio'],
             'uses' => 'MainController@updatePemesanan',
             'as' => 'produk.update.pemesanan'
         ]);
 
         Route::get('order/{id}/delete', [
-            'middleware' => ['auth', 'user'],
+            'middleware' => ['auth', 'user', 'user.bio'],
             'uses' => 'MainController@deletePemesanan',
             'as' => 'produk.delete.pemesanan'
         ]);
@@ -178,26 +178,31 @@ Route::group(['namespace' => 'Pages'], function () {
             ]);
 
             Route::get('edit/{id}/design', [
+                'middleware' => 'user.bio',
                 'uses' => 'UserController@editDesign',
                 'as' => 'user.edit-design.cart',
             ]);
 
             Route::put('update/{id}/order', [
+                'middleware' => 'user.bio',
                 'uses' => 'UserController@updateOrder',
                 'as' => 'user.update-order.cart',
             ]);
 
             Route::get('delete/{id}/note', [
+                'middleware' => 'user.bio',
                 'uses' => 'UserController@deleteNote',
                 'as' => 'user.delete-note.cart',
             ]);
 
             Route::get('cari/promo', [
+                'middleware' => 'user.bio',
                 'uses' => 'UserController@cariPromo',
                 'as' => 'get.cari-promo.cart'
             ]);
 
             Route::post('checkout', [
+                'middleware' => 'user.bio',
                 'uses' => 'UserController@checkout',
                 'as' => 'user.checkout.cart',
             ]);
@@ -212,16 +217,19 @@ Route::group(['namespace' => 'Pages'], function () {
             ]);
 
             Route::get('download/{id}/{file}', [
+                'middleware' => 'user.bio',
                 'uses' => 'UserController@downloadFile',
                 'as' => 'user.download.file'
             ]);
 
             Route::get('{code}/received', [
+                'middleware' => 'user.bio',
                 'uses' => 'UserController@received',
                 'as' => 'user.received'
             ]);
 
             Route::get('{code}/reorder', [
+                'middleware' => 'user.bio',
                 'uses' => 'UserController@reorder',
                 'as' => 'user.reorder'
             ]);

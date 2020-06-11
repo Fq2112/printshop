@@ -1,5 +1,19 @@
 <script>
-    @if(session('contact'))
+    @if(session('profil'))
+    swal({
+        title: "{{__('lang.alert.warning')}}",
+        text: "{{__('lang.alert.login-bio')}}",
+        icon: 'warning',
+        closeOnEsc: false,
+        closeOnClickOutside: false,
+    }).then((confirm) => {
+        if (confirm) {
+            swal({icon: "success", text: '{{__('lang.alert.login-bio2')}}', buttons: false});
+            window.location.href = '{{route('user.profil', ['check' => 'false'])}}';
+        }
+    });
+
+    @elseif(session('contact'))
     swal('{{__('lang.alert.success')}}', '{{__('lang.alert.contact')}}', 'success');
 
     @elseif(session('activated'))
