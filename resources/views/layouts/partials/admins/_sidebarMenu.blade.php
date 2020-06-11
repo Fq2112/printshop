@@ -17,24 +17,28 @@
 
     @endif
 
-    <li class="dropdown {{\Illuminate\Support\Facades\Request::is('*scott.royce/order/show*') ? 'active' : ''}}">
-        <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
-            <i class="fas fa-archive"></i><span>Orders</span></a>
-        <ul class="dropdown-menu">
-            <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/order/show/new*') ? 'active' : ''}}">
-                <a href="{{route('admin.order', ['condition' => \App\Support\StatusProgress::NEW])}}"
-                   class="nav-link">New Orders</a></li>
-            <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/order/show/start*') ? 'active' : ''}}">
-                <a href="{{route('admin.order', ['condition' => \App\Support\StatusProgress::START_PRODUCTION])}}"
-                   class="nav-link">On Produce</a></li>
-            <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/order/show/shipping*') ? 'active' : ''}}">
-                <a href="{{route('admin.order', ['condition' => \App\Support\StatusProgress::SHIPPING])}}"
-                   class="nav-link">Shipping</a></li>
-            <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/order/show/received*') ? 'active' : ''}}">
-                <a href="{{route('admin.order', ['condition' => \App\Support\StatusProgress::RECEIVED])}}"
-                   class="nav-link">Received Orders</a></li>
-        </ul>
+    <li class="dropdown  {{\Illuminate\Support\Facades\Request::is('*scott.royce/order/show*') ? 'active' : ''}}">
+        <a href="{{route('admin.order', ['condition' => \App\Support\StatusProgress::NEW])}}" class="nav-link"><i class="fas fa-archive"></i><span>Orders</span></a>
     </li>
+
+{{--    <li class="dropdown {{\Illuminate\Support\Facades\Request::is('*scott.royce/order/show*') ? 'active' : ''}}">--}}
+{{--        <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">--}}
+{{--            <i class="fas fa-archive"></i><span>Orders</span></a>--}}
+{{--        <ul class="dropdown-menu">--}}
+{{--            <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/order/show/new*') ? 'active' : ''}}">--}}
+{{--                <a href="{{route('admin.order', ['condition' => \App\Support\StatusProgress::NEW])}}"--}}
+{{--                   class="nav-link">New Orders</a></li>--}}
+{{--            <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/order/show/start*') ? 'active' : ''}}">--}}
+{{--                <a href="{{route('admin.order', ['condition' => \App\Support\StatusProgress::START_PRODUCTION])}}"--}}
+{{--                   class="nav-link">On Produce</a></li>--}}
+{{--            <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/order/show/shipping*') ? 'active' : ''}}">--}}
+{{--                <a href="{{route('admin.order', ['condition' => \App\Support\StatusProgress::SHIPPING])}}"--}}
+{{--                   class="nav-link">Shipping</a></li>--}}
+{{--            <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/order/show/received*') ? 'active' : ''}}">--}}
+{{--                <a href="{{route('admin.order', ['condition' => \App\Support\StatusProgress::RECEIVED])}}"--}}
+{{--                   class="nav-link">Received Orders</a></li>--}}
+{{--        </ul>--}}
+{{--    </li>--}}
 
     <li class="menu-header">Tables</li>
 

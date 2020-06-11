@@ -14,12 +14,20 @@ use PHPMailer\PHPMailer\Exception;
 
 class OrderController extends Controller
 {
-    public function show_promo($condition)
+    public function show_promo($condition,Request $request)
     {
         $data = [];
         $status = '';
         if ($condition == StatusProgress::NEW) {
-            $data = Order::where('progress_status', StatusProgress::NEW)->get();
+//            $data = Order::where('progress_status', StatusProgress::NEW)->get();
+            $data = Order::whereNotIn('id',['0'])->when($request->status, function ($query) use ($request){
+                $query->where('progress_status',$request->status);
+            })->when($request->period, function ($query) use ($request){
+                $query->whereBetween('updated_at',[Carbon::now()->subDay($request->period) , Carbon::now()]);
+            })->get();
+
+
+
             $status = $condition;
         } elseif ($condition == StatusProgress::START_PRODUCTION || $condition == StatusProgress::FINISH_PRODUCTION) {
             $data = Order::where('progress_status', StatusProgress::START_PRODUCTION)->orWhere('progress_status', StatusProgress::FINISH_PRODUCTION)->get();
