@@ -113,8 +113,8 @@
             <ul class="dropdown-menu">
                 <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/msc/promo*') ?
                 'active' : ''}}"><a href="{{route('admin.promo')}}" class="nav-link">Promo Code</a></li>
-                <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/msc/privacy*') ?
-                'active' : ''}}"><a href="{{route('table.blog.posts')}}" class="nav-link">Privacy & Term</a></li>
+{{--                <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/msc/privacy*') ?--}}
+{{--                'active' : ''}}"><a href="{{route('table.blog.posts')}}" class="nav-link">Privacy & Term</a></li>--}}
                 <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/msc/maintenance*') ?
                 'active' : ''}}"><a href="{{route('table.blog.posts')}}" class="nav-link">Maintenance</a></li>
             </ul>
