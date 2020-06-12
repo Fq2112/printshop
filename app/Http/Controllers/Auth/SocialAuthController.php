@@ -65,7 +65,7 @@ class SocialAuthController extends Controller
             }
             Auth::loginUsingId($user->id);
 
-            return redirect()->route('beranda')->with('signed', 'message');
+            return redirect()->route('beranda')->with('profil', 'message');
 
         } catch (\Exception $e) {
             return back()->with('unknown', 'message');

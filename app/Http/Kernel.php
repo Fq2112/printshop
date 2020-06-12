@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         '503' => \App\Http\Middleware\Pages\MaintenanceMiddleware::class,
         'user' => \App\Http\Middleware\Pages\Users\UserMiddleware::class,
+        'user.bio' => \App\Http\Middleware\Pages\Users\BioMiddleware::class,
         'root' => \App\Http\Middleware\Pages\Admins\RootMiddleware::class,
         'admin' => \App\Http\Middleware\Pages\Admins\AdminMiddleware::class,
         'owner' => \App\Http\Middleware\Pages\Admins\OwnerMiddleware::class,

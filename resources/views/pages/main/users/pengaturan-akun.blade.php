@@ -91,7 +91,7 @@
                                 <div class="card-content">
                                     <div class="card-title text-center">
                                         <h4 class="aj_name" style="color: #f89406">{{$user->name}}</h4>
-                                        <h5 class="show_username" style="text-transform: none">{{$user->username}}</h5>
+                                        <h5 class="show_username2" style="text-transform: none">{{$user->username}}</h5>
                                     </div>
                                     <div class="card-title">
                                         <div class="row justify-content-center">
@@ -300,7 +300,8 @@
                         $("#error_username").removeClass('has-error');
                         $(".aj_username").text("").parent().hide();
                         $("#show_username_settings").click();
-                        $(".show_username").text(data);
+                        $(".show_username2").text(data.username);
+                        $(".show_username").text(data.limit);
                     }
                 },
                 error: function () {

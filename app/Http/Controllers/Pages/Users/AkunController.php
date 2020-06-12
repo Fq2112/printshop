@@ -11,10 +11,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class AkunController extends Controller
 {
-    public function profil()
+    public function profil(Request $request)
     {
         $user = Auth::user();
         $bio = $user->getBio;
@@ -24,8 +25,10 @@ class AkunController extends Controller
         $provinces = Province::all();
         $occupancy = OccupancyType::all();
 
+        $check = $request->check;
+
         return view('pages.main.users.sunting-profile', compact('user', 'bio', 'addresses',
-            'address', 'provinces', 'occupancy'));
+            'address', 'provinces', 'occupancy', 'check'));
     }
 
     public function updateProfil(Request $request)
@@ -143,7 +146,7 @@ class AkunController extends Controller
 
                 if (!$check || $request->username == Auth::user()->username) {
                     $user->update(['username' => $request->username]);
-                    return $user->username;
+                    return ['username' => $user->username, 'limit' => Str::limit($user->username, 15)];
                 } else {
                     return 0;
                 }

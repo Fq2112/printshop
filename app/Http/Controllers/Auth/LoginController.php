@@ -34,7 +34,12 @@ class LoginController extends Controller
         if (Auth::guard('admin')->check()) {
             return redirect()->route('admin.dashboard')->with('signed', 'message');
         } else {
-            return back()->with('signed', 'message');
+            if (Auth::user()->getBio->dob != null && Auth::user()->getBio->gender != null && Auth::user()->getBio->phone != null) {
+                return back()->with('signed', 'message');
+
+            } else {
+                return back()->with('profil', 'message');
+            }
         }
     }
 
