@@ -490,7 +490,7 @@
 
                         <div class="widget clearfix">
                             <h4 class="ls0 mb-3 nott" data-toc-skip>{{__('lang.footer.payment')}}</h4>
-                            <img src="{{asset('images/logo-midtrans-color.svg')}}" alt="Logo" class="footer-logo">
+                            <img src="{{asset('images/xendit.png')}}" alt="Logo" class="footer-logo">
                         </div>
                     </div>
 
