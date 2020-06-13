@@ -127,6 +127,7 @@
                                         <th class="text-center">ID</th>
                                         <th width="15%">Code</th>
                                         <th width="15%">Customer</th>
+                                        <th width="15%">Phone</th>
                                         <th width="20%">Description</th>
                                         <th width="20%">Shipping</th>
                                         <th>Qty (pcs)</th>
@@ -157,6 +158,9 @@
                                             </td>
                                             <td style="vertical-align: middle">
                                                 <strong>{{$row->getCart->getUser->name}}</strong>
+                                            </td>
+                                            <td style="vertical-align: middle">
+                                                <strong>{{$row->getCart->getUser->getBio->phone}}</strong>
                                             </td>
                                             <td style="vertical-align: middle">
                                                 @if(!empty($row->getCart->subkategori_id))
