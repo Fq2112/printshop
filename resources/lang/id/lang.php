@@ -413,6 +413,7 @@ return [
         "promo2" => "Kode promo yang Anda masukkan telah kedaluwarsa.",
         "checkout" => ":qty produk cetak Anda dengan ID Pembayaran #:code berhasil di checkout! Kami akan langsung mengeksekusi permintaan Anda sesaat setelah Anda menyelesaikan pembayarannya, terima kasih banyak :)",
         "checkout-dashboard" => "Anda akan dialihkan ke halaman Dashboard [Riwayat Pemesanan].",
+        "checkout-xendit" => "Anda akan dialihkan ke halaman Pembayaran Xendit.",
         "received" => "Dengan melanjutkan ini, Anda mengakui bahwa Anda telah menerima pesanan ['+code+'] produk cetak ['+name+'] dan tidak ada masalah.",
         "reorder" => "Apakah Anda yakin untuk memesan ulang produk cetak ['+name+'] ini?",
         "browser" => "Browser yang Anda gunakan tidak support! Silahkan perbarui atau gunakan browser yang lainnya.",

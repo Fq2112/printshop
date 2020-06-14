@@ -412,6 +412,7 @@ return [
         "promo2" => "The promo code you entered has expired.",
         "checkout" => "Your :qty print product:s with Payment ID #:code is successfully checked out! We will immediately execute your request shortly after you complete the payment, bunch of thanks :)",
         "checkout-dashboard" => "You will be redirected to the Dashboard [Order History] page.",
+        "checkout-xendit" => "You will be redirected to the Xendit Payment page.",
         "received" => "By continuing this, you acknowledge that you have received the print product ['+name+'] order ['+code+'] and there`s no any problems.",
         "reorder" => "Are you sure to re-order this print product ['+name+']?",
         "reorder-cart" => "Your print product [:param] is successfully added to your shopping cart!",

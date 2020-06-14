@@ -873,8 +873,7 @@
                                         </div>
                                     </div>
                                     <div class="card-footer p-0">
-                                        <button id="btn_pay" type="button" data-toggle="tooltip"
-                                                data-placement="bottom" title="jasndjs" disabled
+                                        <button id="btn_pay" type="button" disabled
                                                 class="btn btn-primary btn-block text-uppercase text-left noborder">
                                             CHECKOUT <i class="icon-chevron-right fright"></i>
                                         </button>
@@ -1341,7 +1340,7 @@
                 if (confirm) {
                     swal({
                         title: '{{__('lang.alert.warning')}}',
-                        text: '{{__('lang.alert.checkout-dashboard')}}',
+                        text: '{{__('lang.alert.checkout-xendit')}}',
                         icon: 'warning',
                         buttons: false
                     });
