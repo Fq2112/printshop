@@ -54,7 +54,13 @@ class AdminSeeder extends Seeder
             'status' => true,
         ]);
 
-        \App\Models\Bio::create(['user_id' => $user->id]);
+        \App\Models\Bio::create([
+            'user_id' => $user->id,
+            'phone' => '081356598237',
+            'gender' => 'male',
+            'dob' => '1997-10-15'
+        ]);
+
         \App\Models\Address::create([
             'user_id' => $user->id,
             'phone' => '081356598237',
@@ -88,11 +94,16 @@ class AdminSeeder extends Seeder
                 'password' => bcrypt('secret'),
                 'status' => true,
             ]);
-            \App\Models\Bio::create(['user_id' => $dataUser->id]);
+            \App\Models\Bio::create([
+                'user_id' => $dataUser->id,
+                'phone' => '+628123456789' . rand(0, 9),
+                'gender' => rand(0, 1) ? 'male' : 'female',
+                'dob' => $faker->date('Y-m-d')
+            ]);
             for ($a = 0; $a < 2; $a++) {
                 \App\Models\Address::create([
                     'user_id' => $dataUser->id,
-                    'phone' => '+62 ' . $faker->phoneNumber,
+                    'phone' => '+628123456789' . rand(0, 9),
                     'address' => $faker->address,
                     'postal_code' => $faker->postcode,
                     'name' => $faker->sentence,

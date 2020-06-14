@@ -209,6 +209,15 @@ Route::group(['namespace' => 'Pages'], function () {
 
         });
 
+        Route::group(['prefix' => 'payment'], function () {
+
+            Route::get('channels', [
+                'uses' => 'PaymentController@getChannels',
+                'as' => 'get.payment.channels'
+            ]);
+
+        });
+
         Route::group(['prefix' => 'dashboard'], function () {
 
             Route::get('/', [

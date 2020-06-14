@@ -42,7 +42,7 @@ class AkunController extends Controller
             'phone' => preg_replace("![^a-z0-9+]+!i", "", $request->phone),
         ]);
 
-        return back()->with('update', __('lang.profile.update-personal'));
+        return redirect()->route('user.profil')->with('update', __('lang.profile.update-personal'));
     }
 
     public function createProfilAddress(Request $request)

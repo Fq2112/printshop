@@ -250,14 +250,14 @@
                                                         </div>
                                                         <select class="form-control selectpicker" name="gender" required
                                                                 title="{{__('lang.placeholder.choose')}}">
-                                                            <option value="male" {{$bio->gender ==
-                                                            strtolower(__('lang.profile.male')) ? 'selected' : ''}}>
+                                                            <option
+                                                                value="male" {{$bio->gender == 'male' ? 'selected' : ''}}>
                                                                 {{__('lang.profile.male')}}</option>
-                                                            <option value="female" {{$bio->gender ==
-                                                            strtolower(__('lang.profile.female')) ? 'selected' : ''}}>
+                                                            <option
+                                                                value="female" {{$bio->gender == 'female' ? 'selected' : ''}}>
                                                                 {{__('lang.profile.female')}}</option>
-                                                            <option value="other" {{$bio->gender ==
-                                                            strtolower(__('lang.profile.other')) ? 'selected' : ''}}>
+                                                            <option
+                                                                value="other" {{$bio->gender == 'other' ? 'selected' : ''}}>
                                                                 {{__('lang.profile.other')}}</option>
                                                         </select>
                                                     </div>
