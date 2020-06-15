@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
-use Xendit\Xendit;
 
 class UserController extends Controller
 {
@@ -148,7 +147,7 @@ class UserController extends Controller
     {
         $carts = Cart::whereIn('id', explode(',', $request->cart_ids))
             ->orderByRaw('FIELD (id, ' . $request->cart_ids . ') ASC')->get();
-        $code = strtoupper(uniqid('PYM') . now()->timestamp);
+        $code = $request->code;
 
         foreach ($carts as $cart) {
             PaymentCart::create([
@@ -175,15 +174,8 @@ class UserController extends Controller
 
         Mail::to(Auth::user()->email)->send(new InvoiceMail($code, $check, $data, $filename));
 
-        Xendit::setApiKey(env('XENDIT_SECRET'));
-        $xendit_invoice = \Xendit\Invoice::create([
-            'external_id' => $code,
-            'payer_email' => Auth::user()->email,
-            'description' => __('lang.alert.checkout', ['qty' => count($data), 's' => count($data) > 1 ? 's' : '', 'code' => $code]),
-            'amount' => $request->total
-        ]);
-
-        return redirect()->to($xendit_invoice['invoice_url']);
+        return redirect()->route('user.dashboard')->with('add', __('lang.alert.checkout',
+            ['qty' => count($data), 's' => count($data) > 1 ? 's' : '', 'code' => $code]));
     }
 
     public function dashboard(Request $request)

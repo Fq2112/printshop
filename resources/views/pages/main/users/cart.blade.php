@@ -866,6 +866,8 @@
                                     <input type="hidden" name="discount">
                                     <input type="hidden" name="total"
                                            value="{{count($carts) > 0 ? $subtotal + $ongkir : null}}">
+                                    <input type="hidden" name="code"
+                                           value="{{count($carts) > 0 ? strtoupper(uniqid('PYM') . now()->timestamp) : null}}">
                                     <div id="summary-alert" class="card-content pb-0">
                                         <div class="alert alert-warning text-justify">
                                             <i class="icon-exclamation-sign"></i><b>{{__('lang.alert.warning')}}</b>
@@ -976,6 +978,9 @@
 @push('scripts')
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIljHbKjgtTrpZhEiHum734tF1tolxI68&libraries=geometry,places"></script>
+    <!-- TODO: Remove ".sandbox" from script src URL for production environment. Also input your client key in "data-client-key" -->
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js"
+            data-client-key="{{env('MIDTRANS_SERVER_KEY')}}"></script>
     <script>
         var collapse = $('.panel-collapse'), upload_input = $("#file"), link_input = $("#link"), check_file = null,
             btn_pay = $("#btn_pay");
@@ -1328,25 +1333,53 @@
         }
 
         btn_pay.on("click", function () {
-            swal({
-                title: "{{__('lang.alert.delete-head')}}",
-                text: "{{__('lang.alert.delete-capt')}}",
-                icon: 'warning',
-                dangerMode: true,
-                buttons: ["{{__('lang.button.no')}}", "{{__('lang.button.yes')}}"],
-                closeOnEsc: false,
-                closeOnClickOutside: false,
-            }).then((confirm) => {
-                if (confirm) {
-                    swal({
-                        title: '{{__('lang.alert.warning')}}',
-                        text: '{{__('lang.alert.checkout-xendit')}}',
-                        icon: 'warning',
-                        buttons: false
-                    });
-                    $("#form-pembayaran")[0].submit();
-                }
-            });
+            clearTimeout(this.delay);
+            this.delay = setTimeout(function () {
+                $.ajax({
+                    url: '{{route('get.midtrans.snap')}}',
+                    type: "GET",
+                    data: {
+                        code: $("#form-pembayaran input[name=code]").val(),
+                        total: $("#form-pembayaran input[name=total]").val(),
+                    },
+                    beforeSend: function () {
+                        btn_pay.prop("disabled", true).html(
+                            'LOADING&hellip; <span class="spinner-border spinner-border-sm fright" role="status" aria-hidden="true"></span>'
+                        );
+                    },
+                    complete: function () {
+                        btn_pay.prop("disabled", false).html('CHECKOUT <i class="icon-chevron-right fright"></i>');
+                    },
+                    success: function (data) {
+                        snap.pay(data, {
+                            onSuccess: function (result) {
+                                swal({
+                                    title: '{{__('lang.alert.success')}}',
+                                    text: '{{__('lang.alert.checkout-dashboard')}}',
+                                    icon: 'success',
+                                    buttons: false
+                                });
+                                $("#form-pembayaran")[0].submit();
+                            },
+                            onPending: function (result) {
+                                swal({
+                                    title: '{{__('lang.alert.warning')}}',
+                                    text: '{{__('lang.alert.checkout-dashboard')}}',
+                                    icon: 'warning',
+                                    buttons: false
+                                });
+                                $("#form-pembayaran")[0].submit();
+                            },
+                            onError: function (result) {
+                                swal('{{__('lang.alert.error')}}', result.status_message, 'error');
+                            }
+                        });
+                    },
+                    error: function () {
+                        swal('{{__('lang.alert.error')}}', '{{__('lang.alert.error-capt')}}', 'error');
+                    }
+                });
+            }.bind(this), 800);
         });
     </script>
     @include('layouts.partials.users._scriptsAddress')
