@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,12 +17,6 @@ Route::group(['namespace' => 'API', 'prefix' => 'midtrans'], function () {
         'uses' => 'MidtransController@snap',
         'as' => 'get.midtrans.snap'
     ]);
-
-});
-/*Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});*/
-Route::group(['namespace' => 'API'], function () {
 
     Route::get('test', [
         'uses' => 'AcceptPaymentCallbackController@getCallback',
