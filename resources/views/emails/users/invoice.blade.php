@@ -1,7 +1,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no">
-    <title>{{strtoupper(__('lang.order.invoice')).' #'.$code}}</title>
+    <title>{{strtoupper(__('lang.order.invoice')).' #'.str_replace('PYM', 'ORD', $code)}}</title>
     <style type="text/css">
         .alert {
             padding: 15px;
@@ -435,7 +435,7 @@
                                                             <small>
                                                                 <a style="text-decoration: none;color: #f89406;"
                                                                    href="{{route('user.download.file',['id'=>encrypt($check->cart_id),'file'=>'invoice'])}}">
-                                                                    #<b>{{$code}}</b></a>
+                                                                    #<b>{{str_replace('PYM', 'ORD', $code)}}</b></a>
                                                             </small>
                                                             <hr class="hr-divider">
                                                             <table>
@@ -495,6 +495,52 @@
                                                             </td>
                                                         </tr>
                                                     @endif
+                                                    <tr>
+                                                        <td>
+                                                            <small><b>{{__('lang.mail.content.payment4')}}</b></small>
+                                                            <hr class="hr-divider">
+                                                            <span>{{$code}}</span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" width="50%">
+                                                <table border="0" cellpadding="10" cellspacing="0"
+                                                       style="margin-left: 1em" width="100%">
+                                                    <tr>
+                                                        <td>
+                                                            <small><b>{{__('lang.mail.content.payment5')}}</b>
+                                                                <sub>{{strtoupper(str_replace('_',' ',$payment['type']))}}</sub>
+                                                            </small>
+                                                            <hr class="hr-divider">
+                                                            <table>
+                                                                <tr>
+                                                                    @if($payment['type'] == 'bank_transfer')
+                                                                        <td width="50%">
+                                                                            <img alt="{{$payment['bank']}}"
+                                                                                 style="width: 90%;"
+                                                                                 src="{{asset('images/paymentMethod/'.$payment['bank'].'.png')}}">
+                                                                        </td>
+                                                                        <td>
+                                                                            <small
+                                                                                style="line-height: 1.5em;font-size: 14px">
+                                                                                <b style="font-size: 16px">
+                                                                                    {{$payment['account']}}</b>
+                                                                                <br>a/n {{env('APP_TITLE')}}
+                                                                            </small>
+                                                                        </td>
+                                                                    @endif
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td valign="top" width="50%">
+                                                <table width="100%" border="0" cellpadding="10" cellspacing="0"
+                                                       style="margin-left: 1em">
                                                     <tr>
                                                         <td>
                                                             <small><b>{{__('lang.mail.content.payment')}}</b></small>

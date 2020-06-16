@@ -855,7 +855,7 @@
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item noborder">
                                             TOTAL<b class="fright show-total" style="font-size: large">
-                                                {!!count($carts) > 0 ? 'Rp'.number_format($subtotal + $ongkir,2,',','.') : '&ndash;'!!}</b>
+                                                {!!count($carts) > 0 ? 'Rp'.number_format(ceil($subtotal + $ongkir),2,',','.') : '&ndash;'!!}</b>
                                         </li>
                                     </ul>
                                     <input type="hidden" name="cart_ids"
@@ -865,9 +865,13 @@
                                     <input type="hidden" name="ongkir" value="{{count($carts) > 0 ? $ongkir : null}}">
                                     <input type="hidden" name="discount">
                                     <input type="hidden" name="total"
-                                           value="{{count($carts) > 0 ? $subtotal + $ongkir : null}}">
+                                           value="{{count($carts) > 0 ? ceil($subtotal + $ongkir) : null}}">
                                     <input type="hidden" name="code"
                                            value="{{count($carts) > 0 ? strtoupper(uniqid('PYM') . now()->timestamp) : null}}">
+                                    <input type="hidden" name="type">
+                                    <input type="hidden" name="bank">
+                                    <input type="hidden" name="account">
+                                    <input type="hidden" name="pdf_url">
                                     <div id="summary-alert" class="card-content pb-0">
                                         <div class="alert alert-warning text-justify">
                                             <i class="icon-exclamation-sign"></i><b>{{__('lang.alert.warning')}}</b>
@@ -1327,9 +1331,9 @@
 
         function resetter() {
             $("#discount").hide().find('b').text(null);
-            $(".show-total").text('Rp{{number_format($subtotal + $ongkir,2,',','.')}}');
-            $("#form-pembayaran input[name=discount]").val(null);
-            $("#form-pembayaran input[name=total]").val('{{$subtotal + $ongkir}}');
+            $(".show-total").text('Rp{{number_format(ceil($subtotal + $ongkir),2,',','.')}}');
+            $("#form-pembayaran input[name=discount], #form-pembayaran input[name=type], #form-pembayaran input[name=bank], #form-pembayaran input[name=account], #form-pembayaran input[name=pdf_url]").val(null);
+            $("#form-pembayaran input[name=total]").val('{{ceil($subtotal + $ongkir)}}');
         }
 
         btn_pay.on("click", function () {
@@ -1352,6 +1356,7 @@
                     },
                     success: function (data) {
                         snap.pay(data, {
+                            language: '{{app()->getLocale()}}',
                             onSuccess: function (result) {
                                 swal({
                                     title: '{{__('lang.alert.success')}}',
@@ -1359,6 +1364,10 @@
                                     icon: 'success',
                                     buttons: false
                                 });
+                                $("#form-pembayaran input[name=type]").val(result.payment_type);
+                                $("#form-pembayaran input[name=bank]").val(result.va_numbers[0].bank);
+                                $("#form-pembayaran input[name=account]").val(result.va_numbers[0].va_number);
+                                $("#form-pembayaran input[name=pdf_url]").val(result.pdf_url);
                                 $("#form-pembayaran")[0].submit();
                             },
                             onPending: function (result) {
@@ -1368,6 +1377,10 @@
                                     icon: 'warning',
                                     buttons: false
                                 });
+                                $("#form-pembayaran input[name=type]").val(result.payment_type);
+                                $("#form-pembayaran input[name=bank]").val(result.va_numbers[0].bank);
+                                $("#form-pembayaran input[name=account]").val(result.va_numbers[0].va_number);
+                                $("#form-pembayaran input[name=pdf_url]").val(result.pdf_url);
                                 $("#form-pembayaran")[0].submit();
                             },
                             onError: function (result) {

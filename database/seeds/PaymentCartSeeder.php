@@ -34,7 +34,14 @@ class PaymentCartSeeder extends Seeder
             $check = \App\Models\PaymentCart::where('uni_code_payment', $code)->where('user_id', $item->take(1)->toArray()[0]['user_id'])->orderByDesc('id')->first();
             $data = \App\Models\PaymentCart::where('uni_code_payment', $code)->where('user_id', $check->user_id)->orderByDesc('id')->get();
 
-            $pdf = PDF::loadView('exports.invoice', compact('code', 'data', 'check'));
+            $arr = ['bca', 'bni', 'mandiri', 'permata'];
+            $payment = [
+                'type' => 'bank_transfer',
+                'bank' => $arr[array_rand($arr)],
+                'account' => \Faker\Factory::create()->bankAccountNumber,
+            ];
+
+            $pdf = PDF::loadView('exports.invoice', compact('code', 'data', 'payment', 'check'));
             Storage::put('public/users/order/invoice/' . $check->user_id . '/' . $code . '.pdf', $pdf->output());
         }
 
@@ -58,7 +65,14 @@ class PaymentCartSeeder extends Seeder
             $check = \App\Models\PaymentCart::where('uni_code_payment', $code)->where('user_id', $item->take(1)->toArray()[0]['user_id'])->orderByDesc('id')->first();
             $data = \App\Models\PaymentCart::where('uni_code_payment', $code)->where('user_id', $check->user_id)->orderByDesc('id')->get();
 
-            $pdf = PDF::loadView('exports.invoice', compact('code', 'data', 'check'));
+            $arr = ['bca', 'bni', 'mandiri', 'permata'];
+            $payment = [
+                'type' => 'bank_transfer',
+                'bank' => $arr[array_rand($arr)],
+                'account' => \Faker\Factory::create()->bankAccountNumber,
+            ];
+
+            $pdf = PDF::loadView('exports.invoice', compact('code', 'data', 'payment', 'check'));
             Storage::put('public/users/order/invoice/' . $check->user_id . '/' . $code . '.pdf', $pdf->output());
         }
     }

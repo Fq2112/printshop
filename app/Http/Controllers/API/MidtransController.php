@@ -96,7 +96,7 @@ class MidtransController extends Controller
         return Snap::getSnapToken([
             'transaction_details' => [
                 'order_id' => $request->code,
-                'gross_amount' => ceil($request->total),
+                'gross_amount' => $request->total,
             ]
         ]);
     }

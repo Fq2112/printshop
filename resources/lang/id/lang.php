@@ -443,7 +443,7 @@ return [
         "subject" => [
             "activate" => "Akun " . env('APP_NAME') . ": Aktivasi Email",
             "reset" => "Akun " . env('APP_NAME') . ": Reset Kata Sandi",
-            "unpaid" => "Menunggu Pembayaran #:code",
+            "unpaid" => "Menunggu Pembayaran :type #:code",
             "paid" => "Checkout Pesanan dengan ID Pembayaran #:code Berhasil Dikonfirmasi pada :datetime",
         ],
         "content" => [
@@ -463,6 +463,8 @@ return [
             "payment" => "Status Pembayaran",
             "payment2" => "Menunggu Pembayaran",
             "payment3" => "Pembayaran Diterima",
+            "payment4" => "Referensi Pembayaran",
+            "payment5" => "Metode Pembayaran",
             "alert" => "Pastikan untuk tidak menginformasikan detail pembayaran dan bukti kepada pihak manapun <b>kecuali</b> " . env('APP_TITLE') . ".",
             "alert2" => "Silahkan unduh file pdf faktur yang <b>terlampir</b> untuk melihat detail pesanan Anda.",
             "dashboard" => "Tetap awasi pesanan Anda di halaman Dashboard [Riwayat Pemesanan]",

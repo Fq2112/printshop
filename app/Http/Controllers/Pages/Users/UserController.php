@@ -118,6 +118,7 @@ class UserController extends Controller
     {
         $promo = PromoCode::where('promo_code', $request->kode)->first();
         $payment = PaymentCart::where('promo_code', $request->kode)->where('user_id', Auth::id())->first();
+        $amount = ceil($request->subtotal);
 
         if ($promo) {
             if ($payment) {
@@ -126,9 +127,9 @@ class UserController extends Controller
                 if (now() > $promo->end) {
                     return 2;
                 } else {
-                    $discount_price = $request->subtotal * $promo->discount / 100;
-                    $subtotal = $request->subtotal - $discount_price;
-                    $total = $subtotal + $request->ongkir;
+                    $discount_price = ceil($amount * $promo->discount / 100);
+                    $subtotal = $amount - $discount_price;
+                    $total = ceil($subtotal + $request->ongkir);
                     return [
                         'caption' => $promo->description,
                         'discount' => $promo->discount,
@@ -168,11 +169,20 @@ class UserController extends Controller
         $check = PaymentCart::where('uni_code_payment', $code)->where('user_id', Auth::id())->orderByDesc('id')->first();
         $data = PaymentCart::where('uni_code_payment', $code)->where('user_id', Auth::id())->orderByDesc('id')->get();
 
+        $payment = [
+            'type' => $request->type,
+            'bank' => $request->bank,
+            'account' => $request->account,
+        ];
+
         $filename = $code . '.pdf';
-        $pdf = PDF::loadView('exports.invoice', compact('code', 'data', 'check'));
+        $pdf = PDF::loadView('exports.invoice', compact('code', 'data', 'payment', 'check'));
         Storage::put('public/users/order/invoice/' . Auth::id() . '/' . $filename, $pdf->output());
 
-        Mail::to(Auth::user()->email)->send(new InvoiceMail($code, $check, $data, $filename));
+        $instruction = $code . '-instruction.pdf';
+        Storage::put('public/users/order/invoice/' . Auth::id() . '/' . $instruction, file_get_contents($request->pdf_url));
+
+        Mail::to(Auth::user()->email)->send(new InvoiceMail($code, $check, $data, $payment, $filename, $instruction));
 
         return redirect()->route('user.dashboard')->with('add', __('lang.alert.checkout',
             ['qty' => count($data), 's' => count($data) > 1 ? 's' : '', 'code' => $code]));

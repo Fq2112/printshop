@@ -443,7 +443,7 @@ return [
         "subject" => [
             "activate" => env('APP_NAME') . " Account: Activation Email",
             "reset" => env('APP_NAME') . " Account: Reset Password",
-            "unpaid" => "Waiting for Payment #:code",
+            "unpaid" => "Waiting for :type Payment #:code",
             "paid" => "Checkout Orders with Payment ID #:code is Successfully Confirmed on :datetime",
         ],
         "content" => [
@@ -463,6 +463,8 @@ return [
             "payment" => "Payment Status",
             "payment2" => "Waiting for Payment",
             "payment3" => "Payment Received",
+            "payment4" => "Payment Reference",
+            "payment5" => "Payment Method",
             "alert" => "Make sure not to inform payment details and proof to any party <b>except</b> " . env('APP_TITLE') . ".",
             "alert2" => "Please download the <b>attached</b> invoice pdf file to see your order details.",
             "dashboard" => "Keep an eye for your order on the Dashboard [Order History] page",

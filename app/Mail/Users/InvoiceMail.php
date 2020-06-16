@@ -12,19 +12,21 @@ class InvoiceMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $code, $check, $data, $filename;
+    public $code, $check, $data, $payment, $filename, $instruction;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($code, $check, $data, $filename)
+    public function __construct($code, $check, $data, $payment, $filename, $instruction)
     {
         $this->code = $code;
         $this->check = $check;
         $this->data = $data;
+        $this->payment = $payment;
         $this->filename = $filename;
+        $this->instruction = $instruction;
     }
 
     /**
@@ -36,17 +38,19 @@ class InvoiceMail extends Mailable
     {
         $check = $this->check;
         $data = $this->data;
+        $payment = $this->payment;
         $code = $this->code;
 
         if ($check->finish_payment == false) {
-            $subject = __('lang.mail.subject.unpaid', ['code' => $code]);
+            $subject = __('lang.mail.subject.unpaid', ['type' => strtoupper(str_replace('_', ' ', $payment['type'])), 'code' => $code]);
         } else {
             $subject = __('lang.mail.subject.paid', ['code' => $code,
                 'datetime' => Carbon::parse($check->created_at)->formatLocalized('%d %B %Y – %H:%M')]);
         }
 
         return $this->from(env('MAIL_USERNAME'), __('lang.title'))->subject($subject)
-            ->view('emails.users.invoice', compact('code', 'data', 'check'))
-            ->attach(public_path('storage/users/order/invoice/' . $check->user_id . '/' . $this->filename));
+            ->view('emails.users.invoice', compact('code', 'data', 'check', 'payment'))
+            ->attach(public_path('storage/users/order/invoice/' . $check->user_id . '/' . $this->filename))
+            ->attach(public_path('storage/users/order/invoice/' . $check->user_id . '/' . $this->instruction));
     }
 }
