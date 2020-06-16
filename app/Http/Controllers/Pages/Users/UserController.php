@@ -179,8 +179,12 @@ class UserController extends Controller
         $pdf = PDF::loadView('exports.invoice', compact('code', 'data', 'payment', 'check'));
         Storage::put('public/users/order/invoice/' . Auth::id() . '/' . $filename, $pdf->output());
 
-        $instruction = $code . '-instruction.pdf';
-        Storage::put('public/users/order/invoice/' . Auth::id() . '/' . $instruction, file_get_contents($request->pdf_url));
+        if ($request->has('pdf_url')) {
+            $instruction = $code . '-instruction.pdf';
+            Storage::put('public/users/order/invoice/' . Auth::id() . '/' . $instruction, file_get_contents($request->pdf_url));
+        } else {
+            $instruction = null;
+        }
 
         Mail::to(Auth::user()->email)->send(new InvoiceMail($code, $check, $data, $payment, $filename, $instruction));
 

@@ -48,9 +48,12 @@ class InvoiceMail extends Mailable
                 'datetime' => Carbon::parse($check->created_at)->formatLocalized('%d %B %Y – %H:%M')]);
         }
 
+        if (!is_null($this->instruction)) {
+            $this->attach(public_path('storage/users/order/invoice/' . $check->user_id . '/' . $this->instruction));
+        }
+
         return $this->from(env('MAIL_USERNAME'), __('lang.title'))->subject($subject)
             ->view('emails.users.invoice', compact('code', 'data', 'check', 'payment'))
-            ->attach(public_path('storage/users/order/invoice/' . $check->user_id . '/' . $this->filename))
-            ->attach(public_path('storage/users/order/invoice/' . $check->user_id . '/' . $this->instruction));
+            ->attach(public_path('storage/users/order/invoice/' . $check->user_id . '/' . $this->filename));
     }
 }
