@@ -23,7 +23,7 @@ class MidtransController extends Controller
         // Config::$overrideNotifUrl = "https://example.com";
 
         // Optional, remove this to display all available payment methods
-        // $this->channels = ['credit_card', 'cimb_clicks', 'mandiri_clickpay', 'echannel'];
+         $this->channels = ["credit_card", "bca_va", "echannel", "bni_va", "permata_va", "other_va", "gopay", "indomaret", "alfamart"];
     }
 
     public function snap(Request $request)

@@ -1381,14 +1381,28 @@
 
             swal({title: message, text: '{{__('lang.alert.checkout-dashboard')}}', icon: icon, buttons: false});
 
-            $("#form-pembayaran input[name=type]").val(result.payment_type);
-            $("#form-pembayaran input[name=pdf_url]").val(result.pdf_url);
+            if (result.payment_type == 'bank_transfer') {
+                $("#form-pembayaran input[name=type]").val(result.payment_type);
 
-            if(result.payment_type == 'bank_transfer') {
-                $("#form-pembayaran input[name=bank]").val(result.va_numbers[0].bank);
-                $("#form-pembayaran input[name=account]").val(result.va_numbers[0].va_number);
+                if (!result.permata_va_number) {
+                    $("#form-pembayaran input[name=bank]").val(result.va_numbers[0].bank);
+                    $("#form-pembayaran input[name=account]").val(result.va_numbers[0].va_number);
+                } else {
+                    $("#form-pembayaran input[name=bank]").val('permata');
+                    $("#form-pembayaran input[name=account]").val(result.permata_va_number);
+                }
+
+            } else if (result.payment_type == 'echannel') {
+                $("#form-pembayaran input[name=type]").val('bank_transfer');
+                $("#form-pembayaran input[name=bank]").val('mandiri');
+                $("#form-pembayaran input[name=account]").val(result.bill_key);
+
+            } else {
+                $("#form-pembayaran input[name=type]").val(result.payment_type);
+                $("#form-pembayaran input[name=bank]").val(result.store);
             }
 
+            $("#form-pembayaran input[name=pdf_url]").val(result.pdf_url);
             $("#form-pembayaran")[0].submit();
         }
     </script>

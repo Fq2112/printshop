@@ -517,12 +517,12 @@
                                                             <hr class="hr-divider">
                                                             <table>
                                                                 <tr>
+                                                                    <td width="50%">
+                                                                        <img alt="{{$payment['bank']}}"
+                                                                             style="width: 90%;"
+                                                                             src="{{asset('images/paymentMethod/'.$payment['bank'].'.png')}}">
+                                                                    </td>
                                                                     @if($payment['type'] == 'bank_transfer')
-                                                                        <td width="50%">
-                                                                            <img alt="{{$payment['bank']}}"
-                                                                                 style="width: 90%;"
-                                                                                 src="{{asset('images/paymentMethod/'.$payment['bank'].'.png')}}">
-                                                                        </td>
                                                                         <td>
                                                                             <small
                                                                                 style="line-height: 1.5em;font-size: 14px">
