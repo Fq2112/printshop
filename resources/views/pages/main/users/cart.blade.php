@@ -1398,8 +1398,7 @@
                 $("#form-pembayaran input[name=account]").val(result.bill_key);
 
             } else {
-                $("#form-pembayaran input[name=type]").val(result.payment_type);
-                $("#form-pembayaran input[name=bank]").val(result.store);
+                $("#form-pembayaran input[name=type], #form-pembayaran input[name=bank]").val(result.payment_type);
             }
 
             $("#form-pembayaran input[name=pdf_url]").val(result.pdf_url);
