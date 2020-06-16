@@ -408,7 +408,7 @@ return [
         "cart-note2" => "The note of your print product [:param] order is successfully updated!",
         "cart-note3" => "The note of your print product [:param] order is successfully deleted!",
         "promo" => "The promo code you entered was not found.",
-        "promo1" => "You've already been used that promo code!",
+        "promo1" => "You`ve already been used that promo code!",
         "promo2" => "The promo code you entered has expired.",
         "checkout" => "Your :qty print product:s with Payment ID #:code is successfully checked out! We will immediately execute your request shortly after you complete the payment, bunch of thanks :)",
         "checkout-dashboard" => "You will be redirected to the Dashboard [Order History] page.",
