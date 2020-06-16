@@ -1358,30 +1358,10 @@
                         snap.pay(data, {
                             language: '{{app()->getLocale()}}',
                             onSuccess: function (result) {
-                                swal({
-                                    title: '{{__('lang.alert.success')}}',
-                                    text: '{{__('lang.alert.checkout-dashboard')}}',
-                                    icon: 'success',
-                                    buttons: false
-                                });
-                                $("#form-pembayaran input[name=type]").val(result.payment_type);
-                                $("#form-pembayaran input[name=bank]").val(result.va_numbers[0].bank);
-                                $("#form-pembayaran input[name=account]").val(result.va_numbers[0].va_number);
-                                $("#form-pembayaran input[name=pdf_url]").val(result.pdf_url);
-                                $("#form-pembayaran")[0].submit();
+                                responseMidtrans('success', result);
                             },
                             onPending: function (result) {
-                                swal({
-                                    title: '{{__('lang.alert.warning')}}',
-                                    text: '{{__('lang.alert.checkout-dashboard')}}',
-                                    icon: 'warning',
-                                    buttons: false
-                                });
-                                $("#form-pembayaran input[name=type]").val(result.payment_type);
-                                $("#form-pembayaran input[name=bank]").val(result.va_numbers[0].bank);
-                                $("#form-pembayaran input[name=account]").val(result.va_numbers[0].va_number);
-                                $("#form-pembayaran input[name=pdf_url]").val(result.pdf_url);
-                                $("#form-pembayaran")[0].submit();
+                                responseMidtrans('warning', result);
                             },
                             onError: function (result) {
                                 swal('{{__('lang.alert.error')}}', result.status_message, 'error');
@@ -1394,6 +1374,23 @@
                 });
             }.bind(this), 800);
         });
+
+        function responseMidtrans(status, result) {
+            var message = status == 'success' ? '{{__('lang.alert.success')}}' : '{{__('lang.alert.warning')}}',
+                icon = status == 'success' ? 'success' : 'warning';
+
+            swal({title: message, text: '{{__('lang.alert.checkout-dashboard')}}', icon: icon, buttons: false});
+
+            $("#form-pembayaran input[name=type]").val(result.payment_type);
+            $("#form-pembayaran input[name=pdf_url]").val(result.pdf_url);
+
+            if(result.payment_type == 'bank_transfer') {
+                $("#form-pembayaran input[name=bank]").val(result.va_numbers[0].bank);
+                $("#form-pembayaran input[name=account]").val(result.va_numbers[0].va_number);
+            }
+
+            $("#form-pembayaran")[0].submit();
+        }
     </script>
     @include('layouts.partials.users._scriptsAddress')
 @endpush
