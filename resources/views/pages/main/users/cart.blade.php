@@ -1343,7 +1343,7 @@
                     url: '{{route('get.midtrans.snap')}}',
                     type: "GET",
                     data: {
-                        cart_ids: $("#form-pembayaran input[name=cart_ids]").val(),
+                        cart_ids: '{{$total_item->pluck('id')->toArray()}}',
                         code: $("#form-pembayaran input[name=code]").val(),
                         total: $("#form-pembayaran input[name=total]").val(),
                     },
