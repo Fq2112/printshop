@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
+use App\Models\Cart;
+use App\User;
 use Illuminate\Http\Request;
 use Midtrans\Config;
 use Midtrans\Snap;
@@ -23,38 +26,28 @@ class MidtransController extends Controller
         // Config::$overrideNotifUrl = "https://example.com";
 
         // Optional, remove this to display all available payment methods
-         $this->channels = ["credit_card", "bca_va", "echannel", "bni_va", "permata_va", "other_va", "gopay", "indomaret", "alfamart"];
+        $this->channels = ["credit_card", "bca_va", "echannel", "bni_va", "permata_va", "other_va", "gopay", "indomaret", "alfamart"];
     }
 
     public function snap(Request $request)
     {
-        /*// Required
-        $transaction_details = array(
-            'order_id' => rand(),
-            'gross_amount' => 94000, // no decimal allowed for creditcard
-        );
+        $carts = Cart::whereIn('id', explode(',', $request->cart_ids))
+            ->orderByRaw('FIELD (id, ' . $request->cart_ids . ') ASC')->get();
+        $user = User::find($carts->pluck('user_id'));
+        $address = Address::where('user_id', $user->id)->where('is_main', true)->first();
+        $main_address = $address != "" ? $address->address . ' - ' . $address->postal_code . ' (' . $address->getOccupancy->name . ').' : null;
 
-        // Optional
-        $item1_details = array(
-            'id' => 'a1',
-            'price' => 18000,
-            'quantity' => 3,
-            'name' => "Apple"
-        );
+        $items = [];
+        foreach ($carts as $i => $cart) {
+            $items[$i] = [
+                'id' => $cart->id,
+                'price' => $cart->price_pcs,
+                'quantity' => $cart->qty,
+                'name' => !is_null($cart->subkategori_id) ? $cart->getSubKategori->name : $cart->getCluster->name,
+            ];
+        }
 
-        // Optional
-        $item2_details = array(
-            'id' => 'a2',
-            'price' => 20000,
-            'quantity' => 2,
-            'name' => "Orange"
-        );
-
-        // Optional
-        $item_details = array($item1_details, $item2_details);
-
-        // Optional
-        $billing_address = array(
+        /*$billing_address = array(
             'first_name' => "Andri",
             'last_name' => "Litani",
             'address' => "Mangga 20",
@@ -64,7 +57,6 @@ class MidtransController extends Controller
             'country_code' => 'IDN'
         );
 
-        // Optional
         $shipping_address = array(
             'first_name' => "Obet",
             'last_name' => "Supriadi",
@@ -75,7 +67,6 @@ class MidtransController extends Controller
             'country_code' => 'IDN'
         );
 
-        // Optional
         $customer_details = array(
             'first_name' => "Andri",
             'last_name' => "Litani",
@@ -83,21 +74,21 @@ class MidtransController extends Controller
             'phone' => "081122334455",
             'billing_address' => $billing_address,
             'shipping_address' => $shipping_address
-        );
-
-        // Fill transaction details
-        $transaction = array(
-            'enabled_payments' => $channels,
-            'transaction_details' => $transaction_details,
-            'customer_details' => $customer_details,
-            'item_details' => $item_details,
         );*/
 
         return Snap::getSnapToken([
+            'enabled_payments' => $this->channels,
             'transaction_details' => [
                 'order_id' => $request->code,
                 'gross_amount' => $request->total,
-            ]
+            ],
+            'customer_details' => [
+                'name' => $user->username . ' [' . $user->name . ']',
+                'phone' => $user->getBio->phone,
+                'email' => $user->email,
+                'address' => $main_address,
+            ],
+            'item_details' => $items,
         ]);
     }
 }

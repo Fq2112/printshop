@@ -1343,6 +1343,7 @@
                     url: '{{route('get.midtrans.snap')}}',
                     type: "GET",
                     data: {
+                        cart_ids: $("#form-pembayaran input[name=cart_ids]").val(),
                         code: $("#form-pembayaran input[name=code]").val(),
                         total: $("#form-pembayaran input[name=total]").val(),
                     },
@@ -1376,33 +1377,38 @@
         });
 
         function responseMidtrans(status, result) {
-            var message = status == 'success' ? '{{__('lang.alert.success')}}' : '{{__('lang.alert.warning')}}',
-                icon = status == 'success' ? 'success' : 'warning';
+            if (result.payment_type == 'credit_card' || result.payment_type == 'bank_transfer' || result.payment_type == 'echannel' || result.payment_type == 'gopay' || result.payment_type == 'cstore') {
+                var message = status == 'success' ? '{{__('lang.alert.success')}}' : '{{__('lang.alert.warning')}}',
+                    icon = status == 'success' ? 'success' : 'warning';
 
-            swal({title: message, text: '{{__('lang.alert.checkout-dashboard')}}', icon: icon, buttons: false});
+                swal({title: message, text: '{{__('lang.alert.checkout-dashboard')}}', icon: icon, buttons: false});
 
-            if (result.payment_type == 'bank_transfer') {
-                $("#form-pembayaran input[name=type]").val(result.payment_type);
+                if (result.payment_type == 'bank_transfer') {
+                    $("#form-pembayaran input[name=type]").val(result.payment_type);
 
-                if (!result.permata_va_number) {
-                    $("#form-pembayaran input[name=bank]").val(result.va_numbers[0].bank);
-                    $("#form-pembayaran input[name=account]").val(result.va_numbers[0].va_number);
+                    if (!result.permata_va_number) {
+                        $("#form-pembayaran input[name=bank]").val(result.va_numbers[0].bank);
+                        $("#form-pembayaran input[name=account]").val(result.va_numbers[0].va_number);
+                    } else {
+                        $("#form-pembayaran input[name=bank]").val('permata');
+                        $("#form-pembayaran input[name=account]").val(result.permata_va_number);
+                    }
+
+                } else if (result.payment_type == 'echannel') {
+                    $("#form-pembayaran input[name=type]").val('bank_transfer');
+                    $("#form-pembayaran input[name=bank]").val('mandiri');
+                    $("#form-pembayaran input[name=account]").val(result.bill_key);
+
                 } else {
-                    $("#form-pembayaran input[name=bank]").val('permata');
-                    $("#form-pembayaran input[name=account]").val(result.permata_va_number);
+                    $("#form-pembayaran input[name=type], #form-pembayaran input[name=bank]").val(result.payment_type);
                 }
 
-            } else if (result.payment_type == 'echannel') {
-                $("#form-pembayaran input[name=type]").val('bank_transfer');
-                $("#form-pembayaran input[name=bank]").val('mandiri');
-                $("#form-pembayaran input[name=account]").val(result.bill_key);
+                $("#form-pembayaran input[name=pdf_url]").val(result.pdf_url);
+                $("#form-pembayaran")[0].submit();
 
             } else {
-                $("#form-pembayaran input[name=type], #form-pembayaran input[name=bank]").val(result.payment_type);
+                swal('{{__('lang.alert.error')}}', '{{__('lang.alert.checkout-fail')}}', 'error');
             }
-
-            $("#form-pembayaran input[name=pdf_url]").val(result.pdf_url);
-            $("#form-pembayaran")[0].submit();
         }
     </script>
     @include('layouts.partials.users._scriptsAddress')
