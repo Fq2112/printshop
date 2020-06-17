@@ -522,13 +522,14 @@
                                                                              style="width: 90%;"
                                                                              src="{{asset('images/paymentMethod/'.$payment['bank'].'.png')}}">
                                                                     </td>
-                                                                    @if($payment['type'] == 'bank_transfer')
+                                                                    @if($payment['type'] == 'credit_card' || $payment['type'] == 'bank_transfer')
                                                                         <td>
                                                                             <small
                                                                                 style="line-height: 1.5em;font-size: 14px">
-                                                                                <b style="font-size: 16px">
-                                                                                    {{$payment['account']}}</b>
-                                                                                <br>a/n {{env('APP_TITLE')}}
+                                                                                <b style="font-size: 16px">{{$payment['account']}}</b>
+                                                                                @if($payment['type'] == 'bank_transfer')
+                                                                                    <br>a/n {{env('APP_TITLE')}}
+                                                                                @endif
                                                                             </small>
                                                                         </td>
                                                                     @endif

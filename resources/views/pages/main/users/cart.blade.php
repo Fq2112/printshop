@@ -1384,7 +1384,12 @@
 
                 swal({title: message, text: '{{__('lang.alert.checkout-dashboard')}}', icon: icon, buttons: false});
 
-                if (result.payment_type == 'bank_transfer') {
+                if (result.payment_type == 'credit_card') {
+                    $("#form-pembayaran input[name=type]").val(result.payment_type);
+                    $("#form-pembayaran input[name=bank]").val(result.card_type);
+                    $("#form-pembayaran input[name=account]").val(result.masked_card);
+
+                } else if (result.payment_type == 'bank_transfer') {
                     $("#form-pembayaran input[name=type]").val(result.payment_type);
 
                     if (!result.permata_va_number) {
@@ -1405,7 +1410,7 @@
                 }
 
                 $("#form-pembayaran input[name=pdf_url]").val(result.pdf_url);
-                $("#form-pembayaran")[0].submit();
+                // $("#form-pembayaran")[0].submit();
 
             } else {
                 swal('{{__('lang.alert.error')}}', '{{__('lang.alert.checkout-fail')}}', 'error');
