@@ -1340,13 +1340,15 @@
             clearTimeout(this.delay);
             this.delay = setTimeout(function () {
                 $.ajax({
-                    url: '{{route('get.midtrans.snap')}}',
-                    type: "GET",
+                    url: '{{route('midtrans.snap')}}',
+                    type: "POST",
                     data: {
-                        cart_ids: '{{implode(',', $total_item->pluck('id')->toArray())}}',
+                        cart_ids: $("#form-pembayaran input[name=cart_ids]").val(),
                         code: $("#form-pembayaran input[name=code]").val(),
                         total: $("#form-pembayaran input[name=total]").val(),
                     },
+                    contentType: false,
+                    processData: false,
                     beforeSend: function () {
                         btn_pay.prop("disabled", true).html(
                             'LOADING&hellip; <span class="spinner-border spinner-border-sm fright" role="status" aria-hidden="true"></span>'

@@ -13,9 +13,9 @@
 
 Route::group(['namespace' => 'API', 'prefix' => 'midtrans'], function () {
 
-    Route::get('snap', [
+    Route::post('snap', [
         'uses' => 'MidtransController@snap',
-        'as' => 'get.midtrans.snap'
+        'as' => 'midtrans.snap'
     ]);
 
     Route::get('test', [
