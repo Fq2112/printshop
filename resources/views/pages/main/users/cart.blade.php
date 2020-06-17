@@ -1410,7 +1410,7 @@
                 }
 
                 $("#form-pembayaran input[name=pdf_url]").val(result.pdf_url);
-                // $("#form-pembayaran")[0].submit();
+                $("#form-pembayaran")[0].submit();
 
             } else {
                 swal('{{__('lang.alert.error')}}', '{{__('lang.alert.checkout-fail')}}', 'error');
