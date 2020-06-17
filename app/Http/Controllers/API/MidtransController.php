@@ -31,7 +31,8 @@ class MidtransController extends Controller
 
     public function snap(Request $request)
     {
-        $carts = Cart::whereIn('id', $request->cart_ids)->orderByRaw('FIELD (id, ' . $request->cart_ids . ') ASC')->get();
+        $carts = Cart::whereIn('id', explode(',', $request->cart_ids))
+            ->orderByRaw('FIELD (id, ' . $request->cart_ids . ') ASC')->get();
         $user = User::find($carts->pluck('user_id'));
         $address = Address::where('user_id', $user->id)->where('is_main', true)->first();
         $main_address = $address != "" ? $address->address . ' - ' . $address->postal_code . ' (' . $address->getOccupancy->name . ').' : null;
