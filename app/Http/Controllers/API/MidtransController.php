@@ -31,50 +31,13 @@ class MidtransController extends Controller
 
     public function snap(Request $request)
     {
-        $carts = Cart::whereIn('id', explode(',', $request->cart_ids))
-            ->orderByRaw('FIELD (id, ' . $request->cart_ids . ') ASC')->get();
-        $user = User::find($carts->pluck('user_id'));
+        $user = User::find($request->user_id);
+        $split_name = explode(" ", $user->name);
         $address = Address::where('user_id', $user->id)->where('is_main', true)->first();
         $main_address = $address != "" ? $address->address . ' - ' . $address->postal_code . ' (' . $address->getOccupancy->name . ').' : null;
 
-        $items = [];
-        foreach ($carts as $i => $cart) {
-            $items[$i] = [
-                'id' => $cart->id,
-                'price' => $cart->price_pcs,
-                'quantity' => $cart->qty,
-                'name' => !is_null($cart->subkategori_id) ? $cart->getSubKategori->name : $cart->getCluster->name,
-            ];
-        }
-
-        /*$billing_address = array(
-            'first_name' => "Andri",
-            'last_name' => "Litani",
-            'address' => "Mangga 20",
-            'city' => "Jakarta",
-            'postal_code' => "16602",
-            'phone' => "081122334455",
-            'country_code' => 'IDN'
-        );
-
-        $shipping_address = array(
-            'first_name' => "Obet",
-            'last_name' => "Supriadi",
-            'address' => "Manggis 90",
-            'city' => "Jakarta",
-            'postal_code' => "16601",
-            'phone' => "08113366345",
-            'country_code' => 'IDN'
-        );
-
-        $customer_details = array(
-            'first_name' => "Andri",
-            'last_name' => "Litani",
-            'email' => "andri@litani.com",
-            'phone' => "081122334455",
-            'billing_address' => $billing_address,
-            'shipping_address' => $shipping_address
-        );*/
+        $billing = Address::find($request->billing_address);
+        $split_bill_name = explode(" ", $billing->name);
 
         return Snap::getSnapToken([
             'enabled_payments' => $this->channels,
@@ -83,12 +46,21 @@ class MidtransController extends Controller
                 'gross_amount' => $request->total,
             ],
             'customer_details' => [
-                'name' => $user->username . ' [' . $user->name . ']',
+                'first_name' => array_shift($split_name),
+                'last_name' => implode(" ", $split_name),
                 'phone' => $user->getBio->phone,
                 'email' => $user->email,
                 'address' => $main_address,
+                'billing_address' => [
+                    'first_name' => array_shift($split_bill_name),
+                    'last_name' => implode(" ", $split_bill_name),
+                    'address' => $billing->address,
+                    'city' => $billing->getCity->getProvince->name . ', ' . $billing->getCity->name,
+                    'postal_code' => $billing->postal_code,
+                    'phone' => $billing->phone,
+                    'country_code' => 'IDN'
+                ],
             ],
-            'item_details' => $items,
         ]);
     }
 }
