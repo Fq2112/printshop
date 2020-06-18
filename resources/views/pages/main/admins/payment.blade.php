@@ -86,7 +86,8 @@
                                                 @endforeach
                                             </select>
                                             <div class="input-group-append">
-                                                <button data-placement="right" data-toggle="tooltip" title="Submit Filter"
+                                                <button data-placement="right" data-toggle="tooltip"
+                                                        title="Submit Filter"
                                                         type="submit" class="btn btn-warning" style="height: 2.25rem">
                                                     <i class="fa fa-filter"></i></button>
                                             </div>
@@ -127,104 +128,38 @@
                                         <th width="20%">Description</th>
                                         <th width="20%">Shipping</th>
                                         <th>Qty (pcs)</th>
-                                        @if($status == \App\Support\StatusProgress::RECEIVED)
-                                            <th class="text-center" width="10%">Received date</th>
-                                        @else
-                                            <th class="text-center" width="10%">Target finish</th>
-                                        @endif
+
+                                        <th class="text-center" width="10%">Received date</th>
+
                                         <th class="text-center" width="15%">Status</th>
                                         <th width="25%">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @php $no = 1; @endphp
-                                    @foreach($kategori as $row)
+                                    @foreach($data as $item)
                                         <tr>
                                             <td style="vertical-align: middle" align="center">
                                                 <div class="custom-checkbox custom-control">
-                                                    <input type="checkbox" id="cb-{{$row->id}}"
+                                                    <input type="checkbox" id="cb-{{$item->id}}"
                                                            class="custom-control-input dt-checkboxes">
-                                                    <label for="cb-{{$row->id}}"
+                                                    <label for="cb-{{$item->id}}"
                                                            class="custom-control-label">{{$no++}}</label>
                                                 </div>
                                             </td>
-                                            <td style="vertical-align: middle" align="center">{{$row->id}}</td>
-                                            <td style="vertical-align: middle">
-                                                <strong>{{$row->getCart->getPayment->uni_code_payment}}</strong>
-                                            </td>
-                                            <td style="vertical-align: middle">
-                                                <strong>{{$row->getCart->getUser->name}}</strong>
-                                            </td>
-                                            <td style="vertical-align: middle">
-                                                <strong>{{$row->getCart->getUser->getBio->phone}}</strong>
-                                            </td>
-                                            <td style="vertical-align: middle">
-                                                @if(!empty($row->getCart->subkategori_id))
-                                                      {{$row->getCart->getSubKategori->name}}
-                                                @elseif(!empty($row->getCart->cluster_id))
-                                                     {{$row->getCart->getCluster->name}}
-                                                @endif
+                                            <td class="text-center">ID</td>
+                                            <td width="15%">{{ucfirst($item->uni_code_payment)}}</td>
+                                            <td width="15%">{{$item->getUser->name}}</td>
+                                            <td width="15%">Phone</td>
+                                            <td width="20%">Description</td>
+                                            <td width="20%">Shipping</td>
+                                            <td>Qty (pcs)</td>
 
-                                            </td>
-                                            <td style="vertical-align: middle">
-                                                {{$row->getCart->getAddress->address}}
-                                            </td>
+                                            <td class="text-center" width="10%">Received date</td>
 
-                                            <td style="vertical-align: middle">
-                                                {{$row->getCart->qty}}
-                                            </td>
-
-
-                                            <td style="vertical-align: middle" align="center">
-                                                @if($status == \App\Support\StatusProgress::RECEIVED)
-                                                    {{\Carbon\Carbon::parse($row->getCart->received_date)->format('j F Y')}}
-                                                @else
-                                                    {{\Carbon\Carbon::parse($row->getCart->production_finished)->format('j F Y')}}
-                                                @endif
-                                            </td>
-                                            <td style="vertical-align: middle" align="center">
-                                                @if($row->progress_status == \App\Support\StatusProgress::NEW)
-                                                    <span class="badge badge-info"><span
-                                                            class="fa fa-shopping-basket"></span> New</span>
-                                                @elseif($row->progress_status == \App\Support\StatusProgress::START_PRODUCTION || $row->progress_status == \App\Support\StatusProgress::FINISH_PRODUCTION)
-                                                    <span class="badge badge-warning"><span class="fa fa-cogs"></span> On Produce</span>
-                                                @elseif($row->progress_status == \App\Support\StatusProgress::SHIPPING)
-                                                    <span class="badge badge-info"><span
-                                                            class="fa fa-shipping-fast"></span>  Shipping</span>
-                                                @elseif($row->progress_status == \App\Support\StatusProgress::RECEIVED)
-                                                    <span class="badge badge-success"><span
-                                                            class="fa fa-clipboard-check"></span>  Received</span>
-                                                @endif
-                                            </td>
-                                            <td style="vertical-align: middle" align="center">
-{{--                                                @if($row->progress_status == \App\Support\StatusProgress::NEW)--}}
-{{--                                                    <button data-placement="left" data-toggle="tooltip"--}}
-{{--                                                            title="Proceed this order"--}}
-{{--                                                            onclick="proceed_order('{{$row->id}}')"--}}
-{{--                                                            type="button" class="btn btn-warning mr-1">--}}
-{{--                                                        <i class="fa fa-paper-plane"></i></button>--}}
-{{--                                                @elseif($row->progress_status == \App\Support\StatusProgress::START_PRODUCTION || $row->progress_status  == \App\Support\StatusProgress::FINISH_PRODUCTION)--}}
-{{--                                                    <button data-placement="left" data-toggle="tooltip"--}}
-{{--                                                            title="Send this order"--}}
-{{--                                                            onclick="proceed_order('{{$row->id}}')"--}}
-{{--                                                            type="button" class="btn btn-warning mr-1">--}}
-{{--                                                        <i class="fa fa-shipping-fast"></i></button>--}}
-{{--                                                @endif--}}
-{{--                                                @if($row->getCart->link)--}}
-{{--                                                    <a href="{{$row->getCart->link}}" target="_blank">--}}
-{{--                                                        <button data-placement="right" data-toggle="tooltip"--}}
-{{--                                                                title="Design"--}}
-{{--                                                                type="button" class="btn btn-info mr-1">--}}
-{{--                                                            <i class="fa fa-link"></i></button>--}}
-{{--                                                    </a>--}}
-{{--                                                @elseif($row->getChart->file)--}}
-{{--                                                    <button data-placement="right" data-toggle="tooltip"--}}
-{{--                                                            title="Design" onclick="get_design('{{$row->getCart->id}}')"--}}
-{{--                                                            type="button" class="btn btn-info mr-1">--}}
-{{--                                                        <i class="fa fa-file-download"></i></button>--}}
-{{--                                                @endif--}}
-
-                                                <a href="{{route('get.order.detail',['id' => $row->id])}}">
+                                            <td class="text-center" width="15%">Status</td>
+                                            <td width="25%">
+                                                <a href="">
                                                     <button data-placement="right" data-toggle="tooltip"
                                                             title="Detail Info"
                                                             type="button" class="btn btn-info mr-1">
@@ -542,7 +477,6 @@
                 "min": value
             });
         }
-
 
 
         // $("#start-date").datepicker({

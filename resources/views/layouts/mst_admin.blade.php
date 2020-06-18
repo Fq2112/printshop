@@ -98,7 +98,8 @@
                 <li class="dropdown">
                     @if($app->isLocale('id'))
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                            <img class="h-100 mr-1" width="20" src="{{asset('images/icons/flags/id.svg')}}" alt="Indonesia"></a>
+                            <img class="h-100 mr-1" width="20" src="{{asset('images/icons/flags/id.svg')}}"
+                                 alt="Indonesia"></a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="{{LaravelLocalization::getLocalizedURL('en')}}">
                                 <img width="20" src="{{asset('images/icons/flags/en.svg')}}" alt="English">
@@ -109,7 +110,8 @@
                         </div>
                     @else
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                            <img class="h-100 mr-1" width="20" src="{{asset('images/icons/flags/en.svg')}}" alt="English"></a>
+                            <img class="h-100 mr-1" width="20" src="{{asset('images/icons/flags/en.svg')}}"
+                                 alt="English"></a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="{{LaravelLocalization::getLocalizedURL('id')}}">
                                 <img width="20" src="{{asset('images/icons/flags/id.svg')}}" alt="Indonesia">
@@ -202,6 +204,10 @@
     swal('Signed In!', 'Halo {{$role->name}}! You\'re now signed in.', 'success');
 
     @endif
+
+    $(function () {
+        // $('[data-toggle="tooltip"]').tooltip();
+    });
 
     function numberOnly(e, decimal) {
         var key;
