@@ -171,170 +171,170 @@
                                                         :</strong>  {{$row->getCart->getCluster->name}}
                                                 @endif
 
-{{--                                                <br>--}}
-{{--                                                <br>--}}
+                                                <br>
+                                                <br>
 
-{{--                                                @if(!empty($row->getCart->material_id))--}}
-{{--                                                    <strong>Material--}}
-{{--                                                        :</strong>  {{\App\Models\Material::find($row->getCart->material_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->material_id))
+                                                    <strong>Material
+                                                        :</strong>  {{\App\Models\Material::find($row->getCart->material_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->type_id))--}}
-{{--                                                    <strong>Type--}}
-{{--                                                        :</strong>  {{\App\Models\TypeProduct::find($row->getCart->type_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->type_id))
+                                                    <strong>Type
+                                                        :</strong>  {{\App\Models\TypeProduct::find($row->getCart->type_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->balance_id))--}}
-{{--                                                    <strong>Balance--}}
-{{--                                                        :</strong>  {{\App\Models\Balance::find($row->getCart->balance_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->balance_id))
+                                                    <strong>Balance
+                                                        :</strong>  {{\App\Models\Balance::find($row->getCart->balance_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->page_id))--}}
-{{--                                                    <strong>Page--}}
-{{--                                                        :</strong>  {{\App\Models\Pages::find($row->getCart->page_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->page_id))
+                                                    <strong>Page
+                                                        :</strong>  {{\App\Models\Pages::find($row->getCart->page_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->size_id))--}}
-{{--                                                    <strong>Size--}}
-{{--                                                        :</strong>  {{\App\Models\Size::find($row->getCart->size_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->size_id))
+                                                    <strong>Size
+                                                        :</strong>  {{\App\Models\Size::find($row->getCart->size_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->lamination_id))--}}
-{{--                                                    <strong>Lamination--}}
-{{--                                                        :</strong>  {{\App\Models\Lamination::find($row->getCart->lamination_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->lamination_id))
+                                                    <strong>Lamination
+                                                        :</strong>  {{\App\Models\Lamination::find($row->getCart->lamination_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->side_id))--}}
-{{--                                                    <strong>Side--}}
-{{--                                                        :</strong>  {{\App\Models\Side::find($row->getCart->side_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->side_id))
+                                                    <strong>Side
+                                                        :</strong>  {{\App\Models\Side::find($row->getCart->side_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->edge_id))--}}
-{{--                                                    <strong>Edge type--}}
-{{--                                                        :</strong>  {{\App\Models\Edge::find($row->getCart->edge_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->edge_id))
+                                                    <strong>Edge type
+                                                        :</strong>  {{\App\Models\Edge::find($row->getCart->edge_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->color_id))--}}
-{{--                                                    <strong>Color type--}}
-{{--                                                        :</strong>  {{\App\Models\Colors::find($row->getCart->color_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->color_id))
+                                                    <strong>Color type
+                                                        :</strong>  {{\App\Models\Colors::find($row->getCart->color_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->finishing_id))--}}
-{{--                                                    <strong>Finishing--}}
-{{--                                                        :</strong>  {{\App\Models\Finishing::find($row->getCart->finishing_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->finishing_id))
+                                                    <strong>Finishing
+                                                        :</strong>  {{\App\Models\Finishing::find($row->getCart->finishing_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->folding_id))--}}
-{{--                                                    <strong>Folding type--}}
-{{--                                                        :</strong>  {{\App\Models\Folding::find($row->getCart->folding_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->folding_id))
+                                                    <strong>Folding type
+                                                        :</strong>  {{\App\Models\Folding::find($row->getCart->folding_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->front_side_id))--}}
-{{--                                                    <strong>Front Side--}}
-{{--                                                        :</strong>  {{\App\Models\Front::find($row->getCart->front_side_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->front_side_id))
+                                                    <strong>Front Side
+                                                        :</strong>  {{\App\Models\Front::find($row->getCart->front_side_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->right_side_id))--}}
-{{--                                                    <strong>Right Side--}}
-{{--                                                        :</strong>  {{\App\Models\RightLeftSide::find($row->getCart->right_side_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->right_side_id))
+                                                    <strong>Right Side
+                                                        :</strong>  {{\App\Models\RightLeftSide::find($row->getCart->right_side_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->left_side_id))--}}
-{{--                                                    <strong>Left Side--}}
-{{--                                                        :</strong>  {{\App\Models\RightLeftSide::find($row->getCart->right_side_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->left_side_id))
+                                                    <strong>Left Side
+                                                        :</strong>  {{\App\Models\RightLeftSide::find($row->getCart->right_side_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->back_side_id))--}}
-{{--                                                    <strong>Back Side--}}
-{{--                                                        :</strong>  {{\App\Models\BackSide::find($row->getCart->back_side_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->back_side_id))
+                                                    <strong>Back Side
+                                                        :</strong>  {{\App\Models\BackSide::find($row->getCart->back_side_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->front_cover_id))--}}
-{{--                                                    <strong>Front Cover--}}
-{{--                                                        :</strong>  {{\App\Models\Material::find($row->getCart->front_cover_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->front_cover_id))
+                                                    <strong>Front Cover
+                                                        :</strong>  {{\App\Models\Material::find($row->getCart->front_cover_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->back_cover_id))--}}
-{{--                                                    <strong>Back Cover--}}
-{{--                                                        :</strong>  {{\App\Models\Material::find($row->getCart->back_cover_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->back_cover_id))
+                                                    <strong>Back Cover
+                                                        :</strong>  {{\App\Models\Material::find($row->getCart->back_cover_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->binding_id))--}}
-{{--                                                    <strong>Binding type--}}
-{{--                                                        :</strong>  {{\App\Models\Finishing::find($row->getCart->binding_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->binding_id))
+                                                    <strong>Binding type
+                                                        :</strong>  {{\App\Models\Finishing::find($row->getCart->binding_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->print_method_id))--}}
-{{--                                                    <strong>Print Method--}}
-{{--                                                        :</strong>  {{\App\Models\PrintingMethods::find($row->getCart->print_method_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->print_method_id))
+                                                    <strong>Print Method
+                                                        :</strong>  {{\App\Models\PrintingMethods::find($row->getCart->print_method_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->side_cover_id))--}}
-{{--                                                    <strong>Side Cover--}}
-{{--                                                        :</strong>  {{\App\Models\Side::find($row->getCart->side_cover_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->side_cover_id))
+                                                    <strong>Side Cover
+                                                        :</strong>  {{\App\Models\Side::find($row->getCart->side_cover_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->cover_lamination_id))--}}
-{{--                                                    <strong>Cover Lamnination--}}
-{{--                                                        :</strong>  {{\App\Models\Lamination::find($row->getCart->cover_lamination_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->cover_lamination_id))
+                                                    <strong>Cover Lamnination
+                                                        :</strong>  {{\App\Models\Lamination::find($row->getCart->cover_lamination_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->lid_id))--}}
-{{--                                                    <strong>Lid Type--}}
-{{--                                                        :</strong>  {{\App\Models\Lid::find($row->getCart->lid_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->lid_id))
+                                                    <strong>Lid Type
+                                                        :</strong>  {{\App\Models\Lid::find($row->getCart->lid_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->material_cover_id))--}}
-{{--                                                    <strong>Material Cover--}}
-{{--                                                        :</strong>  {{\App\Models\Material::find($row->getCart->material_cover_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->material_cover_id))
+                                                    <strong>Material Cover
+                                                        :</strong>  {{\App\Models\Material::find($row->getCart->material_cover_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->orientation_id))--}}
-{{--                                                    <strong>Orientation--}}
-{{--                                                        :</strong>  {{\App\Models\Finishing::find($row->getCart->orientation_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->orientation_id))
+                                                    <strong>Orientation
+                                                        :</strong>  {{\App\Models\Finishing::find($row->getCart->orientation_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->extra_id))--}}
-{{--                                                    <strong>Extra--}}
-{{--                                                        :</strong>  {{\App\Models\Finishing::find($row->getCart->extra_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->extra_id))
+                                                    <strong>Extra
+                                                        :</strong>  {{\App\Models\Finishing::find($row->getCart->extra_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->holder_id))--}}
-{{--                                                    <strong>Holder type--}}
-{{--                                                        :</strong>  {{\App\Models\Finishing::find($row->getCart->holder_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->holder_id))
+                                                    <strong>Holder type
+                                                        :</strong>  {{\App\Models\Finishing::find($row->getCart->holder_id)->name}}
+                                                    <br>
+                                                @endif
 
-{{--                                                @if(!empty($row->getCart->material_color_id))--}}
-{{--                                                    <strong>Material Color--}}
-{{--                                                        :</strong>  {{\App\Models\Colors::find($row->getCart->material_color_id)->name}}--}}
-{{--                                                    <br>--}}
-{{--                                                @endif--}}
+                                                @if(!empty($row->getCart->material_color_id))
+                                                    <strong>Material Color
+                                                        :</strong>  {{\App\Models\Colors::find($row->getCart->material_color_id)->name}}
+                                                    <br>
+                                                @endif
                                             </td>
                                             <td style="vertical-align: middle">
                                                 {{$row->getCart->getAddress->address}}
