@@ -1407,18 +1407,27 @@
                                 title: "{{__('lang.alert.success')}}",
                                 text: data,
                                 icon: 'success',
-                                buttons: true,
+                                dangerMode: true,
+                                buttons: ["{{__('lang.button.no')}}", "{{__('lang.button.yes')}}"],
                                 closeOnEsc: false,
                                 closeOnClickOutside: false,
                             }).then((confirm) => {
                                 if (confirm) {
                                     swal({
-                                        icon: 'warning',
                                         title: '{{__('lang.alert.warning')}}',
                                         text: '{{__('lang.alert.checkout-dashboard')}}',
+                                        icon: 'warning',
                                         buttons: false
                                     });
                                     window.location.href = '{{route('user.dashboard')}}';
+                                } else {
+                                    swal({
+                                        title: '{{__('lang.alert.warning')}}',
+                                        text: '{{__('lang.alert.logout-message')}}',
+                                        icon: 'warning',
+                                        buttons: false
+                                    });
+                                    window.location.href = '{{route('beranda')}}';
                                 }
                             });
                         },
