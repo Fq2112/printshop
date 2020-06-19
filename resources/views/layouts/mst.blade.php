@@ -35,7 +35,7 @@
 
     <link rel="stylesheet" href="{{asset('css/colors.php?color=f89406')}}" type="text/css">
     <!-- sweetalert2 -->
-    <link rel="stylesheet" href="{{asset('js/plugins/sweetalert/sweetalert2.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/latest/sweetalert2.css">
 
     <style>
         #primary-menu ul li .mega-menu-content.style-2 ul.mega-menu-column:not(.mega-menu-thumb) {
@@ -339,6 +339,60 @@
             pointer-events: none;
         }
 
+        .swal-text {
+            text-align: center;
+            line-height: 24px;
+            font-weight: 500;
+        }
+
+        .swal-footer {
+            text-align: center;
+        }
+
+        .swal-button {
+            border-radius: 3px;
+            font-size: 16px;
+            padding: 7px 19px;
+        }
+
+        .swal-button:focus {
+            box-shadow: none;
+        }
+
+        .swal-button--cancel {
+            font-size: 13px !important;
+        }
+
+        .swal-button--confirm, .swal-button--edit {
+            background-color: #f89406;
+            font-size: 12px;
+            border: 1px solid #fb9706;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+            box-shadow: 0 2px 6px #ff9806;
+        }
+
+
+        .swal-button--confirm:focus, .swal-button--edit:focus, .swal-button--delete:focus {
+            opacity: 0.8;
+        }
+
+
+        .swal-button--confirm:active, .swal-button--edit:active {
+            background-color: #fb9706;
+        }
+
+        .swal-button--delete {
+            background-color: #dc3545;
+            font-size: 12px;
+            border: 1px solid #bd2130;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+            box-shadow: 0 2px 6px #ff3e50;
+        }
+
+        .swal-button--delete:active {
+            background-color: #bd2130;
+        }
+
         .myProgress {
             position: fixed;
             margin-bottom: 0;
@@ -557,8 +611,7 @@
 <!-- Nicescroll -->
 <script src="{{asset('js/plugins/nicescroll/jquery.nicescroll.js')}}"></script>
 <!-- sweetalert2 -->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-{{--<script src="{{asset('js/plugins/sweetalert/sweetalert.min.js')}}"></script>--}}
+<script src="https://cdn.jsdelivr.net/sweetalert2/latest/sweetalert2.js"></script>
 
 <script src="{{asset('js/functions.js')}}"></script>
 
