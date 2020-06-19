@@ -167,16 +167,25 @@ class UserController extends Controller
 
         $archive_paid = PaymentCart::where('user_id', $user->id)->where('finish_payment', true)
             ->whereHas('getCart', function ($q) use ($user) {
-                $q->where('user_id', $user->id)->where('isCheckout', true)->doesntHave('getOrder');
+                $q->where('user_id', $user->id)->where('isCheckout', true)
+                    ->whereHas('getOrder', function ($q) {
+                        $q->where('progress_status', StatusProgress::NEW);
+                    });
             })->when($keyword, function ($q) use ($keyword, $user) {
                 $q->where('uni_code_payment', 'LIKE', '%' . $keyword . '%')
                     ->orWhereHas('getCart', function ($q) use ($keyword, $user) {
                         $q->whereHas('getSubKategori', function ($q) use ($keyword) {
                             $q->where('name', 'LIKE', '%' . $keyword . '%');
-                        })->where('user_id', $user->id)->where('isCheckout', true)->doesntHave('getOrder')
+                        })->where('user_id', $user->id)->where('isCheckout', true)
+                            ->whereHas('getOrder', function ($q) {
+                                $q->where('progress_status', StatusProgress::NEW);
+                            })
                             ->orWhereHas('getCluster', function ($q) use ($keyword) {
                                 $q->where('name', 'LIKE', '%' . $keyword . '%');
-                            })->where('user_id', $user->id)->where('isCheckout', true)->doesntHave('getOrder');
+                            })->where('user_id', $user->id)->where('isCheckout', true)
+                            ->whereHas('getOrder', function ($q) {
+                                $q->where('progress_status', StatusProgress::NEW);
+                            });
                     })->where('user_id', $user->id)->where('finish_payment', true);
             })->orderByDesc('id')->get()->groupBy('uni_code_payment');
         $paid = $archive_paid;
