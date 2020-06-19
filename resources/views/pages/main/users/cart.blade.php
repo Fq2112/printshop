@@ -1394,6 +1394,7 @@
                                 text: '{{__('lang.alert.payment-loading')}}',
                                 content: preloader,
                                 icon: 'warning',
+                                className: 'swal-loading',
                                 buttons: false,
                                 closeOnEsc: false,
                                 closeOnClickOutside: false,
