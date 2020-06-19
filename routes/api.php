@@ -18,9 +18,18 @@ Route::group(['namespace' => 'API', 'prefix' => 'midtrans'], function () {
         'as' => 'get.midtrans.snap'
     ]);
 
-    Route::get('test', [
-        'uses' => 'AcceptPaymentCallbackController@getCallback',
-        'as' => 'admin.dashboard'
-    ]);
+    Route::group(['prefix' => 'callback'], function () {
+
+        Route::get('finish', [
+            'uses' => 'MidtransController@finishCallback',
+            'as' => 'get.midtrans-callback.finish'
+        ]);
+
+        Route::get('unfinish', [
+            'uses' => 'MidtransController@unfinishCallback',
+            'as' => 'get.midtrans-callback.unfinish'
+        ]);
+
+    });
 
 });

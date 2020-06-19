@@ -522,7 +522,7 @@
                                                                              style="width: 90%;"
                                                                              src="{{asset('images/paymentMethod/'.$payment['bank'].'.png')}}">
                                                                     </td>
-                                                                    @if($payment['type'] == 'credit_card' || $payment['type'] == 'bank_transfer')
+                                                                    @if($payment['type'] == 'credit_card' || $payment['type'] == 'bank_transfer' || $payment['type'] == 'cstore')
                                                                         <td>
                                                                             <small
                                                                                 style="line-height: 1.5em;font-size: 14px">

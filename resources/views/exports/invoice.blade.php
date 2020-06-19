@@ -425,7 +425,7 @@
 
     <div id="notes">
         <b class="primary">{{__('lang.mail.content.payment5').': '.strtoupper(str_replace('_',' ',$payment['type']))}}</b><br>
-        @if($payment['type'] == 'credit_card' || $payment['type'] == 'bank_transfer')
+        @if($payment['type'] == 'credit_card' || $payment['type'] == 'bank_transfer' || $payment['type'] == 'cstore')
             <img width="150" alt="{{$payment['bank']}}" style="float:left;margin-right:.5em;margin-bottom:.5em"
                  src="{{public_path('images/paymentMethod/'.$payment['bank'].'.png')}}">
             <small style="line-height: 1.5em;font-size: 14px"><b style="font-size: 16px">{{$payment['account']}}</b>
