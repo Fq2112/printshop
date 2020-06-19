@@ -124,8 +124,6 @@ class MidtransController extends Controller
 
     public function unfinishCallback(Request $request)
     {
-        app()->setLocale($request->lang);
-
         $data_tr = collect(Transaction::status($request->id))->toArray();
         $code = $data_tr['order_id'];
 
@@ -150,13 +148,11 @@ class MidtransController extends Controller
             $cart->update(['isCheckout' => true]);
         }
 
-        $this->invoiceMail('unfinish', $code, $user, $request->pdf_url, $data_tr);
+        $this->invoiceMail($request->lang, 'unfinish', $code, $user, $request->pdf_url, $data_tr);
     }
 
     public function finishCallback(Request $request)
     {
-        app()->setLocale($request->lang);
-
         $data_tr = collect(Transaction::status($request->id))->toArray();
         $code = $data_tr['order_id'];
 
@@ -203,11 +199,13 @@ class MidtransController extends Controller
             ]);
         }
 
-        $this->invoiceMail('finish', $code, $user, $request->pdf_url, $data_tr);
+        $this->invoiceMail($request->lang, 'finish', $code, $user, $request->pdf_url, $data_tr);
     }
 
-    private function invoiceMail($status, $code, $user, $pdf_url, $data_tr)
+    private function invoiceMail($lang, $status, $code, $user, $pdf_url, $data_tr)
     {
+        app()->setLocale($lang);
+
         $check = PaymentCart::where('uni_code_payment', $code)->where('user_id', $user->id)->orderByDesc('id')->first();
         $data = PaymentCart::where('uni_code_payment', $code)->where('user_id', $user->id)->orderByDesc('id')->get();
 
