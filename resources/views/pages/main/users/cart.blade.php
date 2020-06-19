@@ -1380,7 +1380,7 @@
                     $.ajax({
                         url: url,
                         type: "GET",
-                        data: {id: result.transaction_id, pdf_url: result.pdf_url},
+                        data: {lang: '{{app()->getLocale()}}', id: result.transaction_id, pdf_url: result.pdf_url},
                         beforeSend: function () {
                             const preloader = document.createElement('div');
                             preloader.innerHTML =

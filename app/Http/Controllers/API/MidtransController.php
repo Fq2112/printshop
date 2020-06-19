@@ -124,6 +124,8 @@ class MidtransController extends Controller
 
     public function unfinishCallback(Request $request)
     {
+        app()->setLocale($request->lang);
+
         $data_tr = collect(Transaction::status($request->id))->toArray();
         $code = $data_tr['order_id'];
 
@@ -148,6 +150,64 @@ class MidtransController extends Controller
             $cart->update(['isCheckout' => true]);
         }
 
+        $this->invoiceMail('unfinish', $code, $user, $request->pdf_url, $data_tr);
+    }
+
+    public function finishCallback(Request $request)
+    {
+        app()->setLocale($request->lang);
+
+        $data_tr = collect(Transaction::status($request->id))->toArray();
+        $code = $data_tr['order_id'];
+
+        $input = json_decode($data_tr['custom_field1'], true);
+
+        if ($data_tr['payment_type'] == 'credit_card') {
+            $carts = Cart::whereIn('id', explode(',', $input['cart_ids']))
+                ->orderByRaw('FIELD (id, ' . $input['cart_ids'] . ') ASC')->get();
+            foreach ($carts as $cart) {
+                PaymentCart::create([
+                    'user_id' => $cart->user_id,
+                    'address_id' => $input['address_id'],
+                    'cart_id' => $cart->id,
+                    'uni_code_payment' => $code,
+                    'token' => uniqid(),
+                    'price_total' => $cart->total,
+                    'promo_code' => $input['promo_code'],
+                    'is_discount' => $input['is_discount'],
+                    'discount' => $input['discount'],
+                ]);
+
+                $cart->update(['isCheckout' => true]);
+            }
+        }
+
+        $payment_carts = PaymentCart::where('uni_code_payment', $code)->get();
+        $user = User::find(implode($payment_carts->take(1)->pluck('user_id')->toArray()));
+        foreach ($payment_carts as $row) {
+            $row->update(['finish_payment' => true]);
+
+            $item = $row->getCart;
+            $item_name = $item->subkategori_id != null ? $item->getSubKategori->getTranslation('name', 'en') : $item->getCluster->getTranslation('name', 'en');
+            $trim_name = explode(' ', trim($item_name));
+            $initial = '';
+            foreach ($trim_name as $key => $trimItem) {
+                $name = substr($trim_name[$key], 0, 1);
+                $initial = $initial . $name;
+            }
+
+            Order::create([
+                'cart_id' => $item->id,
+                'progress_status' => StatusProgress::NEW,
+                'uni_code' => strtoupper(uniqid($initial)) . now()->timestamp
+            ]);
+        }
+
+        $this->invoiceMail('finish', $code, $user, $request->pdf_url, $data_tr);
+    }
+
+    private function invoiceMail($status, $code, $user, $pdf_url, $data_tr)
+    {
         $check = PaymentCart::where('uni_code_payment', $code)->where('user_id', $user->id)->orderByDesc('id')->first();
         $data = PaymentCart::where('uni_code_payment', $code)->where('user_id', $user->id)->orderByDesc('id')->get();
 
@@ -190,46 +250,29 @@ class MidtransController extends Controller
         ];
 
         $filename = $code . '.pdf';
+        $check_file = 'public/users/order/invoice/' . $user->id . '/' . $filename;
+
+        if ($status == 'finish') {
+            if (Storage::exists($check_file)) {
+                Storage::delete($check_file);
+            }
+            $message = __('lang.alert.payment-success', ['qty' => count($data), 's' => count($data) > 1 ? 's' : '', 'code' => $code]);
+        } else {
+            $message = __('lang.alert.checkout', ['qty' => count($data), 's' => count($data) > 1 ? 's' : '', 'code' => $code]);
+        }
+
         $pdf = PDF::loadView('exports.invoice', compact('code', 'data', 'payment', 'check'));
         Storage::put('public/users/order/invoice/' . $user->id . '/' . $filename, $pdf->output());
 
-        if (!is_null($request->pdf_url)) {
+        if (!is_null($pdf_url)) {
             $instruction = $code . '-instruction.pdf';
-            Storage::put('public/users/order/invoice/' . $user->id . '/' . $instruction, file_get_contents($request->pdf_url));
+            Storage::put('public/users/order/invoice/' . $user->id . '/' . $instruction, file_get_contents($pdf_url));
         } else {
             $instruction = null;
         }
 
         Mail::to($user->email)->send(new InvoiceMail($code, $check, $data, $payment, $filename, $instruction));
 
-        return __('lang.alert.checkout', ['qty' => count($data), 's' => count($data) > 1 ? 's' : '', 'code' => $code]);
-    }
-
-    public function finishCallback(Request $request)
-    {
-        $data_tr = collect(Transaction::status($request->id))->toArray();
-        $payment_carts = PaymentCart::where('uni_code_payment', $data_tr['order_id'])->get();
-
-        foreach ($payment_carts as $row) {
-            $row->update(['finish_payment' => true]);
-
-            $item = $row->getCart;
-            $item_name = $item->subkategori_id != null ? $item->getSubKategori->getTranslation('name', 'en') : $item->getCluster->getTranslation('name', 'en');
-            $trim_name = explode(' ', trim($item_name));
-            $initial = '';
-            foreach ($trim_name as $key => $trimItem) {
-                $name = substr($trim_name[$key], 0, 1);
-                $initial = $initial . $name;
-            }
-            $uni_code = strtoupper(uniqid($initial)) . now()->timestamp;
-
-            Order::create([
-                'cart_id' => $item->id,
-                'progress_status' => StatusProgress::NEW,
-                'uni_code' => $uni_code
-            ]);
-        }
-
-        return __('lang.alert.payment-success', ['qty' => count($payment_carts), 's' => count($payment_carts) > 1 ? 's' : '', 'code' => $data_tr['order_id']]);
+        return $message;
     }
 }

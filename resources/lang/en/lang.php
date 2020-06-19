@@ -414,7 +414,7 @@ return [
         "checkout-dashboard" => "You will be redirected to the Dashboard [Order History] page.",
         "checkout-xendit" => "You will be redirected to the Xendit Payment page.",
         "checkout-fail" => "Sorry the payment channel you selected is still maintenance, please select another one.",
-        "payment-loading" => "Please wait, your transaction is being processed.",
+        "payment-loading" => "Please wait, your transaction is being processed",
         "payment-success" => "Your :qty print product:s with Payment ID #:code is successfully confirmed! Keep an eye on the status of your order on the Dashboard page.",
         "received" => "By continuing this, you acknowledge that you have received the print product ['+name+'] order ['+code+'] and there`s no any problems.",
         "reorder" => "Are you sure to re-order this print product ['+name+']?",
