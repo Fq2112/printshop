@@ -415,6 +415,7 @@ return [
         "checkout-dashboard" => "Anda akan dialihkan ke halaman Dashboard [Riwayat Pemesanan].",
         "checkout-xendit" => "Anda akan dialihkan ke halaman Pembayaran Xendit.",
         "checkout-fail" => "Maaf kanal pembayaran yang Anda pilih masih maintenance, silahkan pilih kanal lainnya.",
+        "payment-loading" => "Mohon tunggu, transaksi Anda sedang diproses.",
         "payment-success" => ":qty produk cetak Anda dengan ID Pembayaran #:code berhasil dikonfirmasi! Tetap awasi status pesanan Anda pada halaman Dashboard.",
         "received" => "Dengan melanjutkan ini, Anda mengakui bahwa Anda telah menerima pesanan ['+code+'] produk cetak ['+name+'] dan tidak ada masalah.",
         "reorder" => "Apakah Anda yakin untuk memesan ulang produk cetak ['+name+'] ini?",

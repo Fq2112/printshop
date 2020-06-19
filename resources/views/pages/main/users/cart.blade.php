@@ -1375,25 +1375,43 @@
         function responseMidtrans(url, result) {
             if (result.payment_type == 'credit_card' || result.payment_type == 'bank_transfer' ||
                 result.payment_type == 'echannel' || result.payment_type == 'gopay' || result.payment_type == 'cstore') {
-                $.get(url, function (data) {
-                    swal({
-                        title: "{{__('lang.alert.success')}}",
-                        text: data,
-                        icon: 'success',
-                        closeOnEsc: false,
-                        closeOnClickOutside: false,
-                    }).then((confirm) => {
-                        if (confirm) {
+                clearTimeout(this.delay);
+                this.delay = setTimeout(function () {
+                    $.ajax({
+                        url: url,
+                        type: "GET",
+                        data: $("#form-pembayaran").serialize(),
+                        beforeSend: function () {
+                            swal('Loading...', '{{__('lang.alert.payment-loading')}}');
+                            swal.showLoading();
+                        },
+                        complete: function () {
+                            swal.close();
+                        },
+                        success: function (data) {
                             swal({
-                                title: '{{__('lang.alert.warning')}}',
-                                text: '{{__('lang.alert.checkout-dashboard')}}',
-                                icon: 'warning',
-                                buttons: false
+                                title: "{{__('lang.alert.success')}}",
+                                text: data,
+                                icon: 'success',
+                                closeOnEsc: false,
+                                closeOnClickOutside: false,
+                            }).then((confirm) => {
+                                if (confirm) {
+                                    swal({
+                                        title: '{{__('lang.alert.warning')}}',
+                                        text: '{{__('lang.alert.checkout-dashboard')}}',
+                                        icon: 'warning',
+                                        buttons: false
+                                    });
+                                    window.location.href = '{{route('user.dashboard')}}';
+                                }
                             });
-                            window.location.href = '{{route('user.dashboard')}}';
+                        },
+                        error: function () {
+                            swal('{{__('lang.alert.error')}}', '{{__('lang.alert.error-capt')}}', 'error');
                         }
                     });
-                });
+                }.bind(this), 800);
 
             } else {
                 swal('{{__('lang.alert.error')}}', '{{__('lang.alert.checkout-fail')}}', 'error');
