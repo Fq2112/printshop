@@ -16,47 +16,39 @@ use PHPMailer\PHPMailer\Exception;
 class OrderController extends Controller
 {
 
-    public function order()
+    public function order(Request $request)
     {
-        $data = PaymentCart::where('finish_payment',true)->distinct('uni_code_payment')->select('uni_code_payment', 'user_id', 'updated_at')->get();
-        return view('pages.main.admins.payment',[
+//        dd($request->all());
+        $data = PaymentCart::where('finish_payment', true)
+            ->distinct('uni_code_payment')->select('uni_code_payment', 'user_id', 'updated_at')->orderBy('updated_at')->get();
+        return view('pages.main.admins.payment', [
             'data' => $data
         ]);
     }
 
-    public function show_promo($condition, Request $request)
+    public function show_order($condition, Request $request)
     {
         $data = [];
         $status = '';
-        if ($condition == StatusProgress::NEW) {
-//            $data = Order::where('progress_status', StatusProgress::NEW)->get();
-            $data = Order::whereNotIn('id', ['0'])->when($request->status, function ($query) use ($request) {
-                $query->where('progress_status', $request->status);
-            })->when($request->period, function ($query) use ($request) {
-                $query->whereBetween('updated_at', [Carbon::now()->subDay($request->period), Carbon::now()]);
-            })->get();
-
-
-            $status = $condition;
-        } elseif ($condition == StatusProgress::START_PRODUCTION || $condition == StatusProgress::FINISH_PRODUCTION) {
-            $data = Order::where('progress_status', StatusProgress::START_PRODUCTION)->orWhere('progress_status', StatusProgress::FINISH_PRODUCTION)->get();
-            $status = $condition;
-        } elseif ($condition == StatusProgress::SHIPPING) {
-            $data = Order::where('progress_status', StatusProgress::SHIPPING)->get();
-            $status = $condition;
-        } elseif ($condition == StatusProgress::RECEIVED) {
-            $data = Order::where('progress_status', StatusProgress::RECEIVED)->get();
-            $status = $condition;
-        }
+        $data = Order::whereNotIn('id', ['0'])->when($request->status, function ($query) use ($request) {
+            $query->where('progress_status', $request->status);
+        })->when($request->period, function ($query) use ($request) {
+            $query->whereBetween('updated_at', [Carbon::now()->subDay($request->period), Carbon::now()]);
+        })->whereHas('getCart', function ($query) use ($condition) {
+            $query->whereHas('getPayment', function ($query) use ($condition) {
+                $query->where('uni_code_payment', $condition);
+            });
+        })->get();
 
         return view('pages.main.admins.order', [
             'title' => 'Order List',
             'kategori' => $data,
             'status' => $status
+            , 'code' => $condition
         ]);
     }
 
-    public function detail_data($id)
+    public function order_detail($id)
     {
         $data = Order::find($id);
 
