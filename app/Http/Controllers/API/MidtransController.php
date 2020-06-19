@@ -124,6 +124,8 @@ class MidtransController extends Controller
 
     public function unfinishCallback(Request $request)
     {
+        app()->setLocale($request->lang);
+
         $data_tr = collect(Transaction::status($request->id))->toArray();
         $code = $data_tr['order_id'];
 
@@ -148,11 +150,15 @@ class MidtransController extends Controller
             $cart->update(['isCheckout' => true]);
         }
 
-        $this->invoiceMail($request->lang, 'unfinish', $code, $user, $request->pdf_url, $data_tr);
+        $this->invoiceMail('unfinish', $code, $user, $request->pdf_url, $data_tr);
+
+        return __('lang.alert.checkout', ['qty' => count($carts), 's' => count($carts) > 1 ? 's' : '', 'code' => $code]);
     }
 
     public function finishCallback(Request $request)
     {
+        app()->setLocale($request->lang);
+
         $data_tr = collect(Transaction::status($request->id))->toArray();
         $code = $data_tr['order_id'];
 
@@ -199,13 +205,13 @@ class MidtransController extends Controller
             ]);
         }
 
-        $this->invoiceMail($request->lang, 'finish', $code, $user, $request->pdf_url, $data_tr);
+        $this->invoiceMail('finish', $code, $user, $request->pdf_url, $data_tr);
+
+        return __('lang.alert.payment-success', ['qty' => count($payment_carts), 's' => count($payment_carts) > 1 ? 's' : '', 'code' => $code]);
     }
 
-    private function invoiceMail($lang, $status, $code, $user, $pdf_url, $data_tr)
+    private function invoiceMail($status, $code, $user, $pdf_url, $data_tr)
     {
-        app()->setLocale($lang);
-
         $check = PaymentCart::where('uni_code_payment', $code)->where('user_id', $user->id)->orderByDesc('id')->first();
         $data = PaymentCart::where('uni_code_payment', $code)->where('user_id', $user->id)->orderByDesc('id')->get();
 
@@ -254,9 +260,6 @@ class MidtransController extends Controller
             if (Storage::exists($check_file)) {
                 Storage::delete($check_file);
             }
-            $message = __('lang.alert.payment-success', ['qty' => count($data), 's' => count($data) > 1 ? 's' : '', 'code' => $code]);
-        } else {
-            $message = __('lang.alert.checkout', ['qty' => count($data), 's' => count($data) > 1 ? 's' : '', 'code' => $code]);
         }
 
         $pdf = PDF::loadView('exports.invoice', compact('code', 'data', 'payment', 'check'));
@@ -270,7 +273,5 @@ class MidtransController extends Controller
         }
 
         Mail::to($user->email)->send(new InvoiceMail($code, $check, $data, $payment, $filename, $instruction));
-
-        return $message;
     }
 }
