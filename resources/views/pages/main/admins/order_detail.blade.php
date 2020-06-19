@@ -76,6 +76,9 @@
                                 <tr data-toggle="tooltip" title="Payment code" data-placement="left">
                                     <td><strong>{{$data->getCart->getPayment->uni_code_payment}}</strong></td>
                                 </tr>
+                                <tr data-toggle="tooltip" title="Order Code" data-placement="left">
+                                    <td> #{{$data->uni_code}}</td>
+                                </tr>
                                 <tr data-toggle="tooltip" title="Customer Name" data-placement="left">
                                     <td> {{$data->getCart->getUser->name}}</td>
                                 </tr>

@@ -125,14 +125,8 @@
                                         <th width="15%">Code</th>
                                         <th width="15%">Customer</th>
                                         <th width="15%">Phone</th>
-                                        <th width="20%">Description</th>
-                                        <th width="20%">Shipping</th>
-                                        <th>Qty (pcs)</th>
-
-                                        <th class="text-center" width="10%">Received date</th>
-
-                                        <th class="text-center" width="15%">Status</th>
-                                        <th width="25%">Action</th>
+                                        <th class="text-center" width="10%">Order date</th>
+                                        <th width="25%" align="center"><center>Action</center></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -150,16 +144,10 @@
                                             <td class="text-center">ID</td>
                                             <td width="15%">{{ucfirst($item->uni_code_payment)}}</td>
                                             <td width="15%">{{$item->getUser->name}}</td>
-                                            <td width="15%">Phone</td>
-                                            <td width="20%">Description</td>
-                                            <td width="20%">Shipping</td>
-                                            <td>Qty (pcs)</td>
-
-                                            <td class="text-center" width="10%">Received date</td>
-
-                                            <td class="text-center" width="15%">Status</td>
-                                            <td width="25%">
-                                                <a href="">
+                                            <td width="15%">{{$item->getUser->getBio->phone}}</td>
+                                            <td class="text-center" width="10%">{{$item->updated_at}}</td>
+                                            <td width="25%" align="center">
+                                                <a href="{{route('admin.order.user',['kode'=>$item->uni_code_payment])}}">
                                                     <button data-placement="right" data-toggle="tooltip"
                                                             title="Detail Info"
                                                             type="button" class="btn btn-info mr-1">

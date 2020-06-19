@@ -36,7 +36,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Order History & Status</h1>
+            <h1>Order #{{$code}}</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{route('admin.dashboard')}}">Dashboard</a></div>
                 <div class="breadcrumb-item">Data Master</div>
@@ -50,7 +50,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{route('admin.order',['condition' => \App\Support\StatusProgress::NEW])}}"
+                            <form action="{{route('admin.order.user',['kode'=>$code])}}"
                                   method="get">
                                 <div class="row form-group">
                                     <div class="col-3 fix-label-group">
@@ -121,10 +121,10 @@
                                             </div>
                                         </th>
                                         <th class="text-center">ID</th>
-                                        <th width="15%">Code</th>
+
                                         <th width="15%">Customer</th>
                                         <th width="15%">Phone</th>
-                                        <th width="20%">Description</th>
+                                        <th width="20%">Product</th>
                                         <th width="20%">Shipping</th>
                                         <th>Qty (pcs)</th>
                                         @if($status == \App\Support\StatusProgress::RECEIVED)
@@ -149,9 +149,9 @@
                                                 </div>
                                             </td>
                                             <td style="vertical-align: middle" align="center">{{$row->id}}</td>
-                                            <td style="vertical-align: middle">
-                                                <strong>{{$row->getCart->getPayment->uni_code_payment}}</strong>
-                                            </td>
+{{--                                            <td style="vertical-align: middle">--}}
+{{--                                                <strong>{{$row->getCart->getPayment->uni_code_payment}}</strong>--}}
+{{--                                            </td>--}}
                                             <td style="vertical-align: middle">
                                                 <strong>{{$row->getCart->getUser->name}}</strong>
                                             </td>

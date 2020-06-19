@@ -94,18 +94,18 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
     });
 
     Route::group(['prefix' => 'order'], function () {
-        Route::get('/', [
+        Route::get('/list', [
             'uses' => 'OrderController@order',
             'as' => 'admin.order'
         ]);
 
-        Route::get('show/{condition}', [
-            'uses' => 'OrderController@show_promo',
+        Route::get('show/{kode}', [
+            'uses' => 'OrderController@show_order',
             'as' => 'admin.order.user'
         ]);
 
         Route::get('detail/{id}', [
-            'uses' => 'OrderController@detail_data',
+            'uses' => 'OrderController@order_detail',
             'as' => 'get.order.detail'
         ]);
 
