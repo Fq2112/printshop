@@ -1410,13 +1410,23 @@
                                 closeOnEsc: false,
                                 closeOnClickOutside: false,
                             }).then((confirm) => {
-                                swal({
-                                    title: '{{__('lang.alert.warning')}}',
-                                    text: '{{__('lang.alert.checkout-dashboard')}}',
-                                    icon: 'warning',
-                                    buttons: false
-                                });
-                                window.location.href = '{{route('user.dashboard')}}';
+                                if (confirm) {
+                                    swal({
+                                        icon: 'warning',
+                                        title: '{{__('lang.alert.warning')}}',
+                                        text: '{{__('lang.alert.checkout-dashboard')}}',
+                                        buttons: false
+                                    });
+                                    window.location.href = '{{route('user.dashboard')}}';
+                                } else {
+                                    swal({
+                                        icon: 'warning',
+                                        title: '{{__('lang.alert.warning')}}',
+                                        text: '{{__('lang.alert.checkout-dashboard')}}',
+                                        buttons: false
+                                    });
+                                    window.location.href = '{{route('user.dashboard')}}';
+                                }
                             });
                         },
                         error: function () {
