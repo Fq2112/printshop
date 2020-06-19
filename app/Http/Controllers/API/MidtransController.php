@@ -122,34 +122,6 @@ class MidtransController extends Controller
         ]);
     }
 
-    public function finishCallback(Request $request)
-    {
-        $data_tr = collect(Transaction::status($request->id))->toArray();
-        $payment_carts = PaymentCart::where('uni_code_payment', $data_tr['order_id'])->get();
-
-        foreach ($payment_carts as $row) {
-            $row->update(['finish_payment' => true]);
-
-            $item = $row->getCart;
-            $item_name = $item->subkategori_id != null ? $item->getSubKategori->getTranslation('name', 'en') : $item->getCluster->getTranslation('name', 'en');
-            $trim_name = explode(' ', trim($item_name));
-            $initial = '';
-            foreach ($trim_name as $key => $trimItem) {
-                $name = substr($trim_name[$key], 0, 1);
-                $initial = $initial . $name;
-            }
-            $uni_code = strtoupper(uniqid($initial)) . now()->timestamp;
-
-            Order::create([
-                'cart_id' => $item->id,
-                'progress_status' => StatusProgress::NEW,
-                'uni_code' => $uni_code
-            ]);
-        }
-
-        return __('lang.alert.payment-success', ['qty' => count($payment_carts), 's' => count($payment_carts) > 1 ? 's' : '', 'code' => $data_tr['order_id']]);
-    }
-
     public function unfinishCallback(Request $request)
     {
         $data_tr = collect(Transaction::status($request->id))->toArray();
@@ -169,7 +141,7 @@ class MidtransController extends Controller
                 'token' => uniqid(),
                 'price_total' => $cart->total,
                 'promo_code' => $input['promo_code'],
-                'is_discount' => $input['discount'],
+                'is_discount' => $input['is_discount'],
                 'discount' => $input['discount'],
             ]);
 
@@ -231,5 +203,33 @@ class MidtransController extends Controller
         Mail::to($user->email)->send(new InvoiceMail($code, $check, $data, $payment, $filename, $instruction));
 
         return __('lang.alert.checkout', ['qty' => count($data), 's' => count($data) > 1 ? 's' : '', 'code' => $code]);
+    }
+
+    public function finishCallback(Request $request)
+    {
+        $data_tr = collect(Transaction::status($request->id))->toArray();
+        $payment_carts = PaymentCart::where('uni_code_payment', $data_tr['order_id'])->get();
+
+        foreach ($payment_carts as $row) {
+            $row->update(['finish_payment' => true]);
+
+            $item = $row->getCart;
+            $item_name = $item->subkategori_id != null ? $item->getSubKategori->getTranslation('name', 'en') : $item->getCluster->getTranslation('name', 'en');
+            $trim_name = explode(' ', trim($item_name));
+            $initial = '';
+            foreach ($trim_name as $key => $trimItem) {
+                $name = substr($trim_name[$key], 0, 1);
+                $initial = $initial . $name;
+            }
+            $uni_code = strtoupper(uniqid($initial)) . now()->timestamp;
+
+            Order::create([
+                'cart_id' => $item->id,
+                'progress_status' => StatusProgress::NEW,
+                'uni_code' => $uni_code
+            ]);
+        }
+
+        return __('lang.alert.payment-success', ['qty' => count($payment_carts), 's' => count($payment_carts) > 1 ? 's' : '', 'code' => $data_tr['order_id']]);
     }
 }

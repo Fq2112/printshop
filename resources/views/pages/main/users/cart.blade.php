@@ -1382,15 +1382,21 @@
                         type: "GET",
                         data: $("#form-pembayaran").serialize(),
                         beforeSend: function () {
+                            const preloader = document.createElement('div');
+                            preloader.innerHTML =
+                                '<div class="css3-spinner" style="position: relative">' +
+                                '<div class="css3-spinner-bounce1"></div>' +
+                                '<div class="css3-spinner-bounce2"></div>' +
+                                '<div class="css3-spinner-bounce3"></div></div>';
+
                             swal({
                                 title: 'Loading...',
                                 text: '{{__('lang.alert.payment-loading')}}',
+                                content: preloader,
+                                icon: 'warning',
                                 buttons: false,
                                 closeOnEsc: false,
                                 closeOnClickOutside: false,
-                                onOpen: () => {
-                                    swal.showLoading();
-                                }
                             });
                         },
                         complete: function () {
@@ -1404,15 +1410,13 @@
                                 closeOnEsc: false,
                                 closeOnClickOutside: false,
                             }).then((confirm) => {
-                                if (confirm) {
-                                    swal({
-                                        title: '{{__('lang.alert.warning')}}',
-                                        text: '{{__('lang.alert.checkout-dashboard')}}',
-                                        icon: 'warning',
-                                        buttons: false
-                                    });
-                                    window.location.href = '{{route('user.dashboard')}}';
-                                }
+                                swal({
+                                    title: '{{__('lang.alert.warning')}}',
+                                    text: '{{__('lang.alert.checkout-dashboard')}}',
+                                    icon: 'warning',
+                                    buttons: false
+                                });
+                                window.location.href = '{{route('user.dashboard')}}';
                             });
                         },
                         error: function () {

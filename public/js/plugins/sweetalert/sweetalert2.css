@@ -4,6 +4,10 @@
     font-weight: 500;
 }
 
+.swal-content:last-child {
+    margin: 2em 0 4em;
+}
+
 .swal-footer {
     text-align: center;
 }
