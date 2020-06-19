@@ -219,12 +219,12 @@ class MidtransController extends Controller
         } else if ($data_tr['payment_type'] == 'bank_transfer') {
             $type = $data_tr['payment_type'];
 
-            if (!$data_tr['permata_va_number']) {
-                $bank = implode((array)$data_tr['va_numbers'][0]->bank);
-                $account = implode((array)$data_tr['va_numbers'][0]->va_number);
-            } else {
+            if (array_key_exists('permata_va_number', $data_tr)) {
                 $bank = 'permata';
                 $account = $data_tr['permata_va_number'];
+            } else {
+                $bank = implode((array)$data_tr['va_numbers'][0]->bank);
+                $account = implode((array)$data_tr['va_numbers'][0]->va_number);
             }
 
         } else if ($data_tr['payment_type'] == 'echannel') {
