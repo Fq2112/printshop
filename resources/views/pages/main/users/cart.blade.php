@@ -1355,10 +1355,10 @@
                         snap.pay(data, {
                             language: '{{app()->getLocale()}}',
                             onSuccess: function (result) {
-                                responseMidtrans('{{route('get.midtrans-callback.finish', ['id' => ''])}}' + result.transaction_id, result);
+                                responseMidtrans('{{route('get.midtrans-callback.finish')}}', result);
                             },
                             onPending: function (result) {
-                                responseMidtrans('{{route('get.midtrans-callback.unfinish', ['id' => ''])}}' + result.transaction_id, result);
+                                responseMidtrans('{{route('get.midtrans-callback.unfinish')}}', result);
                             },
                             onError: function (result) {
                                 swal('{{__('lang.alert.error')}}', result.status_message, 'error');
@@ -1380,7 +1380,7 @@
                     $.ajax({
                         url: url,
                         type: "GET",
-                        data: $("#form-pembayaran").serialize(),
+                        data: {id: result.transaction_id, pdf_url: result.pdf_url},
                         beforeSend: function () {
                             const preloader = document.createElement('div');
                             preloader.innerHTML =

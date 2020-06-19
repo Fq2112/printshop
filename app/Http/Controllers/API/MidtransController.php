@@ -193,9 +193,9 @@ class MidtransController extends Controller
         $pdf = PDF::loadView('exports.invoice', compact('code', 'data', 'payment', 'check'));
         Storage::put('public/users/order/invoice/' . $user->id . '/' . $filename, $pdf->output());
 
-        if (array_key_exists('pdf_url', $data_tr)) {
+        if (!is_null($request->pdf_url)) {
             $instruction = $code . '-instruction.pdf';
-            Storage::put('public/users/order/invoice/' . $user->id . '/' . $instruction, file_get_contents($data_tr['pdf_url']));
+            Storage::put('public/users/order/invoice/' . $user->id . '/' . $instruction, file_get_contents($request->pdf_url));
         } else {
             $instruction = null;
         }
