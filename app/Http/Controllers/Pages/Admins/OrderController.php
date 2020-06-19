@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pages\Admins;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\PaymentCart;
 use App\Support\Role;
 use App\Support\StatusProgress;
 use Carbon\Carbon;
@@ -14,18 +15,26 @@ use PHPMailer\PHPMailer\Exception;
 
 class OrderController extends Controller
 {
-    public function show_promo($condition,Request $request)
+
+    public function order()
+    {
+        $data = PaymentCart::where('finish_payment',true)->distinct('uni_code_payment')->select('uni_code_payment', 'user_id', 'updated_at')->get();
+        return view('pages.main.admins.payment',[
+            'data' => $data
+        ]);
+    }
+
+    public function show_promo($condition, Request $request)
     {
         $data = [];
         $status = '';
         if ($condition == StatusProgress::NEW) {
 //            $data = Order::where('progress_status', StatusProgress::NEW)->get();
-            $data = Order::whereNotIn('id',['0'])->when($request->status, function ($query) use ($request){
-                $query->where('progress_status',$request->status);
-            })->when($request->period, function ($query) use ($request){
-                $query->whereBetween('updated_at',[Carbon::now()->subDay($request->period) , Carbon::now()]);
+            $data = Order::whereNotIn('id', ['0'])->when($request->status, function ($query) use ($request) {
+                $query->where('progress_status', $request->status);
+            })->when($request->period, function ($query) use ($request) {
+                $query->whereBetween('updated_at', [Carbon::now()->subDay($request->period), Carbon::now()]);
             })->get();
-
 
 
             $status = $condition;
@@ -47,6 +56,15 @@ class OrderController extends Controller
         ]);
     }
 
+    public function detail_data($id)
+    {
+        $data = Order::find($id);
+
+        return view('pages.main.admins.order_detail', [
+            'data' => $data,
+        ]);
+    }
+
     public function get_file(Request $request)
     {
         try {
@@ -57,7 +75,7 @@ class OrderController extends Controller
                 return Response::download($file_path, $request->file, [
                     'Content-length : ' . filesize($file_path)
                 ]);
-            }else{
+            } else {
                 return response()->json(['error' => "The file you looking for is gone"], 404);
             }
         } catch (Exception $e) {
@@ -87,11 +105,11 @@ class OrderController extends Controller
     {
         $order = Order::find($request->id);
 
-        if ($order->progress_status == StatusProgress::NEW){
+        if ($order->progress_status == StatusProgress::NEW) {
             $order->update([
                 'progress_status' => StatusProgress::START_PRODUCTION
             ]);
-        }elseif ($order->progress_status == StatusProgress::START_PRODUCTION || $order->progress_status == StatusProgress::FINISH_PRODUCTION){
+        } elseif ($order->progress_status == StatusProgress::START_PRODUCTION || $order->progress_status == StatusProgress::FINISH_PRODUCTION) {
             $order->update([
                 'progress_status' => StatusProgress::SHIPPING
             ]);
