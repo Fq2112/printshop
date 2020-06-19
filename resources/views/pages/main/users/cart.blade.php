@@ -288,9 +288,11 @@
     <section id="content" style="background-color: #F9F9F9">
         <div class="content-wrap">
             <div class="container clearfix">
-                <form id="form-pembayaran" class="row" method="POST" action="{{route('user.checkout.cart')}}"
-                      onkeydown="return event.key != 'Enter';">
+                <form id="form-pembayaran" class="row" method="POST" onkeydown="return event.key != 'Enter';">
                     @csrf
+                    <input type="hidden" name="user_id" value="{{Auth::id()}}">
+                    <input type="hidden" name="lang" value="{{app()->getLocale()}}">
+
                     <div class="postcontent mb-0 pb-0 clearfix">
                         <div class="myCard {{count($carts) > 0 ? 'mb-4' : ''}}">
                             <div class="card-content">
@@ -864,14 +866,11 @@
                                            value="{{count($carts) > 0 ? $subtotal : null}}">
                                     <input type="hidden" name="ongkir" value="{{count($carts) > 0 ? $ongkir : null}}">
                                     <input type="hidden" name="discount">
+                                    <input type="hidden" name="discount_price">
                                     <input type="hidden" name="total"
                                            value="{{count($carts) > 0 ? ceil($subtotal + $ongkir) : null}}">
                                     <input type="hidden" name="code"
                                            value="{{count($carts) > 0 ? strtoupper(uniqid('PYM') . now()->timestamp) : null}}">
-                                    <input type="hidden" name="type">
-                                    <input type="hidden" name="bank">
-                                    <input type="hidden" name="account">
-                                    <input type="hidden" name="pdf_url">
                                     <div id="summary-alert" class="card-content pb-0">
                                         <div class="alert alert-warning text-justify">
                                             <i class="icon-exclamation-sign"></i><b>{{__('lang.alert.warning')}}</b>
@@ -1302,6 +1301,7 @@
                             $("#discount b").text(data.str_discount);
                             $(".show-total").text(data.str_total);
                             $("#form-pembayaran input[name=discount]").val(data.discount);
+                            $("#form-pembayaran input[name=discount_price]").val(data.discount_price);
                             $("#form-pembayaran input[name=total]").val(data.total);
                         }
                     },
@@ -1332,7 +1332,7 @@
         function resetter() {
             $("#discount").hide().find('b').text(null);
             $(".show-total").text('Rp{{number_format(ceil($subtotal + $ongkir),2,',','.')}}');
-            $("#form-pembayaran input[name=discount], #form-pembayaran input[name=type], #form-pembayaran input[name=bank], #form-pembayaran input[name=account], #form-pembayaran input[name=pdf_url]").val(null);
+            $("#form-pembayaran input[name=discount], #form-pembayaran input[name=discount_price]").val(null);
             $("#form-pembayaran input[name=total]").val('{{ceil($subtotal + $ongkir)}}');
         }
 
@@ -1342,12 +1342,7 @@
                 $.ajax({
                     url: '{{route('get.midtrans.snap')}}',
                     type: "GET",
-                    data: {
-                        user_id: '{{$user->id}}',
-                        billing_address: $("#form-pembayaran input[name=address_id]").val(),
-                        code: $("#form-pembayaran input[name=code]").val(),
-                        total: $("#form-pembayaran input[name=total]").val(),
-                    },
+                    data: $("#form-pembayaran").serialize(),
                     beforeSend: function () {
                         btn_pay.prop("disabled", true).html(
                             'LOADING&hellip; <span class="spinner-border spinner-border-sm fright" role="status" aria-hidden="true"></span>'
@@ -1360,10 +1355,10 @@
                         snap.pay(data, {
                             language: '{{app()->getLocale()}}',
                             onSuccess: function (result) {
-                                responseMidtrans('success', result);
+                                responseMidtrans('{{route('get.midtrans-callback.finish', ['id' => ''])}}' + result.transaction_id, result);
                             },
                             onPending: function (result) {
-                                responseMidtrans('warning', result);
+                                responseMidtrans('{{route('get.midtrans-callback.unfinish', ['id' => ''])}}' + result.transaction_id, result);
                             },
                             onError: function (result) {
                                 swal('{{__('lang.alert.error')}}', result.status_message, 'error');
@@ -1377,40 +1372,28 @@
             }.bind(this), 800);
         });
 
-        function responseMidtrans(status, result) {
-            if (result.payment_type == 'credit_card' || result.payment_type == 'bank_transfer' || result.payment_type == 'echannel' || result.payment_type == 'gopay' || result.payment_type == 'cstore') {
-                var message = status == 'success' ? '{{__('lang.alert.success')}}' : '{{__('lang.alert.warning')}}',
-                    icon = status == 'success' ? 'success' : 'warning';
-
-                swal({title: message, text: '{{__('lang.alert.checkout-dashboard')}}', icon: icon, buttons: false});
-
-                if (result.payment_type == 'credit_card') {
-                    $("#form-pembayaran input[name=type]").val(result.payment_type);
-                    $("#form-pembayaran input[name=bank]").val(result.card_type);
-                    $("#form-pembayaran input[name=account]").val(result.masked_card);
-
-                } else if (result.payment_type == 'bank_transfer') {
-                    $("#form-pembayaran input[name=type]").val(result.payment_type);
-
-                    if (!result.permata_va_number) {
-                        $("#form-pembayaran input[name=bank]").val(result.va_numbers[0].bank);
-                        $("#form-pembayaran input[name=account]").val(result.va_numbers[0].va_number);
-                    } else {
-                        $("#form-pembayaran input[name=bank]").val('permata');
-                        $("#form-pembayaran input[name=account]").val(result.permata_va_number);
-                    }
-
-                } else if (result.payment_type == 'echannel') {
-                    $("#form-pembayaran input[name=type]").val('bank_transfer');
-                    $("#form-pembayaran input[name=bank]").val('mandiri');
-                    $("#form-pembayaran input[name=account]").val(result.bill_key);
-
-                } else {
-                    $("#form-pembayaran input[name=type], #form-pembayaran input[name=bank]").val(result.payment_type);
-                }
-
-                $("#form-pembayaran input[name=pdf_url]").val(result.pdf_url);
-                $("#form-pembayaran")[0].submit();
+        function responseMidtrans(url, result) {
+            if (result.payment_type == 'credit_card' || result.payment_type == 'bank_transfer' ||
+                result.payment_type == 'echannel' || result.payment_type == 'gopay' || result.payment_type == 'cstore') {
+                $.get(url, function (data) {
+                    swal({
+                        title: "{{__('lang.alert.success')}}",
+                        text: data,
+                        icon: 'success',
+                        closeOnEsc: false,
+                        closeOnClickOutside: false,
+                    }).then((confirm) => {
+                        if (confirm) {
+                            swal({
+                                title: '{{__('lang.alert.warning')}}',
+                                text: '{{__('lang.alert.checkout-dashboard')}}',
+                                icon: 'warning',
+                                buttons: false
+                            });
+                            window.location.href = '{{route('user.dashboard')}}';
+                        }
+                    });
+                });
 
             } else {
                 swal('{{__('lang.alert.error')}}', '{{__('lang.alert.checkout-fail')}}', 'error');

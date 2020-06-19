@@ -251,6 +251,6 @@ class CartSeeder extends Seeder
             $price_pcs += \App\Models\Finishing::whereIn('id', $specs->extra_ids)->first()->price;
         }
 
-        return $price_pcs;
+        return ceil($price_pcs);
     }
 }

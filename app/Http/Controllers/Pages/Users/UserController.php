@@ -3,18 +3,15 @@
 namespace App\Http\Controllers\Pages\Users;
 
 use App\Http\Controllers\Controller;
-use App\Mail\Users\InvoiceMail;
 use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\PaymentCart;
 use App\Models\PromoCode;
 use App\Support\StatusProgress;
-use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 
@@ -134,6 +131,7 @@ class UserController extends Controller
                         'caption' => $promo->description,
                         'discount' => $promo->discount,
                         'total' => $total,
+                        'discount_price' => $discount_price,
                         'str_discount' => '-Rp' . number_format($discount_price, 2, ',', '.'),
                         'str_total' => 'Rp' . number_format($total, 2, ',', '.')
                     ];
@@ -142,54 +140,6 @@ class UserController extends Controller
         } else {
             return 0;
         }
-    }
-
-    public function checkout(Request $request)
-    {
-        $carts = Cart::whereIn('id', explode(',', $request->cart_ids))
-            ->orderByRaw('FIELD (id, ' . $request->cart_ids . ') ASC')->get();
-        $code = $request->code;
-
-        foreach ($carts as $cart) {
-            PaymentCart::create([
-                'user_id' => $cart->user_id,
-                'address_id' => $request->address_id,
-                'cart_id' => $cart->id,
-                'uni_code_payment' => $code,
-                'token' => uniqid(),
-                'price_total' => $cart->total,
-                'promo_code' => $request->promo_code,
-                'is_discount' => !is_null($request->discount) ? 1 : 0,
-                'discount' => $request->discount,
-            ]);
-
-            $cart->update(['isCheckout' => true]);
-        }
-
-        $check = PaymentCart::where('uni_code_payment', $code)->where('user_id', Auth::id())->orderByDesc('id')->first();
-        $data = PaymentCart::where('uni_code_payment', $code)->where('user_id', Auth::id())->orderByDesc('id')->get();
-
-        $payment = [
-            'type' => $request->type,
-            'bank' => $request->bank,
-            'account' => $request->account,
-        ];
-
-        $filename = $code . '.pdf';
-        $pdf = PDF::loadView('exports.invoice', compact('code', 'data', 'payment', 'check'));
-        Storage::put('public/users/order/invoice/' . Auth::id() . '/' . $filename, $pdf->output());
-
-        if (!is_null($request->pdf_url)) {
-            $instruction = $code . '-instruction.pdf';
-            Storage::put('public/users/order/invoice/' . Auth::id() . '/' . $instruction, file_get_contents($request->pdf_url));
-        } else {
-            $instruction = null;
-        }
-
-        Mail::to(Auth::user()->email)->send(new InvoiceMail($code, $check, $data, $payment, $filename, $instruction));
-
-        return redirect()->route('user.dashboard')->with('add', __('lang.alert.checkout',
-            ['qty' => count($data), 's' => count($data) > 1 ? 's' : '', 'code' => $code]));
     }
 
     public function dashboard(Request $request)

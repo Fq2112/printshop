@@ -201,12 +201,6 @@ Route::group(['namespace' => 'Pages'], function () {
                 'as' => 'get.cari-promo.cart'
             ]);
 
-            Route::post('checkout', [
-                'middleware' => 'user.bio',
-                'uses' => 'UserController@checkout',
-                'as' => 'user.checkout.cart',
-            ]);
-
         });
 
         Route::group(['prefix' => 'dashboard'], function () {
