@@ -1382,8 +1382,16 @@
                         type: "GET",
                         data: $("#form-pembayaran").serialize(),
                         beforeSend: function () {
-                            swal('Loading...', '{{__('lang.alert.payment-loading')}}');
-                            swal.showLoading();
+                            swal({
+                                title: 'Loading...',
+                                text: '{{__('lang.alert.payment-loading')}}',
+                                buttons: false,
+                                closeOnEsc: false,
+                                closeOnClickOutside: false,
+                                onOpen: () => {
+                                    swal.showLoading();
+                                }
+                            });
                         },
                         complete: function () {
                             swal.close();

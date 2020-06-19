@@ -557,7 +557,8 @@
 <!-- Nicescroll -->
 <script src="{{asset('js/plugins/nicescroll/jquery.nicescroll.js')}}"></script>
 <!-- sweetalert2 -->
-<script src="{{asset('js/plugins/sweetalert/sweetalert.min.js')}}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{{--<script src="{{asset('js/plugins/sweetalert/sweetalert.min.js')}}"></script>--}}
 
 <script src="{{asset('js/functions.js')}}"></script>
 
