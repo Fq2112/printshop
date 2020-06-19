@@ -410,7 +410,7 @@ return [
         "promo" => "The promo code you entered was not found.",
         "promo1" => "You`ve already been used that promo code!",
         "promo2" => "The promo code you entered has expired.",
-        "checkout" => "Your :qty print product:s with Payment ID #:code is successfully checked out! We will immediately execute your request shortly after you complete the payment, bunch of thanks :). Do you want to check your dashboard now?",
+        "checkout" => "Your :qty print product:s with Payment ID #:code is successfully checked out! We will immediately execute your request shortly after you complete the payment, bunch of thanks and you will be redirected to the Dashboard [Order History] page :)",
         "checkout-dashboard" => "You will be redirected to the Dashboard [Order History] page.",
         "checkout-xendit" => "You will be redirected to the Xendit Payment page.",
         "checkout-fail" => "Sorry the payment channel you selected is still maintenance, please select another one.",
