@@ -166,30 +166,28 @@ class MidtransController extends Controller
         try {
             if (!array_key_exists('fraud_status', $data_tr) ||
                 (array_key_exists('fraud_status', $data_tr) && $data_tr['fraud_status'] == 'accept')) {
-                if ($data_tr['transaction_status'] == 'capture' || $data_tr['transaction_status'] == 'settlement') {
-                    if ($data_tr['payment_type'] == 'credit_card') {
-                        $carts = Cart::whereIn('id', explode(',', $input['cart_ids']))
-                            ->orderByRaw('FIELD (id, ' . $input['cart_ids'] . ') ASC')->get();
-                        foreach ($carts as $cart) {
-                            PaymentCart::create([
-                                'user_id' => $cart->user_id,
-                                'address_id' => $input['address_id'],
-                                'cart_id' => $cart->id,
-                                'uni_code_payment' => $code,
-                                'token' => uniqid(),
-                                'price_total' => $cart->total,
-                                'promo_code' => $input['promo_code'],
-                                'is_discount' => $input['is_discount'],
-                                'discount' => $input['discount'],
-                            ]);
+                if ($data_tr['payment_type'] == 'credit_card' &&
+                    ($data_tr['transaction_status'] == 'capture' || $data_tr['transaction_status'] == 'settlement')) {
+                    $carts = Cart::whereIn('id', explode(',', $input['cart_ids']))
+                        ->orderByRaw('FIELD (id, ' . $input['cart_ids'] . ') ASC')->get();
+                    foreach ($carts as $cart) {
+                        PaymentCart::create([
+                            'user_id' => $cart->user_id,
+                            'address_id' => $input['address_id'],
+                            'cart_id' => $cart->id,
+                            'uni_code_payment' => $code,
+                            'token' => uniqid(),
+                            'price_total' => $cart->total,
+                            'promo_code' => $input['promo_code'],
+                            'is_discount' => $input['is_discount'],
+                            'discount' => $input['discount'],
+                        ]);
 
-                            $cart->update(['isCheckout' => true]);
-                        }
+                        $cart->update(['isCheckout' => true]);
                     }
                     $this->updatePayment($code, $request->pdf_url, $data_tr);
                 }
             }
-            return response()->json('Internal Server Error', 500);
 
         } catch (\Exception $exception) {
             return response()->json($exception, 500);
