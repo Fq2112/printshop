@@ -279,7 +279,7 @@ class MidtransController extends Controller
     {
         $data = PaymentCart::where('finish_payment',false)->get();
         foreach ($data as $datum){
-            $data->update([
+            $datum->update([
                 'finish_payment' => true
             ]);
         }
