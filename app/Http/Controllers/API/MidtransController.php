@@ -274,4 +274,14 @@ class MidtransController extends Controller
 
         Mail::to($user->email)->send(new InvoiceMail($code, $check, $data, $payment, $filename, $instruction));
     }
+
+    public function updatePayment()
+    {
+        $data = PaymentCart::where('finish_payment',false)->get();
+        foreach ($data as $datum){
+            $data->update([
+                'finish_payment' => true
+            ]);
+        }
+    }
 }
