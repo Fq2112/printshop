@@ -30,7 +30,7 @@ Route::group(['namespace' => 'API', 'prefix' => 'midtrans'], function () {
             'as' => 'get.midtrans-callback.unfinish'
         ]);
 
-        Route::post('notificationk', [
+        Route::post('payment', [
             'uses' => 'MidtransController@notificationCallback',
             'as' => 'post.midtrans-callback.notification'
         ]);

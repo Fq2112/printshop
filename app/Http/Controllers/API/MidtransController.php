@@ -209,7 +209,6 @@ class MidtransController extends Controller
                     $this->updatePayment($notif->order_id, null, $data_tr);
                 }
             }
-//            return response()->json('Internal Server Error', 500);
 
         } catch (\Exception $exception) {
             return response()->json($exception, 500);
