@@ -200,7 +200,20 @@ class MidtransController extends Controller
     {
         $notif = new Notification();
         $data_tr = collect(Transaction::status($notif->transaction_id))->toArray();
-        $this->updatePayment($notif->order_id, null, $data_tr);
+
+        try {
+            if (!array_key_exists('fraud_status', $data_tr) ||
+                (array_key_exists('fraud_status', $data_tr) && $data_tr['fraud_status'] == 'accept')) {
+                if ($data_tr['payment_type'] != 'credit_card' &&
+                    ($data_tr['transaction_status'] == 'capture' || $data_tr['transaction_status'] == 'settlement')) {
+                    $this->updatePayment($notif->order_id, null, $data_tr);
+                }
+            }
+            return response()->json('Internal Server Error', 500);
+
+        } catch (\Exception $exception) {
+            return response()->json($exception, 500);
+        }
     }
 
     private function updatePayment($code, $pdf_url, $data_tr)
