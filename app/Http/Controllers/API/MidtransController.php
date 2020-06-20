@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Midtrans\Config;
+use Midtrans\Notification;
 use Midtrans\Snap;
 use Midtrans\Transaction;
 
@@ -158,32 +159,52 @@ class MidtransController extends Controller
     public function finishCallback(Request $request)
     {
         app()->setLocale($request->lang);
-
         $data_tr = collect(Transaction::status($request->id))->toArray();
         $code = $data_tr['order_id'];
-
         $input = json_decode($data_tr['custom_field1'], true);
 
-        if ($data_tr['payment_type'] == 'credit_card') {
-            $carts = Cart::whereIn('id', explode(',', $input['cart_ids']))
-                ->orderByRaw('FIELD (id, ' . $input['cart_ids'] . ') ASC')->get();
-            foreach ($carts as $cart) {
-                PaymentCart::create([
-                    'user_id' => $cart->user_id,
-                    'address_id' => $input['address_id'],
-                    'cart_id' => $cart->id,
-                    'uni_code_payment' => $code,
-                    'token' => uniqid(),
-                    'price_total' => $cart->total,
-                    'promo_code' => $input['promo_code'],
-                    'is_discount' => $input['is_discount'],
-                    'discount' => $input['discount'],
-                ]);
+        try {
+            if (!array_key_exists('fraud_status', $data_tr) ||
+                (array_key_exists('fraud_status', $data_tr) && $data_tr['fraud_status'] == 'accept')) {
+                if ($data_tr['transaction_status'] == 'capture' || $data_tr['transaction_status'] == 'settlement') {
+                    if ($data_tr['payment_type'] == 'credit_card') {
+                        $carts = Cart::whereIn('id', explode(',', $input['cart_ids']))
+                            ->orderByRaw('FIELD (id, ' . $input['cart_ids'] . ') ASC')->get();
+                        foreach ($carts as $cart) {
+                            PaymentCart::create([
+                                'user_id' => $cart->user_id,
+                                'address_id' => $input['address_id'],
+                                'cart_id' => $cart->id,
+                                'uni_code_payment' => $code,
+                                'token' => uniqid(),
+                                'price_total' => $cart->total,
+                                'promo_code' => $input['promo_code'],
+                                'is_discount' => $input['is_discount'],
+                                'discount' => $input['discount'],
+                            ]);
 
-                $cart->update(['isCheckout' => true]);
+                            $cart->update(['isCheckout' => true]);
+                        }
+                    }
+                    $this->updatePayment($code, $request->pdf_url, $data_tr);
+                }
             }
-        }
+            return response()->json('Internal Server Error', 500);
 
+        } catch (\Exception $exception) {
+            return response()->json($exception, 500);
+        }
+    }
+
+    public function notificationCallback()
+    {
+        $notif = new Notification();
+        $data_tr = collect(Transaction::status($notif->transaction_id))->toArray();
+        $this->updatePayment($notif->order_id, null, $data_tr);
+    }
+
+    private function updatePayment($code, $pdf_url, $data_tr)
+    {
         $payment_carts = PaymentCart::where('uni_code_payment', $code)->get();
         $user = User::find(implode($payment_carts->take(1)->pluck('user_id')->toArray()));
         foreach ($payment_carts as $row) {
@@ -205,7 +226,7 @@ class MidtransController extends Controller
             ]);
         }
 
-        $this->invoiceMail('finish', $code, $user, $request->pdf_url, $data_tr);
+        $this->invoiceMail('finish', $code, $user, $pdf_url, $data_tr);
 
         return __('lang.alert.payment-success', ['qty' => count($payment_carts), 's' => count($payment_carts) > 1 ? 's' : '', 'code' => $code]);
     }
@@ -273,15 +294,5 @@ class MidtransController extends Controller
         }
 
         Mail::to($user->email)->send(new InvoiceMail($code, $check, $data, $payment, $filename, $instruction));
-    }
-
-    public function updatePayment()
-    {
-        $data = PaymentCart::where('finish_payment',false)->get();
-        foreach ($data as $datum){
-            $datum->update([
-                'finish_payment' => true
-            ]);
-        }
     }
 }

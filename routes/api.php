@@ -30,10 +30,11 @@ Route::group(['namespace' => 'API', 'prefix' => 'midtrans'], function () {
             'as' => 'get.midtrans-callback.unfinish'
         ]);
 
-        Route::post('update/payment', [
-            'uses' => 'MidtransController@updatePayment',
-            'as' => 'asasakaskaskaskask'
+        Route::post('notification', [
+            'uses' => 'MidtransController@notificationCallback',
+            'as' => 'post.midtrans-callback.notification'
         ]);
+
     });
 
 });
