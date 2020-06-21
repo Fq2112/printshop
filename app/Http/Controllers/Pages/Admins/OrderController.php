@@ -22,7 +22,7 @@ class OrderController extends Controller
     {
 //        dd($request->all());
         $data = PaymentCart::where('finish_payment', true)
-            ->distinct('uni_code_payment')->select('uni_code_payment', 'user_id', 'updated_at')->orderBy('updated_at')->get();
+            ->distinct('uni_code_payment')->select('uni_code_payment', 'user_id', 'updated_at')->orderBy('updated_at','DESC')->get();
         return view('pages.main.admins.payment', [
             'data' => $data
         ]);
