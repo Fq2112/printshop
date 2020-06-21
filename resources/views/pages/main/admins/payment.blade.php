@@ -158,8 +158,12 @@
                                                             data-toggle="popover" data-trigger="focus"
                                                             title="{{count($order)}} Items" data-html="true"
                                                             data-placement="left" data-content='
-asaasas
 
+                                                    @if(empty($order))
+                                                        Nothing To Show
+                                                        @else
+
+                                                    @endif
                                                         '>
                                                         <i class="fa fa-tag"></i>
                                                     </button>
