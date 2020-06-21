@@ -22,7 +22,7 @@ class OrderController extends Controller
     {
 //        dd($request->all());
         $data = PaymentCart::where('finish_payment', true)
-            ->distinct('uni_code_payment')->select('uni_code_payment', 'user_id', 'updated_at')->orderBy('updated_at','DESC')->get();
+            ->distinct('uni_code_payment')->select('uni_code_payment', 'user_id', 'updated_at')->orderBy('updated_at', 'DESC')->get();
         return view('pages.main.admins.payment', [
             'data' => $data
         ]);
@@ -144,11 +144,30 @@ class OrderController extends Controller
     public function create_pdf(Request $request)
     {
         $filename = $request->code . '.pdf';
-        $pdf = PDF::loadView('exports.shipping');
+        $data = Order::whereHas('getCart', function ($query) use ($request) {
+            $query->whereHas('getPayment', function ($query) use ($request) {
+                $query->where('uni_code_payment', $request->code);
+            });
+        })->get();
+        $pdf = PDF::loadView('exports.production',[
+            'order' => $data,
+            'code' => $request->code
+        ]);
         Storage::put('public/users/order/invoice/owner/' . $filename, $pdf->output());
 
-        return response()->json([
-            'message' => 'PDF Created'
-        ], 201);
+
+        foreach ($data as $item) { //create PDF for Shipping Label
+            $labelname = $item->uni_code . '.pdf';
+            $labelPdf = PDF::loadView('exports.shipping');
+            Storage::put('public/users/order/invoice/owner/prodution/' . $request->code . '/' . $labelname, $labelPdf->output());
+        }
+
+//        return response()->json([
+//            'message' => 'PDF Created'
+//        ], 201);
+        $file_path = storage_path('app/public/users/order/invoice/owner/' .$filename);
+        return Response::download($file_path, 'Production_'.$filename, [
+            'Content-length : ' . filesize($file_path)
+        ]);
     }
 }
