@@ -86,7 +86,8 @@
                                                 @endforeach
                                             </select>
                                             <div class="input-group-append">
-                                                <button data-placement="right" data-toggle="tooltip" title="Submit Filter"
+                                                <button data-placement="right" data-toggle="tooltip"
+                                                        title="Submit Filter"
                                                         type="submit" class="btn btn-warning" style="height: 2.25rem">
                                                     <i class="fa fa-filter"></i></button>
                                             </div>
@@ -149,9 +150,9 @@
                                                 </div>
                                             </td>
                                             <td style="vertical-align: middle" align="center">{{$row->id}}</td>
-{{--                                            <td style="vertical-align: middle">--}}
-{{--                                                <strong>{{$row->getCart->getPayment->uni_code_payment}}</strong>--}}
-{{--                                            </td>--}}
+                                            {{--                                            <td style="vertical-align: middle">--}}
+                                            {{--                                                <strong>{{$row->getCart->getPayment->uni_code_payment}}</strong>--}}
+                                            {{--                                            </td>--}}
                                             <td style="vertical-align: middle">
                                                 <strong>{{$row->getCart->getUser->name}}</strong>
                                             </td>
@@ -160,9 +161,9 @@
                                             </td>
                                             <td style="vertical-align: middle">
                                                 @if(!empty($row->getCart->subkategori_id))
-                                                      {{$row->getCart->getSubKategori->name}}
+                                                    {{$row->getCart->getSubKategori->name}}
                                                 @elseif(!empty($row->getCart->cluster_id))
-                                                     {{$row->getCart->getCluster->name}}
+                                                    {{$row->getCart->getCluster->name}}
                                                 @endif
 
                                             </td>
@@ -197,39 +198,27 @@
                                                 @endif
                                             </td>
                                             <td style="vertical-align: middle" align="center">
-{{--                                                @if($row->progress_status == \App\Support\StatusProgress::NEW)--}}
-{{--                                                    <button data-placement="left" data-toggle="tooltip"--}}
-{{--                                                            title="Proceed this order"--}}
-{{--                                                            onclick="proceed_order('{{$row->id}}')"--}}
-{{--                                                            type="button" class="btn btn-warning mr-1">--}}
-{{--                                                        <i class="fa fa-paper-plane"></i></button>--}}
-{{--                                                @elseif($row->progress_status == \App\Support\StatusProgress::START_PRODUCTION || $row->progress_status  == \App\Support\StatusProgress::FINISH_PRODUCTION)--}}
-{{--                                                    <button data-placement="left" data-toggle="tooltip"--}}
-{{--                                                            title="Send this order"--}}
-{{--                                                            onclick="proceed_order('{{$row->id}}')"--}}
-{{--                                                            type="button" class="btn btn-warning mr-1">--}}
-{{--                                                        <i class="fa fa-shipping-fast"></i></button>--}}
-{{--                                                @endif--}}
-{{--                                                @if($row->getCart->link)--}}
-{{--                                                    <a href="{{$row->getCart->link}}" target="_blank">--}}
-{{--                                                        <button data-placement="right" data-toggle="tooltip"--}}
-{{--                                                                title="Design"--}}
-{{--                                                                type="button" class="btn btn-info mr-1">--}}
-{{--                                                            <i class="fa fa-link"></i></button>--}}
-{{--                                                    </a>--}}
-{{--                                                @elseif($row->getChart->file)--}}
-{{--                                                    <button data-placement="right" data-toggle="tooltip"--}}
-{{--                                                            title="Design" onclick="get_design('{{$row->getCart->id}}')"--}}
-{{--                                                            type="button" class="btn btn-info mr-1">--}}
-{{--                                                        <i class="fa fa-file-download"></i></button>--}}
-{{--                                                @endif--}}
+                                                <div class="btn-group">
+                                                    <?php
+                                                    $file = storage_path('app/public/users/order/invoice/owner/prodution/' . $code . '/' . $row->uni_code . '.pdf');
+                                                    ?>
+                                                    @if(file_exists($file))
+                                                        <button
+                                                            data-placement="right" data-toggle="tooltip"
+                                                            title="Download Shipping Label"
+                                                            type="button" class="btn btn-danger">
 
-                                                <a href="{{route('get.order.detail',['id' => $row->id])}}">
-                                                    <button data-placement="right" data-toggle="tooltip"
-                                                            title="Detail Info"
-                                                            type="button" class="btn btn-info mr-1">
-                                                        <i class="fa fa-info-circle"></i></button>
-                                                </a>
+                                                            <i class="fa fa-file-download   "></i>
+                                                        </button>
+                                                    @endif
+                                                    <a href="{{route('get.order.detail',['id' => $row->id])}}"
+                                                       data-placement="top" data-toggle="tooltip"
+                                                       title="Detail Info"
+                                                       type="button" class="btn btn-info">
+
+                                                        <i class="fa fa-info-circle"></i>
+                                                    </a>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -329,66 +318,6 @@
         </div>
     </section>
 
-    <div class="modal fade " id="blogCategoryModal" tabindex="-1" role="dialog"
-         aria-labelledby="blogCategoryModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document" style="width: 100%">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Create Form</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form id="form-blogCategory" method="post" action="{{route('admin.add')}}">
-                    {{csrf_field()}}
-                    <input type="hidden" name="_method">
-                    <input type="hidden" name="id">
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col">
-                                <label for="name">Name <sup class="text-danger">*</sup></label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                    </div>
-                                    <input id="name" type="text" maxlength="191" name="name" class="form-control"
-                                           placeholder="Write its name here&hellip;" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label for="name">Username <sup class="text-danger">*</sup></label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                    </div>
-                                    <input id="name_id" type="text" maxlength="191" name="username" class="form-control"
-                                           placeholder="Write its name here&hellip;" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label for="name">email <sup class="text-danger">*</sup></label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-                                    </div>
-                                    <input id="name_id" type="email" maxlength="191" name="email" class="form-control"
-                                           placeholder="Write its name here&hellip;" required>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 @endsection
 @push("scripts")
     <script src="{{asset('admins/modules/datatables/datatables.min.js')}}"></script>
@@ -516,6 +445,7 @@
 
         @if(request()->has('status'))
         $('#status').val('{{ request()->get('status') }}');
+
         @endif
 
         function get_design(code) {
@@ -527,8 +457,11 @@
                     code: code
                 },
                 success: function (data) {
-
-
+                    swal('Success', "Plesae Wait Till Page Succesfully Realoded", 'success');
+                    setTimeout(
+                        function () {
+                            location.reload();
+                        }, 5000);
                 }, error: function (xhr, ajaxOptions, thrownError) {
                     if (xhr.status == 500) {
                         console.log(xhr);
@@ -572,7 +505,6 @@
                 "min": value
             });
         }
-
 
 
         // $("#start-date").datepicker({
