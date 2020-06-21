@@ -164,7 +164,9 @@
                                                         @else
 
                                                         <table>
+                                                          @foreach($order as $order_item)
 
+                                                     @endforeach
                                                         </table>
 
 @endif
