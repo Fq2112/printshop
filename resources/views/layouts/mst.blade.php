@@ -510,8 +510,7 @@
             <div class="container clearfix">
                 <div class="row justify-content-between align-items-center">
                     <div class="col-md-6">
-                        © {{now()->format('Y')}} Premier Printing. All rights reserved | Designed & Developed by
-                        <a href="http://rabbit-media.net" target="_blank">Rabbit Media</a>
+                        © {{now()->format('Y')}} Premier Printing. All rights reserved.
                         @if(Route::currentRouteName() == 'user.profil')<br>Icons from
                         <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>@endif
                     </div>
