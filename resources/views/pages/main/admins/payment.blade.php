@@ -175,11 +175,12 @@
                                                         @endif
                                                         </td>
                                                         <td>
-                                                            @if($order_item->getCart->getOrder->progress_status == 'new')
-                                                        <span class="badge badge-info"><span
-                                                                class="fa fa-shopping-basket"></span> New</span> <br>
+                                                          @if(!empty($order_item->getCart->subkategori_id))
+                                                    {{$order_item->getCart->getSubKategori->name}}
 
-                                                            @endif
+                                                    @elseif(!empty($order_item->getCart->cluster_id))
+                                                    {{$order_item->getCart->getCluster->name}}
+                                                    @endif
                                                         </td>
                                                     </tr>
                                                      @endforeach
