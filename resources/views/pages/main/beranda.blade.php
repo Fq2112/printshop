@@ -63,6 +63,62 @@
         .eapps-instagram-feed-posts-slider-inner {
             width: 100% !important;
         }
+
+        @media (min-width: 1440px) {
+
+        }
+
+        @media (min-width: 1281px) and (max-width: 1439px) {
+
+        }
+
+        @media (min-width: 1025px) and (max-width: 1280px) {
+
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+
+        }
+
+        @media (min-width: 481px) and (max-width: 767px) {
+
+        }
+
+        @media (min-width: 320px) and (max-width: 480px) {
+
+        }
+
+        @media (max-width: 480px) {
+            .col_one_fourth.--custom {
+                width: 44%;
+                float: left;
+                margin-right: 4%;
+            }
+
+            .col_one_fourth.--custom-col_last {
+                margin-right: 0 !important;
+                float: right;
+                clear: right;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .col_one_fourth.--custom {
+                width: 44%;
+                float: left;
+                margin-right: 4%;
+            }
+
+            .col_one_fourth.--custom-col_last {
+                margin-right: 0 !important;
+                float: right;
+                clear: right;
+            }
+        }
     </style>
 @endpush
 @section('content')
@@ -76,7 +132,7 @@
                         data-saveperformance="off" data-title="{{__('lang.revo.bc-1')}}"
                         style="background-color: #eee;">
                         <div class="tp-caption ltl tp-resizeme revo-slider-caps-text uppercase"
-                             data-x="600"
+                             data-x="[600,630,630,630,630]"
                              data-y="-25"
                              data-transform_in="x:250;y:0;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;s:400;e:Power4.easeOutQuad;"
                              data-speed="400"
@@ -91,7 +147,7 @@
                             <img src="{{asset('images/slider/rev/business-card.png')}}" alt="{{__('lang.revo.bc-1')}}">
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-caps-text uppercase"
-                             data-x="0"
+                             data-x="[0,70,70,70,70]"
                              data-y="110"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -105,7 +161,7 @@
                              data-endeasing="Power4.easeIn" style=" color: #333;">{{__('lang.revo.head')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-emphasis-text nopadding noborder"
-                             data-x="0"
+                             data-x="[0,70,70,70,70]"
                              data-y="140"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -120,7 +176,7 @@
                              style=" color: #333; max-width: 430px; line-height: 1.15;">{{__('lang.revo.bc-1')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-desc-text tleft"
-                             data-x="0"
+                             data-x="[0,70,70,70,70]"
                              data-y="240"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -135,7 +191,7 @@
                              style=" color: #333; max-width: 550px; white-space: normal;">{{__('lang.revo.bc-2')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme"
-                             data-x="0"
+                             data-x="[0,70,70,70,70]"
                              data-y="340"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -187,7 +243,7 @@
                             <img src="{{asset('images/slider/rev/brochure.png')}}" alt="{{__('lang.revo.bro-1')}}">
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-caps-text uppercase"
-                             data-x="0"
+                             data-x="[0,70,70,70,70]"
                              data-y="110"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -201,7 +257,7 @@
                              data-endeasing="Power4.easeIn" style=" color: #333;">{{__('lang.revo.head')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-emphasis-text nopadding noborder"
-                             data-x="0"
+                             data-x="[0,70,70,70,70]"
                              data-y="140"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -216,7 +272,7 @@
                              style=" color: #333; max-width: 430px; line-height: 1.15;">{{__('lang.revo.bro-1')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-desc-text tleft"
-                             data-x="0"
+                             data-x="[0,70,70,70,70]"
                              data-y="240"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -231,7 +287,7 @@
                              style=" color: #333; max-width: 550px; white-space: normal;">{{__('lang.revo.bro-2')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme"
-                             data-x="0"
+                             data-x="[0,70,70,70,70]"
                              data-y="340"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -283,7 +339,7 @@
                             <img src="{{asset('images/slider/rev/flyer.png')}}" alt="{{__('lang.revo.fly-1')}}">
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-caps-text uppercase"
-                             data-x="0"
+                             data-x="[0,70,70,70,70]"
                              data-y="110"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -297,7 +353,7 @@
                              data-endeasing="Power4.easeIn" style=" color: #333;">{{__('lang.revo.head')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-emphasis-text nopadding noborder"
-                             data-x="0"
+                             data-x="[0,70,70,70,70]"
                              data-y="140"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -312,7 +368,7 @@
                              style=" color: #333; max-width: 430px; line-height: 1.15;">{{__('lang.revo.fly-1')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-desc-text tleft"
-                             data-x="0"
+                             data-x="[0,70,70,70,70]"
                              data-y="240"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -327,7 +383,7 @@
                              style=" color: #333; max-width: 550px; white-space: normal;">{{__('lang.revo.fly-2')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme"
-                             data-x="0"
+                             data-x="[0,70,70,70,70]"
                              data-y="340"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -371,7 +427,7 @@
                 <div class="fancy-title title-dotted-border title-center mb-4">
                     <h4>{{__('lang.feature.head')}}</h4>
                 </div>
-                <div class="col_one_fourth">
+                <div class="col_one_fourth --custom">
                     <div class="feature-box fbox-center fbox-border fbox-effect noborder">
                         <div class="fbox-icon">
                             <a href="#"><i class="icon-money-bill-wave"></i></a>
@@ -380,7 +436,7 @@
                         <p>{{__('lang.feature.price-st')}}</p>
                     </div>
                 </div>
-                <div class="col_one_fourth">
+                <div class="col_one_fourth --custom col_last">
                     <div class="feature-box fbox-center fbox-border fbox-effect noborder">
                         <div class="fbox-icon">
                             <a href="#"><i class="icon-gem"></i></a>
@@ -389,7 +445,7 @@
                         <p>{{__('lang.feature.guarantee-st')}}</p>
                     </div>
                 </div>
-                <div class="col_one_fourth">
+                <div class="col_one_fourth --custom">
                     <div class="feature-box fbox-center fbox-border fbox-effect noborder">
                         <div class="fbox-icon">
                             <a href="#"><i class="icon-drafting-compass"></i></a>
@@ -398,7 +454,7 @@
                         <p>{{__('lang.feature.design-st')}}</p>
                     </div>
                 </div>
-                <div class="col_one_fourth col_last">
+                <div class="col_one_fourth --custom col_last">
                     <div class="feature-box fbox-center fbox-border fbox-effect noborder">
                         <div class="fbox-icon">
                             <a href="#"><i class="icon-shipping-fast"></i></a>
@@ -631,7 +687,7 @@
                     shadow: 0,
                     spinner: "off",
                     autoHeight: "off",
-                    disableProgressBar: "on",
+                    disableProgressBar: "off",
                     hideThumbsOnMobile: "off",
                     hideSliderAtLimit: 0,
                     hideCaptionAtLimit: 0,
@@ -656,8 +712,8 @@
                         arrows: {
                             style: "ares",
                             enable: true,
-                            hide_onmobile: false,
-                            hide_onleave: false,
+                            hide_onmobile: true,
+                            hide_onleave: true,
                             tmp: '<div class="tp-title-wrap">	<span class="tp-arr-titleholder">@{{title}}</span> </div>',
                             left: {
                                 h_align: "left",
