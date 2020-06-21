@@ -436,7 +436,7 @@
                         <p>{{__('lang.feature.price-st')}}</p>
                     </div>
                 </div>
-                <div class="col_one_fourth --custom col_last">
+                <div class="col_one_fourth --custom">
                     <div class="feature-box fbox-center fbox-border fbox-effect noborder">
                         <div class="fbox-icon">
                             <a href="#"><i class="icon-gem"></i></a>
