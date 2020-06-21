@@ -174,7 +174,13 @@
                                                         {{$order_item->getCart->getCluster->name}}
                                                         @endif
                                                         </td>
+                                                        <td>
+                                                            @if($order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::NEW)
+                                                        <span class="badge badge-info"><span
+                                                                class="fa fa-shopping-basket"></span> New</span> <br>
 
+                                                            @endif
+                                                        </td>
                                                     </tr>
                                                      @endforeach
                                                         </table>
