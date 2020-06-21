@@ -423,7 +423,7 @@
     <section id="content">
         <div class="content-wrap py-4">
             <!-- why choose us -->
-            <div class="container clearfix">
+            <div id="why-us" class="container clearfix">
                 <div class="fancy-title title-dotted-border title-center mb-4">
                     <h4>{{__('lang.feature.head')}}</h4>
                 </div>
@@ -734,6 +734,9 @@
             apiRevoSlider.bind("revolution.slide.onloaded", function (e) {
                 SEMICOLON.slider.sliderParallaxDimensions();
             });
+
+            window.mobilecheck() ? $("#why-us .--custom:nth-child(2)").addClass('col_last') :
+                $("#why-us .--custom:nth-child(2)").removeClass('col_last');
 
             $(".portfolio-desc span a:not(:last-child)").each(function () {
                 $(this).append(',');
