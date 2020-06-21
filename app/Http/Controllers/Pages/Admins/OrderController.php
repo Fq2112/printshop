@@ -8,9 +8,11 @@ use App\Models\Order;
 use App\Models\PaymentCart;
 use App\Support\Role;
 use App\Support\StatusProgress;
+use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 use PHPMailer\PHPMailer\Exception;
 
 class OrderController extends Controller
@@ -20,7 +22,7 @@ class OrderController extends Controller
     {
 //        dd($request->all());
         $data = PaymentCart::where('finish_payment', true)
-            ->distinct('uni_code_payment')->select('uni_code_payment', 'user_id', 'updated_at')->orderBy('updated_at')->get();
+            ->distinct('uni_code_payment')->select('uni_code_payment', 'user_id', 'updated_at')->orderBy('updated_at','DESC')->get();
         return view('pages.main.admins.payment', [
             'data' => $data
         ]);
@@ -137,5 +139,16 @@ class OrderController extends Controller
         $post->delete();
 
         return back()->with('success', __('admin.alert.blog.delete', ['param' => $post->title]));
+    }
+
+    public function create_pdf(Request $request)
+    {
+        $filename = $request->code . '.pdf';
+        $pdf = PDF::loadView('exports.shipping');
+        Storage::put('public/users/order/invoice/owner/' . $filename, $pdf->output());
+
+        return response()->json([
+            'message' => 'PDF Created'
+        ], 201);
     }
 }

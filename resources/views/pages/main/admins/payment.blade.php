@@ -126,7 +126,9 @@
                                         <th width="15%">Customer</th>
                                         <th width="15%">Phone</th>
                                         <th class="text-center" width="10%">Order date</th>
-                                        <th width="25%" align="center"><center>Action</center></th>
+                                        <th width="25%" align="center">
+                                            <center>Action</center>
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -145,14 +147,63 @@
                                             <td width="15%">{{ucfirst($item->uni_code_payment)}}</td>
                                             <td width="15%">{{$item->getUser->name}}</td>
                                             <td width="15%">{{$item->getUser->getBio->phone}}</td>
+
                                             <td class="text-center" width="10%">{{$item->updated_at}}</td>
                                             <td width="25%" align="center">
-                                                <a href="{{route('admin.order.user',['kode'=>$item->uni_code_payment])}}">
-                                                    <button data-placement="right" data-toggle="tooltip"
-                                                            title="Detail Info"
-                                                            type="button" class="btn btn-info mr-1">
-                                                        <i class="fa fa-info-circle"></i></button>
-                                                </a>
+                                                <?php
+                                                $order = \App\Models\PaymentCart::where('uni_code_payment', $item->uni_code_payment)->get()
+                                                ?>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-primary"
+                                                            data-toggle="popover" data-trigger="focus"
+                                                            title="{{count($order)}} Items" data-html="true"
+                                                            data-placement="left" data-content='
+
+                                                    @if(empty($order))
+                                                        Nothing To Show
+                                                        @else
+
+                                                        <table>
+                                                          @foreach($order as $order_item)
+                                                        <tr>
+                                                            <td>
+                                                        @if(!empty($order_item->getCart->subkategori_id))
+                                                         {{$order_item->getCart->getSubKategori->name}}
+
+                                                        @elseif(!empty($order_item->getCart->cluster_id))
+                                                        {{$order_item->getCart->getCluster->name}}
+                                                        @endif
+                                                        </td>
+                                                        @if(empty($order_item->getCart->getOrder))
+                                                        @else
+                                                        <td>
+                                                            @if($order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::NEW)
+                                                        <span class="badge badge-info"><span
+                                                                class="fa fa-shopping-basket"></span> New</span> <br>
+                                                            @elseif($order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::START_PRODUCTION || $order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::FINISH_PRODUCTION)
+                                                        <span class="badge badge-warning"><span class="fa fa-cogs"></span> On Produce</span> <br>
+                                                            @elseif($order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::SHIPPING)
+                                                        <span class="badge badge-info"><span
+                                                                class="fa fa-shipping-fast"></span>  Shipping</span> <br>
+                                                            @elseif($order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::RECEIVED)
+                                                        <span class="badge badge-success"><span
+                                                                class="fa fa-clipboard-check"></span>  Received</span> <br>
+                                                            @endif
+                                                        </td>
+                                                        @endif
+                                                    </tr>
+                                                     @endforeach
+                                                        </table>
+
+@endif
+                                                        '>
+                                                        <i class="fa fa-tag"></i>
+                                                    </button>
+                                                    <a href="{{route('admin.order.user',['kode'=>$item->uni_code_payment])}}"
+                                                       data-placement="right" data-toggle="tooltip"
+                                                       title="Detail Info" type="button" class="btn btn-info">
+                                                        <i class="fa fa-info-circle"></i></a>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach

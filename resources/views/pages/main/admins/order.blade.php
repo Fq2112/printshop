@@ -409,6 +409,11 @@
                     ],
                     buttons: [
                         {
+                            text: '<strong class="text-uppercase"><i class="fa fa-file-pdf mr-2"></i>Generate</strong>',
+
+                            className: 'btn btn-danger assets-select-btn export-print generate'
+                        },
+                        {
                             text: '<strong class="text-uppercase"><i class="far fa-clipboard mr-2"></i>Copy</strong>',
                             extend: 'copy',
                             exportOptions: {
@@ -432,6 +437,7 @@
                             },
                             className: 'btn btn-info assets-select-btn export-print'
                         },
+
                         // {
                         //     text: '<strong class="text-uppercase"><i class="fa fa-trash-alt mr-2"></i>Deletes</strong>',
                         //     className: 'btn btn-danger btn_massDelete'
@@ -498,6 +504,10 @@
                         });
                     },
                 });
+
+            $(".generate").on('click', function () {
+                get_design('{{$code}}')
+            });
         });
 
         @if(request()->has('period'))
@@ -507,6 +517,26 @@
         @if(request()->has('status'))
         $('#status').val('{{ request()->get('status') }}');
         @endif
+
+        function get_design(code) {
+            $.ajax({
+                type: 'post',
+                url: '{{route('admin.order.shipping')}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    code: code
+                },
+                success: function (data) {
+
+
+                }, error: function (xhr, ajaxOptions, thrownError) {
+                    if (xhr.status == 500) {
+                        console.log(xhr);
+                        swal('Error', xhr.responseJSON.error, 'error');
+                    }
+                }
+            });
+        }
 
         $("#btn_create").on('click', function () {
             $("#content1").toggle(300);

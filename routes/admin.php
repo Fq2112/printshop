@@ -138,6 +138,11 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             'uses' => 'OrderController@get_file',
             'as' => 'admin.order.download'
         ]);
+
+        Route::post('download/shipping/', [
+            'uses' => 'OrderController@create_pdf',
+            'as' => 'admin.order.shipping'
+        ]);
     });
 
     Route::group(['prefix' => 'inbox', 'middleware' => 'owner'], function () {
