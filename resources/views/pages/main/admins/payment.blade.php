@@ -158,7 +158,7 @@
                                                             data-toggle="popover" data-trigger="focus"
                                                             title="{{count($order)}} Items" data-html="true"
                                                             data-placement="left" data-content='
-
+asaasas
 
                                                         '>
                                                         <i class="fa fa-tag"></i>
