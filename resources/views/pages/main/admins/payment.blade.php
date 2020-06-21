@@ -165,7 +165,17 @@
 
                                                         <table>
                                                           @foreach($order as $order_item)
+                                                        <tr>
+                                                            <td>
+                                                        @if(!empty($order_item->getCart->subkategori_id))
+                                                         {{$order_item->getCart->getSubKategori->name}}
 
+                                                        @elseif(!empty($order_item->getCart->cluster_id))
+                                                        {{$order_item->getCart->getCluster->name}}
+                                                        @endif
+                                                        </td>
+
+                                                    </tr>
                                                      @endforeach
                                                         </table>
 
