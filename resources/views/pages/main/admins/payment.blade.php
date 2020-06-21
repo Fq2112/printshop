@@ -153,46 +153,7 @@
                                                 <?php
                                                 $order = \App\Models\PaymentCart::where('uni_code_payment', $item->uni_code_payment)->get()
                                                 ?>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-primary"
-                                                            data-toggle="popover" data-trigger="focus"
-                                                            title="{{count($order)}} Items" data-html="true"
-                                                            data-placement="left" data-content='
-                                                        @foreach($order as $order_item)
-                                                        <table>
-                                                            <tr>
-                                                                <td>
-                                                    @if(!empty($order_item->getCart->subkategori_id))
-                                                    {{$order_item->getCart->getSubKategori->name}}
 
-                                                    @elseif(!empty($order_item->getCart->cluster_id))
-                                                    {{$order_item->getCart->getCluster->name}}
-                                                    @endif
-                                                        </td>
-                                                        <td>
-                                                            @if($order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::NEW)
-                                                        <span class="badge badge-info"><span
-                                                                class="fa fa-shopping-basket"></span> New</span> <br>
-                                                            @elseif($order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::START_PRODUCTION || $order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::FINISH_PRODUCTION)
-                                                        <span class="badge badge-warning"><span class="fa fa-cogs"></span> On Produce</span> <br>
-                                                            @elseif($order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::SHIPPING)
-                                                        <span class="badge badge-info"><span
-                                                                class="fa fa-shipping-fast"></span>  Shipping</span> <br>
-                                                            @elseif($order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::RECEIVED)
-                                                        <span class="badge badge-success"><span
-                                                                class="fa fa-clipboard-check"></span>  Received</span> <br>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                                    @endforeach'>
-                                                        <i class="fa fa-tag"></i>
-                                                    </button>
-                                                    <a href="{{route('admin.order.user',['kode'=>$item->uni_code_payment])}}"
-                                                       data-placement="right" data-toggle="tooltip"
-                                                       title="Detail Info" type="button" class="btn btn-info">
-                                                        <i class="fa fa-info-circle"></i></a>
-                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
