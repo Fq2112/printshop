@@ -75,7 +75,7 @@ class MidtransController extends Controller
         $arr_ship_disc = [];
         if (!is_null($request->discount)) {
             $arr_ship_disc[count($arr_items)] = [
-                'id' => 'discount-' . $request->code,
+                'id' => 'DISC-' . $request->code,
                 'price' => ceil($request->discount_price * -1),
                 'quantity' => 1,
                 'name' => __('lang.cart.summary.discount') . ' ' . $request->discount . '%'
@@ -83,7 +83,7 @@ class MidtransController extends Controller
         }
 
         $arr_ship_disc[!is_null($request->discount) ? count($arr_items) + 1 : count($arr_items)] = [
-            'id' => 'shipping-' . $request->code,
+            'id' => 'SHIP-' . $request->code,
             'price' => ceil($request->ongkir),
             'quantity' => 1,
             'name' => __('lang.product.form.summary.ongkir')
@@ -136,7 +136,7 @@ class MidtransController extends Controller
         $user = User::find(implode($carts->take(1)->pluck('user_id')->toArray()));
 
         foreach ($carts as $cart) {
-            PaymentCart::create([
+            PaymentCart::firstOrCreate([
                 'user_id' => $cart->user_id,
                 'address_id' => $input['address_id'],
                 'cart_id' => $cart->id,
@@ -166,12 +166,16 @@ class MidtransController extends Controller
         try {
             if (!array_key_exists('fraud_status', $data_tr) ||
                 (array_key_exists('fraud_status', $data_tr) && $data_tr['fraud_status'] == 'accept')) {
+
                 if ($data_tr['payment_type'] == 'credit_card' &&
                     ($data_tr['transaction_status'] == 'capture' || $data_tr['transaction_status'] == 'settlement')) {
+
                     $carts = Cart::whereIn('id', explode(',', $input['cart_ids']))
                         ->orderByRaw('FIELD (id, ' . $input['cart_ids'] . ') ASC')->get();
+                    $user = User::find(implode($carts->take(1)->pluck('user_id')->toArray()));
+
                     foreach ($carts as $cart) {
-                        PaymentCart::create([
+                        PaymentCart::firstOrCreate([
                             'user_id' => $cart->user_id,
                             'address_id' => $input['address_id'],
                             'cart_id' => $cart->id,
@@ -185,7 +189,12 @@ class MidtransController extends Controller
 
                         $cart->update(['isCheckout' => true]);
                     }
-                    $this->updatePayment($code, $request->pdf_url, $data_tr);
+
+                    $this->updatePayment($code);
+                    $this->invoiceMail('finish', $code, $user, $request->pdf_url, $data_tr);
+
+                    return __('lang.alert.payment-success',
+                        ['qty' => count($carts), 's' => count($carts) > 1 ? 's' : '', 'code' => $code]);
                 }
             }
 
@@ -202,9 +211,18 @@ class MidtransController extends Controller
         try {
             if (!array_key_exists('fraud_status', $data_tr) ||
                 (array_key_exists('fraud_status', $data_tr) && $data_tr['fraud_status'] == 'accept')) {
+
                 if ($data_tr['payment_type'] != 'credit_card' &&
                     ($data_tr['transaction_status'] == 'capture' || $data_tr['transaction_status'] == 'settlement')) {
-                    $this->updatePayment($notif->order_id, null, $data_tr);
+
+                    $this->updatePayment($notif->order_id);
+
+                    $payment_carts = PaymentCart::where('uni_code_payment', $notif->order_id)->get();
+                    $user = User::find(implode($payment_carts->take(1)->pluck('user_id')->toArray()));
+                    $this->invoiceMail('finish', $notif->order_id, $user, null, $data_tr);
+
+                    return __('lang.alert.payment-success',
+                        ['qty' => count($payment_carts), 's' => count($payment_carts) > 1 ? 's' : '', 'code' => $notif->order_id]);
                 }
             }
 
@@ -213,10 +231,9 @@ class MidtransController extends Controller
         }
     }
 
-    private function updatePayment($code, $pdf_url, $data_tr)
+    private function updatePayment($code)
     {
         $payment_carts = PaymentCart::where('uni_code_payment', $code)->get();
-        $user = User::find(implode($payment_carts->take(1)->pluck('user_id')->toArray()));
         foreach ($payment_carts as $row) {
             $row->update(['finish_payment' => true]);
 
@@ -235,10 +252,6 @@ class MidtransController extends Controller
                 'uni_code' => strtoupper(uniqid($initial)) . now()->timestamp
             ]);
         }
-
-        $this->invoiceMail('finish', $code, $user, $pdf_url, $data_tr);
-
-        return __('lang.alert.payment-success', ['qty' => count($payment_carts), 's' => count($payment_carts) > 1 ? 's' : '', 'code' => $code]);
     }
 
     private function invoiceMail($status, $code, $user, $pdf_url, $data_tr)
@@ -286,7 +299,6 @@ class MidtransController extends Controller
 
         $filename = $code . '.pdf';
         $check_file = 'public/users/order/invoice/' . $user->id . '/' . $filename;
-
         if ($status == 'finish') {
             if (Storage::exists($check_file)) {
                 Storage::delete($check_file);
