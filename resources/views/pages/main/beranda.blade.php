@@ -64,59 +64,27 @@
             width: 100% !important;
         }
 
-        @media (min-width: 1440px) {
-
-        }
-
-        @media (min-width: 1281px) and (max-width: 1439px) {
-
-        }
-
-        @media (min-width: 1025px) and (max-width: 1280px) {
-
-        }
-
-        @media (min-width: 768px) and (max-width: 1024px) {
-
-        }
-
-        @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-
-        }
-
         @media (min-width: 481px) and (max-width: 767px) {
-
-        }
-
-        @media (min-width: 320px) and (max-width: 480px) {
-
+            .col_one_fourth.--custom {
+                width: 22%;
+                float: left;
+                margin-right: 4%;
+            }
         }
 
         @media (max-width: 480px) {
             .col_one_fourth.--custom {
-                width: 44%;
+                width: 22%;
                 float: left;
                 margin-right: 4%;
-            }
-
-            .col_one_fourth.--custom-col_last {
-                margin-right: 0 !important;
-                float: right;
-                clear: right;
             }
         }
 
         @media (max-width: 360px) {
             .col_one_fourth.--custom {
-                width: 44%;
+                width: 22%;
                 float: left;
                 margin-right: 4%;
-            }
-
-            .col_one_fourth.--custom-col_last {
-                margin-right: 0 !important;
-                float: right;
-                clear: right;
             }
         }
     </style>
@@ -132,7 +100,7 @@
                         data-saveperformance="off" data-title="{{__('lang.revo.bc-1')}}"
                         style="background-color: #eee;">
                         <div class="tp-caption ltl tp-resizeme revo-slider-caps-text uppercase"
-                             data-x="[600,630,630,630,630]"
+                             data-x="[600,630,630,630,630,630]"
                              data-y="-25"
                              data-transform_in="x:250;y:0;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;s:400;e:Power4.easeOutQuad;"
                              data-speed="400"
@@ -147,7 +115,7 @@
                             <img src="{{asset('images/slider/rev/business-card.png')}}" alt="{{__('lang.revo.bc-1')}}">
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-caps-text uppercase"
-                             data-x="[0,70,70,70,70]"
+                             data-x="[0,70,70,70,70,70]"
                              data-y="110"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -161,7 +129,7 @@
                              data-endeasing="Power4.easeIn" style=" color: #333;">{{__('lang.revo.head')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-emphasis-text nopadding noborder"
-                             data-x="[-4,66,66,66,66]"
+                             data-x="[-4,66,66,66,66,66]"
                              data-y="140"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -176,7 +144,7 @@
                              style=" color: #333; max-width: 430px; line-height: 1.15;">{{__('lang.revo.bc-1')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-desc-text tleft"
-                             data-x="[0,70,70,70,70]"
+                             data-x="[0,70,70,70,70,70]"
                              data-y="240"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -191,7 +159,7 @@
                              style=" color: #333; max-width: 550px; white-space: normal;">{{__('lang.revo.bc-2')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme"
-                             data-x="[0,70,70,70,70]"
+                             data-x="[0,70,70,70,70,70]"
                              data-y="340"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -243,7 +211,7 @@
                             <img src="{{asset('images/slider/rev/brochure.png')}}" alt="{{__('lang.revo.bro-1')}}">
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-caps-text uppercase"
-                             data-x="[0,70,70,70,70]"
+                             data-x="[0,70,70,70,70,70]"
                              data-y="110"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -257,7 +225,7 @@
                              data-endeasing="Power4.easeIn" style=" color: #333;">{{__('lang.revo.head')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-emphasis-text nopadding noborder"
-                             data-x="[-4,66,66,66,66]"
+                             data-x="[-4,66,66,66,66,66]"
                              data-y="140"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -272,7 +240,7 @@
                              style=" color: #333; max-width: 430px; line-height: 1.15;">{{__('lang.revo.bro-1')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-desc-text tleft"
-                             data-x="[0,70,70,70,70]"
+                             data-x="[0,70,70,70,70,70]"
                              data-y="240"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -287,7 +255,7 @@
                              style=" color: #333; max-width: 550px; white-space: normal;">{{__('lang.revo.bro-2')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme"
-                             data-x="[0,70,70,70,70]"
+                             data-x="[0,70,70,70,70,70]"
                              data-y="340"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -339,7 +307,7 @@
                             <img src="{{asset('images/slider/rev/flyer.png')}}" alt="{{__('lang.revo.fly-1')}}">
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-caps-text uppercase"
-                             data-x="[0,70,70,70,70]"
+                             data-x="[0,70,70,70,70,70]"
                              data-y="110"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -353,7 +321,7 @@
                              data-endeasing="Power4.easeIn" style=" color: #333;">{{__('lang.revo.head')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-emphasis-text nopadding noborder"
-                             data-x="[-4,66,66,66,66]"
+                             data-x="[-4,66,66,66,66,66]"
                              data-y="140"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -368,7 +336,7 @@
                              style=" color: #333; max-width: 430px; line-height: 1.15;">{{__('lang.revo.fly-1')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-desc-text tleft"
-                             data-x="[0,70,70,70,70]"
+                             data-x="[0,70,70,70,70,70]"
                              data-y="240"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -383,7 +351,7 @@
                              style=" color: #333; max-width: 550px; white-space: normal;">{{__('lang.revo.fly-2')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme"
-                             data-x="[0,70,70,70,70]"
+                             data-x="[0,70,70,70,70,70]"
                              data-y="340"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -680,7 +648,7 @@
                     sliderLayout: "fullwidth",
                     dottedOverlay: "none",
                     delay: 9000,
-                    responsiveLevels: [1200, 992, 768, 480, 320],
+                    responsiveLevels: [1200, 1025, 992, 768, 480, 320],
                     gridwidth: 1140,
                     gridheight: 500,
                     lazyType: "none",
@@ -734,9 +702,6 @@
             apiRevoSlider.bind("revolution.slide.onloaded", function (e) {
                 SEMICOLON.slider.sliderParallaxDimensions();
             });
-
-            window.mobilecheck() ? $("#why-us .--custom:nth-child(2)").addClass('col_last') :
-                $("#why-us .--custom:nth-child(2)").removeClass('col_last');
 
             $(".portfolio-desc span a:not(:last-child)").each(function () {
                 $(this).append(',');
