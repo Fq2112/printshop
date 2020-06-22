@@ -52,6 +52,11 @@
             color: #fff;
         }
 
+        body.device-touch.device-sm .portfolio-notitle .portfolio-desc,
+        body.device-touch.device-xs .portfolio-notitle .portfolio-desc {
+            display: block !important;
+        }
+
         .owl-carousel .owl-stage {
             padding: 0;
         }
@@ -62,6 +67,12 @@
 
         .eapps-instagram-feed-posts-slider-inner {
             width: 100% !important;
+        }
+
+        @media (max-width: 991.98px) {
+            .portfolio .portfolio-item {
+                width: 25%;
+            }
         }
 
         @media (max-width: 767.98px) {
@@ -128,6 +139,11 @@
                 font-size: 10px;
             }
 
+            .portfolio .portfolio-item {
+                width: 50%;
+                padding: 0 12px 12px 0;
+            }
+
             .process-steps li h5 {
                 font-size: 13px;
             }
@@ -161,6 +177,11 @@
             .col_one_fourth.--custom .feature-box.fbox-center.fbox-border h3,
             .col_one_fourth.--custom .feature-box.fbox-center.fbox-border p {
                 font-size: 8px;
+            }
+
+            .portfolio .portfolio-item {
+                width: 50%;
+                padding: 0 12px 12px 0;
             }
 
             .process-steps li h5 {
@@ -485,7 +506,7 @@
                 <div class="col_one_fourth --custom">
                     <div class="feature-box fbox-center fbox-border fbox-effect noborder">
                         <div class="fbox-icon">
-                            <a href="#"><i class="icon-money-bill-wave"></i></a>
+                            <a href="javascript:void(0)"><i class="icon-money-bill-wave"></i></a>
                         </div>
                         <h3>{{__('lang.feature.price-t')}}</h3>
                         <p>{{__('lang.feature.price-st')}}</p>
@@ -494,7 +515,7 @@
                 <div class="col_one_fourth --custom">
                     <div class="feature-box fbox-center fbox-border fbox-effect noborder">
                         <div class="fbox-icon">
-                            <a href="#"><i class="icon-gem"></i></a>
+                            <a href="javascript:void(0)"><i class="icon-gem"></i></a>
                         </div>
                         <h3>{{__('lang.feature.guarantee-t')}}</h3>
                         <p>{{__('lang.feature.guarantee-st')}}</p>
@@ -503,7 +524,7 @@
                 <div class="col_one_fourth --custom">
                     <div class="feature-box fbox-center fbox-border fbox-effect noborder">
                         <div class="fbox-icon">
-                            <a href="#"><i class="icon-drafting-compass"></i></a>
+                            <a href="javascript:void(0)"><i class="icon-drafting-compass"></i></a>
                         </div>
                         <h3>{{__('lang.feature.design-t')}}</h3>
                         <p>{{__('lang.feature.design-st')}}</p>
@@ -512,7 +533,7 @@
                 <div class="col_one_fourth --custom col_last">
                     <div class="feature-box fbox-center fbox-border fbox-effect noborder">
                         <div class="fbox-icon">
-                            <a href="#"><i class="icon-shipping-fast"></i></a>
+                            <a href="javascript:void(0)"><i class="icon-shipping-fast"></i></a>
                         </div>
                         <h3>{{__('lang.feature.shipping-t')}}</h3>
                         <p>{{__('lang.feature.shipping-st')}}</p>
@@ -540,7 +561,8 @@
                                                     <div class="slider-wrap">
                                                         @foreach($row['thumb'] as $file)
                                                             <div class="slide">
-                                                                <a href="#"><img src="{{$file}}" alt="{{$row['name']}}"></a>
+                                                                <a href="javascript:void(0)"><img src="{{$file}}"
+                                                                                                  alt="{{$row['name']}}"></a>
                                                             </div>
                                                         @endforeach
                                                     </div>
@@ -697,18 +719,30 @@
                 <div id="oc-clients-full" class="owl-carousel owl-carousel-full image-carousel carousel-widget mb-5"
                      data-margin="30" data-nav="true" data-pagi="false" data-autoplay="5000" data-items-xs="3"
                      data-items-sm="3" data-items-md="5" data-items-lg="6" data-items-xl="7">
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/1.png')}}" alt=""></a></div>
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/2.png')}}" alt=""></a></div>
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/3.png')}}" alt=""></a></div>
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/4.png')}}" alt=""></a></div>
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/5.png')}}" alt=""></a></div>
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/6.png')}}" alt=""></a></div>
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/7.png')}}" alt=""></a></div>
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/8.png')}}" alt=""></a></div>
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/9.png')}}" alt=""></a></div>
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/10.png')}}" alt=""></a></div>
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/11.png')}}" alt=""></a></div>
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/12.png')}}" alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/1.png')}}"
+                                                                           alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/2.png')}}"
+                                                                           alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/3.png')}}"
+                                                                           alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/4.png')}}"
+                                                                           alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/5.png')}}"
+                                                                           alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/6.png')}}"
+                                                                           alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/7.png')}}"
+                                                                           alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/8.png')}}"
+                                                                           alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/9.png')}}"
+                                                                           alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/10.png')}}"
+                                                                           alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/11.png')}}"
+                                                                           alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/12.png')}}"
+                                                                           alt=""></a></div>
                 </div>
             </div>
             <div class="clear"></div>
