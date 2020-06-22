@@ -161,7 +161,7 @@
                              data-endeasing="Power4.easeIn" style=" color: #333;">{{__('lang.revo.head')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-emphasis-text nopadding noborder"
-                             data-x="[0,70,70,70,70]"
+                             data-x="[-4,66,66,66,66]"
                              data-y="140"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -257,7 +257,7 @@
                              data-endeasing="Power4.easeIn" style=" color: #333;">{{__('lang.revo.head')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-emphasis-text nopadding noborder"
-                             data-x="[0,70,70,70,70]"
+                             data-x="[-4,66,66,66,66]"
                              data-y="140"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -353,7 +353,7 @@
                              data-endeasing="Power4.easeIn" style=" color: #333;">{{__('lang.revo.head')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-emphasis-text nopadding noborder"
-                             data-x="[0,70,70,70,70]"
+                             data-x="[-4,66,66,66,66]"
                              data-y="140"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
