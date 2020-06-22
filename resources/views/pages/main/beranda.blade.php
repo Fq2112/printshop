@@ -954,7 +954,7 @@
             @endif
         });
 
-        $(document).on('mouseover', '.use-nicescroll', function () {
+        $(document).on('mouseover', function () {
             $(".portfolio-notitle .portfolio-desc").css('width', $(".portfolio-image").width());
         });
     </script>
