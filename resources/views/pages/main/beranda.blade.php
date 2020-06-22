@@ -69,6 +69,11 @@
             width: 100% !important;
         }
 
+        .portfolio-notitle .portfolio-item:hover .portfolio-desc,
+        .portfolio-notitle .iportfolio:hover .portfolio-desc {
+            bottom: 12px !important;
+        }
+
         @media (max-width: 991.98px) {
             .portfolio .portfolio-item {
                 width: 25%;
@@ -80,11 +85,11 @@
             }
 
             .portfolio-desc h3 {
-                font-size: 15px;
+                font-size: 14px;
             }
 
             .portfolio-desc span {
-                font-size: 13px;
+                font-size: 11px;
             }
         }
 
@@ -163,11 +168,11 @@
             }
 
             .portfolio-desc h3 {
-                font-size: 14px;
+                font-size: 13px;
             }
 
             .portfolio-desc span {
-                font-size: 12px;
+                font-size: 10px;
             }
 
             .process-steps li h5 {
@@ -216,11 +221,11 @@
             }
 
             .portfolio-desc h3 {
-                font-size: 14px;
+                font-size: 13px;
             }
 
             .portfolio-desc span {
-                font-size: 12px;
+                font-size: 10px;
             }
 
             .process-steps li h5 {
