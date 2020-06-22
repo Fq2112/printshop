@@ -70,6 +70,22 @@
                 float: left;
                 margin-right: 4%;
             }
+
+            .col_one_fourth.--custom .feature-box.fbox-center .fbox-icon {
+                width: 50px;
+                height: 50px;
+                margin-bottom: 1em;
+            }
+
+            .col_one_fourth.--custom .feature-box.fbox-center.fbox-border .fbox-icon i {
+                font-size: 25px;
+                line-height: 48px !important;
+            }
+
+            .col_one_fourth.--custom .feature-box.fbox-center.fbox-border h3,
+            .col_one_fourth.--custom .feature-box.fbox-center.fbox-border p {
+                font-size: 12px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -78,6 +94,22 @@
                 float: left;
                 margin-right: 4%;
             }
+
+            .col_one_fourth.--custom .feature-box.fbox-center .fbox-icon {
+                width: 45px;
+                height: 45px;
+                margin-bottom: 1em;
+            }
+
+            .col_one_fourth.--custom .feature-box.fbox-center.fbox-border .fbox-icon i {
+                font-size: 20px;
+                line-height: 45px !important;
+            }
+
+            .col_one_fourth.--custom .feature-box.fbox-center.fbox-border h3,
+            .col_one_fourth.--custom .feature-box.fbox-center.fbox-border p {
+                font-size: 10px;
+            }
         }
 
         @media (max-width: 360px) {
@@ -85,6 +117,22 @@
                 width: 22%;
                 float: left;
                 margin-right: 4%;
+            }
+
+            .col_one_fourth.--custom .feature-box.fbox-center .fbox-icon {
+                width: 40px;
+                height: 40px;
+                margin-bottom: 1em;
+            }
+
+            .col_one_fourth.--custom .feature-box.fbox-center.fbox-border .fbox-icon i {
+                font-size: 18px;
+                line-height: 38px !important;
+            }
+
+            .col_one_fourth.--custom .feature-box.fbox-center.fbox-border h3,
+            .col_one_fourth.--custom .feature-box.fbox-center.fbox-border p {
+                font-size: 8px;
             }
         }
     </style>
