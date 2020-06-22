@@ -953,5 +953,9 @@
             });
             @endif
         });
+
+        $(document).on('mouseover', '.use-nicescroll', function () {
+            $(".portfolio-notitle .portfolio-desc").css('width', $(".portfolio-image").width());
+        });
     </script>
 @endpush
