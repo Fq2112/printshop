@@ -863,6 +863,8 @@
                 SEMICOLON.slider.sliderParallaxDimensions();
             });
 
+            $(".portfolio-notitle .portfolio-desc").css('width', $(".portfolio-image").width());
+
             $(".portfolio-desc span a:not(:last-child)").each(function () {
                 $(this).append(',');
             });
