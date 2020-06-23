@@ -50,7 +50,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{route('admin.order',['condition' => \App\Support\StatusProgress::NEW])}}"
+                            <form action="{{route(Route::currentRouteName())}}"
                                   method="get">
                                 <div class="row form-group">
                                     <div class="col-3 fix-label-group">
@@ -69,22 +69,6 @@
                                                 <option value="180">{{strtoupper('Six Months')}}</option>
                                                 <option value="360">{{strtoupper('One Year')}}</option>
                                             </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 fix-label-group">
-                                        <label for="status">Status Order</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text fix-label-item" style="height: 2.25rem">
-                                                    <i class="fa fa-tag"></i></span>
-                                            </div>
-                                            <select id="status" class="form-control selectpicker" title="-- Choose --"
-                                                    name="status" data-live-search="true">
-                                                <option value="">{{strtoupper('all')}}</option>
-                                                @foreach(\App\Support\StatusProgress::ALL as $material)
-                                                    <option value="{{$material}}">{{strtoupper($material)}}</option>
-                                                @endforeach
-                                            </select>
                                             <div class="input-group-append">
                                                 <button data-placement="right" data-toggle="tooltip"
                                                         title="Submit Filter"
@@ -93,6 +77,28 @@
                                             </div>
                                         </div>
                                     </div>
+{{--                                    <div class="col-3 fix-label-group">--}}
+{{--                                        <label for="status">Status Order</label>--}}
+{{--                                        <div class="input-group">--}}
+{{--                                            <div class="input-group-prepend">--}}
+{{--                                                <span class="input-group-text fix-label-item" style="height: 2.25rem">--}}
+{{--                                                    <i class="fa fa-tag"></i></span>--}}
+{{--                                            </div>--}}
+{{--                                            <select id="status" class="form-control selectpicker" title="-- Choose --"--}}
+{{--                                                    name="status" data-live-search="true">--}}
+{{--                                                <option value="">{{strtoupper('all')}}</option>--}}
+{{--                                                @foreach(\App\Support\StatusProgress::ALL as $material)--}}
+{{--                                                    <option value="{{$material}}">{{strtoupper($material)}}</option>--}}
+{{--                                                @endforeach--}}
+{{--                                            </select>--}}
+{{--                                            <div class="input-group-append">--}}
+{{--                                                <button data-placement="right" data-toggle="tooltip"--}}
+{{--                                                        title="Submit Filter"--}}
+{{--                                                        type="submit" class="btn btn-warning" style="height: 2.25rem">--}}
+{{--                                                    <i class="fa fa-filter"></i></button>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                 </div>
                             </form>
                         </div>
@@ -102,14 +108,6 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        {{--                        <div class="card-header">--}}
-                        {{--                            <div class="card-header-form">--}}
-                        {{--                                --}}{{--                                <button id="btn_create" class="btn btn-primary text-uppercase">--}}
-                        {{--                                --}}{{--                                    <strong><i class="fas fa-plus mr-2"></i>Create</strong>--}}
-                        {{--                                --}}{{--                                </button>--}}
-                        {{--                            </div>--}}
-                        {{--                        </div>--}}
-
                         <div class="card-body">
                             <div id="content1" class="table-responsive">
                                 <table class="table table-striped" id="dt-buttons">

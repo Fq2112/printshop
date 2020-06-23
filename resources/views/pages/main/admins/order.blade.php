@@ -203,13 +203,13 @@
                                                     $file = storage_path('app/public/users/order/invoice/owner/prodution/' . $code . '/' . $row->uni_code . '.pdf');
                                                     ?>
                                                     @if(file_exists($file))
-                                                        <button
-                                                            data-placement="right" data-toggle="tooltip"
-                                                            title="Download Shipping Label"
-                                                            type="button" class="btn btn-danger">
+                                                        <a href="{{asset('storage/users/order/invoice/owner/prodution/' . $code . '/' . $row->uni_code . '.pdf')}}"
+                                                           data-placement="right" data-toggle="tooltip"
+                                                           title="Download Shipping Label"
+                                                           type="button" class="btn btn-danger">
 
                                                             <i class="fa fa-file-download   "></i>
-                                                        </button>
+                                                        </a>
                                                     @endif
                                                     <a href="{{route('get.order.detail',['id' => $row->id])}}"
                                                        data-placement="top" data-toggle="tooltip"
@@ -457,6 +457,23 @@
                     code: code
                 },
                 success: function (data) {
+
+                    setTimeout(
+                        function () {
+                            $.ajax({ //Download File from above
+                                type: 'post',
+                                url: '{{route('admin.order.production.download')}}',
+                                data: {
+                                    _token: '{{csrf_token()}}',
+                                    code: code
+                                },
+                                success: function (data) {
+                                    console.log('downloaded')
+                                }
+                            });
+                        }, 1000);
+
+
                     swal('Success', "Plesae Wait Till Page Succesfully Realoded", 'success');
                     setTimeout(
                         function () {

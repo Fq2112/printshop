@@ -21,7 +21,9 @@ class OrderController extends Controller
     public function order(Request $request)
     {
 //        dd($request->all());
-        $data = PaymentCart::where('finish_payment', true)
+        $data = PaymentCart::when($request->period, function ($query) use ($request) {
+            $query->whereBetween('updated_at', [Carbon::now()->subDay($request->period), Carbon::now()]);
+        })->where('finish_payment', true)
             ->distinct('uni_code_payment')->select('uni_code_payment', 'user_id', 'updated_at')->orderBy('updated_at', 'DESC')->get();
         return view('pages.main.admins.payment', [
             'data' => $data
@@ -169,9 +171,18 @@ class OrderController extends Controller
             'message' => 'PDF Created'
         ], 201);
 //        $file_path = storage_path('app/public/users/order/invoice/owner/' .$filename);
-//        return Response::download($file_path, 'Production_'.$filename, [
+//        return response()->download($file_path, 'Production_'.$filename, [
 //            'Content-length : ' . filesize($file_path)
 //        ]);
+    }
+
+    public function download_production(Request $request)
+    {
+        $filename =$request->code . '.pdf';
+        $file_path = storage_path('app/public/users/order/invoice/owner/' .$filename);
+        return Response::download($file_path, 'Production_'.$filename, [
+            'Content-length : ' . filesize($file_path)
+        ]);
     }
 
     public function shipping()
