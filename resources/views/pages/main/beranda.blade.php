@@ -52,6 +52,11 @@
             color: #fff;
         }
 
+        body.device-touch.device-sm .portfolio-notitle .portfolio-desc,
+        body.device-touch.device-xs .portfolio-notitle .portfolio-desc {
+            display: block !important;
+        }
+
         .owl-carousel .owl-stage {
             padding: 0;
         }
@@ -62,6 +67,177 @@
 
         .eapps-instagram-feed-posts-slider-inner {
             width: 100% !important;
+        }
+
+        .portfolio-notitle .portfolio-item:hover .portfolio-desc,
+        .portfolio-notitle .iportfolio:hover .portfolio-desc {
+            bottom: 12px !important;
+        }
+
+        @media (max-width: 991.98px) {
+            .portfolio .portfolio-item {
+                width: 25%;
+            }
+
+            .portfolio-notitle .portfolio-desc {
+                height: 65px;
+                padding: 10px 5px;
+            }
+
+            .portfolio-desc h3 {
+                font-size: 14px;
+            }
+
+            .portfolio-desc span {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .process-steps li {
+                float: left;
+                width: 20% !important;
+                margin-top: 0;
+            }
+
+            .process-steps li h5 {
+                margin: 15px 0 0 0;
+            }
+
+            .process-steps li:before,
+            .process-steps li:after {
+                display: unset;
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 767px) {
+            .col_one_fourth.--custom {
+                width: 22%;
+                float: left;
+                margin-right: 4%;
+            }
+
+            .col_one_fourth.--custom .feature-box.fbox-center .fbox-icon {
+                width: 50px;
+                height: 50px;
+                margin-bottom: 1em;
+            }
+
+            .col_one_fourth.--custom .feature-box.fbox-center.fbox-border .fbox-icon i {
+                font-size: 25px;
+                line-height: 48px !important;
+            }
+
+            .col_one_fourth.--custom .feature-box.fbox-center.fbox-border h3,
+            .col_one_fourth.--custom .feature-box.fbox-center.fbox-border p {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .col_one_fourth.--custom {
+                width: 22%;
+                float: left;
+                margin-right: 4%;
+            }
+
+            .col_one_fourth.--custom .feature-box.fbox-center .fbox-icon {
+                width: 45px;
+                height: 45px;
+                margin-bottom: 1em;
+            }
+
+            .col_one_fourth.--custom .feature-box.fbox-center.fbox-border .fbox-icon i {
+                font-size: 20px;
+                line-height: 45px !important;
+            }
+
+            .col_one_fourth.--custom .feature-box.fbox-center.fbox-border h3,
+            .col_one_fourth.--custom .feature-box.fbox-center.fbox-border p {
+                font-size: 10px;
+            }
+
+            .portfolio .portfolio-item {
+                width: 50%;
+                padding: 0 12px 12px 0;
+            }
+
+            .portfolio-notitle .portfolio-desc {
+                height: 55px;
+                padding: 5px;
+            }
+
+            .portfolio-desc h3 {
+                font-size: 13px;
+            }
+
+            .portfolio-desc span {
+                font-size: 10px;
+            }
+
+            .process-steps li h5 {
+                font-size: 13px;
+            }
+
+            .process-steps li a.i-bordered {
+                width: 40px !important;
+                height: 40px !important;
+                line-height: 40px !important;
+                font-size: 20px !important;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .col_one_fourth.--custom {
+                width: 22%;
+                float: left;
+                margin-right: 4%;
+            }
+
+            .col_one_fourth.--custom .feature-box.fbox-center .fbox-icon {
+                width: 40px;
+                height: 40px;
+                margin-bottom: 1em;
+            }
+
+            .col_one_fourth.--custom .feature-box.fbox-center.fbox-border .fbox-icon i {
+                font-size: 18px;
+                line-height: 38px !important;
+            }
+
+            .col_one_fourth.--custom .feature-box.fbox-center.fbox-border h3,
+            .col_one_fourth.--custom .feature-box.fbox-center.fbox-border p {
+                font-size: 8px;
+            }
+
+            .portfolio .portfolio-item {
+                width: 50%;
+                padding: 0 12px 12px 0;
+            }
+
+            .portfolio-notitle .portfolio-desc {
+                height: 55px;
+                padding: 5px;
+            }
+
+            .portfolio-desc h3 {
+                font-size: 13px;
+            }
+
+            .portfolio-desc span {
+                font-size: 10px;
+            }
+
+            .process-steps li h5 {
+                font-size: 10px;
+            }
+
+            .process-steps li a.i-bordered {
+                width: 35px !important;
+                height: 35px !important;
+                line-height: 35px !important;
+                font-size: 17px !important;
+            }
         }
     </style>
 @endpush
@@ -76,7 +252,7 @@
                         data-saveperformance="off" data-title="{{__('lang.revo.bc-1')}}"
                         style="background-color: #eee;">
                         <div class="tp-caption ltl tp-resizeme revo-slider-caps-text uppercase"
-                             data-x="600"
+                             data-x="[600,630,630,630,630,630]"
                              data-y="-25"
                              data-transform_in="x:250;y:0;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;s:400;e:Power4.easeOutQuad;"
                              data-speed="400"
@@ -91,7 +267,7 @@
                             <img src="{{asset('images/slider/rev/business-card.png')}}" alt="{{__('lang.revo.bc-1')}}">
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-caps-text uppercase"
-                             data-x="0"
+                             data-x="[0,70,70,70,70,70]"
                              data-y="110"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -105,7 +281,7 @@
                              data-endeasing="Power4.easeIn" style=" color: #333;">{{__('lang.revo.head')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-emphasis-text nopadding noborder"
-                             data-x="0"
+                             data-x="[-4,66,66,66,66,66]"
                              data-y="140"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -120,7 +296,7 @@
                              style=" color: #333; max-width: 430px; line-height: 1.15;">{{__('lang.revo.bc-1')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-desc-text tleft"
-                             data-x="0"
+                             data-x="[0,70,70,70,70,70]"
                              data-y="240"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -135,7 +311,7 @@
                              style=" color: #333; max-width: 550px; white-space: normal;">{{__('lang.revo.bc-2')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme"
-                             data-x="0"
+                             data-x="[0,70,70,70,70,70]"
                              data-y="340"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -187,7 +363,7 @@
                             <img src="{{asset('images/slider/rev/brochure.png')}}" alt="{{__('lang.revo.bro-1')}}">
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-caps-text uppercase"
-                             data-x="0"
+                             data-x="[0,70,70,70,70,70]"
                              data-y="110"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -201,7 +377,7 @@
                              data-endeasing="Power4.easeIn" style=" color: #333;">{{__('lang.revo.head')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-emphasis-text nopadding noborder"
-                             data-x="0"
+                             data-x="[-4,66,66,66,66,66]"
                              data-y="140"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -216,7 +392,7 @@
                              style=" color: #333; max-width: 430px; line-height: 1.15;">{{__('lang.revo.bro-1')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-desc-text tleft"
-                             data-x="0"
+                             data-x="[0,70,70,70,70,70]"
                              data-y="240"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -231,7 +407,7 @@
                              style=" color: #333; max-width: 550px; white-space: normal;">{{__('lang.revo.bro-2')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme"
-                             data-x="0"
+                             data-x="[0,70,70,70,70,70]"
                              data-y="340"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -283,7 +459,7 @@
                             <img src="{{asset('images/slider/rev/flyer.png')}}" alt="{{__('lang.revo.fly-1')}}">
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-caps-text uppercase"
-                             data-x="0"
+                             data-x="[0,70,70,70,70,70]"
                              data-y="110"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -297,7 +473,7 @@
                              data-endeasing="Power4.easeIn" style=" color: #333;">{{__('lang.revo.head')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-emphasis-text nopadding noborder"
-                             data-x="0"
+                             data-x="[-4,66,66,66,66,66]"
                              data-y="140"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -312,7 +488,7 @@
                              style=" color: #333; max-width: 430px; line-height: 1.15;">{{__('lang.revo.fly-1')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme revo-slider-desc-text tleft"
-                             data-x="0"
+                             data-x="[0,70,70,70,70,70]"
                              data-y="240"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -327,7 +503,7 @@
                              style=" color: #333; max-width: 550px; white-space: normal;">{{__('lang.revo.fly-2')}}
                         </div>
                         <div class="tp-caption ltl tp-resizeme"
-                             data-x="0"
+                             data-x="[0,70,70,70,70,70]"
                              data-y="340"
                              data-transform_in="x:0;y:150;z:0;rotationZ:0;scaleX:1.3;scaleY:1;skewX:0;skewY:0;opacity:0;s:700;e:Power4.easeOutQuad;"
                              data-speed="700"
@@ -367,41 +543,41 @@
     <section id="content">
         <div class="content-wrap py-4">
             <!-- why choose us -->
-            <div class="container clearfix">
+            <div id="why-us" class="container clearfix">
                 <div class="fancy-title title-dotted-border title-center mb-4">
                     <h4>{{__('lang.feature.head')}}</h4>
                 </div>
-                <div class="col_one_fourth">
+                <div class="col_one_fourth --custom">
                     <div class="feature-box fbox-center fbox-border fbox-effect noborder">
                         <div class="fbox-icon">
-                            <a href="#"><i class="icon-money-bill-wave"></i></a>
+                            <a href="javascript:void(0)"><i class="icon-money-bill-wave"></i></a>
                         </div>
                         <h3>{{__('lang.feature.price-t')}}</h3>
                         <p>{{__('lang.feature.price-st')}}</p>
                     </div>
                 </div>
-                <div class="col_one_fourth">
+                <div class="col_one_fourth --custom">
                     <div class="feature-box fbox-center fbox-border fbox-effect noborder">
                         <div class="fbox-icon">
-                            <a href="#"><i class="icon-gem"></i></a>
+                            <a href="javascript:void(0)"><i class="icon-gem"></i></a>
                         </div>
                         <h3>{{__('lang.feature.guarantee-t')}}</h3>
                         <p>{{__('lang.feature.guarantee-st')}}</p>
                     </div>
                 </div>
-                <div class="col_one_fourth">
+                <div class="col_one_fourth --custom">
                     <div class="feature-box fbox-center fbox-border fbox-effect noborder">
                         <div class="fbox-icon">
-                            <a href="#"><i class="icon-drafting-compass"></i></a>
+                            <a href="javascript:void(0)"><i class="icon-drafting-compass"></i></a>
                         </div>
                         <h3>{{__('lang.feature.design-t')}}</h3>
                         <p>{{__('lang.feature.design-st')}}</p>
                     </div>
                 </div>
-                <div class="col_one_fourth col_last">
+                <div class="col_one_fourth --custom col_last">
                     <div class="feature-box fbox-center fbox-border fbox-effect noborder">
                         <div class="fbox-icon">
-                            <a href="#"><i class="icon-shipping-fast"></i></a>
+                            <a href="javascript:void(0)"><i class="icon-shipping-fast"></i></a>
                         </div>
                         <h3>{{__('lang.feature.shipping-t')}}</h3>
                         <p>{{__('lang.feature.shipping-st')}}</p>
@@ -429,7 +605,8 @@
                                                     <div class="slider-wrap">
                                                         @foreach($row['thumb'] as $file)
                                                             <div class="slide">
-                                                                <a href="#"><img src="{{$file}}" alt="{{$row['name']}}"></a>
+                                                                <a href="javascript:void(0)"><img src="{{$file}}"
+                                                                                                  alt="{{$row['name']}}"></a>
                                                             </div>
                                                         @endforeach
                                                     </div>
@@ -586,18 +763,30 @@
                 <div id="oc-clients-full" class="owl-carousel owl-carousel-full image-carousel carousel-widget mb-5"
                      data-margin="30" data-nav="true" data-pagi="false" data-autoplay="5000" data-items-xs="3"
                      data-items-sm="3" data-items-md="5" data-items-lg="6" data-items-xl="7">
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/1.png')}}" alt=""></a></div>
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/2.png')}}" alt=""></a></div>
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/3.png')}}" alt=""></a></div>
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/4.png')}}" alt=""></a></div>
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/5.png')}}" alt=""></a></div>
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/6.png')}}" alt=""></a></div>
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/7.png')}}" alt=""></a></div>
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/8.png')}}" alt=""></a></div>
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/9.png')}}" alt=""></a></div>
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/10.png')}}" alt=""></a></div>
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/11.png')}}" alt=""></a></div>
-                    <div class="oc-item"><a href="#"><img src="{{asset('images/clients/12.png')}}" alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/1.png')}}"
+                                                                           alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/2.png')}}"
+                                                                           alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/3.png')}}"
+                                                                           alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/4.png')}}"
+                                                                           alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/5.png')}}"
+                                                                           alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/6.png')}}"
+                                                                           alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/7.png')}}"
+                                                                           alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/8.png')}}"
+                                                                           alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/9.png')}}"
+                                                                           alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/10.png')}}"
+                                                                           alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/11.png')}}"
+                                                                           alt=""></a></div>
+                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/12.png')}}"
+                                                                           alt=""></a></div>
                 </div>
             </div>
             <div class="clear"></div>
@@ -624,14 +813,14 @@
                     sliderLayout: "fullwidth",
                     dottedOverlay: "none",
                     delay: 9000,
-                    responsiveLevels: [1200, 992, 768, 480, 320],
+                    responsiveLevels: [1200, 1025, 992, 768, 480, 320],
                     gridwidth: 1140,
                     gridheight: 500,
                     lazyType: "none",
                     shadow: 0,
                     spinner: "off",
                     autoHeight: "off",
-                    disableProgressBar: "on",
+                    disableProgressBar: "off",
                     hideThumbsOnMobile: "off",
                     hideSliderAtLimit: 0,
                     hideCaptionAtLimit: 0,
@@ -656,8 +845,8 @@
                         arrows: {
                             style: "ares",
                             enable: true,
-                            hide_onmobile: false,
-                            hide_onleave: false,
+                            hide_onmobile: true,
+                            hide_onleave: true,
                             tmp: '<div class="tp-title-wrap">	<span class="tp-arr-titleholder">@{{title}}</span> </div>',
                             left: {
                                 h_align: "left",
@@ -678,6 +867,8 @@
             apiRevoSlider.bind("revolution.slide.onloaded", function (e) {
                 SEMICOLON.slider.sliderParallaxDimensions();
             });
+
+            $(".portfolio-notitle .portfolio-desc").css('width', $(".portfolio-image").width());
 
             $(".portfolio-desc span a:not(:last-child)").each(function () {
                 $(this).append(',');
@@ -761,6 +952,10 @@
                 }
             });
             @endif
+        });
+
+        $(document).on('mouseover', function () {
+            $(".portfolio-notitle .portfolio-desc").css('width', $(".portfolio-image").width());
         });
     </script>
 @endpush
