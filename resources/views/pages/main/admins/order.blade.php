@@ -451,7 +451,7 @@
         function get_design(code) {
             $.ajax({
                 type: 'post',
-                url: '{{route('admin.order.shipping')}}',
+                url: '{{route('admin.order.production.pdf')}}',
                 data: {
                     _token: '{{csrf_token()}}',
                     code: code

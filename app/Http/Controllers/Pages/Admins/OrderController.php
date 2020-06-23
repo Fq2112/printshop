@@ -143,13 +143,13 @@ class OrderController extends Controller
 
     public function create_pdf(Request $request)
     {
-        $filename = $request->code . '.pdf';
+        $filename =$request->code . '.pdf';
         $data = Order::whereHas('getCart', function ($query) use ($request) {
             $query->whereHas('getPayment', function ($query) use ($request) {
                 $query->where('uni_code_payment', $request->code);
             });
         })->get();
-        $pdf = PDF::loadView('exports.production',[
+        $pdf = PDF::loadView('exports.production', [
             'order' => $data,
             'code' => $request->code
         ]);
@@ -158,16 +158,33 @@ class OrderController extends Controller
 
         foreach ($data as $item) { //create PDF for Shipping Label
             $labelname = $item->uni_code . '.pdf';
-            $labelPdf = PDF::loadView('exports.shipping');
+            $labelPdf = PDF::loadView('exports.shipping',[
+                'code' => $request->code,
+                'order' => $item
+            ]);
             Storage::put('public/users/order/invoice/owner/prodution/' . $request->code . '/' . $labelname, $labelPdf->output());
         }
 
-//        return response()->json([
-//            'message' => 'PDF Created'
-//        ], 201);
-        $file_path = storage_path('app/public/users/order/invoice/owner/' .$filename);
-        return Response::download($file_path, 'Production_'.$filename, [
-            'Content-length : ' . filesize($file_path)
+        return response()->json([
+            'message' => 'PDF Created'
+        ], 201);
+//        $file_path = storage_path('app/public/users/order/invoice/owner/' .$filename);
+//        return Response::download($file_path, 'Production_'.$filename, [
+//            'Content-length : ' . filesize($file_path)
+//        ]);
+    }
+
+    public function shipping()
+    {
+        $code = 'PYM5EE6262B5F30D1592141355';
+
+        $data = Order::whereHas('getCart', function ($query) use ($code) {
+            $query->whereHas('getPayment', function ($query) use ($code) {
+                $query->where('uni_code_payment', $code);
+            });
+        })->get();
+        return view('exports.shipping', [
+            'data' => $data
         ]);
     }
 }

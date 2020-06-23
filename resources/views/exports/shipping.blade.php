@@ -10,7 +10,8 @@
 
         #invoice {
             max-width: 800px;
-            margin: 0 auto
+            margin: 0 auto;
+            padding: 20px;
         }
 
         #billship, #company {
@@ -35,7 +36,7 @@
         #co-right div {
             float: right;
             text-align: center;
-            font-size: 28px;
+            font-size: 14px;
             padding: 10px;
             color: #fff;
             width: 240px;
@@ -111,7 +112,7 @@
     </style>
 </head>
 <body>
-<div id="invoice">
+<div id="invoice" style="border:1px solid black;">
     <table id="company">
         <tr>
             <td>
@@ -124,10 +125,14 @@
                 </div>
             </td>
             <td id="co-right">
-                <div class="uppercase">{{__('lang.order.invoice')}}</div>
-                <br><br><br><br><br>
-                <div style="background: none">
-                    <img src="" alt="logo">
+                <div class="uppercase">#{{$code}}</div>
+                <br><br>
+                <div style="background: white">
+                    {!! QrCode::size(100)->generate('indoprintZ.com'); !!}
+                    <?php
+                    $qrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate('http://indoprint.co.id/en'));
+                    ?>
+                    <img src="data:image/png;base64, {!! $qrcode !!}">
                 </div>
             </td>
         </tr>
@@ -135,48 +140,56 @@
 
     <table id="billship">
         <tr>
-            <td>
-                <b class="primary">{{__('lang.invoice.bill-to')}}</b><br>
-               Nama RUmah<br>
-                Alamat Lengkap<br>
-               KOta Prov Postal Code
+            <td style="font-size: 14px">
+                <b class="primary">Kode Pesanan #{{$order->uni_code}} </b> <br>
+                <b class="primary">Pembeli : </b> {{$order->getCart->getUser->name}}<br>
+                <b class="primary">Tlpn :</b> {{$order->getCart->getUser->getBio->phone}}<br>
+                <b class="primary">Tgl.
+                    Pembayaran:</b> {{\Carbon\Carbon::parse($order->getCart->getPayment->updated_at)->formatLocalized('%d %B %Y')}}
+                <br><br>
             </td>
-            <td>
-                <b class="primary">{{__('lang.order.invoice')}} #:</b> <br>
-                <b class="primary">DOP:</b> {{now()->formatLocalized('%d %B %Y')}}<br>
-                <b class="primary">P.O. #:</b> <br>
-                <b class="primary">Due Date:</b> {{now()->addDay()->formatLocalized('%d %B %Y')}}
+            <td style="font-size: 14px">
+                <b class="primary">Penerima</b><br>
+                {{$order->getCart->getAddress->name}}<br>
+                {{$order->getCart->getAddress->phone}}<br>
+                {{$order->getCart->getAddress->address}}, {{$order->getCart->getAddress->postal_code}}
             </td>
         </tr>
     </table>
 
-    <table id="items">
+    <table id="items" style="font-size: 14px">
         <thead>
         <tr>
-            <th><b>{{__('lang.breadcrumb.product')}}</b></th>
-            <th class="center"><b>{{__('lang.product.form.summary.quantity')}}</b></th>
-            <th class="center"><b>{{__('lang.product.form.summary.price', ['unit' => 'pcs'])}}</b></th>
-            <th class="center"><b>{{__('lang.product.form.summary.ongkir')}}</b></th>
-            <th class="center"><b>Total</b></th>
+            <th><b>#</b></th>
+            <th><b>Produk</b></th>
+            <th><b>Kategori</b></th>
+{{--            <th class="center"><b>{{__('lang.product.form.summary.price', ['unit' => 'pcs'])}}</b></th>--}}
+            <th class="center"><b>Tgl. Cetak</b></th>
+            <th class="center"><b>Qty</b></th>
         </tr>
         </thead>
         <tbody>
-
-        <tr class="ttl">
-            <td class="right" colspan="4">SUBTOTAL</td>
-            <td class="right">Rp</td>
-        </tr>
-        <tr class="ttl">
-            <td class="right uppercase" colspan="4">Diskon</td>
-            <td class="right">Jumlah Diskon</td>
-        </tr>
-        <tr class="ttl">
-            <td class="right uppercase" colspan="4">{{__('lang.product.form.summary.ongkir')}}</td>
-            <td class="right">Rp ongkor</td>
-        </tr>
-        <tr class="ttl">
-            <td class="right" colspan="4">GRAND TOTAL</td>
-            <td class="right">Rp TOtal</td>
+        <tr>
+            <td>1</td>
+            <td>
+                @if(!empty($order->getCart->subkategori_id))
+                    {{$order->getCart->getSubKategori->name}}
+                @elseif(!empty($order->getCart->cluster_id))
+                    {{$order->getCart->getCluster->name}}
+                @endif
+            </td>
+            <td>
+                @if(!empty($order->getCart->subkategori_id))
+                    {{$order->getCart->getSubKategori->getKategori->name}}
+                @elseif(!empty($order->getCart->cluster_id))
+                    {{$order->getCart->getCluster->getSubKategori->getKategori->name}}
+                @endif
+            </td>
+{{--            <td align="center"> {{number_format(ceil($order->getCart->price_pcs), 2, ',', '.')}}</td>--}}
+            <td align="center">{{\Carbon\Carbon::parse($order->getCart->production_finished)->formatLocalized('%d %B %Y')}}</td>
+            <td align="center">
+                {{$order->getCart->qty}}
+            </td>
         </tr>
         </tbody>
     </table>

@@ -141,6 +141,11 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
 
         Route::post('download/shipping/', [
             'uses' => 'OrderController@create_pdf',
+            'as' => 'admin.order.production.pdf'
+        ]);
+
+        Route::get('shipping', [
+            'uses' => 'OrderController@shipping',
             'as' => 'admin.order.shipping'
         ]);
     });
