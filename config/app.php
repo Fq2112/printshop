@@ -167,7 +167,7 @@ return [
          * Package Service Providers...
          */
         Barryvdh\DomPDF\ServiceProvider::class,
-
+//        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -231,6 +231,7 @@ return [
         'GlobalAuth' => App\Support\Facades\GlobalAuth::class,
         'NumberShorten' => App\Support\Facades\NumberShorten::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
     ],
 
 ];

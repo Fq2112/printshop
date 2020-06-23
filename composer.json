@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.0",
         "mcamara/laravel-localization": "^1.5",
         "midtrans/midtrans-php": "^2.2",
+        "simplesoftwareio/simple-qrcode": "^3.0",
         "spatie/laravel-translatable": "^4.3",
         "xendit/xendit-php": "^2.4"
     },
