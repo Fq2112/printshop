@@ -89,12 +89,13 @@
                             <hr>
                             <center>
                                 <div class="btn-group ">
+
                                     @if($data->getCart->link != null || $data->getCart->link != '')
                                         <a href="{{$data->getCart->link}}" target="_blank" class="btn btn-info">
                                             <i class="fa fa-link"></i> DOWNLOAD
                                         </a>
                                     @endif
-                                    @if($data->gerCart->file != null || $data->gerCart->file != '')
+                                    @if($data->getCart->file != null || $data->getCart->file != '')
                                         <button class="btn btn-primary" onclick="get_design('{{$data->getCart->id}}')">
                                             <i class="fa fa-file-download"></i> DOWNLOAD
                                         </button>
