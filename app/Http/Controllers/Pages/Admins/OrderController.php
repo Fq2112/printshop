@@ -179,16 +179,23 @@ class OrderController extends Controller
     public function download_production(Request $request)
     {
         $filename = $request->code . '.pdf';
-        $file_path = asset('storage/users/order/invoice/owner/' . $filename);
-        return Response::download($file_path, 'Production_' . $filename, [
-            'Content-length : ' . filesize($file_path)
-        ]);
+        $file_path = storage_path('app/public/users/order/invoice/owner/' . $filename);
+        if (file_exists($file_path)) {
+            return Response::download($file_path, 'Production_' . $filename, [
+                'Content-length : ' . filesize($file_path)
+            ]);
+        }
+        else {
+            return \response()->json([
+                'message' => "Oops! The current file you are looking for is not available "
+            ], 404);
+        }
     }
 
     public function download_invoice(Request $request)
     {
         $filename = $request->code . '.pdf';
-        $file_path = asset('storage/users/order/invoice/' . $request->user_id . '/' . $filename);
+        $file_path =  storage_path('app/public/users/order/invoice/' . $request->user_id . '/' . $filename);
         if (file_exists($file_path)) {
             return Response::download($file_path, 'Invoice_' . $filename, [
                 'Content-length : ' . filesize($file_path)
