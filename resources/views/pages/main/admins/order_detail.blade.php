@@ -96,7 +96,7 @@
                                         </a>
                                     @endif
                                     @if($data->getCart->file != null || $data->getCart->file != '')
-                                        <button class="btn btn-primary" onclick="get_design('{{$data->getCart->id}}')">
+                                        <button class="btn btn-info" onclick="get_design('{{$data->getCart->id}}')">
                                             <i class="fa fa-file-download"></i> DOWNLOAD
                                         </button>
                                     @endif
