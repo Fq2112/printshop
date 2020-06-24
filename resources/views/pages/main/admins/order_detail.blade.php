@@ -89,16 +89,16 @@
                             <hr>
                             <center>
                                 <div class="btn-group ">
-                                    @if($data->getCart->link)
+                                    @if($data->getCart->link != null || $data->getCart->link != '')
                                         <a href="{{$data->getCart->link}}" target="_blank" class="btn btn-info">
-                                            <i class="fa fa-file-download"></i> DOWNLOAD
+                                            <i class="fa fa-link"></i> DOWNLOAD
                                         </a>
                                     @endif
-                                    {{$data->gerCart}}
-                                    <button class="btn btn-primary" onclick="get_design('{{$data->getCart->id}}')">
-                                        <i class="fa fa-file-download"></i> DOWNLOAD
-                                    </button>
-
+                                    @if($data->gerCart->file != null || $data->gerCart->file != '')
+                                        <button class="btn btn-primary" onclick="get_design('{{$data->getCart->id}}')">
+                                            <i class="fa fa-file-download"></i> DOWNLOAD
+                                        </button>
+                                    @endif
 
                                     @if($data->progress_status == \App\Support\StatusProgress::NEW)
                                         <button class="btn btn-primary" onclick="proceed_order('{{$data->id}}')"><i
