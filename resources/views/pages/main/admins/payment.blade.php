@@ -197,6 +197,10 @@
                                                         '>
                                                         <i class="fa fa-tag"></i>
                                                     </button>
+                                                    <button type="button" class="btn btn-danger"
+                                                            data-toggle="tooltip" onclick="getInvoice('{{$item->getUser->id}}','{{ucfirst($item->uni_code_payment)}}')"
+                                                            title="Download Invoice" data-html="true"
+                                                            data-placement="top" > <i class="fa fa-file-pdf"></i> </button>
                                                     <a href="{{route('admin.order.user',['kode'=>$item->uni_code_payment])}}"
                                                        data-placement="right" data-toggle="tooltip"
                                                        title="Detail Info" type="button" class="btn btn-info">
@@ -472,6 +476,30 @@
                     },
                 });
         });
+
+        function getInvoice(user_id,code) {
+            $.ajax({
+                type: 'post',
+                url: '{{route('admin.order.invoice.download')}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    code: code,
+                    user_id: user_id
+                },
+                success: function (data) {
+                    // swal('Success', "Plesae Wait Till Page Succesfully Realoded", 'success');
+                    // setTimeout(
+                    //     function () {
+                    //         location.reload();
+                    //     }, 5000);
+                }, error: function (xhr, ajaxOptions, thrownError) {
+                    if (xhr.status == 404) {
+                        console.log(xhr);
+                        swal('Error', xhr.responseJSON.message, 'error');
+                    }
+                }
+            });
+        }
 
         @if(request()->has('period'))
         $('#period').val('{{ request()->get('period') }}');

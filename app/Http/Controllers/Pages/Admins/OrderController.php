@@ -145,7 +145,7 @@ class OrderController extends Controller
 
     public function create_pdf(Request $request)
     {
-        $filename =$request->code . '.pdf';
+        $filename = $request->code . '.pdf';
         $data = Order::whereHas('getCart', function ($query) use ($request) {
             $query->whereHas('getPayment', function ($query) use ($request) {
                 $query->where('uni_code_payment', $request->code);
@@ -160,7 +160,7 @@ class OrderController extends Controller
 
         foreach ($data as $item) { //create PDF for Shipping Label
             $labelname = $item->uni_code . '.pdf';
-            $labelPdf = PDF::loadView('exports.shipping',[
+            $labelPdf = PDF::loadView('exports.shipping', [
                 'code' => $request->code,
                 'order' => $item
             ]);
@@ -178,11 +178,26 @@ class OrderController extends Controller
 
     public function download_production(Request $request)
     {
-        $filename =$request->code . '.pdf';
-        $file_path = storage_path('app/public/users/order/invoice/owner/' .$filename);
-        return Response::download($file_path, 'Production_'.$filename, [
+        $filename = $request->code . '.pdf';
+        $file_path = storage_path('app/public/users/order/invoice/owner/' . $filename);
+        return Response::download($file_path, 'Production_' . $filename, [
             'Content-length : ' . filesize($file_path)
         ]);
+    }
+
+    public function download_invoice(Request $request)
+    {
+        $filename = $request->code . '.pdf';
+        $file_path = storage_path('app/public/users/order/invoice/' . $request->user_id . '/' . $filename);
+        if (file_exists($file_path)) {
+            return Response::download($file_path, 'Invoice_' . $filename, [
+                'Content-length : ' . filesize($file_path)
+            ]);
+        } else {
+            return \response()->json([
+                'message' => "Oops! The current file you are looking for is not available "
+            ], 404);
+        }
     }
 
     public function shipping()
