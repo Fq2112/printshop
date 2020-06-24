@@ -94,7 +94,7 @@
                                             <i class="fa fa-file-download"></i> DOWNLOAD
                                         </a>
                                     @endif
-                                    {{$data->gerCart->file}}
+                                    {{$data->gerCart}}
                                     <button class="btn btn-primary" onclick="get_design('{{$data->getCart->id}}')">
                                         <i class="fa fa-file-download"></i> DOWNLOAD
                                     </button>
