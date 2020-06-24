@@ -151,11 +151,11 @@ class OrderController extends Controller
                 $query->where('uni_code_payment', $request->code);
             });
         })->get();
-//        $pdf = PDF::loadView('exports.production', [
-//            'order' => $data,
-//            'code' => $request->code
-//        ]);
-//        Storage::put('public/users/order/invoice/owner/' . $filename, $pdf->output());
+        $pdf = PDF::loadView('exports.production', [
+            'order' => $data,
+            'code' => $request->code
+        ]);
+        Storage::put('public/users/order/invoice/owner/' . $filename, $pdf->output());
 //
 //
 //        foreach ($data as $item) { //create PDF for Shipping Label
