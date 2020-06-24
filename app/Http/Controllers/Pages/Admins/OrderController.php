@@ -156,16 +156,16 @@ class OrderController extends Controller
             'code' => $request->code
         ]);
         Storage::put('public/users/order/invoice/owner/' . $filename, $pdf->output());
-//
-//
-//        foreach ($data as $item) { //create PDF for Shipping Label
-//            $labelname = $item->uni_code . '.pdf';
-//            $labelPdf = PDF::loadView('exports.shipping', [
-//                'code' => $request->code,
-//                'order' => $item
-//            ]);
-//            Storage::put('public/users/order/invoice/owner/prodution/' . $request->code . '/' . $labelname, $labelPdf->output());
-//        }
+
+
+        foreach ($data as $item) { //create PDF for Shipping Label
+            $labelname = $item->uni_code . '.pdf';
+            $labelPdf = PDF::loadView('exports.shipping', [
+                'code' => $request->code,
+                'order' => $item
+            ]);
+            Storage::put('public/users/order/invoice/owner/prodution/' . $request->code . '/' . $labelname, $labelPdf->output());
+        }
 
         return response()->json([
             'message' => 'PDF Created'

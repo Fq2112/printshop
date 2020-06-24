@@ -339,7 +339,7 @@
                 <td>
                     @if($data->getCart->link)
                         Attachment
-                    @elseif($data->gerCart->file)
+                    @elseif($data->getCart->file)
                         {{$data->uni_code}}.jpg
                     @endif
                 </td>
