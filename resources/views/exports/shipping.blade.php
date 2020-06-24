@@ -113,11 +113,11 @@
 </head>
 <body>
 <div id="invoice" style="border:1px solid black;">
-    <table id="company">
+    <table id="company" style="margin-bottom: 0">
         <tr>
             <td>
-                <img src="{{public_path('images/logotype-invoice.png')}}" alt="logo">
-                <div id="co-left">
+                <img src="{{public_path('images/logotype-invoice.png')}}" alt="logo" style="margin-bottom: 0">
+                <div id="co-left" style="margin-top: 0">
                     {{env('APP_TITLE')}}<br>Raya Kenjeran 469 Gading, Tambaksari<br>
                     Surabaya, Jawa Timur &ndash; 60134<br>
                     {{__('lang.footer.phone')}}: (031) 3814969 | Fax: (031) 3814969<br>
@@ -127,7 +127,7 @@
             <td id="co-right">
                 <div class="uppercase">#{{$code}}</div>
                 <br><br>
-                <div style="background: white">
+                <div style="background: transparent">
                     {!! QrCode::size(100)->generate('indoprintZ.com'); !!}
                     <?php
                     $qrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate('http://indoprint.co.id/en'));
@@ -138,7 +138,7 @@
         </tr>
     </table>
 
-    <table id="billship">
+    <table id="billship" style="margin: 0 auto">
         <tr>
             <td style="font-size: 14px">
                 <b class="primary">Kode Pesanan #{{$order->uni_code}} </b> <br>
@@ -157,7 +157,7 @@
         </tr>
     </table>
 
-    <table id="items" style="font-size: 14px">
+    <table id="items" style="font-size: 14px;margin-top: 0">
         <thead>
         <tr>
             <th><b>#</b></th>

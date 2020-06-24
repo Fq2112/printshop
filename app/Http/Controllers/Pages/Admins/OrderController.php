@@ -155,6 +155,7 @@ class OrderController extends Controller
             'order' => $data,
             'code' => $request->code
         ]);
+
         Storage::put('public/users/order/invoice/owner/' . $filename, $pdf->output());
 
 
@@ -164,6 +165,7 @@ class OrderController extends Controller
                 'code' => $request->code,
                 'order' => $item
             ]);
+            $labelPdf->setPaper('a5','landscape');
             Storage::put('public/users/order/invoice/owner/prodution/' . $request->code . '/' . $labelname, $labelPdf->output());
         }
 
