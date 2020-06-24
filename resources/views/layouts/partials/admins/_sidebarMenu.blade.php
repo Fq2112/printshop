@@ -17,7 +17,7 @@
 
     @endif
 
-    <li class="dropdown  {{\Illuminate\Support\Facades\Request::is('*scott.royce/order/list*') ? 'active' : ''}}">
+    <li class="dropdown  {{\Illuminate\Support\Facades\Request::is('*scott.royce/order*') ? 'active' : ''}}">
         <a href="{{route('admin.order')}}" class="nav-link"><i class="fas fa-archive"></i><span>Orders</span></a>
     </li>
 

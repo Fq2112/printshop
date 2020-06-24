@@ -94,7 +94,7 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
     });
 
     Route::group(['prefix' => 'order'], function () {
-        Route::get('/list', [
+        Route::get('/', [
             'uses' => 'OrderController@order',
             'as' => 'admin.order'
         ]);

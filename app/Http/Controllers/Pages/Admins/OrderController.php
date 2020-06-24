@@ -66,7 +66,7 @@ class OrderController extends Controller
         try {
             $cart = Cart::find($request->cart_id);
 //            dd($cart);
-            $file_path = storage_path('app/public/users/order/design/' . $cart->user_id . '/' . $cart->file);
+            $file_path = asset('storage/users/order/design/' . $cart->user_id . '/' . $cart->file);
             if (file_exists($file_path)) {
                 return Response::download($file_path, $request->file, [
                     'Content-length : ' . filesize($file_path)
@@ -170,7 +170,7 @@ class OrderController extends Controller
         return response()->json([
             'message' => 'PDF Created'
         ], 201);
-//        $file_path = storage_path('app/public/users/order/invoice/owner/' .$filename);
+//        $file_path = asset('storage/users/order/invoice/owner/' .$filename);
 //        return response()->download($file_path, 'Production_'.$filename, [
 //            'Content-length : ' . filesize($file_path)
 //        ]);
@@ -179,7 +179,7 @@ class OrderController extends Controller
     public function download_production(Request $request)
     {
         $filename = $request->code . '.pdf';
-        $file_path = storage_path('app/public/users/order/invoice/owner/' . $filename);
+        $file_path = asset('storage/users/order/invoice/owner/' . $filename);
         return Response::download($file_path, 'Production_' . $filename, [
             'Content-length : ' . filesize($file_path)
         ]);
@@ -188,7 +188,7 @@ class OrderController extends Controller
     public function download_invoice(Request $request)
     {
         $filename = $request->code . '.pdf';
-        $file_path = storage_path('app/public/users/order/invoice/' . $request->user_id . '/' . $filename);
+        $file_path = asset('storage/users/order/invoice/' . $request->user_id . '/' . $filename);
         if (file_exists($file_path)) {
             return Response::download($file_path, 'Invoice_' . $filename, [
                 'Content-length : ' . filesize($file_path)
