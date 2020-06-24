@@ -176,7 +176,7 @@
                                                         @else
                                                         <td>
                                                             @if($order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::NEW)
-                                                        <span class="badge badge-info"><span
+                                                        <span class="badge badge-danger"><span
                                                                 class="fa fa-shopping-basket"></span> New</span> <br>
                                                             @elseif($order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::START_PRODUCTION || $order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::FINISH_PRODUCTION)
                                                         <span class="badge badge-warning"><span class="fa fa-cogs"></span> On Produce</span> <br>
