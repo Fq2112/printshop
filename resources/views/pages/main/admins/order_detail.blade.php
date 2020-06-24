@@ -95,9 +95,7 @@
                                         </a>
                                     @endif
                                     @if($data->gerCart->file)
-                                        <button class="btn btn-primary" onclick="get_design('{{$data->getCart->id}}')">
-                                            <i class="fa fa-file-download"></i> DOWNLOAD
-                                        </button>
+
                                     @endif
 
                                     @if($data->progress_status == \App\Support\StatusProgress::NEW)
