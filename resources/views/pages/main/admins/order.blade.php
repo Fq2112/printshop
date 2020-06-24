@@ -458,20 +458,20 @@
                 },
                 success: function (data) {
 
-                    {{--setTimeout(--}}
-                    {{--    function () {--}}
-                    {{--        $.ajax({ //Download File from above--}}
-                    {{--            type: 'post',--}}
-                    {{--            url: '{{route('admin.order.production.download')}}',--}}
-                    {{--            data: {--}}
-                    {{--                _token: '{{csrf_token()}}',--}}
-                    {{--                code: code--}}
-                    {{--            },--}}
-                    {{--            success: function (data) {--}}
-                    {{--                console.log('downloaded')--}}
-                    {{--            }--}}
-                    {{--        });--}}
-                    {{--    }, 1000);--}}
+                    setTimeout(
+                        function () {
+                            $.ajax({ //Download File from above
+                                type: 'post',
+                                url: '{{route('admin.order.production.download')}}',
+                                data: {
+                                    _token: '{{csrf_token()}}',
+                                    code: code
+                                },
+                                success: function (data) {
+                                    console.log('downloaded')
+                                }
+                            });
+                        }, 1000);
 
 
                     swal('Success', "Plesae Wait Till Page Succesfully Realoded", 'success');
