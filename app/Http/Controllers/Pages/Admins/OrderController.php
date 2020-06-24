@@ -66,7 +66,7 @@ class OrderController extends Controller
         try {
             $cart = Cart::find($request->cart_id);
 //            dd($cart);
-            $file_path = storage_path('app/public/user/order/design/' . $cart->user_id . '/' . $cart->file);
+            $file_path = storage_path('app/public/users/order/design/' . $cart->user_id . '/' . $cart->file);
             if (file_exists($file_path)) {
                 return Response::download($file_path, $request->file, [
                     'Content-length : ' . filesize($file_path)
