@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\PaymentCart;
-use App\Support\Role;
+use App\Models\PromoCode;
 use App\Support\StatusProgress;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
@@ -32,7 +32,6 @@ class OrderController extends Controller
 
     public function show_order($condition, Request $request)
     {
-        $data = [];
         $status = '';
         $data = Order::whereNotIn('id', ['0'])->when($request->status, function ($query) use ($request) {
             $query->where('progress_status', $request->status);
@@ -47,8 +46,8 @@ class OrderController extends Controller
         return view('pages.main.admins.order', [
             'title' => 'Order List',
             'kategori' => $data,
-            'status' => $status
-            , 'code' => $condition
+            'status' => $status,
+            'code' => $condition
         ]);
     }
 

@@ -1,8 +1,13 @@
 <!DOCTYPE html>
+@php
+    app()->setLocale('id');
+    \Carbon\Carbon::setLocale('id');
+    setlocale(LC_TIME, config('app.locale'));
+@endphp
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{strtoupper(__('lang.order.invoice')).' #'}}</title>
+    <title>{{strtoupper(__('lang.order.invoice')).' #'.$code}}</title>
     <style>
         html, body {
             font-family: sans-serif;
@@ -128,11 +133,8 @@
                 <div class="uppercase">#{{$code}}</div>
                 <br><br>
                 <div style="background: transparent">
-                    {!! QrCode::size(100)->generate('indoprintZ.com'); !!}
-                    <?php
-                    $qrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate('http://indoprint.co.id/en'));
-                    ?>
-                    <img src="data:image/png;base64, {!! $qrcode !!}">
+                    <img
+                        src="data:image/png;base64, {!! base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate(asset('storage/users/order/invoice/'.$order->getCart->user_id.'/'.$code))) !!}">
                 </div>
             </td>
         </tr>
@@ -141,12 +143,10 @@
     <table id="billship" style="margin: 0 auto">
         <tr>
             <td style="font-size: 14px">
-                <b class="primary">Kode Pesanan #{{$order->uni_code}} </b> <br>
-                <b class="primary">Pembeli : </b> {{$order->getCart->getUser->name}}<br>
-                <b class="primary">Tlpn :</b> {{$order->getCart->getUser->getBio->phone}}<br>
-                <b class="primary">Tgl.
-                    Pembayaran:</b> {{\Carbon\Carbon::parse($order->getCart->getPayment->updated_at)->formatLocalized('%d %B %Y')}}
-                <br><br>
+                <b class="primary">Order ID #{{$order->uni_code}}</b><br>
+                <b class="primary">Pemesan: </b>{{$order->getCart->getUser->name}}<br>
+                <b class="primary">Telepon: </b>{{$order->getCart->getUser->getBio->phone}}<br>
+                <b class="primary">Pembayaran: </b>{{\Carbon\Carbon::parse($order->getCart->getPayment->updated_at)->formatLocalized('%d %B %Y pukul %H:%I')}}
             </td>
             <td style="font-size: 14px">
                 <b class="primary">Penerima</b><br>
@@ -193,12 +193,6 @@
         </tr>
         </tbody>
     </table>
-
-    <hr style=" color: #f89406;">
-
-    <div id="notes">
-
-    </div>
 </div>
 </body>
 </html>
