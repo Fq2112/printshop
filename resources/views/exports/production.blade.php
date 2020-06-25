@@ -3,9 +3,6 @@
     app()->setLocale('id');
     \Carbon\Carbon::setLocale('id');
     setlocale(LC_TIME, config('app.locale'));
-    $cart = $data->getCart;
-    $product = !is_null($cart->subkategori_id) ? $cart->getSubKategori : $cart->getCluster;
-    $specs = !is_null($cart->subkategori_id) ? $cart->getSubKategori->getSubkatSpecs : $cart->getCluster->getClusterSpecs;
 @endphp
 <html lang="en">
 <head>
@@ -167,6 +164,11 @@
         </thead>
         <tbody>
         @foreach($order as $data)
+            @php
+                $cart = $data->getCart;
+                $product = !is_null($cart->subkategori_id) ? $cart->getSubKategori : $cart->getCluster;
+                $specs = !is_null($cart->subkategori_id) ? $cart->getSubKategori->getSubkatSpecs : $cart->getCluster->getClusterSpecs;
+            @endphp
             <tr>
                 <td>{{$product->name}}</td>
                 <td>
