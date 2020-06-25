@@ -275,21 +275,21 @@
                     @endif
 
                     @if(!empty($cart->extra_id))
-                        <b>Ekstra:</b> {{\App\Models\Finishing::find($cart->extra_id)->name}}<br>
-                    @endif
+                            <b>Ekstra:</b> {{\App\Models\Finishing::find($cart->extra_id)->name}}<br>
+                        @endif
 
-                    @if(!empty($cart->holder_id))
-                        <b>Holder Kartu:</b> {{\App\Models\Finishing::find($cart->holder_id)->name}}<br>
-                    @endif
+                        @if(!empty($cart->holder_id))
+                            <b>Holder Kartu:</b> {{\App\Models\Finishing::find($cart->holder_id)->name}}<br>
+                        @endif
 
-                    @if(!empty($cart->material_color_id))
-                        <b>Warna Material:</b> {{\App\Models\Colors::find($cart->material_color_id)->name}}<br>
-                    @endif
-                    <b>File Desain:</b> {{!is_null($cart->link) ? $cart->link : $cart->file}}
+                        @if(!empty($cart->material_color_id))
+                            <b>Warna Material:</b> {{\App\Models\Colors::find($cart->material_color_id)->name}}<br>
+                        @endif
+                        <br><b>File Desain:</b> {{!is_null($cart->link) ? $cart->link : $cart->file}}
                 </td>
                 <td align="center">{{$cart->qty.' '.$specs->getUnit->name}}</td>
                 <td align="center">
-                    {{\Carbon\Carbon::parse($cart->production_finished)->formatLocalized('%d %b %Y')}}</td>
+                    {{\Carbon\Carbon::parse($cart->production_finished)->formatLocalized('%d %B %Y')}}</td>
             </tr>
         @endforeach
         </tbody>

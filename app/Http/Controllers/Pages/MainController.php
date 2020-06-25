@@ -204,7 +204,7 @@ class MainController extends Controller
         if ($request->hasFile('file')) {
             $this->validate($request, ['file' => 'required|mimes:jpg,jpeg,png,tiff,pdf,zip,rar|max:204800']);
             $ext = $request->file('file')->getClientOriginalExtension();
-            $file = 'design-' . str_replace(' ', '-', !is_null($sub) ? $sub->name : $clust->name) . '.' . $ext;
+            $file = 'design-' . strtolower(str_replace(' ', '-', !is_null($sub) ? $sub->name : $clust->name)) . '.' . $ext;
             $request->file('file')->storeAs('public/users/order/design/' . Auth::id(), $file);
             $link = null;
         } else {
@@ -269,7 +269,7 @@ class MainController extends Controller
         if ($request->hasFile('file')) {
             $this->validate($request, ['file' => 'required|mimes:jpg,jpeg,png,tiff,pdf,zip,rar|max:204800']);
             $ext = $request->file('file')->getClientOriginalExtension();
-            $file = 'design-' . str_replace(' ', '-', !is_null($cart->subkategori_id) ? $cart->getSubKategori->name : $cart->getCluster->name) . '.' . $ext;
+            $file = 'design-' . strtolower(str_replace(' ', '-', !is_null($cart->subkategori_id) ? $cart->getSubKategori->name : $cart->getCluster->name)) . '.' . $ext;
             if ($cart->file != '') {
                 Storage::delete('public/users/order/design/' . Auth::id() . '/' . $cart->file);
             }
