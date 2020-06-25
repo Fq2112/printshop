@@ -59,7 +59,7 @@ return [
         "desc-5" => "<ul><li>Your print product will be sent directly to the shipping address you entered earlier.</li><li>Review us about the results of the print product you received or tell us about your experience using our services.</li></ul>",
     ],
     "client" => [
-        "head" => env('APP_TITLE') . " Clients",
+        "head" => "Our Clients",
     ],
     "ig-feed" => [
         "head" => "Follow Us on Instagram",

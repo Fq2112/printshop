@@ -54,6 +54,14 @@
         }
 
         @media (max-width: 480px) {
+            .media .media-body h2 {
+                font-size: 16px;
+            }
+
+            .media .media-body ul {
+                font-size: 14px;
+            }
+
             .process-steps li h5 {
                 font-size: 13px;
             }
@@ -67,6 +75,14 @@
         }
 
         @media (max-width: 360px) {
+            .media .media-body h2 {
+                font-size: 14px;
+            }
+
+            .media .media-body ul {
+                font-size: 13px;
+            }
+
             .process-steps li h5 {
                 font-size: 10px;
             }
@@ -234,12 +250,11 @@
                                 <div class="col text-center">
                                     <button
                                         class="button button-rounded button-reveal button-border button-primary tleft prev-linker"
-                                        style="display: none"><i class="icon-angle-left"></i>
-                                        <span>{{__('lang.button.prev')}}</span>
+                                        style="display: none"><i class="icon-angle-left"></i><span>PREV</span>
                                     </button>
                                     <button
                                         class="button button-rounded button-reveal button-border button-primary tright next-linker">
-                                        <i class="icon-angle-right"></i><span>{{__('lang.button.next')}}</span>
+                                        <i class="icon-angle-right"></i><span>NEXT</span>
                                     </button>
                                     <button
                                         class="button button-rounded button-reveal button-border button-primary tright finish-linker"
