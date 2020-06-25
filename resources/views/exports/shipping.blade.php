@@ -3,11 +3,14 @@
     app()->setLocale('id');
     \Carbon\Carbon::setLocale('id');
     setlocale(LC_TIME, config('app.locale'));
+    $cart = $order->getCart;
+    $product = !is_null($cart->subkategori_id) ? $cart->getSubKategori : $cart->getCluster;
+    $specs = !is_null($cart->subkategori_id) ? $cart->getSubKategori->getSubkatSpecs : $cart->getCluster->getClusterSpecs;
 @endphp
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{strtoupper(__('lang.order.invoice')).' #'.$code}}</title>
+    <title>SHIPPING LABEL | INVOICE #{{$code}}</title>
     <style>
         html, body {
             font-family: sans-serif;
@@ -125,7 +128,7 @@
                 <div id="co-left" style="margin-top: 0">
                     {{env('APP_TITLE')}}<br>Raya Kenjeran 469 Gading, Tambaksari<br>
                     Surabaya, Jawa Timur &ndash; 60134<br>
-                    {{__('lang.footer.phone')}}: (031) 3814969 | Fax: (031) 3814969<br>
+                    Phone: (031) 3814969<br>Fax: (031) 3814969<br>
                     {{env('APP_URL')}}<br>{{env('MAIL_USERNAME')}}
                 </div>
             </td>
@@ -133,8 +136,8 @@
                 <div class="uppercase">#{{$code}}</div>
                 <br><br>
                 <div style="background: transparent">
-                    <img
-                        src="data:image/png;base64, {!! base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate(asset('storage/users/order/invoice/'.$order->getCart->user_id.'/'.$code))) !!}">
+                    <img alt="QR Code"
+                         src="data:image/png;base64, {!! base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate(asset('storage/users/order/invoice/'.$cart->user_id.'/'.$code))) !!}">
                 </div>
             </td>
         </tr>
@@ -144,15 +147,15 @@
         <tr>
             <td style="font-size: 14px">
                 <b class="primary">Order ID #{{$order->uni_code}}</b><br>
-                <b class="primary">Pemesan: </b>{{$order->getCart->getUser->name}}<br>
-                <b class="primary">Telepon: </b>{{$order->getCart->getUser->getBio->phone}}<br>
-                <b class="primary">Pembayaran: </b>{{\Carbon\Carbon::parse($order->getCart->getPayment->updated_at)->formatLocalized('%d %B %Y pukul %H:%I')}}
+                <b class="primary">Pemesan: </b>{{$cart->getUser->name}}<br>
+                <b class="primary">Telepon: </b>{{$cart->getUser->getBio->phone}}<br>
+                <b class="primary">Pembayaran: </b>{{\Carbon\Carbon::parse($cart->getPayment->updated_at)->formatLocalized('%d %B %Y pukul %H:%I')}}
             </td>
             <td style="font-size: 14px">
                 <b class="primary">Penerima</b><br>
-                {{$order->getCart->getAddress->name}}<br>
-                {{$order->getCart->getAddress->phone}}<br>
-                {{$order->getCart->getAddress->address}}, {{$order->getCart->getAddress->postal_code}}
+                {{$cart->getAddress->name}}<br>
+                {{$cart->getAddress->phone}}<br>
+                {{$cart->getAddress->address}}, {{$cart->getAddress->postal_code}}
             </td>
         </tr>
     </table>
@@ -160,36 +163,20 @@
     <table id="items" style="font-size: 14px;margin-top: 0">
         <thead>
         <tr>
-            <th><b>#</b></th>
-            <th><b>Produk</b></th>
+            <th><b>Produk Cetak</b></th>
             <th><b>Kategori</b></th>
-{{--            <th class="center"><b>{{__('lang.product.form.summary.price', ['unit' => 'pcs'])}}</b></th>--}}
+            {{--            <th class="center"><b>{{__('lang.product.form.summary.price', ['unit' => 'pcs'])}}</b></th>--}}
             <th class="center"><b>Tgl. Cetak</b></th>
-            <th class="center"><b>Qty</b></th>
+            <th class="center"><b>Qty.</b></th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td>1</td>
-            <td>
-                @if(!empty($order->getCart->subkategori_id))
-                    {{$order->getCart->getSubKategori->name}}
-                @elseif(!empty($order->getCart->cluster_id))
-                    {{$order->getCart->getCluster->name}}
-                @endif
-            </td>
-            <td>
-                @if(!empty($order->getCart->subkategori_id))
-                    {{$order->getCart->getSubKategori->getKategori->name}}
-                @elseif(!empty($order->getCart->cluster_id))
-                    {{$order->getCart->getCluster->getSubKategori->getKategori->name}}
-                @endif
-            </td>
-{{--            <td align="center"> {{number_format(ceil($order->getCart->price_pcs), 2, ',', '.')}}</td>--}}
-            <td align="center">{{\Carbon\Carbon::parse($order->getCart->production_finished)->formatLocalized('%d %B %Y')}}</td>
-            <td align="center">
-                {{$order->getCart->qty}}
-            </td>
+            <td>{{$product->name}}</td>
+            <td>{{!is_null($cart->subkategori_id) ? $cart->getSubKategori->getKategori->name : $cart->getCluster->getSubKategori->name}}</td>
+            {{--            <td align="center"> {{number_format(ceil($cart->price_pcs), 2, ',', '.')}}</td>--}}
+            <td align="center">{{\Carbon\Carbon::parse($cart->production_finished)->formatLocalized('%d %B %Y')}}</td>
+            <td align="center">{{$cart->qty.' '.$specs->getUnit->name}}</td>
         </tr>
         </tbody>
     </table>
