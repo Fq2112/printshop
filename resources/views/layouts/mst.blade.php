@@ -38,6 +38,19 @@
     <!-- sweetalert2 -->
     <link rel="stylesheet" href="{{asset('js/plugins/sweetalert/sweetalert2.css')}}">
 
+    <style>
+        @media (max-width: 480px) {
+            .footer-logo {
+                width: 170px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .footer-logo {
+                width: 150px;
+            }
+        }
+    </style>
     @stack('styles')
 
     <script src='https://www.google.com/recaptcha/api.js?onload=recaptchaCallback&render=explicit' async defer></script>
