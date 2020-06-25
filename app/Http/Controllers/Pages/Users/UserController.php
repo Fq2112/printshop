@@ -269,7 +269,7 @@ class UserController extends Controller
                         'Content-Length: ' . filesize($file_path)
                     ]);
                 } else {
-                    return 0;
+                    return back()->with('warning', __('lang.alert.download-fail'));
                 }
             } else {
                 return $cart->link;

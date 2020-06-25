@@ -423,19 +423,5 @@
                 }
             });
         }
-
-        $(".btn_download").on('click', function () {
-            $.get($(this).attr("href"), function (data) {
-                if ($(this).data('file') == 'invoice') {
-                    window.open(data, '_blank');
-                }
-
-                if (data == 0) {
-                    swal('{{__('lang.alert.warning')}}', '{{__('lang.alert.download-fail')}}', 'warning');
-                }
-            });
-
-            return false;
-        });
     </script>
 @endpush

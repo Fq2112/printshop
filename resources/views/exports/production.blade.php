@@ -265,16 +265,16 @@
                         <b>Tipe Lid:</b> {{\App\Models\Lid::find($cart->lid_id)->name}}<br>
                     @endif
 
-                    @if(!empty($cart->material_cover_id))
-                        <b>Material Cover:</b> {{\App\Models\Material::find($cart->material_cover_id)->name}}
-                        <br>
-                    @endif
+                        @if(!empty($cart->material_cover_id))
+                            <b>Material Cover:</b> {{\App\Models\Material::find($cart->material_cover_id)->name}}
+                            <br>
+                        @endif
 
-                    @if(!empty($cart->orientation_id))
-                        <b>Orientasi:</b> {{\App\Models\Finishing::find($cart->orientation_id)->name}}<br>
-                    @endif
+                        @if(!empty($cart->orientation_id))
+                            <b>Orientasi:</b> {{\App\Models\Finishing::find($cart->orientation_id)->name}}<br>
+                        @endif
 
-                    @if(!empty($cart->extra_id))
+                        @if(!empty($cart->extra_id))
                             <b>Ekstra:</b> {{\App\Models\Finishing::find($cart->extra_id)->name}}<br>
                         @endif
 

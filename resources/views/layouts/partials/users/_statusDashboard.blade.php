@@ -123,8 +123,8 @@
                                 }
                             @endphp
                             <div class="media">
-                                <a data-placement="bottom" class="content-area align-self-center btn_download"
-                                   data-toggle="tooltip" data-file="design" style="cursor: pointer"
+                                <a data-placement="bottom" class="content-area align-self-center" data-toggle="tooltip"
+                                   style="cursor: pointer"
                                    href="{{route('user.download.file',['id'=>encrypt($cart->id),'file'=>'design'])}}">
                                     <img alt="icon" width="150" src="{{$image}}">
                                     <div class="custom-overlay">
@@ -138,7 +138,7 @@
                                         <i class="icon-drafting-compass mr-2"></i>{{$data->name}}
                                         <span class="fright text-uppercase">
                                             @if($acc == 'shipped' || $acc == 'received')
-                                                <a class="btn_download" data-file="invoice" style="color: #17a2b8;"
+                                                <a style="color: #17a2b8;"
                                                    href="{{route('user.download.file',['id'=>encrypt($cart->id),'file'=>'invoice'])}}">
                                                     {{__('lang.order.invoice')}}
                                                     <i class="icon-file-invoice-dollar ml-1"></i>
@@ -158,7 +158,7 @@
                                                     </a>
                                                 @endif
                                             @else
-                                                <a class="btn_download" data-file="invoice" style="color: #17a2b8;"
+                                                <a style="color: #17a2b8;"
                                                    href="{{route('user.download.file',['id'=>encrypt($cart->id),'file'=>'invoice'])}}">
                                                     <i class="icon-file-invoice-dollar mr-1"></i>
                                                     {{__('lang.order.invoice')}}
