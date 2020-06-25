@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+@php
+    app()->setLocale('id');
+    \Carbon\Carbon::setLocale('id');
+    setlocale(LC_TIME, config('app.locale'));
+@endphp
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -144,215 +149,158 @@
                 {{$user->getUser->email}}<br>
                 {{$user->getUser->getBio->phone}}
             </td>
-            <td>
-                <b class="primary">{{__('lang.order.invoice')}} #{{$code}}</b> <br>
-            </td>
+            <td><b class="primary">{{strtoupper(__('lang.order.invoice')).' #'.$code}}</b><br></td>
         </tr>
     </table>
 
     <table id="items">
         <thead>
         <tr>
-            <th><b>{{__('lang.breadcrumb.product')}}</b></th>
-            <th class="center"><b>Description</b></th>
-            <th class="center"><b>{{__('lang.product.form.summary.quantity')}}</b></th>
-            <th class="center"><b>Due Date</b></th>
-            <th class="center"><b>File Name</b></th>
+            <th>Produk Cetak</th>
+            <th>Spesifikasi</th>
+            <th class="center">Qty.</th>
+            <th class="center">Due Date</th>
+            <th class="center">File Desain</th>
         </tr>
         </thead>
         <tbody>
         @foreach($order as $data)
             <tr>
-                <td>@if(!empty($data->getCart->subkategori_id))
+                <td>
+                    @if(!empty($data->getCart->subkategori_id))
                         {{$data->getCart->getSubKategori->name}}
                     @elseif(!empty($data->getCart->cluster_id))
                         {{$data->getCart->getCluster->name}}
-                    @endif</td>
+                    @endif
+                </td>
                 <td>
-                    <br>
                     @if(!empty($data->getCart->material_id))
-                        <strong>Material
-                            :</strong>  {{\App\Models\Material::find($data->getCart->material_id)->name}}
-                        <br>
+                        <b>Material:</b> {{\App\Models\Material::find($data->getCart->material_id)->name}}<br>
                     @endif
 
                     @if(!empty($data->getCart->type_id))
-                        <strong>Type
-                            :</strong>  {{\App\Models\TypeProduct::find($data->getCart->type_id)->name}}
-                        <br>
+                        <b>Tipe:</b> {{\App\Models\TypeProduct::find($data->getCart->type_id)->name}}<br>
                     @endif
 
                     @if(!empty($data->getCart->balance_id))
-                        <strong>Balance
-                            :</strong>  {{\App\Models\Balance::find($data->getCart->balance_id)->name}}
-                        <br>
+                        <b>Saldo:</b> {{\App\Models\Balance::find($data->getCart->balance_id)->name}}<br>
                     @endif
 
                     @if(!empty($data->getCart->page_id))
-                        <strong>Page
-                            :</strong>  {{\App\Models\Pages::find($data->getCart->page_id)->name}}
-                        <br>
+                        <b>Lembar / Halaman:</b> {{\App\Models\Pages::find($data->getCart->page_id)->name}}<br>
                     @endif
 
                     @if(!empty($data->getCart->size_id))
-                        <strong>Size
-                            :</strong>  {{\App\Models\Size::find($data->getCart->size_id)->name}}
-                        <br>
+                        <b>Ukuran Produk:</b> {{\App\Models\Size::find($data->getCart->size_id)->name}}<br>
                     @endif
 
                     @if(!empty($data->getCart->lamination_id))
-                        <strong>Lamination
-                            :</strong>  {{\App\Models\Lamination::find($data->getCart->lamination_id)->name}}
-                        <br>
+                        <b>Laminasi:</b> {{\App\Models\Lamination::find($data->getCart->lamination_id)->name}}<br>
                     @endif
 
                     @if(!empty($data->getCart->side_id))
-                        <strong>Side
-                            :</strong>  {{\App\Models\Side::find($data->getCart->side_id)->name}}
-                        <br>
+                        <b>Sisi:</b> {{\App\Models\Side::find($data->getCart->side_id)->name}}<br>
                     @endif
 
                     @if(!empty($data->getCart->edge_id))
-                        <strong>Edge type
-                            :</strong>  {{\App\Models\Edge::find($data->getCart->edge_id)->name}}
-                        <br>
+                        <b>Tipe Sudut:</b> {{\App\Models\Edge::find($data->getCart->edge_id)->name}}<br>
                     @endif
 
                     @if(!empty($data->getCart->color_id))
-                        <strong>Color type
-                            :</strong>  {{\App\Models\Colors::find($data->getCart->color_id)->name}}
-                        <br>
+                        <b>Warna:</b> {{\App\Models\Colors::find($data->getCart->color_id)->name}}<br>
                     @endif
 
                     @if(!empty($data->getCart->finishing_id))
-                        <strong>Finishing
-                            :</strong>  {{\App\Models\Finishing::find($data->getCart->finishing_id)->name}}
-                        <br>
+                        <b>Finishing:</b> {{\App\Models\Finishing::find($data->getCart->finishing_id)->name}}<br>
                     @endif
 
                     @if(!empty($data->getCart->folding_id))
-                        <strong>Folding type
-                            :</strong>  {{\App\Models\Folding::find($data->getCart->folding_id)->name}}
-                        <br>
+                        <b>Lipatan:</b> {{\App\Models\Folding::find($data->getCart->folding_id)->name}}<br>
                     @endif
 
                     @if(!empty($data->getCart->front_side_id))
-                        <strong>Front Side
-                            :</strong>  {{\App\Models\Front::find($data->getCart->front_side_id)->name}}
-                        <br>
+                        <b>Bagian Depan:</b> {{\App\Models\Front::find($data->getCart->front_side_id)->name}}<br>
+                    @endif
+
+                    @if(!empty($data->getCart->back_side_id))
+                        <b>Bagian Belakang:</b> {{\App\Models\BackSide::find($data->getCart->back_side_id)->name}}<br>
                     @endif
 
                     @if(!empty($data->getCart->right_side_id))
-                        <strong>Right Side
-                            :</strong>  {{\App\Models\RightLeftSide::find($data->getCart->right_side_id)->name}}
+                        <b>Lengan Kanan:</b> {{\App\Models\RightLeftSide::find($data->getCart->right_side_id)->name}}
                         <br>
                     @endif
 
                     @if(!empty($data->getCart->left_side_id))
-                        <strong>Left Side
-                            :</strong>  {{\App\Models\RightLeftSide::find($data->getCart->right_side_id)->name}}
-                        <br>
-                    @endif
-
-                    @if(!empty($data->getCart->back_side_id))
-                        <strong>Back Side
-                            :</strong>  {{\App\Models\BackSide::find($data->getCart->back_side_id)->name}}
-                        <br>
+                        <b>Lengan Kiri:</b> {{\App\Models\RightLeftSide::find($data->getCart->right_side_id)->name}}<br>
                     @endif
 
                     @if(!empty($data->getCart->front_cover_id))
-                        <strong>Front Cover
-                            :</strong>  {{\App\Models\Material::find($data->getCart->front_cover_id)->name}}
-                        <br>
+                        <b>Cover Depan:</b> {{\App\Models\Material::find($data->getCart->front_cover_id)->name}}<br>
                     @endif
 
                     @if(!empty($data->getCart->back_cover_id))
-                        <strong>Back Cover
-                            :</strong>  {{\App\Models\Material::find($data->getCart->back_cover_id)->name}}
-                        <br>
+                        <b>Cover Belakang:</b> {{\App\Models\Material::find($data->getCart->back_cover_id)->name}}<br>
                     @endif
 
                     @if(!empty($data->getCart->binding_id))
-                        <strong>Binding type
-                            :</strong>  {{\App\Models\Finishing::find($data->getCart->binding_id)->name}}
+                        <b>Jilid:</b> {{\App\Models\Finishing::find($data->getCart->binding_id)->name}}
                         <br>
                     @endif
 
                     @if(!empty($data->getCart->print_method_id))
-                        <strong>Print Method
-                            :</strong>  {{\App\Models\PrintingMethods::find($data->getCart->print_method_id)->name}}
+                        <b>Metode
+                            Cetak:</b> {{\App\Models\PrintingMethods::find($data->getCart->print_method_id)->name}}
                         <br>
                     @endif
 
                     @if(!empty($data->getCart->side_cover_id))
-                        <strong>Side Cover
-                            :</strong>  {{\App\Models\Side::find($data->getCart->side_cover_id)->name}}
-                        <br>
+                        <b>Sisi Cover:</b> {{\App\Models\Side::find($data->getCart->side_cover_id)->name}}<br>
                     @endif
 
                     @if(!empty($data->getCart->cover_lamination_id))
-                        <strong>Cover Lamnination
-                            :</strong>  {{\App\Models\Lamination::find($data->getCart->cover_lamination_id)->name}}
-                        <br>
+                        <b>Lamninasi
+                            Cover:</b> {{\App\Models\Lamination::find($data->getCart->cover_lamination_id)->name}}<br>
                     @endif
 
                     @if(!empty($data->getCart->lid_id))
-                        <strong>Lid Type
-                            :</strong>  {{\App\Models\Lid::find($data->getCart->lid_id)->name}}
-                        <br>
+                        <b>Tipe Lid:</b> {{\App\Models\Lid::find($data->getCart->lid_id)->name}}<br>
                     @endif
 
                     @if(!empty($data->getCart->material_cover_id))
-                        <strong>Material Cover
-                            :</strong>  {{\App\Models\Material::find($data->getCart->material_cover_id)->name}}
+                        <b>Material Cover:</b> {{\App\Models\Material::find($data->getCart->material_cover_id)->name}}
                         <br>
                     @endif
 
                     @if(!empty($data->getCart->orientation_id))
-                        <strong>Orientation
-                            :</strong>  {{\App\Models\Finishing::find($data->getCart->orientation_id)->name}}
-                        <br>
+                        <b>Orientasi:</b> {{\App\Models\Finishing::find($data->getCart->orientation_id)->name}}<br>
                     @endif
 
                     @if(!empty($data->getCart->extra_id))
-                        <strong>Extra
-                            :</strong>  {{\App\Models\Finishing::find($data->getCart->extra_id)->name}}
-                        <br>
+                        <b>Ekstra:</b> {{\App\Models\Finishing::find($data->getCart->extra_id)->name}}<br>
                     @endif
 
                     @if(!empty($data->getCart->holder_id))
-                        <strong>Holder type
-                            :</strong>  {{\App\Models\Finishing::find($data->getCart->holder_id)->name}}
-                        <br>
+                        <b>Holder Kartu:</b> {{\App\Models\Finishing::find($data->getCart->holder_id)->name}}<br>
                     @endif
 
                     @if(!empty($data->getCart->material_color_id))
-                        <strong>Material Color
-                            :</strong>  {{\App\Models\Colors::find($data->getCart->material_color_id)->name}}
-                        <br>
+                        <b>Warna Material:</b> {{\App\Models\Colors::find($data->getCart->material_color_id)->name}}<br>
                     @endif
-                    <br>
-
                 </td>
                 <td align="center">{{$data->getCart->qty}}</td>
-                <td>{{\Carbon\Carbon::parse($data->getCart->production_finished)->format('d-m-Y')}}</td>
-                <td>
+                <td align="center">{{\Carbon\Carbon::parse($data->getCart->production_finished)->formatLocalized('%d %b %Y')}}</td>
+                <td align="center">
                     @if($data->getCart->link)
-                        Attachment
+                        Terlampir
                     @elseif($data->getCart->file)
-                        {{$data->uni_code}}.jpg
+                        {{$data->getCart->file}}
                     @endif
                 </td>
             </tr>
         @endforeach
         </tbody>
     </table>
-
-    <hr style=" color: #f89406;">
-
-    <div id="notes">
-
-    </div>
 </div>
 </body>
 </html>
