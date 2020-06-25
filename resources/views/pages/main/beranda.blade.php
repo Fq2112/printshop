@@ -892,6 +892,7 @@
             var how_to = $("#processTabs"), activeIDX;
             how_to.tabs({show: {effect: "slide", duration: 500}});
             activeIDX = how_to.tabs("option", "active");
+            $(".process-content").css('height', how_to.find('.process-content').find('#ptab' + parseInt(activeIDX + 1)).height())
 
             $("a[href='#ptab1']").on("click", function () {
                 $(".prev-linker, .finish-linker").hide();
@@ -923,6 +924,8 @@
                 }
 
                 how_to.tabs("option", "active", activeIDX);
+
+                $(".process-content").css('height', how_to.find('.process-content').find('#ptab' + parseInt(activeIDX + 1)).height())
             });
 
             $(".next-linker").on("click", function () {
@@ -938,6 +941,8 @@
                 }
 
                 how_to.tabs("option", "active", activeIDX);
+
+                $(".process-content").css('height', how_to.find('.process-content').find('#ptab' + parseInt(activeIDX + 1)).height())
             });
 
             $(".finish-linker").on("click", function () {
