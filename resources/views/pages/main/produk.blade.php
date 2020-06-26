@@ -284,18 +284,36 @@
                 $(".prev-linker, .finish-linker").hide();
                 $(".next-linker").show();
                 activeIDX = 0;
+
+                $(".process-content").css('height', how_to.find('.process-content').find('#ptab' + parseInt(activeIDX + 1)).height())
             });
 
             $("a[href='#ptab2'], a[href='#ptab3'], a[href='#ptab4']").on("click", function () {
                 $(".prev-linker, .next-linker").show();
                 $(".finish-linker").hide();
-                activeIDX = 0;
+            });
+
+            $("a[href='#ptab2']").on("click", function () {
+                activeIDX = 1;
+                $(".process-content").css('height', how_to.find('.process-content').find('#ptab' + parseInt(activeIDX + 1)).height())
+            });
+
+            $("a[href='#ptab3']").on("click", function () {
+                activeIDX = 2;
+                $(".process-content").css('height', how_to.find('.process-content').find('#ptab' + parseInt(activeIDX + 1)).height())
+            });
+
+            $("a[href='#ptab4']").on("click", function () {
+                activeIDX = 3;
+                $(".process-content").css('height', how_to.find('.process-content').find('#ptab' + parseInt(activeIDX + 1)).height())
             });
 
             $("a[href='#ptab5']").on("click", function () {
                 $(".prev-linker, .finish-linker").show();
                 $(".next-linker").hide();
                 activeIDX = 4;
+
+                $(".process-content").css('height', how_to.find('.process-content').find('#ptab' + parseInt(activeIDX + 1)).height())
             });
 
             $(".prev-linker").on("click", function () {
