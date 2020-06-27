@@ -97,7 +97,7 @@
                                     @endif
                                     @if($data->getCart->file != null || $data->getCart->file != '')
                                         <a class="btn btn-info"
-                                           href="{{route('admin.order.download',['id'=>encrypt($cart->id)])}}">
+                                           href="{{route('admin.order.download',['id'=>encrypt($data->getCart->id)])}}">
                                             <i class="fa fa-file-download"></i> DOWNLOAD
                                         </a>
                                     @endif
