@@ -96,9 +96,10 @@
                                         </a>
                                     @endif
                                     @if($data->getCart->file != null || $data->getCart->file != '')
-                                        <button class="btn btn-info" onclick="get_design('{{$data->getCart->id}}')">
+                                        <a class="btn btn-info"
+                                           href="{{route('admin.order.download',['id'=>encrypt($cart->id)])}}">
                                             <i class="fa fa-file-download"></i> DOWNLOAD
-                                        </button>
+                                        </a>
                                     @endif
 
                                     @if($data->progress_status == \App\Support\StatusProgress::NEW)
@@ -346,25 +347,6 @@
                 cursorborder: "none",
             });
         });
-
-        function get_design(cart_id) {
-            $.ajax({
-                type: 'get',
-                url: '{{route('admin.order.download')}}',
-                data: {
-                    cart_id: cart_id
-                },
-                success: function (data) {
-
-
-                }, error: function (xhr, ajaxOptions, thrownError) {
-                    if (xhr.status == 404) {
-                        console.log(xhr);
-                        swal('Error', xhr.responseJSON.error, 'error');
-                    }
-                }
-            });
-        }
 
         function proceed_order(order_id) {
             $.ajax({

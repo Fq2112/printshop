@@ -62,19 +62,14 @@ class OrderController extends Controller
 
     public function get_file(Request $request)
     {
-        try {
-            $cart = Cart::find($request->cart_id);
-//            dd($cart);
-            $file_path = asset('storage/users/order/design/' . $cart->user_id . '/' . $cart->file);
-            if (file_exists($file_path)) {
-                return Response::download($file_path, $request->file, [
-                    'Content-length : ' . filesize($file_path)
-                ]);
-            } else {
-                return response()->json(['error' => "The file you looking for is gone"], 404);
-            }
-        } catch (Exception $e) {
-            return response()->json(['error' => $e], 500);
+        $cart = Cart::find(decrypt($request->id));
+        $file_path = storage_path('app/public/users/order/design/' . $cart->user_id . '/' . $cart->file);
+        if (file_exists($file_path)) {
+            return Response::download($file_path, $cart->file, [
+                'Content-Length: ' . filesize($file_path)
+            ]);
+        } else {
+            return back()->with('warning', __('lang.alert.download-fail'));
         }
     }
 

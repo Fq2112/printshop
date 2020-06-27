@@ -134,7 +134,7 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             'as' => 'delete.order'
         ]);
 
-        Route::get('download/file', [
+        Route::get('download/{id}/file', [
             'uses' => 'OrderController@get_file',
             'as' => 'admin.order.download'
         ]);
