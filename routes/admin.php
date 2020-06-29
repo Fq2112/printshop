@@ -258,8 +258,8 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                 'as' => 'table.cluster.add'
             ]);
 
-            Route::post('/cluster/update', [
-                'uses' => 'CategoryController@update_data',
+            Route::put('/cluster/update', [
+                'uses' => 'CategoryController@update_data_cluster',
                 'as' => 'table.cluster.update'
             ]);
 
@@ -721,7 +721,7 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             });
         });
 
-        Route::group(['prefix' => 'blog', 'middleware' => ['admin']], function () {
+        Route::group(['prefix' => 'blog'], function () {
 
             Route::group(['prefix' => 'categories'], function () {
 

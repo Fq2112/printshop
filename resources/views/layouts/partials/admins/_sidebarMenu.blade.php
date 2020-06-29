@@ -42,17 +42,7 @@
 
     <li class="menu-header">Tables</li>
 
-    <li class="dropdown {{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/blog*') ? 'active' : ''}}">
-        <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
-            <i class="fas fa-blog"></i><span>Blog</span></a>
-        <ul class="dropdown-menu">
-            <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/blog/categories*') ? 'active' : ''}}">
-                <a href="{{route('table.blog.categories')}}" class="nav-link">{{__('admin.sidebar.blog-category')}}</a>
-            </li>
-            <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/blog/posts*') ? 'active' : ''}}">
-                <a href="{{route('table.blog.posts')}}" class="nav-link">{{__('admin.sidebar.blog-post')}}</a></li>
-        </ul>
-    </li>
+
 
     @if(Auth::user()->isRoot() || Auth::user()->isOwner())
         <li class="dropdown {{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/categories*') ? 'active' : ''}}">
@@ -117,6 +107,18 @@
 {{--                'active' : ''}}"><a href="{{route('table.blog.posts')}}" class="nav-link">Privacy & Term</a></li>--}}
                 <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/msc/maintenance*') ?
                 'active' : ''}}"><a href="{{route('table.blog.posts')}}" class="nav-link">Maintenance</a></li>
+            </ul>
+        </li>
+
+        <li class="dropdown {{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/blog*') ? 'active' : ''}}">
+            <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+                <i class="fas fa-blog"></i><span>Blog</span></a>
+            <ul class="dropdown-menu">
+                <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/blog/categories*') ? 'active' : ''}}">
+                    <a href="{{route('table.blog.categories')}}" class="nav-link">{{__('admin.sidebar.blog-category')}}</a>
+                </li>
+                <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/blog/posts*') ? 'active' : ''}}">
+                    <a href="{{route('table.blog.posts')}}" class="nav-link">{{__('admin.sidebar.blog-post')}}</a></li>
             </ul>
         </li>
 
