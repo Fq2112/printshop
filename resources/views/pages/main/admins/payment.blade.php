@@ -39,9 +39,7 @@
             <h1>Order History & Status</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{route('admin.dashboard')}}">Dashboard</a></div>
-                <div class="breadcrumb-item">Data Master</div>
-                <div class="breadcrumb-item">Category</div>
-                <div class="breadcrumb-item">Main Category</div>
+                <div class="breadcrumb-item">Order History</div>
             </div>
         </div>
 
