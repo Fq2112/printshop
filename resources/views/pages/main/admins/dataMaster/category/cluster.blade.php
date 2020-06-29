@@ -900,7 +900,7 @@
             $(".fix-label-group .bootstrap-select").addClass('p-0');
             $(".fix-label-group .bootstrap-select button").css('border-color', '#e4e6fc');
 
-            $("#form-blogPost").attr('action', '{{route('table.cluster.add')}}');
+            $("#form-blogPost").attr('action', '{{route('table.cluster.update')}}');
             $("#form-blogPost input[name=_method]").val('PUT');
             $("#form-blogPost input[name=id]").val(id);
             $(".input-files").hide();

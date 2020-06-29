@@ -483,8 +483,8 @@ class CategoryController extends Controller
                 'id' => preg_replace("![^a-z0-9]+!i", "-", strtolower($request->name_id)),
                 'en' => preg_replace("![^a-z0-9]+!i", "-", strtolower($request->name_en)),
             ],
-            'banner' => $thumbnail,
-            'guidelines' => $guidelines
+            'thumbnail' => $thumbnail,
+            'features' => $guidelines
         ]);
 
         if ($request->has('advance')) {
@@ -604,6 +604,165 @@ class CategoryController extends Controller
             }
         }
 
+        return back()->with('success', __('admin.alert.blog-category.create', ['param' => $request->name]));
+    }
+
+    public function update_data_cluster(Request $request)
+    {
+
+        $cluster = ClusterKategori::find($request->id);
+
+        if ($request->hasFile('thumbnail')) {
+            $this->validate($request, ['thumbnail' => 'required|image|mimes:jpg,jpeg,gif,png|max:5120']);
+            $thumbnail = uniqid() . $request->file('thumbnail')->getClientOriginalName();
+            $request->file('thumbnail')->storeAs('public/subkat/', $thumbnail);
+        } else {
+            $thumbnail = "";
+        }
+
+        if ($request->hasFile('guidelines')) {
+            $this->validate($request, ['guidelines' => 'required|image|mimes:jpg,jpeg,gif,png|max:5120']);
+            $guidelines = uniqid() . $request->file('guidelines')->getClientOriginalName();
+            $request->file('guidelines')->storeAs('public/subkat/guidelines/', $guidelines);
+        } else {
+            $guidelines = "";
+        }
+
+        $cluster->update([
+            'subkategori_id' => $request->kategori_id,
+            'name' => [
+                'en' => $request->name_en,
+                'id' => $request->name_id
+            ],
+            'caption' => [
+                'en' => $request->_content_en,
+                'id' => $request->_content_id
+            ],
+            'permalink' => [
+                'id' => preg_replace("![^a-z0-9]+!i", "-", strtolower($request->name_id)),
+                'en' => preg_replace("![^a-z0-9]+!i", "-", strtolower($request->name_en)),
+            ],
+            'thumbnail' => $thumbnail,
+            'features' => $guidelines
+        ]);
+
+        $detail = DetailProduct::where('cluster_kategoris_id',$cluster->id)->first();
+        if (!empty($detail)) {
+           $detail->update([
+                'cluster_kategoris_id' => $cluster->id,
+                'unit_id' => 1,
+                'price' => $request->price
+            ]);
+
+            if ($request->has('material_id')){
+                $detail->update([
+                    'is_material' => true,
+                    'material_ids' => $request->material_id
+                ]);
+            }
+            if ($request->has('type_id')){
+                $detail->update([
+                    'is_type' => true,
+                    'type_ids' => $request->type_id
+                ]);
+            }
+            if ($request->has('balance_id')){
+                $detail->update([
+                    'is_balance' => true,
+                    'balance_ids' => $request->balance_id
+                ]);
+            }
+            if ($request->has('page_id')){
+                $detail->update([
+                    'is_page' => true,
+                    'page_ids' => $request->page_id
+                ]);
+            }
+            if ($request->has('copies_id')){
+                $detail->update([
+                    'is_copies' => true,
+                    'copies_ids' => $request->copies_id
+                ]);
+            }
+            if ($request->has('size_id')){
+                $detail->update([
+                    'is_size' => true,
+                    'size_ids' => $request->size_id
+                ]);
+            }
+            if ($request->has('lamination_id')){
+                $detail->update([
+                    'is_lamination' => true,
+                    'lamination_ids' => $request->lamination_id
+                ]);
+            }
+            if ($request->has('side_id')){
+                $detail->update([
+                    'is_side' => true,
+                    'side_ids' => $request->side_id
+                ]);
+            }
+            if ($request->has('edge_id')){
+                $detail->update([
+                    'is_edge' => true,
+                    'edge_ids' => $request->edge_id
+                ]);
+            }
+            if ($request->has('color_id')){
+                $detail->update([
+                    'is_color' => true,
+                    'color_ids' => $request->color_id
+                ]);
+            }
+            if ($request->has('front_side_id')){
+                $detail->update([
+                    'is_front_side' => true,
+                    'front_side_ids' => $request->front_side_id
+                ]);
+            }
+            if ($request->has('back_side_id')){
+                $detail->update([
+                    'is_back_side' => true,
+                    'back_side_ids' => $request->back_side_id
+                ]);
+            }
+            if ($request->has('right_side_id')){
+                $detail->update([
+                    'is_right_side' => true,
+                    'right_side_ids' => $request->right_side_id
+                ]);
+            }
+            if ($request->has('left_side_id')){
+                $detail->update([
+                    'is_left_side' => true,
+                    'left_side_ids' => $request->left_side_id
+                ]);
+            }
+            if ($request->has('front_cover_id')){
+                $detail->update([
+                    'is_front_coder' => true,
+                    'front_cover_ids' => $request->front_cover_id
+                ]);
+            }
+            if ($request->has('back_cover_id')){
+                $detail->update([
+                    'is_back_cover' => true,
+                    'back_cover_ids' => $request->back_cover_id
+                ]);
+            }
+            if ($request->has('binding_id')){
+                $detail->update([
+                    'is_binding' => true,
+                    'binding_ids' => $request->binding_id
+                ]);
+            }
+            if ($request->has('print_method_id')){
+                $detail->update([
+                    'is_print_method' => true,
+                    'print_method_ids' => $request->print_method_id
+                ]);
+            }
+        }
         return back()->with('success', __('admin.alert.blog-category.create', ['param' => $request->name]));
     }
 }
