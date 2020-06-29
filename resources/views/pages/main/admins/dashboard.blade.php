@@ -222,9 +222,9 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Invoices Today</h4>
+                        <h4>Latest Invoices</h4>
                         <div class="card-header-action">
-                            <a href="{{route('admin.invoice')}}" class="btn btn-danger">View More <i
+                            <a href="{{route('admin.order')}}" class="btn btn-danger">View More <i
                                     class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
@@ -256,14 +256,32 @@
                                             <td class="font-weight-600">{{$item->getUser->name}}</td>
                                             <td>
                                                 @if($item->finish_payment == 1)
-                                                    <div class="badge badge-success">Paid</div>
+                                                    <div class="badge badge-success">{{strtoupper('paid')}}</div>
                                                 @else
-                                                    <div class="badge badge-warning">Unpaid</div>
+                                                    <div class="badge badge-warning">{{strtoupper('unpaid')}}</div>
                                                 @endif
                                             </td>
                                             <td>{{\Carbon\Carbon::parse($item->updated_at)->format('d  F Y')}}</td>
                                             <td>
-                                                <a href="{{route('admin.invoice')}}" class="btn btn-primary">Detail</a>
+                                                @if($item->finish_payment == 1)
+                                                    <div class="btn-group">
+                                                        <a href="javascript:void(0)" class="btn btn-danger"
+                                                           onclick="getInvoice('{{$item->getUser->id}}','{{ucfirst($item->uni_code_payment)}}')"
+                                                           data-toggle="tooltip" title="Download Invoice"><i
+                                                                class="fa fa-file-pdf"></i></a>
+                                                        <a href="{{route('admin.order.user',['kode'=>$item->uni_code_payment])}}" class="btn btn-info"
+                                                           data-toggle="tooltip" title="Detail Invoice"><i
+                                                                class="fa fa-info"></i></a>
+                                                    </div>
+                                                @else
+                                                    <div class="btn-group">
+                                                        <a href="javascript:void(0)" class="btn btn-danger"
+                                                           onclick="getInvoice('{{$item->getUser->id}}','{{ucfirst($item->uni_code_payment)}}')" class="btn btn-danger"
+                                                           data-toggle="tooltip" title="Download Invoice"><i
+                                                                class="fa fa-file-pdf"></i></a>
+                                                    </div>
+                                                @endif
+
                                             </td>
                                         </tr>
 
@@ -631,6 +649,30 @@
         $("#period").on('change', function () {
             $("#form-filter")[0].submit();
         });
+
+        function getInvoice(user_id, code) {
+            $.ajax({
+                type: 'post',
+                url: '{{route('admin.order.invoice.download')}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    code: code,
+                    user_id: user_id
+                },
+                success: function (data) {
+                    // swal('Success', "Plesae Wait Till Page Succesfully Realoded", 'success');
+                    // setTimeout(
+                    //     function () {
+                    //         location.reload();
+                    //     }, 5000);
+                }, error: function (xhr, ajaxOptions, thrownError) {
+                    if (xhr.status == 404) {
+                        console.log(xhr);
+                        swal('Error', xhr.responseJSON.message, 'error');
+                    }
+                }
+            });
+        }
 
         function editBlogPost(id, url) {
             $("#div-blog").removeClass('p-0');

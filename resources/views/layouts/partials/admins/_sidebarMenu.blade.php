@@ -11,9 +11,9 @@
             <a href="{{route('admin.inbox')}}" class="nav-link"><i
                     class="fas fa-envelope"></i><span>{{__('admin.sidebar.inbox')}}</span></a>
         </li>
-        <li class="dropdown {{\Illuminate\Support\Facades\Request::is('*scott.royce/invoice*') ? 'active' : ''}}">
-            <a href="{{route('admin.invoice')}}" class="nav-link"><i class="fas fa-money-bill"></i><span>Invoices</span></a>
-        </li>
+{{--        <li class="dropdown {{\Illuminate\Support\Facades\Request::is('*scott.royce/invoice*') ? 'active' : ''}}">--}}
+{{--            <a href="{{route('admin.invoice')}}" class="nav-link"><i class="fas fa-money-bill"></i><span>Invoices</span></a>--}}
+{{--        </li>--}}
 
     @endif
 

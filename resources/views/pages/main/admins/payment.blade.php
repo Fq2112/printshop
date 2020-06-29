@@ -69,6 +69,23 @@
                                                 <option value="180">{{strtoupper('Six Months')}}</option>
                                                 <option value="360">{{strtoupper('One Year')}}</option>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-3 fix-label-group">
+                                        <label for="status">Status Payment</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                                                    <span
+                                                                                        class="input-group-text fix-label-item"
+                                                                                        style="height: 2.25rem">
+                                                                                        <i class="fa fa-tag"></i></span>
+                                            </div>
+                                            <select id="status" class="form-control selectpicker" title="-- Choose --"
+                                                    name="status" data-live-search="true">
+                                                <option value="">{{strtoupper('all')}}</option>
+                                                <option value="1">{{strtoupper('Paid')}}</option>
+                                                <option value="false">{{strtoupper('Unppaid')}}</option>
+                                            </select>
                                             <div class="input-group-append">
                                                 <button data-placement="right" data-toggle="tooltip"
                                                         title="Submit Filter"
@@ -77,28 +94,6 @@
                                             </div>
                                         </div>
                                     </div>
-{{--                                    <div class="col-3 fix-label-group">--}}
-{{--                                        <label for="status">Status Order</label>--}}
-{{--                                        <div class="input-group">--}}
-{{--                                            <div class="input-group-prepend">--}}
-{{--                                                <span class="input-group-text fix-label-item" style="height: 2.25rem">--}}
-{{--                                                    <i class="fa fa-tag"></i></span>--}}
-{{--                                            </div>--}}
-{{--                                            <select id="status" class="form-control selectpicker" title="-- Choose --"--}}
-{{--                                                    name="status" data-live-search="true">--}}
-{{--                                                <option value="">{{strtoupper('all')}}</option>--}}
-{{--                                                @foreach(\App\Support\StatusProgress::ALL as $material)--}}
-{{--                                                    <option value="{{$material}}">{{strtoupper($material)}}</option>--}}
-{{--                                                @endforeach--}}
-{{--                                            </select>--}}
-{{--                                            <div class="input-group-append">--}}
-{{--                                                <button data-placement="right" data-toggle="tooltip"--}}
-{{--                                                        title="Submit Filter"--}}
-{{--                                                        type="submit" class="btn btn-warning" style="height: 2.25rem">--}}
-{{--                                                    <i class="fa fa-filter"></i></button>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
                                 </div>
                             </form>
                         </div>
@@ -124,6 +119,7 @@
                                         <th width="15%">Customer</th>
                                         <th width="15%">Phone</th>
                                         <th class="text-center" width="10%">Order date</th>
+                                        <th class="text-center" width="10%">Status</th>
                                         <th width="25%" align="center">
                                             <center>Action</center>
                                         </th>
@@ -147,65 +143,85 @@
                                             <td width="15%">{{$item->getUser->getBio->phone}}</td>
 
                                             <td class="text-center" width="10%">{{$item->updated_at}}</td>
+                                            <td class="text-center" width="10%">
+                                                @if($item->finish_payment == 1)
+                                                    <div class="badge badge-success">Paid</div>
+                                                @else
+                                                    <div class="badge badge-warning">Unpaid</div>
+                                                @endif
+                                            </td>
                                             <td width="25%" align="center">
                                                 <?php
                                                 $order = \App\Models\PaymentCart::where('uni_code_payment', $item->uni_code_payment)->get()
                                                 ?>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-primary"
-                                                            data-toggle="popover" data-trigger="focus"
-                                                            title="{{count($order)}} Items" data-html="true"
-                                                            data-placement="left" data-content='
+                                                @if($item->finish_payment == 1)
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-primary"
+                                                                data-toggle="popover" data-trigger="focus"
+                                                                title="{{count($order)}} Items" data-html="true"
+                                                                data-placement="left" data-content='
 
                                                     @if(empty($order))
-                                                        Nothing To Show
-                                                        @else
+                                                            Nothing To Show
+@else
 
-                                                        <table>
-                                                          @foreach($order as $order_item)
-                                                        <tr>
-                                                            <td>
-                                                        @if(!empty($order_item->getCart->subkategori_id))
-                                                         {{$order_item->getCart->getSubKategori->name}}
+                                                            <table>
+@foreach($order as $order_item)
+                                                            <tr>
+                                                                <td>
+@if(!empty($order_item->getCart->subkategori_id))
+                                                        {{$order_item->getCart->getSubKategori->name}}
 
                                                         @elseif(!empty($order_item->getCart->cluster_id))
                                                         {{$order_item->getCart->getCluster->name}}
                                                         @endif
-                                                        </td>
-                                                        @if(empty($order_item->getCart->getOrder))
+                                                            </td>
+@if(empty($order_item->getCart->getOrder))
                                                         @else
-                                                        <td>
-                                                            @if($order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::NEW)
-                                                        <span class="badge badge-danger"><span
-                                                                class="fa fa-shopping-basket"></span> New</span> <br>
-                                                            @elseif($order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::START_PRODUCTION || $order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::FINISH_PRODUCTION)
-                                                        <span class="badge badge-warning"><span class="fa fa-cogs"></span> On Produce</span> <br>
-                                                            @elseif($order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::SHIPPING)
-                                                        <span class="badge badge-info"><span
-                                                                class="fa fa-shipping-fast"></span>  Shipping</span> <br>
-                                                            @elseif($order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::RECEIVED)
-                                                        <span class="badge badge-success"><span
-                                                                class="fa fa-clipboard-check"></span>  Received</span> <br>
-                                                            @endif
-                                                        </td>
-                                                        @endif
-                                                    </tr>
-                                                     @endforeach
-                                                        </table>
+                                                            <td>
+@if($order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::NEW)
+                                                            <span class="badge badge-danger"><span
+                                                                    class="fa fa-shopping-basket"></span> New</span> <br>
+@elseif($order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::START_PRODUCTION || $order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::FINISH_PRODUCTION)
+                                                            <span class="badge badge-warning"><span class="fa fa-cogs"></span> On Produce</span> <br>
+@elseif($order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::SHIPPING)
+                                                            <span class="badge badge-info"><span
+                                                                    class="fa fa-shipping-fast"></span>  Shipping</span> <br>
+@elseif($order_item->getCart->getOrder->progress_status == \App\Support\StatusProgress::RECEIVED)
+                                                            <span class="badge badge-success"><span
+                                                                    class="fa fa-clipboard-check"></span>  Received</span> <br>
+@endif
+                                                            </td>
+@endif
+                                                            </tr>
+@endforeach
+                                                            </table>
 
 @endif
-                                                        '>
-                                                        <i class="fa fa-tag"></i>
-                                                    </button>
-                                                    <button type="button" class="btn btn-danger"
-                                                            data-toggle="tooltip" onclick="getInvoice('{{$item->getUser->id}}','{{ucfirst($item->uni_code_payment)}}')"
-                                                            title="Download Invoice" data-html="true"
-                                                            data-placement="top" > <i class="fa fa-file-pdf"></i> </button>
-                                                    <a href="{{route('admin.order.user',['kode'=>$item->uni_code_payment])}}"
-                                                       data-placement="right" data-toggle="tooltip"
-                                                       title="Detail Info" type="button" class="btn btn-info">
-                                                        <i class="fa fa-info-circle"></i></a>
-                                                </div>
+                                                            '>
+                                                            <i class="fa fa-tag"></i>
+                                                        </button>
+                                                        <button type="button" class="btn btn-danger"
+                                                                data-toggle="tooltip"
+                                                                onclick="getInvoice('{{$item->getUser->id}}','{{ucfirst($item->uni_code_payment)}}')"
+                                                                title="Download Invoice" data-html="true"
+                                                                data-placement="top"><i class="fa fa-file-pdf"></i>
+                                                        </button>
+                                                        <a href="{{route('admin.order.user',['kode'=>$item->uni_code_payment])}}"
+                                                           data-placement="right" data-toggle="tooltip"
+                                                           title="Detail Info" type="button" class="btn btn-info">
+                                                            <i class="fa fa-info-circle"></i></a>
+                                                    </div>
+                                                @else
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-danger"
+                                                                data-toggle="tooltip"
+                                                                onclick="getInvoice('{{$item->getUser->id}}','{{ucfirst($item->uni_code_payment)}}')"
+                                                                title="Download Invoice" data-html="true"
+                                                                data-placement="top"><i class="fa fa-file-pdf"></i>
+                                                        </button>
+                                                    </div>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -218,84 +234,6 @@
                                 <form method="post" id="form-mass">
                                     {{csrf_field()}}
                                     <input type="hidden" name="post_ids">
-                                </form>
-                            </div>
-
-                            <div id="content2" style="display: none;">
-                                <form id="form-blogPost" method="post" action="{{route('add.promo')}}"
-                                      enctype="multipart/form-data">
-                                    {{csrf_field()}}
-                                    <input type="hidden" name="_method">
-                                    <input type="hidden" name="id">
-                                    <input type="hidden" name="admin_id">
-
-                                    <div class="row form-group">
-                                        <div class="col has-feedback">
-                                            <label for="title">Promo Code</label>
-                                            <input id="promo_code" type="text" maxlength="191" name="promo_code"
-                                                   class="form-control"
-                                                   placeholder="Write its promo code here&hellip;" required>
-                                            <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="row form-group has-feedback">
-                                        <div class="col">
-                                            <label for="_content">Description</label>
-                                            <textarea id="description" type="text" name="description"
-                                                      class="summernote form-control"
-                                                      placeholder="Write something about your post here&hellip;"></textarea>
-                                            <span class="glyphicon glyphicon-text-height form-control-feedback"></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="row form-group">
-                                        <div class="col">
-                                            <label for="thumbnail">Start</label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                                </div>
-                                                <input type="date" name="start" class="form-control"
-                                                       onblur="set_end_date(this.value)"
-                                                       id="start-date" required>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <label for="thumbnail">End</label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                                </div>
-                                                <input type="date" name="end" class="form-control"
-                                                       id="end-date" required>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row form-group">
-                                        <div class="col-6 has-feedback">
-                                            <label for="title">Amount of Discount</label>
-                                            <div class="input-group mb-2">
-                                                <input id="discount" type="number" name="discount" max="99" min="1"
-                                                       class="form-control"
-                                                       placeholder="1xxxxxx" required>
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">%</div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="row form-group">
-                                        <div class="col">
-                                            <button type="submit" class="btn btn-primary btn-block text-uppercase"
-                                                    style="font-weight: 900">Submit
-                                            </button>
-                                        </div>
-                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -477,7 +415,7 @@
                 });
         });
 
-        function getInvoice(user_id,code) {
+        function getInvoice(user_id, code) {
             $.ajax({
                 type: 'post',
                 url: '{{route('admin.order.invoice.download')}}',

@@ -23,8 +23,9 @@ class OrderController extends Controller
 //        dd($request->all());
         $data = PaymentCart::when($request->period, function ($query) use ($request) {
             $query->whereBetween('updated_at', [Carbon::now()->subDay($request->period), Carbon::now()]);
-        })->where('finish_payment', true)
-            ->distinct('uni_code_payment')->select('uni_code_payment', 'user_id', 'updated_at')->orderBy('updated_at', 'DESC')->get();
+        })->when($request->status, function ($query) use ($request) {
+            $query->where('finish_payment',$request->status);
+        })->distinct('uni_code_payment')->select('uni_code_payment', 'user_id', 'updated_at','finish_payment')->orderBy('updated_at', 'DESC')->get();
         return view('pages.main.admins.payment', [
             'data' => $data
         ]);
