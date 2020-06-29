@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\PaymentCart;
-use App\Support\Role;
+use App\Models\PromoCode;
 use App\Support\StatusProgress;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
@@ -33,7 +33,6 @@ class OrderController extends Controller
 
     public function show_order($condition, Request $request)
     {
-        $data = [];
         $status = '';
         $data = Order::whereNotIn('id', ['0'])->when($request->status, function ($query) use ($request) {
             $query->where('progress_status', $request->status);
@@ -48,8 +47,8 @@ class OrderController extends Controller
         return view('pages.main.admins.order', [
             'title' => 'Order List',
             'kategori' => $data,
-            'status' => $status
-            , 'code' => $condition
+            'status' => $status,
+            'code' => $condition
         ]);
     }
 
@@ -64,19 +63,14 @@ class OrderController extends Controller
 
     public function get_file(Request $request)
     {
-        try {
-            $cart = Cart::find($request->cart_id);
-//            dd($cart);
-            $file_path = asset('storage/users/order/design/' . $cart->user_id . '/' . $cart->file);
-            if (file_exists($file_path)) {
-                return Response::download($file_path, $request->file, [
-                    'Content-length : ' . filesize($file_path)
-                ]);
-            } else {
-                return response()->json(['error' => "The file you looking for is gone"], 404);
-            }
-        } catch (Exception $e) {
-            return response()->json(['error' => $e], 500);
+        $cart = Cart::find(decrypt($request->id));
+        $file_path = storage_path('app/public/users/order/design/' . $cart->user_id . '/' . $cart->file);
+        if (file_exists($file_path)) {
+            return Response::download($file_path, $cart->file, [
+                'Content-Length: ' . filesize($file_path)
+            ]);
+        } else {
+            return back()->with('warning', __('lang.alert.download-fail'));
         }
     }
 

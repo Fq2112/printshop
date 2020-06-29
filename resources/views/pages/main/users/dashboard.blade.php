@@ -423,17 +423,5 @@
                 }
             });
         }
-
-        $(".btn_download").on('click', function () {
-            $.get($(this).attr("href"), function (data) {
-                if (data == 0) {
-                    swal('{{__('lang.alert.warning')}}', '{{__('lang.alert.download-fail')}}', 'warning');
-                } else {
-                    window.open(data, '_blank');
-                }
-            });
-
-            return false;
-        });
     </script>
 @endpush

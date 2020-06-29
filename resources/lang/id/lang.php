@@ -59,7 +59,7 @@ return [
         "desc-5" => "<ul><li>Produk cetak Anda akan langsung dikirimkan ke alamat pengiriman yang Anda masukkan sebelumnya.</li><li>Ulas kami mengenai hasil produk cetak yang Anda terima atau ceritakan bagaimana pengalaman Anda menggunakan layanan kami.</li></ul>",
     ],
     "client" => [
-        "head" => "Klien " . env('APP_TITLE'),
+        "head" => "Klien Kami",
     ],
     "ig-feed" => [
         "head" => "Ikuti Kami di Instagram",
@@ -101,8 +101,8 @@ return [
                 "balance" => "Saldo",
                 "copies" => "Rangkap",
                 "page" => "Lembar / Halaman",
-                "front_cover" => "Sampul Depan",
-                "back_cover" => "Sampul Belakang",
+                "front_cover" => "Cover Depan",
+                "back_cover" => "Cover Belakang",
                 "binding" => "Jilid",
                 "orientation" => "Orientasi",
                 "folding" => "Lipatan",

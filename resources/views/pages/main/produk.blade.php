@@ -54,6 +54,14 @@
         }
 
         @media (max-width: 480px) {
+            .media .media-body h2 {
+                font-size: 16px;
+            }
+
+            .media .media-body ul {
+                font-size: 14px;
+            }
+
             .process-steps li h5 {
                 font-size: 13px;
             }
@@ -67,6 +75,14 @@
         }
 
         @media (max-width: 360px) {
+            .media .media-body h2 {
+                font-size: 14px;
+            }
+
+            .media .media-body ul {
+                font-size: 13px;
+            }
+
             .process-steps li h5 {
                 font-size: 10px;
             }
@@ -234,12 +250,11 @@
                                 <div class="col text-center">
                                     <button
                                         class="button button-rounded button-reveal button-border button-primary tleft prev-linker"
-                                        style="display: none"><i class="icon-angle-left"></i>
-                                        <span>{{__('lang.button.prev')}}</span>
+                                        style="display: none"><i class="icon-angle-left"></i><span>PREV</span>
                                     </button>
                                     <button
                                         class="button button-rounded button-reveal button-border button-primary tright next-linker">
-                                        <i class="icon-angle-right"></i><span>{{__('lang.button.next')}}</span>
+                                        <i class="icon-angle-right"></i><span>NEXT</span>
                                     </button>
                                     <button
                                         class="button button-rounded button-reveal button-border button-primary tright finish-linker"
@@ -263,23 +278,42 @@
             var how_to = $("#processTabs"), activeIDX;
             how_to.tabs({show: {effect: "slide", duration: 500}});
             activeIDX = how_to.tabs("option", "active");
+            $(".process-content").css('height', how_to.find('.process-content').find('#ptab' + parseInt(activeIDX + 1)).height())
 
             $("a[href='#ptab1']").on("click", function () {
                 $(".prev-linker, .finish-linker").hide();
                 $(".next-linker").show();
                 activeIDX = 0;
+
+                $(".process-content").css('height', how_to.find('.process-content').find('#ptab' + parseInt(activeIDX + 1)).height())
             });
 
             $("a[href='#ptab2'], a[href='#ptab3'], a[href='#ptab4']").on("click", function () {
                 $(".prev-linker, .next-linker").show();
                 $(".finish-linker").hide();
-                activeIDX = 0;
+            });
+
+            $("a[href='#ptab2']").on("click", function () {
+                activeIDX = 1;
+                $(".process-content").css('height', how_to.find('.process-content').find('#ptab' + parseInt(activeIDX + 1)).height())
+            });
+
+            $("a[href='#ptab3']").on("click", function () {
+                activeIDX = 2;
+                $(".process-content").css('height', how_to.find('.process-content').find('#ptab' + parseInt(activeIDX + 1)).height())
+            });
+
+            $("a[href='#ptab4']").on("click", function () {
+                activeIDX = 3;
+                $(".process-content").css('height', how_to.find('.process-content').find('#ptab' + parseInt(activeIDX + 1)).height())
             });
 
             $("a[href='#ptab5']").on("click", function () {
                 $(".prev-linker, .finish-linker").show();
                 $(".next-linker").hide();
                 activeIDX = 4;
+
+                $(".process-content").css('height', how_to.find('.process-content').find('#ptab' + parseInt(activeIDX + 1)).height())
             });
 
             $(".prev-linker").on("click", function () {
@@ -294,6 +328,8 @@
                 }
 
                 how_to.tabs("option", "active", activeIDX);
+
+                $(".process-content").css('height', how_to.find('.process-content').find('#ptab' + parseInt(activeIDX + 1)).height())
             });
 
             $(".next-linker").on("click", function () {
@@ -309,6 +345,8 @@
                 }
 
                 how_to.tabs("option", "active", activeIDX);
+
+                $(".process-content").css('height', how_to.find('.process-content').find('#ptab' + parseInt(activeIDX + 1)).height())
             });
 
             $(".finish-linker").on("click", function () {
