@@ -21,6 +21,7 @@ class CreateSettingsTable extends Migration
             $table->text('address')->nullable();
             $table->string('phone')->nullable();
             $table->string('fax')->nullable();
+            $table->string('rules')->default('1');
             $table->timestamps();
         });
     }
