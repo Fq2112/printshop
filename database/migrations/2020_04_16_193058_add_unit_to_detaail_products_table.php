@@ -19,6 +19,7 @@ class AddUnitToDetaailProductsTable extends Migration
                 ->on('units')->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
             $table->string('price')->default('25000');
+            $table->string('weight')->default('1000');// in Gram
         });
     }
 
