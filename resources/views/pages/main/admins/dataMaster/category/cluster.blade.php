@@ -670,8 +670,18 @@
 
                                                 <div class="row form-group">
                                                     <div class="col has-feedback">
-                                                        <label for="title">Base Price </label>
+                                                        <label for="title">Base Price (HPP)</label>
                                                         <input id="price" type="number" maxlength="191" name="price"
+                                                               class="form-control"
+                                                               placeholder="Write its price here&hellip;">
+                                                        <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row form-group">
+                                                    <div class="col has-feedback">
+                                                        <label for="title">Weight Product (in Grams)</label>
+                                                        <input id="weight" type="number" maxlength="191" name="weight"
                                                                class="form-control"
                                                                placeholder="Write its price here&hellip;">
                                                         <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
@@ -874,6 +884,7 @@
             $('#binding_id').selectpicker('val', null);
             $('#print_method_id').selectpicker('val', null);
             $('#price').val(null);
+            $('#weight').val(null);
         }
 
         function editBlogCategory(id, name, name_id, caption) {
@@ -942,6 +953,7 @@
                     $('#binding_id').selectpicker('val', data.detail.binding_ids);
                     $('#print_method_id').selectpicker('val', data.detail.print_method_ids);
                     $('#price').val(data.detail.price);
+                    $('#weight').val(data.detail.weight);
                     $("#advance_check").show();
                 }
 

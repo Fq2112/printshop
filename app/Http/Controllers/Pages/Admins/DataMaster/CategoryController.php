@@ -143,112 +143,113 @@ class CategoryController extends Controller
             $detail = DetailSubkat::create([
                 'subkategori_id' => $subkat->id,
                 'unit_id' => 1,
-                'price' => $request->price
+                'price' => $request->price,
+                'weight' => $request->weight
             ]);
 
-            if ($request->has('material_id')){
+            if ($request->has('material_id')) {
                 $detail->update([
                     'is_material' => true,
                     'material_ids' => $request->material_id
                 ]);
             }
-            if ($request->has('type_id')){
+            if ($request->has('type_id')) {
                 $detail->update([
                     'is_type' => true,
                     'type_ids' => $request->type_id
                 ]);
             }
-            if ($request->has('balance_id')){
+            if ($request->has('balance_id')) {
                 $detail->update([
                     'is_balance' => true,
                     'balance_ids' => $request->balance_id
                 ]);
             }
-            if ($request->has('page_id')){
+            if ($request->has('page_id')) {
                 $detail->update([
                     'is_page' => true,
                     'page_ids' => $request->page_id
                 ]);
             }
-            if ($request->has('copies_id')){
+            if ($request->has('copies_id')) {
                 $detail->update([
                     'is_copies' => true,
                     'copies_ids' => $request->copies_id
                 ]);
             }
-            if ($request->has('size_id')){
+            if ($request->has('size_id')) {
                 $detail->update([
                     'is_size' => true,
                     'size_ids' => $request->size_id
                 ]);
             }
-            if ($request->has('lamination_id')){
+            if ($request->has('lamination_id')) {
                 $detail->update([
                     'is_lamination' => true,
                     'lamination_ids' => $request->lamination_id
                 ]);
             }
-            if ($request->has('side_id')){
+            if ($request->has('side_id')) {
                 $detail->update([
                     'is_side' => true,
                     'side_ids' => $request->side_id
                 ]);
             }
-            if ($request->has('edge_id')){
+            if ($request->has('edge_id')) {
                 $detail->update([
                     'is_edge' => true,
                     'edge_ids' => $request->edge_id
                 ]);
             }
-            if ($request->has('color_id')){
+            if ($request->has('color_id')) {
                 $detail->update([
                     'is_color' => true,
                     'color_ids' => $request->color_id
                 ]);
             }
-            if ($request->has('front_side_id')){
+            if ($request->has('front_side_id')) {
                 $detail->update([
                     'is_front_side' => true,
                     'front_side_ids' => $request->front_side_id
                 ]);
             }
-            if ($request->has('back_side_id')){
+            if ($request->has('back_side_id')) {
                 $detail->update([
                     'is_back_side' => true,
                     'back_side_ids' => $request->back_side_id
                 ]);
             }
-            if ($request->has('right_side_id')){
+            if ($request->has('right_side_id')) {
                 $detail->update([
                     'is_right_side' => true,
                     'right_side_ids' => $request->right_side_id
                 ]);
             }
-            if ($request->has('left_side_id')){
+            if ($request->has('left_side_id')) {
                 $detail->update([
                     'is_left_side' => true,
                     'left_side_ids' => $request->left_side_id
                 ]);
             }
-            if ($request->has('front_cover_id')){
+            if ($request->has('front_cover_id')) {
                 $detail->update([
                     'is_front_coder' => true,
                     'front_cover_ids' => $request->front_cover_id
                 ]);
             }
-            if ($request->has('back_cover_id')){
+            if ($request->has('back_cover_id')) {
                 $detail->update([
                     'is_back_cover' => true,
                     'back_cover_ids' => $request->back_cover_id
                 ]);
             }
-            if ($request->has('binding_id')){
+            if ($request->has('binding_id')) {
                 $detail->update([
                     'is_binding' => true,
                     'binding_ids' => $request->binding_id
                 ]);
             }
-            if ($request->has('print_method_id')){
+            if ($request->has('print_method_id')) {
                 $detail->update([
                     'is_print_method' => true,
                     'print_method_ids' => $request->print_method_id
@@ -309,122 +310,123 @@ class CategoryController extends Controller
             'guidelines' => $guidelines
         ]);
 
-        $detail = DetailSubkat::where('subkategori_id',$category->id)->first();
-        if (!empty($detail)){
-                $detail->update([
-                    'subkategori_id' => $category->id,
-                    'unit_id' => 1,
-                    'price' => $request->price
-                ]);
+        $detail = DetailSubkat::where('subkategori_id', $category->id)->first();
+        if (!empty($detail)) {
+            $detail->update([
+                'subkategori_id' => $category->id,
+                'unit_id' => 1,
+                'price' => $request->price,
+                'weight' => $request->weight
+            ]);
 
-                if ($request->has('material_id')){
-                    $detail->update([
-                        'is_material' => true,
-                        'material_ids' => $request->material_id
-                    ]);
-                }
-                if ($request->has('type_id')){
-                    $detail->update([
-                        'is_type' => true,
-                        'type_ids' => $request->type_id
-                    ]);
-                }
-                if ($request->has('balance_id')){
-                    $detail->update([
-                        'is_balance' => true,
-                        'balance_ids' => $request->balance_id
-                    ]);
-                }
-                if ($request->has('page_id')){
-                    $detail->update([
-                        'is_page' => true,
-                        'page_ids' => $request->page_id
-                    ]);
-                }
-                if ($request->has('copies_id')){
-                    $detail->update([
-                        'is_copies' => true,
-                        'copies_ids' => $request->copies_id
-                    ]);
-                }
-                if ($request->has('size_id')){
-                    $detail->update([
-                        'is_size' => true,
-                        'size_ids' => $request->size_id
-                    ]);
-                }
-                if ($request->has('lamination_id')){
-                    $detail->update([
-                        'is_lamination' => true,
-                        'lamination_ids' => $request->lamination_id
-                    ]);
-                }
-                if ($request->has('side_id')){
-                    $detail->update([
-                        'is_side' => true,
-                        'side_ids' => $request->side_id
-                    ]);
-                }
-                if ($request->has('edge_id')){
-                    $detail->update([
-                        'is_edge' => true,
-                        'edge_ids' => $request->edge_id
-                    ]);
-                }
-                if ($request->has('color_id')){
-                    $detail->update([
-                        'is_color' => true,
-                        'color_ids' => $request->color_id
-                    ]);
-                }
-                if ($request->has('front_side_id')){
-                    $detail->update([
-                        'is_front_side' => true,
-                        'front_side_ids' => $request->front_side_id
-                    ]);
-                }
-                if ($request->has('back_side_id')){
-                    $detail->update([
-                        'is_back_side' => true,
-                        'back_side_ids' => $request->back_side_id
-                    ]);
-                }
-                if ($request->has('right_side_id')){
-                    $detail->update([
-                        'is_right_side' => true,
-                        'right_side_ids' => $request->right_side_id
-                    ]);
-                }
-                if ($request->has('left_side_id')){
-                    $detail->update([
-                        'is_left_side' => true,
-                        'left_side_ids' => $request->left_side_id
-                    ]);
-                }
-                if ($request->has('front_cover_id')){
-                    $detail->update([
-                        'is_front_coder' => true,
-                        'front_cover_ids' => $request->front_cover_id
-                    ]);
-                }
-                if ($request->has('back_cover_id')){
-                    $detail->update([
-                        'is_back_cover' => true,
-                        'back_cover_ids' => $request->back_cover_id
-                    ]);
-                }
-                if ($request->has('binding_id')){
-                    $detail->update([
-                        'is_binding' => true,
-                        'binding_ids' => $request->binding_id
-                    ]);
-                }
-                if ($request->has('print_method_id')){
-                    $detail->update([
-                        'is_print_method' => true,
-                        'print_method_ids' => $request->print_method_id
-                    ]);
-                }
+            if ($request->has('material_id')) {
+                $detail->update([
+                    'is_material' => true,
+                    'material_ids' => $request->material_id
+                ]);
+            }
+            if ($request->has('type_id')) {
+                $detail->update([
+                    'is_type' => true,
+                    'type_ids' => $request->type_id
+                ]);
+            }
+            if ($request->has('balance_id')) {
+                $detail->update([
+                    'is_balance' => true,
+                    'balance_ids' => $request->balance_id
+                ]);
+            }
+            if ($request->has('page_id')) {
+                $detail->update([
+                    'is_page' => true,
+                    'page_ids' => $request->page_id
+                ]);
+            }
+            if ($request->has('copies_id')) {
+                $detail->update([
+                    'is_copies' => true,
+                    'copies_ids' => $request->copies_id
+                ]);
+            }
+            if ($request->has('size_id')) {
+                $detail->update([
+                    'is_size' => true,
+                    'size_ids' => $request->size_id
+                ]);
+            }
+            if ($request->has('lamination_id')) {
+                $detail->update([
+                    'is_lamination' => true,
+                    'lamination_ids' => $request->lamination_id
+                ]);
+            }
+            if ($request->has('side_id')) {
+                $detail->update([
+                    'is_side' => true,
+                    'side_ids' => $request->side_id
+                ]);
+            }
+            if ($request->has('edge_id')) {
+                $detail->update([
+                    'is_edge' => true,
+                    'edge_ids' => $request->edge_id
+                ]);
+            }
+            if ($request->has('color_id')) {
+                $detail->update([
+                    'is_color' => true,
+                    'color_ids' => $request->color_id
+                ]);
+            }
+            if ($request->has('front_side_id')) {
+                $detail->update([
+                    'is_front_side' => true,
+                    'front_side_ids' => $request->front_side_id
+                ]);
+            }
+            if ($request->has('back_side_id')) {
+                $detail->update([
+                    'is_back_side' => true,
+                    'back_side_ids' => $request->back_side_id
+                ]);
+            }
+            if ($request->has('right_side_id')) {
+                $detail->update([
+                    'is_right_side' => true,
+                    'right_side_ids' => $request->right_side_id
+                ]);
+            }
+            if ($request->has('left_side_id')) {
+                $detail->update([
+                    'is_left_side' => true,
+                    'left_side_ids' => $request->left_side_id
+                ]);
+            }
+            if ($request->has('front_cover_id')) {
+                $detail->update([
+                    'is_front_coder' => true,
+                    'front_cover_ids' => $request->front_cover_id
+                ]);
+            }
+            if ($request->has('back_cover_id')) {
+                $detail->update([
+                    'is_back_cover' => true,
+                    'back_cover_ids' => $request->back_cover_id
+                ]);
+            }
+            if ($request->has('binding_id')) {
+                $detail->update([
+                    'is_binding' => true,
+                    'binding_ids' => $request->binding_id
+                ]);
+            }
+            if ($request->has('print_method_id')) {
+                $detail->update([
+                    'is_print_method' => true,
+                    'print_method_ids' => $request->print_method_id
+                ]);
+            }
 
         }
 
@@ -491,112 +493,113 @@ class CategoryController extends Controller
             $detail = DetailProduct::create([
                 'cluster_kategoris_id' => $subkat->id,
                 'unit_id' => 1,
-                'price' => $request->price
+                'price' => $request->price,
+                'weight' => $request->weight
             ]);
 
-            if ($request->has('material_id')){
+            if ($request->has('material_id')) {
                 $detail->update([
                     'is_material' => true,
                     'material_ids' => $request->material_id
                 ]);
             }
-            if ($request->has('type_id')){
+            if ($request->has('type_id')) {
                 $detail->update([
                     'is_type' => true,
                     'type_ids' => $request->type_id
                 ]);
             }
-            if ($request->has('balance_id')){
+            if ($request->has('balance_id')) {
                 $detail->update([
                     'is_balance' => true,
                     'balance_ids' => $request->balance_id
                 ]);
             }
-            if ($request->has('page_id')){
+            if ($request->has('page_id')) {
                 $detail->update([
                     'is_page' => true,
                     'page_ids' => $request->page_id
                 ]);
             }
-            if ($request->has('copies_id')){
+            if ($request->has('copies_id')) {
                 $detail->update([
                     'is_copies' => true,
                     'copies_ids' => $request->copies_id
                 ]);
             }
-            if ($request->has('size_id')){
+            if ($request->has('size_id')) {
                 $detail->update([
                     'is_size' => true,
                     'size_ids' => $request->size_id
                 ]);
             }
-            if ($request->has('lamination_id')){
+            if ($request->has('lamination_id')) {
                 $detail->update([
                     'is_lamination' => true,
                     'lamination_ids' => $request->lamination_id
                 ]);
             }
-            if ($request->has('side_id')){
+            if ($request->has('side_id')) {
                 $detail->update([
                     'is_side' => true,
                     'side_ids' => $request->side_id
                 ]);
             }
-            if ($request->has('edge_id')){
+            if ($request->has('edge_id')) {
                 $detail->update([
                     'is_edge' => true,
                     'edge_ids' => $request->edge_id
                 ]);
             }
-            if ($request->has('color_id')){
+            if ($request->has('color_id')) {
                 $detail->update([
                     'is_color' => true,
                     'color_ids' => $request->color_id
                 ]);
             }
-            if ($request->has('front_side_id')){
+            if ($request->has('front_side_id')) {
                 $detail->update([
                     'is_front_side' => true,
                     'front_side_ids' => $request->front_side_id
                 ]);
             }
-            if ($request->has('back_side_id')){
+            if ($request->has('back_side_id')) {
                 $detail->update([
                     'is_back_side' => true,
                     'back_side_ids' => $request->back_side_id
                 ]);
             }
-            if ($request->has('right_side_id')){
+            if ($request->has('right_side_id')) {
                 $detail->update([
                     'is_right_side' => true,
                     'right_side_ids' => $request->right_side_id
                 ]);
             }
-            if ($request->has('left_side_id')){
+            if ($request->has('left_side_id')) {
                 $detail->update([
                     'is_left_side' => true,
                     'left_side_ids' => $request->left_side_id
                 ]);
             }
-            if ($request->has('front_cover_id')){
+            if ($request->has('front_cover_id')) {
                 $detail->update([
                     'is_front_coder' => true,
                     'front_cover_ids' => $request->front_cover_id
                 ]);
             }
-            if ($request->has('back_cover_id')){
+            if ($request->has('back_cover_id')) {
                 $detail->update([
                     'is_back_cover' => true,
                     'back_cover_ids' => $request->back_cover_id
                 ]);
             }
-            if ($request->has('binding_id')){
+            if ($request->has('binding_id')) {
                 $detail->update([
                     'is_binding' => true,
                     'binding_ids' => $request->binding_id
                 ]);
             }
-            if ($request->has('print_method_id')){
+            if ($request->has('print_method_id')) {
                 $detail->update([
                     'is_print_method' => true,
                     'print_method_ids' => $request->print_method_id
@@ -646,117 +649,118 @@ class CategoryController extends Controller
             'features' => $guidelines
         ]);
 
-        $detail = DetailProduct::where('cluster_kategoris_id',$cluster->id)->first();
+        $detail = DetailProduct::where('cluster_kategoris_id', $cluster->id)->first();
         if (!empty($detail)) {
-           $detail->update([
+            $detail->update([
                 'cluster_kategoris_id' => $cluster->id,
                 'unit_id' => 1,
-                'price' => $request->price
+                'price' => $request->price,
+                'weight' => $request->weight
             ]);
 
-            if ($request->has('material_id')){
+            if ($request->has('material_id')) {
                 $detail->update([
                     'is_material' => true,
                     'material_ids' => $request->material_id
                 ]);
             }
-            if ($request->has('type_id')){
+            if ($request->has('type_id')) {
                 $detail->update([
                     'is_type' => true,
                     'type_ids' => $request->type_id
                 ]);
             }
-            if ($request->has('balance_id')){
+            if ($request->has('balance_id')) {
                 $detail->update([
                     'is_balance' => true,
                     'balance_ids' => $request->balance_id
                 ]);
             }
-            if ($request->has('page_id')){
+            if ($request->has('page_id')) {
                 $detail->update([
                     'is_page' => true,
                     'page_ids' => $request->page_id
                 ]);
             }
-            if ($request->has('copies_id')){
+            if ($request->has('copies_id')) {
                 $detail->update([
                     'is_copies' => true,
                     'copies_ids' => $request->copies_id
                 ]);
             }
-            if ($request->has('size_id')){
+            if ($request->has('size_id')) {
                 $detail->update([
                     'is_size' => true,
                     'size_ids' => $request->size_id
                 ]);
             }
-            if ($request->has('lamination_id')){
+            if ($request->has('lamination_id')) {
                 $detail->update([
                     'is_lamination' => true,
                     'lamination_ids' => $request->lamination_id
                 ]);
             }
-            if ($request->has('side_id')){
+            if ($request->has('side_id')) {
                 $detail->update([
                     'is_side' => true,
                     'side_ids' => $request->side_id
                 ]);
             }
-            if ($request->has('edge_id')){
+            if ($request->has('edge_id')) {
                 $detail->update([
                     'is_edge' => true,
                     'edge_ids' => $request->edge_id
                 ]);
             }
-            if ($request->has('color_id')){
+            if ($request->has('color_id')) {
                 $detail->update([
                     'is_color' => true,
                     'color_ids' => $request->color_id
                 ]);
             }
-            if ($request->has('front_side_id')){
+            if ($request->has('front_side_id')) {
                 $detail->update([
                     'is_front_side' => true,
                     'front_side_ids' => $request->front_side_id
                 ]);
             }
-            if ($request->has('back_side_id')){
+            if ($request->has('back_side_id')) {
                 $detail->update([
                     'is_back_side' => true,
                     'back_side_ids' => $request->back_side_id
                 ]);
             }
-            if ($request->has('right_side_id')){
+            if ($request->has('right_side_id')) {
                 $detail->update([
                     'is_right_side' => true,
                     'right_side_ids' => $request->right_side_id
                 ]);
             }
-            if ($request->has('left_side_id')){
+            if ($request->has('left_side_id')) {
                 $detail->update([
                     'is_left_side' => true,
                     'left_side_ids' => $request->left_side_id
                 ]);
             }
-            if ($request->has('front_cover_id')){
+            if ($request->has('front_cover_id')) {
                 $detail->update([
                     'is_front_coder' => true,
                     'front_cover_ids' => $request->front_cover_id
                 ]);
             }
-            if ($request->has('back_cover_id')){
+            if ($request->has('back_cover_id')) {
                 $detail->update([
                     'is_back_cover' => true,
                     'back_cover_ids' => $request->back_cover_id
                 ]);
             }
-            if ($request->has('binding_id')){
+            if ($request->has('binding_id')) {
                 $detail->update([
                     'is_binding' => true,
                     'binding_ids' => $request->binding_id
                 ]);
             }
-            if ($request->has('print_method_id')){
+            if ($request->has('print_method_id')) {
                 $detail->update([
                     'is_print_method' => true,
                     'print_method_ids' => $request->print_method_id
