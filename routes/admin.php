@@ -91,6 +91,23 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                 'as' => 'delete.promo'
             ]);
         });
+
+        Route::group(['prefix' => 'setting', 'middleware' => 'owner'], function () {
+            Route::get('show', [
+                'uses' => 'SettingController@show_setting',
+                'as' => 'admin.setting.general'
+            ]);
+
+            Route::get('general', [
+                'uses' => 'SettingController@show_general',
+                'as' => 'admin.setting.general.show'
+            ]);
+
+            Route::get('maintenance', [
+                'uses' => 'SettingController@show_maintenance',
+                'as' => 'admin.setting.maintenance.show'
+            ]);
+        });
     });
 
     Route::group(['prefix' => 'order'], function () {

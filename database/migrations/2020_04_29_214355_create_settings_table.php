@@ -16,6 +16,8 @@ class CreateSettingsTable extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->boolean('is_maintenance')->default(false);
+            $table->string('logo')->nullable();
+            $table->string('fav_icon')->nullable();
             $table->string('email_premier')->nullable();
             $table->text('tag_line')->nullable();
             $table->text('address')->nullable();
