@@ -19,4 +19,9 @@ class Cities extends Model
     {
         return $this->hasMany(Address::class, 'city_id');
     }
+
+    public function getSuburbs()
+    {
+        return $this->hasMany(Suburbs::class,'suburbs_id');
+    }
 }
