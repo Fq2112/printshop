@@ -111,6 +111,7 @@ return [
                 "extra" => "Ekstra",
                 "holder" => "Holder Kartu",
                 "quantity" => "Kuantitas",
+                "weight" => "Berat",
                 "price" => "Harga /:unit",
                 "production" => "Selesai Produksi",
                 "ongkir" => "Ongkir",

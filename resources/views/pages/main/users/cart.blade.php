@@ -406,6 +406,11 @@
                                                                                                 <b class="fright">Rp{{number_format($row->price_pcs,2,',','.')}}</b>
                                                                                             </li>
                                                                                             <li class="list-group-item noborder">
+                                                                                                {{__('lang.product.form.summary.weight')}}
+                                                                                                <b class="fright">{{number_format($specs->weight / 1000,1,',','.')}}
+                                                                                                    kg</b>
+                                                                                            </li>
+                                                                                            <li class="list-group-item noborder">
                                                                                                 {{__('lang.product.form.summary.production')}}
                                                                                                 <b class="fright">{{now()->addDays(3)->formatLocalized('%d %b %Y')}}</b>
                                                                                             </li>

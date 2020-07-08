@@ -446,6 +446,10 @@
                                             <b class="fright show-price">&ndash;</b>
                                         </li>
                                         <li class="list-group-item noborder">
+                                            {{__('lang.product.form.summary.weight')}}
+                                            <b class="fright show-weight">&ndash;</b>
+                                        </li>
+                                        <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.production')}}
                                             <i class="i-plain i-small icon-line2-info ml-1" data-toggle="popover"
                                                data-placement="top" title="{{__('lang.alert.warning')}}"
@@ -588,6 +592,7 @@
         var collapse = $('.panel-collapse'), input_qty = $("#input-quantity"), range_slider = $("#range-quantity"),
             btn_upload = $("#btn_upload"), upload_input = $("#file"), link_input = $("#link"),
             range_max = 100, qty = parseInt('{{!is_null($cart) ? $cart->qty : 0}}'),
+            weight = Number('{{$specs->weight / 1000}}'), total_weight = 0,
             pricing_specs = 0, disc_1 = 0, disc_2 = 0, disc_3 = 0, price_pcs = parseInt('{{$specs->price}}'),
             str_unit = ' {{$specs->getUnit->name}}', production_day = 3, ongkir = 0, etd = '', str_etd = '', total = 0;
 
@@ -788,6 +793,7 @@
                 input_qty.val(qty);
                 $(".show-quantity").text(qty + str_unit);
                 $(".show-price").text("Rp" + number_format(price_pcs, 2, ',', '.'));
+                $(".show-weight").text(number_format(weight * qty, 1, ',', '.') + " kg");
                 $(".show-production").text(moment().add(production_day, 'days').format('DD MMM YYYY'));
                 $("#price_pcs").val(price_pcs);
                 $("#production_finished").val(moment().add(production_day, 'days').format('YYYY-MM-DD'));
@@ -814,7 +820,7 @@
                 total = 0;
 
                 input_qty.val(qty);
-                $(".show-address, .show-city, .show-quantity, .show-price, .show-production, .show-ongkir, .show-delivery, .show-received, .show-total").html('&ndash;');
+                $(".show-address, .show-city, .show-quantity, .show-price, .show-weight, .show-production, .show-ongkir, .show-delivery, .show-received, .show-total").html('&ndash;');
                 $("#price_pcs, #production_finished, #ongkir, #delivery_duration, #received_date, #total").val(null);
 
                 $("#alert-quantity").show();

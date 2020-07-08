@@ -111,6 +111,7 @@ return [
                 "extra" => "Extra",
                 "holder" => "Card Holder",
                 "quantity" => "Quantity",
+                "weight" => "Weight",
                 "price" => "Price /:unit",
                 "production" => "Production Finished",
                 "ongkir" => "Shipping Cost",
