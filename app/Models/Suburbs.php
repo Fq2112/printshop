@@ -8,7 +8,9 @@ class Suburbs extends Model
 {
     protected $table = 'suburbs';
 
-    protected $guarded = ['id'];
+    protected $fillable = ['id', 'name'];
+
+    public $incrementing = false;
 
     public function getAreas()
     {

@@ -14,8 +14,9 @@ class CreateSuburbsTable extends Migration
     public function up()
     {
         Schema::create('suburbs', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('cities_id');
+            $table->integer('id')->unsigned();
+            $table->primary('id');
+            $table->unsignedInteger('cities_id');
             $table->foreign('cities_id')->references('id')
                 ->on('cities')->onUpdate('CASCADE')
                 ->onDelete('CASCADE');

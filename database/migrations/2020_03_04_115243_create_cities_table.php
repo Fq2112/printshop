@@ -14,14 +14,13 @@ class CreateCitiesTable extends Migration
     public function up()
     {
         Schema::create('cities', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('province_id');
+            $table->integer('id')->unsigned();
+            $table->primary('id');
+            $table->unsignedInteger('province_id');
             $table->foreign('province_id')->references('id')
                 ->on('provinces')->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
             $table->string('name');
-            $table->string('type');
-            $table->string('postal_code');
             $table->timestamps();
         });
     }

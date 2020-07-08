@@ -15,7 +15,7 @@ class CreateAreasTable extends Migration
     {
         Schema::create('areas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('suburbs_id');
+            $table->unsignedInteger('suburbs_id');
             $table->foreign('suburbs_id')->references('id')
                 ->on('suburbs')->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
