@@ -125,6 +125,7 @@ return [
             ],
             "shipping" => [
                 "head" => "Alamat Pengiriman",
+                "head2" => "Opsi Pengiriman",
                 "capt" => "Tentukan kemana produk cetak Anda akan dikirim",
                 "empty-head" => "Anda belum membuat alamat manapun",
                 "empty-capt" => "Buka halaman \"Sunting Profil\" dan kelola daftar alamat Anda sekarang",
@@ -150,9 +151,14 @@ return [
             "head" => "Alamat Penagihan",
             "capt" => "Tentukan kemana kami harus mengirimkan tagihan Anda",
         ],
+        "addressee" => [
+            "head" => "Penerima Pesanan",
+            "capt" => "Tentukan kemana produk cetak Anda akan dikirim beserta tagihannya"
+        ],
         "summary" => [
             "promo" => "Kode Promo",
             "discount" => "Diskon",
+            "choose-shipping" => "Silahkan pilih alamat pengiriman pesanan Anda terlebih dahulu.",
             "choose-billing" => "Silahkan pilih alamat penagihan pesanan Anda terlebih dahulu.",
         ],
     ],
@@ -343,6 +349,7 @@ return [
         "edit" => "SUNTING",
         "delete" => "HAPUS",
         "save" => "SIMPAN PERUBAHAN",
+        "tracking" => "MULAI MELACAK",
     ],
     "modal" => [
         "auth" => [
@@ -481,7 +488,9 @@ return [
         "headquarters" => "Kantor Pusat",
         "phone" => "Telepon",
         "link" => "Mengenal Kami",
+        "tracking" => "Lacak Pesanan Anda",
         "payment" => "Mitra Pembayaran",
+        "shipping" => "Mitra Pengiriman",
         "subs-head" => "Berlangganan Sekarang",
         "subs-capt" => "<strong>Berlangganan</strong> Newsletter Kami untuk mendapatkan Berita Penting, Penawawan Menakjubkan &amp; <em>Inside Scoops</em>:",
         "social" => "Ikuti Kami",

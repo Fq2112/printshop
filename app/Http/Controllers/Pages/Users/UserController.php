@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Pages\Users;
 use App\Http\Controllers\Controller;
 use App\Models\Address;
 use App\Models\Cart;
+use App\Models\OccupancyType;
 use App\Models\Order;
 use App\Models\PaymentCart;
 use App\Models\PromoCode;
+use App\Models\Province;
 use App\Support\StatusProgress;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -28,6 +30,8 @@ class UserController extends Controller
             });
         $carts = $archive;
 
+        $provinces = Province::all();
+        $occupancies = OccupancyType::all();
         $addresses = Address::where('user_id', $user->id)->orderByDesc('id')->get();
 
         $a = 1;
@@ -36,11 +40,11 @@ class UserController extends Controller
         $d = 1;
         $e = 1;
         $total_item = Cart::where('user_id', $user->id)->where('isCheckout', false)->get();
+        $total_weight = 0;
         $subtotal = 0;
-        $ongkir = 0;
 
-        return view('pages.main.users.cart', compact('user', 'bio', 'carts', 'addresses',
-            'a', 'b', 'c', 'd', 'e', 'total_item', 'subtotal', 'ongkir'));
+        return view('pages.main.users.cart', compact('user', 'bio', 'carts', 'provinces',
+            'occupancies', 'addresses', 'a', 'b', 'c', 'd', 'e', 'total_item', 'total_weight', 'subtotal'));
     }
 
     public function editDesign(Request $request)
@@ -54,6 +58,19 @@ class UserController extends Controller
         return [
             'is_design' => $specs->is_design == true ? 1 : 0,
             'file' => $cart->file, 'size' => $size, 'path' => $path, 'link' => $cart->link
+        ];
+    }
+
+    public function editNote(Request $request)
+    {
+        $cart = Cart::find($request->id);
+        $data = !is_null($cart->subkategori_id) ? $cart->getSubKategori : $cart->getCluster;
+
+        return [
+            'note' => $cart->note,
+            'name' => $data->name,
+            'url_update' => route('user.update-order.cart', ['id' => $cart->id]),
+            'url_delete' => route('user.delete-note.cart', ['id' => $cart->id]),
         ];
     }
 
@@ -283,7 +300,7 @@ class UserController extends Controller
                     'Content-Length: ' . filesize($file_path)
                 ]);
             } else {
-                return 0;
+                return back()->with('warning', __('lang.alert.download-fail'));
             }
         }
     }

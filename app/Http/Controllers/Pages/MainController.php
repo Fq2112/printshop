@@ -3,12 +3,9 @@
 namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
-use App\Models\Address;
 use App\Models\Cart;
 use App\Models\ClusterKategori;
-use App\Models\Province;
 use App\Models\SubKategori;
-use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -149,12 +146,9 @@ class MainController extends Controller
             ->orwhere('permalink->id', $request->produk)->whereHas('getCluster')->first();
         $clust = ClusterKategori::where('permalink->en', $request->produk)
             ->orwhere('permalink->id', $request->produk)->first();
-        $provinces = Province::all();
         $guidelines = null;
-        $addresses = Address::where('user_id', Auth::id())->orderByDesc('id')->get();
 
         $cart = $request->has('cart_id') ? Cart::find(decrypt($request->cart_id)) : null;
-        $shipping = !is_null($cart) ? Address::find($cart->address_id) : null;
 
         if (!is_null($sub)) {
             $data = $sub;
@@ -166,8 +160,7 @@ class MainController extends Controller
                 $specs = $data->getSubkatSpecs;
                 $guidelines = $data->guidelines;
 
-                return view('pages.main.form-pemesanan', compact('clust', 'data', 'provinces', 'specs',
-                    'guidelines', 'addresses', 'cart', 'shipping'));
+                return view('pages.main.form-pemesanan', compact('clust', 'data', 'specs', 'guidelines', 'cart'));
             }
 
         } elseif (!is_null($clust)) {
@@ -175,8 +168,7 @@ class MainController extends Controller
             $specs = $data->getClusterSpecs;
             $guidelines = $data->getSubKategori->guidelines;
 
-            return view('pages.main.form-pemesanan', compact('clust', 'data', 'provinces', 'specs',
-                'guidelines', 'addresses', 'cart', 'shipping'));
+            return view('pages.main.form-pemesanan', compact('clust', 'data', 'specs', 'guidelines', 'cart'));
         }
 
         return back();
@@ -216,7 +208,6 @@ class MainController extends Controller
             'user_id' => Auth::id(),
             'subkategori_id' => !is_null($sub) ? $sub->id : null,
             'cluster_id' => !is_null($clust) ? $clust->id : null,
-            'address_id' => $request->address_id,
             'material_id' => $request->materials,
             'type_id' => $request->type,
             'balance_id' => $request->balance,
@@ -249,10 +240,6 @@ class MainController extends Controller
             'material_color_id' => $request->material_color,
             'qty' => $request->qty,
             'price_pcs' => $request->price_pcs,
-            'production_finished' => $request->production_finished,
-            'ongkir' => $request->ongkir,
-            'delivery_duration' => $request->delivery_duration,
-            'received_date' => $request->received_date,
             'total' => $request->total,
             'file' => $file,
             'link' => $link,
@@ -289,7 +276,6 @@ class MainController extends Controller
         }
 
         $cart->update([
-            'address_id' => $request->address_id,
             'material_id' => $request->materials,
             'type_id' => $request->type,
             'balance_id' => $request->balance,
@@ -322,10 +308,6 @@ class MainController extends Controller
             'material_color_id' => $request->material_color,
             'qty' => $request->qty,
             'price_pcs' => $request->price_pcs,
-            'production_finished' => $request->production_finished,
-            'ongkir' => $request->ongkir,
-            'delivery_duration' => $request->delivery_duration,
-            'received_date' => $request->received_date,
             'total' => $request->total,
             'file' => $file,
             'link' => $link,
@@ -372,34 +354,5 @@ class MainController extends Controller
         }
 
         return collect($sub)->merge($cluster);
-    }
-
-    public function cekPengirimanProduk(Request $request)
-    {
-        $client = new \GuzzleHttp\Client([
-            'headers' => [
-                'Accept' => 'application/json',
-                'key' => env('RajaOngkir_KEY')
-            ],
-            'defaults' => [
-                'exceptions' => false
-            ]
-        ]);
-
-        try {
-            $response = $client->post('https://api.rajaongkir.com/starter/cost', [
-                'form_params' => [
-                    'origin' => 444,
-                    'destination' => $request->destination,
-                    'weight' => 2,
-                    'courier' => 'jne'
-                ]
-            ])->getBody()->getContents();
-
-            return json_decode($response, true);
-
-        } catch (ConnectException $e) {
-            return response()->json();
-        }
     }
 }

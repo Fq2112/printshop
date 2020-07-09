@@ -154,8 +154,8 @@
                             <img src="{{asset('images/logotype-footer.png')}}" alt="Logo" class="footer-logo"
                                  style="margin-top: -1.5rem">
                             {!! __('lang.footer.caption') !!}
-                            <div
-                                style="background: url('{{asset('images/world_map.png')}}') no-repeat center center; background-size: 100%;">
+                            <div class="mb-3"
+                                 style="background: url('{{asset('images/world_map.png')}}') no-repeat center center; background-size: 100%;">
                                 <address class="mb-3">
                                     <strong>{{__('lang.footer.headquarters')}}:</strong><br>
                                     Raya Kenjeran 469 Gading, Tambaksari, Surabaya, Jawa Timur &ndash; 60134.
@@ -183,18 +183,24 @@
                             </ul>
                         </div>
 
-                        <div class="widget clearfix">
-                            <h4 class="ls0 mb-3 nott" data-toc-skip>{{__('lang.footer.payment')}}</h4>
-                            <img src="{{asset('images/midtrans.svg')}}" alt="Logo" class="footer-logo">
+                        <div class="widget mt-0 clearfix">
+                            <h4 class="ls0 mb-0 nott" data-toc-skip>{{__('lang.footer.tracking')}}</h4>
+                            <button type="button" onclick="orderTrack()"
+                                    class="button button-3d button-primary button-rounded mx-0 mb-3">
+                                <i class="icon-line2-target mr-2"></i>{{__('lang.button.tracking')}}
+                            </button>
                         </div>
                     </div>
 
                     <div class="col-lg-4 col-md-4 col-sm-12">
-                        <div id="instagram" class="widget clearfix">
-                            <h4 class="ls0 mb-3 nott" data-toc-skip>{{__('lang.ig-feed.head')}}</h4>
-                            <div id="instagram-photos" class="instagram-photos masonry-thumbs grid-4"
-                                 data-user="5834720953" data-count="12" data-type="user"></div>
-                            {{--3832059847 | 5834720953--}}
+                        <div class="widget clearfix">
+                            <h4 class="ls0 mb-3 nott" data-toc-skip>{{__('lang.footer.payment')}}</h4>
+                            <img src="{{asset('images/midtrans.svg')}}" alt="Logo" class="footer-logo">
+                        </div>
+
+                        <div class="widget clearfix">
+                            <h4 class="ls0 mb-3 nott" data-toc-skip>{{__('lang.footer.shipping')}}</h4>
+                            <img src="{{asset('images/shipper.png')}}" alt="Logo" class="footer-logo">
                         </div>
                     </div>
                 </div>

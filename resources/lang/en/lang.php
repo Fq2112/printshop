@@ -125,6 +125,7 @@ return [
             ],
             "shipping" => [
                 "head" => "Shipping Address",
+                "head2" => "Shipping Option",
                 "capt" => "Decide where your print products will be sent",
                 "empty-head" => "You haven't made any addresses",
                 "empty-capt" => "Open \"Edit Profile\" page and manage your address list now",
@@ -150,9 +151,14 @@ return [
             "head" => "Billing Address",
             "capt" => "Decide where we should send your bills",
         ],
+        "addressee" => [
+            "head" => "Order Addressee",
+            "capt" => "Decide where your print products will be sent along with the bills"
+        ],
         "summary" => [
             "promo" => "Promo Code",
             "discount" => "Discount",
+            "choose-shipping" => "Please choose the shipping address for your order first.",
             "choose-billing" => "Please choose the billing address for your order first.",
         ],
     ],
@@ -343,6 +349,7 @@ return [
         "edit" => "EDIT",
         "delete" => "DELETE",
         "save" => "SAVE CHANGES",
+        "tracking" => "START TRACKING",
     ],
     "modal" => [
         "auth" => [
@@ -481,7 +488,9 @@ return [
         "headquarters" => "Headquarters",
         "phone" => "Phone",
         "link" => "Get to Know Us",
+        "tracking" => "Track your Order",
         "payment" => "Payment Partner",
+        "shipping" => "Shipping Partner",
         "subs-head" => "Subscribe Now",
         "subs-capt" => "<strong>Subscribe</strong> to Our Newsletter to get Important News, Amazing Offers &amp; Inside Scoops:",
         "social" => "Get in Touch",

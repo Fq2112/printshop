@@ -330,7 +330,7 @@
                             </div>
                         </div>
 
-                        <div class="myCard mb-4">
+                        <div class="myCard">
                             <div class="card-content">
                                 <div class="card-title" style="text-transform: none">
                                     <h4 class="text-center"
@@ -382,27 +382,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div id="card-shipping" class="myCard" style="display: none">
-                            <div class="card-content">
-                                <div class="card-title" style="text-transform: none">
-                                    <h4 class="text-center" style="color: #f89406">
-                                        {{__('lang.product.form.shipping.head')}}</h4>
-                                    <h5 class="text-center mb-2" style="text-transform: none">
-                                        {{__('lang.product.form.shipping.capt')}}</h5>
-                                    <div class="divider divider-center mt-1 mb-1"><i class="icon-circle"></i></div>
-                                    <div class="component-accordion">
-                                        @include('layouts.partials.users._shippingForm')
-                                    </div>
-                                    <input id="price_pcs" type="hidden" name="price_pcs">
-                                    <input id="production_finished" type="hidden" name="production_finished">
-                                    <input id="ongkir" type="hidden" name="ongkir">
-                                    <input id="delivery_duration" type="hidden" name="delivery_duration">
-                                    <input id="received_date" type="hidden" name="received_date">
-                                    <input id="total" type="hidden" name="total">
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="sidebar sticky-sidebar-wrap col_last nobottommargin clearfix">
@@ -432,46 +411,17 @@
                                         </div>
                                     </div>
                                     <ul class="list-group list-group-flush">
-                                        <div class="css3-spinner" style="z-index: 1;top: -1rem;display: none">
-                                            <div class="css3-spinner-bounce1"></div>
-                                            <div class="css3-spinner-bounce2"></div>
-                                            <div class="css3-spinner-bounce3"></div>
-                                        </div>
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.quantity')}}
                                             <b class="fright show-quantity">&ndash;</b>
-                                        </li>
-                                        <li class="list-group-item noborder">
-                                            {{__('lang.product.form.summary.price', ['unit' => strtok($specs->getUnit->name, '(')])}}
-                                            <b class="fright show-price">&ndash;</b>
                                         </li>
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.weight')}}
                                             <b class="fright show-weight">&ndash;</b>
                                         </li>
                                         <li class="list-group-item noborder">
-                                            {{__('lang.product.form.summary.production')}}
-                                            <i class="i-plain i-small icon-line2-info ml-1" data-toggle="popover"
-                                               data-placement="top" title="{{__('lang.alert.warning')}}"
-                                               data-content="{{__('lang.popover.production_finished')}}"
-                                               style="cursor: help;float: none"></i>
-                                            <b class="fright show-production">&ndash;</b>
-                                        </li>
-                                        <li class="list-group-item noborder">
-                                            {{__('lang.product.form.summary.ongkir')}}
-                                            <b class="fright show-ongkir">&ndash;</b>
-                                        </li>
-                                        <li class="list-group-item noborder">
-                                            {{__('lang.product.form.summary.delivery')}}
-                                            <b class="fright show-delivery">&ndash;</b>
-                                        </li>
-                                        <li class="list-group-item noborder">
-                                            {{__('lang.product.form.summary.received')}}
-                                            <i class="i-plain i-small icon-line2-info ml-1" data-toggle="popover"
-                                               data-placement="top" title="{{__('lang.alert.warning')}}"
-                                               data-content="{{__('lang.popover.received_date')}}"
-                                               style="cursor: help;float: none"></i>
-                                            <b class="fright show-received">&ndash;</b>
+                                            {{__('lang.product.form.summary.price', ['unit' => strtok($specs->getUnit->name, '(')])}}
+                                            <b class="fright show-price">&ndash;</b>
                                         </li>
                                     </ul>
                                     <div class="card-content pt-0 pb-0">
@@ -487,8 +437,6 @@
                                         <div class="alert alert-warning text-justify">
                                             <i class="icon-exclamation-sign"></i><b>{{__('lang.alert.warning')}}</b>
                                             <span id="alert-quantity">{{__('lang.product.form.summary.alert3')}}</span>
-                                            <span id="alert-shipping" style="display: none">
-                                                {{__('lang.product.form.summary.alert2')}}</span>
                                             <span id="alert-order" style="display: none">
                                                 {!! __('lang.product.form.summary.alert', ['quantity' => '1 '.
                                                 $specs->getUnit->name, 'product' => $data->name]) !!}</span>
@@ -580,21 +528,21 @@
                             </div>
                         </div>
                     @endauth
+
+                    <input id="price_pcs" type="hidden" name="price_pcs">
+                    <input id="total" type="hidden" name="total">
                 </form>
             </div>
         </div>
     </section>
 @endsection
 @push('scripts')
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIljHbKjgtTrpZhEiHum734tF1tolxI68&libraries=geometry,places"></script>
     <script>
         var collapse = $('.panel-collapse'), input_qty = $("#input-quantity"), range_slider = $("#range-quantity"),
             btn_upload = $("#btn_upload"), upload_input = $("#file"), link_input = $("#link"),
             range_max = 100, qty = parseInt('{{!is_null($cart) ? $cart->qty : 0}}'),
-            weight = Number('{{$specs->weight / 1000}}'), total_weight = 0,
-            pricing_specs = 0, disc_1 = 0, disc_2 = 0, disc_3 = 0, price_pcs = parseInt('{{$specs->price}}'),
-            str_unit = ' {{$specs->getUnit->name}}', production_day = 3, ongkir = 0, etd = '', str_etd = '', total = 0;
+            weight = Number('{{$specs->weight / 1000}}'), pricing_specs = 0, disc_1 = 0, disc_2 = 0, disc_3 = 0,
+            price_pcs = parseInt('{{$specs->price}}'), str_unit = ' {{$specs->getUnit->name}}', total = 0;
 
         $(function () {
             range_slider.ionRangeSlider({
@@ -619,7 +567,6 @@
                     } else {
                         resetter(0);
                         setPrice();
-                        $("#card-shipping").hide();
                     }
                 }
             });
@@ -682,9 +629,7 @@
 
             setPrice();
 
-            @if(!is_null($shipping))
-            getShipping('{{$shipping->city_id}}', 'address', '{{$shipping->is_main == false ?
-            $shipping->getOccupancy->name : $shipping->getOccupancy->name.' ['.__('lang.profile.main-address').']'}}');
+            @if(!is_null($cart))
             resetter(1);
             @endif
 
@@ -712,7 +657,6 @@
                 custom = $(this).find('input[type=radio]').val() == 90 ? 1 : 0,
                 spec_val = $("#" + spec).data('name'), str_spec = '';
 
-            $("#card-shipping").hide();
             str_spec = check == 'balance' ? 'Rp' + number_format(parseInt(spec_val), 2, ',', '.') : spec_val;
 
             if (custom == 1) {
@@ -771,7 +715,6 @@
             } else {
                 resetter(0);
                 setPrice();
-                $("#card-shipping").hide();
             }
         });
 
@@ -789,42 +732,34 @@
                     price_pcs = disc_3;
                 }
 
-                total = (qty * price_pcs) + ongkir;
+                total = qty * price_pcs;
                 input_qty.val(qty);
                 $(".show-quantity").text(qty + str_unit);
                 $(".show-price").text("Rp" + number_format(price_pcs, 2, ',', '.'));
-                $(".show-weight").text(number_format(weight * qty, 1, ',', '.') + " kg");
-                $(".show-production").text(moment().add(production_day, 'days').format('DD MMM YYYY'));
+                $(".show-weight").text(number_format(weight * qty, 2, ',', '.') + " kg");
                 $("#price_pcs").val(price_pcs);
-                $("#production_finished").val(moment().add(production_day, 'days').format('YYYY-MM-DD'));
                 $(".show-total").text("Rp" + number_format(total, 2, ',', '.'));
+                $("#total").val(total);
 
-                if ($("#alert-order").css('display') == 'none') {
-                    $("#alert-shipping").show();
-                    $("#alert-order, #alert-quantity").hide();
-                }
-
-                $("#card-shipping").show();
+                $("#alert-quantity").hide();
+                $("#alert-order").show();
+                btn_upload.removeAttr('disabled');
 
             } else {
                 range_max = 100;
                 range_slider.data("ionRangeSlider").update({max: range_max, from: 0});
-                $("#card-shipping div[role=tabpanel]").collapse('hide');
-                $("#card-shipping input[type=radio]").prop('checked', false);
-                $("#shipping_estimation").val('default').selectpicker('refresh');
 
                 qty = 0;
-                ongkir = 0;
                 pricing_specs = 0;
                 price_pcs = parseInt('{{$specs->price}}');
                 total = 0;
 
                 input_qty.val(qty);
-                $(".show-address, .show-city, .show-quantity, .show-price, .show-weight, .show-production, .show-ongkir, .show-delivery, .show-received, .show-total").html('&ndash;');
-                $("#price_pcs, #production_finished, #ongkir, #delivery_duration, #received_date, #total").val(null);
+                $(".show-address, .show-city, .show-quantity, .show-price, .show-weight, .show-total").html('&ndash;');
+                $("#price_pcs, #total").val(null);
 
                 $("#alert-quantity").show();
-                $("#alert-order, #alert-shipping").hide();
+                $("#alert-order").hide();
                 btn_upload.attr('disabled', 'disabled');
             }
         }
@@ -877,93 +812,6 @@
             $("#qty-2150").text('Rp' + number_format(disc_1, 2, ',', '.'));
             $("#qty-51100").text('Rp' + number_format(disc_2, 2, ',', '.'));
             $("#qty-100").text('Rp' + number_format(disc_3, 2, ',', '.'));
-        }
-
-        function getShipping(city, check, name) {
-            var add_receive;
-
-            $(".show-" + check).text(name);
-            $('#collapse-' + check).collapse('hide');
-            $('html,body').animate({scrollTop: $("#accordion2").parent().parent().offset().top}, 0);
-
-            if (check == 'address') {
-                $("#shipping_estimation").val('default').selectpicker('refresh');
-                $(".show-city").html('&ndash;');
-            } else {
-                $(".address-rb").prop('checked', false);
-                $(".show-address").html('&ndash;');
-                $("#alert-shipping").show();
-                $("#alert-order, #alert-quantity").hide();
-                btn_upload.attr('disabled', 'disabled');
-            }
-
-            clearTimeout(this.delay);
-            this.delay = setTimeout(function () {
-                $.ajax({
-                    url: "{{route('get.cari-pengiriman.produk')}}?destination=" + city,
-                    type: "GET",
-                    beforeSend: function () {
-                        $('.css3-spinner').show();
-                        $(".list-group-flush").css('opacity', '.3');
-                    },
-                    complete: function () {
-                        $('.css3-spinner').hide();
-                        $(".list-group-flush").css('opacity', '1');
-                    },
-                    success: function (data) {
-                        if (data['rajaongkir']['results'][0]['costs'].length > 0) {
-                            $.each(data['rajaongkir']['results'][0]['costs'], function (i, val) {
-                                if (val.service == 'REG' || val.service == 'CTCYES') {
-                                    ongkir = val.cost[0].value;
-                                    etd = val.cost[0].etd;
-                                }
-                            });
-
-                            total += parseInt(ongkir);
-
-                            if (etd.includes('+')) {
-                                str_etd = '&ge; ' + etd.replace('+', '') + ' {{__('lang.product.form.summary.day', ['s' => 's'])}}';
-                                add_receive = etd.replace('+', '');
-                            } else {
-                                if (etd == '1-1') {
-                                    str_etd = '&le; 1 {{__('lang.product.form.summary.day', ['s' => null])}}'
-                                } else {
-                                    str_etd = etd.replace('-', ' – ') + ' {{__('lang.product.form.summary.day', ['s' => 's'])}}';
-                                }
-                                add_receive = etd.substr(-1);
-                            }
-
-                            $(".show-ongkir").text("Rp" + number_format(ongkir, 2, ',', '.'));
-                            $(".show-delivery").html(str_etd);
-                            $(".show-received").text(moment().add(parseInt(production_day) + parseInt(add_receive), 'days').format('DD MMM YYYY'));
-                            $(".show-total").text("Rp" + number_format(total, 2, ',', '.'));
-
-                            $("#ongkir").val(ongkir);
-                            $("#delivery_duration").val(etd);
-                            $("#received_date").val(moment().add(parseInt(production_day) + parseInt(add_receive), 'days').format('YYYY-MM-DD'));
-                            $("#total").val(total);
-
-                            if (check == 'address') {
-                                $("#alert-shipping, #alert-quantity").hide();
-                                $("#alert-order").show();
-                                btn_upload.removeAttr('disabled');
-                            }
-
-                        } else {
-                            $(".show-ongkir, .show-delivery, .show-received").text('N/A');
-                            $("#ongkir, #delivery_duration, #received_date, #total").val(null);
-                            $("#alert-shipping").show();
-                            $("#alert-order, #alert-quantity").hide();
-                            btn_upload.attr('disabled', 'disabled');
-                        }
-                    },
-                    error: function () {
-                        swal('{{__('lang.alert.error')}}', '{{__('lang.alert.error-capt')}}', 'error');
-                    }
-                });
-            }.bind(this), 800);
-
-            return false;
         }
 
         btn_upload.on('click', function () {
@@ -1101,5 +949,4 @@
             return false;
         });
     </script>
-    @include('layouts.partials.users._scriptsAddress')
 @endpush

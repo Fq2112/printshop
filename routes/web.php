@@ -94,11 +94,6 @@ Route::group(['namespace' => 'Pages'], function () {
         'as' => 'get.cari-nama.produk'
     ]);
 
-    Route::get('cari/pengiriman', [
-        'uses' => 'MainController@cekPengirimanProduk',
-        'as' => 'get.cari-pengiriman.produk'
-    ]);
-
     Route::group(['prefix' => 'info'], function () {
 
         Route::get('pro', [
@@ -181,6 +176,12 @@ Route::group(['namespace' => 'Pages'], function () {
                 'middleware' => 'user.bio',
                 'uses' => 'UserController@editDesign',
                 'as' => 'user.edit-design.cart',
+            ]);
+
+            Route::get('edit/{id}/note', [
+                'middleware' => 'user.bio',
+                'uses' => 'UserController@editNote',
+                'as' => 'user.edit-note.cart',
             ]);
 
             Route::put('update/{id}/order', [

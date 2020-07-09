@@ -28,10 +28,6 @@ class CreateCartsTable extends Migration
             $table->foreign('cluster_id')->references('id')->on('cluster_kategoris')
                 ->onDelete('CASCADE')->onUpdate('CASCADE');
 
-            $table->unsignedBigInteger('address_id');
-            $table->foreign('address_id')->references('id')->on('addresses')
-                ->onDelete('CASCADE')->onUpdate('CASCADE');
-
             $table->integer('material_id')->nullable();
             $table->integer('type_id')->nullable();
             $table->integer('balance_id')->nullable();
@@ -65,10 +61,6 @@ class CreateCartsTable extends Migration
 
             $table->integer('qty');
             $table->string('price_pcs');
-            $table->date('production_finished');
-            $table->string('ongkir');
-            $table->string('delivery_duration');
-            $table->date('received_date');
             $table->string('total');
             $table->text('file')->nullable();
             $table->text('link')->nullable();

@@ -11,22 +11,20 @@ class PaymentCart extends Model
 
     protected $guarded = ['id'];
 
-    protected $casts = [
-        'cart_ids' => 'array',
-    ];
+    protected $casts = ['cart_ids' => 'array'];
 
     public function getUser()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function getAddress()
+    public function getShippingAddress()
     {
-        return $this->belongsTo(Address::class, 'address_id');
+        return $this->belongsTo(Address::class, 'shipping_address');
     }
 
-    public function getCart()
+    public function getBillingAddress()
     {
-        return $this->belongsTo(Cart::class, 'cart_id');
+        return $this->belongsTo(Address::class, 'billing_address');
     }
 }

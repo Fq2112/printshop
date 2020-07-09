@@ -237,7 +237,7 @@
         }
 
         .card-input img {
-            width: 128px;
+            /*width: 128px;*/
             height: 100%;
         }
 
@@ -326,23 +326,13 @@
                                                                 @foreach($archive as $i => $row)
                                                                     @php
                                                                         $data = !is_null($row->subkategori_id) ? $row->getSubKategori : $row->getCluster;
-                                                                        $subtotal += ($row->total - $row->ongkir);
-                                                                        $ongkir += $row->ongkir;
+                                                                        $subtotal += $row->total;
                                                                         $image = !is_null($row->subkategori_id) ?
                                                                         asset('storage/products/banner/'.$row->getSubKategori->banner) :
                                                                         asset('storage/products/thumb/'.$row->getCluster->thumbnail);
                                                                         $specs = !is_null($row->subkategori_id) ? $data->getSubkatSpecs : $data->getClusterSpecs;
-                                                                        if(strpos($row->delivery_duration, '+')) {
-                                                                            $etd = '&ge; '. str_replace('+','',$row->delivery_duration) .' '.__(__('lang.product.form.summary.day', ['s' => 's']));
-                                                                            $received = str_replace('+','',$row->delivery_duration);
-                                                                        } else {
-                                                                            if($row->delivery_duration == '1-1') {
-                                                                                $etd = '&le; 1 ' . __(__('lang.product.form.summary.day', ['s' => null]));
-                                                                            } else {
-                                                                                $etd = str_replace('-', ' – ',$row->delivery_duration) . ' ' . __('lang.product.form.summary.day', ['s' => 's']);
-                                                                            }
-                                                                            $received = substr($row->delivery_duration,-1);
-                                                                        }
+                                                                        $weight = ($specs->weight / 1000) * $row->qty;
+                                                                        $total_weight += $weight;
                                                                     @endphp
                                                                     <div class="media">
                                                                         <div data-placement="bottom"
@@ -367,10 +357,8 @@
                                                                                    data-toggle="tooltip"
                                                                                    data-placement="right"
                                                                                    title="{{__('lang.tooltip.note')}}"
-                                                                                   style="cursor: pointer;float: none"
-                                                                                   onclick="manageNote('{{$row->note}}','{{$data->name}}',
-                                                                                       '{{route('user.update-order.cart', ['id' => $row->id])}}',
-                                                                                       '{{route('user.delete-note.cart', ['id' => $row->id])}}')"></i>
+                                                                                   style="cursor:pointer;float:none;color:#f89406"
+                                                                                   onclick="manageNote('{{route('user.edit-note.cart', ['id' => $row->id])}}')"></i>
                                                                                 <span class="fright">
                                                                                     <a style="color: #f89406;cursor: pointer;"
                                                                                        href="{{route('produk', ['produk' => $data->permalink, 'cart_id' => encrypt($row->id)])}}">
@@ -407,24 +395,9 @@
                                                                                             </li>
                                                                                             <li class="list-group-item noborder">
                                                                                                 {{__('lang.product.form.summary.weight')}}
-                                                                                                <b class="fright">{{number_format($specs->weight / 1000,1,',','.')}}
+                                                                                                <b class="fright">
+                                                                                                    {{number_format($weight,2,',','.')}}
                                                                                                     kg</b>
-                                                                                            </li>
-                                                                                            <li class="list-group-item noborder">
-                                                                                                {{__('lang.product.form.summary.production')}}
-                                                                                                <b class="fright">{{now()->addDays(3)->formatLocalized('%d %b %Y')}}</b>
-                                                                                            </li>
-                                                                                            <li class="list-group-item noborder">
-                                                                                                {{__('lang.product.form.summary.ongkir')}}
-                                                                                                <b class="fright">Rp{{number_format($row->ongkir,2,',','.')}}</b>
-                                                                                            </li>
-                                                                                            <li class="list-group-item noborder">
-                                                                                                {{__('lang.product.form.summary.delivery')}}
-                                                                                                <b class="fright">{!! $etd !!}</b>
-                                                                                            </li>
-                                                                                            <li class="list-group-item noborder">
-                                                                                                {{__('lang.product.form.summary.received')}}
-                                                                                                <b class="fright">{{now()->addDays(3+$received)->formatLocalized('%d %b %Y')}}</b>
                                                                                             </li>
                                                                                         </ul>
                                                                                         <div
@@ -441,7 +414,8 @@
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <div class="toggle toggle-border mb-3">
+                                                                                <div
+                                                                                    class="toggle toggle-border {{$row->note != "" ? 'mb-3' : 'mb-0'}}">
                                                                                     <div
                                                                                         class="togglet toggleta font-weight-normal text-uppercase">
                                                                                         <i class="toggle-closed icon-chevron-down1"></i>
@@ -654,79 +628,6 @@
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <div
-                                                                                    class="toggle toggle-border {{$row->note != "" ? 'mb-3' : 'mb-0'}}">
-                                                                                    <div
-                                                                                        class="togglet toggleta font-weight-normal text-uppercase">
-                                                                                        <i class="toggle-closed icon-chevron-down1"></i>
-                                                                                        <i class="toggle-open icon-chevron-up1"></i>
-                                                                                        {{__('lang.product.form.shipping.head')}}
-                                                                                    </div>
-                                                                                    <div class="togglec">
-                                                                                        <div class="media">
-                                                                                            <div
-                                                                                                class="align-self-center ml-3">
-                                                                                                <img alt="icon"
-                                                                                                     width="80"
-                                                                                                     src="{{asset('images/icons/occupancy/'.$row->getAddress->getOccupancy->image)}}">
-                                                                                            </div>
-                                                                                            <div
-                                                                                                class="ml-3 media-body">
-                                                                                                <h5 class="mt-3 mb-1">
-                                                                                                    <i class="icon-building mr-1"></i>{{$row->getAddress->getOccupancy->name}}
-                                                                                                    {!! $row->getAddress->is_main == false ? '' : '<span style="font-weight: 500;color: unset">['.__('lang.profile.main-address').']</span>'!!}
-                                                                                                </h5>
-                                                                                                <blockquote class="mb-3"
-                                                                                                            style="font-size: 14px;text-transform: none">
-                                                                                                    <table class="m-0"
-                                                                                                           style="font-size: 14px">
-                                                                                                        <tr data-toggle="tooltip"
-                                                                                                            data-placement="left"
-                                                                                                            title="{{ucwords(__('lang.placeholder.name'))}}">
-                                                                                                            <td>
-                                                                                                                <i class="icon-id-card"></i>
-                                                                                                            </td>
-                                                                                                            <td>&nbsp;
-                                                                                                            </td>
-                                                                                                            <td>{{$row->getAddress->name}}</td>
-                                                                                                        </tr>
-                                                                                                        <tr data-toggle="tooltip"
-                                                                                                            data-placement="left"
-                                                                                                            title="{{__('lang.footer.phone')}}">
-                                                                                                            <td>
-                                                                                                                <i class="icon-phone"></i>
-                                                                                                            </td>
-                                                                                                            <td>&nbsp;
-                                                                                                            </td>
-                                                                                                            <td>{{$row->getAddress->phone}}</td>
-                                                                                                        </tr>
-                                                                                                        <tr data-toggle="tooltip"
-                                                                                                            data-placement="left"
-                                                                                                            title="{{__('lang.profile.city')}}">
-                                                                                                            <td>
-                                                                                                                <i class="icon-city"></i>
-                                                                                                            </td>
-                                                                                                            <td>&nbsp;
-                                                                                                            </td>
-                                                                                                            <td>{{$row->getAddress->getCity->getProvince->name.', '.$row->getAddress->getCity->name}}</td>
-                                                                                                        </tr>
-                                                                                                        <tr data-toggle="tooltip"
-                                                                                                            data-placement="left"
-                                                                                                            title="{{__('lang.profile.address')}}">
-                                                                                                            <td>
-                                                                                                                <i class="icon-map-marker-alt"></i>
-                                                                                                            </td>
-                                                                                                            <td>&nbsp;
-                                                                                                            </td>
-                                                                                                            <td>{{$row->getAddress->address.' - '.$row->getAddress->postal_code}}</td>
-                                                                                                        </tr>
-                                                                                                    </table>
-                                                                                                </blockquote>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
                                                                                 @if($row->note != "")
                                                                                     <div
                                                                                         class="toggle toggle-border mb-0">
@@ -782,12 +683,146 @@
                                 <div class="card-content">
                                     <div class="card-title" style="text-transform: none">
                                         <h4 class="text-center" style="color: #f89406">
-                                            {{__('lang.cart.billing.head')}}</h4>
+                                            {{__('lang.cart.addressee.head')}}</h4>
                                         <h5 class="text-center mb-2" style="text-transform: none">
-                                            {{__('lang.cart.billing.capt')}}</h5>
+                                            {{__('lang.cart.addressee.capt')}}</h5>
                                         <div class="divider divider-center mt-1 mb-1"><i class="icon-circle"></i></div>
                                         <div class="component-accordion">
-                                            @include('layouts.partials.users._shippingForm')
+                                            <div id="preload-shipping" class="css3-spinner"
+                                                 style="z-index: 1;top: 0;display: none">
+                                                <div class="css3-spinner-bounce1"></div>
+                                                <div class="css3-spinner-bounce2"></div>
+                                                <div class="css3-spinner-bounce3"></div>
+                                            </div>
+                                            <div class="panel-group" id="accordion2" role="tablist">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" role="tab" id="heading-shipping">
+                                                        <h4 class="panel-title">
+                                                            <a role="button" data-toggle="collapse"
+                                                               href="#collapse-shipping" aria-expanded="false"
+                                                               aria-controls="collapse-shipping" class="collapsed">
+                                                                {{__('lang.product.form.shipping.head')}}
+                                                                <b class="show-shipping">&ndash;</b>
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapse-shipping" class="panel-collapse collapse"
+                                                         role="tabpanel" aria-labelledby="heading-shipping"
+                                                         aria-expanded="false" style="height:0;"
+                                                         data-parent="#accordion2">
+                                                        <div class="panel-body">
+                                                            <div
+                                                                class="row {{count($addresses) > 0 ? '' : 'justify-content-center text-center'}} addressee">
+                                                                @if(count($addresses) > 0)
+                                                                    @foreach($addresses as $row)
+                                                                        @php $occupancy = $row->is_main == false ? $row->getOccupancy->name : $row->getOccupancy->name.' ['.__('lang.profile.main-address').']'; @endphp
+                                                                        <div class="col-12 mb-3">
+                                                                            <label class="card-label"
+                                                                                   for="shipping_{{$row->id}}">
+                                                                                <input id="shipping_{{$row->id}}"
+                                                                                       class="card-rb" type="radio"
+                                                                                       name="shipping_id"
+                                                                                       value="{{$row->id}}"
+                                                                                       data-name="{{$occupancy}}">
+                                                                                @php $check = 'shipping'; @endphp
+                                                                                @include('layouts.partials.users._shippingForm')
+                                                                            </label>
+                                                                        </div>
+                                                                    @endforeach
+                                                                @else
+                                                                    <div class="col-12">
+                                                                        <img width="256" class="img-fluid" alt="Empty"
+                                                                             src="{{asset('images/loader-image.gif')}}">
+                                                                        <h3 class="mt-0 mb-1">{{__('lang.product.form.shipping.empty-head')}}</h3>
+                                                                        <h4 class="m-0" style="text-transform: none">
+                                                                            {{__('lang.product.form.shipping.empty-capt')}}</h4>
+                                                                    </div>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="panel panel-default" style="display: none">
+                                                    <div class="panel-heading" role="tab" id="heading-rate">
+                                                        <h4 class="panel-title">
+                                                            <a role="button" data-toggle="collapse"
+                                                               href="#collapse-rate" aria-expanded="false"
+                                                               aria-controls="collapse-rate" class="collapsed">
+                                                                {{__('lang.product.form.shipping.head2')}}
+                                                                <b class="show-rate">&ndash;</b>
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapse-rate" class="panel-collapse collapse"
+                                                         role="tabpanel" aria-labelledby="heading-rate"
+                                                         aria-expanded="false" style="height:0;"
+                                                         data-parent="#accordion2">
+                                                        <div class="panel-body">
+                                                            <div class="row justify-content-center addressee"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="panel panel-default" style="display: none">
+                                                    <div class="panel-heading" role="tab" id="heading-billing">
+                                                        <h4 class="panel-title">
+                                                            <a role="button" data-toggle="collapse"
+                                                               href="#collapse-billing" aria-expanded="false"
+                                                               aria-controls="collapse-billing" class="collapsed">
+                                                                {{__('lang.cart.billing.head')}}
+                                                                <b class="show-billing">&ndash;</b>
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapse-billing" class="panel-collapse collapse"
+                                                         role="tabpanel" aria-labelledby="heading-billing"
+                                                         aria-expanded="false" style="height:0;"
+                                                         data-parent="#accordion2">
+                                                        <div class="panel-body">
+                                                            <div
+                                                                class="row {{count($addresses) > 0 ? '' : 'justify-content-center text-center'}} addressee">
+                                                                @if(count($addresses) > 0)
+                                                                    @foreach($addresses as $row)
+                                                                        @php $occupancy = $row->is_main == false ? $row->getOccupancy->name : $row->getOccupancy->name.' ['.__('lang.profile.main-address').']'; @endphp
+                                                                        <div class="col-12 mb-3">
+                                                                            <label class="card-label"
+                                                                                   for="billing_{{$row->id}}">
+                                                                                <input id="billing_{{$row->id}}"
+                                                                                       class="card-rb" type="radio"
+                                                                                       name="billing_id"
+                                                                                       value="{{$row->id}}"
+                                                                                       data-name="{{$occupancy}}">
+                                                                                @php $check = 'billing'; @endphp
+                                                                                @include('layouts.partials.users._shippingForm')
+                                                                            </label>
+                                                                        </div>
+                                                                    @endforeach
+                                                                @else
+                                                                    <div class="col-12">
+                                                                        <img width="256" class="img-fluid" alt="Empty"
+                                                                             src="{{asset('images/loader-image.gif')}}">
+                                                                        <h3 class="mt-0 mb-1">{{__('lang.product.form.shipping.empty-head')}}</h3>
+                                                                        <h4 class="mt-0 mb-3"
+                                                                            style="text-transform: none">
+                                                                            {{__('lang.product.form.shipping.empty-capt')}}</h4>
+                                                                    </div>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="panel panel-default mb-0">
+                                                    <div class="panel-heading" role="button">
+                                                        <button type="button" onclick="addAddress()"
+                                                                class="button button-3d button-primary button-rounded w-100 m-0">
+                                                            <i class="icon-map-marked-alt mr-1"></i>
+                                                            {{__('lang.button.add').' '.__('lang.profile.address')}}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -827,12 +862,13 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div id="preload-summary" class="css3-spinner"
+                                         style="z-index: 1;top: 3rem;display: none">
+                                        <div class="css3-spinner-bounce1"></div>
+                                        <div class="css3-spinner-bounce2"></div>
+                                        <div class="css3-spinner-bounce3"></div>
+                                    </div>
                                     <ul class="list-group list-group-flush">
-                                        <div class="css3-spinner" style="z-index: 1;top: 4em;display: none">
-                                            <div class="css3-spinner-bounce1"></div>
-                                            <div class="css3-spinner-bounce2"></div>
-                                            <div class="css3-spinner-bounce3"></div>
-                                        </div>
                                         <li class="list-group-item noborder">
                                             Subtotal
                                             ({{__('lang.cart.order.product', ['qty' => count($total_item), 's' =>
@@ -849,10 +885,34 @@
                                             <b class="fright"></b>
                                         </li>
                                         <li class="list-group-item noborder">
-                                            {{__('lang.product.form.summary.ongkir')}}
+                                            {{__('lang.product.form.summary.weight')}}
                                             <b class="fright">
-                                                {!! count($carts) > 0 ? 'Rp'.number_format($ongkir,2,',','.') : '&ndash;' !!}
+                                                {!! count($carts) > 0 ? number_format($total_weight,2,',','.').' kg' : '&ndash;' !!}
                                             </b>
+                                        </li>
+                                        <li class="list-group-item noborder">
+                                            {{__('lang.product.form.summary.production')}}
+                                            <i class="i-plain i-small icon-line2-info ml-1" data-toggle="popover"
+                                               data-placement="top" title="{{__('lang.alert.warning')}}"
+                                               data-content="{{__('lang.popover.production_finished')}}"
+                                               style="cursor: help;float: none;margin: 0"></i>
+                                            <b class="fright">{{now()->addDays(3)->formatLocalized('%d %b %Y')}}</b>
+                                        </li>
+                                        <li class="list-group-item noborder">
+                                            {{__('lang.product.form.summary.ongkir')}}
+                                            <b class="fright show-ongkir">&ndash;</b>
+                                        </li>
+                                        <li class="list-group-item noborder">
+                                            {{__('lang.product.form.summary.delivery')}}
+                                            <b class="fright show-delivery">&ndash;</b>
+                                        </li>
+                                        <li class="list-group-item noborder">
+                                            {{__('lang.product.form.summary.received')}}
+                                            <i class="i-plain i-small icon-line2-info ml-1" data-toggle="popover"
+                                               data-placement="top" title="{{__('lang.alert.warning')}}"
+                                               data-content="{{__('lang.popover.received_date')}}"
+                                               style="cursor: help;float: none;margin: 0"></i>
+                                            <b class="fright show-received">&ndash;</b>
                                         </li>
                                     </ul>
                                     <div class="card-content pt-0 pb-0">
@@ -862,24 +922,15 @@
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item noborder">
                                             TOTAL<b class="fright show-total" style="font-size: large">
-                                                {!!count($carts) > 0 ? 'Rp'.number_format(ceil($subtotal + $ongkir),2,',','.') : '&ndash;'!!}</b>
+                                                {!!count($carts) > 0 ? 'Rp'.number_format($subtotal,2,',','.') : '&ndash;'!!}</b>
                                         </li>
                                     </ul>
-                                    <input type="hidden" name="cart_ids"
-                                           value="{{implode(',', $total_item->pluck('id')->toArray())}}">
-                                    <input type="hidden" name="subtotal"
-                                           value="{{count($carts) > 0 ? $subtotal : null}}">
-                                    <input type="hidden" name="ongkir" value="{{count($carts) > 0 ? $ongkir : null}}">
-                                    <input type="hidden" name="discount">
-                                    <input type="hidden" name="discount_price">
-                                    <input type="hidden" name="total"
-                                           value="{{count($carts) > 0 ? ceil($subtotal + $ongkir) : null}}">
-                                    <input type="hidden" name="code"
-                                           value="{{count($carts) > 0 ? strtoupper(uniqid('PYM') . now()->timestamp) : null}}">
-                                    <div id="summary-alert" class="card-content pb-0">
+                                    <div class="card-content pb-0">
                                         <div class="alert alert-warning text-justify">
                                             <i class="icon-exclamation-sign"></i><b>{{__('lang.alert.warning')}}</b>
-                                            {{__('lang.cart.summary.choose-billing')}}
+                                            <span id="shipping-alert">{{__('lang.cart.summary.choose-shipping')}}</span>
+                                            <span id="billing-alert" style="display: none">
+                                                {{__('lang.cart.summary.choose-billing')}}</span>
                                         </div>
                                     </div>
                                     <div class="card-footer p-0">
@@ -892,6 +943,22 @@
                             </div>
                         </div>
                     </div>
+
+                    <input type="hidden" name="cart_ids"
+                           value="{{implode(',', $total_item->pluck('id')->toArray())}}">
+                    <input type="hidden" name="subtotal"
+                           value="{{count($carts) > 0 ? $subtotal : null}}">
+                    <input id="total_weight" type="hidden" name="total_weight"
+                           value="{{count($carts) > 0 ? number_format($total_weight,2,'.',',') : null}}">
+                    <input type="hidden" name="discount">
+                    <input type="hidden" name="discount_price">
+                    <input id="ongkir" type="hidden" name="ongkir">
+                    <input id="delivery_duration" type="hidden" name="delivery_duration">
+                    <input id="received_date" type="hidden" name="received_date">
+                    <input type="hidden" name="total"
+                           value="{{count($carts) > 0 ? $subtotal : null}}">
+                    <input type="hidden" name="code"
+                           value="{{count($carts) > 0 ? strtoupper(uniqid('PYM') . now()->timestamp) : null}}">
                 </form>
 
                 <form id="form-design" action="#" method="post" enctype="multipart/form-data">
@@ -979,6 +1046,173 @@
                         </div>
                     </div>
                 </form>
+
+                <form id="form-address" action="{{route('user.profil-alamat.create')}}" method="post">
+                    @csrf
+                    <div id="modal_address" class="modal fade" tabindex="-1" role="dialog"
+                         aria-labelledby="modal_address" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-body">
+                                <input id="method" type="hidden" name="_method">
+                                <input id="lat" type="hidden" name="lat">
+                                <input id="long" type="hidden" name="long">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title text-capitalize">
+                                            {{strtolower(__('lang.button.add').' '.__('lang.profile.address'))}}
+                                        </h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row form-group">
+                                            <div class="col-lg-7 col-md-12 col-sm-12">
+                                                <small>{{ucwords(__('lang.placeholder.name'))}}
+                                                    <span class="required">*</span></small>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i class="icon-id-card"></i></span>
+                                                    </div>
+                                                    <input placeholder="{{__('lang.placeholder.name')}}"
+                                                           type="text"
+                                                           id="address_name" maxlength="191"
+                                                           value="{{$user->name}}"
+                                                           class="form-control" name="address_name"
+                                                           spellcheck="false" autocomplete="off" autofocus
+                                                           required>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5 col-md-12 col-sm-12">
+                                                <small>{{__('lang.footer.phone')}}
+                                                    <span class="required">*</span></small>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i class="icon-phone"></i></span>
+                                                    </div>
+                                                    <input placeholder="{{__('lang.placeholder.phone')}}"
+                                                           id="address_phone" class="form-control"
+                                                           name="address_phone" type="text"
+                                                           onkeypress="return numberOnly(event, false)"
+                                                           value="{{$bio->phone != "" ? $bio->phone : ''}}"
+                                                           spellcheck="false" autocomplete="off" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-7 col-md-12 col-sm-12">
+                                                <div id="map" class="gmap img-thumbnail"
+                                                     style="height: 420px;"></div>
+                                            </div>
+                                            <div class="col-lg-5 col-md-12 col-sm-12">
+                                                <div class="row form-group">
+                                                    <div class="col">
+                                                        <small>{{__('lang.profile.city')}}
+                                                            <span class="required">*</span></small>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i class="icon-city"></i></span>
+                                                            </div>
+                                                            <select id="city_id" name="city_id"
+                                                                    data-live-search="true"
+                                                                    class="form-control selectpicker" required
+                                                                    title="{{__('lang.placeholder.choose')}}">
+                                                                @foreach($provinces as $province)
+                                                                    <optgroup label="{{$province->name}}">
+                                                                        @foreach($province->getCity as $city)
+                                                                            <option value="{{$city->id}}">
+                                                                                {{$city->name}}</option>
+                                                                        @endforeach
+                                                                    </optgroup>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col">
+                                                        <small>{{__('lang.profile.address')}}
+                                                            <span class="required">*</span></small>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i class="icon-map-marker-alt"></i></span>
+                                                            </div>
+                                                            <textarea id="address_map" class="form-control"
+                                                                      placeholder="{{__('lang.profile.address')}}"
+                                                                      name="address" rows="5"
+                                                                      spellcheck="false"
+                                                                      autocomplete="off"
+                                                                      required></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col">
+                                                        <small>{{__('lang.profile.zip')}}
+                                                            <span class="required">*</span></small>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i class="icon-hashtag"></i></span>
+                                                            </div>
+                                                            <input spellcheck="false" autocomplete="off"
+                                                                   placeholder="{{ucfirst(strtolower(__('lang.profile.zip')))}}"
+                                                                   id="postal_code" type="text"
+                                                                   class="form-control"
+                                                                   name="postal_code" maxlength="5" required
+                                                                   onkeypress="return numberOnly(event, false)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col">
+                                                        <small>{{__('lang.profile.save-as')}}
+                                                            <span class="required">*</span></small>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i class="icon-building"></i></span>
+                                                            </div>
+                                                            <select id="occupancy_id" name="occupancy_id"
+                                                                    data-live-search="true"
+                                                                    class="form-control selectpicker"
+                                                                    required
+                                                                    title="{{__('lang.placeholder.choose')}}">
+                                                                @foreach($occupancies as $row)
+                                                                    <option value="{{$row->id}}">{{$row->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col">
+                                                        <div>
+                                                            <input id="is_main" class="checkbox-style"
+                                                                   name="is_main" value="1" type="checkbox">
+                                                            <label for="is_main"
+                                                                   class="checkbox-style-2-label checkbox-small"
+                                                                   style="text-transform: none">{{__('lang.profile.cb-main')}}</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer p-0">
+                                        <button type="submit" class="btn btn-primary btn-block noborder">
+                                            <i class="icon-map-marked-alt mr-2"></i>{{__('lang.button.save')}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </section>
@@ -991,7 +1225,8 @@
             data-client-key="{{env('MIDTRANS_SERVER_KEY')}}"></script>
     <script>
         var collapse = $('.panel-collapse'), upload_input = $("#file"), link_input = $("#link"), check_file = null,
-            btn_pay = $("#btn_pay");
+            btn_pay = $("#btn_pay"), production_day = 3, ongkir = 0, etd = '', str_etd = '',
+            total = parseInt('{{count($carts) > 0 ? $subtotal : 0}}');
 
         $(function () {
             collapse.on('show.bs.collapse', function () {
@@ -1011,6 +1246,8 @@
             });
 
             $(".panel-body .divider:last-child").remove();
+
+            $(".addressee .col-12:last-child").removeClass('mb-3');
         });
 
         function editDesign(url_edit, url_update) {
@@ -1181,70 +1418,213 @@
             }
         });
 
-        function manageNote(note, name, url_update, url_delete) {
-            if (note != "") {
-                swal({
-                    title: '{{__('lang.tooltip.note')}}',
-                    text: '{!! __('lang.alert.note') !!}',
-                    icon: 'warning',
-                    dangerMode: true,
-                    buttons: {
-                        cancel: '{{__('lang.button.cancel')}}',
-                        edit: {
-                            text: '{{__('lang.button.edit')}}',
-                            value: 'edit',
-                        },
-                        delete: {
-                            text: '{{__('lang.button.delete')}}',
-                            value: 'delete',
-                        }
-                    },
-                    closeOnEsc: false,
-                    closeOnClickOutside: false,
-                }).then((value) => {
-                    if (value == 'edit') {
-                        $("#form-note .modal-title").html("{{strtolower(__('lang.button.edit').' '.__('lang.tooltip.note'))}}: " +
-                            "<b style='text-transform: none'>" + name + "</b>");
-                        $("#form-note").attr('action', url_update);
-                        $("#note").val(note);
-                        $("#modal_note").modal('show');
-
-                    } else if (value == 'delete') {
-                        swal({
-                            title: "{{__('lang.alert.delete-head')}}",
-                            text: "{{__('lang.alert.delete-capt')}}",
-                            icon: 'warning',
-                            dangerMode: true,
-                            buttons: ["{{__('lang.button.no')}}", "{{__('lang.button.yes')}}"],
-                            closeOnEsc: false,
-                            closeOnClickOutside: false,
-                        }).then((confirm) => {
-                            if (confirm) {
-                                swal({icon: "success", buttons: false});
-                                window.location.href = url_delete;
+        function manageNote(url) {
+            $.get(url, function (data) {
+                var note = data.note, name = data.name, url_update = data.url_update, url_delete = data.url_delete;
+                if (note != null) {
+                    swal({
+                        title: '{{__('lang.tooltip.note')}}',
+                        text: '{!! __('lang.alert.note') !!}',
+                        icon: 'warning',
+                        dangerMode: true,
+                        buttons: {
+                            cancel: '{{__('lang.button.cancel')}}',
+                            edit: {
+                                text: '{{__('lang.button.edit')}}',
+                                value: 'edit',
+                            },
+                            delete: {
+                                text: '{{__('lang.button.delete')}}',
+                                value: 'delete',
                             }
-                        });
-                    } else {
-                        swal.close();
-                    }
-                });
+                        },
+                        closeOnEsc: false,
+                        closeOnClickOutside: false,
+                    }).then((value) => {
+                        if (value == 'edit') {
+                            $("#form-note .modal-title").html("{{strtolower(__('lang.button.edit').' '.__('lang.tooltip.note'))}}: " +
+                                "<b style='text-transform: none'>" + name + "</b>");
+                            $("#form-note").attr('action', url_update);
+                            $("#note").val(note);
+                            $("#modal_note").modal('show');
 
-            } else {
-                $("#form-note .modal-title").html("{{strtolower(__('lang.button.add').' '.__('lang.tooltip.note'))}}: " +
-                    "<b style='text-transform: none'>" + name + "</b>");
-                $("#form-note").attr('action', url_update);
-                $("#note").val(null);
-                $("#modal_note").modal('show');
-            }
+                        } else if (value == 'delete') {
+                            swal({
+                                title: "{{__('lang.alert.delete-head')}}",
+                                text: "{{__('lang.alert.delete-capt')}}",
+                                icon: 'warning',
+                                dangerMode: true,
+                                buttons: ["{{__('lang.button.no')}}", "{{__('lang.button.yes')}}"],
+                                closeOnEsc: false,
+                                closeOnClickOutside: false,
+                            }).then((confirm) => {
+                                if (confirm) {
+                                    swal({icon: "success", buttons: false});
+                                    window.location.href = url_delete;
+                                }
+                            });
+                        } else {
+                            swal.close();
+                        }
+                    });
+
+                } else {
+                    $("#form-note .modal-title").html("{{strtolower(__('lang.button.add').' '.__('lang.tooltip.note'))}}: " +
+                        "<b style='text-transform: none'>" + name + "</b>");
+                    $("#form-note").attr('action', url_update);
+                    $("#note").val(null);
+                    $("#modal_note").modal('show');
+                }
+            });
         }
 
         function getShipping(city, check, name) {
             $(".show-" + check).text(name);
             $('#collapse-' + check).collapse('hide');
-            $("#promo_code, #btn_pay").removeAttr('disabled');
-            $("#summary-alert").hide();
+
+            if (check == 'shipping') {
+                clearTimeout(this.delay);
+                this.delay = setTimeout(function () {
+                    $.ajax({
+                        url: "{{route('get.shipper.rates')}}",
+                        data: {d: city, wt: $("#total_weight").val(), v: total, l: 10, w: 10, h: 10},
+                        type: "GET",
+                        beforeSend: function () {
+                            $('#preload-shipping').show();
+                            $("#accordion2").css('opacity', '.3');
+                        },
+                        complete: function () {
+                            $('#preload-shipping').hide();
+                            $("#accordion2").css('opacity', '1');
+                        },
+                        success: function (data) {
+                            var rate_content = '', $str_etd = '', $str_date = '';
+                            $('[data-toggle="tooltip"]').tooltip();
+
+                            if (data['data']['rates']['logistic']['regular'].length > 0) {
+                                $("#shipping-alert").hide();
+                                $("#billing-alert").show();
+                                $("#heading-rate, #heading-billing").parent().show();
+
+                                $.each(data['data']['rates']['logistic']['regular'], function (i, val) {
+                                    if (val.min_day == val.max_day) {
+                                        if (val.min_day > 1) {
+                                            $str_etd = val.min_day + ' {{__('lang.product.form.summary.day', ['s' => 's'])}}';
+                                        } else {
+                                            $str_etd = val.min_day + ' {{__('lang.product.form.summary.day', ['s' => null])}}';
+                                        }
+                                        $str_date = moment().add(production_day + parseInt(val.max_day), 'days').format('DD MMM YYYY');
+
+                                    } else {
+                                        $str_etd = val.min_day + ' – ' + val.max_day + ' {{__('lang.product.form.summary.day', ['s' => 's'])}}';
+                                        $str_date = moment().add(production_day + parseInt(val.min_day), 'days').format('DD MMM YYYY') + ' – ' + moment().add(production_day + parseInt(val.max_day), 'days').format('DD MMM YYYY');
+                                    }
+
+                                    rate_content +=
+                                        '<div class="col-12 mb-3">' +
+                                        '<label class="card-label" for="rate_' + val.rate_id + '">' +
+                                        '<input id="rate_' + val.rate_id + '" class="card-rb" type="radio" name="rate_id" ' +
+                                        'value="' + val.rate_id + '" data-index="' + i + '" data-name="' + val.name + ' ' + val.rate_name + '">' +
+                                        '<div class="card card-input"><div class="row"><div class="col-lg-12">' +
+                                        '<div class="media">' +
+                                        '<div class="align-self-center ml-3"><img alt="' + val.name + '" src="' + val.logo_url + '"></div>' +
+                                        '<div class="ml-3 media-body">' +
+                                        '<h5 class="mt-3 mb-1"><i class="icon-shipping-fast mr-1"></i>' + val.name + ' ' + val.rate_name + '</h5>' +
+                                        '<blockquote class="mb-3" style="font-size: 14px;text-transform: none">' +
+                                        '<table class="m-0" style="font-size: 14px">' +
+                                        '<tr data-toggle="tooltip" data-placement="left" title="{{__('lang.product.form.summary.ongkir')}}">' +
+                                        '<td><i class="icon-money-bill-wave"></i></td>' +
+                                        '<td>&nbsp;</td>' +
+                                        '<td>Rp' + number_format(val.finalRate, 2, ',', '.') + '</td></tr>' +
+                                        '<tr data-toggle="tooltip" data-placement="left" title="{{__('lang.product.form.summary.delivery')}}">' +
+                                        '<td><i class="icon-clock"></i></td>' +
+                                        '<td>&nbsp;</td>' +
+                                        '<td>' + $str_etd + '</td></tr>' +
+                                        '<tr data-toggle="tooltip" data-placement="left" title="{{__('lang.product.form.summary.received')}}">' +
+                                        '<td><i class="icon-calendar-check"></i></td>' +
+                                        '<td>&nbsp;</td>' +
+                                        '<td>' + $str_date + '</td></tr>' +
+                                        '</table></blockquote></div></div></div></div></div></label></div>';
+                                });
+                                $("#collapse-rate .addressee").html(rate_content);
+
+                                $($.unique(
+                                    $('#collapse-rate .addressee INPUT:radio').map(function (i, e) {
+                                        return $(e).attr('name')
+                                    }).get()
+                                )).each(function (i, e) {
+                                    $('.component-accordion .panel-body INPUT:radio[name="' + e + '"]:last')
+                                        .attr('checked', 'checked').attr('required', 'required');
+                                });
+                                $(".show-rate").text($("input[name=rate_id]:checked").data('name'));
+                                setRate(data['data']['rates']['logistic']['regular'][0]);
+
+                                $("input[name=rate_id]").on('change', function () {
+                                    if ($(this).is(':checked')) {
+                                        total = parseInt('{{count($carts) > 0 ? $subtotal : 0}}');
+                                        $(".show-rate").text($(this).data('name'));
+                                        $('#collapse-rate').collapse('hide');
+
+                                        setRate(data['data']['rates']['logistic']['regular'][$(this).data('index')]);
+                                    }
+                                });
+
+                            } else {
+                                $("#shipping-alert").show();
+                                $("#billing-alert").hide();
+                                $("#heading-rate, #heading-billing").parent().hide();
+                                $(".show-ongkir, .show-delivery, .show-received").text('N/A');
+                                $("#ongkir, #delivery_duration, #received_date, #total").val(null);
+                            }
+                        },
+                        error: function () {
+                            swal('{{__('lang.alert.error')}}', '{{__('lang.alert.error-capt')}}', 'error');
+                        }
+                    });
+                }.bind(this), 800);
+
+            } else {
+                $("#promo_code, #btn_pay").removeAttr('disabled');
+                $("#shipping-alert").parent().parent().hide();
+            }
 
             $('html,body').animate({scrollTop: $("#accordion2").parent().parent().offset().top}, 0);
+        }
+
+        function setRate(data) {
+            $('#preload-summary').show();
+            $(".list-group-flush").css('opacity', '.3');
+
+            clearTimeout(this.delay);
+            this.delay = setTimeout(function () {
+                $('#preload-summary').hide();
+                $(".list-group-flush").css('opacity', '1');
+
+                etd = data.min_day + '-' + data.max_day;
+                if (data.min_day == data.max_day) {
+                    if (data.min_day > 1) {
+                        str_etd = data.min_day + ' {{__('lang.product.form.summary.day', ['s' => 's'])}}';
+                    } else {
+                        str_etd = data.min_day + ' {{__('lang.product.form.summary.day', ['s' => null])}}';
+                    }
+
+                } else {
+                    str_etd = data.min_day + ' – ' + data.max_day + ' {{__('lang.product.form.summary.day', ['s' => 's'])}}';
+                }
+
+                ongkir = data.finalRate;
+                total += parseInt(ongkir);
+
+                $(".show-ongkir").text("Rp" + number_format(ongkir, 2, ',', '.'));
+                $(".show-delivery").html(str_etd);
+                $(".show-received").text(moment().add(production_day + parseInt(data.max_day), 'days').format('DD MMM YYYY'));
+                $(".show-total").text("Rp" + number_format(total, 2, ',', '.'));
+
+                $("#ongkir").val(ongkir);
+                $("#delivery_duration").val(etd);
+                $("#received_date").val(moment().add(production_day + parseInt(data.max_day), 'days').format('YYYY-MM-DD'));
+                $("#total").val(total);
+            }.bind(this), 800);
         }
 
         $("#promo_code").on('keyup', function (e) {
@@ -1265,14 +1645,14 @@
             clearTimeout(this.delay);
             this.delay = setTimeout(function () {
                 $.ajax({
-                    url: "{!! route('get.cari-promo.cart',['subtotal' => $subtotal, 'ongkir' => $ongkir])!!}&kode=" + $("#promo_code").val(),
+                    url: "{!! route('get.cari-promo.cart',['subtotal' => $subtotal])!!}&ongkir=" + ongkir + "&kode=" + $("#promo_code").val(),
                     type: "GET",
                     beforeSend: function () {
-                        $('.css3-spinner').show();
+                        $('#preload-summary').show();
                         $(".list-group-flush").css('opacity', '.3');
                     },
                     complete: function () {
-                        $('.css3-spinner').hide();
+                        $('#preload-summary').hide();
                         $(".list-group-flush").css('opacity', '1');
                     },
                     success: function (data) {
@@ -1336,9 +1716,9 @@
 
         function resetter() {
             $("#discount").hide().find('b').text(null);
-            $(".show-total").text('Rp{{number_format(ceil($subtotal + $ongkir),2,',','.')}}');
+            $(".show-total").text('Rp' + number_format(total, 2, ',', '.'));
             $("#form-pembayaran input[name=discount], #form-pembayaran input[name=discount_price]").val(null);
-            $("#form-pembayaran input[name=total]").val('{{ceil($subtotal + $ongkir)}}');
+            $("#form-pembayaran input[name=total]").val(total);
         }
 
         btn_pay.on("click", function () {

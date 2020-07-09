@@ -212,8 +212,6 @@
     function editAddress(name, phone, lat, long, city_id, address, postal_code, occupancy_id, occupancy, is_main, url) {
         var main_str = is_main == 1 ? ' <span class="font-weight-normal">[{{__('lang.profile.main-address')}}]</span>' : '';
 
-        $(".address-rb").prop('checked', false);
-
         init(lat, long);
         infoWindow.setContent(
             '<div id="iw-container">' +

@@ -11,29 +11,42 @@
 |
 */
 
-Route::group(['namespace' => 'API', 'prefix' => 'midtrans'], function () {
+Route::group(['namespace' => 'API'], function () {
 
-    Route::get('snap', [
-        'uses' => 'MidtransController@snap',
-        'as' => 'get.midtrans.snap'
-    ]);
+    Route::group(['prefix' => 'shipper'], function () {
 
-    Route::group(['prefix' => 'callback'], function () {
-
-        Route::get('finish', [
-            'uses' => 'MidtransController@finishCallback',
-            'as' => 'get.midtrans-callback.finish'
+        Route::get('rates', [
+            'uses' => 'ShipperController@getRates',
+            'as' => 'get.shipper.rates'
         ]);
 
-        Route::get('unfinish', [
-            'uses' => 'MidtransController@unfinishCallback',
-            'as' => 'get.midtrans-callback.unfinish'
+    });
+
+    Route::group(['prefix' => 'midtrans'], function () {
+
+        Route::get('snap', [
+            'uses' => 'MidtransController@snap',
+            'as' => 'get.midtrans.snap'
         ]);
 
-        Route::post('payment', [
-            'uses' => 'MidtransController@notificationCallback',
-            'as' => 'post.midtrans-callback.notification'
-        ]);
+        Route::group(['prefix' => 'callback'], function () {
+
+            Route::get('finish', [
+                'uses' => 'MidtransController@finishCallback',
+                'as' => 'get.midtrans-callback.finish'
+            ]);
+
+            Route::get('unfinish', [
+                'uses' => 'MidtransController@unfinishCallback',
+                'as' => 'get.midtrans-callback.unfinish'
+            ]);
+
+            Route::post('payment', [
+                'uses' => 'MidtransController@notificationCallback',
+                'as' => 'post.midtrans-callback.notification'
+            ]);
+
+        });
 
     });
 

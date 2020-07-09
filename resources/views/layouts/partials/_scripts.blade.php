@@ -261,6 +261,16 @@
         }, 230);
     }
 
+    function orderTrack() {
+        @auth
+            window.location.href = '{{route('user.dashboard')}}';
+        @elseauth('admin')
+        swal('{{__('lang.alert.warning')}}', '{{__('lang.alert.feature-fail')}}', 'warning');
+        @else
+        openLoginModal();
+        @endauth
+    }
+
     function numberOnly(e, decimal) {
         var key;
         var keychar;
