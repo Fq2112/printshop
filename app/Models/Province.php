@@ -8,7 +8,9 @@ class Province extends Model
 {
     protected $table = 'provinces';
 
-    protected $guarded = ['id'];
+    protected $fillable = ['id', 'name'];
+
+    public $incrementing = false;
 
     public function getCity()
     {
