@@ -23,9 +23,9 @@ class Address extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function getCity()
+    public function getAreas()
     {
-        return $this->belongsTo(Cities::class, 'city_id');
+        return $this->belongsTo(Areas::class, 'area_id');
     }
 
     public function getOccupancy()

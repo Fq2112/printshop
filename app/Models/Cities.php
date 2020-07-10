@@ -17,10 +17,6 @@ class Cities extends Model
         return $this->belongsTo(Province::class, 'province_id');
     }
 
-    public function getAddress()
-    {
-        return $this->hasMany(Address::class, 'city_id');
-    }
 
     public function getSuburbs()
     {
