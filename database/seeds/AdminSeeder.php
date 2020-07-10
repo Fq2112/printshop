@@ -101,14 +101,15 @@ class AdminSeeder extends Seeder
                 'dob' => $faker->date('Y-m-d')
             ]);
             for ($a = 0; $a < 2; $a++) {
+                $area = rand(\App\Models\Areas::min('id'), \App\Models\Areas::max('id'));
                 \App\Models\Address::create([
                     'user_id' => $dataUser->id,
                     'phone' => '+628123456789' . rand(0, 9),
                     'address' => $faker->address,
-                    'postal_code' => $faker->postcode,
+                    'postal_code' => \App\Models\Areas::find($area)->postal_code,
                     'name' => $faker->sentence,
                     'is_main' => rand(0, 1) ? true : false,
-                    'city_id' => rand(\App\Models\Cities::min('id'), \App\Models\Cities::max('id')),
+                    'area_id' => $area,
                     'occupancy_id' => rand(\App\Models\OccupancyType::min('id'), \App\Models\OccupancyType::max('id'))
                 ]);
             }
