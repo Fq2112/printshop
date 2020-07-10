@@ -41,10 +41,14 @@ class UserController extends Controller
         $e = 1;
         $total_item = Cart::where('user_id', $user->id)->where('isCheckout', false)->get();
         $total_weight = 0;
+        $length = 10;
+        $width = 10;
+        $height = 10;
         $subtotal = 0;
 
         return view('pages.main.users.cart', compact('user', 'bio', 'carts', 'provinces',
-            'occupancies', 'addresses', 'a', 'b', 'c', 'd', 'e', 'total_item', 'total_weight', 'subtotal'));
+            'occupancies', 'addresses', 'a', 'b', 'c', 'd', 'e', 'total_item',
+            'total_weight', 'length', 'width', 'height', 'subtotal'));
     }
 
     public function editDesign(Request $request)

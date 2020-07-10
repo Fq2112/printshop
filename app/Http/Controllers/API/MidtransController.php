@@ -47,7 +47,9 @@ class MidtransController extends Controller
         $split_name = explode(" ", $user->name);
         $address = Address::where('user_id', $user->id)->where('is_main', true)->first();
         $main_address = $address != "" ? $address->address . ' - ' . $address->postal_code . ' (' . $address->getOccupancy->name . ').' : null;
-        $billing = Address::find($request->address_id);
+        $shipping = Address::find($request->shipping_id);
+        $split_shipping_name = explode(" ", $shipping->name);
+        $billing = Address::find($request->billing_id);
         $split_bill_name = explode(" ", $billing->name);
 
         $carts = Cart::whereIn('id', explode(',', $request->cart_ids))
@@ -105,9 +107,18 @@ class MidtransController extends Controller
                     'first_name' => array_shift($split_bill_name),
                     'last_name' => implode(" ", $split_bill_name),
                     'address' => $billing->address,
-                    'city' => $billing->getCity->getProvince->name . ', ' . $billing->getCity->name,
+                    'city' => $billing->getAreas->getSuburbs->getCities->getProvince->name . ', ' . $billing->getAreas->getSuburbs->getCities->name,
                     'postal_code' => $billing->postal_code,
                     'phone' => $billing->phone,
+                    'country_code' => 'IDN'
+                ],
+                'shipping_address' => [
+                    'first_name' => array_shift($split_shipping_name),
+                    'last_name' => implode(" ", $split_shipping_name),
+                    'address' => $shipping->address,
+                    'city' => $shipping->getAreas->getSuburbs->getCities->getProvince->name . ', ' . $shipping->getAreas->getSuburbs->getCities->name,
+                    'postal_code' => $shipping->postal_code,
+                    'phone' => $shipping->phone,
                     'country_code' => 'IDN'
                 ],
             ],
@@ -115,7 +126,13 @@ class MidtransController extends Controller
             'custom_field1' => json_encode([
                 'code' => $request->code,
                 'cart_ids' => $request->cart_ids,
-                'address_id' => $request->address_id,
+                'shipping_address' => $request->shipping_id,
+                'billing_address' => $request->billing_id,
+                'production_finished' => $request->production_finished,
+                'ongkir' => $request->ongkir,
+                'delivery_duration' => $request->delivery_duration,
+                'received_date' => $request->received_date,
+                'rate_id' => $request->rate_id,
                 'promo_code' => $request->promo_code,
                 'is_discount' => !is_null($request->discount) ? 1 : 0,
                 'discount' => $request->discount,
@@ -136,20 +153,25 @@ class MidtransController extends Controller
         $user = User::find(implode($carts->take(1)->pluck('user_id')->toArray()));
 
         foreach ($carts as $cart) {
-            PaymentCart::firstOrCreate([
-                'user_id' => $cart->user_id,
-                'address_id' => $input['address_id'],
-                'cart_id' => $cart->id,
-                'uni_code_payment' => $code,
-                'token' => uniqid(),
-                'price_total' => $cart->total,
-                'promo_code' => $input['promo_code'],
-                'is_discount' => $input['is_discount'],
-                'discount' => $input['discount'],
-            ]);
-
             $cart->update(['isCheckout' => true]);
         }
+        PaymentCart::firstOrCreate([
+            'user_id' => $user->id,
+            'shipping_address' => $input['shipping_id'],
+            'billing_address' => $input['billing_id'],
+            'cart_ids' => $carts->pluck('id')->toArray(),
+            'uni_code_payment' => $code,
+            'token' => uniqid(),
+            'production_finished' => $input['production_finished'],
+            'ongkir' => $input['ongkir'],
+            'delivery_duration' => $input['delivery_duration'],
+            'received_date' => $input['received_date'],
+            'rate_id' => $input['rate_id'],
+            'price_total' => $data_tr['gross_amount'],
+            'promo_code' => $input['promo_code'],
+            'is_discount' => $input['is_discount'],
+            'discount' => $input['discount'],
+        ]);
 
         $this->invoiceMail('unfinish', $code, $user, $request->pdf_url, $data_tr);
 
@@ -175,20 +197,25 @@ class MidtransController extends Controller
                     $user = User::find(implode($carts->take(1)->pluck('user_id')->toArray()));
 
                     foreach ($carts as $cart) {
-                        PaymentCart::firstOrCreate([
-                            'user_id' => $cart->user_id,
-                            'address_id' => $input['address_id'],
-                            'cart_id' => $cart->id,
-                            'uni_code_payment' => $code,
-                            'token' => uniqid(),
-                            'price_total' => $cart->total,
-                            'promo_code' => $input['promo_code'],
-                            'is_discount' => $input['is_discount'],
-                            'discount' => $input['discount'],
-                        ]);
-
                         $cart->update(['isCheckout' => true]);
                     }
+                    PaymentCart::firstOrCreate([
+                        'user_id' => $user->id,
+                        'shipping_address' => $input['shipping_id'],
+                        'billing_address' => $input['billing_id'],
+                        'cart_ids' => $carts->pluck('id')->toArray(),
+                        'uni_code_payment' => $code,
+                        'token' => uniqid(),
+                        'production_finished' => $input['production_finished'],
+                        'ongkir' => $input['ongkir'],
+                        'delivery_duration' => $input['delivery_duration'],
+                        'received_date' => $input['received_date'],
+                        'rate_id' => $input['rate_id'],
+                        'price_total' => $data_tr['gross_amount'],
+                        'promo_code' => $input['promo_code'],
+                        'is_discount' => $input['is_discount'],
+                        'discount' => $input['discount'],
+                    ]);
 
                     $this->updatePayment($code);
                     $this->invoiceMail('finish', $code, $user, $request->pdf_url, $data_tr);

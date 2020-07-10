@@ -333,6 +333,9 @@
                                                                         $specs = !is_null($row->subkategori_id) ? $data->getSubkatSpecs : $data->getClusterSpecs;
                                                                         $weight = ($specs->weight / 1000) * $row->qty;
                                                                         $total_weight += $weight;
+                                                                        $length += $specs->length;
+                                                                        $width += $specs->width;
+                                                                        $height += $specs->height;
                                                                     @endphp
                                                                     <div class="media">
                                                                         <div data-placement="bottom"
@@ -896,7 +899,9 @@
                                                data-placement="top" title="{{__('lang.alert.warning')}}"
                                                data-content="{{__('lang.popover.production_finished')}}"
                                                style="cursor: help;float: none;margin: 0"></i>
-                                            <b class="fright">{{now()->addDays(3)->formatLocalized('%d %b %Y')}}</b>
+                                            <b class="fright">
+                                                {!! count($carts) > 0 ? now()->addDays(3)->formatLocalized('%d %b %Y') : '&ndash;' !!}
+                                            </b>
                                         </li>
                                         <li class="list-group-item noborder">
                                             {{__('lang.product.form.summary.ongkir')}}
@@ -952,6 +957,8 @@
                            value="{{count($carts) > 0 ? number_format($total_weight,2,'.',',') : null}}">
                     <input type="hidden" name="discount">
                     <input type="hidden" name="discount_price">
+                    <input type="hidden" name="production_day"
+                           value="{{count($carts) > 0 ? now()->addDays(3)->format('Y-m-d') : null}}">
                     <input id="ongkir" type="hidden" name="ongkir">
                     <input id="delivery_duration" type="hidden" name="delivery_duration">
                     <input id="received_date" type="hidden" name="received_date">
@@ -1116,7 +1123,7 @@
                                                             <span class="input-group-text">
                                                                 <i class="icon-city"></i></span>
                                                             </div>
-                                                            <select id="city_id" name="city_id"
+                                                            <select id="area_id" name="area_id"
                                                                     data-live-search="true"
                                                                     class="form-control selectpicker" required
                                                                     title="{{__('lang.placeholder.choose')}}">
@@ -1225,7 +1232,7 @@
             data-client-key="{{env('MIDTRANS_SERVER_KEY')}}"></script>
     <script>
         var collapse = $('.panel-collapse'), upload_input = $("#file"), link_input = $("#link"), check_file = null,
-            btn_pay = $("#btn_pay"), production_day = 3, ongkir = 0, etd = '', str_etd = '',
+            btn_pay = $("#btn_pay"), production_day = 3, ongkir = 0, etd = '', str_etd = '', str_date = '',
             total = parseInt('{{count($carts) > 0 ? $subtotal : 0}}');
 
         $(function () {
@@ -1478,7 +1485,7 @@
             });
         }
 
-        function getShipping(city, check, name) {
+        function getShipping(area, latLng, check, name) {
             $(".show-" + check).text(name);
             $('#collapse-' + check).collapse('hide');
 
@@ -1487,7 +1494,10 @@
                 this.delay = setTimeout(function () {
                     $.ajax({
                         url: "{{route('get.shipper.rates')}}",
-                        data: {d: city, wt: $("#total_weight").val(), v: total, l: 10, w: 10, h: 10},
+                        data: {
+                            d: area, destinationCoord: latLng, wt: $("#total_weight").val(), v: total,
+                            l: parseInt('{{$length}}'), w: parseInt('{{$width}}'), h: parseInt('{{$height}}')
+                        },
                         type: "GET",
                         beforeSend: function () {
                             $('#preload-shipping').show();
@@ -1498,27 +1508,14 @@
                             $("#accordion2").css('opacity', '1');
                         },
                         success: function (data) {
-                            var rate_content = '', $str_etd = '', $str_date = '';
-                            $('[data-toggle="tooltip"]').tooltip();
-
-                            if (data['data']['rates']['logistic']['regular'].length > 0) {
+                            var rate_content = '', logistic = data['data']['rates']['logistic']['regular'];
+                            if (logistic.length > 0) {
                                 $("#shipping-alert").hide();
                                 $("#billing-alert").show();
                                 $("#heading-rate, #heading-billing").parent().show();
 
-                                $.each(data['data']['rates']['logistic']['regular'], function (i, val) {
-                                    if (val.min_day == val.max_day) {
-                                        if (val.min_day > 1) {
-                                            $str_etd = val.min_day + ' {{__('lang.product.form.summary.day', ['s' => 's'])}}';
-                                        } else {
-                                            $str_etd = val.min_day + ' {{__('lang.product.form.summary.day', ['s' => null])}}';
-                                        }
-                                        $str_date = moment().add(production_day + parseInt(val.max_day), 'days').format('DD MMM YYYY');
-
-                                    } else {
-                                        $str_etd = val.min_day + ' – ' + val.max_day + ' {{__('lang.product.form.summary.day', ['s' => 's'])}}';
-                                        $str_date = moment().add(production_day + parseInt(val.min_day), 'days').format('DD MMM YYYY') + ' – ' + moment().add(production_day + parseInt(val.max_day), 'days').format('DD MMM YYYY');
-                                    }
+                                $.each(logistic, function (i, val) {
+                                    formatETD(val.min_day, val.max_day);
 
                                     rate_content +=
                                         '<div class="col-12 mb-3">' +
@@ -1539,25 +1536,20 @@
                                         '<tr data-toggle="tooltip" data-placement="left" title="{{__('lang.product.form.summary.delivery')}}">' +
                                         '<td><i class="icon-clock"></i></td>' +
                                         '<td>&nbsp;</td>' +
-                                        '<td>' + $str_etd + '</td></tr>' +
+                                        '<td>' + str_etd + '</td></tr>' +
                                         '<tr data-toggle="tooltip" data-placement="left" title="{{__('lang.product.form.summary.received')}}">' +
                                         '<td><i class="icon-calendar-check"></i></td>' +
                                         '<td>&nbsp;</td>' +
-                                        '<td>' + $str_date + '</td></tr>' +
+                                        '<td>' + str_date + '</td></tr>' +
                                         '</table></blockquote></div></div></div></div></div></label></div>';
                                 });
                                 $("#collapse-rate .addressee").html(rate_content);
+                                $('[data-toggle="tooltip"]').tooltip();
 
-                                $($.unique(
-                                    $('#collapse-rate .addressee INPUT:radio').map(function (i, e) {
-                                        return $(e).attr('name')
-                                    }).get()
-                                )).each(function (i, e) {
-                                    $('.component-accordion .panel-body INPUT:radio[name="' + e + '"]:last')
-                                        .attr('checked', 'checked').attr('required', 'required');
-                                });
-                                $(".show-rate").text($("input[name=rate_id]:checked").data('name'));
-                                setRate(data['data']['rates']['logistic']['regular'][0]);
+                                var last_rate = $("input[type=radio][name=rate_id]:last");
+                                last_rate.prop('checked', true).prop('required', true);
+                                $(".show-rate").text(last_rate.data('name'));
+                                setRate(logistic[last_rate.data('index')]);
 
                                 $("input[name=rate_id]").on('change', function () {
                                     if ($(this).is(':checked')) {
@@ -1565,7 +1557,7 @@
                                         $(".show-rate").text($(this).data('name'));
                                         $('#collapse-rate').collapse('hide');
 
-                                        setRate(data['data']['rates']['logistic']['regular'][$(this).data('index')]);
+                                        setRate(logistic[$(this).data('index')]);
                                     }
                                 });
 
@@ -1601,16 +1593,7 @@
                 $(".list-group-flush").css('opacity', '1');
 
                 etd = data.min_day + '-' + data.max_day;
-                if (data.min_day == data.max_day) {
-                    if (data.min_day > 1) {
-                        str_etd = data.min_day + ' {{__('lang.product.form.summary.day', ['s' => 's'])}}';
-                    } else {
-                        str_etd = data.min_day + ' {{__('lang.product.form.summary.day', ['s' => null])}}';
-                    }
-
-                } else {
-                    str_etd = data.min_day + ' – ' + data.max_day + ' {{__('lang.product.form.summary.day', ['s' => 's'])}}';
-                }
+                formatETD(data.min_day, data.max_day);
 
                 ongkir = data.finalRate;
                 total += parseInt(ongkir);
@@ -1625,6 +1608,21 @@
                 $("#received_date").val(moment().add(production_day + parseInt(data.max_day), 'days').format('YYYY-MM-DD'));
                 $("#total").val(total);
             }.bind(this), 800);
+        }
+
+        function formatETD(min_day, max_day) {
+            if (min_day == max_day) {
+                if (min_day > 1) {
+                    str_etd = min_day + ' {{__('lang.product.form.summary.day', ['s' => 's'])}}';
+                } else {
+                    str_etd = min_day + ' {{__('lang.product.form.summary.day', ['s' => null])}}';
+                }
+                str_date = moment().add(production_day + parseInt(max_day), 'days').format('DD MMM YYYY');
+
+            } else {
+                str_etd = min_day + ' – ' + max_day + ' {{__('lang.product.form.summary.day', ['s' => 's'])}}';
+                str_date = moment().add(production_day + parseInt(min_day), 'days').format('DD MMM YYYY') + ' – ' + moment().add(production_day + parseInt(max_day), 'days').format('DD MMM YYYY');
+            }
         }
 
         $("#promo_code").on('keyup', function (e) {

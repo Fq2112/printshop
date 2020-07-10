@@ -70,7 +70,7 @@ class AdminSeeder extends Seeder
             'postal_code' => '61253',
             'name' => 'Fiqy Ainuzzaqy',
             'is_main' => true,
-            'city_id' => 409,
+            'area_id' => rand(\App\Models\Areas::min('id'), \App\Models\Areas::max('id')),
             'occupancy_id' => 8
         ]);
         \App\Models\Address::create([
@@ -82,7 +82,7 @@ class AdminSeeder extends Seeder
             'postal_code' => '66273',
             'name' => 'Laras Sulistyorini',
             'is_main' => false,
-            'city_id' => 492,
+            'area_id' => rand(\App\Models\Areas::min('id'), \App\Models\Areas::max('id')),
             'occupancy_id' => 7
         ]);
 

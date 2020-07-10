@@ -22,7 +22,9 @@ class ShipperController extends Controller
 
         try {
             $response = $client->get('https://sandbox-api.shipper.id/public/v1/domesticRates?apiKey=' .
-                env('SHIPPER_KEY') . '&o=123&d=' . $request->d . '&wt=' . $request->wt . '&v=' . $request->v .
+                env('SHIPPER_KEY') . '&o=30149&originCoord=-7.250445,112.768845' .
+                '&d=' . $request->d . '&destinationCoord=' . $request->destinationCoord .
+                '&wt=' . $request->wt . '&v=' . $request->v .
                 '&l=' . $request->l . '&w=' . $request->w . '&h=' . $request->h)->getBody()->getContents();
 
             return json_decode($response, true);
