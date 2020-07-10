@@ -20,6 +20,10 @@ class AddUnitToDetailSubkatsTable extends Migration
                 ->onUpdate('CASCADE');
             $table->string('price')->default('25000');
             $table->string('weight')->default('250');// in Gram
+            $table->string('height')->default('10');// in CM
+            $table->string('length')->default('10');// in CM
+            $table->string('width')->default('30');// in Cm
+
         });
     }
 

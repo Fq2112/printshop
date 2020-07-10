@@ -14,12 +14,14 @@ class CreateAreasTable extends Migration
     public function up()
     {
         Schema::create('areas', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->integer('id')->unsigned();
+            $table->primary('id');
             $table->unsignedInteger('suburbs_id');
             $table->foreign('suburbs_id')->references('id')
                 ->on('suburbs')->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
             $table->string('name');
+            $table->string('postal_code');
             $table->timestamps();
         });
     }
