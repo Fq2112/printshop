@@ -10,8 +10,8 @@ class Order extends Model
 
     protected $guarded = ['id'];
 
-    public function getCart()
+    public function getPayment()
     {
-        return $this->belongsTo(Cart::class, 'cart_id');
+        return $this->belongsTo(PaymentCart::class, 'payment_carts_id');
     }
 }

@@ -15,12 +15,14 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('cart_id');
-            $table->foreign('cart_id')->references('id')->on('carts')
+            $table->unsignedBigInteger('payment_carts_id');
+            $table->foreign('payment_carts_id')->references('id')->on('payment_carts')
                 ->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->string('progress_status');
             $table->string('uni_code')->unique();
             $table->string('resi')->nullable()->unique();
+            $table->string('shipping_id')->nullable()->unique(); //Shipper Long ID
+            $table->string('tracking_id')->nullable()->unique();
             $table->timestamps();
         });
     }

@@ -27,4 +27,9 @@ class PaymentCart extends Model
     {
         return $this->belongsTo(Address::class, 'billing_address');
     }
+
+    public function getOrder()
+    {
+        return $this->hasOne(Order::class,'payment_carts_id');
+    }
 }
