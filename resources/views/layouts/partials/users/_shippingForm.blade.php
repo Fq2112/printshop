@@ -5,6 +5,7 @@
                 <div class="content-area align-self-center ml-3" data-toggle="tooltip" data-placement="bottom"
                      title="{{__('lang.tooltip.edit-address')}}" style="cursor: pointer"
                      onclick="editAddress('{{$row->name}}','{{$row->phone}}','{{$row->lat}}','{{$row->long}}',
+                         '{{$row->getAreas->getSuburbs->cities_id}}','{{$row->getAreas->suburbs_id}}',
                          '{{$row->area_id}}','{{$row->address}}','{{$row->postal_code}}','{{$row->getOccupancy->id}}',
                          '{{$row->getOccupancy->name}}','{{$row->is_main}}',
                          '{{route('user.profil-alamat.update', ['id' => $row->id])}}')">

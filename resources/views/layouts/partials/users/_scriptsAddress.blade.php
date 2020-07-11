@@ -1,5 +1,6 @@
 <script>
-    var google, myLatlng, geocoder, map, marker, infoWindow;
+    var google, myLatlng, geocoder, map, marker, infoWindow,
+        $city = $("#city_id"), $suburb = $("#suburb_id"), $area = $("#area_id"), $postal = $("#postal_code");
 
     function init(lat, long) {
         geocoder = new google.maps.Geocoder();
@@ -74,7 +75,7 @@
             for (var i = 0; i < place.address_components.length; i++) {
                 for (var j = 0; j < place.address_components[i].types.length; j++) {
                     if (place.address_components[i].types[j] == "postal_code") {
-                        $("#postal_code").val(place.address_components[i].long_name);
+                        $postal.val(place.address_components[i].long_name);
                     }
                 }
             }
@@ -161,7 +162,7 @@
             for (var i = 0; i < responses[0].address_components.length; i++) {
                 for (var j = 0; j < responses[0].address_components[i].types.length; j++) {
                     if (responses[0].address_components[i].types[j] == "postal_code") {
-                        $("#postal_code").val(responses[0].address_components[i].long_name);
+                        $postal.val(responses[0].address_components[i].long_name);
                     }
                 }
             }
@@ -209,8 +210,39 @@
         $("#modal_address").modal('show');
     }
 
-    function editAddress(name, phone, lat, long, city_id, address, postal_code, occupancy_id, occupancy, is_main, url) {
-        var main_str = is_main == 1 ? ' <span class="font-weight-normal">[{{__('lang.profile.main-address')}}]</span>' : '';
+    $city.on('change', function () {
+        $suburb.removeAttr('disabled').attr('required', 'required').empty().selectpicker('refresh');
+        $area.removeAttr('required').attr('disabled', 'disabled').empty().selectpicker('refresh');
+        $postal.val(null);
+
+        $.get('{{route('get.shipper.location')}}?q=suburb&id=' + $(this).val(), function (data) {
+            $.each(data, function (i, val) {
+                $suburb.append('<option value="' + val.id + '">' + val.name + '</option>').selectpicker('refresh');
+            });
+        });
+    });
+
+    $suburb.on('change', function () {
+        $area.removeAttr('disabled').attr('required', 'required').empty().selectpicker('refresh');
+        $postal.val(null);
+
+        $.get('{{route('get.shipper.location')}}?q=area&id=' + $(this).val(), function (data) {
+            $.each(data, function (i, val) {
+                $area.append('<option value="' + val.id + '" data-postal="' + val.postal_code + '">' + val.name + '</option>').selectpicker('refresh');
+            });
+        });
+    });
+
+    $area.on('change', function () {
+        $postal.val($("option[value=" + $(this).val() + "]", this).attr('data-postal'));
+    });
+
+    function editAddress(name, phone, lat, long, city_id, suburb_id, area_id, address, postal_code, occupancy_id, occupancy, is_main, url) {
+        $('#preload-shipping').show();
+        $("#accordion2").css('opacity', '.3');
+
+        var main_str = is_main == 1 ? ' <span class="font-weight-normal">[{{__('lang.profile.main-address')}}]</span>' : '',
+            attr_suburb = '', attr_area = '';
 
         init(lat, long);
         infoWindow.setContent(
@@ -227,8 +259,28 @@
         $("#address_name").val(name);
         $("#address_phone").val(phone);
         $("#address_map").val(address);
-        $("#postal_code").val(postal_code);
-        $("#city_id").val(city_id).selectpicker('refresh');
+
+        $city.val(city_id).selectpicker('refresh');
+        $suburb.removeAttr('disabled').attr('required', 'required').empty().selectpicker('refresh');
+        $area.removeAttr('required').attr('disabled', 'disabled').empty().selectpicker('refresh');
+        $postal.val(null);
+        $.get('{{route('get.shipper.location')}}?q=suburb&id=' + city_id, function (data) {
+            $.each(data, function (i, val) {
+                attr_suburb = val.id == suburb_id ? 'selected' : '';
+                $suburb.append('<option value="' + val.id + '" ' + attr_suburb + '>' + val.name + '</option>').selectpicker('refresh');
+            });
+        });
+
+        $area.removeAttr('disabled').attr('required', 'required').empty().selectpicker('refresh');
+        $postal.val(null);
+        $.get('{{route('get.shipper.location')}}?q=area&id=' + suburb_id, function (data) {
+            $.each(data, function (i, val) {
+                attr_area = val.id == area_id ? 'selected' : '';
+                $area.append('<option value="' + val.id + '" data-postal="' + val.postal_code + '" ' + attr_area + '>' + val.name + '</option>').selectpicker('refresh');
+            });
+        });
+        $postal.val(postal_code);
+
         $("#occupancy_id").val(occupancy_id).selectpicker('refresh');
         if (is_main == 1) {
             $("#is_main").prop('checked', true);
@@ -241,6 +293,13 @@
         $("#long").val(long);
         $("#form-address").attr('action', url);
 
-        $("#modal_address").modal('show');
+        clearTimeout(this.delay);
+        this.delay = setTimeout(function () {
+            $('#preload-shipping').hide();
+            $("#accordion2").css('opacity', '1');
+
+            $("#modal_address").modal('show');
+
+        }.bind(this), 800);
     }
 </script>

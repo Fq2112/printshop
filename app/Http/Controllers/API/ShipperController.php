@@ -3,11 +3,24 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Areas;
+use App\Models\Suburbs;
 use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Http\Request;
 
 class ShipperController extends Controller
 {
+    public function getLocation(Request $request)
+    {
+        if ($request->q == 'suburb') {
+            $data = Suburbs::where('cities_id', $request->id)->get();
+        } else {
+            $data = Areas::where('suburbs_id', $request->id)->get();
+        }
+
+        return $data;
+    }
+
     public function getRates(Request $request)
     {
         $client = new \GuzzleHttp\Client([

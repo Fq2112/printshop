@@ -385,6 +385,11 @@
                                                         class="icon-circle"></i></div>
                                                 <div class="mt-0 stats_address" style="font-size: 14px;">
                                                     @if(count($addresses) > 0)
+                                                        <div class="css3-spinner" style="z-index:1;top:0;display:none">
+                                                            <div class="css3-spinner-bounce1"></div>
+                                                            <div class="css3-spinner-bounce2"></div>
+                                                            <div class="css3-spinner-bounce3"></div>
+                                                        </div>
                                                         @foreach($addresses as $row)
                                                             <div class="row">
                                                                 <div class="col-lg-12">
@@ -402,7 +407,8 @@
                                                                             <a style="color: #f89406;cursor: pointer;"
                                                                                onclick="editAddress('{{$row->name}}',
                                                                                    '{{$row->phone}}','{{$row->lat}}',
-                                                                                   '{{$row->long}}','{{$row->city_id}}',
+                                                                                   '{{$row->long}}','{{$row->getAreas->getSuburbs->cities_id}}',
+                                                                                   '{{$row->getAreas->suburbs_id}}','{{$row->area_id}}',
                                                                                    '{{$row->address}}','{{$row->postal_code}}',
                                                                                    '{{$row->getOccupancy->id}}',
                                                                                    '{{$row->getOccupancy->name}}',
@@ -446,8 +452,7 @@
                                                                                         <td><i class="icon-city"></i>
                                                                                         </td>
                                                                                         <td>&nbsp;</td>
-                                                                                        <td>{{$row->getCity->getProvince->name.
-                                                                                ', '.$row->getCity->name}}</td>
+                                                                                        <td>{{$row->getAreas->getSuburbs->getCities->getProvince->name.', '.$row->getAreas->getSuburbs->getCities->name}}</td>
                                                                                     </tr>
                                                                                     <tr data-toggle="tooltip"
                                                                                         data-placement="left"
@@ -456,8 +461,7 @@
                                                                                             <i class="icon-map-marker-alt"></i>
                                                                                         </td>
                                                                                         <td>&nbsp;</td>
-                                                                                        <td>{{$row->address.' - '.
-                                                                                $row->postal_code}}</td>
+                                                                                        <td>{{$row->address.' - '.$row->postal_code}}</td>
                                                                                     </tr>
                                                                                 </table>
                                                                             </blockquote>
@@ -511,7 +515,7 @@
                                                     <div class="row">
                                                         <div class="col-lg-7 col-md-12 col-sm-12">
                                                             <div id="map" class="gmap img-thumbnail"
-                                                                 style="height: 420px;"></div>
+                                                                 style="height: 520px;"></div>
                                                         </div>
                                                         <div class="col-lg-5 col-md-12 col-sm-12">
                                                             <div class="row form-group">
@@ -524,9 +528,8 @@
                                                                 <i class="icon-city"></i></span>
                                                                         </div>
                                                                         <select id="city_id" name="city_id"
-                                                                                data-live-search="true"
+                                                                                data-live-search="true" required
                                                                                 class="form-control selectpicker"
-                                                                                required
                                                                                 title="{{__('lang.placeholder.choose')}}">
                                                                             @foreach($provinces as $province)
                                                                                 <optgroup label="{{$province->name}}">
@@ -542,6 +545,39 @@
                                                             </div>
                                                             <div class="row form-group">
                                                                 <div class="col">
+                                                                    <small>Suburb <span
+                                                                            class="required">*</span></small>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i class="icon-road"></i></span>
+                                                                        </div>
+                                                                        <select id="suburb_id" name="suburb_id"
+                                                                                data-live-search="true" disabled
+                                                                                class="form-control selectpicker"
+                                                                                title="{{__('lang.placeholder.choose')}}">
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <div class="col">
+                                                                    <small>Area <span class="required">*</span></small>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i class="icon-map-signs"></i></span>
+                                                                        </div>
+                                                                        <select id="area_id" name="area_id"
+                                                                                data-live-search="true" disabled
+                                                                                class="form-control selectpicker"
+                                                                                title="{{__('lang.placeholder.choose')}}">
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <div class="col">
                                                                     <small>{{__('lang.profile.address')}}
                                                                         <span class="required">*</span></small>
                                                                     <div class="input-group">
@@ -551,7 +587,7 @@
                                                                         </div>
                                                                         <textarea id="address_map" class="form-control"
                                                                                   placeholder="{{__('lang.profile.address')}}"
-                                                                                  name="address" rows="5"
+                                                                                  name="address" rows="3"
                                                                                   spellcheck="false"
                                                                                   autocomplete="off"
                                                                                   required></textarea>
@@ -634,6 +670,8 @@
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIljHbKjgtTrpZhEiHum734tF1tolxI68&libraries=geometry,places"></script>
     <script>
+        var $city = $("#city_id"), $suburb = $("#suburb_id"), $area = $("#area_id"), $postal = $("#postal_code");
+
         $(function () {
             $(".stats_address .divider:last-child").remove();
 
@@ -727,7 +765,7 @@
                 for (var i = 0; i < place.address_components.length; i++) {
                     for (var j = 0; j < place.address_components[i].types.length; j++) {
                         if (place.address_components[i].types[j] == "postal_code") {
-                            $("#postal_code").val(place.address_components[i].long_name);
+                            $postal.val(place.address_components[i].long_name);
                         }
                     }
                 }
@@ -814,7 +852,7 @@
                 for (var i = 0; i < responses[0].address_components.length; i++) {
                     for (var j = 0; j < responses[0].address_components[i].types.length; j++) {
                         if (responses[0].address_components[i].types[j] == "postal_code") {
-                            $("#postal_code").val(responses[0].address_components[i].long_name);
+                            $postal.val(responses[0].address_components[i].long_name);
                         }
                     }
                 }
@@ -866,12 +904,22 @@
         });
 
         $("#show_address_settings").on('click', function () {
-            $(this).toggle(300);
-            $("#hide_address_settings").toggle(300);
+            $(".css3-spinner").show();
+            $(".stats_address .row").css('opacity', '.3');
 
-            resetterAddress();
+            clearTimeout(this.delay);
+            this.delay = setTimeout(function () {
+                $(".css3-spinner").hide();
+                $(".stats_address .row").css('opacity', '1');
 
-            $('html,body').animate({scrollTop: $("#form-address").parent().parent().parent().offset().top}, 500);
+                $(this).toggle(300);
+                $("#hide_address_settings").toggle(300);
+
+                resetterAddress();
+
+                $('html,body').animate({scrollTop: $("#form-address").parent().parent().parent().offset().top}, 500);
+
+            }.bind(this), 800);
         });
 
         $("#hide_address_settings").on('click', function () {
@@ -879,6 +927,33 @@
             $("#show_address_settings").toggle(300);
 
             resetterAddress();
+        });
+
+        $city.on('change', function () {
+            $suburb.removeAttr('disabled').attr('required', 'required').empty().selectpicker('refresh');
+            $area.removeAttr('required').attr('disabled', 'disabled').empty().selectpicker('refresh');
+            $postal.val(null);
+
+            $.get('{{route('get.shipper.location')}}?q=suburb&id=' + $(this).val(), function (data) {
+                $.each(data, function (i, val) {
+                    $suburb.append('<option value="' + val.id + '">' + val.name + '</option>').selectpicker('refresh');
+                });
+            });
+        });
+
+        $suburb.on('change', function () {
+            $area.removeAttr('disabled').attr('required', 'required').empty().selectpicker('refresh');
+            $postal.val(null);
+
+            $.get('{{route('get.shipper.location')}}?q=area&id=' + $(this).val(), function (data) {
+                $.each(data, function (i, val) {
+                    $area.append('<option value="' + val.id + '" data-postal="' + val.postal_code + '">' + val.name + '</option>').selectpicker('refresh');
+                });
+            });
+        });
+
+        $area.on('change', function () {
+            $postal.val($("option[value=" + $(this).val() + "]", this).attr('data-postal'));
         });
 
         function resetterAddress() {
@@ -898,6 +973,7 @@
 
             $("#method, #lat, #long, #address_name, #address_phone, #address_map, #postal_code").val(null);
             $("#city_id, #occupancy_id").val('default').selectpicker('refresh');
+            $("#suburb_id, #area_id").removeAttr('required').attr('disabled', 'disabled').empty().selectpicker('refresh');
             $("#form-address").attr('action', '{{route('user.profil-alamat.create')}}');
             $("#is_main").prop('checked', false);
 
@@ -908,14 +984,12 @@
             }
         }
 
-        function editAddress(name, phone, lat, long, city_id, address, postal_code, occupancy_id, occupancy, is_main, url) {
-            var main_str = is_main == 1 ? ' <span class="font-weight-normal">[{{__('lang.profile.main-address')}}]</span>' : '';
+        function editAddress(name, phone, lat, long, city_id, suburb_id, area_id, address, postal_code, occupancy_id, occupancy, is_main, url) {
+            $(".css3-spinner").show();
+            $(".stats_address .row").css('opacity', '.3');
 
-            $("#show_address_settings").hide();
-            $("#hide_address_settings").show();
-            $("#address_settings").toggle(300);
-            $(".stats_address").toggle(300);
-
+            var main_str = is_main == 1 ? ' <span class="font-weight-normal">[{{__('lang.profile.main-address')}}]</span>' : '',
+                attr_suburb = '', attr_area = '';
             init(lat, long);
             infoWindow.setContent(
                 '<div id="iw-container">' +
@@ -931,8 +1005,28 @@
             $("#address_name").val(name);
             $("#address_phone").val(phone);
             $("#address_map").val(address);
-            $("#postal_code").val(postal_code);
-            $("#city_id").val(city_id).selectpicker('refresh');
+
+            $city.val(city_id).selectpicker('refresh');
+            $suburb.removeAttr('disabled').attr('required', 'required').empty().selectpicker('refresh');
+            $area.removeAttr('required').attr('disabled', 'disabled').empty().selectpicker('refresh');
+            $postal.val(null);
+            $.get('{{route('get.shipper.location')}}?q=suburb&id=' + city_id, function (data) {
+                $.each(data, function (i, val) {
+                    attr_suburb = val.id == suburb_id ? 'selected' : '';
+                    $suburb.append('<option value="' + val.id + '" ' + attr_suburb + '>' + val.name + '</option>').selectpicker('refresh');
+                });
+            });
+
+            $area.removeAttr('disabled').attr('required', 'required').empty().selectpicker('refresh');
+            $postal.val(null);
+            $.get('{{route('get.shipper.location')}}?q=area&id=' + suburb_id, function (data) {
+                $.each(data, function (i, val) {
+                    attr_area = val.id == area_id ? 'selected' : '';
+                    $area.append('<option value="' + val.id + '" data-postal="' + val.postal_code + '" ' + attr_area + '>' + val.name + '</option>').selectpicker('refresh');
+                });
+            });
+            $postal.val(postal_code);
+
             $("#occupancy_id").val(occupancy_id).selectpicker('refresh');
             if (is_main == 1) {
                 $("#is_main").prop('checked', true);
@@ -951,7 +1045,19 @@
                 $("#btn_save_address").attr('disabled', 'disabled');
             }
 
-            $('html,body').animate({scrollTop: $("#form-address").parent().parent().parent().offset().top}, 500);
+            clearTimeout(this.delay);
+            this.delay = setTimeout(function () {
+                $(".css3-spinner").hide();
+                $(".stats_address .row").css('opacity', '1');
+
+                $("#show_address_settings").hide();
+                $("#hide_address_settings").show();
+                $("#address_settings").toggle(300);
+                $(".stats_address").toggle(300);
+
+                $('html,body').animate({scrollTop: $("#form-address").parent().parent().parent().offset().top}, 500);
+
+            }.bind(this), 800);
         }
 
         function deleteAddress(is_main, occupancy, address, url) {

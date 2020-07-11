@@ -15,6 +15,11 @@ Route::group(['namespace' => 'API'], function () {
 
     Route::group(['prefix' => 'shipper'], function () {
 
+        Route::get('location', [
+            'uses' => 'ShipperController@getLocation',
+            'as' => 'get.shipper.location'
+        ]);
+
         Route::get('rates', [
             'uses' => 'ShipperController@getRates',
             'as' => 'get.shipper.rates'

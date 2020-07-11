@@ -187,7 +187,7 @@
                             <h4 class="ls0 mb-0 nott" data-toc-skip>{{__('lang.footer.tracking')}}</h4>
                             <button type="button" onclick="orderTrack()"
                                     class="button button-3d button-primary button-rounded mx-0 mb-3">
-                                <i class="icon-line2-target mr-2"></i>{{__('lang.button.tracking')}}
+                                <i class="icon-crosshairs mr-2"></i>{{__('lang.button.tracking')}}
                             </button>
                         </div>
                     </div>

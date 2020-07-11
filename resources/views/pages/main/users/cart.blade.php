@@ -1037,7 +1037,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <label for="note">{{strtolower(ucfirst(__('lang.tooltip.note')))}}
+                                        <label for="note" class="mb-1">{{strtolower(ucfirst(__('lang.tooltip.note')))}}
                                             <span class="required">*</span></label>
                                         <textarea class="sm-form-control" id="note"
                                                   name="note" placeholder="{{__('lang.placeholder.note')}}"
@@ -1075,8 +1075,9 @@
                                     <div class="modal-body">
                                         <div class="row form-group">
                                             <div class="col-lg-7 col-md-12 col-sm-12">
-                                                <small>{{ucwords(__('lang.placeholder.name'))}}
-                                                    <span class="required">*</span></small>
+                                                <label class="mb-1"
+                                                       for="address_name">{{ucwords(__('lang.placeholder.name'))}}
+                                                    <span class="required">*</span></label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
                                                             <span class="input-group-text">
@@ -1092,8 +1093,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-5 col-md-12 col-sm-12">
-                                                <small>{{__('lang.footer.phone')}}
-                                                    <span class="required">*</span></small>
+                                                <label class="mb-1" for="address_phone">{{__('lang.footer.phone')}}
+                                                    <span class="required">*</span></label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
                                                             <span class="input-group-text">
@@ -1110,20 +1111,19 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-7 col-md-12 col-sm-12">
-                                                <div id="map" class="gmap img-thumbnail"
-                                                     style="height: 420px;"></div>
+                                                <div id="map" class="gmap img-thumbnail" style="height: 550px;"></div>
                                             </div>
                                             <div class="col-lg-5 col-md-12 col-sm-12">
                                                 <div class="row form-group">
                                                     <div class="col">
-                                                        <small>{{__('lang.profile.city')}}
-                                                            <span class="required">*</span></small>
+                                                        <label class="mb-1" for="city_id">{{__('lang.profile.city')}}
+                                                            <span class="required">*</span></label>
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
                                                             <span class="input-group-text">
                                                                 <i class="icon-city"></i></span>
                                                             </div>
-                                                            <select id="area_id" name="area_id"
+                                                            <select id="city_id" name="city_id"
                                                                     data-live-search="true"
                                                                     class="form-control selectpicker" required
                                                                     title="{{__('lang.placeholder.choose')}}">
@@ -1141,8 +1141,43 @@
                                                 </div>
                                                 <div class="row form-group">
                                                     <div class="col">
-                                                        <small>{{__('lang.profile.address')}}
-                                                            <span class="required">*</span></small>
+                                                        <label class="mb-1" for="suburb_id">Suburb
+                                                            <span class="required">*</span></label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i class="icon-road"></i></span>
+                                                            </div>
+                                                            <select id="suburb_id" name="suburb_id"
+                                                                    data-live-search="true" disabled
+                                                                    class="form-control selectpicker"
+                                                                    title="{{__('lang.placeholder.choose')}}">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col">
+                                                        <label class="mb-1" for="area_id">Area
+                                                            <span class="required">*</span></label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i class="icon-map-signs"></i></span>
+                                                            </div>
+                                                            <select id="area_id" name="area_id"
+                                                                    data-live-search="true" disabled
+                                                                    class="form-control selectpicker"
+                                                                    title="{{__('lang.placeholder.choose')}}">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col">
+                                                        <label class="mb-1"
+                                                               for="address_map">{{__('lang.profile.address')}}
+                                                            <span class="required">*</span></label>
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
                                                             <span class="input-group-text">
@@ -1150,17 +1185,15 @@
                                                             </div>
                                                             <textarea id="address_map" class="form-control"
                                                                       placeholder="{{__('lang.profile.address')}}"
-                                                                      name="address" rows="5"
-                                                                      spellcheck="false"
-                                                                      autocomplete="off"
-                                                                      required></textarea>
+                                                                      name="address" rows="3" spellcheck="false"
+                                                                      autocomplete="off" required></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row form-group">
                                                     <div class="col">
-                                                        <small>{{__('lang.profile.zip')}}
-                                                            <span class="required">*</span></small>
+                                                        <label class="mb-1" for="postal_code">{{__('lang.profile.zip')}}
+                                                            <span class="required">*</span></label>
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
                                                             <span class="input-group-text">
@@ -1177,8 +1210,9 @@
                                                 </div>
                                                 <div class="row form-group">
                                                     <div class="col">
-                                                        <small>{{__('lang.profile.save-as')}}
-                                                            <span class="required">*</span></small>
+                                                        <label class="mb-1"
+                                                               for="occupancy_id">{{__('lang.profile.save-as')}}
+                                                            <span class="required">*</span></label>
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
                                                             <span class="input-group-text">
