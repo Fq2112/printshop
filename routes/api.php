@@ -20,7 +20,7 @@ Route::group(['namespace' => 'API'], function () {
             'as' => 'get.shipper.location'
         ]);
 
-        Route::get('rates', [
+        Route::post('rates', [
             'uses' => 'ShipperController@getRates',
             'as' => 'get.shipper.rates'
         ]);

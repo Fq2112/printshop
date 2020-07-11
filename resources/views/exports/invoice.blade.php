@@ -13,7 +13,7 @@
             margin: 0 auto
         }
 
-        #billship, #company {
+        #billship, #company, #msc {
             margin-bottom: 30px
         }
 
@@ -47,7 +47,7 @@
             border-bottom: 3px solid #fff
         }
 
-        #billship td, #items td, #items th, #notes {
+        #billship td, #msc td, #items td, #items th {
             padding: 10px
         }
 
@@ -65,12 +65,12 @@
             color: #f89406;
         }
 
-        #billship, #company, #items {
+        #billship, #company, #items, #msc {
             width: 100%;
             border-collapse: collapse
         }
 
-        #billship td {
+        #billship td, #msc td {
             width: 33%
         }
 
@@ -103,11 +103,6 @@
         .uppercase {
             text-transform: uppercase !important;
         }
-
-        #notes {
-            background: #fff5e6;
-            margin-top: 30px
-        }
     </style>
 </head>
 <body>
@@ -127,7 +122,7 @@
                 <div class="uppercase">{{__('lang.order.invoice')}}</div>
                 <br><br><br><br><br>
                 <div style="background: none">
-                    <img src="{{$check->finish_payment == true ? public_path('images/stamp_paid.png') :
+                    <img src="{{$data->finish_payment == true ? public_path('images/stamp_paid.png') :
                     public_path('images/stamp_unpaid.png')}}" alt="logo">
                 </div>
             </td>
@@ -138,14 +133,18 @@
         <tr>
             <td>
                 <b class="primary">{{__('lang.invoice.bill-to')}}</b><br>
-                {{$check->getAddress->name}}<br>
-                {{$check->getAddress->address}}<br>
-                {{$check->getAddress->getCity->name.', '.$check->getAddress->getCity->name.' – '.$check->getAddress->postal_code}}
+                {{$data->getBillingAddress->name}}<br>
+                {{$data->getBillingAddress->address}}
+            </td>
+            <td>
+                <b class="primary">{{__('lang.invoice.ship-to')}}</b><br>
+                {{$data->getShippingAddress->name}}<br>
+                {{$data->getShippingAddress->address}}
             </td>
             <td>
                 <b class="primary">{{__('lang.order.invoice')}} #:</b> {{$code}}<br>
                 <b class="primary">DOP:</b> {{now()->formatLocalized('%d %B %Y')}}<br>
-                <b class="primary">P.O. #:</b> {{str_replace('PYM','ORD',$code)}}<br>
+                <b class="primary">P.O. #:</b> {{str_pad($data->id,14,0,STR_PAD_LEFT)}}<br>
                 <b class="primary">Due Date:</b> {{now()->addDay()->formatLocalized('%d %B %Y')}}
             </td>
         </tr>
@@ -157,24 +156,22 @@
             <th><b>{{__('lang.breadcrumb.product')}}</b></th>
             <th class="center"><b>{{__('lang.product.form.summary.quantity')}}</b></th>
             <th class="center"><b>{{__('lang.product.form.summary.price', ['unit' => 'pcs'])}}</b></th>
-            <th class="center"><b>{{__('lang.product.form.summary.ongkir')}}</b></th>
+            <th class="center"><b>{{__('lang.product.form.summary.weight')}}</b></th>
             <th class="center"><b>Total</b></th>
         </tr>
         </thead>
         <tbody>
-        @php $subtotal = 0; $ongkir = 0; $total = 0; @endphp
-        @foreach($data as $row)
+        @php $subtotal = 0; @endphp
+        @foreach(\App\Models\Cart::whereIn('id', $data->cart_ids)->get() as $cart)
             @php
-                $cart = $row->getCart;
-                $data = !is_null($cart->subkategori_id) ? $cart->getSubKategori : $cart->getCluster;
-                $specs = !is_null($cart->subkategori_id) ? $data->getSubkatSpecs : $data->getClusterSpecs;
-                $address = $cart->getAddress;
-                $subtotal += ($cart->total - $cart->ongkir);
-                $ongkir += $cart->ongkir;
+                $data_cart = !is_null($cart->subkategori_id) ? $cart->getSubKategori : $cart->getCluster;
+                $specs = !is_null($cart->subkategori_id) ? $data_cart->getSubkatSpecs : $data_cart->getClusterSpecs;
+                $subtotal += $cart->total;
+                $weight = ($specs->weight / 1000) * $cart->qty;
             @endphp
             <tr>
                 <td>
-                    <div><b>{{$data->name}}</b></div>
+                    <div><b>{{$data_cart->name}}</b></div>
                     <table id="specs">
                         <tr>
                             <td colspan="3" class="uppercase">{{__('lang.product.form.summary.specification')}}</td>
@@ -385,20 +382,17 @@
                             </tr>
                         @endif
                     </table>
-                    <small class="idesc"><b>{{__('lang.invoice.ship-to')}}</b><br>
-                        {{$address->address.' - '.$address->postal_code.' ('.$address->name.' - '.$address->getOccupancy->name.')'}}
-                    </small>
                 </td>
                 <td class="center">{{$cart->qty}}</td>
                 <td class="center">Rp{{number_format($cart->price_pcs,2,',','.')}}</td>
-                <td class="center">Rp{{number_format($cart->ongkir,2,',','.')}}</td>
+                <td class="center">{{number_format($weight,2,',','.')}} kg</td>
                 <td class="right">Rp{{number_format($cart->total,2,',','.')}}</td>
             </tr>
         @endforeach
         @php
-            if($check->is_discount == true) {
-                $discount = $check->discount;
-                $discount_price = $subtotal * $discount / 100;
+            if($data->is_discount == true) {
+                $discount = $data->discount;
+                $discount_price = ceil($subtotal * $discount / 100);
             } else {
                 $discount = 0;
                 $discount_price = 0;
@@ -414,30 +408,48 @@
         </tr>
         <tr class="ttl">
             <td class="right uppercase" colspan="4">{{__('lang.product.form.summary.ongkir')}}</td>
-            <td class="right">Rp{{number_format($ongkir,2,',','.')}}</td>
+            <td class="right">Rp{{number_format($data->ongkir,2,',','.')}}</td>
         </tr>
         <tr class="ttl">
             <td class="right" colspan="4">GRAND TOTAL</td>
-            <td class="right">Rp{{number_format($subtotal - $discount_price + $ongkir,2,',','.')}}</td>
+            <td class="right">Rp{{number_format($subtotal - $discount_price + $data->ongkir,2,',','.')}}</td>
         </tr>
         </tbody>
     </table>
 
-    <div id="notes">
-        <b class="primary">{{__('lang.mail.content.payment5').': '.strtoupper(str_replace('_',' ',$payment['type']))}}</b><br>
-        @if($payment['type'] == 'credit_card' || $payment['type'] == 'bank_transfer' || $payment['type'] == 'cstore')
-            <img width="150" alt="{{$payment['bank']}}" style="float:left;margin-right:.5em;margin-bottom:.5em"
-                 src="{{public_path('images/paymentMethod/'.$payment['bank'].'.png')}}">
-            <small style="line-height: 1.5em;font-size: 14px"><b style="font-size: 16px">{{$payment['account']}}</b>
-                @if($payment['type'] == 'bank_transfer')
-                    <br>a/n {{env('APP_TITLE')}}
-                @endif
-            </small>
-        @else
-            <img width="150" alt="{{$payment['bank']}}"
-                 src="{{public_path('images/paymentMethod/'.$payment['bank'].'.png')}}">
-        @endif
-    </div>
+    <table id="msc" style="background: #fff5e6;margin-top: 30px">
+        <tr>
+            <td>
+                <b class="primary">{{strtoupper(__('lang.mail.content.payment5'))}}</b>
+                <table>
+                    <tr>
+                        <td width="50%">
+                            <img width="150" alt="{{$payment['bank']}}"
+                                 src="{{public_path('images/paymentMethod/'.$payment['bank'].'.png')}}">
+                        </td>
+                        <td>
+                            {{strtoupper(str_replace('_',' ',$payment['type']))}}
+                            @if($payment['type'] == 'credit_card' || $payment['type'] == 'bank_transfer' || $payment['type'] == 'cstore')
+                                <br>{{$payment['account']}}
+                                @if($payment['type'] == 'bank_transfer')
+                                    <br>a/n {{env('APP_TITLE')}}
+                                @endif
+                            @endif
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <b class="primary">{{strtoupper(__('lang.product.form.shipping.head2'))}}</b>
+                <table>
+                    <tr>
+                        <td width="50%"><img alt="Logo" src="{{$input['rate_logo']}}"></td>
+                        <td>{{$input['rate_name']}}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 </div>
 </body>
 </html>

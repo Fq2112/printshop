@@ -280,9 +280,8 @@ class UserController extends Controller
 
     public function downloadFile(Request $request)
     {
-        $cart = Cart::find(decrypt($request->id));
-
         if ($request->file == 'design') {
+            $cart = Cart::find(decrypt($request->id));
             if (!is_null($cart->file)) {
                 $file_path = storage_path('app/public/users/order/design/' . $cart->user_id . '/' . $cart->file);
                 if (file_exists($file_path)) {
@@ -297,8 +296,9 @@ class UserController extends Controller
             }
 
         } else {
-            $invoice = $cart->getPayment->uni_code_payment . '.pdf';
-            $file_path = storage_path('app/public/users/order/invoice/' . $cart->user_id . '/' . $invoice);
+            $payment_cart = PaymentCart::find(decrypt($request->id));
+            $invoice = $payment_cart->uni_code_payment . '.pdf';
+            $file_path = storage_path('app/public/users/order/invoice/' . $payment_cart->user_id . '/' . $invoice);
             if (file_exists($file_path)) {
                 return Response::download($file_path, $invoice, [
                     'Content-Length: ' . filesize($file_path)

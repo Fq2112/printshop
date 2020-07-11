@@ -12,21 +12,21 @@ class InvoiceMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $code, $check, $data, $payment, $filename, $instruction;
+    public $code, $data, $payment, $filename, $instruction, $input;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($code, $check, $data, $payment, $filename, $instruction)
+    public function __construct($code, $data, $payment, $filename, $instruction, $input)
     {
         $this->code = $code;
-        $this->check = $check;
         $this->data = $data;
         $this->payment = $payment;
         $this->filename = $filename;
         $this->instruction = $instruction;
+        $this->input = $input;
     }
 
     /**
@@ -36,24 +36,24 @@ class InvoiceMail extends Mailable
      */
     public function build()
     {
-        $check = $this->check;
         $data = $this->data;
         $payment = $this->payment;
         $code = $this->code;
+        $input = $this->input;
 
-        if ($check->finish_payment == false) {
+        if ($data->finish_payment == false) {
             $subject = __('lang.mail.subject.unpaid', ['type' => strtoupper(str_replace('_', ' ', $payment['type'])), 'code' => $code]);
         } else {
             $subject = __('lang.mail.subject.paid', ['code' => $code,
-                'datetime' => Carbon::parse($check->created_at)->formatLocalized('%d %B %Y – %H:%M')]);
+                'datetime' => Carbon::parse($data->created_at)->formatLocalized('%d %B %Y – %H:%M')]);
         }
 
         if (!is_null($this->instruction)) {
-            $this->attach(public_path('storage/users/order/invoice/' . $check->user_id . '/' . $this->instruction));
+            $this->attach(public_path('storage/users/order/invoice/' . $data->user_id . '/' . $this->instruction));
         }
 
         return $this->from(env('MAIL_USERNAME'), __('lang.title'))->subject($subject)
-            ->view('emails.users.invoice', compact('code', 'data', 'check', 'payment'))
-            ->attach(public_path('storage/users/order/invoice/' . $check->user_id . '/' . $this->filename));
+            ->view('emails.users.invoice', compact('code', 'data', 'payment', 'input'))
+            ->attach(public_path('storage/users/order/invoice/' . $data->user_id . '/' . $this->filename));
     }
 }

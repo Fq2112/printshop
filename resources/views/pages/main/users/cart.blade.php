@@ -692,7 +692,7 @@
                                         <div class="divider divider-center mt-1 mb-1"><i class="icon-circle"></i></div>
                                         <div class="component-accordion">
                                             <div id="preload-shipping" class="css3-spinner"
-                                                 style="z-index: 1;top: 0;display: none">
+                                                 style="z-index: 1;position:relative;top:3em;display: none">
                                                 <div class="css3-spinner-bounce1"></div>
                                                 <div class="css3-spinner-bounce2"></div>
                                                 <div class="css3-spinner-bounce3"></div>
@@ -957,7 +957,7 @@
                            value="{{count($carts) > 0 ? number_format($total_weight,2,'.',',') : null}}">
                     <input type="hidden" name="discount">
                     <input type="hidden" name="discount_price">
-                    <input type="hidden" name="production_day"
+                    <input type="hidden" name="production_finished"
                            value="{{count($carts) > 0 ? now()->addDays(3)->format('Y-m-d') : null}}">
                     <input id="ongkir" type="hidden" name="ongkir">
                     <input id="delivery_duration" type="hidden" name="delivery_duration">
@@ -966,6 +966,11 @@
                            value="{{count($carts) > 0 ? $subtotal : null}}">
                     <input type="hidden" name="code"
                            value="{{count($carts) > 0 ? strtoupper(uniqid('PYM') . now()->timestamp) : null}}">
+                    <input type="hidden" name="lang" value="{{app()->getLocale()}}">
+                    <input type="hidden" name="transaction_id">
+                    <input type="hidden" name="pdf_url">
+                    <input type="hidden" name="rate_name">
+                    <input type="hidden" name="rate_logo">
                 </form>
 
                 <form id="form-design" action="#" method="post" enctype="multipart/form-data">
@@ -1532,7 +1537,7 @@
                             d: area, destinationCoord: latLng, wt: $("#total_weight").val(), v: total,
                             l: parseInt('{{$length}}'), w: parseInt('{{$width}}'), h: parseInt('{{$height}}')
                         },
-                        type: "GET",
+                        type: "POST",
                         beforeSend: function () {
                             $('#preload-shipping').show();
                             $("#accordion2").css('opacity', '.3');
@@ -1637,6 +1642,8 @@
                 $(".show-received").text(moment().add(production_day + parseInt(data.max_day), 'days').format('DD MMM YYYY'));
                 $(".show-total").text("Rp" + number_format(total, 2, ',', '.'));
 
+                $("#form-pembayaran input[name=rate_name]").val(data.name + ' ' + data.rate_name);
+                $("#form-pembayaran input[name=rate_logo]").val(data.logo_url);
                 $("#ongkir").val(ongkir);
                 $("#delivery_duration").val(etd);
                 $("#received_date").val(moment().add(production_day + parseInt(data.max_day), 'days').format('YYYY-MM-DD'));
@@ -1792,12 +1799,16 @@
         function responseMidtrans(url, result) {
             if (result.payment_type == 'credit_card' || result.payment_type == 'bank_transfer' ||
                 result.payment_type == 'echannel' || result.payment_type == 'gopay' || result.payment_type == 'cstore') {
+
+                $("#form-pembayaran input[name=transaction_id]").val(result.transaction_id);
+                $("#form-pembayaran input[name=pdf_url]").val(result.pdf_url);
+
                 clearTimeout(this.delay);
                 this.delay = setTimeout(function () {
                     $.ajax({
                         url: url,
                         type: "GET",
-                        data: {lang: '{{app()->getLocale()}}', id: result.transaction_id, pdf_url: result.pdf_url},
+                        data: $("#form-pembayaran").serialize(),
                         beforeSend: function () {
                             const preloader = document.createElement('div');
                             preloader.innerHTML =

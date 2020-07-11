@@ -1,7 +1,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no">
-    <title>{{strtoupper(__('lang.order.invoice')).' #'.str_replace('PYM', 'ORD', $code)}}</title>
+    <title>{{strtoupper(__('lang.order.invoice')).' #'.$code}}</title>
     <style type="text/css">
         .alert {
             padding: 15px;
@@ -249,6 +249,10 @@
             text-decoration: none;
         }
 
+        table.custom td div {
+            margin-bottom: 1.3em;
+        }
+
         @media screen and (max-width: 480px) {
             /* Width Control */
             table[class=full-width], img[class=full-width], a[class=full-width], div[class=full-width] {
@@ -385,7 +389,7 @@
                                                     <tr>
                                                         <td>
                                                             <small style="line-height: 2em">
-                                                                @if($check->finish_payment == false)
+                                                                @if($data->finish_payment == false)
                                                                     <b style="font-size: 22px">
                                                                         {{__('lang.mail.content.unpaid')}}</b><br>
                                                                     {{__('lang.mail.content.unpaid2', ['datetime' => now()->formatLocalized('%d %B %Y – %H:%M')])}}
@@ -409,16 +413,15 @@
                                     </table>
                                     @php
                                         $subtotal = 0;
-                                        $ongkir = 0;
-                                        foreach($data as $row) {
-                                            $cart = $row->getCart;
-                                            $subtotal += ($cart->total - $cart->ongkir);
-                                            $ongkir += $cart->ongkir;
+                                        foreach(\App\Models\Cart::whereIn('id', $data->cart_ids)->get() as $cart) {
+                                            $data_cart = !is_null($cart->subkategori_id) ? $cart->getSubKategori : $cart->getCluster;
+                                            $specs = !is_null($cart->subkategori_id) ? $data_cart->getSubkatSpecs : $data_cart->getClusterSpecs;
+                                            $subtotal += $cart->total;
                                         }
 
-                                        if($check->is_discount == true) {
-                                            $discount = $check->discount;
-                                            $discount_price = $subtotal * $discount / 100;
+                                        if($data->is_discount == true) {
+                                            $discount = $data->discount;
+                                            $discount_price = ceil($subtotal * $discount / 100);
                                         } else {
                                             $discount = 0;
                                             $discount_price = 0;
@@ -434,46 +437,61 @@
                                                         <td>
                                                             <small>
                                                                 <a style="text-decoration: none;color: #f89406;"
-                                                                   href="{{route('user.download.file',['id'=>encrypt($check->cart_id),'file'=>'invoice'])}}">
-                                                                    #<b>{{str_replace('PYM', 'ORD', $code)}}</b></a>
+                                                                   href="{{route('user.download.file',['id'=>encrypt($data->id),'file'=>'invoice'])}}">
+                                                                    #<b>{{$code}}</b></a>
                                                             </small>
                                                             <hr class="hr-divider">
-                                                            <table>
+                                                            <table class="custom">
                                                                 <tr>
-                                                                    <td><b>Subtotal ({{__('lang.cart.order.product',
-                                                                    ['qty' => count($data),
-                                                                    's' => count($data) > 1 ? 's' : null])}})</b>
+                                                                    <td>
+                                                                        <div><b>Subtotal
+                                                                                ({{__('lang.cart.order.product',['qty' => count($data->cart_ids),'s' => count($data->cart_ids) > 1 ? 's' : null])}}
+                                                                                )</b></div>
                                                                     </td>
-                                                                    <td>&emsp;</td>
+                                                                    <td>
+                                                                        <div>&emsp;</div>
+                                                                    </td>
                                                                     <td align="right">
-                                                                        <b>Rp{{number_format($subtotal,2,',','.')}}</b>
+                                                                        <div>
+                                                                            <b>Rp{{number_format($subtotal,2,',','.')}}</b>
+                                                                        </div>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>
-                                                                        <b>{{__('lang.cart.summary.discount').' '.$discount.'%'}}</b>
+                                                                        <div>
+                                                                            <b>{{__('lang.cart.summary.discount').' '.$discount.'%'}}</b>
+                                                                        </div>
                                                                     </td>
-                                                                    <td>&emsp;</td>
+                                                                    <td>
+                                                                        <div>&emsp;</div>
+                                                                    </td>
                                                                     <td align="right">
-                                                                        <b>-Rp{{number_format($discount_price,2,',','.')}}</b>
+                                                                        <div>
+                                                                            <b>-Rp{{number_format($discount_price,2,',','.')}}</b>
+                                                                        </div>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>
-                                                                        <b>
-                                                                            {{__('lang.product.form.summary.ongkir')}}
-                                                                        </b>
+                                                                        <div>
+                                                                            <b>{{__('lang.product.form.summary.ongkir')}}</b>
+                                                                        </div>
                                                                     </td>
-                                                                    <td>&emsp;</td>
+                                                                    <td>
+                                                                        <div>&emsp;</div>
+                                                                    </td>
                                                                     <td align="right">
-                                                                        <b>Rp{{number_format($ongkir,2,',','.')}}</b>
+                                                                        <div>
+                                                                            <b>Rp{{number_format($data->ongkir,2,',','.')}}</b>
+                                                                        </div>
                                                                     </td>
                                                                 </tr>
-                                                                <tr style="border-top: 1px solid #eee">
+                                                                <tr style="border-top: 1px solid #ccc">
                                                                     <td><b>TOTAL</b></td>
                                                                     <td>&emsp;</td>
                                                                     <td align="right" style="font-size: large">
-                                                                        <b>Rp{{number_format($subtotal - $discount_price + $ongkir,2,',','.')}}</b>
+                                                                        <b>Rp{{number_format($subtotal - $discount_price + $data->ongkir,2,',','.')}}</b>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -484,22 +502,25 @@
                                             <td valign="top" width="40%">
                                                 <table border="0" cellpadding="10" cellspacing="0" width="100%"
                                                        style="margin-left: 1em">
-                                                    @if($check->finish_payment == false)
-                                                        <tr>
-                                                            <td>
-                                                                <small><b>{{__('lang.mail.content.unpaid3')}}</b></small>
-                                                                <hr class="hr-divider">
-                                                                <span>
-                                                                    {{now()->formatLocalized('%d %B %Y – %H:%M')}}
-                                                                </span>
-                                                            </td>
-                                                        </tr>
-                                                    @endif
                                                     <tr>
                                                         <td>
-                                                            <small><b>{{__('lang.mail.content.payment4')}}</b></small>
+                                                            <small><b>P.O.</b></small>
                                                             <hr class="hr-divider">
-                                                            <span>{{$code}}</span>
+                                                            <span>#{{str_pad($data->id,14,0,STR_PAD_LEFT)}}</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <small><b>Due Date</b></small>
+                                                            <hr class="hr-divider">
+                                                            <span>{{now()->addDay()->formatLocalized('%d %B %Y – %H:%M')}}</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <small><b>{{__('lang.mail.content.payment')}}</b></small>
+                                                            <hr class="hr-divider">
+                                                            <span>{{$data->finish_payment == false ? __('lang.mail.content.payment2') : __('lang.mail.content.payment3')}}</span>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -540,13 +561,26 @@
                                                 </table>
                                             </td>
                                             <td valign="top" width="50%">
-                                                <table width="100%" border="0" cellpadding="10" cellspacing="0"
-                                                       style="margin-left: 1em">
+                                                <table border="0" cellpadding="10" cellspacing="0"
+                                                       style="margin-left: 1em" width="100%">
                                                     <tr>
                                                         <td>
-                                                            <small><b>{{__('lang.mail.content.payment')}}</b></small>
+                                                            <small><b>{{__('lang.product.form.shipping.head2')}}</b></small>
                                                             <hr class="hr-divider">
-                                                            <span>{{$check->finish_payment == false ? __('lang.mail.content.payment2') : __('lang.mail.content.payment3')}}</span>
+                                                            <table>
+                                                                <tr>
+                                                                    <td width="50%">
+                                                                        <img alt="Logo" src="{{$input['rate_logo']}}">
+                                                                    </td>
+                                                                    <td>
+                                                                        <small
+                                                                            style="line-height: 1.5em;font-size: 14px">
+                                                                            <b style="font-size: 16px">
+                                                                                {{$input['rate_name']}}</b>
+                                                                        </small>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -567,7 +601,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        @if($check->finish_payment == false)
+                                        @if($data->finish_payment == false)
                                             <tr>
                                                 <td>
                                                     <div class="alert alert-warning text-center">

@@ -124,18 +124,8 @@ class MidtransController extends Controller
             ],
             'item_details' => array_merge($arr_items, $arr_ship_disc),
             'custom_field1' => json_encode([
-                'code' => $request->code,
-                'cart_ids' => $request->cart_ids,
-                'shipping_address' => $request->shipping_id,
-                'billing_address' => $request->billing_id,
-                'production_finished' => $request->production_finished,
-                'ongkir' => $request->ongkir,
-                'delivery_duration' => $request->delivery_duration,
-                'received_date' => $request->received_date,
-                'rate_id' => $request->rate_id,
-                'promo_code' => $request->promo_code,
-                'is_discount' => !is_null($request->discount) ? 1 : 0,
-                'discount' => $request->discount,
+                'rate_name' => $request->rate_name,
+                'rate_logo' => $request->rate_logo,
             ])
         ]);
     }
@@ -144,36 +134,37 @@ class MidtransController extends Controller
     {
         app()->setLocale($request->lang);
 
-        $data_tr = collect(Transaction::status($request->id))->toArray();
+        $data_tr = collect(Transaction::status($request->transaction_id))->toArray();
+        $input = json_decode($data_tr['custom_field1'], true);
         $code = $data_tr['order_id'];
 
-        $input = json_decode($data_tr['custom_field1'], true);
-        $carts = Cart::whereIn('id', explode(',', $input['cart_ids']))
-            ->orderByRaw('FIELD (id, ' . $input['cart_ids'] . ') ASC')->get();
+        $carts = Cart::whereIn('id', explode(',', $request->cart_ids))
+            ->orderByRaw('FIELD (id, ' . $request->cart_ids . ') ASC')->get();
         $user = User::find(implode($carts->take(1)->pluck('user_id')->toArray()));
+
+        PaymentCart::firstOrCreate([
+            'user_id' => $user->id,
+            'shipping_address' => $request->shipping_id,
+            'billing_address' => $request->billing_id,
+            'cart_ids' => $carts->pluck('id')->toArray(),
+            'uni_code_payment' => $code,
+            'token' => uniqid(),
+            'production_finished' => $request->production_finished,
+            'ongkir' => $request->ongkir,
+            'delivery_duration' => $request->delivery_duration,
+            'received_date' => $request->received_date,
+            'rate_id' => $request->rate_id,
+            'price_total' => $data_tr['gross_amount'],
+            'promo_code' => $request->promo_code,
+            'is_discount' => !is_null($request->discount) ? 1 : 0,
+            'discount' => $request->discount,
+        ]);
 
         foreach ($carts as $cart) {
             $cart->update(['isCheckout' => true]);
         }
-        PaymentCart::firstOrCreate([
-            'user_id' => $user->id,
-            'shipping_address' => $input['shipping_id'],
-            'billing_address' => $input['billing_id'],
-            'cart_ids' => $carts->pluck('id')->toArray(),
-            'uni_code_payment' => $code,
-            'token' => uniqid(),
-            'production_finished' => $input['production_finished'],
-            'ongkir' => $input['ongkir'],
-            'delivery_duration' => $input['delivery_duration'],
-            'received_date' => $input['received_date'],
-            'rate_id' => $input['rate_id'],
-            'price_total' => $data_tr['gross_amount'],
-            'promo_code' => $input['promo_code'],
-            'is_discount' => $input['is_discount'],
-            'discount' => $input['discount'],
-        ]);
 
-        $this->invoiceMail('unfinish', $code, $user, $request->pdf_url, $data_tr);
+        $this->invoiceMail('unfinish', $code, $user, $request->pdf_url, $data_tr, $input);
 
         return __('lang.alert.checkout', ['qty' => count($carts), 's' => count($carts) > 1 ? 's' : '', 'code' => $code]);
     }
@@ -181,9 +172,9 @@ class MidtransController extends Controller
     public function finishCallback(Request $request)
     {
         app()->setLocale($request->lang);
-        $data_tr = collect(Transaction::status($request->id))->toArray();
-        $code = $data_tr['order_id'];
+        $data_tr = collect(Transaction::status($request->transaction_id))->toArray();
         $input = json_decode($data_tr['custom_field1'], true);
+        $code = $data_tr['order_id'];
 
         try {
             if (!array_key_exists('fraud_status', $data_tr) ||
@@ -192,33 +183,33 @@ class MidtransController extends Controller
                 if ($data_tr['payment_type'] == 'credit_card' &&
                     ($data_tr['transaction_status'] == 'capture' || $data_tr['transaction_status'] == 'settlement')) {
 
-                    $carts = Cart::whereIn('id', explode(',', $input['cart_ids']))
-                        ->orderByRaw('FIELD (id, ' . $input['cart_ids'] . ') ASC')->get();
+                    $carts = Cart::whereIn('id', explode(',', $request->cart_ids))
+                        ->orderByRaw('FIELD (id, ' . $request->cart_ids . ') ASC')->get();
                     $user = User::find(implode($carts->take(1)->pluck('user_id')->toArray()));
+
+                    PaymentCart::firstOrCreate([
+                        'user_id' => $user->id,
+                        'shipping_address' => $request->shipping_id,
+                        'billing_address' => $request->billing_id,
+                        'cart_ids' => $carts->pluck('id')->toArray(),
+                        'uni_code_payment' => $code,
+                        'token' => uniqid(),
+                        'production_finished' => $request->production_finished,
+                        'ongkir' => $request->ongkir,
+                        'delivery_duration' => $request->delivery_duration,
+                        'received_date' => $request->received_date,
+                        'rate_id' => $request->rate_id,
+                        'price_total' => $data_tr['gross_amount'],
+                        'promo_code' => $request->promo_code,
+                        'is_discount' => !is_null($request->discount) ? 1 : 0,
+                        'discount' => $request->discount,
+                    ]);
 
                     foreach ($carts as $cart) {
                         $cart->update(['isCheckout' => true]);
                     }
-                    PaymentCart::firstOrCreate([
-                        'user_id' => $user->id,
-                        'shipping_address' => $input['shipping_id'],
-                        'billing_address' => $input['billing_id'],
-                        'cart_ids' => $carts->pluck('id')->toArray(),
-                        'uni_code_payment' => $code,
-                        'token' => uniqid(),
-                        'production_finished' => $input['production_finished'],
-                        'ongkir' => $input['ongkir'],
-                        'delivery_duration' => $input['delivery_duration'],
-                        'received_date' => $input['received_date'],
-                        'rate_id' => $input['rate_id'],
-                        'price_total' => $data_tr['gross_amount'],
-                        'promo_code' => $input['promo_code'],
-                        'is_discount' => $input['is_discount'],
-                        'discount' => $input['discount'],
-                    ]);
-
                     $this->updatePayment($code);
-                    $this->invoiceMail('finish', $code, $user, $request->pdf_url, $data_tr);
+                    $this->invoiceMail('finish', $code, $user, $request->pdf_url, $data_tr, $input);
 
                     return __('lang.alert.payment-success',
                         ['qty' => count($carts), 's' => count($carts) > 1 ? 's' : '', 'code' => $code]);
@@ -234,6 +225,7 @@ class MidtransController extends Controller
     {
         $notif = new Notification();
         $data_tr = collect(Transaction::status($notif->transaction_id))->toArray();
+        $input = json_decode($data_tr['custom_field1'], true);
 
         try {
             if (!array_key_exists('fraud_status', $data_tr) ||
@@ -244,12 +236,15 @@ class MidtransController extends Controller
 
                     $this->updatePayment($notif->order_id);
 
-                    $payment_carts = PaymentCart::where('uni_code_payment', $notif->order_id)->get();
-                    $user = User::find(implode($payment_carts->take(1)->pluck('user_id')->toArray()));
-                    $this->invoiceMail('finish', $notif->order_id, $user, null, $data_tr);
+                    $payment_cart = PaymentCart::where('uni_code_payment', $notif->order_id)->first();
+                    $user = User::find($payment_cart->user_id);
+                    $this->invoiceMail('finish', $notif->order_id, $user, null, $data_tr, $input);
 
-                    return __('lang.alert.payment-success',
-                        ['qty' => count($payment_carts), 's' => count($payment_carts) > 1 ? 's' : '', 'code' => $notif->order_id]);
+                    return __('lang.alert.payment-success', [
+                        'qty' => count($payment_cart->cart_ids),
+                        's' => count($payment_cart->cart_ids) > 1 ? 's' : '',
+                        'code' => $notif->order_id
+                    ]);
                 }
             }
 
@@ -260,11 +255,12 @@ class MidtransController extends Controller
 
     private function updatePayment($code)
     {
-        $payment_carts = PaymentCart::where('uni_code_payment', $code)->get();
-        foreach ($payment_carts as $row) {
-            $row->update(['finish_payment' => true]);
+        $payment_cart = PaymentCart::where('uni_code_payment', $code)->first();
+        $payment_cart->update(['finish_payment' => true]);
+        $carts = Cart::whereIn('id', $payment_cart->cart_ids)
+            ->orderByRaw('FIELD (id, ' . implode(',', $payment_cart->cart_ids) . ') ASC')->get();
 
-            $item = $row->getCart;
+        foreach ($carts as $item) {
             $item_name = $item->subkategori_id != null ? $item->getSubKategori->getTranslation('name', 'en') : $item->getCluster->getTranslation('name', 'en');
             $trim_name = explode(' ', trim($item_name));
             $initial = '';
@@ -274,17 +270,16 @@ class MidtransController extends Controller
             }
 
             Order::create([
-                'cart_id' => $item->id,
+                'payment_carts_id' => $payment_cart->id,
                 'progress_status' => StatusProgress::NEW,
                 'uni_code' => strtoupper(uniqid($initial)) . now()->timestamp
             ]);
         }
     }
 
-    private function invoiceMail($status, $code, $user, $pdf_url, $data_tr)
+    private function invoiceMail($status, $code, $user, $pdf_url, $data_tr, $input)
     {
-        $check = PaymentCart::where('uni_code_payment', $code)->where('user_id', $user->id)->orderByDesc('id')->first();
-        $data = PaymentCart::where('uni_code_payment', $code)->where('user_id', $user->id)->orderByDesc('id')->get();
+        $data = PaymentCart::where('uni_code_payment', $code)->first();
 
         if ($data_tr['payment_type'] == 'credit_card') {
             $type = $data_tr['payment_type'];
@@ -332,7 +327,7 @@ class MidtransController extends Controller
             }
         }
 
-        $pdf = PDF::loadView('exports.invoice', compact('code', 'data', 'payment', 'check'));
+        $pdf = PDF::loadView('exports.invoice', compact('code', 'data', 'payment', 'input'));
         Storage::put('public/users/order/invoice/' . $user->id . '/' . $filename, $pdf->output());
 
         if (!is_null($pdf_url)) {
@@ -342,6 +337,6 @@ class MidtransController extends Controller
             $instruction = null;
         }
 
-        Mail::to($user->email)->send(new InvoiceMail($code, $check, $data, $payment, $filename, $instruction));
+        Mail::to($user->email)->send(new InvoiceMail($code, $data, $payment, $filename, $instruction, $input));
     }
 }
