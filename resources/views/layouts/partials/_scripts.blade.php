@@ -263,7 +263,7 @@
 
     function orderTrack() {
         @auth
-            window.location.href = '{{route('user.dashboard')}}';
+            window.location.href = '{{route('user.dashboard', ['filter' => 'shipped'])}}';
         @elseauth('admin')
         swal('{{__('lang.alert.warning')}}', '{{__('lang.alert.feature-fail')}}', 'warning');
         @else

@@ -162,6 +162,170 @@
         .process-steps.process-5 li.ui-tabs-active:before {
             border-top: 1px solid #f89406;
         }
+
+        .tracking-detail {
+            padding: 3rem 0
+        }
+
+        #tracking {
+            margin-bottom: 1rem
+        }
+
+        [class*=tracking-status-] p {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #fff;
+            text-transform: uppercase;
+            text-align: center
+        }
+
+        [class*=tracking-status-] {
+            padding: 1.6rem 0
+        }
+
+        .tracking-status-intransit {
+            background-color: #65aee0
+        }
+
+        .tracking-status-outfordelivery {
+            background-color: #f5a551
+        }
+
+        .tracking-status-deliveryoffice {
+            background-color: #f7dc6f
+        }
+
+        .tracking-status-delivered {
+            background-color: #4cbb87
+        }
+
+        .tracking-status-attemptfail {
+            background-color: #b789c7
+        }
+
+        .tracking-status-error, .tracking-status-exception {
+            background-color: #d26759
+        }
+
+        .tracking-status-expired {
+            background-color: #616e7d
+        }
+
+        .tracking-status-pending {
+            background-color: #ccc
+        }
+
+        .tracking-status-inforeceived {
+            background-color: #214977
+        }
+
+        .tracking-list {
+            border: 1px solid #e5e5e5
+        }
+
+        .tracking-item {
+            border-left: 1px solid #e5e5e5;
+            position: relative;
+            padding: 2rem 1.5rem .5rem 2.5rem;
+            font-size: .9rem;
+            margin-left: 3rem;
+            min-height: 5rem
+        }
+
+        .tracking-item:last-child {
+            padding-bottom: 4rem
+        }
+
+        .tracking-item .tracking-date {
+            margin-bottom: .5rem
+        }
+
+        .tracking-item .tracking-date span {
+            color: #888;
+            font-size: 85%;
+            padding-left: .4rem
+        }
+
+        .tracking-item .tracking-content {
+            padding: .5rem .8rem;
+            background-color: #f4f4f4;
+            border-radius: .5rem
+        }
+
+        .tracking-item .tracking-content span {
+            display: block;
+            color: #888;
+            font-size: 85%
+        }
+
+        .tracking-item .tracking-icon {
+            line-height: 2.6rem;
+            position: absolute;
+            left: -1.3rem;
+            width: 2.6rem;
+            height: 2.6rem;
+            text-align: center;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            background-color: #fff;
+            color: #fff
+        }
+
+        .tracking-item .tracking-icon.status-sponsored {
+            background-color: #f68
+        }
+
+        .tracking-item .tracking-icon.status-delivered {
+            background-color: #4cbb87
+        }
+
+        .tracking-item .tracking-icon.status-outfordelivery {
+            background-color: #f5a551
+        }
+
+        .tracking-item .tracking-icon.status-deliveryoffice {
+            background-color: #f7dc6f
+        }
+
+        .tracking-item .tracking-icon.status-attemptfail {
+            background-color: #b789c7
+        }
+
+        .tracking-item .tracking-icon.status-exception {
+            background-color: #d26759
+        }
+
+        .tracking-item .tracking-icon.status-inforeceived {
+            background-color: #214977
+        }
+
+        .tracking-item .tracking-icon.status-intransit {
+            color: #e5e5e5;
+            border: 1px solid #e5e5e5;
+            font-size: .6rem
+        }
+
+        @media (min-width: 992px) {
+            .tracking-item {
+                margin-left: 10rem
+            }
+
+            .tracking-item .tracking-date {
+                position: absolute;
+                left: -10rem;
+                width: 7.5rem;
+                text-align: right
+            }
+
+            .tracking-item .tracking-date span {
+                display: block
+            }
+
+            .tracking-item .tracking-content {
+                padding: 0;
+                background-color: transparent
+            }
+        }
     </style>
 @endpush
 @section('content')
@@ -272,23 +436,23 @@
                         @if($all > 0)
                             @if(count($unpaid) > 0)
                                 @php $item = $unpaid; $all = 'all-unpaid-'; $acc = 'unpaid'; @endphp
-                                @include('layouts.partials.users._paymentDashboard')
+                                @include('layouts.partials.users._statusDashboard')
                             @endif
                             @if(count($paid) > 0)
                                 @php $item = $paid; $all = 'all-paid-'; $acc = 'paid'; @endphp
-                                @include('layouts.partials.users._paymentDashboard')
+                                @include('layouts.partials.users._statusDashboard')
                             @endif
                             @if(count($produced) > 0)
                                 @php $item = $produced; $all = 'all-'; $acc = 'produced'; @endphp
-                                @include('layouts.partials.users._orderDashboard')
+                                @include('layouts.partials.users._statusDashboard')
                             @endif
                             @if(count($shipped) > 0)
                                 @php $item = $shipped; $all = 'all-'; $acc = 'shipped'; @endphp
-                                @include('layouts.partials.users._orderDashboard')
+                                @include('layouts.partials.users._statusDashboard')
                             @endif
                             @if(count($received) > 0)
                                 @php $item = $received; $all = 'all-'; $acc = 'received'; @endphp
-                                @include('layouts.partials.users._orderDashboard')
+                                @include('layouts.partials.users._statusDashboard')
                             @endif
                         @else
                             @include('layouts.partials.users._emptyDashboard')
@@ -299,7 +463,7 @@
                          id="tabContent-or" role="tabpanel" aria-labelledby="nav-or-tab" style="border: none">
                         @if(count($unpaid) > 0)
                             @php $item = $unpaid; $all = 'unpaid'; $acc = 'unpaid'; @endphp
-                            @include('layouts.partials.users._paymentDashboard')
+                            @include('layouts.partials.users._statusDashboard')
                         @else
                             @include('layouts.partials.users._emptyDashboard')
                         @endif
@@ -309,7 +473,7 @@
                          id="tabContent-pr" role="tabpanel" aria-labelledby="nav-pr-tab" style="border: none">
                         @if(count($paid) > 0)
                             @php $item = $paid; $all = 'paid'; $acc = 'paid'; @endphp
-                            @include('layouts.partials.users._paymentDashboard')
+                            @include('layouts.partials.users._statusDashboard')
                         @else
                             @include('layouts.partials.users._emptyDashboard')
                         @endif
@@ -319,7 +483,7 @@
                          id="tabContent-bp" role="tabpanel" aria-labelledby="nav-bp-tab" style="border: none">
                         @if(count($produced) > 0)
                             @php $item = $produced; $all = null; $acc = 'produced'; @endphp
-                            @include('layouts.partials.users._orderDashboard')
+                            @include('layouts.partials.users._statusDashboard')
                         @else
                             @include('layouts.partials.users._emptyDashboard')
                         @endif
@@ -329,7 +493,7 @@
                          id="tabContent-id" role="tabpanel" aria-labelledby="nav-id-tab" style="border: none">
                         @if(count($shipped) > 0)
                             @php $item = $shipped; $all = null; $acc = 'shipped'; @endphp
-                            @include('layouts.partials.users._orderDashboard')
+                            @include('layouts.partials.users._statusDashboard')
                         @else
                             @include('layouts.partials.users._emptyDashboard')
                         @endif
@@ -339,7 +503,7 @@
                          id="tabContent-ir" role="tabpanel" aria-labelledby="nav-ir-tab" style="border: none">
                         @if(count($received) > 0)
                             @php $item = $received; $all = null; $acc = 'received'; @endphp
-                            @include('layouts.partials.users._orderDashboard')
+                            @include('layouts.partials.users._statusDashboard')
                         @else
                             @include('layouts.partials.users._emptyDashboard')
                         @endif
@@ -357,7 +521,7 @@
             collapse.on('show.bs.collapse', function () {
                 $(this).siblings('.panel-heading').addClass('active');
                 $(this).siblings('.panel-heading').find('a').addClass('active font-weight-bold');
-                $(this).siblings('.panel-heading').find('b').toggle(300);
+                // $(this).siblings('.panel-heading').find('b').toggle(300);
 
                 $('html,body').animate({scrollTop: $(this).parent().offset().top}, 0);
             });
@@ -365,7 +529,7 @@
             collapse.on('hide.bs.collapse', function () {
                 $(this).siblings('.panel-heading').removeClass('active');
                 $(this).siblings('.panel-heading').find('a').removeClass('active font-weight-bold');
-                $(this).siblings('.panel-heading').find('b').toggle(300);
+                // $(this).siblings('.panel-heading').find('b').toggle(300);
 
                 $('html,body').animate({scrollTop: $("#form-loadOrder").offset().top}, 0);
             });

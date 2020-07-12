@@ -181,40 +181,32 @@ class UserController extends Controller
             $q->where('uni_code_payment', 'LIKE', '%' . $keyword . '%');
         })->orderByDesc('id')->get();
 
-        $archive_produced = Order::where('progress_status', StatusProgress::START_PRODUCTION)
-            ->whereHas('getPayment', function ($q) use ($user) {
-                $q->where('user_id', $user->id);
-            })->when($keyword, function ($q) use ($keyword, $user) {
-                $q->where('uni_code', 'LIKE', '%' . $keyword . '%');
-            })->orWhere('progress_status', StatusProgress::FINISH_PRODUCTION)
-            ->whereHas('getPayment', function ($q) use ($user) {
-                $q->where('user_id', $user->id);
-            })->when($keyword, function ($q) use ($keyword, $user) {
-                $q->where('uni_code', 'LIKE', '%' . $keyword . '%');
-            })->orderByDesc('updated_at')->get()->groupBy(function ($q) {
-                return $q->getPayment->uni_code_payment;
-            });
-        $produced = $archive_produced;
+        $produced = PaymentCart::where('user_id', $user->id)->where('finish_payment', true)
+            ->whereHas('getOrder', function ($q) use ($keyword, $user) {
+                $q->where('progress_status', StatusProgress::START_PRODUCTION)
+                    ->when($keyword, function ($q) use ($keyword, $user) {
+                        $q->where('uni_code', 'LIKE', '%' . $keyword . '%');
+                    })->orWhere('progress_status', StatusProgress::FINISH_PRODUCTION)
+                    ->when($keyword, function ($q) use ($keyword, $user) {
+                        $q->where('uni_code', 'LIKE', '%' . $keyword . '%');
+                    });
+            })->orderByDesc('id')->get();
 
-        $archive_shipped = Order::where('progress_status', StatusProgress::SHIPPING)
-            ->whereHas('getPayment', function ($q) use ($user) {
-                $q->where('user_id', $user->id);
-            })->when($keyword, function ($q) use ($keyword, $user) {
-                $q->where('uni_code', 'LIKE', '%' . $keyword . '%');
-            })->orderByDesc('updated_at')->get()->groupBy(function ($q) {
-                return $q->getPayment->uni_code_payment;
-            });
-        $shipped = $archive_shipped;
+        $shipped = PaymentCart::where('user_id', $user->id)->where('finish_payment', true)
+            ->whereHas('getOrder', function ($q) use ($keyword, $user) {
+                $q->where('progress_status', StatusProgress::SHIPPING)
+                    ->when($keyword, function ($q) use ($keyword, $user) {
+                        $q->where('uni_code', 'LIKE', '%' . $keyword . '%');
+                    });
+            })->orderByDesc('id')->get();
 
-        $archive_received = Order::where('progress_status', StatusProgress::RECEIVED)
-            ->whereHas('getPayment', function ($q) use ($user) {
-                $q->where('user_id', $user->id);
-            })->when($keyword, function ($q) use ($keyword, $user) {
-                $q->where('uni_code', 'LIKE', '%' . $keyword . '%');
-            })->orderByDesc('updated_at')->get()->groupBy(function ($q) {
-                return $q->getPayment->uni_code_payment;
-            });
-        $received = $archive_received;
+        $received = PaymentCart::where('user_id', $user->id)->where('finish_payment', true)
+            ->whereHas('getOrder', function ($q) use ($keyword, $user) {
+                $q->where('progress_status', StatusProgress::RECEIVED)
+                    ->when($keyword, function ($q) use ($keyword, $user) {
+                        $q->where('uni_code', 'LIKE', '%' . $keyword . '%');
+                    });
+            })->orderByDesc('id')->get();
 
         $all = count($paid) + count($unpaid) + count($produced) + count($shipped) + count($received);
 

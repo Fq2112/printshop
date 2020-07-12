@@ -11,20 +11,8 @@ class CartSeeder extends Seeder
      */
     public function run()
     {
-        $client = new \GuzzleHttp\Client([
-            'headers' => [
-                'Accept' => 'application/json',
-                'key' => env('RajaOngkir_KEY')
-            ],
-            'defaults' => [
-                'exceptions' => false
-            ]
-        ]);
-
         foreach (\App\User::all() as $user) {
             for ($i = 0; $i < 10; $i++) {
-                $address = \App\Models\Address::where('user_id', $user->id)->inRandomOrder()->first();
-
                 $qty = rand(1, 20);
 
                 $cluster = \App\Models\ClusterKategori::inRandomOrder()->first();
