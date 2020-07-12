@@ -123,10 +123,6 @@ class MidtransController extends Controller
                 ],
             ],
             'item_details' => array_merge($arr_items, $arr_ship_disc),
-            'custom_field1' => json_encode([
-                'rate_name' => $request->rate_name,
-                'rate_logo' => $request->rate_logo,
-            ])
         ]);
     }
 
@@ -135,7 +131,7 @@ class MidtransController extends Controller
         app()->setLocale($request->lang);
 
         $data_tr = collect(Transaction::status($request->transaction_id))->toArray();
-        $input = json_decode($data_tr['custom_field1'], true);
+        $input = ['rate_name' => $request->rate_name, 'rate_logo' => $request->rate_logo];
         $code = $data_tr['order_id'];
 
         $carts = Cart::whereIn('id', explode(',', $request->cart_ids))
@@ -154,6 +150,8 @@ class MidtransController extends Controller
             'delivery_duration' => $request->delivery_duration,
             'received_date' => $request->received_date,
             'rate_id' => $request->rate_id,
+            'rate_name' => $request->rate_name,
+            'rate_logo' => $request->rate_logo,
             'price_total' => $data_tr['gross_amount'],
             'promo_code' => $request->promo_code,
             'is_discount' => !is_null($request->discount) ? 1 : 0,
@@ -173,7 +171,7 @@ class MidtransController extends Controller
     {
         app()->setLocale($request->lang);
         $data_tr = collect(Transaction::status($request->transaction_id))->toArray();
-        $input = json_decode($data_tr['custom_field1'], true);
+        $input = ['rate_name' => $request->rate_name, 'rate_logo' => $request->rate_logo];
         $code = $data_tr['order_id'];
 
         try {
@@ -199,6 +197,8 @@ class MidtransController extends Controller
                         'delivery_duration' => $request->delivery_duration,
                         'received_date' => $request->received_date,
                         'rate_id' => $request->rate_id,
+                        'rate_name' => $request->rate_name,
+                        'rate_logo' => $request->rate_logo,
                         'price_total' => $data_tr['gross_amount'],
                         'promo_code' => $request->promo_code,
                         'is_discount' => !is_null($request->discount) ? 1 : 0,
@@ -225,7 +225,6 @@ class MidtransController extends Controller
     {
         $notif = new Notification();
         $data_tr = collect(Transaction::status($notif->transaction_id))->toArray();
-        $input = json_decode($data_tr['custom_field1'], true);
 
         try {
             if (!array_key_exists('fraud_status', $data_tr) ||
@@ -237,6 +236,7 @@ class MidtransController extends Controller
                     $this->updatePayment($notif->order_id);
 
                     $payment_cart = PaymentCart::where('uni_code_payment', $notif->order_id)->first();
+                    $input = ['rate_name' => $payment_cart->rate_name, 'rate_logo' => $payment_cart->rate_logo];
                     $user = User::find($payment_cart->user_id);
                     $this->invoiceMail('finish', $notif->order_id, $user, null, $data_tr, $input);
 

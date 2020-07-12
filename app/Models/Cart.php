@@ -25,14 +25,4 @@ class Cart extends Model
     {
         return $this->belongsTo(ClusterKategori::class, 'cluster_id');
     }
-
-    public function getOrder()
-    {
-        return $this->hasOne(Order::class, 'cart_id');
-    }
-
-    public function getPayment()
-    {
-        return $this->hasOne(PaymentCart::class, 'cart_id');
-    }
 }

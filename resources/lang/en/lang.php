@@ -226,7 +226,7 @@ return [
     ],
     "order" => [
         "capt" => "Here you can see your order history and its status.",
-        "search" => "Enter the payment/order number or the print product name you ordered...",
+        "search" => "Enter the payment/order/AWB number of your order...",
         "tab-or" => "Order Received",
         "tab-pr" => "Payment Received",
         "tab-bp" => "Being Produced",
@@ -241,6 +241,7 @@ return [
         "status" => "Order Status",
         "unpaid" => "UNPAID",
         "paid" => "PAID",
+        "logistic" => "Logistic",
     ],
     "profile" => [
         "capt" => "Here you can manage your avatar and background profile, personal data, and also your address list.",
@@ -318,7 +319,8 @@ return [
         "promo" => "Enter your promo code...",
         "drag-drop" => "Drag & drop your design file here...",
         "click-select" => "<br>(or click to choose it)",
-        "choose-file" => "Choose file..."
+        "choose-file" => "Choose file...",
+        "occupancy" => "Occupancy Type",
     ],
     "button" => [
         "cart" => "View Cart",

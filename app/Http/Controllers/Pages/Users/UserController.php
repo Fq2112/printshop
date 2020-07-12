@@ -170,106 +170,50 @@ class UserController extends Controller
         $keyword = $request->q;
         $category = $request->filter;
 
-        $archive_unpaid = PaymentCart::where('user_id', $user->id)->where('finish_payment', false)
-            ->whereHas('getCart', function ($q) use ($user) {
-                $q->where('user_id', $user->id)->where('isCheckout', true)->doesntHave('getOrder');
-            })->when($keyword, function ($q) use ($keyword, $user) {
-                $q->where('uni_code_payment', 'LIKE', '%' . $keyword . '%')
-                    ->orWhereHas('getCart', function ($q) use ($keyword, $user) {
-                        $q->whereHas('getSubKategori', function ($q) use ($keyword) {
-                            $q->where('name', 'LIKE', '%' . $keyword . '%');
-                        })->where('user_id', $user->id)->where('isCheckout', true)->doesntHave('getOrder')
-                            ->orWhereHas('getCluster', function ($q) use ($keyword) {
-                                $q->where('name', 'LIKE', '%' . $keyword . '%');
-                            })->where('user_id', $user->id)->where('isCheckout', true)->doesntHave('getOrder');
-                    })->where('user_id', $user->id)->where('finish_payment', false);
-            })->orderByDesc('id')->get()->groupBy('uni_code_payment');
-        $unpaid = $archive_unpaid;
+        $unpaid = PaymentCart::where('user_id', $user->id)->where('finish_payment', false)->doesntHave('getOrder')
+            ->when($keyword, function ($q) use ($keyword, $user) {
+                $q->where('uni_code_payment', 'LIKE', '%' . $keyword . '%');
+            })->orderByDesc('id')->get();
 
-        $archive_paid = PaymentCart::where('user_id', $user->id)->where('finish_payment', true)
-            ->whereHas('getCart', function ($q) use ($user) {
-                $q->where('user_id', $user->id)->where('isCheckout', true)
-                    ->whereHas('getOrder', function ($q) {
-                        $q->where('progress_status', StatusProgress::NEW);
-                    });
-            })->when($keyword, function ($q) use ($keyword, $user) {
-                $q->where('uni_code_payment', 'LIKE', '%' . $keyword . '%')
-                    ->orWhereHas('getCart', function ($q) use ($keyword, $user) {
-                        $q->whereHas('getSubKategori', function ($q) use ($keyword) {
-                            $q->where('name', 'LIKE', '%' . $keyword . '%');
-                        })->where('user_id', $user->id)->where('isCheckout', true)
-                            ->whereHas('getOrder', function ($q) {
-                                $q->where('progress_status', StatusProgress::NEW);
-                            })
-                            ->orWhereHas('getCluster', function ($q) use ($keyword) {
-                                $q->where('name', 'LIKE', '%' . $keyword . '%');
-                            })->where('user_id', $user->id)->where('isCheckout', true)
-                            ->whereHas('getOrder', function ($q) {
-                                $q->where('progress_status', StatusProgress::NEW);
-                            });
-                    })->where('user_id', $user->id)->where('finish_payment', true);
-            })->orderByDesc('id')->get()->groupBy('uni_code_payment');
-        $paid = $archive_paid;
+        $paid = PaymentCart::where('user_id', $user->id)->where('finish_payment', true)->whereHas('getOrder', function ($q) {
+            $q->where('progress_status', StatusProgress::NEW);
+        })->when($keyword, function ($q) use ($keyword, $user) {
+            $q->where('uni_code_payment', 'LIKE', '%' . $keyword . '%');
+        })->orderByDesc('id')->get();
 
         $archive_produced = Order::where('progress_status', StatusProgress::START_PRODUCTION)
-            ->whereHas('getCart', function ($q) use ($user) {
+            ->whereHas('getPayment', function ($q) use ($user) {
                 $q->where('user_id', $user->id);
             })->when($keyword, function ($q) use ($keyword, $user) {
-                $q->where('uni_code', 'LIKE', '%' . $keyword . '%')
-                    ->orWhereHas('getCart', function ($q) use ($keyword, $user) {
-                        $q->whereHas('getSubKategori', function ($q) use ($keyword) {
-                            $q->where('name', 'LIKE', '%' . $keyword . '%');
-                        })->where('user_id', $user->id)
-                            ->orWhereHas('getCluster', function ($q) use ($keyword) {
-                                $q->where('name', 'LIKE', '%' . $keyword . '%');
-                            })->where('user_id', $user->id);
-                    })->where('progress_status', StatusProgress::START_PRODUCTION);
+                $q->where('uni_code', 'LIKE', '%' . $keyword . '%');
             })->orWhere('progress_status', StatusProgress::FINISH_PRODUCTION)
-            ->whereHas('getCart', function ($q) use ($user) {
+            ->whereHas('getPayment', function ($q) use ($user) {
                 $q->where('user_id', $user->id);
             })->when($keyword, function ($q) use ($keyword, $user) {
-                $q->where('uni_code', 'LIKE', '%' . $keyword . '%')
-                    ->orWhereHas('getCart', function ($q) use ($keyword, $user) {
-                        $q->whereHas('getSubKategori', function ($q) use ($keyword) {
-                            $q->where('name', 'LIKE', '%' . $keyword . '%');
-                        })->where('user_id', $user->id)
-                            ->orWhereHas('getCluster', function ($q) use ($keyword) {
-                                $q->where('name', 'LIKE', '%' . $keyword . '%');
-                            })->where('user_id', $user->id);
-                    })->where('progress_status', StatusProgress::FINISH_PRODUCTION);
-            })->orderByDesc('updated_at')->get()->groupBy('uni_code');
+                $q->where('uni_code', 'LIKE', '%' . $keyword . '%');
+            })->orderByDesc('updated_at')->get()->groupBy(function ($q) {
+                return $q->getPayment->uni_code_payment;
+            });
         $produced = $archive_produced;
 
         $archive_shipped = Order::where('progress_status', StatusProgress::SHIPPING)
-            ->whereHas('getCart', function ($q) use ($user) {
+            ->whereHas('getPayment', function ($q) use ($user) {
                 $q->where('user_id', $user->id);
             })->when($keyword, function ($q) use ($keyword, $user) {
-                $q->where('uni_code', 'LIKE', '%' . $keyword . '%')
-                    ->orWhereHas('getCart', function ($q) use ($keyword, $user) {
-                        $q->whereHas('getSubKategori', function ($q) use ($keyword) {
-                            $q->where('name', 'LIKE', '%' . $keyword . '%');
-                        })->where('user_id', $user->id)
-                            ->orWhereHas('getCluster', function ($q) use ($keyword) {
-                                $q->where('name', 'LIKE', '%' . $keyword . '%');
-                            })->where('user_id', $user->id);
-                    })->where('progress_status', StatusProgress::SHIPPING);
-            })->orderByDesc('updated_at')->get()->groupBy('uni_code');
+                $q->where('uni_code', 'LIKE', '%' . $keyword . '%');
+            })->orderByDesc('updated_at')->get()->groupBy(function ($q) {
+                return $q->getPayment->uni_code_payment;
+            });
         $shipped = $archive_shipped;
 
         $archive_received = Order::where('progress_status', StatusProgress::RECEIVED)
-            ->whereHas('getCart', function ($q) use ($user) {
+            ->whereHas('getPayment', function ($q) use ($user) {
                 $q->where('user_id', $user->id);
             })->when($keyword, function ($q) use ($keyword, $user) {
-                $q->where('uni_code', 'LIKE', '%' . $keyword . '%')
-                    ->orWhereHas('getCart', function ($q) use ($keyword, $user) {
-                        $q->whereHas('getSubKategori', function ($q) use ($keyword) {
-                            $q->where('name', 'LIKE', '%' . $keyword . '%');
-                        })->where('user_id', $user->id)
-                            ->orWhereHas('getCluster', function ($q) use ($keyword) {
-                                $q->where('name', 'LIKE', '%' . $keyword . '%');
-                            })->where('user_id', $user->id);
-                    })->where('progress_status', StatusProgress::RECEIVED);
-            })->orderByDesc('updated_at')->get()->groupBy('uni_code');
+                $q->where('uni_code', 'LIKE', '%' . $keyword . '%');
+            })->orderByDesc('updated_at')->get()->groupBy(function ($q) {
+                return $q->getPayment->uni_code_payment;
+            });
         $received = $archive_received;
 
         $all = count($paid) + count($unpaid) + count($produced) + count($shipped) + count($received);
@@ -292,7 +236,7 @@ class UserController extends Controller
                     return back()->with('warning', __('lang.alert.download-fail'));
                 }
             } else {
-                return $cart->link;
+                return redirect()->to($cart->link);
             }
 
         } else {

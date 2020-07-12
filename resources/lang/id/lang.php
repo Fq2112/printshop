@@ -226,7 +226,7 @@ return [
     ],
     "order" => [
         "capt" => "Di sini Anda dapat melihat riwayat pemesanan Anda beserta statusnya.",
-        "search" => "Masukkan nomor pembayaran/pesanan atau nama produk cetak yang Anda pesan...",
+        "search" => "Masukkan nomor pembayaran/pesanan/resi dari pesanan Anda...",
         "tab-or" => "Pesanan Diterima",
         "tab-pr" => "Pembayaran Diterima",
         "tab-bp" => "Sedang Diproduksi",
@@ -241,6 +241,7 @@ return [
         "status" => "Status Pesanan",
         "unpaid" => "BELUM DIBAYAR",
         "paid" => "DIBAYAR",
+        "logistic" => "Logistik",
     ],
     "profile" => [
         "capt" => "Di sini Anda dapat mengatur avatar dan latar belakang profil Anda, data personal dan juga daftar alamat Anda.",
@@ -318,7 +319,8 @@ return [
         "promo" => "Masukkan kode promo Anda...",
         "drag-drop" => "Drag & drop file desain Anda di sini...",
         "click-select" => "<br>(atau klik untuk memilihnya)",
-        "choose-file" => "Pilih file..."
+        "choose-file" => "Pilih file...",
+        "occupancy" => "Jenis Hunian",
     ],
     "button" => [
         "cart" => "Lihat Keranjang",

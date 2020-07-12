@@ -272,23 +272,23 @@
                         @if($all > 0)
                             @if(count($unpaid) > 0)
                                 @php $item = $unpaid; $all = 'all-unpaid-'; $acc = 'unpaid'; @endphp
-                                @include('layouts.partials.users._statusDashboard')
+                                @include('layouts.partials.users._paymentDashboard')
                             @endif
                             @if(count($paid) > 0)
                                 @php $item = $paid; $all = 'all-paid-'; $acc = 'paid'; @endphp
-                                @include('layouts.partials.users._statusDashboard')
+                                @include('layouts.partials.users._paymentDashboard')
                             @endif
                             @if(count($produced) > 0)
                                 @php $item = $produced; $all = 'all-'; $acc = 'produced'; @endphp
-                                @include('layouts.partials.users._statusDashboard')
+                                @include('layouts.partials.users._orderDashboard')
                             @endif
                             @if(count($shipped) > 0)
                                 @php $item = $shipped; $all = 'all-'; $acc = 'shipped'; @endphp
-                                @include('layouts.partials.users._statusDashboard')
+                                @include('layouts.partials.users._orderDashboard')
                             @endif
                             @if(count($received) > 0)
                                 @php $item = $received; $all = 'all-'; $acc = 'received'; @endphp
-                                @include('layouts.partials.users._statusDashboard')
+                                @include('layouts.partials.users._orderDashboard')
                             @endif
                         @else
                             @include('layouts.partials.users._emptyDashboard')
@@ -299,7 +299,7 @@
                          id="tabContent-or" role="tabpanel" aria-labelledby="nav-or-tab" style="border: none">
                         @if(count($unpaid) > 0)
                             @php $item = $unpaid; $all = 'unpaid'; $acc = 'unpaid'; @endphp
-                            @include('layouts.partials.users._statusDashboard')
+                            @include('layouts.partials.users._paymentDashboard')
                         @else
                             @include('layouts.partials.users._emptyDashboard')
                         @endif
@@ -309,7 +309,7 @@
                          id="tabContent-pr" role="tabpanel" aria-labelledby="nav-pr-tab" style="border: none">
                         @if(count($paid) > 0)
                             @php $item = $paid; $all = 'paid'; $acc = 'paid'; @endphp
-                            @include('layouts.partials.users._statusDashboard')
+                            @include('layouts.partials.users._paymentDashboard')
                         @else
                             @include('layouts.partials.users._emptyDashboard')
                         @endif
@@ -319,7 +319,7 @@
                          id="tabContent-bp" role="tabpanel" aria-labelledby="nav-bp-tab" style="border: none">
                         @if(count($produced) > 0)
                             @php $item = $produced; $all = null; $acc = 'produced'; @endphp
-                            @include('layouts.partials.users._statusDashboard')
+                            @include('layouts.partials.users._orderDashboard')
                         @else
                             @include('layouts.partials.users._emptyDashboard')
                         @endif
@@ -329,7 +329,7 @@
                          id="tabContent-id" role="tabpanel" aria-labelledby="nav-id-tab" style="border: none">
                         @if(count($shipped) > 0)
                             @php $item = $shipped; $all = null; $acc = 'shipped'; @endphp
-                            @include('layouts.partials.users._statusDashboard')
+                            @include('layouts.partials.users._orderDashboard')
                         @else
                             @include('layouts.partials.users._emptyDashboard')
                         @endif
@@ -339,7 +339,7 @@
                          id="tabContent-ir" role="tabpanel" aria-labelledby="nav-ir-tab" style="border: none">
                         @if(count($received) > 0)
                             @php $item = $received; $all = null; $acc = 'received'; @endphp
-                            @include('layouts.partials.users._statusDashboard')
+                            @include('layouts.partials.users._orderDashboard')
                         @else
                             @include('layouts.partials.users._emptyDashboard')
                         @endif

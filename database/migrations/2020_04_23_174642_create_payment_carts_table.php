@@ -33,6 +33,8 @@ class CreatePaymentCartsTable extends Migration
             $table->text('uni_code_payment');
             $table->string('token')->unique();
             $table->integer('rate_id');
+            $table->string('rate_name');
+            $table->text('rate_logo');
             $table->boolean('finish_payment')->default(false);
             $table->timestamps();
         });
