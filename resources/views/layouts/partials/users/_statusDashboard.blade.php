@@ -51,7 +51,7 @@
             @php
                 $code = $val->uni_code_payment;
                 $carts = \App\Models\Cart::whereIn('id', $val->cart_ids)->orderByRaw('FIELD (id, ' . implode(',', $val->cart_ids) . ') ASC')->get();
-                $order = $val->getOrder;
+                $order = \App\Models\Order::where('payment_carts_id', $val->id)->first();
                 $shipping = $val->getShippingAddress;
                 $billing = $val->getBillingAddress;
                 $min_day = substr($val->delivery_duration, 0, 1);
@@ -85,23 +85,23 @@
                 } elseif($acc == 'produced') {
                     $or_date = \Carbon\Carbon::parse($val->created_at)->formatLocalized('%d %b %Y – %H:%M');
                     $pr_date = \Carbon\Carbon::parse($val->updated_at)->formatLocalized('%d %b %Y – %H:%M');
-                    $bp_date = \Carbon\Carbon::parse($order->created_at)->formatLocalized('%d %b %Y – %H:%M');
+                    $bp_date = \Carbon\Carbon::parse($order->date_production)->formatLocalized('%d %b %Y – %H:%M');
                     $id_date = '';
                     $ir_date = '';
 
                 } elseif($acc == 'shipped') {
                     $or_date = \Carbon\Carbon::parse($val->created_at)->formatLocalized('%d %b %Y – %H:%M');
                     $pr_date = \Carbon\Carbon::parse($val->updated_at)->formatLocalized('%d %b %Y – %H:%M');
-                    $bp_date = \Carbon\Carbon::parse($order->created_at)->formatLocalized('%d %b %Y – %H:%M');
-                    $id_date = \Carbon\Carbon::parse($order->updated_at)->formatLocalized('%d %b %Y – %H:%M');
+                    $bp_date = \Carbon\Carbon::parse($order->date_production)->formatLocalized('%d %b %Y – %H:%M');
+                    $id_date = \Carbon\Carbon::parse($val->pickup_date)->formatLocalized('%d %b %Y – %H:%M');
                     $ir_date = '';
 
                 } else {
                     $or_date = \Carbon\Carbon::parse($val->created_at)->formatLocalized('%d %b %Y – %H:%M');
                     $pr_date = \Carbon\Carbon::parse($val->updated_at)->formatLocalized('%d %b %Y – %H:%M');
-                    $bp_date = \Carbon\Carbon::parse($order->created_at)->formatLocalized('%d %b %Y – %H:%M');
-                    $id_date = \Carbon\Carbon::parse($order->updated_at)->formatLocalized('%d %b %Y – %H:%M');
-                    $ir_date = \Carbon\Carbon::parse($order->updated_at)->formatLocalized('%d %b %Y – %H:%M');
+                    $bp_date = \Carbon\Carbon::parse($order->date_production)->formatLocalized('%d %b %Y – %H:%M');
+                    $id_date = \Carbon\Carbon::parse($val->pickup_date)->formatLocalized('%d %b %Y – %H:%M');
+                    $ir_date = \Carbon\Carbon::parse($val->receive_date)->formatLocalized('%d %b %Y – %H:%M');
                 }
             @endphp
             <div class="panel panel-default">
@@ -109,7 +109,7 @@
                     <h4 class="panel-title">
                         <a role="button" data-toggle="collapse" href="#collapse-{{$all.$code}}" aria-expanded="false"
                            aria-controls="collapse-{{$all.$code}}" class="collapsed">
-                            {!! __('lang.order.payment_id', ['id' => substr($code,0,-1)]) !!}
+                            {!! __('lang.order.payment_id', ['id' => $code]) !!}
                             <b class="text-uppercase" style="color: {{$color}}">{{$stats}}</b>
                         </a>
                     </h4>
@@ -162,7 +162,7 @@
                                                             <i class="icon-drafting-compass mr-2"></i>{{$data->name}}
                                                             @if($acc != 'unpaid' || $acc != 'paid')
                                                                 <span class="fright text-uppercase">
-                                                                    {!! __('lang.order.order_id', ['id' => substr($order->uni_code,0,-1)]) !!}
+                                                                    {!! __('lang.order.order_id', ['id' => str_replace('-','',$order->uni_code)]) !!}
                                                                 </span>
                                                             @endif
                                                         </h5>
@@ -615,7 +615,7 @@
                                                aria-controls="collapse-{{$all.$code}}-status" class="collapsed">
                                                 {{__('lang.order.status')}}
                                                 @if($acc == 'shipped' || $acc == 'received')
-                                                    <b class="text-uppercase">{{__('lang.order.AWB').' #'.uniqid($order->resi)}}</b>
+                                                    <b class="text-uppercase">{{__('lang.order.AWB').' #'.$val->resi}}</b>
                                                 @endif
                                             </a>
                                         </h4>

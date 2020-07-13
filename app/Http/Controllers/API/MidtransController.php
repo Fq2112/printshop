@@ -272,7 +272,7 @@ class MidtransController extends Controller
             Order::create([
                 'payment_carts_id' => $payment_cart->id,
                 'progress_status' => StatusProgress::NEW,
-                'uni_code' => strtoupper(uniqid($initial)) . now()->timestamp
+                'uni_code' => strtoupper(uniqid($initial)) . '-' . $item->id
             ]);
         }
     }

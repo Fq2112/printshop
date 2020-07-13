@@ -86,7 +86,7 @@ class PaymentCartSeeder extends Seeder
             Order::create([
                 'payment_carts_id' => $data->id,
                 'progress_status' => StatusProgress::NEW,
-                'uni_code' => strtoupper(uniqid($initial)) . now()->timestamp
+                'uni_code' => strtoupper(uniqid($initial)) . '-' . $item->id
             ]);
         }
 
@@ -150,7 +150,7 @@ class PaymentCartSeeder extends Seeder
             Order::create([
                 'payment_carts_id' => $data->id,
                 'progress_status' => StatusProgress::NEW,
-                'uni_code' => strtoupper(uniqid($initial)) . now()->timestamp
+                'uni_code' => strtoupper(uniqid($initial)) . '-' . $item->id
             ]);
         }
 
