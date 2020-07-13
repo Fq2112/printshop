@@ -20,9 +20,7 @@ class CreateOrdersTable extends Migration
                 ->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->string('progress_status');
             $table->string('uni_code')->unique();
-            $table->string('resi')->nullable()->unique();
-            $table->string('shipping_id')->nullable()->unique(); //Shipper Long ID
-            $table->string('tracking_id')->nullable()->unique();
+            $table->dateTime('date_production')->nullable();
             $table->timestamps();
         });
     }
