@@ -333,8 +333,12 @@
                                                                         $specs = !is_null($row->subkategori_id) ? $data->getSubkatSpecs : $data->getClusterSpecs;
                                                                         $weight = ($specs->weight / 1000) * $row->qty;
                                                                         $total_weight += $weight;
-                                                                        $length += $specs->length;
-                                                                        $width += $specs->width;
+                                                                        if ($length < $specs->length){
+                                                                            $length = $specs->length;
+                                                                        }
+                                                                        if ($width < $specs->width){
+                                                                            $width = $specs->width;
+                                                                        }
                                                                         $height += $specs->height;
                                                                     @endphp
                                                                     <div class="media">

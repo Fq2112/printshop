@@ -30,6 +30,6 @@ class PaymentCart extends Model
 
     public function getOrder()
     {
-        return $this->hasOne(Order::class,'payment_carts_id');
+        return $this->hasMany(Order::class, 'payment_carts_id');
     }
 }
