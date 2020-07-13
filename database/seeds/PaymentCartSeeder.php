@@ -100,15 +100,15 @@ class PaymentCartSeeder extends Seeder
         $width_clust = 0;
         $height_clust = 0;
         foreach ($carts_clust as $item) {
-            $weight_clust += ($item->getSubKategori->getSubkatSpecs->weight / 1000) * $item->qty;
+            $weight_clust += ($item->getCluster->getClusterSpecs->weight / 1000) * $item->qty;
 
-            if ($length_clust < $item->getSubKategori->getSubkatSpecs->length) {
-                $length_clust = $item->getSubKategori->getSubkatSpecs->length;
+            if ($length_clust < $item->getCluster->getClusterSpecs->length) {
+                $length_clust = $item->getCluster->getClusterSpecs->length;
             }
-            if ($width_clust < $item->getSubKategori->getSubkatSpecs->width) {
-                $width_clust = $item->getSubKategori->getSubkatSpecs->width;
+            if ($width_clust < $item->getCluster->getClusterSpecs->width) {
+                $width_clust = $item->getCluster->getClusterSpecs->width;
             }
-            $height_clust += $item->getSubKategori->getSubkatSpecs->height;
+            $height_clust += $item->getCluster->getClusterSpecs->height;
         }
 
         $response_clust = $client->get('https://sandbox-api.shipper.id/public/v1/domesticRates?apiKey=' .
