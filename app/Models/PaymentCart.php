@@ -32,4 +32,9 @@ class PaymentCart extends Model
     {
         return $this->hasMany(Order::class, 'payment_carts_id');
     }
+
+    public function getTracking()
+    {
+        return $this->hasMany(TrackingLog::class,'payment_id');
+    }
 }
