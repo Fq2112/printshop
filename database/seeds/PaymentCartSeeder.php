@@ -23,7 +23,7 @@ class PaymentCartSeeder extends Seeder
         $carts_subkat = Cart::whereNotNull('subkategori_id')->where('isCheckout', true)->get();
         $user = User::find(implode($carts_subkat->take(1)->pluck('user_id')->toArray()));
         $address = Address::where('user_id', $user->id)->inRandomOrder()->first();
-        $code = strtoupper(uniqid('PYM') . now()->timestamp);
+        $code = strtoupper(uniqid('PYM') . now()->subDays(rand(1, 3))->timestamp);
         $arr = ['bca', 'bni', 'mandiri', 'permata'];
         $payment = [
             'type' => 'bank_transfer',
@@ -95,6 +95,7 @@ class PaymentCartSeeder extends Seeder
 
         // cluster
         $carts_clust = Cart::whereNotNull('cluster_id')->where('isCheckout', true)->get();
+        $code = strtoupper(uniqid('PYM') . now()->subDays(rand(3, 5))->timestamp);
         $weight_clust = 0;
         $length_clust = 0;
         $width_clust = 0;

@@ -235,7 +235,7 @@ return [
         "empty-head" => "You haven't made any orders",
         "empty-capt" => "Complete your printing needs now",
         "payment_id" => "Payment ID #<span style=\"font-weight: 800\">:id</span>",
-        "order_id" => "Order ID #<span style=\"font-weight: 800\">:id</span>",
+        "order_id" => "Order ID #<span style=\"font-weight: 600\">:id</span>",
         "invoice" => "Invoice",
         "reorder" => "Re-Order",
         "status" => "Order Status",

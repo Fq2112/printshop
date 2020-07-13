@@ -145,6 +145,8 @@
                                                     asset('storage/products/thumb/'.$cart->getCluster->thumbnail);
                                                     $specs = !is_null($cart->subkategori_id) ? $data->getSubkatSpecs : $data->getClusterSpecs;
                                                     $weight = ($specs->weight / 1000) * $cart->qty;
+
+                                                    $uni_code = \App\Models\Order::whereRaw('SUBSTRING_INDEX(uni_code,"-",-1) = '.$cart->id)->first()->uni_code;
                                                 @endphp
                                                 <div class="media">
                                                     <a data-placement="bottom" class="content-area align-self-center"
@@ -160,9 +162,10 @@
                                                     <div class="ml-3 media-body">
                                                         <h5 class="mt-3 mb-1">
                                                             <i class="icon-drafting-compass mr-2"></i>{{$data->name}}
-                                                            @if($acc != 'unpaid' || $acc != 'paid')
-                                                                <span class="fright text-uppercase">
-                                                                    {!! __('lang.order.order_id', ['id' => str_replace('-','',$order->uni_code)]) !!}
+                                                            @if($acc == 'produced' || $acc == 'shipped' || $acc == 'received')
+                                                                <span class="fright text-uppercase"
+                                                                      style="color: unset;font-weight: 500">
+                                                                    {!! __('lang.order.order_id', ['id' => str_replace('-','',$uni_code)]) !!}
                                                                 </span>
                                                             @endif
                                                         </h5>

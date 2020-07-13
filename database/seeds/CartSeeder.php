@@ -12,7 +12,7 @@ class CartSeeder extends Seeder
     public function run()
     {
         foreach (\App\User::all() as $user) {
-            for ($i = 0; $i < 10; $i++) {
+            for ($i = 0; $i < 5; $i++) {
                 $qty = rand(1, 20);
 
                 $cluster = \App\Models\ClusterKategori::inRandomOrder()->first();
