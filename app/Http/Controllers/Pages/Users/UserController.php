@@ -247,25 +247,23 @@ class UserController extends Controller
 
     public function received(Request $request)
     {
-        $order = Order::where('uni_code', $request->code)->first();
-        $data = !is_null($order->getCart->subkategori_id) ? $order->getCart->getSubKategori : $order->getCart->getCluster;
+        $payment = PaymentCart::where('uni_code_payment', $request->code)->first();
+        foreach ($payment->getOrder as $row) {
+            $row->update(['progress_status' => StatusProgress::RECEIVED]);
+        }
 
-        $order->update(['progress_status' => StatusProgress::RECEIVED]);
-
-        return back()
-            ->with('update', __('lang.alert.order-received', ['code' => $order->uni_code, 'name' => $data->name]));
+        return back()->with('update', __('lang.alert.order-received', ['code' => $request->code]));
     }
 
     public function reorder(Request $request)
     {
         $order = Order::where('uni_code', $request->code)->first();
-        $cart = $order->getCart;
+        $cart = Cart::find(ltrim(strstr($order->uni_code, '-'), '-'));
 
         Cart::create([
             'user_id' => $cart->user_id,
             'subkategori_id' => !is_null($cart->subkategori_id) ? $cart->subkategori_id : null,
             'cluster_id' => !is_null($cart->cluster_id) ? $cart->cluster_id : null,
-            'address_id' => $cart->address_id,
             'material_id' => $cart->material_id,
             'type_id' => $cart->type_id,
             'balance_id' => $cart->balance_id,
@@ -298,10 +296,6 @@ class UserController extends Controller
             'material_color_id' => $cart->material_color_id,
             'qty' => $cart->qty,
             'price_pcs' => $cart->price_pcs,
-            'production_finished' => $cart->production_finished,
-            'ongkir' => $cart->ongkir,
-            'delivery_duration' => $cart->delivery_duration,
-            'received_date' => $cart->received_date,
             'total' => $cart->total,
             'file' => $cart->file,
             'link' => $cart->link,

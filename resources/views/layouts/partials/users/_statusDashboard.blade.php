@@ -52,6 +52,7 @@
                 $code = $val->uni_code_payment;
                 $carts = \App\Models\Cart::whereIn('id', $val->cart_ids)->orderByRaw('FIELD (id, ' . implode(',', $val->cart_ids) . ') ASC')->get();
                 $order = \App\Models\Order::where('payment_carts_id', $val->id)->first();
+                $tracking = \App\Models\TrackingLog::where('payment_id', $val->id)->orderByDesc('id')->get();
                 $shipping = $val->getShippingAddress;
                 $billing = $val->getBillingAddress;
                 $min_day = substr($val->delivery_duration, 0, 1);
@@ -435,6 +436,22 @@
                                                                     </div>
                                                                 </div>
                                                             @endif
+
+                                                            @if($acc == "received")
+                                                                <div class="toggle toggle-border mt-3 mb-0 noborder">
+                                                                    <div class="togglet toggleta text-center"
+                                                                         style="padding: 0 !important;">
+                                                                        <a class="button button-3d button-primary button-rounded w-100 m-0"
+                                                                           href="javascript:void(0)"
+                                                                           onclick="reOrder('{{$data->name}}',
+                                                                               '{{route('user.reorder', ['code' => $uni_code])}}')">
+                                                                            <i class="icon-shopping-cart1 mr-1"
+                                                                               style="right: unset;position: unset;line-height: unset;"></i>
+                                                                            {{__('lang.order.reorder')}}
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
                                                         </blockquote>
                                                     </div>
                                                 </div>
@@ -625,10 +642,9 @@
                                     </div>
                                     <div id="collapse-{{$all.$code}}-status" class="panel-collapse collapse"
                                          role="tabpanel" aria-labelledby="heading-{{$all.$code}}-status"
-                                         aria-expanded="false" style="height: 0;"
+                                         aria-expanded="false" style="height:0;"
                                          data-parent="#acc-{{$all.$acc}}-detail">
-                                        <div
-                                            class="panel-body {{$acc == 'shipped' || $acc == 'received' ? 'pb-0 px-0' : ''}}">
+                                        <div class="panel-body {{$acc=='shipped'||$acc=='received' ? 'pb-0 px-0' :''}}">
                                             <div class="row justify-content-center processTabs clearfix">
                                                 <ul class="process-steps process-5 w-100 mb-2 clearfix">
                                                     <li class="{{$or_class}}">
@@ -664,433 +680,43 @@
                                                 </ul>
                                             </div>
 
-                                            @if($acc == 'shipped' || $acc == 'received')
+                                            @if(count($tracking) > 0 && ($acc == 'shipped' || $acc == 'received'))
+                                                @php $cek = \App\Models\TrackingLog::where('payment_id', $val->id)->orderByDesc('id')->first(); @endphp
                                                 <div class="row justify-content-center clearfix">
                                                     <div class="col">
                                                         <div id="tracking-pre"></div>
                                                         <div id="tracking" class="mt-3 mb-0">
-                                                            <div class="tracking-list"
-                                                                 style="border-left:0;border-right:0">
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-intransit">
-                                                                        <svg class="svg-inline--fa fa-circle fa-w-16"
-                                                                             aria-hidden="true" data-prefix="fas"
-                                                                             data-icon="circle" role="img"
-                                                                             xmlns="http://www.w3.org/2000/svg"
-                                                                             viewBox="0 0 512 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-circle"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Aug 10, 2018<span>05:01 PM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">DESTROYEDPER SHIPPER
-                                                                        INSTRUCTION<span>KUALA LUMPUR (LOGISTICS HUB), MALAYSIA, MALAYSIA</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-intransit">
-                                                                        <svg class="svg-inline--fa fa-circle fa-w-16"
-                                                                             aria-hidden="true" data-prefix="fas"
-                                                                             data-icon="circle" role="img"
-                                                                             xmlns="http://www.w3.org/2000/svg"
-                                                                             viewBox="0 0 512 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-circle"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Aug 10, 2018<span>11:19 AM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">SHIPMENT DELAYSHIPPER
-                                                                        INSTRUCTION TO DESTROY<span>SHENZHEN, CHINA, PEOPLE'S REPUBLIC</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-intransit">
-                                                                        <svg class="svg-inline--fa fa-circle fa-w-16"
-                                                                             aria-hidden="true" data-prefix="fas"
-                                                                             data-icon="circle" role="img"
-                                                                             xmlns="http://www.w3.org/2000/svg"
-                                                                             viewBox="0 0 512 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-circle"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Jul 27, 2018<span>04:08 PM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">DELIVERY ADVICERequest
-                                                                        Instruction from ORIGIN<span>KUALA LUMPUR (LOGISTICS HUB), MALAYSIA, MALAYSIA</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-intransit">
-                                                                        <svg class="svg-inline--fa fa-circle fa-w-16"
-                                                                             aria-hidden="true" data-prefix="fas"
-                                                                             data-icon="circle" role="img"
-                                                                             xmlns="http://www.w3.org/2000/svg"
-                                                                             viewBox="0 0 512 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-circle"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Jul 20, 2018<span>05:25 PM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">Delivery
-                                                                        InfoCLOSED-OFFICE/HOUSE CLOSED<span>KUALA LUMPUR (LOGISTICS HUB), MALAYSIA, MALAYSIA</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-outfordelivery">
-                                                                        <svg
-                                                                            class="svg-inline--fa fa-shipping-fast fa-w-20"
-                                                                            aria-hidden="true" data-prefix="fas"
-                                                                            data-icon="shipping-fast" role="img"
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            viewBox="0 0 640 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M624 352h-16V243.9c0-12.7-5.1-24.9-14.1-33.9L494 110.1c-9-9-21.2-14.1-33.9-14.1H416V48c0-26.5-21.5-48-48-48H112C85.5 0 64 21.5 64 48v48H8c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h272c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H40c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h208c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H8c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h208c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H64v128c0 53 43 96 96 96s96-43 96-96h128c0 53 43 96 96 96s96-43 96-96h48c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zM160 464c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm320 0c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm80-208H416V144h44.1l99.9 99.9V256z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-shipping-fast"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Jul 20, 2018<span>08:58 AM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">Shipment is out for
-                                                                        despatch by KLHB023.<span>KUALA LUMPUR (LOGISTICS HUB), MALAYSIA, MALAYSIA</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-intransit">
-                                                                        <svg class="svg-inline--fa fa-circle fa-w-16"
-                                                                             aria-hidden="true" data-prefix="fas"
-                                                                             data-icon="circle" role="img"
-                                                                             xmlns="http://www.w3.org/2000/svg"
-                                                                             viewBox="0 0 512 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-circle"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Jul 19, 2018<span>05:42 PM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">Delivery InfoUNABLE TO
-                                                                        ACCESS<span>KUALA LUMPUR (LOGISTICS HUB), MALAYSIA, MALAYSIA</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-outfordelivery">
-                                                                        <svg
-                                                                            class="svg-inline--fa fa-shipping-fast fa-w-20"
-                                                                            aria-hidden="true" data-prefix="fas"
-                                                                            data-icon="shipping-fast" role="img"
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            viewBox="0 0 640 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M624 352h-16V243.9c0-12.7-5.1-24.9-14.1-33.9L494 110.1c-9-9-21.2-14.1-33.9-14.1H416V48c0-26.5-21.5-48-48-48H112C85.5 0 64 21.5 64 48v48H8c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h272c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H40c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h208c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H8c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h208c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H64v128c0 53 43 96 96 96s96-43 96-96h128c0 53 43 96 96 96s96-43 96-96h48c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zM160 464c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm320 0c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm80-208H416V144h44.1l99.9 99.9V256z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-shipping-fast"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Jul 19, 2018<span>07:36 AM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">Shipment is out for
-                                                                        despatch by KLHB023.<span>KUALA LUMPUR (LOGISTICS HUB), MALAYSIA, MALAYSIA</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-intransit">
-                                                                        <svg class="svg-inline--fa fa-circle fa-w-16"
-                                                                             aria-hidden="true" data-prefix="fas"
-                                                                             data-icon="circle" role="img"
-                                                                             xmlns="http://www.w3.org/2000/svg"
-                                                                             viewBox="0 0 512 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-circle"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Jul 17, 2018<span>10:54 AM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">Delivery
-                                                                        InfoCLOSED-OFFICE/HOUSE CLOSED<span>KUALA LUMPUR (LOGISTICS HUB), MALAYSIA, MALAYSIA</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-outfordelivery">
-                                                                        <svg
-                                                                            class="svg-inline--fa fa-shipping-fast fa-w-20"
-                                                                            aria-hidden="true" data-prefix="fas"
-                                                                            data-icon="shipping-fast" role="img"
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            viewBox="0 0 640 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M624 352h-16V243.9c0-12.7-5.1-24.9-14.1-33.9L494 110.1c-9-9-21.2-14.1-33.9-14.1H416V48c0-26.5-21.5-48-48-48H112C85.5 0 64 21.5 64 48v48H8c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h272c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H40c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h208c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H8c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h208c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H64v128c0 53 43 96 96 96s96-43 96-96h128c0 53 43 96 96 96s96-43 96-96h48c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zM160 464c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm320 0c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm80-208H416V144h44.1l99.9 99.9V256z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-shipping-fast"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Jul 17, 2018<span>08:08 AM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">Shipment is out for
-                                                                        despatch by KLHB023.<span>KUALA LUMPUR (LOGISTICS HUB), MALAYSIA, MALAYSIA</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-intransit">
-                                                                        <svg class="svg-inline--fa fa-circle fa-w-16"
-                                                                             aria-hidden="true" data-prefix="fas"
-                                                                             data-icon="circle" role="img"
-                                                                             xmlns="http://www.w3.org/2000/svg"
-                                                                             viewBox="0 0 512 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-circle"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Jul 16, 2018<span>12:30 PM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">SHIPMENT
-                                                                        DELAYCONSIGNEE NOT AVAILABLE<span>KUALA LUMPUR (LOGISTICS HUB), MALAYSIA, MALAYSIA</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-intransit">
-                                                                        <svg class="svg-inline--fa fa-circle fa-w-16"
-                                                                             aria-hidden="true" data-prefix="fas"
-                                                                             data-icon="circle" role="img"
-                                                                             xmlns="http://www.w3.org/2000/svg"
-                                                                             viewBox="0 0 512 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-circle"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Jul 16, 2018<span>12:06 PM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">Delivery
-                                                                        InfoCLOSED-OFFICE/HOUSE CLOSED<span>KUALA LUMPUR (LOGISTICS HUB), MALAYSIA, MALAYSIA</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-outfordelivery">
-                                                                        <svg
-                                                                            class="svg-inline--fa fa-shipping-fast fa-w-20"
-                                                                            aria-hidden="true" data-prefix="fas"
-                                                                            data-icon="shipping-fast" role="img"
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            viewBox="0 0 640 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M624 352h-16V243.9c0-12.7-5.1-24.9-14.1-33.9L494 110.1c-9-9-21.2-14.1-33.9-14.1H416V48c0-26.5-21.5-48-48-48H112C85.5 0 64 21.5 64 48v48H8c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h272c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H40c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h208c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H8c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h208c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H64v128c0 53 43 96 96 96s96-43 96-96h128c0 53 43 96 96 96s96-43 96-96h48c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zM160 464c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm320 0c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm80-208H416V144h44.1l99.9 99.9V256z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-shipping-fast"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Jul 16, 2018<span>08:32 AM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">Shipment is out for
-                                                                        despatch by KLHB023.<span>KUALA LUMPUR (LOGISTICS HUB), MALAYSIA, MALAYSIA</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-intransit">
-                                                                        <svg class="svg-inline--fa fa-circle fa-w-16"
-                                                                             aria-hidden="true" data-prefix="fas"
-                                                                             data-icon="circle" role="img"
-                                                                             xmlns="http://www.w3.org/2000/svg"
-                                                                             viewBox="0 0 512 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-circle"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Jul 14, 2018<span>01:57 PM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">Delivery InfoMISSED
-                                                                        DELIVERY<span>KUALA LUMPUR (LOGISTICS HUB), MALAYSIA, MALAYSIA</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-outfordelivery">
-                                                                        <svg
-                                                                            class="svg-inline--fa fa-shipping-fast fa-w-20"
-                                                                            aria-hidden="true" data-prefix="fas"
-                                                                            data-icon="shipping-fast" role="img"
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            viewBox="0 0 640 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M624 352h-16V243.9c0-12.7-5.1-24.9-14.1-33.9L494 110.1c-9-9-21.2-14.1-33.9-14.1H416V48c0-26.5-21.5-48-48-48H112C85.5 0 64 21.5 64 48v48H8c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h272c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H40c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h208c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H8c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h208c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H64v128c0 53 43 96 96 96s96-43 96-96h128c0 53 43 96 96 96s96-43 96-96h48c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zM160 464c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm320 0c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm80-208H416V144h44.1l99.9 99.9V256z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-shipping-fast"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Jul 14, 2018<span>08:41 AM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">Shipment is out for
-                                                                        despatch by KLHB023.<span>KUALA LUMPUR (LOGISTICS HUB), MALAYSIA, MALAYSIA</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-intransit">
-                                                                        <svg class="svg-inline--fa fa-circle fa-w-16"
-                                                                             aria-hidden="true" data-prefix="fas"
-                                                                             data-icon="circle" role="img"
-                                                                             xmlns="http://www.w3.org/2000/svg"
-                                                                             viewBox="0 0 512 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-circle"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Jul 11, 2018<span>05:22 PM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">Shipment designated to
-                                                                        .<span>KUALA LUMPUR (LOGISTICS HUB), MALAYSIA, MALAYSIA</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-intransit">
-                                                                        <svg class="svg-inline--fa fa-circle fa-w-16"
-                                                                             aria-hidden="true" data-prefix="fas"
-                                                                             data-icon="circle" role="img"
-                                                                             xmlns="http://www.w3.org/2000/svg"
-                                                                             viewBox="0 0 512 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-circle"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Jul 11, 2018<span>10:32 AM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">Shipment arrived at
-                                                                        KUALA LUMPUR (LOGISTICS HUB), MALAYSIA
-                                                                        station.<span>KUALA LUMPUR (LOGISTICS HUB), MALAYSIA, MALAYSIA</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-intransit">
-                                                                        <svg class="svg-inline--fa fa-circle fa-w-16"
-                                                                             aria-hidden="true" data-prefix="fas"
-                                                                             data-icon="circle" role="img"
-                                                                             xmlns="http://www.w3.org/2000/svg"
-                                                                             viewBox="0 0 512 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-circle"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Jul 10, 2018<span>02:30 PM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">Custom cleared and
-                                                                        arrived at KUALA LUMPUR (LOGISTICS HUB),
-                                                                        MALAYSIA station.<span>KUALA LUMPUR (LOGISTICS HUB), MALAYSIA, MALAYSIA</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-intransit">
-                                                                        <svg class="svg-inline--fa fa-circle fa-w-16"
-                                                                             aria-hidden="true" data-prefix="fas"
-                                                                             data-icon="circle" role="img"
-                                                                             xmlns="http://www.w3.org/2000/svg"
-                                                                             viewBox="0 0 512 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-circle"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Jul 10, 2018<span>07:30 AM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">Shipment arrived at
-                                                                        airport.<span>KUALA LUMPUR (LOGISTICS HUB), MALAYSIA, MALAYSIA</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-intransit">
-                                                                        <svg class="svg-inline--fa fa-circle fa-w-16"
-                                                                             aria-hidden="true" data-prefix="fas"
-                                                                             data-icon="circle" role="img"
-                                                                             xmlns="http://www.w3.org/2000/svg"
-                                                                             viewBox="0 0 512 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-circle"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Jul 10, 2018<span>03:59 AM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">Shipment departed to
-                                                                        MALAYSIA.<span>HONG KONG, HONGKONG</span></div>
-                                                                </div>
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-intransit">
-                                                                        <svg class="svg-inline--fa fa-circle fa-w-16"
-                                                                             aria-hidden="true" data-prefix="fas"
-                                                                             data-icon="circle" role="img"
-                                                                             xmlns="http://www.w3.org/2000/svg"
-                                                                             viewBox="0 0 512 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-circle"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Jul 09, 2018<span>04:03 PM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">Shipment designated to
-                                                                        MALAYSIA.<span>SHENZHEN, CHINA, PEOPLE'S REPUBLIC</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-intransit">
-                                                                        <svg class="svg-inline--fa fa-circle fa-w-16"
-                                                                             aria-hidden="true" data-prefix="fas"
-                                                                             data-icon="circle" role="img"
-                                                                             xmlns="http://www.w3.org/2000/svg"
-                                                                             viewBox="0 0 512 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-circle"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Jul 09, 2018<span>11:04 AM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">Pickup shipment
-                                                                        checked in at SHENZHEN.<span>SHENZHEN, CHINA, PEOPLE'S REPUBLIC</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-intransit">
-                                                                        <svg class="svg-inline--fa fa-circle fa-w-16"
-                                                                             aria-hidden="true" data-prefix="fas"
-                                                                             data-icon="circle" role="img"
-                                                                             xmlns="http://www.w3.org/2000/svg"
-                                                                             viewBox="0 0 512 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-circle"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Jul 09, 2018<span>10:09 AM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">Shipment info
-                                                                        registered at SHENZHEN.<span>SHENZHEN, CHINA, PEOPLE'S REPUBLIC</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="tracking-item">
-                                                                    <div class="tracking-icon status-inforeceived">
-                                                                        <svg
-                                                                            class="svg-inline--fa fa-clipboard-list fa-w-12"
-                                                                            aria-hidden="true" data-prefix="fas"
-                                                                            data-icon="clipboard-list" role="img"
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            viewBox="0 0 384 512" data-fa-i2svg="">
-                                                                            <path fill="currentColor"
-                                                                                  d="M336 64h-80c0-35.3-28.7-64-64-64s-64 28.7-64 64H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zM96 424c-13.3 0-24-10.7-24-24s10.7-24 24-24 24 10.7 24 24-10.7 24-24 24zm0-96c-13.3 0-24-10.7-24-24s10.7-24 24-24 24 10.7 24 24-10.7 24-24 24zm0-96c-13.3 0-24-10.7-24-24s10.7-24 24-24 24 10.7 24 24-10.7 24-24 24zm96-192c13.3 0 24 10.7 24 24s-10.7 24-24 24-24-10.7-24-24 10.7-24 24-24zm128 368c0 4.4-3.6 8-8 8H168c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16zm0-96c0 4.4-3.6 8-8 8H168c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16zm0-96c0 4.4-3.6 8-8 8H168c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16z"></path>
-                                                                        </svg>
-                                                                        <!-- <i class="fas fa-clipboard-list"></i> -->
-                                                                    </div>
-                                                                    <div class="tracking-date">Jul 06, 2018<span>02:02 PM</span>
-                                                                    </div>
-                                                                    <div class="tracking-content">Shipment designated to
-                                                                        MALAYSIA.<span>HONG KONG, HONGKONG</span></div>
-                                                                </div>
+                                                            <div class="tracking-list">
+                                                                @foreach($tracking as $log)
+                                                                    @php
+                                                                        $date = \Carbon\Carbon::parse($log->time_detail)->formatLocalized('%d %B %Y');
+                                                                        $time = \Carbon\Carbon::parse($log->time_detail)->formatLocalized('%H:%M %p');
+                                                                    @endphp
+                                                                    <div
+                                                                        class="tracking-item {{$cek->id == $log->id ? 'outfordelivery' : 'intransit'}}">
+                                                                        <div
+                                                                            class="tracking-icon status-{{$cek->id == $log->id ? 'outfordelivery' : 'intransit'}}">
+                                                                            <svg
+                                                                                class="svg-inline--fa fa-shipping-fast fa-w-20"
+                                                                                aria-hidden="true" data-prefix="fas"
+                                                                                data-icon="shipping-fast" role="img"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                viewBox="0 0 640 512" data-fa-i2svg="">
+                                                                                <path fill="currentColor"
+                                                                                      d="M624 352h-16V243.9c0-12.7-5.1-24.9-14.1-33.9L494 110.1c-9-9-21.2-14.1-33.9-14.1H416V48c0-26.5-21.5-48-48-48H112C85.5 0 64 21.5 64 48v48H8c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h272c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H40c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h208c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H8c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h208c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H64v128c0 53 43 96 96 96s96-43 96-96h128c0 53 43 96 96 96s96-43 96-96h48c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zM160 464c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm320 0c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm80-208H416V144h44.1l99.9 99.9V256z"></path>
+                                                                            </svg>
+                                                                        </div>
+                                                                        <div class="tracking-date"
+                                                                             style="color: {{$cek->id == $log->id ? '#f89406' : ''}}">
+                                                                            {{$date}}<span>{{$time}}</span>
+                                                                        </div>
+                                                                        <div class="tracking-content text-uppercase"
+                                                                             style="color: {{$cek->id == $log->id ? '#f89406' : ''}}">
+                                                                            {{$log->title}}
+                                                                            <span>{{$log->subtitle}}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                @endforeach
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1104,21 +730,15 @@
                                     <div class="panel-heading text-center" role="button">
                                         <a class="button button-3d button-primary button-rounded m-0"
                                            href="{{route('user.download.file',['id'=>encrypt($val->id),'file'=>'invoice'])}}"
-                                           style="width: {{$acc == 'shipped' || $acc == 'received' ? '49.7' : '100'}}%">
+                                           style="width: {{$acc == 'shipped' ? '49.7' : '100'}}%">
                                             <b><i class="icon-cloud-download mr-1"></i>
                                                 {{__('lang.button.download-invoice')}}</b>
                                         </a>
                                         @if($acc == 'shipped')
                                             <a class="button button-3d button-primary button-rounded w-50 m-0"
-                                               href="javascript:void(0)" onclick="received('{{$data->name}}',
-                                                '{{$code}}','{{route('user.received', ['code' => $code])}}')">
+                                               href="javascript:void(0)" onclick="received('{{$code}}',
+                                                '{{route('user.received', ['code' => $code])}}')">
                                                 <b><i class="icon-box-open mr-2"></i>{{__('lang.order.tab-ir')}}</b>
-                                            </a>
-                                        @elseif($acc == 'received')
-                                            <a class="button button-3d button-primary button-rounded w-50 m-0"
-                                               href="javascript:void(0)" onclick="reOrder('{{$data->name}}',
-                                                '{{route('user.reorder', ['code' => $code])}}')">
-                                                <i class="icon-shopping-cart1 mr-2"></i>{{__('lang.order.reorder')}}
                                             </a>
                                         @endif
                                     </div>

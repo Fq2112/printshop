@@ -64,13 +64,17 @@ class OrderController extends Controller
     public function get_file(Request $request)
     {
         $cart = Cart::find(decrypt($request->id));
-        $file_path = storage_path('app/public/users/order/design/' . $cart->user_id . '/' . $cart->file);
-        if (file_exists($file_path)) {
-            return Response::download($file_path, $cart->file, [
-                'Content-Length: ' . filesize($file_path)
-            ]);
+        if (!is_null($cart->file)) {
+            $file_path = storage_path('app/public/users/order/design/' . $cart->user_id . '/' . $cart->file);
+            if (file_exists($file_path)) {
+                return Response::download($file_path, $cart->file, [
+                    'Content-Length: ' . filesize($file_path)
+                ]);
+            } else {
+                return back()->with('warning', __('lang.alert.download-fail'));
+            }
         } else {
-            return back()->with('warning', __('lang.alert.download-fail'));
+            return redirect()->to($cart->link);
         }
     }
 
