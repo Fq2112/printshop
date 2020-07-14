@@ -226,30 +226,25 @@ class MidtransController extends Controller
         $notif = new Notification();
         $data_tr = collect(Transaction::status($notif->transaction_id))->toArray();
 
-        try {
-            if (!array_key_exists('fraud_status', $data_tr) ||
-                (array_key_exists('fraud_status', $data_tr) && $data_tr['fraud_status'] == 'accept')) {
+        if (!array_key_exists('fraud_status', $data_tr) ||
+            (array_key_exists('fraud_status', $data_tr) && $data_tr['fraud_status'] == 'accept')) {
 
-                if ($data_tr['payment_type'] != 'credit_card' &&
-                    ($data_tr['transaction_status'] == 'capture' || $data_tr['transaction_status'] == 'settlement')) {
+            if ($data_tr['payment_type'] != 'credit_card' &&
+                ($data_tr['transaction_status'] == 'capture' || $data_tr['transaction_status'] == 'settlement')) {
 
-                    $this->updatePayment($notif->order_id);
+                $this->updatePayment($notif->order_id);
 
-                    $payment_cart = PaymentCart::where('uni_code_payment', $notif->order_id)->first();
-                    $input = ['rate_name' => $payment_cart->rate_name, 'rate_logo' => $payment_cart->rate_logo];
-                    $user = User::find($payment_cart->user_id);
-                    $this->invoiceMail('finish', $notif->order_id, $user, null, $data_tr, $input);
+                $payment_cart = PaymentCart::where('uni_code_payment', $notif->order_id)->first();
+                $input = ['rate_name' => $payment_cart->rate_name, 'rate_logo' => $payment_cart->rate_logo];
+                $user = User::find($payment_cart->user_id);
+                $this->invoiceMail('finish', $notif->order_id, $user, null, $data_tr, $input);
 
-                    return __('lang.alert.payment-success', [
-                        'qty' => count($payment_cart->cart_ids),
-                        's' => count($payment_cart->cart_ids) > 1 ? 's' : '',
-                        'code' => $notif->order_id
-                    ]);
-                }
+                return response()->json(__('lang.alert.payment-success', [
+                    'qty' => count($payment_cart->cart_ids),
+                    's' => count($payment_cart->cart_ids) > 1 ? 's' : '',
+                    'code' => $notif->order_id
+                ]), 200);
             }
-
-        } catch (\Exception $exception) {
-            return response()->json($exception, 500);
         }
     }
 
