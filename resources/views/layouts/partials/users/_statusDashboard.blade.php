@@ -147,7 +147,9 @@
                                                     $specs = !is_null($cart->subkategori_id) ? $data->getSubkatSpecs : $data->getClusterSpecs;
                                                     $weight = ($specs->weight / 1000) * $cart->qty;
 
-                                                    $uni_code = \App\Models\Order::whereRaw('SUBSTRING_INDEX(uni_code,"-",-1) = '.$cart->id)->first()->uni_code;
+                                                    if($acc == 'produced' || $acc == 'shipped' || $acc == 'received') {
+                                                        $uni_code = \App\Models\Order::whereRaw('SUBSTRING_INDEX(uni_code,"-",-1) = '.$cart->id)->first()->uni_code;
+                                                    }
                                                 @endphp
                                                 <div class="media">
                                                     <a data-placement="bottom" class="content-area align-self-center"
