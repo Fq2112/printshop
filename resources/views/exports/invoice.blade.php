@@ -419,8 +419,11 @@
 
     <table id="msc" style="background: #fff5e6;margin-top: 30px">
         <tr>
+            <td><b class="primary">{{strtoupper(__('lang.mail.content.payment5'))}}</b></td>
+            <td><b class="primary">{{strtoupper(__('lang.product.form.shipping.head2'))}}</b></td>
+        </tr>
+        <tr>
             <td>
-                <b class="primary">{{strtoupper(__('lang.mail.content.payment5'))}}</b>
                 <table>
                     <tr>
                         <td width="50%">
@@ -440,7 +443,6 @@
                 </table>
             </td>
             <td>
-                <b class="primary">{{strtoupper(__('lang.product.form.shipping.head2'))}}</b>
                 <table>
                     <tr>
                         <td width="50%"><img alt="Logo" src="{{$input['rate_logo']}}"></td>
