@@ -24,8 +24,8 @@ class OrderController extends Controller
         $data = PaymentCart::when($request->period, function ($query) use ($request) {
             $query->whereBetween('updated_at', [Carbon::now()->subDay($request->period), Carbon::now()]);
         })->when($request->status, function ($query) use ($request) {
-            $query->where('finish_payment',$request->status);
-        })->distinct('uni_code_payment')->select('uni_code_payment', 'user_id', 'updated_at','finish_payment')->orderBy('updated_at', 'DESC')->get();
+            $query->where('finish_payment', $request->status);
+        })->distinct('uni_code_payment')->select('uni_code_payment', 'user_id', 'updated_at', 'finish_payment')->orderBy('updated_at', 'DESC')->get();
         return view('pages.main.admins.payment', [
             'data' => $data
         ]);
@@ -34,30 +34,35 @@ class OrderController extends Controller
     public function show_order($condition, Request $request)
     {
         $status = '';
+        $payment = PaymentCart::where('uni_code_payment', $condition)->first();
+
+        $order = [];
+        foreach ($payment->cart_ids as $item) {
+            $order_item = \App\Models\Order::whereRaw('SUBSTRING_INDEX(uni_code,"-",-1) = ' . $item)->first();
+            $order_item->setAttribute('cart_id',$item);
+            array_push($order, $order_item);
+        }
+
         $data = Order::whereNotIn('id', ['0'])->when($request->status, function ($query) use ($request) {
             $query->where('progress_status', $request->status);
         })->when($request->period, function ($query) use ($request) {
             $query->whereBetween('updated_at', [Carbon::now()->subDay($request->period), Carbon::now()]);
-        })->whereHas('getCart', function ($query) use ($condition) {
-            $query->whereHas('getPayment', function ($query) use ($condition) {
-                $query->where('uni_code_payment', $condition);
-            });
         })->get();
 
         return view('pages.main.admins.order', [
             'title' => 'Order List',
-            'kategori' => $data,
+            'kategori' => $order,
             'status' => $status,
             'code' => $condition
         ]);
     }
 
-    public function order_detail($id)
+    public function order_detail(Request $request)
     {
-        $data = Order::find($id);
+        $data = Cart::find($request->id);
 
-        return view('pages.main.admins.order_detail', [
-            'data' => $data,
+        return view('pages.main.admins._partials.modal.detail_cart', [
+            'cart' => $data,
         ]);
     }
 
@@ -164,7 +169,7 @@ class OrderController extends Controller
                 'code' => $request->code,
                 'order' => $item
             ]);
-            $labelPdf->setPaper('a5','landscape');
+            $labelPdf->setPaper('a5', 'landscape');
             Storage::put('public/users/order/invoice/owner/prodution/' . $request->code . '/' . $labelname, $labelPdf->output());
         }
 
@@ -185,8 +190,7 @@ class OrderController extends Controller
             return Response::download($file_path, 'Production_' . $filename, [
                 'Content-length : ' . filesize($file_path)
             ]);
-        }
-        else {
+        } else {
             return \response()->json([
                 'message' => "Oops! The current file you are looking for is not available "
             ], 404);
@@ -196,7 +200,7 @@ class OrderController extends Controller
     public function download_invoice(Request $request)
     {
         $filename = $request->code . '.pdf';
-        $file_path =  storage_path('app/public/users/order/invoice/' . $request->user_id . '/' . $filename);
+        $file_path = storage_path('app/public/users/order/invoice/' . $request->user_id . '/' . $filename);
         if (file_exists($file_path)) {
             return Response::download($file_path, 'Invoice_' . $filename, [
                 'Content-length : ' . filesize($file_path)

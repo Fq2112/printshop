@@ -47,6 +47,12 @@
         <div class="section-body">
             <div class="row">
                 <div class="col-12">
+                    <a href="{{ url()->previous() }}" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i>
+                        BACK </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-body">
                             <form action="{{route('admin.order.user',['kode'=>$code])}}"
@@ -101,14 +107,6 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        {{--                        <div class="card-header">--}}
-                        {{--                            <div class="card-header-form">--}}
-                        {{--                                --}}{{--                                <button id="btn_create" class="btn btn-primary text-uppercase">--}}
-                        {{--                                --}}{{--                                    <strong><i class="fas fa-plus mr-2"></i>Create</strong>--}}
-                        {{--                                --}}{{--                                </button>--}}
-                        {{--                            </div>--}}
-                        {{--                        </div>--}}
-
                         <div class="card-body">
                             <div id="content1" class="table-responsive">
                                 <table class="table table-striped" id="dt-buttons">
@@ -122,10 +120,7 @@
                                         </th>
                                         <th class="text-center">ID</th>
 
-                                        <th width="15%">Customer</th>
-                                        <th width="15%">Phone</th>
                                         <th width="20%">Product</th>
-                                        <th width="20%">Shipping</th>
                                         <th>Qty (pcs)</th>
                                         @if($status == \App\Support\StatusProgress::RECEIVED)
                                             <th class="text-center" width="10%">Received date</th>
@@ -139,6 +134,9 @@
                                     <tbody>
                                     @php $no = 1; @endphp
                                     @foreach($kategori as $row)
+                                        <?php
+                                        $cart = \App\Models\Cart::find($row->cart_id);
+                                        ?>
                                         <tr>
                                             <td style="vertical-align: middle" align="center">
                                                 <div class="custom-checkbox custom-control">
@@ -153,33 +151,25 @@
                                             {{--                                                <strong>{{$row->getCart->getPayment->uni_code_payment}}</strong>--}}
                                             {{--                                            </td>--}}
                                             <td style="vertical-align: middle">
-                                                <strong>{{$row->getCart->getUser->name}}</strong>
-                                            </td>
-                                            <td style="vertical-align: middle">
-                                                <strong>{{$row->getCart->getUser->getBio->phone}}</strong>
-                                            </td>
-                                            <td style="vertical-align: middle">
-                                                @if(!empty($row->getCart->subkategori_id))
-                                                    {{$row->getCart->getSubKategori->name}}
-                                                @elseif(!empty($row->getCart->cluster_id))
-                                                    {{$row->getCart->getCluster->name}}
+
+                                                @if(!empty($cart->subkategori_id))
+                                                    {{$cart->getSubKategori->name}}
+                                                @elseif(!empty($cart->cluster_id))
+                                                    {{$cart->getCluster->name}}
                                                 @endif
 
                                             </td>
-                                            <td style="vertical-align: middle">
-                                                {{$row->getCart->getAddress->address}}
-                                            </td>
 
                                             <td style="vertical-align: middle">
-                                                {{$row->getCart->qty}}
+                                                {{$cart->qty}}
                                             </td>
 
 
                                             <td style="vertical-align: middle" align="center">
                                                 @if($status == \App\Support\StatusProgress::RECEIVED)
-                                                    {{\Carbon\Carbon::parse($row->getCart->received_date)->format('j F Y')}}
+
                                                 @else
-                                                    {{\Carbon\Carbon::parse($row->getCart->production_finished)->format('j F Y')}}
+
                                                 @endif
                                             </td>
                                             <td style="vertical-align: middle" align="center">
@@ -210,7 +200,12 @@
                                                             <i class="fa fa-file-download   "></i>
                                                         </a>
                                                     @endif
-                                                    <a href="{{route('get.order.detail',['id' => $row->id])}}"
+                                                    <a href="javascript:void(0)"
+                                                       onclick="openModal('{{$cart->id}}','{{route('get.order.detail')}}',' @if(!empty($cart->subkategori_id))\n'+
+                                                           '                                                    {{$cart->getSubKategori->name}}\n'+
+                                                           '                                                @elseif(!empty($cart->cluster_id))\n'+
+                                                           '                                                    {{$cart->getCluster->name}}\n'+
+                                                           '                                                @endif')"
                                                        data-placement="top" data-toggle="tooltip"
                                                        title="Detail Info"
                                                        type="button" class="btn btn-info">
@@ -332,7 +327,7 @@
                     dom: "<'row'<'col-sm-12 col-md-3'l><'col-sm-12 col-md-5'B><'col-sm-12 col-md-4'f>>" +
                         "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                     columnDefs: [
-                        {sortable: false, targets: 5},
+                        {sortable: false, targets: 6},
                         {targets: 1, visible: false, searchable: false}
                     ],
                     buttons: [
@@ -446,6 +441,20 @@
         $('#status').val('{{ request()->get('status') }}');
 
         @endif
+
+        function openModal(code, url_action, title) {
+            console.log(code);
+            $.post(url_action, {
+                    _token: '{{csrf_token()}}',
+                    id: code
+                },
+                function (data) {
+                    $('#customModalbody').html(data);
+                });
+            $('#payment_code').val(code);
+            $('#customModalTitle').text("Detail "+ title);
+            $('#customModal').modal({backdrop: 'static', keyboard: false})
+        }
 
         function get_design(code) {
             $.ajax({

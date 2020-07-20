@@ -155,6 +155,20 @@
                                                 @if($item->finish_payment == 1)
                                                     <div class="btn-group">
                                                         <button type="button" class="btn btn-primary"
+                                                                data-toggle="tooltip"
+                                                                onclick="openModal('{{ucfirst($item->uni_code_payment)}}','{{route('admin.shipper.modal.create')}}','Create Data to Shipper')"
+                                                                title="Create to Shipper" data-html="true"
+                                                                data-placement="top"><i class="fa fa-shipping-fast"></i>
+                                                        </button>
+
+                                                        <button type="button" class="btn btn-primary"
+                                                                data-toggle="tooltip"
+                                                                onclick="openModal('{{ucfirst($item->uni_code_payment)}}','{{route('admin.shipper.modal.agents')}}','Get Agents')"
+                                                                title="Set Pickup Order" data-html="true"
+                                                                data-placement="top"><i class="fa fa-calendar"></i>
+                                                        </button>
+
+                                                        <button type="button" class="btn btn-primary " style="display: none"
                                                                 data-toggle="popover" data-trigger="focus"
                                                                 title="{{count($order)}} Items" data-html="true"
                                                                 data-placement="left" data-content='
@@ -205,6 +219,7 @@
                                                                 title="Download Invoice" data-html="true"
                                                                 data-placement="top"><i class="fa fa-file-pdf"></i>
                                                         </button>
+
                                                         <a href="{{route('admin.order.user',['kode'=>$item->uni_code_payment])}}"
                                                            data-placement="right" data-toggle="tooltip"
                                                            title="Detail Info" type="button" class="btn btn-info">
@@ -241,66 +256,7 @@
         </div>
     </section>
 
-    <div class="modal fade " id="blogCategoryModal" tabindex="-1" role="dialog"
-         aria-labelledby="blogCategoryModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document" style="width: 100%">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Create Form</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form id="form-blogCategory" method="post" action="{{route('admin.add')}}">
-                    {{csrf_field()}}
-                    <input type="hidden" name="_method">
-                    <input type="hidden" name="id">
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col">
-                                <label for="name">Name <sup class="text-danger">*</sup></label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                    </div>
-                                    <input id="name" type="text" maxlength="191" name="name" class="form-control"
-                                           placeholder="Write its name here&hellip;" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label for="name">Username <sup class="text-danger">*</sup></label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                    </div>
-                                    <input id="name_id" type="text" maxlength="191" name="username" class="form-control"
-                                           placeholder="Write its name here&hellip;" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label for="name">email <sup class="text-danger">*</sup></label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-                                    </div>
-                                    <input id="name_id" type="email" maxlength="191" name="email" class="form-control"
-                                           placeholder="Write its name here&hellip;" required>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+
 @endsection
 @push("scripts")
     <script src="{{asset('admins/modules/datatables/datatables.min.js')}}"></script>
@@ -412,6 +368,20 @@
                     },
                 });
         });
+
+        function openModal(code,url_action,title) {
+            console.log(code);
+            $.post(url_action, {
+                    _token: '{{csrf_token()}}',
+                    code : code
+                },
+                function (data) {
+                    $('#customModalbody').html(data);
+                });
+            $('#payment_code').val(code);
+            $('#customModalTitle').text(title);
+            $('#customModal').modal({backdrop: 'static', keyboard: false})
+        }
 
         function getInvoice(user_id, code) {
             $.ajax({
