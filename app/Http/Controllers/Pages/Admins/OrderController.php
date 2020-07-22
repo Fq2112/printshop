@@ -25,7 +25,7 @@ class OrderController extends Controller
             $query->whereBetween('updated_at', [Carbon::now()->subDay($request->period), Carbon::now()]);
         })->when($request->status, function ($query) use ($request) {
             $query->where('finish_payment', $request->status);
-        })->distinct('uni_code_payment')->select('uni_code_payment', 'user_id', 'updated_at', 'finish_payment')->orderBy('updated_at', 'DESC')->get();
+        })->orderBy('updated_at', 'DESC')->get();
         return view('pages.main.admins.payment', [
             'data' => $data
         ]);

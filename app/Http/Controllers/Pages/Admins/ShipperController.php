@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Pages\Admins;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\PaymentCart;
+use Carbon\Carbon;
 use Egulias\EmailValidator\Exception\ExpectingQPair;
+use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
 use PHPMailer\PHPMailer\Exception;
 use GuzzleHttp\Client;
@@ -81,7 +85,7 @@ class ShipperController extends Controller
                 "originDirection" => "q",
                 "destinationAddress" => $data->getShippingAddress->address . " - " . $data->getShippingAddress->postal_code,
                 "destinationDirection" => "w",
-                "itemName" => json_encode($itemName),
+                "itemName" => $itemName,
                 "contents" => "show",
                 "useInsurance" => 0,
                 "packageType" => 2,
@@ -91,20 +95,28 @@ class ShipperController extends Controller
 
             ];
 //            dd($form);
-            $jsonform = json_encode($form);
-            $response = $this->guzzle('POST', '/orders/domestics?apiKey='.env('SHIPPER_KEY'), $form);
 
+
+            $response = $this->guzzle('POST', '/orders/domestics?apiKey=' . env('SHIPPER_KEY'), $form);
             $ersponseData = json_decode($response->getBody(), true);
 
 
-            $responseTracking = $this->guzzle('GET', '/orders?apiKey='.env('SHIPPER_KEY').'&id=5f057d26271157007be8f5b0', []);
+            $responseTracking = $this->guzzle('GET', '/orders?apiKey=' . env('SHIPPER_KEY') . '&id=' . $ersponseData['data']['id'], []);
             $responseDataTracking = json_decode($responseTracking->getBody(), true);
-            $data->update([
-                'shipping_id' => $ersponseData['data']['id'],
-                'tracking_id' => $responseDataTracking['data']['id']
+
+            $Activeresponse = $this->guzzle('PUT', '/activations/' . $responseDataTracking['data']['id'] . '?apiKey=' . env('SHIPPER_KEY'), [
+                'active' => 1
             ]);
 
-            return back()->with('success', $ersponseData['data']['content']." & ".$responseDataTracking['data']['content']);
+            $ActiveresponseData = json_decode($Activeresponse->getBody(), true);
+
+            $data->update([
+                'shipping_id' => $ersponseData['data']['id'],
+                'tracking_id' => $responseDataTracking['data']['id'],
+                'isActive' => true
+            ]);
+
+            return back()->with('success', $ersponseData['data']['content'] . " & " . $ActiveresponseData['data']['message']);
         } catch (Exception $exception) {
             return response()->json([
                 'status' => 'error',
@@ -116,15 +128,60 @@ class ShipperController extends Controller
     public function getAgents(Request $request)
     {
         try {
-            $response = $this->guzzle('GET', '/agents?apiKey='.env('SHIPPER_KEY').'&suburbId=2581', []);
+
+            $response = $this->guzzle('GET', '/agents?apiKey=' . env('SHIPPER_KEY') . '&suburbId=2581', []);
             $responseData = json_decode($response->getBody(), true);
-dd($responseData);
-            return view('pages.main.admins._partials.modal.shipper_agents',[
-                'data' => $responseData
+
+            return view('pages.main.admins._partials.modal.shipper_agents', [
+                'data' => $responseData['data']['data'],
+                'code' => $request->code
             ]);
         } catch (Exception $exception) {
             return back()->with('error', $exception->getMessage());
         }
+    }
+
+    public function postPickup(Request $request)
+    {
+
+//        try {
+        $formateed = Carbon::parse($request->pickup_date)->format('Y-m-d H:i:s');
+        $payment = PaymentCart::where('uni_code_payment', $request->payment_code)->first();
+
+        $arrayOrder = [];
+        array_push($arrayOrder, $payment->tracking_id);
+//            dd($arrayOrder);
+        $formPickup = [
+            "orderIds" => $arrayOrder,
+            'datePickup' => $formateed,
+            'agentId' => $request->agent_id
+        ];
+        dd($formPickup);
+
+
+        $response = $this->guzzle('POST', '/pickup?apiKey=' . env('SHIPPER_KEY'), $formPickup);
+
+        $ersponseData = json_decode($response->getBody(), true);
+
+        $payment->update([
+            'agent_id' => $request->agent_id,
+            'pick_up' => $formateed,
+            'agent_name' => $request->agent_name,
+            'agent_phone' => $request->agent_phone
+        ]);
+
+        return back()->with('success', $ersponseData['data']['message']);
+//
+//        } catch (Exception $exception) {
+//            return back()->with('success', $exception->getMessage());
+//        } catch (BadResponseException $exception) {
+//            return back()->with('success', $exception->getMessage());
+//        } catch (ConnectException $exception) {
+//            return back()->with('success', $exception->getMessage());
+//        } catch (RequestException $exception) {
+//            return back()->with('success', $exception->getMessage());
+//        }
+
     }
 
     function guzzle($method, $url, $form)
@@ -134,7 +191,7 @@ dd($responseData);
         $response = $client->request($method, $base_url . $url, [
             'headers' => [
                 'Accept' => 'application/json',
-
+//                'Content-Type' => 'application/json',
                 'User-Agent' => 'Shipper/',
             ],
             'form_params' => $form

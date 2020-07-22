@@ -191,6 +191,11 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                 'uses' => 'ShipperController@getAgents',
                 'as' => 'admin.shipper.modal.agents'
             ]);
+
+            Route::post('create/pickup', [
+                'uses' => 'ShipperController@postPickup',
+                'as' => 'admin.shipper.create.pickup'
+            ]);
         });
 
     });

@@ -31,6 +31,67 @@
             padding: 1rem !important;
             border-top: 1px solid #e9ecef !important;
         }
+
+        label {
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        .card-input-element + .card {
+            height: calc(45px + 2 * 1rem);
+            color: var(--primary);
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            border: 2px solid transparent;
+            border-radius: 4px;
+        }
+
+        .card-input-element + .card:hover {
+            cursor: pointer;
+        }
+
+        .card-input-element:checked + .card {
+            border: 2px solid #f89406;
+            -webkit-transition: border .3s;
+            -o-transition: border .3s;
+            transition: border .3s;
+        }
+
+        .card-input-element:checked + .card::after {
+            font-family: "Font Awesome 5 Free";
+            content: "\f14a";
+            color: #f89406;
+            font-size: 24px;
+            -webkit-animation-name: fadeInCheckbox;
+            animation-name: fadeInCheckbox;
+            -webkit-animation-duration: .5s;
+            animation-duration: .5s;
+            -webkit-animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @-webkit-keyframes fadeInCheckbox {
+            from {
+                opacity: 0;
+                -webkit-transform: rotateZ(-20deg);
+            }
+            to {
+                opacity: 1;
+                -webkit-transform: rotateZ(0deg);
+            }
+        }
+
+        @keyframes fadeInCheckbox {
+            from {
+                opacity: 0;
+                transform: rotateZ(-20deg);
+            }
+            to {
+                opacity: 1;
+                transform: rotateZ(0deg);
+            }
+        }
+
     </style>
 @endpush
 @section('content')
@@ -154,21 +215,30 @@
                                                 ?>
                                                 @if($item->finish_payment == 1)
                                                     <div class="btn-group">
-                                                        <button type="button" class="btn btn-primary"
-                                                                data-toggle="tooltip"
-                                                                onclick="openModal('{{ucfirst($item->uni_code_payment)}}','{{route('admin.shipper.modal.create')}}','Create Data to Shipper')"
-                                                                title="Create to Shipper" data-html="true"
-                                                                data-placement="top"><i class="fa fa-shipping-fast"></i>
-                                                        </button>
+                                                        @if($item->tracking_id == null)
+                                                            <button type="button" class="btn btn-primary"
+                                                                    data-toggle="tooltip"
+                                                                    onclick="openModal('{{ucfirst($item->uni_code_payment)}}','{{route('admin.shipper.modal.create')}}','Create Data to Shipper')"
+                                                                    title="Create to Shipper" data-html="true"
+                                                                    data-placement="top"><i
+                                                                    class="fa fa-shipping-fast"></i>
+                                                            </button>
+                                                        @else
+                                                            @if($item->agent_id == null)
+                                                                <button type="button" class="btn btn-primary"
+                                                                        data-toggle="tooltip"
+                                                                        onclick="openModal('{{ucfirst($item->uni_code_payment)}}','{{route('admin.shipper.modal.agents')}}','Get Agents')"
+                                                                        title="Set Pickup Order" data-html="true"
+                                                                        data-placement="top"><i
+                                                                        class="fa fa-calendar"></i>
+                                                                </button>
+                                                            @else
+                                                            @endif
+                                                        @endif
 
-                                                        <button type="button" class="btn btn-primary"
-                                                                data-toggle="tooltip"
-                                                                onclick="openModal('{{ucfirst($item->uni_code_payment)}}','{{route('admin.shipper.modal.agents')}}','Get Agents')"
-                                                                title="Set Pickup Order" data-html="true"
-                                                                data-placement="top"><i class="fa fa-calendar"></i>
-                                                        </button>
 
-                                                        <button type="button" class="btn btn-primary " style="display: none"
+                                                        <button type="button" class="btn btn-primary "
+                                                                style="display: none"
                                                                 data-toggle="popover" data-trigger="focus"
                                                                 title="{{count($order)}} Items" data-html="true"
                                                                 data-placement="left" data-content='
@@ -369,11 +439,11 @@
                 });
         });
 
-        function openModal(code,url_action,title) {
+        function openModal(code, url_action, title) {
             console.log(code);
             $.post(url_action, {
                     _token: '{{csrf_token()}}',
-                    code : code
+                    code: code
                 },
                 function (data) {
                     $('#customModalbody').html(data);
@@ -381,6 +451,11 @@
             $('#payment_code').val(code);
             $('#customModalTitle').text(title);
             $('#customModal').modal({backdrop: 'static', keyboard: false})
+        }
+
+        function getPhoneAgent(phone,name) {
+            $("#agent_name").val(name);
+            $("#agent_phone").val(phone);
         }
 
         function getInvoice(user_id, code) {

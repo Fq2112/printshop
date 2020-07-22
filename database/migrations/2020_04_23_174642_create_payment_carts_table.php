@@ -38,7 +38,10 @@ class CreatePaymentCartsTable extends Migration
             $table->string('resi')->nullable()->unique();
             $table->string('shipping_id')->nullable()->unique(); //Shipper Long ID
             $table->string('tracking_id')->nullable()->unique();
+            $table->boolean('isActive')->default(false);
             $table->integer('agent_id')->nullable();
+            $table->string('agent_name')->nullable();
+            $table->string('agent_phone')->nullable();
             $table->dateTime('pickup_date')->nullable();
             $table->dateTime('receive_date')->nullable();
             $table->boolean('finish_payment')->default(false);
