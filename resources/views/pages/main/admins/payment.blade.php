@@ -225,18 +225,31 @@
                                                             </button>
                                                         @else
                                                             @if($item->agent_id == null)
-                                                                <button type="button" class="btn btn-primary"
+                                                            <!--button type="button" class="btn btn-primary"
                                                                         data-toggle="tooltip"
                                                                         onclick="openModal('{{ucfirst($item->uni_code_payment)}}','{{route('admin.shipper.modal.agents')}}','Get Agents')"
                                                                         title="Set Pickup Order" data-html="true"
                                                                         data-placement="top"><i
                                                                         class="fa fa-calendar"></i>
-                                                                </button>
+                                                                </button-->
                                                             @else
                                                             @endif
                                                         @endif
 
-
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-primary dropdown-toggle"
+                                                                    type="button" id="dropdownMenuButton"
+                                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                                    aria-expanded="false"> <i class="fa fa-file-download"></i>
+                                                                Download
+                                                            </button>
+                                                            <div class="dropdown-menu"
+                                                                 aria-labelledby="dropdownMenuButton">
+                                                                <a class="dropdown-item" href="javascript:void(0)"  onclick="getInvoice('{{$item->getUser->id}}','{{ucfirst($item->uni_code_payment)}}')">Invoice</a>
+                                                                <a class="dropdown-item" href="javascript:void(0)" onclick=" get_design('{{ucfirst($item->uni_code_payment)}}')">Production Summary</a>
+                                                                <a class="dropdown-item" href="javascript:void(0)">Shipping Label</a>
+                                                            </div>
+                                                        </div>
                                                         <button type="button" class="btn btn-primary "
                                                                 style="display: none"
                                                                 data-toggle="popover" data-trigger="focus"
@@ -282,12 +295,6 @@
 @endif
                                                             '>
                                                             <i class="fa fa-tag"></i>
-                                                        </button>
-                                                        <button type="button" class="btn btn-danger"
-                                                                data-toggle="tooltip"
-                                                                onclick="getInvoice('{{$item->getUser->id}}','{{ucfirst($item->uni_code_payment)}}')"
-                                                                title="Download Invoice" data-html="true"
-                                                                data-placement="top"><i class="fa fa-file-pdf"></i>
                                                         </button>
 
                                                         <a href="{{route('admin.order.user',['kode'=>$item->uni_code_payment])}}"
@@ -453,7 +460,7 @@
             $('#customModal').modal({backdrop: 'static', keyboard: false})
         }
 
-        function getPhoneAgent(phone,name) {
+        function getPhoneAgent(phone, name) {
             $("#agent_name").val(name);
             $("#agent_phone").val(phone);
         }
@@ -517,6 +524,47 @@
             $('#_content_en').summernote('code', "");
             $('#_content_id').summernote('code', "");
         });
+
+        function get_design(code) {
+            $.ajax({
+                type: 'post',
+                url: '{{route('admin.order.production.pdf')}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    code: code
+                },
+                success: function (data) {
+
+                                        setTimeout(
+                                            function () {
+                                                $.ajax({ //Download File from above
+                                                    type: 'post',
+                                                    url: '{{route('admin.order.production.download')}}',
+                                data: {
+                                    _token: '{{csrf_token()}}',
+                                    code: code
+                                },
+                                success: function (data) {
+                                    console.log('downloaded')
+                                }
+                            });
+                        }, 1000);
+
+
+                    swal('Success', "Plesae Wait Till Page Succesfully Realoded", 'success');
+                    setTimeout(
+                        function () {
+                            location.reload();
+                        }, 5000);
+
+                }, error: function (xhr, ajaxOptions, thrownError) {
+                    if (xhr.status == 500) {
+                        console.log(xhr);
+                        swal('Error', xhr.responseJSON.error, 'error');
+                    }
+                }
+            });
+        }
 
         function set_end_date(value) {
 

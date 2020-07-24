@@ -39,7 +39,7 @@ class OrderController extends Controller
         $order = [];
         foreach ($payment->cart_ids as $item) {
             $order_item = \App\Models\Order::whereRaw('SUBSTRING_INDEX(uni_code,"-",-1) = ' . $item)->first();
-            $order_item->setAttribute('cart_id',$item);
+            $order_item->setAttribute('cart_id', $item);
             array_push($order, $order_item);
         }
 
@@ -150,28 +150,28 @@ class OrderController extends Controller
     public function create_pdf(Request $request)
     {
         $filename = $request->code . '.pdf';
-        $data = Order::whereHas('getCart', function ($query) use ($request) {
-            $query->whereHas('getPayment', function ($query) use ($request) {
-                $query->where('uni_code_payment', $request->code);
-            });
-        })->get();
+
+        $payment = \App\Models\PaymentCart::where('uni_code_payment', $request->code)->first();
+
+        $responseDetail = $this->guzzle('GET', '/orders/' . $payment->tracking_id . '?apiKey=' . env('SHIPPER_KEY'), []);
+        $responseDatadetail = json_decode($responseDetail->getBody(), true);
+//        dd($responseDatadetail['data']['order']['detail']['package']);
         $pdf = PDF::loadView('exports.production', [
-            'order' => $data,
             'code' => $request->code
         ]);
 
         Storage::put('public/users/order/invoice/owner/' . $filename, $pdf->output());
 
 
-        foreach ($data as $item) { //create PDF for Shipping Label
-            $labelname = $item->uni_code . '.pdf';
-            $labelPdf = PDF::loadView('exports.shipping', [
-                'code' => $request->code,
-                'order' => $item
-            ]);
-            $labelPdf->setPaper('a5', 'landscape');
-            Storage::put('public/users/order/invoice/owner/prodution/' . $request->code . '/' . $labelname, $labelPdf->output());
-        }
+//        foreach ($data as $item) { //create PDF for Shipping Label
+//            $labelname = $item->uni_code . '.pdf';
+//            $labelPdf = PDF::loadView('exports.shipping', [
+//                'code' => $request->code,
+//                'order' => $item
+//            ]);
+//            $labelPdf->setPaper('a5', 'landscape');
+//            Storage::put('public/users/order/invoice/owner/prodution/' . $request->code . '/' . $labelname, $labelPdf->output());
+//        }
 
         return response()->json([
             'message' => 'PDF Created'
@@ -224,5 +224,21 @@ class OrderController extends Controller
         return view('exports.shipping', [
             'data' => $data
         ]);
+    }
+
+    function guzzle($method, $url, $form)
+    {
+        $base_url = env('SHIPPER_BASE_URL');
+        $client = new \GuzzleHttp\Client();
+        $response = $client->request($method, $base_url . $url, [
+            'headers' => [
+                'Accept' => 'application/json',
+//                'Content-Type' => 'application/json',
+                'User-Agent' => 'Shipper/',
+            ],
+            'form_params' => $form
+        ]);
+
+        return $response;
     }
 }

@@ -8,6 +8,7 @@ use App\Models\PaymentCart;
 use Carbon\Carbon;
 use Egulias\EmailValidator\Exception\ExpectingQPair;
 use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
@@ -84,7 +85,6 @@ class ShipperController extends Controller
                 "originAddress" => "Raya Kenjeran 469 Gading, Tambaksari, Surabaya, Jawa Timur – 60134.",
                 "originDirection" => "q",
                 "destinationAddress" => $data->getShippingAddress->address . " - " . $data->getShippingAddress->postal_code,
-                "destinationDirection" => "w",
                 "itemName" => $itemName,
                 "contents" => "show",
                 "useInsurance" => 0,
@@ -94,8 +94,6 @@ class ShipperController extends Controller
                 "cod" => 0,
 
             ];
-//            dd($form);
-
 
             $response = $this->guzzle('POST', '/orders/domestics?apiKey=' . env('SHIPPER_KEY'), $form);
             $ersponseData = json_decode($response->getBody(), true);
@@ -122,6 +120,8 @@ class ShipperController extends Controller
                 'status' => 'error',
                 'message' => $exception->getMessage()
             ], 500);
+        } catch (ClientException $exception) {
+            return back()->with('error', $exception->getMessage());
         }
     }
 
