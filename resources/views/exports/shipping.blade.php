@@ -3,17 +3,18 @@
     app()->setLocale('id');
     \Carbon\Carbon::setLocale('id');
     setlocale(LC_TIME, config('app.locale'));
-    $cart = $order->getCart;
-    $product = !is_null($cart->subkategori_id) ? $cart->getSubKategori : $cart->getCluster;
-    $specs = !is_null($cart->subkategori_id) ? $cart->getSubKategori->getSubkatSpecs : $cart->getCluster->getClusterSpecs;
+   // $cart = $order->getCart;
+    //$product = !is_null($cart->subkategori_id) ? $cart->getSubKategori : $cart->getCluster;
+    //$specs = !is_null($cart->subkategori_id) ? $cart->getSubKategori->getSubkatSpecs : $cart->getCluster->getClusterSpecs;
 @endphp
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SHIPPING LABEL | INVOICE #{{$code}}</title>
+    <title>SHIPPING LABEL | INVOICE #</title>
     <style>
         html, body {
             font-family: sans-serif;
+            font-size: 8pt;
         }
 
         #invoice {
@@ -33,7 +34,7 @@
 
         #co-left {
             padding: 10px;
-            font-size: .95em;
+            font-size: 8pt;
             color: #888
         }
 
@@ -44,7 +45,7 @@
         #co-right div {
             float: right;
             text-align: center;
-            font-size: 14px;
+            font-size: 8pt;
             padding: 10px;
             color: #fff;
             width: 240px;
@@ -52,6 +53,7 @@
         }
 
         #items td, #items th {
+            font-size: 8pt;
             font-weight: 400;
             border-bottom: 3px solid #fff
         }
@@ -61,7 +63,7 @@
         }
 
         #specs {
-            font-size: 14px;
+            font-size: 8pt;
             margin: 1em 0;
         }
 
@@ -117,69 +119,108 @@
             background: #fff5e6;
             margin-top: 30px
         }
+
     </style>
 </head>
 <body>
 <div id="invoice" style="border:1px solid black;">
+    <!-- Header -->
     <table id="company" style="margin-bottom: 0">
         <tr>
             <td>
-                <img src="{{public_path('images/logotype-invoice.png')}}" alt="logo" style="margin-bottom: 0">
+                <img src="{{public_path('images/logotype-invoice.png')}}" alt="logo"
+                     style="margin-bottom: 0;width: 80px">
+            </td>
+            <td style="color: white">asdasdasdasdasdasdasdasdasd</td>
+            <td align="left">
+                <img src="{{asset($data->rate_logo)}}" alt="" style="width: 60px">
+            </td>
+        </tr>
+    </table>
+    <!-- Origin -->
+    <table id="company" style="margin-bottom: 0" width="100%">
+        <tr>
+            <td>
                 <div id="co-left" style="margin-top: 0">
                     {{env('APP_TITLE')}}<br>Raya Kenjeran 469 Gading, Tambaksari<br>
                     Surabaya, Jawa Timur &ndash; 60134<br>
                     Phone: (031) 3814969<br>Fax: (031) 3814969<br>
-                    {{env('APP_URL')}}<br>{{env('MAIL_USERNAME')}}
                 </div>
+                <br>
+                <div class="uppercase" style="
+                text-align: center;
+                font-size: 8pt;
+                padding: 5px;
+                color: #fff;
+                width: 240px;
+                background: #f89406;">#{{$data->uni_code_payment}}</div>
             </td>
-            <td id="co-right">
-                <div class="uppercase">#{{$code}}</div>
-                <br><br>
+
+            <td align="center">
+                {{$data->uni_code_payment}}
                 <div style="background: transparent">
+
                     <img alt="QR Code"
-                         src="data:image/png;base64, {!! base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate(asset('storage/users/order/invoice/'.$cart->user_id.'/'.$code))) !!}">
+                         src="data:image/png;base64, {!! base64_encode(QrCode::format('svg')->size(50)->errorCorrection('H')->generate(asset('storage/users/order/invoice/'.$data->user_id.'/'.$data->uni_code_payment))) !!}">
                 </div>
+
             </td>
         </tr>
     </table>
-
-    <table id="billship" style="margin: 0 auto">
+    <hr>
+    <!-- Destination -->
+    <table id="">
         <tr>
-            <td style="font-size: 14px">
-                <b class="primary">Order ID #{{$order->uni_code}}</b><br>
-                <b class="primary">Pemesan: </b>{{$cart->getUser->name}}<br>
-                <b class="primary">Telepon: </b>{{$cart->getUser->getBio->phone}}<br>
-                <b class="primary">Pembayaran: </b>{{\Carbon\Carbon::parse($cart->getPayment->updated_at)->formatLocalized('%d %B %Y pukul %H:%I')}}
+            <td id="co-left" style="font-size: 10px">
+                <b class="primary">Penerima</b><br>
+                {{$data->getUser->name}} <br>
+                {{$detail['detail']['destination']['address']}} Kel. {{$detail['detail']['destination']['areaName']}}
+                Kec. {{$detail['detail']['destination']['suburbName']}} {{$detail['detail']['destination']['cityName']}}
+                - {{$detail['detail']['destination']['provinceName']}} ({{$detail['detail']['destination']['postcode']}}
+                ) <br>
+                Telepon: {{$data->getUser->getBio->phone}}<br>
+                Pembayaran: {{\Carbon\Carbon::parse($data->updated_at)->formatLocalized('%d %B %Y pukul %H:%I')}}
+
             </td>
             <td style="font-size: 14px">
-                <b class="primary">Penerima</b><br>
-                {{$cart->getAddress->name}}<br>
-                {{$cart->getAddress->phone}}<br>
-                {{$cart->getAddress->address}}, {{$cart->getAddress->postal_code}}
             </td>
         </tr>
     </table>
+    <hr>
 
+    <!-- Item -->
     <table id="items" style="font-size: 14px;margin-top: 0">
         <thead>
         <tr>
             <th><b>Produk Cetak</b></th>
-            <th><b>Kategori</b></th>
-            {{--            <th class="center"><b>{{__('lang.product.form.summary.price', ['unit' => 'pcs'])}}</b></th>--}}
-            <th class="center"><b>Tgl. Cetak</b></th>
             <th class="center"><b>Qty.</b></th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>{{$product->name}}</td>
-            <td>{{!is_null($cart->subkategori_id) ? $cart->getSubKategori->getKategori->name : $cart->getCluster->getSubKategori->name}}</td>
-            {{--            <td align="center"> {{number_format(ceil($cart->price_pcs), 2, ',', '.')}}</td>--}}
-            <td align="center">{{\Carbon\Carbon::parse($cart->production_finished)->formatLocalized('%d %B %Y')}}</td>
-            <td align="center">{{$cart->qty.' '.$specs->getUnit->name}}</td>
-        </tr>
+        @foreach($detail['detail']['package']['details'] as $item)
+            <tr>
+                <td>{{$item['itemName']}}</td>
+                <td align="center">{{$item['itemQTY']}} pcs</td>
+            </tr>
+        @endforeach
         </tbody>
+        <thead>
+        <tr >
+            <td align="right">Logistik / Jenis / Berat :</td>
+            <td align="left">{{$detail['detail']['courier']['name']}} / {{$detail['detail']['courier']['rate_name']}} / {{$detail['detail']['package']['weight']['value']}}
+                <small>{{$detail['detail']['package']['weight']['UoM']}} </small> </td>
+        </tr>
+        <tr >
+            <td align="right">Asuransi :</td>
+            <td align="left">Rp {{number_format($detail['detail']['rates']['insurance']['value'])}}</td>
+        </tr>
+        <tr >
+            <td align="right">Biaya Kirim :</td>
+            <td align="left">Rp {{number_format($detail['detail']['courier']['rate']['value'])}}</td>
+        </tr>
+        </thead>
     </table>
+
 </div>
 </body>
 </html>

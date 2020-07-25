@@ -240,14 +240,22 @@
                                                             <button class="btn btn-primary dropdown-toggle"
                                                                     type="button" id="dropdownMenuButton"
                                                                     data-toggle="dropdown" aria-haspopup="true"
-                                                                    aria-expanded="false"> <i class="fa fa-file-download"></i>
+                                                                    aria-expanded="false"><i
+                                                                    class="fa fa-file-download"></i>
                                                                 Download
                                                             </button>
                                                             <div class="dropdown-menu"
                                                                  aria-labelledby="dropdownMenuButton">
-                                                                <a class="dropdown-item" href="javascript:void(0)"  onclick="getInvoice('{{$item->getUser->id}}','{{ucfirst($item->uni_code_payment)}}')">Invoice</a>
-                                                                <a class="dropdown-item" href="javascript:void(0)" onclick=" get_design('{{ucfirst($item->uni_code_payment)}}')">Production Summary</a>
-                                                                <a class="dropdown-item" href="javascript:void(0)">Shipping Label</a>
+                                                                <a class="dropdown-item" href="javascript:void(0)"
+                                                                   onclick="getInvoice('{{$item->getUser->id}}','{{ucfirst($item->uni_code_payment)}}')">Invoice</a>
+                                                                <a class="dropdown-item" href="javascript:void(0)"
+                                                                   onclick=" get_design('{{ucfirst($item->uni_code_payment)}}')">Production
+                                                                    Summary</a>
+                                                                <a class="dropdown-item" href="{{route('admin.order.shipping',['code' =>$item->uni_code_payment])}}" target="_blank" style="display: none">Shipping
+                                                                    Label Test</a>
+                                                                <a class="dropdown-item" href="javascript:void(0)" onclick="get_shipping('{{ucfirst($item->uni_code_payment)}}')">Shipping
+                                                                    Label</a>
+
                                                             </div>
                                                         </div>
                                                         <button type="button" class="btn btn-primary "
@@ -489,6 +497,28 @@
             });
         }
 
+        function get_shipping(code) {
+            $.ajax({
+                type: 'get',
+                url: '{{route('admin.order.shipping')}}',
+                data: {
+                    code: code,
+                },
+                success: function (data) {
+                    // swal('Success', "Plesae Wait Till Page Succesfully Realoded", 'success');
+                    // setTimeout(
+                    //     function () {
+                    //         location.reload();
+                    //     }, 5000);
+                }, error: function (xhr, ajaxOptions, thrownError) {
+                    if (xhr.status == 404) {
+                        console.log(xhr);
+                        swal('Error', xhr.responseJSON.message, 'error');
+                    }
+                }
+            });
+        }
+
         @if(request()->has('period'))
         $('#period').val('{{ request()->get('period') }}');
         @endif
@@ -534,12 +564,12 @@
                     code: code
                 },
                 success: function (data) {
-
-                                        setTimeout(
-                                            function () {
-                                                $.ajax({ //Download File from above
-                                                    type: 'post',
-                                                    url: '{{route('admin.order.production.download')}}',
+                    /*
+                    setTimeout(
+                        function () {
+                            $.ajax({ //Download File from above
+                                type: 'post',
+                                url: '{{route('admin.order.production.download')}}',
                                 data: {
                                     _token: '{{csrf_token()}}',
                                     code: code
@@ -556,6 +586,7 @@
                         function () {
                             location.reload();
                         }, 5000);
+                        */
 
                 }, error: function (xhr, ajaxOptions, thrownError) {
                     if (xhr.status == 500) {

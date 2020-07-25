@@ -163,15 +163,14 @@ class OrderController extends Controller
         Storage::put('public/users/order/invoice/owner/' . $filename, $pdf->output());
 
 
-//        foreach ($data as $item) { //create PDF for Shipping Label
-//            $labelname = $item->uni_code . '.pdf';
-//            $labelPdf = PDF::loadView('exports.shipping', [
-//                'code' => $request->code,
-//                'order' => $item
-//            ]);
-//            $labelPdf->setPaper('a5', 'landscape');
-//            Storage::put('public/users/order/invoice/owner/prodution/' . $request->code . '/' . $labelname, $labelPdf->output());
-//        }
+        $labelname = $payment->uni_code_payment . '.pdf';
+        $labelPdf = PDF::loadView('exports.shipping', [
+            'data' => $payment,
+            'detail' => $responseDatadetail['data']['order']
+        ]);
+        $labelPdf->setPaper('a5', 'potrait');
+        Storage::put('public/users/order/invoice/owner/prodution/' . $request->code . '/' . $labelname, $labelPdf->output());
+
 
         return response()->json([
             'message' => 'PDF Created'
@@ -197,6 +196,21 @@ class OrderController extends Controller
         }
     }
 
+    public function download_shipping(Request $request)
+    {
+        $filename = $request->code . '.pdf';
+        $file_path = storage_path('app/public/users/order/invoice/owner/prodution/' . $request->code.'/'.$filename);
+        if (file_exists($file_path)) {
+            return Response::download($file_path, 'Shipping_Label_' . $filename, [
+                'Content-length : ' . filesize($file_path)
+            ]);
+        } else {
+            return \response()->json([
+                'message' => "Oops! The current file you are looking for is not available "
+            ], 404);
+        }
+    }
+
     public function download_invoice(Request $request)
     {
         $filename = $request->code . '.pdf';
@@ -212,17 +226,16 @@ class OrderController extends Controller
         }
     }
 
-    public function shipping()
+    public function shipping($code)
     {
-        $code = 'PYM5EE6262B5F30D1592141355';
+        $payment = \App\Models\PaymentCart::where('uni_code_payment', $code)->first();
 
-        $data = Order::whereHas('getCart', function ($query) use ($code) {
-            $query->whereHas('getPayment', function ($query) use ($code) {
-                $query->where('uni_code_payment', $code);
-            });
-        })->get();
+        $responseDetail = $this->guzzle('GET', '/orders/' . $payment->tracking_id . '?apiKey=' . env('SHIPPER_KEY'), []);
+        $responseDatadetail = json_decode($responseDetail->getBody(), true);
+//        dd($responseDatadetail['data']['order']);
         return view('exports.shipping', [
-            'data' => $data
+            'data' => $payment,
+            'detail' => $responseDatadetail['data']['order']
         ]);
     }
 

@@ -171,8 +171,12 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             'as' => 'admin.order.production.download'
         ]);
 
-        Route::get('shipping', [
+        Route::get('shipping/{code}', [
             'uses' => 'OrderController@shipping',
+            'as' => 'admin.order.shipping'
+        ]);
+        Route::get('shipping/', [
+            'uses' => 'OrderController@download_shipping',
             'as' => 'admin.order.shipping'
         ]);
         Route::group(['prefix' => 'shipper'], function () {
