@@ -38,8 +38,15 @@ class OrderController extends Controller
 
         $order = [];
         foreach ($payment->cart_ids as $item) {
-            $order_item = \App\Models\Order::whereRaw('SUBSTRING_INDEX(uni_code,"-",-1) = ' . $item)->first();
-            $order_item->setAttribute('cart_id', $item);
+            $order_item = \App\Models\Order::whereRaw('SUBSTRING_INDEX(uni_code,"-",-1) = ' . $item)->when($request->status, function ($query) use ($request) {
+                $query->where('progress_status', $request->status);
+            })->when($request->period, function ($query) use ($request) {
+                $query->whereBetween('updated_at', [Carbon::now()->subDay($request->period), Carbon::now()]);
+            })->first();
+            if (!empty($order_item)){
+                $order_item->setAttribute('cart_id', $item);
+            }
+
             array_push($order, $order_item);
         }
 
@@ -63,6 +70,7 @@ class OrderController extends Controller
 
         return view('pages.main.admins._partials.modal.detail_cart', [
             'cart' => $data,
+            'order' => $request->order_id
         ]);
     }
 

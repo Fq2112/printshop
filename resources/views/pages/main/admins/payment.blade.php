@@ -178,7 +178,8 @@
                                         <th width="15%">Customer</th>
                                         <th width="15%">Phone</th>
                                         <th class="text-center" width="10%">Order date</th>
-                                        <th class="text-center" width="10%">Status</th>
+                                        <th class="text-center" width="10%">Payment</th>
+                                        <th class="text-center" width="10%">Shipper</th>
                                         <th width="25%" align="center">
                                             <center>Action</center>
                                         </th>
@@ -204,9 +205,27 @@
                                             <td class="text-center" width="10%">{{$item->updated_at}}</td>
                                             <td class="text-center" width="10%">
                                                 @if($item->finish_payment == 1)
-                                                    <div class="badge badge-success">Paid</div>
+                                                    <div class="badge badge-success" data-placement="top"
+                                                         data-toggle="tooltip"
+                                                         title="Paid"><i class="fa fa-check"></i></div>
                                                 @else
-                                                    <div class="badge badge-warning">Unpaid</div>
+                                                    <div class="badge badge-danger" data-placement="top"
+                                                         data-toggle="tooltip"
+                                                         title="Unpaid"><i class="fa fa-window-close"></i></div>
+                                                @endif
+                                            </td>
+                                            <td class="text-center" width="10%">
+                                                @if($item->tracking_id == null | $item->tracking_id == "")
+
+                                                    <div class="badge badge-danger" data-placement="top"
+                                                         data-toggle="tooltip"
+                                                         title="Not Connected with Shipper Yet"><i
+                                                            class="fa fa-window-close"></i></div>
+                                                @else
+                                                    <div class="badge badge-success" data-placement="top"
+                                                         data-toggle="tooltip"
+                                                         title="Connected With Shipper"><i class="fa fa-check"></i>
+                                                    </div>
                                                 @endif
                                             </td>
                                             <td width="25%" align="center">
@@ -251,11 +270,18 @@
                                                                 <a class="dropdown-item" href="javascript:void(0)"
                                                                    onclick=" get_design('{{ucfirst($item->uni_code_payment)}}')">Production
                                                                     Summary</a>
-                                                                <a class="dropdown-item" href="{{route('admin.order.shipping',['code' =>$item->uni_code_payment])}}" target="_blank" style="display: none">Shipping
+                                                                <a class="dropdown-item"
+                                                                   href="{{route('admin.order.shipping',['code' =>$item->uni_code_payment])}}"
+                                                                   target="_blank" style="display: none">Shipping
                                                                     Label Test</a>
-                                                                <a class="dropdown-item" href="javascript:void(0)" onclick="get_shipping('{{ucfirst($item->uni_code_payment)}}')">Shipping
-                                                                    Label</a>
-
+                                                                <?php
+                                                                $file_path = storage_path('app/public/users/order/invoice/owner/prodution/' . $item->uni_code_payment . '/' . $item->uni_code_payment . '.pdf');
+                                                                ?>
+                                                                @if(file_exists($file_path))
+                                                                    <a class="dropdown-item" href="javascript:void(0)"
+                                                                       onclick="get_shipping('{{ucfirst($item->uni_code_payment)}}')">Shipping
+                                                                        Label</a>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                         <button type="button" class="btn btn-primary "

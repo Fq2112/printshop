@@ -1,6 +1,16 @@
 <form id="form-blogCategory" method="post" action="{{route('admin.shipper.create.order')}}">
     {{csrf_field()}}
+    <div class="row">
+        <div class="col">
+            <div class="alert alert-warning d-flex flex-row">
+                <i class="fas fa-fw fa-exclamation-circle mr-3 align-self-center"></i>
+                <div>
+                <strong> Pastikan produk telah dikemas, Shipper akan segera menghubungi Premier setelah data diproses </strong>
+                </div>
+            </div>
 
+        </div>
+    </div>
     <div class="row">
         <div class="col">
             <label for="name">Payment Code <sup class="text-danger">*</sup></label>

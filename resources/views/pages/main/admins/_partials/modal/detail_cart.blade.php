@@ -1,21 +1,8 @@
-<form id="form-blogCategory" method="post" action="{{route('admin.shipper.create.order')}}">
+<form id="form-blogCategory" method="post" action="{{route('update.order.status')}}">
     {{csrf_field()}}
-
     <div class="row">
-        <div class="col">
-            <label for="name">Payment Code <sup class="text-danger">*</sup></label>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fa fa-tag"></i></span>
-                </div>
-                <input id="payment_code" type="text" maxlength="191" name="payment_code" class="form-control disabled"
-                       readonly value=""
-                       placeholder="Write its name here&hellip;" required>
-                <input type="hidden" name="id" value="">
-            </div>
-        </div>
+        <input type="hidden" name="id" id="" value="{{$order}}">
     </div>
-    <br>
     <div class="row">
         <div class="col">
             <table class="table table-sm table-borderless table-hover ">
@@ -207,7 +194,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" >Proceed </button>
     </div>
 </form>

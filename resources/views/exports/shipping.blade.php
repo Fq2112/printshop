@@ -157,11 +157,10 @@
             </td>
 
             <td align="center">
-                {{$data->uni_code_payment}}
                 <div style="background: transparent">
 
                     <img alt="QR Code"
-                         src="data:image/png;base64, {!! base64_encode(QrCode::format('svg')->size(50)->errorCorrection('H')->generate(asset('storage/users/order/invoice/'.$data->user_id.'/'.$data->uni_code_payment))) !!}">
+                         src="data:image/png;base64, {!! base64_encode(QrCode::format('svg')->size(75)->errorCorrection('H')->generate(asset('storage/users/order/invoice/'.$data->user_id.'/'.$data->uni_code_payment))) !!}">
                 </div>
 
             </td>
@@ -194,29 +193,50 @@
         <tr>
             <th><b>Produk Cetak</b></th>
             <th class="center"><b>Qty.</b></th>
+            <th class="center"><b>Berat (Kg)</b></th>
         </tr>
         </thead>
         <tbody>
-        @foreach($detail['detail']['package']['details'] as $item)
+        <?
+        $weightTotal = 0;
+        ?>
+        @foreach($data->cart_ids as $item)
+            <?
+            $cart = \App\Models\Cart::find($item);
+            $product = !is_null($cart->subkategori_id) ? $cart->getSubKategori : $cart->getCluster;
+            $specs = !is_null($cart->subkategori_id) ? $cart->getSubKategori->getSubkatSpecs : $cart->getCluster->getClusterSpecs;
+            $weight = ($specs->weight / 1000) * $cart->qty;
+            $weightTotal = $weightTotal + $weight;
+            ?>
             <tr>
-                <td>{{$item['itemName']}}</td>
-                <td align="center">{{$item['itemQTY']}} pcs</td>
+                <td>{{$product->name}}</td>
+                <td align="center">{{$cart->qty}} pcs</td>
+                <td align="center">{{$weight}} </td>
             </tr>
+            <?
+
+            ?>
         @endforeach
         </tbody>
         <thead>
-        <tr >
-            <td align="right">Logistik / Jenis / Berat :</td>
-            <td align="left">{{$detail['detail']['courier']['name']}} / {{$detail['detail']['courier']['rate_name']}} / {{$detail['detail']['package']['weight']['value']}}
-                <small>{{$detail['detail']['package']['weight']['UoM']}} </small> </td>
+        <tr>
+            <td colspan="2" align="right"><strong>Total Berat :</strong></td>
+            <td align="center">{{$weightTotal}}
+                <small>{{$detail['detail']['package']['weight']['UoM']}} </small></td>
         </tr>
-        <tr >
-            <td align="right">Asuransi :</td>
-            <td align="left">Rp {{number_format($detail['detail']['rates']['insurance']['value'])}}</td>
+        <tr>
+            <td align="right" colspan="2"><strong>Kurir / Jenis :</strong></td>
+            <td align="center">{{$detail['detail']['courier']['name']}} / {{$detail['detail']['courier']['rate_name']}}
+
+            </td>
         </tr>
-        <tr >
-            <td align="right">Biaya Kirim :</td>
-            <td align="left">Rp {{number_format($detail['detail']['courier']['rate']['value'])}}</td>
+        {{--        <tr >--}}
+        {{--            <td align="right">Asuransi :</td>--}}
+        {{--            <td align="left">Rp {{number_format($detail['detail']['rates']['insurance']['value'])}}</td>--}}
+        {{--        </tr>--}}
+        <tr>
+            <td align="right" colspan="2"><strong>Biaya Kirim :</strong></td>
+            <td align="center">Rp {{number_format($detail['detail']['courier']['rate']['value'])}}</td>
         </tr>
         </thead>
     </table>
