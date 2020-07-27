@@ -144,7 +144,10 @@ class CategoryController extends Controller
                 'subkategori_id' => $subkat->id,
                 'unit_id' => 1,
                 'price' => $request->price,
-                'weight' => $request->weight
+                'weight' => $request->weight,
+                'length' => $request->length,
+                'width' => $request->width,
+                'height' => $request->height
             ]);
 
             if ($request->has('material_id')) {
@@ -316,7 +319,10 @@ class CategoryController extends Controller
                 'subkategori_id' => $category->id,
                 'unit_id' => 1,
                 'price' => $request->price,
-                'weight' => $request->weight
+                'weight' => $request->weight,
+                'length' => $request->length,
+                'width' => $request->width,
+                'height' => $request->height
             ]);
 
             if ($request->has('material_id')) {
@@ -494,7 +500,10 @@ class CategoryController extends Controller
                 'cluster_kategoris_id' => $subkat->id,
                 'unit_id' => 1,
                 'price' => $request->price,
-                'weight' => $request->weight
+                'weight' => $request->weight,
+                'length' => $request->length,
+                'width' => $request->width,
+                'height' => $request->height
             ]);
 
             if ($request->has('material_id')) {
@@ -655,7 +664,10 @@ class CategoryController extends Controller
                 'cluster_kategoris_id' => $cluster->id,
                 'unit_id' => 1,
                 'price' => $request->price,
-                'weight' => $request->weight
+                'weight' => $request->weight,
+                'length' => $request->length,
+                'width' => $request->width,
+                'height' => $request->height
             ]);
 
             if ($request->has('material_id')) {
