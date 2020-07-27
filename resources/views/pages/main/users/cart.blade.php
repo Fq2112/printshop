@@ -1276,7 +1276,7 @@
     <script>
         var collapse = $('.panel-collapse'), upload_input = $("#file"), link_input = $("#link"), check_file = null,
             btn_pay = $("#btn_pay"), production_day = 3, ongkir = 0, etd = '', str_etd = '', str_date = '',
-            total = parseInt('{{count($carts) > 0 ? $subtotal : 0}}');
+            harga_diskon = 0, total = parseInt('{{count($carts) > 0 ? $subtotal : 0}}');
 
         $(function () {
             collapse.on('show.bs.collapse', function () {
@@ -1644,14 +1644,14 @@
                 $(".show-ongkir").text("Rp" + number_format(ongkir, 2, ',', '.'));
                 $(".show-delivery").html(str_etd);
                 $(".show-received").text(moment().add(production_day + parseInt(data.max_day), 'days').format('DD MMM YYYY'));
-                $(".show-total").text("Rp" + number_format(total, 2, ',', '.'));
+                $(".show-total").text("Rp" + number_format(total - parseInt(harga_diskon), 2, ',', '.'));
 
                 $("#form-pembayaran input[name=rate_name]").val(data.name + ' ' + data.rate_name);
                 $("#form-pembayaran input[name=rate_logo]").val(data.logo_url);
                 $("#ongkir").val(ongkir);
                 $("#delivery_duration").val(etd);
                 $("#received_date").val(moment().add(production_day + parseInt(data.max_day), 'days').format('YYYY-MM-DD'));
-                $("#total").val(total);
+                $("#total").val(total - parseInt(harga_diskon));
             }.bind(this), 800);
         }
 
@@ -1721,6 +1721,7 @@
                             resetter();
 
                         } else {
+                            harga_diskon = data.discount_price;
                             $("#promo_code").css('border-color', '#ced4da');
                             $("#error_promo").show().find('b').text(data.caption).css('color', '#f89406');
                             $("#btn_set").removeAttr('disabled');
@@ -1729,7 +1730,7 @@
                             $("#discount b").text(data.str_discount);
                             $(".show-total").text(data.str_total);
                             $("#form-pembayaran input[name=discount]").val(data.discount);
-                            $("#form-pembayaran input[name=discount_price]").val(data.discount_price);
+                            $("#form-pembayaran input[name=discount_price]").val(harga_diskon);
                             $("#form-pembayaran input[name=total]").val(data.total);
                         }
                     },
@@ -1758,10 +1759,11 @@
         });
 
         function resetter() {
+            harga_diskon = 0;
             $("#discount").hide().find('b').text(null);
-            $(".show-total").text('Rp' + number_format(total, 2, ',', '.'));
+            $(".show-total").text('Rp' + number_format(total - parseInt(harga_diskon), 2, ',', '.'));
             $("#form-pembayaran input[name=discount], #form-pembayaran input[name=discount_price]").val(null);
-            $("#form-pembayaran input[name=total]").val(total);
+            $("#form-pembayaran input[name=total]").val(total - parseInt(harga_diskon));
         }
 
         btn_pay.on("click", function () {
