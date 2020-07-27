@@ -163,9 +163,9 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($order as $data)
+        @foreach($user->cart_ids as $data)
             @php
-                $cart = $data->getCart;
+                $cart = \App\Models\Cart::find($data);
                 $product = !is_null($cart->subkategori_id) ? $cart->getSubKategori : $cart->getCluster;
                 $specs = !is_null($cart->subkategori_id) ? $cart->getSubKategori->getSubkatSpecs : $cart->getCluster->getClusterSpecs;
             @endphp

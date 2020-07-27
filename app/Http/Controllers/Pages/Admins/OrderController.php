@@ -24,8 +24,8 @@ class OrderController extends Controller
         $data = PaymentCart::when($request->period, function ($query) use ($request) {
             $query->whereBetween('updated_at', [Carbon::now()->subDay($request->period), Carbon::now()]);
         })->when($request->status, function ($query) use ($request) {
-            $query->where('finish_payment',$request->status);
-        })->distinct('uni_code_payment')->select('uni_code_payment', 'user_id', 'updated_at','finish_payment')->orderBy('updated_at', 'DESC')->get();
+            $query->where('finish_payment', $request->status);
+        })->orderBy('updated_at', 'DESC')->get();
         return view('pages.main.admins.payment', [
             'data' => $data
         ]);
@@ -34,30 +34,43 @@ class OrderController extends Controller
     public function show_order($condition, Request $request)
     {
         $status = '';
+        $payment = PaymentCart::where('uni_code_payment', $condition)->first();
+
+        $order = [];
+        foreach ($payment->cart_ids as $item) {
+            $order_item = \App\Models\Order::whereRaw('SUBSTRING_INDEX(uni_code,"-",-1) = ' . $item)->when($request->status, function ($query) use ($request) {
+                $query->where('progress_status', $request->status);
+            })->when($request->period, function ($query) use ($request) {
+                $query->whereBetween('updated_at', [Carbon::now()->subDay($request->period), Carbon::now()]);
+            })->first();
+            if (!empty($order_item)){
+                $order_item->setAttribute('cart_id', $item);
+            }
+
+            array_push($order, $order_item);
+        }
+
         $data = Order::whereNotIn('id', ['0'])->when($request->status, function ($query) use ($request) {
             $query->where('progress_status', $request->status);
         })->when($request->period, function ($query) use ($request) {
             $query->whereBetween('updated_at', [Carbon::now()->subDay($request->period), Carbon::now()]);
-        })->whereHas('getCart', function ($query) use ($condition) {
-            $query->whereHas('getPayment', function ($query) use ($condition) {
-                $query->where('uni_code_payment', $condition);
-            });
         })->get();
 
         return view('pages.main.admins.order', [
             'title' => 'Order List',
-            'kategori' => $data,
+            'kategori' => $order,
             'status' => $status,
             'code' => $condition
         ]);
     }
 
-    public function order_detail($id)
+    public function order_detail(Request $request)
     {
-        $data = Order::find($id);
+        $data = Cart::find($request->id);
 
-        return view('pages.main.admins.order_detail', [
-            'data' => $data,
+        return view('pages.main.admins._partials.modal.detail_cart', [
+            'cart' => $data,
+            'order' => $request->order_id
         ]);
     }
 
@@ -145,28 +158,27 @@ class OrderController extends Controller
     public function create_pdf(Request $request)
     {
         $filename = $request->code . '.pdf';
-        $data = Order::whereHas('getCart', function ($query) use ($request) {
-            $query->whereHas('getPayment', function ($query) use ($request) {
-                $query->where('uni_code_payment', $request->code);
-            });
-        })->get();
+
+        $payment = \App\Models\PaymentCart::where('uni_code_payment', $request->code)->first();
+
+        $responseDetail = $this->guzzle('GET', '/orders/' . $payment->tracking_id . '?apiKey=' . env('SHIPPER_KEY'), []);
+        $responseDatadetail = json_decode($responseDetail->getBody(), true);
+//        dd($responseDatadetail['data']['order']['detail']['package']);
         $pdf = PDF::loadView('exports.production', [
-            'order' => $data,
             'code' => $request->code
         ]);
 
         Storage::put('public/users/order/invoice/owner/' . $filename, $pdf->output());
 
 
-        foreach ($data as $item) { //create PDF for Shipping Label
-            $labelname = $item->uni_code . '.pdf';
-            $labelPdf = PDF::loadView('exports.shipping', [
-                'code' => $request->code,
-                'order' => $item
-            ]);
-            $labelPdf->setPaper('a5','landscape');
-            Storage::put('public/users/order/invoice/owner/prodution/' . $request->code . '/' . $labelname, $labelPdf->output());
-        }
+        $labelname = $payment->uni_code_payment . '.pdf';
+        $labelPdf = PDF::loadView('exports.shipping', [
+            'data' => $payment,
+            'detail' => $responseDatadetail['data']['order']
+        ]);
+        $labelPdf->setPaper('a5', 'potrait');
+        Storage::put('public/users/order/invoice/owner/prodution/' . $request->code . '/' . $labelname, $labelPdf->output());
+
 
         return response()->json([
             'message' => 'PDF Created'
@@ -185,8 +197,22 @@ class OrderController extends Controller
             return Response::download($file_path, 'Production_' . $filename, [
                 'Content-length : ' . filesize($file_path)
             ]);
+        } else {
+            return \response()->json([
+                'message' => "Oops! The current file you are looking for is not available "
+            ], 404);
         }
-        else {
+    }
+
+    public function download_shipping(Request $request)
+    {
+        $filename = $request->code . '.pdf';
+        $file_path = storage_path('app/public/users/order/invoice/owner/prodution/' . $request->code.'/'.$filename);
+        if (file_exists($file_path)) {
+            return Response::download($file_path, 'Shipping_Label_' . $filename, [
+                'Content-length : ' . filesize($file_path)
+            ]);
+        } else {
             return \response()->json([
                 'message' => "Oops! The current file you are looking for is not available "
             ], 404);
@@ -196,7 +222,7 @@ class OrderController extends Controller
     public function download_invoice(Request $request)
     {
         $filename = $request->code . '.pdf';
-        $file_path =  storage_path('app/public/users/order/invoice/' . $request->user_id . '/' . $filename);
+        $file_path = storage_path('app/public/users/order/invoice/' . $request->user_id . '/' . $filename);
         if (file_exists($file_path)) {
             return Response::download($file_path, 'Invoice_' . $filename, [
                 'Content-length : ' . filesize($file_path)
@@ -208,17 +234,32 @@ class OrderController extends Controller
         }
     }
 
-    public function shipping()
+    public function shipping($code)
     {
-        $code = 'PYM5EE6262B5F30D1592141355';
+        $payment = \App\Models\PaymentCart::where('uni_code_payment', $code)->first();
 
-        $data = Order::whereHas('getCart', function ($query) use ($code) {
-            $query->whereHas('getPayment', function ($query) use ($code) {
-                $query->where('uni_code_payment', $code);
-            });
-        })->get();
+        $responseDetail = $this->guzzle('GET', '/orders/' . $payment->tracking_id . '?apiKey=' . env('SHIPPER_KEY'), []);
+        $responseDatadetail = json_decode($responseDetail->getBody(), true);
+//        dd($responseDatadetail['data']['order']);
         return view('exports.shipping', [
-            'data' => $data
+            'data' => $payment,
+            'detail' => $responseDatadetail['data']['order']
         ]);
+    }
+
+    function guzzle($method, $url, $form)
+    {
+        $base_url = env('SHIPPER_BASE_URL');
+        $client = new \GuzzleHttp\Client();
+        $response = $client->request($method, $base_url . $url, [
+            'headers' => [
+                'Accept' => 'application/json',
+//                'Content-Type' => 'application/json',
+                'User-Agent' => 'Shipper/',
+            ],
+            'form_params' => $form
+        ]);
+
+        return $response;
     }
 }

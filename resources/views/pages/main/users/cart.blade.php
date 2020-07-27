@@ -339,7 +339,7 @@
                                                                         if ($width < $specs->width){
                                                                             $width = $specs->width;
                                                                         }
-                                                                        $height += $specs->height;
+                                                                        $height = $height + $specs->height * $row->qty;
                                                                     @endphp
                                                                     <div class="media">
                                                                         <div data-placement="bottom"

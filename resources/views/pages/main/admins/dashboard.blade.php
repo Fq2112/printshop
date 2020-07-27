@@ -753,7 +753,7 @@
                             $total = 0;
                             $visitors = \App\Models\PaymentCart::whereMonth('created_at',$i)->get();
                             foreach ($visitors as $row){
-                                $total += $row->getCart->total;
+
                             }
                         @endphp
                         {{$total}},
