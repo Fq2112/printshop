@@ -161,32 +161,15 @@ class OrderController extends Controller
 
         $payment = \App\Models\PaymentCart::where('uni_code_payment', $request->code)->first();
 
-        $responseDetail = $this->guzzle('GET', '/orders/' . $payment->tracking_id . '?apiKey=' . env('SHIPPER_KEY'), []);
-        $responseDatadetail = json_decode($responseDetail->getBody(), true);
-//        dd($responseDatadetail['data']['order']['detail']['package']);
         $pdf = PDF::loadView('exports.production', [
             'code' => $request->code
         ]);
 
         Storage::put('public/users/order/invoice/owner/' . $filename, $pdf->output());
 
-
-        $labelname = $payment->uni_code_payment . '.pdf';
-        $labelPdf = PDF::loadView('exports.shipping', [
-            'data' => $payment,
-            'detail' => $responseDatadetail['data']['order']
-        ]);
-        $labelPdf->setPaper('a5', 'potrait');
-        Storage::put('public/users/order/invoice/owner/prodution/' . $request->code . '/' . $labelname, $labelPdf->output());
-
-
         return response()->json([
             'message' => 'PDF Created'
         ], 201);
-//        $file_path = asset('storage/users/order/invoice/owner/' .$filename);
-//        return response()->download($file_path, 'Production_'.$filename, [
-//            'Content-length : ' . filesize($file_path)
-//        ]);
     }
 
     public function download_production(Request $request)

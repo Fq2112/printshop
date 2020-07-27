@@ -69,6 +69,18 @@
 
                     </tr>
                 @endforeach
+                <tr>
+                    <td colspan="3" align="right"><strong>Expedition</strong> : </td>
+                    <td ><img src="{{asset($payment->rate_logo)}}" alt="" width="50px"> </td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="right"><strong>Expedition type</strong> : </td>
+                    <td > {{$payment->rate_name}} </td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="right"><strong>Shipping Cost</strong> : </td>
+                    <td ><strong> {{number_format($payment->ongkir)}}</strong> </td>
+                </tr>
                 </tbody>
             </table>
         </div>

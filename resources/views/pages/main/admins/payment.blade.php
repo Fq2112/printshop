@@ -176,7 +176,7 @@
                                         <th class="text-center">ID</th>
                                         <th width="15%">Code</th>
                                         <th width="15%">Customer</th>
-                                        <th width="15%">Phone</th>
+                                        <th width="15%"> <center>Courier</center></th>
                                         <th class="text-center" width="10%">Order date</th>
                                         <th class="text-center" width="10%">Payment</th>
                                         <th class="text-center" width="10%">Shipper</th>
@@ -199,8 +199,13 @@
                                             </td>
                                             <td class="text-center">ID</td>
                                             <td width="15%">{{ucfirst($item->uni_code_payment)}}</td>
-                                            <td width="15%">{{$item->getUser->name}}</td>
-                                            <td width="15%">{{$item->getUser->getBio->phone}}</td>
+                                            <td width="15%">{{$item->getUser->name}} <br>
+                                            ( {{$item->getUser->getBio->phone}} )
+                                            </td>
+                                            <td width="15%" align="center">
+                                                <img src="{{asset($item->rate_logo)}}" alt="" width="50px"> <br>
+                                                {{$item->rate_name}}
+                                            </td>
 
                                             <td class="text-center" width="10%">{{$item->updated_at}}</td>
                                             <td class="text-center" width="10%">
@@ -235,7 +240,7 @@
                                                 @if($item->finish_payment == 1)
                                                     <div class="btn-group">
                                                         @if($item->tracking_id == null)
-                                                            <button type="button" class="btn btn-primary"
+                                                            <button type="button" class="btn btn-danger"
                                                                     data-toggle="tooltip"
                                                                     onclick="openModal('{{ucfirst($item->uni_code_payment)}}','{{route('admin.shipper.modal.create')}}','Create Data to Shipper')"
                                                                     title="Create to Shipper" data-html="true"
@@ -590,7 +595,7 @@
                     code: code
                 },
                 success: function (data) {
-                    /*
+
                     setTimeout(
                         function () {
                             $.ajax({ //Download File from above
@@ -612,7 +617,7 @@
                         function () {
                             location.reload();
                         }, 5000);
-                        */
+
 
                 }, error: function (xhr, ajaxOptions, thrownError) {
                     if (xhr.status == 500) {

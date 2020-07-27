@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pages\Admins;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\PaymentCart;
+use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Egulias\EmailValidator\Exception\ExpectingQPair;
 use GuzzleHttp\Exception\BadResponseException;
@@ -12,6 +13,7 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use PHPMailer\PHPMailer\Exception;
 use GuzzleHttp\Client;
 
@@ -95,6 +97,8 @@ class ShipperController extends Controller
 
             ];
 
+
+
             $response = $this->guzzle('POST', '/orders/domestics?apiKey=' . env('SHIPPER_KEY'), $form);
             $ersponseData = json_decode($response->getBody(), true);
 
@@ -108,11 +112,23 @@ class ShipperController extends Controller
 
             $ActiveresponseData = json_decode($Activeresponse->getBody(), true);
 
+            $responseDetail = $this->guzzle('GET', '/orders/' . $responseDataTracking['data']['id'] . '?apiKey=' . env('SHIPPER_KEY'), []);
+            $responseDatadetail = json_decode($responseDetail->getBody(), true);
+
             $data->update([
                 'shipping_id' => $ersponseData['data']['id'],
                 'tracking_id' => $responseDataTracking['data']['id'],
                 'isActive' => true
             ]);
+
+            $labelname = $data->uni_code_payment . '.pdf';
+            $labelPdf = PDF::loadView('exports.shipping', [
+                'data' => $data,
+                'detail' => $responseDatadetail['data']['order']
+            ]);
+            $labelPdf->setPaper('a5', 'potrait');
+            Storage::put('public/users/order/invoice/owner/prodution/' . $data->uni_code_payment . '/' . $labelname, $labelPdf->output());
+
 
             return back()->with('success', $ersponseData['data']['content'] . " & " . $ActiveresponseData['data']['message']);
         } catch (Exception $exception) {
