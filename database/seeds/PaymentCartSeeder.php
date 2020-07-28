@@ -47,7 +47,7 @@ class PaymentCartSeeder extends Seeder
             $height_subkat = $height_subkat + $item->getSubKategori->getSubkatSpecs->height * $item->qty;
         }
 
-        $response_subkat = $client->get('https://sandbox-api.shipper.id/public/v1/domesticRates?apiKey=' .
+        $response_subkat = $client->get(env('SHIPPER_BASE_URL') . '/domesticRates?apiKey=' .
             env('SHIPPER_KEY') . '&o=30149&originCoord=-7.250445,112.768845' .
             '&d=' . $address->area_id . '&destinationCoord=' . $address->lat . ',' . $address->long .
             '&wt=' . $weight_subkat . '&v=' . $carts_subkat->sum('total') .
@@ -112,7 +112,7 @@ class PaymentCartSeeder extends Seeder
             $height_clust = $height_clust + $item->getCluster->getClusterSpecs->height * $item->qty;
         }
 
-        $response_clust = $client->get('https://sandbox-api.shipper.id/public/v1/domesticRates?apiKey=' .
+        $response_clust = $client->get(env('SHIPPER_BASE_URL') . '/domesticRates?apiKey=' .
             env('SHIPPER_KEY') . '&o=30149&originCoord=-7.250445,112.768845' .
             '&d=' . $address->area_id . '&destinationCoord=' . $address->lat . ',' . $address->long .
             '&wt=' . $weight_clust . '&v=' . $carts_clust->sum('total') .
