@@ -47,6 +47,12 @@
         <div class="section-body">
             <div class="row">
                 <div class="col-12">
+                    <a href="{{ url()->previous() }}" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i>
+                        BACK </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-body">
                             <form action="{{route('admin.order.user',['kode'=>$code])}}"
@@ -101,14 +107,6 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        {{--                        <div class="card-header">--}}
-                        {{--                            <div class="card-header-form">--}}
-                        {{--                                --}}{{--                                <button id="btn_create" class="btn btn-primary text-uppercase">--}}
-                        {{--                                --}}{{--                                    <strong><i class="fas fa-plus mr-2"></i>Create</strong>--}}
-                        {{--                                --}}{{--                                </button>--}}
-                        {{--                            </div>--}}
-                        {{--                        </div>--}}
-
                         <div class="card-body">
                             <div id="content1" class="table-responsive">
                                 <table class="table table-striped" id="dt-buttons">
@@ -122,16 +120,10 @@
                                         </th>
                                         <th class="text-center">ID</th>
 
-                                        <th width="15%">Customer</th>
-                                        <th width="15%">Phone</th>
                                         <th width="20%">Product</th>
-                                        <th width="20%">Shipping</th>
                                         <th>Qty (pcs)</th>
-                                        @if($status == \App\Support\StatusProgress::RECEIVED)
-                                            <th class="text-center" width="10%">Received date</th>
-                                        @else
-                                            <th class="text-center" width="10%">Target finish</th>
-                                        @endif
+
+
                                         <th class="text-center" width="15%">Status</th>
                                         <th width="25%">Action</th>
                                     </tr>
@@ -139,87 +131,84 @@
                                     <tbody>
                                     @php $no = 1; @endphp
                                     @foreach($kategori as $row)
-                                        <tr>
-                                            <td style="vertical-align: middle" align="center">
-                                                <div class="custom-checkbox custom-control">
-                                                    <input type="checkbox" id="cb-{{$row->id}}"
-                                                           class="custom-control-input dt-checkboxes">
-                                                    <label for="cb-{{$row->id}}"
-                                                           class="custom-control-label">{{$no++}}</label>
-                                                </div>
-                                            </td>
-                                            <td style="vertical-align: middle" align="center">{{$row->id}}</td>
-                                            {{--                                            <td style="vertical-align: middle">--}}
-                                            {{--                                                <strong>{{$row->getCart->getPayment->uni_code_payment}}</strong>--}}
-                                            {{--                                            </td>--}}
-                                            <td style="vertical-align: middle">
-                                                <strong>{{$row->getCart->getUser->name}}</strong>
-                                            </td>
-                                            <td style="vertical-align: middle">
-                                                <strong>{{$row->getCart->getUser->getBio->phone}}</strong>
-                                            </td>
-                                            <td style="vertical-align: middle">
-                                                @if(!empty($row->getCart->subkategori_id))
-                                                    {{$row->getCart->getSubKategori->name}}
-                                                @elseif(!empty($row->getCart->cluster_id))
-                                                    {{$row->getCart->getCluster->name}}
-                                                @endif
+                                        @if(!empty($row->cart_id))
+                                            <?php
+                                            $cart = \App\Models\Cart::find($row->cart_id);
+                                            ?>
+                                            <tr>
+                                                <td style="vertical-align: middle" align="center">
+                                                    <div class="custom-checkbox custom-control">
+                                                        <input type="checkbox" id="cb-{{$row->id}}"
+                                                               class="custom-control-input dt-checkboxes">
+                                                        <label for="cb-{{$row->id}}"
+                                                               class="custom-control-label">{{$no++}}</label>
+                                                    </div>
+                                                </td>
+                                                <td style="vertical-align: middle" align="center">{{$row->id}}</td>
+                                                {{--                                            <td style="vertical-align: middle">--}}
+                                                {{--                                                <strong>{{$row->getCart->getPayment->uni_code_payment}}</strong>--}}
+                                                {{--                                            </td>--}}
+                                                <td style="vertical-align: middle">
 
-                                            </td>
-                                            <td style="vertical-align: middle">
-                                                {{$row->getCart->getAddress->address}}
-                                            </td>
-
-                                            <td style="vertical-align: middle">
-                                                {{$row->getCart->qty}}
-                                            </td>
-
-
-                                            <td style="vertical-align: middle" align="center">
-                                                @if($status == \App\Support\StatusProgress::RECEIVED)
-                                                    {{\Carbon\Carbon::parse($row->getCart->received_date)->format('j F Y')}}
-                                                @else
-                                                    {{\Carbon\Carbon::parse($row->getCart->production_finished)->format('j F Y')}}
-                                                @endif
-                                            </td>
-                                            <td style="vertical-align: middle" align="center">
-                                                @if($row->progress_status == \App\Support\StatusProgress::NEW)
-                                                    <span class="badge badge-info"><span
-                                                            class="fa fa-shopping-basket"></span> New</span>
-                                                @elseif($row->progress_status == \App\Support\StatusProgress::START_PRODUCTION || $row->progress_status == \App\Support\StatusProgress::FINISH_PRODUCTION)
-                                                    <span class="badge badge-warning"><span class="fa fa-cogs"></span> On Produce</span>
-                                                @elseif($row->progress_status == \App\Support\StatusProgress::SHIPPING)
-                                                    <span class="badge badge-info"><span
-                                                            class="fa fa-shipping-fast"></span>  Shipping</span>
-                                                @elseif($row->progress_status == \App\Support\StatusProgress::RECEIVED)
-                                                    <span class="badge badge-success"><span
-                                                            class="fa fa-clipboard-check"></span>  Received</span>
-                                                @endif
-                                            </td>
-                                            <td style="vertical-align: middle" align="center">
-                                                <div class="btn-group">
-                                                    <?php
-                                                    $file = storage_path('app/public/users/order/invoice/owner/prodution/' . $code . '/' . $row->uni_code . '.pdf');
-                                                    ?>
-                                                    @if(file_exists($file))
-                                                        <a href="{{asset('storage/users/order/invoice/owner/prodution/' . $code . '/' . $row->uni_code . '.pdf')}}"
-                                                           data-placement="right" data-toggle="tooltip"
-                                                           title="Download Shipping Label"
-                                                           type="button" class="btn btn-danger">
-
-                                                            <i class="fa fa-file-download   "></i>
-                                                        </a>
+                                                    @if(!empty($cart->subkategori_id))
+                                                        {{$cart->getSubKategori->name}}
+                                                    @elseif(!empty($cart->cluster_id))
+                                                        {{$cart->getCluster->name}}
                                                     @endif
-                                                    <a href="{{route('get.order.detail',['id' => $row->id])}}"
-                                                       data-placement="top" data-toggle="tooltip"
-                                                       title="Detail Info"
-                                                       type="button" class="btn btn-info">
 
-                                                        <i class="fa fa-info-circle"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+
+                                                <td style="vertical-align: middle">
+                                                    {{$cart->qty}}
+                                                </td>
+
+
+
+                                                <td style="vertical-align: middle" align="center">
+                                                    @if($row->progress_status == \App\Support\StatusProgress::NEW)
+                                                        <span class="badge badge-info"><span
+                                                                class="fa fa-shopping-basket"></span> New</span>
+                                                    @elseif($row->progress_status == \App\Support\StatusProgress::START_PRODUCTION || $row->progress_status == \App\Support\StatusProgress::FINISH_PRODUCTION)
+                                                        <span class="badge badge-warning"><span class="fa fa-cogs"></span> On Produce</span>
+                                                    @elseif($row->progress_status == \App\Support\StatusProgress::SHIPPING)
+                                                        <span class="badge badge-info"><span
+                                                                class="fa fa-shipping-fast"></span>  Shipping</span>
+                                                    @elseif($row->progress_status == \App\Support\StatusProgress::RECEIVED)
+                                                        <span class="badge badge-success"><span
+                                                                class="fa fa-clipboard-check"></span>  Received</span>
+                                                    @endif
+                                                </td>
+                                                <td style="vertical-align: middle" align="center">
+                                                    <div class="btn-group">
+
+                                                        @if($cart->link != null || $cart->link != '')
+                                                            <a href="{{$cart->link}}" target="_blank"
+                                                               class="btn btn-primary">
+                                                                <i class="fa fa-link"></i> DOWNLOAD
+                                                            </a>
+                                                        @endif
+                                                        @if($cart->file != null || $cart->file != '')
+                                                            <a class="btn btn-primary"
+                                                               href="{{route('admin.order.download',['id'=>encrypt($cart->id)])}}">
+                                                                <i class="fa fa-file-download"></i> DOWNLOAD
+                                                            </a>
+                                                        @endif
+                                                        <a href="javascript:void(0)"
+                                                           onclick="openModal('{{$cart->id}}','{{route('get.order.detail')}}',' @if(!empty($cart->subkategori_id))\n'+
+                                                               '                                                    {{$cart->getSubKategori->name}}\n'+
+                                                               '                                                @elseif(!empty($cart->cluster_id))\n'+
+                                                               '                                                    {{$cart->getCluster->name}}\n'+
+                                                               '                                                @endif','{{$row->id}}')"
+                                                           data-placement="top" data-toggle="tooltip"
+                                                           title="Detail Info"
+                                                           type="button" class="btn btn-info">
+
+                                                            <i class="fa fa-info-circle"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endif
                                     @endforeach
                                     </tbody>
                                 </table>
@@ -230,84 +219,6 @@
                                 <form method="post" id="form-mass">
                                     {{csrf_field()}}
                                     <input type="hidden" name="post_ids">
-                                </form>
-                            </div>
-
-                            <div id="content2" style="display: none;">
-                                <form id="form-blogPost" method="post" action="{{route('add.promo')}}"
-                                      enctype="multipart/form-data">
-                                    {{csrf_field()}}
-                                    <input type="hidden" name="_method">
-                                    <input type="hidden" name="id">
-                                    <input type="hidden" name="admin_id">
-
-                                    <div class="row form-group">
-                                        <div class="col has-feedback">
-                                            <label for="title">Promo Code</label>
-                                            <input id="promo_code" type="text" maxlength="191" name="promo_code"
-                                                   class="form-control"
-                                                   placeholder="Write its promo code here&hellip;" required>
-                                            <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="row form-group has-feedback">
-                                        <div class="col">
-                                            <label for="_content">Description</label>
-                                            <textarea id="description" type="text" name="description"
-                                                      class="summernote form-control"
-                                                      placeholder="Write something about your post here&hellip;"></textarea>
-                                            <span class="glyphicon glyphicon-text-height form-control-feedback"></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="row form-group">
-                                        <div class="col">
-                                            <label for="thumbnail">Start</label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                                </div>
-                                                <input type="date" name="start" class="form-control"
-                                                       onblur="set_end_date(this.value)"
-                                                       id="start-date" required>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <label for="thumbnail">End</label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                                </div>
-                                                <input type="date" name="end" class="form-control"
-                                                       id="end-date" required>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row form-group">
-                                        <div class="col-6 has-feedback">
-                                            <label for="title">Amount of Discount</label>
-                                            <div class="input-group mb-2">
-                                                <input id="discount" type="number" name="discount" max="99" min="1"
-                                                       class="form-control"
-                                                       placeholder="1xxxxxx" required>
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">%</div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="row form-group">
-                                        <div class="col">
-                                            <button type="submit" class="btn btn-primary btn-block text-uppercase"
-                                                    style="font-weight: 900">Submit
-                                            </button>
-                                        </div>
-                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -336,11 +247,6 @@
                         {targets: 1, visible: false, searchable: false}
                     ],
                     buttons: [
-                        {
-                            text: '<strong class="text-uppercase"><i class="fa fa-file-pdf mr-2"></i>Generate</strong>',
-
-                            className: 'btn btn-danger assets-select-btn export-print generate'
-                        },
                         {
                             text: '<strong class="text-uppercase"><i class="far fa-clipboard mr-2"></i>Copy</strong>',
                             extend: 'copy',
@@ -446,6 +352,21 @@
         $('#status').val('{{ request()->get('status') }}');
 
         @endif
+
+        function openModal(code, url_action, title,order_id) {
+            console.log(code);
+            $.post(url_action, {
+                    _token: '{{csrf_token()}}',
+                    id: code,
+                    order_id : order_id
+                },
+                function (data) {
+                    $('#customModalbody').html(data);
+                });
+            $('#payment_code').val(code);
+            $('#customModalTitle').text("Detail " + title);
+            $('#customModal').modal({backdrop: 'static', keyboard: false})
+        }
 
         function get_design(code) {
             $.ajax({

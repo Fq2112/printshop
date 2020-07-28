@@ -121,7 +121,7 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             'as' => 'admin.order.user'
         ]);
 
-        Route::get('detail/{id}', [
+        Route::post('detail', [
             'uses' => 'OrderController@order_detail',
             'as' => 'get.order.detail'
         ]);
@@ -171,10 +171,37 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             'as' => 'admin.order.production.download'
         ]);
 
-        Route::get('shipping', [
+        Route::get('shipping/{code}', [
             'uses' => 'OrderController@shipping',
             'as' => 'admin.order.shipping'
         ]);
+        Route::get('shipping/', [
+            'uses' => 'OrderController@download_shipping',
+            'as' => 'admin.order.shipping'
+        ]);
+        Route::group(['prefix' => 'shipper'], function () {
+
+            Route::post('modal', [
+                'uses' => 'ShipperController@showModal',
+                'as' => 'admin.shipper.modal.create'
+            ]);
+
+            Route::post('create', [
+                'uses' => 'ShipperController@postOrder',
+                'as' => 'admin.shipper.create.order'
+            ]);
+
+            Route::post('agents', [
+                'uses' => 'ShipperController@getAgents',
+                'as' => 'admin.shipper.modal.agents'
+            ]);
+
+            Route::post('create/pickup', [
+                'uses' => 'ShipperController@postPickup',
+                'as' => 'admin.shipper.create.pickup'
+            ]);
+        });
+
     });
 
     Route::group(['prefix' => 'inbox', 'middleware' => 'owner'], function () {

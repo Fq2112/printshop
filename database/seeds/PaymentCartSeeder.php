@@ -44,7 +44,7 @@ class PaymentCartSeeder extends Seeder
             if ($width_subkat < $item->getSubKategori->getSubkatSpecs->width) {
                 $width_subkat = $item->getSubKategori->getSubkatSpecs->width;
             }
-            $height_subkat += $item->getSubKategori->getSubkatSpecs->height;
+            $height_subkat = $height_subkat + $item->getSubKategori->getSubkatSpecs->height * $item->qty;
         }
 
         $response_subkat = $client->get('https://sandbox-api.shipper.id/public/v1/domesticRates?apiKey=' .
@@ -109,7 +109,7 @@ class PaymentCartSeeder extends Seeder
             if ($width_clust < $item->getCluster->getClusterSpecs->width) {
                 $width_clust = $item->getCluster->getClusterSpecs->width;
             }
-            $height_clust += $item->getCluster->getClusterSpecs->height;
+            $height_clust = $height_clust + $item->getCluster->getClusterSpecs->height * $item->qty;
         }
 
         $response_clust = $client->get('https://sandbox-api.shipper.id/public/v1/domesticRates?apiKey=' .

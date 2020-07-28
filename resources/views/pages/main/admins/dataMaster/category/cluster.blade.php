@@ -687,6 +687,30 @@
                                                         <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
                                                     </div>
                                                 </div>
+
+                                                <div class="row form-group">
+                                                    <div class="col-4 has-feedback">
+                                                        <label for="title">Length (in Centimeter)</label>
+                                                        <input id="length_inp" type="number" maxlength="191" name="length"
+                                                               class="form-control"
+                                                               placeholder="Write its price here&hellip;">
+                                                        <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
+                                                    </div>
+                                                    <div class="col-4 has-feedback">
+                                                        <label for="title">Width (in Centimeter)</label>
+                                                        <input id="width_inp" type="number" maxlength="191" name="width"
+                                                               class="form-control"
+                                                               placeholder="Write its price here&hellip;">
+                                                        <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
+                                                    </div>
+                                                    <div class="col-4 has-feedback">
+                                                        <label for="title">Height (in Centimeter)</label>
+                                                        <input id="height_inp" type="number" maxlength="191" name="height"
+                                                               class="form-control"
+                                                               placeholder="Write its price here&hellip;">
+                                                        <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -885,6 +909,9 @@
             $('#print_method_id').selectpicker('val', null);
             $('#price').val(null);
             $('#weight').val(null);
+            $('#length_inp').val(null);
+            $('#width_inp').val(null);
+            $('#height_inp').val(null);
         }
 
         function editBlogCategory(id, name, name_id, caption) {
@@ -954,6 +981,9 @@
                     $('#print_method_id').selectpicker('val', data.detail.print_method_ids);
                     $('#price').val(data.detail.price);
                     $('#weight').val(data.detail.weight);
+                    $('#length_inp').val(data.detail.length);
+                    $('#width_inp').val(data.detail.width);
+                    $('#height_inp').val(data.detail.height);
                     $("#advance_check").show();
                 }
 

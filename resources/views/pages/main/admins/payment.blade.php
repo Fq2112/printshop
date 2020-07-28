@@ -31,6 +31,67 @@
             padding: 1rem !important;
             border-top: 1px solid #e9ecef !important;
         }
+
+        label {
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        .card-input-element + .card {
+            height: calc(45px + 2 * 1rem);
+            color: var(--primary);
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            border: 2px solid transparent;
+            border-radius: 4px;
+        }
+
+        .card-input-element + .card:hover {
+            cursor: pointer;
+        }
+
+        .card-input-element:checked + .card {
+            border: 2px solid #f89406;
+            -webkit-transition: border .3s;
+            -o-transition: border .3s;
+            transition: border .3s;
+        }
+
+        .card-input-element:checked + .card::after {
+            font-family: "Font Awesome 5 Free";
+            content: "\f14a";
+            color: #f89406;
+            font-size: 24px;
+            -webkit-animation-name: fadeInCheckbox;
+            animation-name: fadeInCheckbox;
+            -webkit-animation-duration: .5s;
+            animation-duration: .5s;
+            -webkit-animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @-webkit-keyframes fadeInCheckbox {
+            from {
+                opacity: 0;
+                -webkit-transform: rotateZ(-20deg);
+            }
+            to {
+                opacity: 1;
+                -webkit-transform: rotateZ(0deg);
+            }
+        }
+
+        @keyframes fadeInCheckbox {
+            from {
+                opacity: 0;
+                transform: rotateZ(-20deg);
+            }
+            to {
+                opacity: 1;
+                transform: rotateZ(0deg);
+            }
+        }
+
     </style>
 @endpush
 @section('content')
@@ -115,9 +176,10 @@
                                         <th class="text-center">ID</th>
                                         <th width="15%">Code</th>
                                         <th width="15%">Customer</th>
-                                        <th width="15%">Phone</th>
+                                        <th width="15%"> <center>Courier</center></th>
                                         <th class="text-center" width="10%">Order date</th>
-                                        <th class="text-center" width="10%">Status</th>
+                                        <th class="text-center" width="10%">Payment</th>
+                                        <th class="text-center" width="10%">Shipper</th>
                                         <th width="25%" align="center">
                                             <center>Action</center>
                                         </th>
@@ -137,15 +199,38 @@
                                             </td>
                                             <td class="text-center">ID</td>
                                             <td width="15%">{{ucfirst($item->uni_code_payment)}}</td>
-                                            <td width="15%">{{$item->getUser->name}}</td>
-                                            <td width="15%">{{$item->getUser->getBio->phone}}</td>
+                                            <td width="15%">{{$item->getUser->name}} <br>
+                                            ( {{$item->getUser->getBio->phone}} )
+                                            </td>
+                                            <td width="15%" align="center">
+                                                <img src="{{asset($item->rate_logo)}}" alt="" width="50px"> <br>
+                                                {{$item->rate_name}}
+                                            </td>
 
                                             <td class="text-center" width="10%">{{$item->updated_at}}</td>
                                             <td class="text-center" width="10%">
                                                 @if($item->finish_payment == 1)
-                                                    <div class="badge badge-success">Paid</div>
+                                                    <div class="badge badge-success" data-placement="top"
+                                                         data-toggle="tooltip"
+                                                         title="Paid"><i class="fa fa-check"></i></div>
                                                 @else
-                                                    <div class="badge badge-warning">Unpaid</div>
+                                                    <div class="badge badge-danger" data-placement="top"
+                                                         data-toggle="tooltip"
+                                                         title="Unpaid"><i class="fa fa-window-close"></i></div>
+                                                @endif
+                                            </td>
+                                            <td class="text-center" width="10%">
+                                                @if($item->tracking_id == null | $item->tracking_id == "")
+
+                                                    <div class="badge badge-danger" data-placement="top"
+                                                         data-toggle="tooltip"
+                                                         title="Not Connected with Shipper Yet"><i
+                                                            class="fa fa-window-close"></i></div>
+                                                @else
+                                                    <div class="badge badge-success" data-placement="top"
+                                                         data-toggle="tooltip"
+                                                         title="Connected With Shipper"><i class="fa fa-check"></i>
+                                                    </div>
                                                 @endif
                                             </td>
                                             <td width="25%" align="center">
@@ -154,7 +239,58 @@
                                                 ?>
                                                 @if($item->finish_payment == 1)
                                                     <div class="btn-group">
-                                                        <button type="button" class="btn btn-primary"
+                                                        @if($item->tracking_id == null)
+                                                            <button type="button" class="btn btn-danger"
+                                                                    data-toggle="tooltip"
+                                                                    onclick="openModal('{{ucfirst($item->uni_code_payment)}}','{{route('admin.shipper.modal.create')}}','Create Data to Shipper')"
+                                                                    title="Create to Shipper" data-html="true"
+                                                                    data-placement="top"><i
+                                                                    class="fa fa-shipping-fast"></i>
+                                                            </button>
+                                                        @else
+                                                            @if($item->agent_id == null)
+                                                            <!--button type="button" class="btn btn-primary"
+                                                                        data-toggle="tooltip"
+                                                                        onclick="openModal('{{ucfirst($item->uni_code_payment)}}','{{route('admin.shipper.modal.agents')}}','Get Agents')"
+                                                                        title="Set Pickup Order" data-html="true"
+                                                                        data-placement="top"><i
+                                                                        class="fa fa-calendar"></i>
+                                                                </button-->
+                                                            @else
+                                                            @endif
+                                                        @endif
+
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-primary dropdown-toggle"
+                                                                    type="button" id="dropdownMenuButton"
+                                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                                    aria-expanded="false"><i
+                                                                    class="fa fa-file-download"></i>
+                                                                Download
+                                                            </button>
+                                                            <div class="dropdown-menu"
+                                                                 aria-labelledby="dropdownMenuButton">
+                                                                <a class="dropdown-item" href="javascript:void(0)"
+                                                                   onclick="getInvoice('{{$item->getUser->id}}','{{ucfirst($item->uni_code_payment)}}')">Invoice</a>
+                                                                <a class="dropdown-item" href="javascript:void(0)"
+                                                                   onclick=" get_design('{{ucfirst($item->uni_code_payment)}}')">Production
+                                                                    Summary</a>
+                                                                <a class="dropdown-item"
+                                                                   href="{{route('admin.order.shipping',['code' =>$item->uni_code_payment])}}"
+                                                                   target="_blank" style="display: none">Shipping
+                                                                    Label Test</a>
+                                                                <?php
+                                                                $file_path = storage_path('app/public/users/order/invoice/owner/prodution/' . $item->uni_code_payment . '/' . $item->uni_code_payment . '.pdf');
+                                                                ?>
+                                                                @if(file_exists($file_path))
+                                                                    <a class="dropdown-item" href="javascript:void(0)"
+                                                                       onclick="get_shipping('{{ucfirst($item->uni_code_payment)}}')">Shipping
+                                                                        Label</a>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                        <button type="button" class="btn btn-primary "
+                                                                style="display: none"
                                                                 data-toggle="popover" data-trigger="focus"
                                                                 title="{{count($order)}} Items" data-html="true"
                                                                 data-placement="left" data-content='
@@ -199,12 +335,7 @@
                                                             '>
                                                             <i class="fa fa-tag"></i>
                                                         </button>
-                                                        <button type="button" class="btn btn-danger"
-                                                                data-toggle="tooltip"
-                                                                onclick="getInvoice('{{$item->getUser->id}}','{{ucfirst($item->uni_code_payment)}}')"
-                                                                title="Download Invoice" data-html="true"
-                                                                data-placement="top"><i class="fa fa-file-pdf"></i>
-                                                        </button>
+
                                                         <a href="{{route('admin.order.user',['kode'=>$item->uni_code_payment])}}"
                                                            data-placement="right" data-toggle="tooltip"
                                                            title="Detail Info" type="button" class="btn btn-info">
@@ -241,66 +372,7 @@
         </div>
     </section>
 
-    <div class="modal fade " id="blogCategoryModal" tabindex="-1" role="dialog"
-         aria-labelledby="blogCategoryModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document" style="width: 100%">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Create Form</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form id="form-blogCategory" method="post" action="{{route('admin.add')}}">
-                    {{csrf_field()}}
-                    <input type="hidden" name="_method">
-                    <input type="hidden" name="id">
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col">
-                                <label for="name">Name <sup class="text-danger">*</sup></label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                    </div>
-                                    <input id="name" type="text" maxlength="191" name="name" class="form-control"
-                                           placeholder="Write its name here&hellip;" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label for="name">Username <sup class="text-danger">*</sup></label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                    </div>
-                                    <input id="name_id" type="text" maxlength="191" name="username" class="form-control"
-                                           placeholder="Write its name here&hellip;" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label for="name">email <sup class="text-danger">*</sup></label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-                                    </div>
-                                    <input id="name_id" type="email" maxlength="191" name="email" class="form-control"
-                                           placeholder="Write its name here&hellip;" required>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+
 @endsection
 @push("scripts")
     <script src="{{asset('admins/modules/datatables/datatables.min.js')}}"></script>
@@ -413,6 +485,25 @@
                 });
         });
 
+        function openModal(code, url_action, title) {
+            console.log(code);
+            $.post(url_action, {
+                    _token: '{{csrf_token()}}',
+                    code: code
+                },
+                function (data) {
+                    $('#customModalbody').html(data);
+                });
+            $('#payment_code').val(code);
+            $('#customModalTitle').text(title);
+            $('#customModal').modal({backdrop: 'static', keyboard: false})
+        }
+
+        function getPhoneAgent(phone, name) {
+            $("#agent_name").val(name);
+            $("#agent_phone").val(phone);
+        }
+
         function getInvoice(user_id, code) {
             $.ajax({
                 type: 'post',
@@ -421,6 +512,28 @@
                     _token: '{{csrf_token()}}',
                     code: code,
                     user_id: user_id
+                },
+                success: function (data) {
+                    // swal('Success', "Plesae Wait Till Page Succesfully Realoded", 'success');
+                    // setTimeout(
+                    //     function () {
+                    //         location.reload();
+                    //     }, 5000);
+                }, error: function (xhr, ajaxOptions, thrownError) {
+                    if (xhr.status == 404) {
+                        console.log(xhr);
+                        swal('Error', xhr.responseJSON.message, 'error');
+                    }
+                }
+            });
+        }
+
+        function get_shipping(code) {
+            $.ajax({
+                type: 'get',
+                url: '{{route('admin.order.shipping')}}',
+                data: {
+                    code: code,
                 },
                 success: function (data) {
                     // swal('Success', "Plesae Wait Till Page Succesfully Realoded", 'success');
@@ -472,6 +585,48 @@
             $('#_content_en').summernote('code', "");
             $('#_content_id').summernote('code', "");
         });
+
+        function get_design(code) {
+            $.ajax({
+                type: 'post',
+                url: '{{route('admin.order.production.pdf')}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    code: code
+                },
+                success: function (data) {
+
+                    setTimeout(
+                        function () {
+                            $.ajax({ //Download File from above
+                                type: 'post',
+                                url: '{{route('admin.order.production.download')}}',
+                                data: {
+                                    _token: '{{csrf_token()}}',
+                                    code: code
+                                },
+                                success: function (data) {
+                                    console.log('downloaded')
+                                }
+                            });
+                        }, 1000);
+
+
+                    swal('Success', "Plesae Wait Till Page Succesfully Realoded", 'success');
+                    setTimeout(
+                        function () {
+                            location.reload();
+                        }, 5000);
+
+
+                }, error: function (xhr, ajaxOptions, thrownError) {
+                    if (xhr.status == 500) {
+                        console.log(xhr);
+                        swal('Error', xhr.responseJSON.error, 'error');
+                    }
+                }
+            });
+        }
 
         function set_end_date(value) {
 
