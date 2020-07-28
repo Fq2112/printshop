@@ -146,6 +146,11 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             'as' => 'update.order.status'
         ]);
 
+        Route::post('update/order/mass', [
+            'uses' => 'OrderController@proceed_order_mass',
+            'as' => 'update.order.update.mass'
+        ]);
+
         Route::get('{id}/delete', [
             'uses' => 'OrderController@delete_data',
             'as' => 'delete.order'

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pages\Admins;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\PaymentCart;
+use App\Support\StatusProgress;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Egulias\EmailValidator\Exception\ExpectingQPair;
@@ -23,8 +24,12 @@ class ShipperController extends Controller
     {
         $dataPay = PaymentCart::where('uni_code_payment', $request->code)->first();
         $order = [];
+        $status = 0;
         foreach ($dataPay->cart_ids as $item) {
             $order_item = \App\Models\Order::whereRaw('SUBSTRING_INDEX(uni_code,"-",-1) = ' . $item)->first();
+            if ($order_item->progress_status == StatusProgress::NEW || $order_item->progress_status == StatusProgress::START_PRODUCTION ){
+                $status ++;
+            }
             $order_item->setAttribute('cart_id', $item);
             array_push($order, $order_item);
         }
@@ -32,7 +37,8 @@ class ShipperController extends Controller
         return view('pages.main.admins._partials.modal.create_shipper', [
             'code' => $request->code,
             'data' => $order,
-            'payment' => $dataPay
+            'payment' => $dataPay,
+            'status' => $status
         ]);
     }
 

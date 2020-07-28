@@ -43,7 +43,7 @@ class OrderController extends Controller
             })->when($request->period, function ($query) use ($request) {
                 $query->whereBetween('updated_at', [Carbon::now()->subDay($request->period), Carbon::now()]);
             })->first();
-            if (!empty($order_item)){
+            if (!empty($order_item)) {
                 $order_item->setAttribute('cart_id', $item);
             }
 
@@ -109,15 +109,41 @@ class OrderController extends Controller
         }
     }
 
+    public function proceed_order_mass(Request $request)
+    {
+        $array_order = explode(',', $request->order_ids);
+
+        foreach ($array_order as $item) {
+            $order = Order::find($item);
+            if ($order->progress_status == StatusProgress::NEW) {
+                $order->update([
+                    'progress_status' => StatusProgress::START_PRODUCTION
+                ]);
+            } elseif ($order->progress_status == StatusProgress::START_PRODUCTION) {
+                $order->update([
+                    'progress_status' => StatusProgress::FINISH_PRODUCTION
+                ]);
+            } elseif ($order->progress_status == StatusProgress::FINISH_PRODUCTION) {
+                $order->update([
+                    'progress_status' => StatusProgress::SHIPPING
+                ]);
+            }
+        }
+        return back()->with('success', 'Order Successfully Updated!');
+    }
+
     public function proceed_order(Request $request)
     {
         $order = Order::find($request->id);
-
         if ($order->progress_status == StatusProgress::NEW) {
             $order->update([
                 'progress_status' => StatusProgress::START_PRODUCTION
             ]);
-        } elseif ($order->progress_status == StatusProgress::START_PRODUCTION || $order->progress_status == StatusProgress::FINISH_PRODUCTION) {
+        } elseif ($order->progress_status == StatusProgress::START_PRODUCTION) {
+            $order->update([
+                'progress_status' => StatusProgress::FINISH_PRODUCTION
+            ]);
+        } elseif ($order->progress_status == StatusProgress::FINISH_PRODUCTION) {
             $order->update([
                 'progress_status' => StatusProgress::SHIPPING
             ]);
@@ -190,7 +216,7 @@ class OrderController extends Controller
     public function download_shipping(Request $request)
     {
         $filename = $request->code . '.pdf';
-        $file_path = storage_path('app/public/users/order/invoice/owner/prodution/' . $request->code.'/'.$filename);
+        $file_path = storage_path('app/public/users/order/invoice/owner/prodution/' . $request->code . '/' . $filename);
         if (file_exists($file_path)) {
             return Response::download($file_path, 'Shipping_Label_' . $filename, [
                 'Content-length : ' . filesize($file_path)

@@ -168,8 +168,10 @@
                                                     @if($row->progress_status == \App\Support\StatusProgress::NEW)
                                                         <span class="badge badge-info"><span
                                                                 class="fa fa-shopping-basket"></span> New</span>
-                                                    @elseif($row->progress_status == \App\Support\StatusProgress::START_PRODUCTION || $row->progress_status == \App\Support\StatusProgress::FINISH_PRODUCTION)
+                                                    @elseif($row->progress_status == \App\Support\StatusProgress::START_PRODUCTION )
                                                         <span class="badge badge-warning"><span class="fa fa-cogs"></span> On Produce</span>
+                                                    @elseif( $row->progress_status == \App\Support\StatusProgress::FINISH_PRODUCTION)
+                                                        <span class="badge badge-success"><span class="fa fa-flag"></span> Finish Production</span>
                                                     @elseif($row->progress_status == \App\Support\StatusProgress::SHIPPING)
                                                         <span class="badge badge-info"><span
                                                                 class="fa fa-shipping-fast"></span>  Shipping</span>
@@ -214,11 +216,7 @@
                                 </table>
                                 <form method="post" id="form-mass">
                                     {{csrf_field()}}
-                                    <input type="hidden" name="category_ids">
-                                </form>
-                                <form method="post" id="form-mass">
-                                    {{csrf_field()}}
-                                    <input type="hidden" name="post_ids">
+                                    <input type="hidden" name="order_ids">
                                 </form>
                             </div>
                         </div>
@@ -263,19 +261,11 @@
                             className: 'btn btn-success assets-export-btn export-xls ttip',
                             title: export_filename,
                             extension: '.xls'
-                        }, {
-                            text: '<strong class="text-uppercase"><i class="fa fa-print mr-2"></i>Print</strong>',
-                            extend: 'print',
-                            exportOptions: {
-                                columns: [0, 2, 3, 4]
-                            },
-                            className: 'btn btn-info assets-select-btn export-print'
                         },
-
-                        // {
-                        //     text: '<strong class="text-uppercase"><i class="fa fa-trash-alt mr-2"></i>Deletes</strong>',
-                        //     className: 'btn btn-danger btn_massDelete'
-                        // }
+                        {
+                            text: '<strong class="text-uppercase"><i class="fa fa-paper-plane mr-2"></i>Proceed Orders</strong>',
+                            className: 'btn btn-info btn_proceed'
+                        }
                     ],
                     fnDrawCallback: function (oSettings) {
                         $('.use-nicescroll').getNiceScroll().resize();
@@ -308,17 +298,17 @@
                             }
                         });
 
-                        $('.btn_massDelete').on("click", function () {
+                        $('.btn_proceed').on("click", function () {
                             var ids = $.map(table.rows('.terpilih').data(), function (item) {
                                 return item[1]
                             });
-                            $("#form-mass input[name=category_ids]").val(ids);
-                            $("#form-mass").attr("action", "{{route('massDelete.blog.categories')}}");
+                            $("#form-mass input[name=order_ids]").val(ids);
+                            $("#form-mass").attr("action", "{{route('update.order.update.mass')}}");
 
                             if (ids.length > 0) {
                                 swal({
-                                    title: 'Delete Blog Categories',
-                                    text: 'Are you sure to delete this ' + ids.length + ' selected record(s)? ' +
+                                    title: 'Proceed Orders',
+                                    text: 'Are you sure to proceed this ' + ids.length + ' order(s)? ' +
                                         'You won\'t be able to revert this!',
                                     icon: 'warning',
                                     dangerMode: true,
