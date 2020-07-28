@@ -248,6 +248,8 @@ class UserController extends Controller
     public function received(Request $request)
     {
         $payment = PaymentCart::where('uni_code_payment', $request->code)->first();
+        $payment->update(['receive_date' => now()]);
+
         foreach ($payment->getOrder as $row) {
             $row->update(['progress_status' => StatusProgress::RECEIVED]);
         }
