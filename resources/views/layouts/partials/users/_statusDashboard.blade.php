@@ -52,7 +52,6 @@
                 $code = $val->uni_code_payment;
                 $carts = \App\Models\Cart::whereIn('id', $val->cart_ids)->orderByRaw('FIELD (id, ' . implode(',', $val->cart_ids) . ') ASC')->get();
                 $order = \App\Models\Order::where('payment_carts_id', $val->id)->first();
-                $tracking = \App\Models\TrackingLog::where('payment_id', $val->id)->orderByDesc('id')->get();
                 $shipping = $val->getShippingAddress;
                 $billing = $val->getBillingAddress;
                 $min_day = substr($val->delivery_duration, 0, 1);
@@ -632,10 +631,10 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading" role="tab" id="heading-{{$all.$code}}-status">
                                         <h4 class="panel-title">
-                                            <a role="button" data-toggle="collapse"
+                                            <a class="collapsed" role="button" data-toggle="collapse"
                                                href="#collapse-{{$all.$code}}-status" aria-expanded="false"
-                                               aria-controls="collapse-{{$all.$code}}-status" class="collapsed">
-                                                {{__('lang.order.status')}}
+                                               aria-controls="collapse-{{$all.$code}}-status"
+                                               onclick="tracking('{{$val->tracking_id}}')">{{__('lang.order.status')}}
                                                 @if($acc == 'shipped' || $acc == 'received')
                                                     <b class="text-uppercase">{{__('lang.order.AWB').' #'.$val->resi}}</b>
                                                 @endif
@@ -647,7 +646,17 @@
                                          aria-expanded="false" style="height:0;"
                                          data-parent="#acc-{{$all.$acc}}-detail">
                                         <div class="panel-body {{$acc=='shipped'||$acc=='received' ? 'pb-0 px-0' :''}}">
-                                            <div class="row justify-content-center processTabs clearfix">
+                                            @if($acc == 'shipped' || $acc == 'received')
+                                                <div class="css3-spinner"
+                                                     style="z-index: 1;position:absolute;top:12em;">
+                                                    <div class="css3-spinner-bounce1"></div>
+                                                    <div class="css3-spinner-bounce2"></div>
+                                                    <div class="css3-spinner-bounce3"></div>
+                                                </div>
+                                            @endif
+
+                                            <div
+                                                class="row justify-content-center processTabs clearfix {{$acc == 'shipped' || $acc == 'received' ? 'waybill' : ''}}">
                                                 <ul class="process-steps process-5 w-100 mb-2 clearfix">
                                                     <li class="{{$or_class}}">
                                                         <a href="#unpaid"
@@ -682,45 +691,11 @@
                                                 </ul>
                                             </div>
 
-                                            @if(count($tracking) > 0 && ($acc == 'shipped' || $acc == 'received'))
-                                                @php $cek = \App\Models\TrackingLog::where('payment_id', $val->id)->orderByDesc('id')->first(); @endphp
-                                                <div class="row justify-content-center clearfix">
+                                            @if($acc == 'shipped' || $acc == 'received')
+                                                <div
+                                                    class="row justify-content-center clearfix {{$acc == 'shipped' || $acc == 'received' ? 'waybill' : ''}}">
                                                     <div class="col">
-                                                        <div id="tracking-pre"></div>
-                                                        <div id="tracking" class="mt-3 mb-0">
-                                                            <div class="tracking-list">
-                                                                @foreach($tracking as $log)
-                                                                    @php
-                                                                        $date = \Carbon\Carbon::parse($log->time_detail)->formatLocalized('%d %B %Y');
-                                                                        $time = \Carbon\Carbon::parse($log->time_detail)->formatLocalized('%H:%M %p');
-                                                                    @endphp
-                                                                    <div
-                                                                        class="tracking-item {{$cek->id == $log->id ? 'outfordelivery' : 'intransit'}}">
-                                                                        <div
-                                                                            class="tracking-icon status-{{$cek->id == $log->id ? 'outfordelivery' : 'intransit'}}">
-                                                                            <svg
-                                                                                class="svg-inline--fa fa-shipping-fast fa-w-20"
-                                                                                aria-hidden="true" data-prefix="fas"
-                                                                                data-icon="shipping-fast" role="img"
-                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                viewBox="0 0 640 512" data-fa-i2svg="">
-                                                                                <path fill="currentColor"
-                                                                                      d="M624 352h-16V243.9c0-12.7-5.1-24.9-14.1-33.9L494 110.1c-9-9-21.2-14.1-33.9-14.1H416V48c0-26.5-21.5-48-48-48H112C85.5 0 64 21.5 64 48v48H8c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h272c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H40c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h208c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H8c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h208c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H64v128c0 53 43 96 96 96s96-43 96-96h128c0 53 43 96 96 96s96-43 96-96h48c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zM160 464c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm320 0c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm80-208H416V144h44.1l99.9 99.9V256z"></path>
-                                                                            </svg>
-                                                                        </div>
-                                                                        <div class="tracking-date"
-                                                                             style="color: {{$cek->id == $log->id ? '#f89406' : ''}}">
-                                                                            {{$date}}<span>{{$time}}</span>
-                                                                        </div>
-                                                                        <div class="tracking-content text-uppercase"
-                                                                             style="color: {{$cek->id == $log->id ? '#f89406' : ''}}">
-                                                                            {{$log->title}}
-                                                                            <span>{{$log->subtitle}}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                @endforeach
-                                                            </div>
-                                                        </div>
+                                                        <div class="tracking-list mt-3 mb-0"></div>
                                                     </div>
                                                 </div>
                                             @endif

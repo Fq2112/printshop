@@ -1,10 +1,5 @@
-
 .tracking-detail {
     padding: 3rem 0
-}
-
-#tracking {
-    margin-bottom: 1rem
 }
 
 [class*=tracking-status-] p {
@@ -90,7 +85,8 @@
 .tracking-item .tracking-content {
     padding: .5rem .8rem;
     background-color: #f4f4f4;
-    border-radius: .5rem
+    border-radius: .5rem;
+    text-transform: uppercase;
 }
 
 .tracking-item .tracking-content span {

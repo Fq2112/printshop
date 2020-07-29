@@ -25,6 +25,11 @@ Route::group(['namespace' => 'API'], function () {
             'as' => 'get.shipper.rates'
         ]);
 
+        Route::post('waybill', [
+            'uses' => 'ShipperController@getWaybill',
+            'as' => 'get.shipper.waybill'
+        ]);
+
     });
 
     Route::group(['prefix' => 'midtrans'], function () {
