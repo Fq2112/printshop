@@ -2,10 +2,11 @@
     {{csrf_field()}}
     <div class="row">
         <div class="col">
-            <div class="alert alert-warning d-flex flex-row">
+            <div class="alert alert-danger d-flex flex-row">
                 <i class="fas fa-fw fa-exclamation-circle mr-3 align-self-center"></i>
                 <div>
-                <strong> Pastikan produk telah dikemas, Shipper akan segera menghubungi Premier setelah data diproses </strong>
+                    <strong> Pastikan produk telah dikemas, Shipper akan segera menghubungi Premier setelah data
+                        diproses </strong>
                 </div>
             </div>
 
@@ -21,7 +22,7 @@
                 <input id="payment_code" type="text" maxlength="191" name="payment_code" class="form-control disabled"
                        readonly value="{{$code}}"
                        placeholder="Write its name here&hellip;" required>
-                <input type="hidden" name="id"  value="{{$payment->id}}">
+                <input type="hidden" name="id" value="{{$payment->id}}">
             </div>
         </div>
     </div>
@@ -41,7 +42,7 @@
                 <tbody>
                 @foreach($data as $item)
                     <?php
-                        $cart = \App\Models\Cart::find($item->cart_id);
+                    $cart = \App\Models\Cart::find($item->cart_id);
                     ?>
                     <tr>
                         <th scope="row">{{$loop->iteration}}</th>
@@ -56,8 +57,10 @@
                             @if($item->progress_status == \App\Support\StatusProgress::NEW)
                                 <span class="badge badge-info"><span
                                         class="fa fa-shopping-basket"></span> New</span>
-                            @elseif($item->progress_status == \App\Support\StatusProgress::START_PRODUCTION || $item->progress_status == \App\Support\StatusProgress::FINISH_PRODUCTION)
+                            @elseif($item->progress_status == \App\Support\StatusProgress::START_PRODUCTION )
                                 <span class="badge badge-warning"><span class="fa fa-cogs"></span> On Produce</span>
+                            @elseif( $item->progress_status == \App\Support\StatusProgress::FINISH_PRODUCTION)
+                                <span class="badge badge-success"><span class="fa fa-flag"></span> Finish Production</span>
                             @elseif($item->progress_status == \App\Support\StatusProgress::SHIPPING)
                                 <span class="badge badge-info"><span
                                         class="fa fa-shipping-fast"></span>  Shipping</span>
@@ -70,16 +73,16 @@
                     </tr>
                 @endforeach
                 <tr>
-                    <td colspan="3" align="right"><strong>Expedition</strong> : </td>
-                    <td ><img src="{{asset($payment->rate_logo)}}" alt="" width="50px"> </td>
+                    <td colspan="3" align="right"><strong>Expedition</strong> :</td>
+                    <td><img src="{{asset($payment->rate_logo)}}" alt="" width="50px"></td>
                 </tr>
                 <tr>
-                    <td colspan="3" align="right"><strong>Expedition type</strong> : </td>
-                    <td > {{$payment->rate_name}} </td>
+                    <td colspan="3" align="right"><strong>Expedition type</strong> :</td>
+                    <td> {{$payment->rate_name}} </td>
                 </tr>
                 <tr>
-                    <td colspan="3" align="right"><strong>Shipping Cost</strong> : </td>
-                    <td ><strong> {{number_format($payment->ongkir)}}</strong> </td>
+                    <td colspan="3" align="right"><strong>Shipping Cost</strong> :</td>
+                    <td><strong> {{number_format($payment->ongkir)}}</strong></td>
                 </tr>
                 </tbody>
             </table>
@@ -87,6 +90,12 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        @if($status > 0)
+            <button type="button" class="btn btn-danger" disabled >Product Not Ready</button>
+
+        @else
+{{--            Product Ready--}}
+            <button type="submit" class="btn btn-primary" disabled  >Submit</button>
+        @endif
     </div>
 </form>
