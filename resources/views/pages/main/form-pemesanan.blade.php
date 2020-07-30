@@ -541,7 +541,8 @@
         var collapse = $('.panel-collapse'), input_qty = $("#input-quantity"), range_slider = $("#range-quantity"),
             btn_upload = $("#btn_upload"), upload_input = $("#file"), link_input = $("#link"),
             range_max = 100, qty = parseInt('{{!is_null($cart) ? $cart->qty : 0}}'),
-            weight = Number('{{$specs->weight / 1000}}'), pricing_specs = 0, disc_1 = 0, disc_2 = 0, disc_3 = 0,
+            weight = Number('{{$specs->weight / 1000}}'), pricing_specs = 0,
+            pricing_rules = Number('{{$setting->rules}}' / 100), disc_1 = 0, disc_2 = 0, disc_3 = 0,
             price_pcs = parseInt('{{$specs->price}}'), str_unit = ' {{$specs->getUnit->name}}', total = 0;
 
         $(function () {
@@ -804,9 +805,9 @@
             }
 
             price_pcs += pricing_specs;
-            disc_1 = parseInt(price_pcs - (price_pcs * 0.15));
-            disc_2 = parseInt(disc_1 - (disc_1 * 0.15));
-            disc_3 = parseInt(disc_2 - (disc_2 * 0.15));
+            disc_1 = parseInt(price_pcs - (price_pcs * pricing_rules));
+            disc_2 = parseInt(disc_1 - (disc_1 * pricing_rules));
+            disc_3 = parseInt(disc_2 - (disc_2 * pricing_rules));
 
             $("#qty-120").text('Rp' + number_format(price_pcs, 2, ',', '.'));
             $("#qty-2150").text('Rp' + number_format(disc_1, 2, ',', '.'));

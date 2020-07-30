@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pages;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\ClusterKategori;
+use App\Models\Setting;
 use App\Models\SubKategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -159,16 +160,20 @@ class MainController extends Controller
             } else {
                 $specs = $data->getSubkatSpecs;
                 $guidelines = $data->guidelines;
+                $setting = Setting::first();
 
-                return view('pages.main.form-pemesanan', compact('clust', 'data', 'specs', 'guidelines', 'cart'));
+                return view('pages.main.form-pemesanan', compact('clust', 'data', 'specs', 'guidelines',
+                    'cart', 'setting'));
             }
 
         } elseif (!is_null($clust)) {
             $data = $clust;
             $specs = $data->getClusterSpecs;
             $guidelines = $data->getSubKategori->guidelines;
+            $setting = Setting::first();
 
-            return view('pages.main.form-pemesanan', compact('clust', 'data', 'specs', 'guidelines', 'cart'));
+            return view('pages.main.form-pemesanan', compact('clust', 'data', 'specs', 'guidelines',
+                'cart', 'setting'));
         }
 
         return back();
