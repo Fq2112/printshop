@@ -1,9 +1,7 @@
 <form id="setting-form" enctype="multipart/form-data" method="post"
       action="{{route('admin.setting.maintenance.update')}}">
     {{csrf_field()}}
-    <?php
-    $data = \App\Models\Setting::where('id', '!=', 0)->first();
-    ?>
+
     <div class="card-body">
         <p class="text-muted">Fill the form to Activate / Deactivate Maintenance mode.</p>
         <div class="form-group row align-items-center">

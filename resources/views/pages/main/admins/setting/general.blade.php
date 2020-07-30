@@ -1,8 +1,6 @@
 <form id="setting-form" enctype="multipart/form-data" action="{{route('admin.setting.general.update')}}" method="post">
     {{csrf_field()}}
-    <?php
-    $data = \App\Models\Setting::where('id', '!=', 0)->first();
-    ?>
+
     <div class="card-body">
         <p class="text-muted">General settings such as, site title, site description, address
             and so on.</p>

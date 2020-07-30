@@ -18,7 +18,8 @@ class SettingController extends Controller
 
     public function show_general()
     {
-        return view('pages.main.admins.setting.general');
+        $data = \App\Models\Setting::where('id', '!=', 0)->first();
+        return view('pages.main.admins.setting.general',compact('data'));
     }
 
     public function update_general(Request $request)
@@ -71,7 +72,8 @@ class SettingController extends Controller
 
     public function rule(Request $request)
     {
-        return view('pages.main.admins.setting.rules');
+        $data = \App\Models\Setting::where('id', '!=', 0)->first();
+        return view('pages.main.admins.setting.rules',compact('data'));
     }
 
     public function rules_update(Request $request)
@@ -86,6 +88,7 @@ class SettingController extends Controller
 
     public function show_maintenance()
     {
-        return view('pages.main.admins.setting.maintenance');
+        $data = \App\Models\Setting::where('id', '!=', 0)->first();
+        return view('pages.main.admins.setting.maintenance',compact('data'));
     }
 }
