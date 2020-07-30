@@ -103,10 +103,17 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                 'as' => 'admin.setting.general.show'
             ]);
 
+            Route::post('general/update', [
+                'uses' => 'SettingController@update_general',
+                'as' => 'admin.setting.general.update'
+            ]);
+
             Route::get('maintenance', [
                 'uses' => 'SettingController@show_maintenance',
                 'as' => 'admin.setting.maintenance.show'
             ]);
+
+
         });
     });
 

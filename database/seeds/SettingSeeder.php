@@ -11,12 +11,12 @@ class SettingSeeder extends Seeder
      */
     public function run()
     {
-       \App\Models\Setting::create([
+        \App\Models\Setting::create([
             'email_premier' => "indoprintpremier@gmail.com",
-           'address' => 'Raya Kenjeran 469 Gading, Tambaksari, Surabaya, Jawa Timur – 60134.',
-           'phone' => '(031) 3814969',
-           'fax' => '(031) 3814969',
-
-       ]);
+            'address' => 'Raya Kenjeran 469 Gading, Tambaksari, Surabaya, Jawa Timur – 60134.',
+            'phone' => '(031) 3814969',
+            'fax' => '(031) 3814969',
+            'logo' => 'images/logotype.png'
+        ]);
     }
 }

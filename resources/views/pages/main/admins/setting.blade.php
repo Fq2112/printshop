@@ -38,9 +38,6 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <div class="section-header-back">
-                <a href="features-settings.html" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
-            </div>
             <h1>General Settings</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
@@ -80,9 +77,6 @@
                             <h4 id="title_form"></h4>
                         </div>
                         <div id="content_setting"></div>
-                        <div class="card-footer bg-whitesmoke text-md-right">
-                            <button class="btn btn-primary" id="save-btn">Save Changes</button>
-                        </div>
                     </div>
 
                 </div>
@@ -104,6 +98,27 @@
 
         $("#compose, .compose-close").on("click", function () {
             $(".compose").slideToggle()
+        });
+
+        function test(t) {
+            console.log(t)
+        }
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#img-logo').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]); // convert to base64 string
+            }
+        }
+
+        $(".input-logo").change(function () {
+            console.log("it changed");
+            readURL(this);
         });
 
         $("#compose").on("click", function () {
