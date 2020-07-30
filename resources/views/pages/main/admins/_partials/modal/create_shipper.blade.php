@@ -96,10 +96,8 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
         @if($status > 0)
             <button type="button" class="btn btn-danger" disabled >Product Not Ready</button>
-
         @else
-{{--            Product Ready--}}
-            <button type="submit" class="btn btn-primary" disabled  >Submit</button>
+            <button type="submit" class="btn btn-primary" >Submit</button>
         @endif
     </div>
 </form>

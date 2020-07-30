@@ -16,7 +16,7 @@
             <label for="site-title" class="form-control-label col-sm-3 text-md-right">Rule Value</label>
             <div class="col-sm-6 col-md-9">
                 <input type="number" name="rule" class="form-control" id="site-title" required placeholder="in percent"
-                       min="1" max="10">
+                       min="0.1" max="10">
                 <input type="hidden" name="id" value="{{$data->id}}">
             </div>
         </div>

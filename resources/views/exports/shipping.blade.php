@@ -218,7 +218,7 @@
             ?>
         @endforeach
         </tbody>
-        <thead>
+        <tfoot>
         <tr>
             <td colspan="2" align="right"><strong>Total Berat :</strong></td>
             <td align="center">{{$weightTotal}}
@@ -238,7 +238,7 @@
             <td align="right" colspan="2"><strong>Biaya Kirim :</strong></td>
             <td align="center">Rp {{number_format($detail['detail']['courier']['rate']['value'])}}</td>
         </tr>
-        </thead>
+        </tfoot>
     </table>
 
 </div>
