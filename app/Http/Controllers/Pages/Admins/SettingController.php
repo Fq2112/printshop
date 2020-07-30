@@ -71,7 +71,17 @@ class SettingController extends Controller
 
     public function rule(Request $request)
     {
+        return view('pages.main.admins.setting.rules');
+    }
 
+    public function rules_update(Request $request)
+    {
+        $data = Setting::find($request->id);
+        $data->update([
+            'rules' => $request->rule,
+        ]);
+
+        return back()->with('success', 'Rules Successfully Updated to ' . $request->rule . '%');
     }
 
     public function show_maintenance()

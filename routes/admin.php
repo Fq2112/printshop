@@ -118,6 +118,16 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                 'as' => 'admin.setting.maintenance.update'
             ]);
 
+            Route::get('rules', [
+                'uses' => 'SettingController@rule',
+                'as' => 'admin.setting.rules.show'
+            ]);
+
+            Route::post('rules/update', [
+                'uses' => 'SettingController@rules_update',
+                'as' => 'admin.setting.rules.update'
+            ]);
+
         });
     });
 
