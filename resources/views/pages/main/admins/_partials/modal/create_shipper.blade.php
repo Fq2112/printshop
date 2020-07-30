@@ -73,6 +73,10 @@
                     </tr>
                 @endforeach
                 <tr>
+                    <td colspan="3" align="right"><strong>Destination</strong> :</td>
+                    <td>{{$payment->getShippingAddress->address}} - {{$payment->getShippingAddress->postal_code}}</td>
+                </tr>
+                <tr>
                     <td colspan="3" align="right"><strong>Expedition</strong> :</td>
                     <td><img src="{{asset($payment->rate_logo)}}" alt="" width="50px"></td>
                 </tr>
