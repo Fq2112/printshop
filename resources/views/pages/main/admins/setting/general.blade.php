@@ -67,8 +67,4 @@
         <button class="btn btn-primary" id="save-btn">Save Changes</button>
     </div>
 </form>
-@push('scripts')
-    <script !src="">
 
-    </script>
-@endpush

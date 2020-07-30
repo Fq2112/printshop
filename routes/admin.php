@@ -113,6 +113,10 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                 'as' => 'admin.setting.maintenance.show'
             ]);
 
+            Route::post('maintenance/update', [
+                'uses' => 'SettingController@activeMaintenance',
+                'as' => 'admin.setting.maintenance.update'
+            ]);
 
         });
     });
