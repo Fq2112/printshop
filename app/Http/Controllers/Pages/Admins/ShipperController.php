@@ -138,12 +138,9 @@ class ShipperController extends Controller
 
             return back()->with('success', $ersponseData['data']['content'] . " & " . $ActiveresponseData['data']['message']);
         } catch (Exception $exception) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $exception->getMessage()
-            ], 500);
-        } catch (ClientException $exception) {
             return back()->with('error', $exception->getMessage());
+        } catch (ClientException $exception) {
+            return back()->with('error', 'Please Try Again Later');
         }
     }
 
