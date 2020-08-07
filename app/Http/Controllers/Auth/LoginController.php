@@ -64,9 +64,8 @@ class LoginController extends Controller
         if (GlobalAuth::login(['useremail' => $request->useremail, 'password' => $request->password], $request)) {
             if (session()->has('intended')) {
                 session()->forget('intended');
+                return $this->redirectTo();
             }
-
-            return $this->redirectTo();
         }
 
         return back()->withInput($request->all())->with([
