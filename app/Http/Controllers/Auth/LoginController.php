@@ -31,7 +31,7 @@ class LoginController extends Controller
      */
     public function redirectTo()
     {
-        if (Auth::guard('admin')->check()) {
+        /*if (Auth::guard('admin')->check()) {
             return redirect()->route('admin.dashboard')->with('signed', 'message');
         } else {
             if (Auth::user()->getBio->dob != null && Auth::user()->getBio->gender != null && Auth::user()->getBio->phone != null) {
@@ -40,7 +40,7 @@ class LoginController extends Controller
             } else {
                 return back()->with('profil', 'message');
             }
-        }
+        }*/
     }
 
     /**
@@ -64,13 +64,24 @@ class LoginController extends Controller
         if (GlobalAuth::login(['useremail' => $request->useremail, 'password' => $request->password], $request)) {
             if (session()->has('intended')) {
                 session()->forget('intended');
-                return $this->redirectTo();
+            }
+
+            if (Auth::guard('admin')->check()) {
+                return redirect()->route('admin.dashboard')->with('signed', 'message');
+            } else {
+                if (Auth::user()->status == false) {
+                    return back()->withInput($request->all())->with(['inactive' => 'message']);
+                } else {
+                    if (Auth::user()->getBio->dob != null && Auth::user()->getBio->gender != null && Auth::user()->getBio->phone != null) {
+                        return back()->with('signed', 'message');
+                    } else {
+                        return back()->with('profil', 'message');
+                    }
+                }
             }
         }
 
-        return back()->withInput($request->all())->with([
-            'error' => 'message'
-        ]);
+        return back()->withInput($request->all())->with(['error' => 'message']);
     }
 
     /**

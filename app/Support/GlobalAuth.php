@@ -26,14 +26,8 @@ class GlobalAuth
     {
         if ($this->isUser($credentials['useremail'])) {
             $user = User::where('username', $request->useremail)->orwhere('email', $request->useremail)->first();
-            if ($user->status == false) {
-                return back()->withInput($request->all())->with([
-                    'inactive' => 'message'
-                ]);
-            } else {
-                if (Auth::guard('web')->attempt(['email' => $user->email, 'password' => $request->password])) {
-                    return true;
-                }
+            if (Auth::guard('web')->attempt(['email' => $user->email, 'password' => $request->password])) {
+                return true;
             }
         } else if ($this->isAdmin($credentials['useremail'])) {
             $admin = Admin::where('username', $request->useremail)->orwhere('email', $request->useremail)->first();
