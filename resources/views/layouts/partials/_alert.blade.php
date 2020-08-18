@@ -47,6 +47,9 @@
     @elseif(session('add'))
     swal('{{__('lang.alert.success')}}', '{{session('add')}}', 'success');
 
+    @elseif(session('claim'))
+    swal('{{__('lang.alert.success')}}', '{{session('claim')}}', 'success');
+
     @elseif(session('update'))
     swal('{{__('lang.alert.success')}}', '{{session('update')}}', 'success');
 

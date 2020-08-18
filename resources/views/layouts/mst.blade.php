@@ -39,6 +39,18 @@
     <link rel="stylesheet" href="{{asset('js/plugins/sweetalert/sweetalert2.css')}}">
 
     <style>
+        #welcomeModal .block {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .45) 30%, rgba(0, 0, 0, .65) 80%, rgba(0, 0, 0, .85) 100%), url('{{asset('images/banner/pro.jpg')}}') no-repeat;
+            background-size: cover;
+            background-blend-mode: multiply;
+            max-width: 700px;
+        }
+
+        #welcomeModal .dark .button.button-border:not(.button-light) {
+            border-color: #eee;
+            color: #eee;
+        }
+
         @media (max-width: 480px) {
             .footer-logo {
                 width: 170px;

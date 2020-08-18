@@ -57,6 +57,11 @@ Route::group(['namespace' => 'Pages'], function () {
         'as' => 'beranda'
     ]);
 
+    Route::post('claim-offer', [
+        'uses' => 'MainController@claimOffer',
+        'as' => 'claim.offer'
+    ]);
+
     Route::group(['prefix' => '{produk}'], function () {
 
         Route::get('/', [

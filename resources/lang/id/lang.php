@@ -378,7 +378,14 @@ return [
             "msg-required" => "Anda harus memilih sebuah file untuk diunggah!",
             "msg-size" => "File \"{name}\" (<b>{size} KB</b>) melebihi ukuran unggahan maksimum yang diizinkan sebesar <b>{maxSize} KB (200 MB)</b>, coba unggah file yang ukurannya lebih kecil!",
             "msg-extension" => "Ekstensi tidak valid untuk file \"{name}\", hanya file \"{extensions}\" yang didukung!",
-        ]
+        ],
+        "welcome" => [
+            "lang" => "Halo! Silahkan, pilih bahasa.",
+            "head" => "Pengguna Baru Diskon <span>:disc%</span>!",
+            "capt" => "Masukkan alamat email Anda di bawah untuk mengklaim kode promo Anda.",
+            "button" => "KLAIM SEKARANG",
+            "note" => "NB: Pastikan email yang Anda masukkan sesuai dengan email akun <span style='color: #f89406'>" . env('APP_NAME') . "</span> Anda.",
+        ],
     ],
     "alert" => [
         "alert" => "PERINGATAN!",
@@ -442,6 +449,7 @@ return [
         "token-fail" => "Halaman telah kedaluwarsa karena tidak aktif, silakan coba lagi.",
         "feature-fail" => "Fitur ini hanya berfungsi ketika Anda masuk sebagai Pelanggan.",
         "contact" => "Terima kasih telah meninggalkan kami pesan! Karena setiap komentar atau kritik yang Anda berikan, akan membuat kami menjadi perusahaan yang lebih baik.",
+        "claim-offer" => "Berhasil diklaim! Kami telah mengirimkan kode promo Anda, silakan periksa email Anda.",
     ],
     "errors" => [
         "403-head" => "AKSES TERLARANG",
@@ -460,6 +468,7 @@ return [
             "reset" => "Akun " . env('APP_NAME') . ": Reset Kata Sandi",
             "unpaid" => "Menunggu Pembayaran :type #:code",
             "paid" => "Checkout Pesanan dengan ID Pembayaran #:code Berhasil Dikonfirmasi pada :datetime",
+            "claim-offer" => "PENGGUNA BARU DISKON :disc%!",
         ],
         "content" => [
             "hello" => "Halo",
@@ -470,6 +479,8 @@ return [
             "reset" => "Kami mengirim email ini karena kami menerima permintaan reset kata sandi. Jika Anda tidak mengirimkannya, abaikan email ini dan hubungi kami sesegera mungkin.",
             "reset2" => "Dimana kata sandi baru saya?",
             "reset3" => "Kami tidak akan membuat Anda mengingat kata sandi atau kode tertentu lainnya.<br>Cukup klik tautan dan masukkan kata sandi yang baru sesuai keinginan.",
+            "claim-offer" => 'Gunakan kode promo ini "<b>:code</b>" untuk mendapatkan diskon <b>:disc%</b>.',
+            "claim-offer2" => "Kami mengirim email ini karena kami menerima permintaan klaim promo pengguna baru. Jika Anda tidak mengirimkannya, abaikan email ini dan hubungi kami sesegera mungkin.",
             "unpaid" => "Mohon untuk segera menyeleseaikan pembayaran Anda",
             "unpaid2" => "Checkout berhasil pada :datetime",
             "unpaid3" => "Batas Waktu Pembayaran",

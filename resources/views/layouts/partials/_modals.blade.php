@@ -305,3 +305,33 @@
         </div>
     </div>
 </div>
+
+@if(Request::is(app()->getLocale()))
+    @php $promo = \App\Models\PromoCode::where('promo_code', 'welcome10')->first(); @endphp
+    @if(!is_null($promo) && (Auth::guest() || (Auth::check() && count(Auth::user()->getPayment) <= 0)) && !session('claim'))
+        <div class="modal-on-load" data-target="#welcomeModal"></div>
+        <div class="modal1 mfp-hide subscribe-widget customjs" id="welcomeModal">
+            <div class="block dark divcenter">
+                <div style="padding: 50px;">
+                    <div class="heading-block nobottomborder bottommargin-sm" style="max-width:500px;">
+                        <h3>{!! __('lang.modal.welcome.head', ['disc' => $promo->discount]) !!}</h3>
+                        <span>{{__('lang.modal.welcome.capt')}}</span>
+                    </div>
+                    <form class="widget-subscribe-form2" action="{{route('claim.offer')}}" method="post"
+                          style="max-width: 350px;">
+                        @csrf
+                        <input type="hidden" name="promo_code" value="{{$promo->promo_code}}">
+                        <input type="email" id="widget-subscribe-form2-email" name="claim_email"
+                               class="form-control form-control-lg not-dark required email" autofocus required
+                               value="{{Auth::user()->email}}" placeholder="{{__('lang.placeholder.email')}}">
+                        <button type="submit"
+                                class="button button-rounded button-reveal button-border button-primary tright ml-0 mt-3">
+                            <i class="icon-angle-right"></i><span>{{__('lang.modal.welcome.button')}}</span>
+                        </button>
+                    </form>
+                    <p class="nobottommargin"><small><em>{!! __('lang.modal.welcome.note') !!}</em></small></p>
+                </div>
+            </div>
+        </div>
+    @endif
+@endif
