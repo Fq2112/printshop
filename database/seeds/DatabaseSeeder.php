@@ -47,6 +47,8 @@ class DatabaseSeeder extends Seeder
             PromoCodeSeeder::class,
             PaymentCartSeeder::class,
             OrderSeeder::class,
+            GaleryCluster::class,
+            GalerySubs::class
         ]);
     }
 }

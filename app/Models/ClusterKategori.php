@@ -32,6 +32,11 @@ class ClusterKategori extends Model
         return $this->hasMany(Cart::class, 'cluster_id');
     }
 
+    public function getGallery()
+    {
+        return $this->hasMany(GalleryCluster::class, 'cluster_id');
+    }
+
     public function getLocale(): string
     {
         if (is_null(App::getLocale())) {
