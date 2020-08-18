@@ -37,6 +37,11 @@ class SubKategori extends Model
         return $this->hasMany(Cart::class, 'subkategori_id');
     }
 
+    public function getGallery()
+    {
+        return $this->hasMany(GallerySubs::class, 'subkategori_id');
+    }
+
     public function getLocale(): string
     {
         if (is_null(App::getLocale())) {
