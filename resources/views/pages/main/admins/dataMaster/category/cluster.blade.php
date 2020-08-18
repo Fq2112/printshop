@@ -87,10 +87,10 @@
                                                         type="button" class="btn btn-warning mr-1"
                                                         onclick="editBlogPost('{{$row->id}}','{{route('edit.categories.cluster.posts', ['id' => $row->id])}}')">
                                                     <i class="fa fa-edit"></i></button>
-{{--                                                <a href="{{route('delete.categories', ['id' => encrypt($row->id)])}}"--}}
-{{--                                                   class="btn btn-danger delete-data" data-toggle="tooltip"--}}
-{{--                                                   title="Delete" data-placement="right">--}}
-{{--                                                    <i class="fas fa-trash-alt"></i></a>--}}
+                                                <a href="{{route('delete.categories', ['id' => encrypt($row->id)])}}"
+                                                   class="btn btn-danger delete-data" data-toggle="tooltip"
+                                                   title="Delete" data-placement="right">
+                                                    <i class="fas fa-trash-alt"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
