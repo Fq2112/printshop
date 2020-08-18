@@ -675,7 +675,7 @@
         $(function () {
             $(".stats_address .divider:last-child").remove();
 
-            @if($check == 'false')
+            @if($check == 'false' || is_null($bio->dob) || is_null($bio->gender) || is_null($bio->phone))
             swal({
                 title: "{{__('lang.alert.warning')}}",
                 text: "{{__('lang.alert.login-bio3')}}",

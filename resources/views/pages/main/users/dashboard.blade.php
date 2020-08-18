@@ -414,7 +414,7 @@
                             $(".tracking-list").empty();
 
                             $.each(waybill, function (i, val) {
-                                $(".tracking-list").append(
+                                $(".tracking-list").prepend(
                                     '<div class="tracking-item intransit">' +
                                     '<div class="tracking-icon status-intransit">' +
                                     '<svg class="svg-inline--fa fa-shipping-fast fa-w-20" aria-hidden="true" ' +

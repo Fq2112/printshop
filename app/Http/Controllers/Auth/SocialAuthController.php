@@ -65,7 +65,12 @@ class SocialAuthController extends Controller
             }
             Auth::loginUsingId($user->id);
 
-            return redirect()->route('beranda')->with('profil', 'message');
+            if (Auth::user()->getBio->dob != null && Auth::user()->getBio->gender != null && Auth::user()->getBio->phone != null) {
+                return redirect()->route('beranda');
+
+            } else {
+                return redirect()->route('beranda')->with('profil', 'message');
+            }
 
         } catch (\Exception $e) {
             return back()->with('unknown', 'message');
