@@ -378,7 +378,14 @@ return [
             "msg-required" => "You must select a file to upload!",
             "msg-size" => "File \"{name}\" (<b>{size} KB</b>) exceeds maximum allowed upload size of <b>{maxSize} KB (200 MB)</b>, try to upload smaller file!",
             "msg-extension" => "Invalid extension for file \"{name}\", only \"{extensions}\" files are supported!",
-        ]
+        ],
+        "welcome" => [
+            "lang" => "Hello! Please, choose a language.",
+            "head" => "New User <span>:disc%</span> Off!",
+            "capt" => "Enter your email address below to claim your promo code.",
+            "button" => "CLAIM NOW",
+            "note" => "P.S.: Make sure the email you entered matches your <span style='color: #f89406'>" . env('APP_NAME') . "</span> account email.",
+        ],
     ],
     "alert" => [
         "alert" => "ALERT!",
@@ -442,6 +449,7 @@ return [
         "token-fail" => "The page has expired due to inactivity, please try again.",
         "feature-fail" => "This feature only works when you`re signed in as a Customer.",
         "contact" => "Thank you for dropping us a line! Because every single comment or criticism that you gave, will make us be a better company.",
+        "claim-offer" => "Successfully claimed! We have sent your promo code, please check your email.",
     ],
     "errors" => [
         "403-head" => "FORBIDDEN ACCESS",
@@ -460,6 +468,7 @@ return [
             "reset" => env('APP_NAME') . " Account: Reset Password",
             "unpaid" => "Waiting for :type Payment #:code",
             "paid" => "Checkout Orders with Payment ID #:code is Successfully Confirmed on :datetime",
+            "claim-offer" => "NEW USER :disc% Off!",
         ],
         "content" => [
             "hello" => "Hello",
@@ -470,6 +479,8 @@ return [
             "reset" => "We sent this email because we received a password reset request. If you didn't submit the request, please ignore this email and contact us as soon as possible.",
             "reset2" => "Where is my new password?",
             "reset3" => "We will not make you remember other passwords or certain codes.<br>Just click the link and enter the new password as you wish.",
+            "claim-offer" => 'Use this promo code "<b>:code</b>" to get <b>:disc%</b> off.',
+            "claim-offer2" => "We sent this email because we received a claim new user promo request. If you didn't submit the request, please ignore this email and contact us as soon as possible.",
             "unpaid" => "Please, complete your payment immediately",
             "unpaid2" => "Checkout was successfully on :datetime",
             "unpaid3" => "Payment Deadline",

@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Users\ClaimOfferMail;
 use App\Models\Cart;
 use App\Models\ClusterKategori;
+use App\Models\PromoCode;
 use App\Models\Setting;
 use App\Models\SubKategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 
@@ -141,6 +144,15 @@ class MainController extends Controller
         return $featured;
     }
 
+    public function claimOffer(Request $request)
+    {
+        $email = $request->claim_email;
+        $promo = PromoCode::where('promo_code', $request->promo_code)->first();
+        Mail::to($email)->send(new ClaimOfferMail($email, $promo));
+
+        return back()->with('claim', __('lang.alert.claim-offer'));
+    }
+
     public function produk(Request $request)
     {
         $sub = SubKategori::where('permalink->en', $request->produk)
@@ -161,9 +173,10 @@ class MainController extends Controller
                 $specs = $data->getSubkatSpecs;
                 $guidelines = $data->guidelines;
                 $setting = Setting::first();
+                $gallery = $data->getGallery;
 
-                return view('pages.main.form-pemesanan', compact('clust', 'data', 'specs', 'guidelines',
-                    'cart', 'setting'));
+                return view('pages.main.form-pemesanan', compact('clust', 'data', 'specs',
+                    'guidelines', 'cart', 'setting', 'gallery'));
             }
 
         } elseif (!is_null($clust)) {
@@ -171,9 +184,10 @@ class MainController extends Controller
             $specs = $data->getClusterSpecs;
             $guidelines = $data->getSubKategori->guidelines;
             $setting = Setting::first();
+            $gallery = $data->getGallery;
 
-            return view('pages.main.form-pemesanan', compact('clust', 'data', 'specs', 'guidelines',
-                'cart', 'setting'));
+            return view('pages.main.form-pemesanan', compact('clust', 'data', 'specs',
+                'guidelines', 'cart', 'setting', 'gallery'));
         }
 
         return back();

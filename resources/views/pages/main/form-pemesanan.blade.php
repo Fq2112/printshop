@@ -3,6 +3,10 @@
 @push('styles')
     <link rel="stylesheet" href="{{asset('css/card.css')}}">
     <style>
+        .owl-carousel .owl-stage {
+            padding: 0;
+        }
+
         #content .postcontent {
             width: 70%;
             margin-right: 1.5rem;
@@ -308,6 +312,29 @@
     </section>
 
     <section id="content" style="background-color: #F9F9F9">
+        @if(count($gallery) > 0)
+            <div id="related-portfolio" data-margin="0" data-nav="true" data-pagi="false"
+                 class="owl-carousel owl-carousel-full portfolio-carousel portfolio-nomargin carousel-widget"
+                 data-items-xs="2" data-items-sm="3" data-items-md="4" data-items-lg="5">
+                @foreach($gallery as $row)
+                    <div class="oc-item">
+                        <div class="iportfolio">
+                            <div class="portfolio-image">
+                                <a href="javascript:void(0)">
+                                    <img src="{{asset('images/gallery/'.$row->image)}}" alt="Thumb">
+                                </a>
+                                <div class="portfolio-overlay">
+                                    <a href="{{asset('images/gallery/'.$row->image)}}" class="left-icon"
+                                       data-lightbox="image" style="margin: 0 auto;left: 45%;top: 40%">
+                                        <i class="icon-line-stack-2"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+
         <div class="content-wrap">
             <div class="container clearfix">
                 <form id="form-pemesanan" class="row" method="POST" enctype="multipart/form-data"
