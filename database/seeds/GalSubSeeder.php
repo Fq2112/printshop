@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class GalerySubs extends Seeder
+class GalSubSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,11 +13,12 @@ class GalerySubs extends Seeder
     {
         foreach (\App\Models\SubKategori::all() as $item) {
             for ($i = 0; $i < 5; $i++) {
-                GaleryCluster::create([
+                \App\Models\GallerySubs::create([
                     'subkategori_id' => $item->id,
                     'image' => 'http://lorempixel.com/640/480/'
                 ]);
             }
         }
+
     }
 }

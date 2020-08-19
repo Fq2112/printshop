@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class GaleryCluster extends Seeder
+class GalClustSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,9 +11,10 @@ class GaleryCluster extends Seeder
      */
     public function run()
     {
+
         foreach (\App\Models\ClusterKategori::all() as $item) {
             for ($i = 0; $i < 5; $i++) {
-                GaleryCluster::create([
+                \App\Models\GalleryCluster::create([
                     'cluster_id' => $item->id,
                     'image' => 'http://lorempixel.com/640/480/'
                 ]);
