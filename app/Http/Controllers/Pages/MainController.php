@@ -144,6 +144,14 @@ class MainController extends Controller
         return $featured;
     }
 
+    public function switchLang(Request $request)
+    {
+        $visitor = \App\Models\Visitor::where('ip', $_SERVER['REMOTE_ADDR'])->where('date', date('Y-m-d'))->first();
+        $visitor->update(['lang' => $request->lang]);
+
+        return redirect()->to($request->locale_url);
+    }
+
     public function claimOffer(Request $request)
     {
         $email = $request->claim_email;
@@ -156,7 +164,7 @@ class MainController extends Controller
     public function produk(Request $request)
     {
         $sub = SubKategori::where('permalink->en', $request->produk)
-            ->orwhere('permalink->id', $request->produk)->whereHas('getCluster')->first();
+            ->orwhere('permalink->id', $request->produk)->first();
         $clust = ClusterKategori::where('permalink->en', $request->produk)
             ->orwhere('permalink->id', $request->produk)->first();
         $guidelines = null;
@@ -208,7 +216,7 @@ class MainController extends Controller
     public function submitPemesanan(Request $request)
     {
         $sub = SubKategori::where('permalink->en', $request->produk)
-            ->orwhere('permalink->id', $request->produk)->whereHas('getCluster')->first();
+            ->orwhere('permalink->id', $request->produk)->first();
         $clust = ClusterKategori::where('permalink->en', $request->produk)
             ->orwhere('permalink->id', $request->produk)->first();
 

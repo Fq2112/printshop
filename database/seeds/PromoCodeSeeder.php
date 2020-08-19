@@ -22,5 +22,12 @@ class PromoCodeSeeder extends Seeder
         }
 
         \App\Models\PromoCode::find(1)->update(['promo_code' => 'versapremier']);
+        \App\Models\PromoCode::find(2)->update([
+            'promo_code' => 'welcome10',
+            'start' => now(),
+            'end' => now()->addCentury(),
+            'description' => 'New user 10% off!',
+            'discount' => 10,
+        ]);
     }
 }

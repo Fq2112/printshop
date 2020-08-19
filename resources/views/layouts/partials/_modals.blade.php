@@ -307,29 +307,72 @@
 </div>
 
 @if(Request::is(app()->getLocale()))
-    @php $promo = \App\Models\PromoCode::where('promo_code', 'welcome10')->first(); @endphp
-    @if(!is_null($promo) && (Auth::guest() || (Auth::check() && count(Auth::user()->getPayment) <= 0)) && !session('claim'))
-        <div class="modal-on-load" data-target="#welcomeModal"></div>
-        <div class="modal1 mfp-hide subscribe-widget customjs" id="welcomeModal">
+    @php
+        $visitor = \App\Models\Visitor::where('ip', $_SERVER['REMOTE_ADDR'])->where('date', date('Y-m-d'))->first();
+        $promo = \App\Models\PromoCode::where('promo_code', 'welcome10')->first();
+    @endphp
+    @if(!is_null($visitor->lang))
+        @if(!is_null($promo) && (Auth::guest() || (Auth::check() && count(Auth::user()->getPayment) <= 0)) && !session('claim'))
+            <div class="modal-on-load" data-target="#welcomeModal"></div>
+            <div class="modal1 mfp-hide subscribe-widget customjs" id="welcomeModal">
+                <div class="block dark divcenter">
+                    <div style="padding: 50px;">
+                        <div class="heading-block nobottomborder bottommargin-sm" style="max-width:500px;">
+                            <h3>{!! __('lang.modal.welcome.head', ['disc' => $promo->discount]) !!}</h3>
+                            <span>{{__('lang.modal.welcome.capt')}}</span>
+                        </div>
+                        <form class="widget-subscribe-form2" action="{{route('claim.offer')}}" method="post"
+                              style="max-width: 350px;">
+                            @csrf
+                            <input type="hidden" name="promo_code" value="{{$promo->promo_code}}">
+                            <input type="email" id="widget-subscribe-form2-email" name="claim_email"
+                                   class="form-control form-control-lg not-dark required email"
+                                   value="{{Auth::check() ? Auth::user()->email : null}}"
+                                   placeholder="{{__('lang.placeholder.email')}}" autofocus required>
+                            <button type="submit"
+                                    class="button button-rounded button-reveal button-border button-primary tright ml-0 mt-3">
+                                <i class="icon-angle-right"></i><span>{{__('lang.modal.welcome.button')}}</span>
+                            </button>
+                        </form>
+                        <p class="nobottommargin"><small><em>{!! __('lang.modal.welcome.note') !!}</em></small></p>
+                    </div>
+                </div>
+            </div>
+        @endif
+    @else
+        <div class="modal-on-load" data-target="#langModal"></div>
+        <div class="modal1 mfp-hide subscribe-widget customjs" id="langModal">
             <div class="block dark divcenter">
                 <div style="padding: 50px;">
-                    <div class="heading-block nobottomborder bottommargin-sm" style="max-width:500px;">
-                        <h3>{!! __('lang.modal.welcome.head', ['disc' => $promo->discount]) !!}</h3>
-                        <span>{{__('lang.modal.welcome.capt')}}</span>
+                    <div class="heading-block nobottomborder bottommargin-sm" style="max-width: 350px">
+                        <h3>{{__('lang.mail.content.hello')}}!</h3>
+                        <span>{{__('lang.modal.welcome.lang')}}</span>
                     </div>
-                    <form class="widget-subscribe-form2" action="{{route('claim.offer')}}" method="post"
-                          style="max-width: 350px;">
+                    <form id="form-langSwitch" class="widget-subscribe-form2 mb-0" action="{{route('switch.lang')}}"
+                          method="post" style="max-width: 350px">
                         @csrf
-                        <input type="hidden" name="promo_code" value="{{$promo->promo_code}}">
-                        <input type="email" id="widget-subscribe-form2-email" name="claim_email"
-                               class="form-control form-control-lg not-dark required email" autofocus required
-                               value="{{Auth::user()->email}}" placeholder="{{__('lang.placeholder.email')}}">
-                        <button type="submit"
-                                class="button button-rounded button-reveal button-border button-primary tright ml-0 mt-3">
-                            <i class="icon-angle-right"></i><span>{{__('lang.modal.welcome.button')}}</span>
-                        </button>
+                        <input type="hidden" name="locale_url">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label class="card-label" for="lang_id">
+                                    <input id="lang_id" class="card-rb" name="lang" type="radio" value="id">
+                                    <div class="card card-input">
+                                        <img class="img-fluid" alt="Indonesia"
+                                             src="{{asset('images/icons/flags/indonesia.png')}}">
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                <label class="card-label" for="lang_en">
+                                    <input id="lang_en" class="card-rb" name="lang" type="radio" value="en">
+                                    <div class="card card-input">
+                                        <img class="img-fluid" alt="English"
+                                             src="{{asset('images/icons/flags/usa.png')}}">
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
                     </form>
-                    <p class="nobottommargin"><small><em>{!! __('lang.modal.welcome.note') !!}</em></small></p>
                 </div>
             </div>
         </div>

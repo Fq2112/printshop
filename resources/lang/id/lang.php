@@ -380,7 +380,7 @@ return [
             "msg-extension" => "Ekstensi tidak valid untuk file \"{name}\", hanya file \"{extensions}\" yang didukung!",
         ],
         "welcome" => [
-            "lang" => "Halo! Silahkan, pilih bahasa.",
+            "lang" => "Silahkan, pilih bahasa.",
             "head" => "Pengguna Baru Diskon <span>:disc%</span>!",
             "capt" => "Masukkan alamat email Anda di bawah untuk mengklaim kode promo Anda.",
             "button" => "KLAIM SEKARANG",

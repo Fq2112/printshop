@@ -321,10 +321,10 @@
                         <div class="iportfolio">
                             <div class="portfolio-image">
                                 <a href="javascript:void(0)">
-                                    <img src="{{asset('images/gallery/'.$row->image)}}" alt="Thumb">
+                                    <img src="{{asset('storage/products/gallery/'.$row->image)}}" alt="Thumb">
                                 </a>
                                 <div class="portfolio-overlay">
-                                    <a href="{{asset('images/gallery/'.$row->image)}}" class="left-icon"
+                                    <a href="{{asset('storage/products/gallery/'.$row->image)}}" class="left-icon"
                                        data-lightbox="image" style="margin: 0 auto;left: 45%;top: 40%">
                                         <i class="icon-line-stack-2"></i></a>
                                 </div>

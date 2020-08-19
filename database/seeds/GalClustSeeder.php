@@ -16,7 +16,7 @@ class GalClustSeeder extends Seeder
             for ($i = 0; $i < 5; $i++) {
                 \App\Models\GalleryCluster::create([
                     'cluster_id' => $item->id,
-                    'image' => 'http://lorempixel.com/640/480/'
+                    'image' => $item->thumbnail
                 ]);
             }
         }

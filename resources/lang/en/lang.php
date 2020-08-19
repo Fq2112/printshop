@@ -380,7 +380,7 @@ return [
             "msg-extension" => "Invalid extension for file \"{name}\", only \"{extensions}\" files are supported!",
         ],
         "welcome" => [
-            "lang" => "Hello! Please, choose a language.",
+            "lang" => "Please, choose a language.",
             "head" => "New User <span>:disc%</span> Off!",
             "capt" => "Enter your email address below to claim your promo code.",
             "button" => "CLAIM NOW",

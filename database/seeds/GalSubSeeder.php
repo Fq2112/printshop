@@ -11,11 +11,11 @@ class GalSubSeeder extends Seeder
      */
     public function run()
     {
-        foreach (\App\Models\SubKategori::all() as $item) {
+        foreach (\App\Models\SubKategori::doesnthave('getCluster')->get() as $item) {
             for ($i = 0; $i < 5; $i++) {
                 \App\Models\GallerySubs::create([
                     'subkategori_id' => $item->id,
-                    'image' => 'http://lorempixel.com/640/480/'
+                    'image' => $item->banner
                 ]);
             }
         }

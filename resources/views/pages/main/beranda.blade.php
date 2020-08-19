@@ -5,6 +5,50 @@
     <link rel="stylesheet" type="text/css" href="{{asset('include/rs-plugin/css/layers.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('include/rs-plugin/css/navigation.css')}}">
     <style>
+        #welcomeModal .block,
+        #langModal .block {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .45) 30%, rgba(0, 0, 0, .65) 80%, rgba(0, 0, 0, .85) 100%), url('{{asset('images/banner/pro.jpg')}}') no-repeat;
+            background-size: cover;
+            background-blend-mode: multiply;
+            max-width: 700px;
+        }
+
+        #welcomeModal .dark .button.button-border:not(.button-light),
+        #langModal .dark .button.button-border:not(.button-light) {
+            border-color: #eee;
+            color: #eee;
+        }
+
+        .card-label {
+            width: 100%;
+            margin-bottom: 0;
+        }
+
+        .card-label .card-title {
+            text-transform: none;
+        }
+
+        .card-rb {
+            display: none;
+        }
+
+        .card-input {
+            cursor: pointer;
+            background-color: transparent !important;
+            opacity: .6;
+            -webkit-transition: all .2s ease-in-out;
+            -moz-transition: all .2s ease-in-out;
+            transition: all .2s ease-in-out;
+        }
+
+        .card-input:hover {
+            opacity: .8;
+        }
+
+        .card-rb:checked + .card-input {
+            opacity: 1;
+        }
+
         .revo-slider-emphasis-text {
             font-size: 58px;
             font-weight: 700;
@@ -990,6 +1034,14 @@
                 }
             });
             @endif
+        });
+
+        $("#form-langSwitch input[name=lang]").on('change', function () {
+            var locale = $(this).val() == 'id' ? '{{LaravelLocalization::getLocalizedURL('id')}}' :
+                '{{LaravelLocalization::getLocalizedURL('en')}}';
+
+            $("#form-langSwitch input[name=locale_url]").val(locale);
+            $("#form-langSwitch")[0].submit();
         });
 
         $(document).on('mouseover', function () {
