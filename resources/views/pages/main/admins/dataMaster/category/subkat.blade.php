@@ -83,14 +83,20 @@
                                             <td style="vertical-align: middle" align="center">
                                                 {{$row->updated_at->diffForHumans()}}</td>
                                             <td style="vertical-align: middle" align="center">
+                                                @if(!empty(\App\Models\DetailSubkat::where('subkategori_id',$row->id)->first()))
+                                                    <a href="{{route('table.categories.subs.gallery', ['id' => encrypt($row->id)])}}"
+                                                       class="btn btn-info " data-toggle="tooltip"
+                                                       title="Gallery" data-placement="right">
+                                                        <i class="fas fa-images"></i></a>
+                                                @endif
                                                 <button data-placement="left" data-toggle="tooltip" title="Edit"
                                                         type="button" class="btn btn-warning mr-1"
                                                         onclick="editBlogPost('{{$row->id}}','{{route('edit.categories.sub.posts', ['id' => $row->id])}}')">
                                                     <i class="fa fa-edit"></i></button>
-{{--                                                <a href="{{route('delete.categories', ['id' => encrypt($row->id)])}}"--}}
-{{--                                                   class="btn btn-danger delete-data" data-toggle="tooltip"--}}
-{{--                                                   title="Delete" data-placement="right">--}}
-{{--                                                    <i class="fas fa-trash-alt"></i></a>--}}
+                                                {{--                                                <a href="{{route('delete.categories', ['id' => encrypt($row->id)])}}"--}}
+                                                {{--                                                   class="btn btn-danger delete-data" data-toggle="tooltip"--}}
+                                                {{--                                                   title="Delete" data-placement="right">--}}
+                                                {{--                                                    <i class="fas fa-trash-alt"></i></a>--}}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -311,7 +317,7 @@
                                                         </div>
                                                         <select id="page_id" class="form-control selectpicker"
                                                                 title="-- Choose --" multiple
-                                                                name="page_id" data-live-search="true" >
+                                                                name="page_id" data-live-search="true">
                                                             @foreach(\App\Models\Pages::all() as $material)
                                                                 <option
                                                                     value="{{$material->id}}">{{$material->name}}</option>
@@ -335,7 +341,7 @@
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
                                                                         name="copies_id" data-live-search="true"
-                                                                        >
+                                                                >
                                                                     @foreach(\App\Models\Copies::all() as $material)
                                                                         <option
                                                                             value="{{$material->id}}">{{$material->name}}</option>
@@ -359,7 +365,7 @@
                                                                 <select id="size_id"
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
-                                                                        name="size_id" data-live-search="true" >
+                                                                        name="size_id" data-live-search="true">
                                                                     @foreach(\App\Models\Size::all() as $material)
                                                                         <option
                                                                             value="{{$material->id}}">{{$material->name}}</option>
@@ -384,7 +390,7 @@
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
                                                                         name="lamination_id" data-live-search="true"
-                                                                        >
+                                                                >
                                                                     @foreach(\App\Models\Lamination::all() as $material)
                                                                         <option
                                                                             value="{{$material->id}}">{{$material->name}}</option>
@@ -408,7 +414,7 @@
                                                                 <select id="side_id"
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
-                                                                        name="side_id" data-live-search="true" >
+                                                                        name="side_id" data-live-search="true">
                                                                     @foreach(\App\Models\Side::all() as $material)
                                                                         <option
                                                                             value="{{$material->id}}">{{$material->name}}</option>
@@ -432,7 +438,7 @@
                                                                 <select id="edge_id"
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
-                                                                        name="edge_id" data-live-search="true" >
+                                                                        name="edge_id" data-live-search="true">
                                                                     @foreach(\App\Models\Edge::all() as $material)
                                                                         <option
                                                                             value="{{$material->id}}">{{$material->name}}</option>
@@ -457,7 +463,7 @@
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
                                                                         name="color_id" data-live-search="true"
-                                                                        >
+                                                                >
                                                                     @foreach(\App\Models\Colors::all() as $material)
                                                                         <option
                                                                             value="{{$material->id}}">{{$material->name}}</option>
@@ -482,7 +488,7 @@
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
                                                                         name="front_side_id" data-live-search="true"
-                                                                        >
+                                                                >
                                                                     @foreach(\App\Models\Front::all() as $material)
                                                                         <option
                                                                             value="{{$material->id}}">{{$material->name}}</option>
@@ -507,7 +513,7 @@
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
                                                                         name="back_side_id" data-live-search="true"
-                                                                        >
+                                                                >
                                                                     @foreach(\App\Models\BackSide::all() as $material)
                                                                         <option
                                                                             value="{{$material->id}}">{{$material->name}}</option>
@@ -532,7 +538,7 @@
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
                                                                         name="right_side_id" data-live-search="true"
-                                                                        >
+                                                                >
                                                                     @foreach(\App\Models\RightLeftSide::all() as $material)
                                                                         <option
                                                                             value="{{$material->id}}">{{$material->name}}</option>
@@ -557,7 +563,7 @@
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
                                                                         name="left_side_id" data-live-search="true"
-                                                                        >
+                                                                >
                                                                     @foreach(\App\Models\RightLeftSide::all() as $material)
                                                                         <option
                                                                             value="{{$material->id}}">{{$material->name}}</option>
@@ -582,7 +588,7 @@
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
                                                                         name="front_cover_id" data-live-search="true"
-                                                                        >
+                                                                >
                                                                     @foreach(\App\Models\Material::all() as $material)
                                                                         <option
                                                                             value="{{$material->id}}">{{$material->name}}</option>
@@ -607,7 +613,7 @@
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
                                                                         name="back_cover_id" data-live-search="true"
-                                                                        >
+                                                                >
                                                                     @foreach(\App\Models\Material::all() as $material)
                                                                         <option
                                                                             value="{{$material->id}}">{{$material->name}}</option>
@@ -632,7 +638,7 @@
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
                                                                         name="binding_id" data-live-search="true"
-                                                                        >
+                                                                >
                                                                     @foreach(\App\Models\Finishing::all() as $material)
                                                                         <option
                                                                             value="{{$material->id}}">{{$material->name}}</option>
@@ -657,7 +663,7 @@
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
                                                                         name="print_method_id" data-live-search="true"
-                                                                        >
+                                                                >
                                                                     @foreach(\App\Models\PrintingMethods::all() as $material)
                                                                         <option
                                                                             value="{{$material->id}}">{{$material->name}}</option>
@@ -674,7 +680,8 @@
                                                         <input id="price" type="number" maxlength="191" name="price"
                                                                class="form-control"
                                                                placeholder="Write its price here&hellip;">
-                                                        <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
+                                                        <span
+                                                            class="glyphicon glyphicon-text-width form-control-feedback"></span>
                                                     </div>
                                                 </div>
 
@@ -684,44 +691,50 @@
                                                         <input id="weight" type="number" maxlength="191" name="weight"
                                                                class="form-control"
                                                                placeholder="Write its price here&hellip;">
-                                                        <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
+                                                        <span
+                                                            class="glyphicon glyphicon-text-width form-control-feedback"></span>
                                                     </div>
                                                 </div>
 
                                                 <div class="row form-group">
                                                     <div class="col-4 has-feedback">
                                                         <label for="title">Length (in Centimeter)</label>
-                                                        <input id="length_inp" type="number" maxlength="191" name="length"
+                                                        <input id="length_inp" type="number" maxlength="191"
+                                                               name="length"
                                                                class="form-control"
                                                                placeholder="Write its price here&hellip;">
-                                                        <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
+                                                        <span
+                                                            class="glyphicon glyphicon-text-width form-control-feedback"></span>
                                                     </div>
                                                     <div class="col-4 has-feedback">
                                                         <label for="title">Width (in Centimeter)</label>
                                                         <input id="width_inp" type="number" maxlength="191" name="width"
                                                                class="form-control"
                                                                placeholder="Write its price here&hellip;">
-                                                        <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
+                                                        <span
+                                                            class="glyphicon glyphicon-text-width form-control-feedback"></span>
                                                     </div>
                                                     <div class="col-4 has-feedback">
                                                         <label for="title">Height (in Centimeter)</label>
-                                                        <input id="height_inp" type="number" maxlength="191" name="height"
+                                                        <input id="height_inp" type="number" maxlength="191"
+                                                               name="height"
                                                                class="form-control"
                                                                placeholder="Write its price here&hellip;">
-                                                        <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
+                                                        <span
+                                                            class="glyphicon glyphicon-text-width form-control-feedback"></span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                        <div class="row form-group">
-                                            <div class="col">
-                                                <button type="submit" class="btn btn-primary btn-block text-uppercase"
-                                                        style="font-weight: 900">Submit
-                                                </button>
-                                            </div>
+                                    <div class="row form-group">
+                                        <div class="col">
+                                            <button type="submit" class="btn btn-primary btn-block text-uppercase"
+                                                    style="font-weight: 900">Submit
+                                            </button>
                                         </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -964,11 +977,11 @@
             $("#name_en").val("");
             $("#name_id").val("");
             $('#_content_en').summernote('code', "");
-            $('#_content_id').summernote('code',"");
+            $('#_content_id').summernote('code', "");
 
             $('#material_id').selectpicker('val', null);
-            $('#type_id').selectpicker('val',null);
-            $('#balance_id').selectpicker('val',null);
+            $('#type_id').selectpicker('val', null);
+            $('#balance_id').selectpicker('val', null);
             $('#page_id').selectpicker('val', null);
             $('#copies_id').selectpicker('val', null);
             $('#size_id').selectpicker('val', null);
@@ -1033,9 +1046,9 @@
                 $("#thumbnail").removeAttr('required', 'required');
                 // $("#txt_thumbnail").text(data.data.image.length > 60 ? data.data.image.slice(0, 60) + "..." : data.data.image);
 
-                if(!data.detail){
+                if (!data.detail) {
                     $("#advance_check").hide();
-                }else{
+                } else {
                     $("#advance").attr('checked', true);
                     $('#advance_menu').show();
                     $('#material_id').selectpicker('val', data.detail.material_ids);

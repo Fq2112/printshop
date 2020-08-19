@@ -338,6 +338,36 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                 'as' => 'edit.categories.cluster.posts'
             ]);
 
+            Route::get('subs/gallery/{id}', [
+                'uses' => 'CategoryController@show_gallery_subs',
+                'as' => 'table.categories.subs.gallery'
+            ]);
+
+            Route::post('/subs/gallery/add', [
+                'uses' => 'CategoryController@add_gallery_subs',
+                'as' => 'table.categories.subs.gallery.add'
+            ]);
+
+            Route::get('/subs/gallery/delete/{id}', [
+                'uses' => 'CategoryController@delete_gallery_subs',
+                'as' => 'table.categories.subs.gallery.delete'
+            ]);
+
+            Route::get('cluster/gallery/{id}', [
+                'uses' => 'CategoryController@show_gallery_cluster',
+                'as' => 'table.categories.cluster.gallery'
+            ]);
+
+            Route::post('/cluster/gallery/add', [
+                'uses' => 'CategoryController@add_gallery_clust',
+                'as' => 'table.categories.cluster.gallery.add'
+            ]);
+
+            Route::get('/cluster/gallery/delete/{id}', [
+                'uses' => 'CategoryController@delete_gallery_cluster',
+                'as' => 'table.categories.cluster.gallery.delete'
+            ]);
+
         });
 
         Route::group(['prefix' => 'spec', 'namespace' => 'Spec'], function () {

@@ -8,10 +8,13 @@ use App\Models\BlogCategory;
 use App\Models\ClusterKategori;
 use App\Models\DetailProduct;
 use App\Models\DetailSubkat;
+use App\Models\GalleryCluster;
+use App\Models\GallerySubs;
 use App\Models\Kategori;
 use App\Models\SubKategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use PHPMailer\PHPMailer\Exception;
 
 class CategoryController extends Controller
 {
@@ -780,5 +783,84 @@ class CategoryController extends Controller
             }
         }
         return back()->with('success', __('admin.alert.blog-category.create', ['param' => $request->name]));
+    }
+
+    public function show_gallery_subs($id)
+    {
+        $data = SubKategori::find(decrypt($id));
+
+        return view('pages.main.admins.dataMaster.category.gallery_subs', [
+            'data' => $data
+        ]);
+    }
+
+    public function add_gallery_subs(Request $request)
+    {
+        try {
+            foreach ($request->file('photos') as $file) {
+                $photo = uniqid() . $file->getClientOriginalName();
+                $file->storeAs('public/products/gallery/', $photo);
+
+                GallerySubs::create([
+                    'subkategori_id' => $request->subkategori_id,
+                    'image' => $photo
+                ]);
+            }
+            return back()->with('success', 'Banner Photo Successfully Added');
+        } catch (Exception $exception) {
+            return back()->with('error', $exception->getMessage());
+        }
+    }
+
+
+    public function delete_gallery_subs($id)
+    {
+        try {
+            $data = GallerySubs::find($id);
+            $data->delete();
+            return back()->with('success', 'Banner Photo Successfully Removed');
+
+        }catch (\Exception $exception){
+            return back()->with('error', $exception->getMessage());
+        }
+    }
+
+    public function show_gallery_cluster($id)
+    {
+        $data = ClusterKategori::find(decrypt($id));
+
+        return view('pages.main.admins.dataMaster.category.gallery_cluster', [
+            'data' => $data
+        ]);
+    }
+
+    public function add_gallery_clust(Request $request)
+    {
+        try {
+            foreach ($request->file('photos') as $file) {
+                $photo = uniqid() . $file->getClientOriginalName();
+                $file->storeAs('public/products/gallery/', $photo);
+
+                GalleryCluster::create([
+                    'cluster_id' => $request->cluster_id,
+                    'image' => $photo
+                ]);
+            }
+            return back()->with('success', 'Banner Photo Successfully Added');
+        } catch (Exception $exception) {
+            return back()->with('error', $exception->getMessage());
+        }
+    }
+
+    public function delete_gallery_cluster($id)
+    {
+        try {
+            $data = GalleryCluster::find($id);
+            $data->delete();
+            return back()->with('success', 'Banner Photo Successfully Removed');
+
+        }catch (\Exception $exception){
+            return back()->with('error', $exception->getMessage());
+        }
     }
 }

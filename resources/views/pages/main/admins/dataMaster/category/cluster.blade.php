@@ -83,6 +83,10 @@
                                             <td style="vertical-align: middle" align="center">
                                                 {{$row->updated_at->diffForHumans()}}</td>
                                             <td style="vertical-align: middle" align="center">
+                                                <a href="{{route('table.categories.cluster.gallery', ['id' => encrypt($row->id)])}}"
+                                                   class="btn btn-info " data-toggle="tooltip"
+                                                   title="Gallery" data-placement="right">
+                                                    <i class="fas fa-images"></i></a>
                                                 <button data-placement="left" data-toggle="tooltip" title="Edit"
                                                         type="button" class="btn btn-warning mr-1"
                                                         onclick="editBlogPost('{{$row->id}}','{{route('edit.categories.cluster.posts', ['id' => $row->id])}}')">
