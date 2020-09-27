@@ -220,7 +220,8 @@
                                                 title="{{__('lang.profile.last-update')}}">
                                                 <td><i class="icon-clock"></i></td>
                                                 <td>&nbsp;</td>
-                                                <td class="text-lowercase">{{$user->updated_at->diffForHumans()}}</td>
+                                                <td class="text-lowercase aj_updated">
+                                                    {{$user->updated_at->diffForHumans()}}</td>
                                             </tr>
                                         </table>
                                         <div id="personal_settings" style="display: none">
@@ -1137,6 +1138,7 @@
                                         $(".show_ava").attr('src', data);
                                         swal('{{__('lang.alert.success')}}', '{{__('lang.alert.upload')}}', 'success');
                                         $("#progress-upload").css("display", "none");
+                                        $(".aj_updated").text('{{now()->diffForHumans()}}');
                                     },
                                     error: function () {
                                         swal('{{__('lang.alert.error')}}', '{{__('lang.alert.error-capt')}}', 'error');
@@ -1210,6 +1212,7 @@
                                         $(".show_bg").attr('src', '{{asset('storage/users/background')}}/' + data);
                                         swal('{{__('lang.alert.success')}}', '{{__('lang.alert.upload-bg')}}', 'success');
                                         $("#progress-upload-bg").css("display", "none");
+                                        $(".aj_updated").text('{{now()->diffForHumans()}}');
                                     },
                                     error: function () {
                                         swal('{{__('lang.alert.error')}}', '{{__('lang.alert.error-capt')}}', 'error');

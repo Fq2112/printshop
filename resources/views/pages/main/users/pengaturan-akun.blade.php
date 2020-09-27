@@ -146,7 +146,8 @@
                                                 title="{{__('lang.profile.last-update')}}">
                                                 <td><i class="icon-clock"></i></td>
                                                 <td>&nbsp;</td>
-                                                <td class="text-lowercase">{{$user->updated_at->diffForHumans()}}</td>
+                                                <td class="text-lowercase aj_updated">
+                                                    {{$user->updated_at->diffForHumans()}}</td>
                                             </tr>
                                         </table>
                                         <div id="username_settings" style="display: none">
@@ -302,6 +303,7 @@
                         $("#show_username_settings").click();
                         $(".show_username2").text(data.username);
                         $(".show_username").text(data.limit);
+                        $(".aj_updated").text('{{now()->diffForHumans()}}');
                     }
                 },
                 error: function () {
@@ -396,6 +398,7 @@
                         $(".aj_pass").text("").parent().hide();
                         $(".aj_new_pass").text("").parent().hide();
                         $("#show_password_settings").click();
+                        $(".aj_updated").text('{{now()->diffForHumans()}}');
                     }
                 },
                 error: function () {
@@ -461,6 +464,7 @@
                                         $(".show_ava").attr('src', data);
                                         swal('{{__('lang.alert.success')}}', '{{__('lang.alert.upload')}}', 'success');
                                         $("#progress-upload").css("display", "none");
+                                        $(".aj_updated").text('{{now()->diffForHumans()}}');
                                     },
                                     error: function () {
                                         swal('{{__('lang.alert.error')}}', '{{__('lang.alert.error-capt')}}', 'error');
