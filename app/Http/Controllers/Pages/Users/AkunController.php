@@ -122,6 +122,7 @@ class AkunController extends Controller
             if ($request->file('ava')->isValid()) {
                 $request->ava->storeAs('public/users/ava', $name);
                 $user->getBio->update(['ava' => $name]);
+                $user->update(['updated_at' => now()]);
                 return asset('storage/users/ava/' . $name);
             }
 
@@ -137,6 +138,7 @@ class AkunController extends Controller
             if ($request->file('background')->isValid()) {
                 $request->background->storeAs('public/users/background', $name);
                 $user->getBio->update(['background' => $name]);
+                $user->update(['updated_at' => now()]);
                 return $name;
             }
 
