@@ -185,7 +185,7 @@
 
         #activate {
             color: #FFFFFF;
-            background: #00adb5;
+            background: #f89406;
             -moz-border-radius: 9px;
             -webkit-border-radius: 9px;
             border-radius: 9px;
@@ -310,7 +310,7 @@
             text-align: center;
             font-weight: 700;
             padding: 20px 15px 10px;
-            color: #f1c40f
+            color: #f89406
         }
 
         .dl .discount:after {
@@ -353,7 +353,7 @@
 
         .dl .ends {
             padding: 0 15px;
-            color: #f1c40f;
+            color: #f89406;
             margin-bottom: 10px
         }
 
@@ -376,7 +376,7 @@
             border-radius: 4px;
             margin-top: 10px;
             padding: 10px 15px;
-            color: #f1c40f;
+            color: #f89406;
             background: #f0f0f0
         }
 
@@ -509,10 +509,30 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td>
+                                                <div style="font-size:30px;line-height:29px;">&nbsp;</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div style="font-size:30px;line-height:30px;">&nbsp;</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td align="center" valign="top"
                                                 style="font-family:helvetica,arial,sans-serif; color:#646464; font-size:14px; line-height:22px;">
                                                 <span style="font-size:22px; font-weight:bold; line-height:26px;">
                                                     {{__('lang.mail.content.hello')}}, {{!is_null($user) ? $user->name : $email}}</span>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <table width="660" border="0" align="center" cellspacing="0" cellpadding="0"
+                                           bgcolor="#FFFFFF" class="full-width">
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <div style="font-size:20px;line-height:20px;">&nbsp;</div>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -555,6 +575,13 @@
                                                         </td>
                                                     </tr>
                                                 </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="alert alert-warning text-center">
+                                                    {{__('lang.mail.content.claim-offer2')}}
+                                                </div>
                                             </td>
                                         </tr>
                                     </table>
