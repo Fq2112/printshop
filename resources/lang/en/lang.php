@@ -479,7 +479,7 @@ return [
             "reset" => "We sent this email because we received a password reset request. If you didn't submit the request, please ignore this email and contact us as soon as possible.",
             "reset2" => "Where is my new password?",
             "reset3" => "We will not make you remember other passwords or certain codes.<br>Just click the link and enter the new password as you wish.",
-            "claim-offer" => 'Use this promo code "<b>:code</b>" to get <b>:disc%</b> off.',
+            "claim-offer" => 'Use Promo Code',
             "claim-offer2" => "We sent this email because we received a claim new user promo request. If you didn't submit the request, please ignore this email and contact us as soon as possible.",
             "unpaid" => "Please, complete your payment immediately",
             "unpaid2" => "Checkout was successfully on :datetime",
