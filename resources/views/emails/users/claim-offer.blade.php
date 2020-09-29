@@ -539,7 +539,7 @@
                                     </table>
 
                                     <table bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" width="660"
-                                           align="center">
+                                           align="center" style="border-top: 2px solid #f3f3f3">
                                         <tr>
                                             <td>
                                                 <table border="0" cellpadding="10" cellspacing="0"
