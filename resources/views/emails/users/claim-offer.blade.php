@@ -310,7 +310,7 @@
             text-align: center;
             font-weight: 700;
             padding: 20px 15px 10px;
-            color: #f89406
+            color: #f1c40f
         }
 
         .dl .discount:after {
@@ -353,7 +353,7 @@
 
         .dl .ends {
             padding: 0 15px;
-            color: #f89406;
+            color: #f1c40f;
             margin-bottom: 10px
         }
 
@@ -376,7 +376,7 @@
             border-radius: 4px;
             margin-top: 10px;
             padding: 10px 15px;
-            color: #f89406;
+            color: #f1c40f;
             background: #f0f0f0
         }
 
@@ -539,7 +539,7 @@
                                     </table>
 
                                     <table bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" width="660"
-                                           align="center" style="border-top: 2px solid #f3f3f3">
+                                           align="center">
                                         <tr>
                                             <td>
                                                 <table border="0" cellpadding="10" cellspacing="0"
