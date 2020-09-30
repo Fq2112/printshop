@@ -634,8 +634,15 @@
                                             <a class="collapsed" role="button" data-toggle="collapse"
                                                href="#collapse-{{$all.$code}}-status" aria-expanded="false"
                                                aria-controls="collapse-{{$all.$code}}-status"
-                                               onclick="tracking('{{$val->tracking_id}}')">{{__('lang.order.status')}}
-                                                @if($acc == 'shipped' || $acc == 'received')
+                                               onclick="tracking('{{$val->tracking_id}}')">
+                                                {{__('lang.order.status')}}
+                                                @if($acc == 'unpaid')
+                                                    <b class="text-uppercase">{{__('lang.order.tab-or')}}</b>
+                                                @elseif($acc == 'paid')
+                                                    <b class="text-uppercase">{{__('lang.order.tab-pr')}}</b>
+                                                @elseif($acc == 'produced')
+                                                    <b class="text-uppercase">{{__('lang.order.tab-bp')}}</b>
+                                                @elseif($acc == 'shipped' || $acc == 'received')
                                                     <b class="text-uppercase">{{__('lang.order.AWB').' #'.$val->resi}}</b>
                                                 @endif
                                             </a>
