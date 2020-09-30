@@ -3,154 +3,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scaleable=no">
     <title>Claim Offer</title>
     <style type="text/css">
-        #activate {
-            color: #FFFFFF;
-            background: #f89406;
-            -moz-border-radius: 9px;
-            -webkit-border-radius: 9px;
-            border-radius: 9px;
-            padding-left: 20px;
-            padding-right: 20px;
-            width: 320px;
-            display: block;
-            font-size: 18px;
-            font-weight: bold;
-            line-height: 50px;
-            text-align: center;
-            text-decoration: none;
-            font-family: helvetica, arial;
-            text-transform: uppercase;
-        }
-
-        .zoom {
-            transition: transform .3s;
-        }
-
-        .zoom:hover {
-            -ms-transform: scale(1.3); /* IE 9 */
-            -webkit-transform: scale(1.3); /* Safari 3-8 */
-            transform: scale(1.3);
-        }
-
-        div, p, a, li, td {
-            -webkit-text-size-adjust: none;
-        }
-
-        .ExternalClass * {
-            line-height: 100%
-        }
-
-        .ReadMsgBody {
-            width: 100%
-        }
-
-        .ExternalClass {
-            width: 100%
-        }
-
-        .appleLinks a {
-            color: #646464;
-            text-decoration: none;
-        }
-
-        table {
-            border-collapse: collapse;
-        }
-
-        body {
-            margin-left: 0px;
-            margin-top: 0px;
-            margin-right: 0px;
-            margin-bottom: 0px;
-        }
-
-        .appleLinksWhite a {
-            color: #949494;
-            text-decoration: none;
-        }
-
-        @media screen and (max-width: 480px) {
-            /* Width Control */
-            table[class=full-width], img[class=full-width], a[class=full-width], div[class=full-width] {
-                width: 100% !important;
-                height: auto !important;
-            }
-
-            div[class=line40] {
-                line-height: 40px !important;
-            }
-
-            /* Hiding Elements */
-            table[id=hide], td[class="hide"], img[id=hide] {
-                display: none !important;
-            }
-
-            img[class=logo] {
-                width: 240px !important;
-                height: 75px !important;
-            }
-        }
-
-        /* Medium Screen Tablets */
-        @media screen and (max-width: 650px) {
-            img[class=logo] {
-                width: 240px !important;
-                height: 75px !important;
-            }
-
-            a[class=footerlinks] {
-                display: block !important;
-                font-size: 16px !important;
-                padding: 0px 4px 2px 4px !important;
-                line-height: 14px !important;
-                width: 70% !important;
-                text-align: center !important;
-                color: #F9F9F9 !important;
-                text-decoration: none !important;
-            }
-
-            table[class=full-width], img[class=full-width], a[class=full-width], div[class=full-width] {
-                width: 100% !important;
-                height: auto !important;
-            }
-
-            table[class=hide], img[class=hide], td[class=hide], span[class=hide] {
-                display: none !important;
-            }
-
-            div[class=line40] {
-                line-height: 40px !important;
-            }
-
-            td[class=headline] {
-                padding-left: 10px !important;
-            }
-
-            span[class=content2] {
-                font-size: 18px !important;
-            }
-
-            span[class=appleLinksWhite] {
-                color: #949494 !important;
-            }
-
-            td[class=body], span[class=body] {
-                padding-right: 25px !important;
-                padding-left: 25px !important;
-                font-size: 20px !important;
-            }
-
-            td[class=footer-padding] {
-                padding-right: 15px !important;
-                padding-left: 15px !important;
-            }
-
-            img[class=social-icons] {
-                height: 90px !important;
-                width: auto !important;
-            }
-        }
-
         .alert {
             padding: 15px;
             margin: 0 1.5em 1em 1.5em;
@@ -245,8 +97,369 @@
             color: #843534;
         }
 
+        .text-left {
+            text-align: left;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
         .text-center {
             text-align: center;
+        }
+
+        blockquote {
+            padding: 10px 20px;
+            margin: 0 0 20px;
+            font-size: 17.5px;
+            border-left: 5px solid #eeeeee;
+        }
+
+        blockquote p:last-child,
+        blockquote ul:last-child,
+        blockquote ol:last-child {
+            margin-bottom: 0;
+        }
+
+        blockquote footer,
+        blockquote small,
+        blockquote .small {
+            display: block;
+            font-size: 80%;
+            line-height: 1.42857;
+            color: #777777;
+        }
+
+        blockquote footer:before,
+        blockquote small:before,
+        blockquote .small:before {
+            content: '\2014 \00A0';
+        }
+
+        .blockquote-reverse,
+        blockquote.pull-right {
+            padding-right: 15px;
+            padding-left: 0;
+            border-right: 5px solid #eeeeee;
+            border-left: 0;
+            text-align: right;
+        }
+
+        .blockquote-reverse footer:before,
+        .blockquote-reverse small:before,
+        .blockquote-reverse .small:before,
+        blockquote.pull-right footer:before,
+        blockquote.pull-right small:before,
+        blockquote.pull-right .small:before {
+            content: '';
+        }
+
+        .blockquote-reverse footer:after,
+        .blockquote-reverse small:after,
+        .blockquote-reverse .small:after,
+        blockquote.pull-right footer:after,
+        blockquote.pull-right small:after,
+        blockquote.pull-right .small:after {
+            content: '\00A0 \2014';
+        }
+
+        .list-inline {
+            padding-left: 0;
+            list-style: none;
+            margin-left: -5px;
+        }
+
+        .list-inline > li {
+            display: inline-block;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        .hr-divider {
+            margin: 0 0 .5em 0;
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, .4), rgba(0, 0, 0, .1), rgba(0, 0, 0, 0));
+        }
+
+        #activate {
+            color: #FFFFFF;
+            background: #f89406;
+            -moz-border-radius: 9px;
+            -webkit-border-radius: 9px;
+            border-radius: 9px;
+            padding-left: 20px;
+            padding-right: 20px;
+            width: 320px;
+            display: block;
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 50px;
+            text-align: center;
+            text-decoration: none;
+            font-family: helvetica, arial;
+            text-transform: uppercase;
+        }
+
+        .zoom {
+            transition: transform .3s;
+        }
+
+        .zoom:hover {
+            -ms-transform: scale(1.3); /* IE 9 */
+            -webkit-transform: scale(1.3); /* Safari 3-8 */
+            transform: scale(1.3);
+        }
+
+        div, p, a, li, td {
+            -webkit-text-size-adjust: none;
+        }
+
+        .ExternalClass * {
+            line-height: 100%
+        }
+
+        .ReadMsgBody {
+            width: 100%
+        }
+
+        .ExternalClass {
+            width: 100%
+        }
+
+        .appleLinks a {
+            color: #646464;
+            text-decoration: none;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        body {
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+        }
+
+        .appleLinksWhite a {
+            color: #949494;
+            text-decoration: none;
+        }
+
+        table.custom td div {
+            margin-bottom: 1.3em;
+        }
+
+        .alizarin {
+            background: #fa5555
+        }
+
+        .amethyst {
+            background: #9b59b6
+        }
+
+        .emerald {
+            background: #2ecc71
+        }
+
+        .midnight-blue {
+            background: #2c3e50
+        }
+
+        .peter-river {
+            background: #3498db
+        }
+
+        .dl {
+            width: 60%;
+            background: #f0f0f0;
+            padding: 30px 0;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .dl:before {
+            content: " ";
+            height: 20px;
+            width: 20px;
+            background: #ddd;
+            border-radius: 20px;
+            position: absolute;
+            left: 50%;
+            top: 20px;
+            margin-left: -10px
+        }
+
+        .dl .brand {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            padding: 10px 15px;
+            margin-top: 10px;
+            text-align: center;
+            min-height: 100px
+        }
+
+        .dl .discount {
+            min-height: 50px;
+            position: relative;
+            font-size: 80px;
+            line-height: 65px;
+            text-align: center;
+            font-weight: 700;
+            padding: 20px 15px 10px;
+            color: #f1c40f
+        }
+
+        .dl .discount:after {
+            content: " ";
+            border-right: 20px solid transparent;
+            border-left: 20px solid transparent;
+            position: absolute;
+            bottom: -20px;
+            left: 20%;
+        }
+
+        .dl .discount.alizarin:after {
+            border-top: 20px solid #fa5555
+        }
+
+        .dl .discount.peter-river:after {
+            border-top: 20px solid #3498db
+        }
+
+        .dl .discount.emerald:after {
+            border-top: 20px solid #2ecc71
+        }
+
+        .dl .discount.amethyst:after {
+            border-top: 20px solid #9b59b6
+        }
+
+        .dl .discount .type {
+            font-size: 25px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            line-height: 40px;
+        }
+
+        .dl .descr {
+            color: #999;
+            margin-top: 10px;
+            padding: 20px 15px
+        }
+
+        .dl .ends {
+            padding: 0 15px;
+            color: #f1c40f;
+            margin-bottom: 10px
+        }
+
+        .dl .coupon {
+            min-height: 50px;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 18px;
+            padding: 20px 15px
+        }
+
+        .dl .coupon a.open-code {
+            color: #16a085;
+            text-decoration: none;
+        }
+
+        .dl .coupon .code {
+            letter-spacing: 1px;
+            border-radius: 4px;
+            margin-top: 10px;
+            padding: 10px 15px;
+            color: #f1c40f;
+            background: #f0f0f0
+        }
+
+        @media screen and (max-width: 480px) {
+            /* Width Control */
+            table[class=full-width], img[class=full-width], a[class=full-width], div[class=full-width] {
+                width: 100% !important;
+                height: auto !important;
+            }
+
+            div[class=line40] {
+                line-height: 40px !important;
+            }
+
+            /* Hiding Elements */
+            table[id=hide], td[class="hide"], img[id=hide] {
+                display: none !important;
+            }
+
+            img[class=logo] {
+                width: 240px !important;
+                height: 75px !important;
+            }
+        }
+
+        /* Medium Screen Tablets */
+        @media screen and (max-width: 650px) {
+            img[class=logo] {
+                width: 240px !important;
+                height: 75px !important;
+            }
+
+            a[class=footerlinks] {
+                display: block !important;
+                font-size: 16px !important;
+                padding: 0px 4px 2px 4px !important;
+                line-height: 14px !important;
+                width: 70% !important;
+                text-align: center !important;
+                color: #F9F9F9 !important;
+                text-decoration: none !important;
+            }
+
+            table[class=full-width], img[class=full-width], a[class=full-width], div[class=full-width] {
+                width: 100% !important;
+                height: auto !important;
+            }
+
+            table[class=hide], img[class=hide], td[class=hide], span[class=hide] {
+                display: none !important;
+            }
+
+            div[class=line40] {
+                line-height: 40px !important;
+            }
+
+            td[class=headline] {
+                padding-left: 10px !important;
+            }
+
+            span[class=content2] {
+                font-size: 18px !important;
+            }
+
+            span[class=appleLinksWhite] {
+                color: #949494 !important;
+            }
+
+            td[class=body], span[class=body] {
+                padding-right: 25px !important;
+                padding-left: 25px !important;
+                font-size: 20px !important;
+            }
+
+            td[class=footer-padding] {
+                padding-right: 15px !important;
+                padding-left: 15px !important;
+            }
+
+            img[class=social-icons] {
+                height: 90px !important;
+                width: auto !important;
+            }
         }
     </style>
 </head>
@@ -325,16 +538,43 @@
                                         </tbody>
                                     </table>
 
-                                    <!-- BEGIN Body Content -->
-
-                                    <table width="660" border="0" align="center" cellspacing="0" cellpadding="0"
-                                           bgcolor="#FFFFFF" class="full-width">
-                                        <tbody>
+                                    <table bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" width="660"
+                                           align="center" style="border-top: 2px solid #f3f3f3">
                                         <tr>
                                             <td>
-                                                <div class="alert alert-info text-center">
-                                                    {!! __('lang.mail.content.claim-offer', ['code' => $promo->promo_code, 'disc' => $promo->discount]) !!}
-                                                </div>
+                                                <table border="0" cellpadding="10" cellspacing="0"
+                                                       style="margin: .5em 1em">
+                                                    <tr>
+                                                        <td align="center" width="600" class="full-width"
+                                                            style="padding-left: 20px; padding-right:20px"
+                                                            valign="top">
+                                                            <div class="dl">
+                                                                <div class="brand">
+                                                                    <h2>New User Discount Voucher</h2>
+                                                                </div>
+                                                                <div class="discount alizarin">{{$promo->discount}}%
+                                                                    <div class="type">off</div>
+                                                                </div>
+                                                                <div class="descr">
+                                                                    {{$promo->description}}
+                                                                </div>
+                                                                <div class="ends">
+                                                                    <small>*
+                                                                        Expires: {{\Carbon\Carbon::parse($promo->end)->format('l, j F Y')}}
+                                                                        .</small>
+                                                                </div>
+                                                                <div class="coupon midnight-blue">
+                                                                    <a data-toggle="collapse" href="#code-1"
+                                                                       class="open-code">
+                                                                        {{__('lang.mail.content.claim-offer')}}</a>
+                                                                    <div id="code-1" class="collapse code">
+                                                                        {{$promo->promo_code}}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
                                             </td>
                                         </tr>
                                         <tr>
@@ -344,7 +584,6 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        </tbody>
                                     </table>
 
                                     <table width="660" border="0" align="center" cellspacing="0" cellpadding="0"

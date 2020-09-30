@@ -479,7 +479,7 @@ return [
             "reset" => "Kami mengirim email ini karena kami menerima permintaan reset kata sandi. Jika Anda tidak mengirimkannya, abaikan email ini dan hubungi kami sesegera mungkin.",
             "reset2" => "Dimana kata sandi baru saya?",
             "reset3" => "Kami tidak akan membuat Anda mengingat kata sandi atau kode tertentu lainnya.<br>Cukup klik tautan dan masukkan kata sandi yang baru sesuai keinginan.",
-            "claim-offer" => 'Gunakan kode promo ini "<b>:code</b>" untuk mendapatkan diskon <b>:disc%</b>.',
+            "claim-offer" => 'Gunakan Kode Promo',
             "claim-offer2" => "Kami mengirim email ini karena kami menerima permintaan klaim promo pengguna baru. Jika Anda tidak mengirimkannya, abaikan email ini dan hubungi kami sesegera mungkin.",
             "unpaid" => "Mohon untuk segera menyeleseaikan pembayaran Anda",
             "unpaid2" => "Checkout berhasil pada :datetime",
