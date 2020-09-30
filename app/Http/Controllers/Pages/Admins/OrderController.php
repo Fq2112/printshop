@@ -243,6 +243,19 @@ class OrderController extends Controller
         }
     }
 
+    public function get_invoice_($code,$user_id)
+    {
+        $filename = $code . '.pdf';
+        $file_path = storage_path('app/public/users/order/invoice/' . $user_id . '/' . $filename);
+        if (file_exists($file_path)) {
+            return Response::download($file_path, 'Invoice_' . $filename, [
+                'Content-length : ' . filesize($file_path)
+            ]);
+        } else {
+            return back()->with('error',"Oops! The current file you are looking for is not available ");
+        }
+    }
+
     public function shipping($code)
     {
         $payment = \App\Models\PaymentCart::where('uni_code_payment', $code)->first();

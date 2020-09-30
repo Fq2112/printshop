@@ -182,10 +182,16 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             'as' => 'admin.order.download'
         ]);
 
+        Route::get('download/{code}/{user_id}', [
+            'uses' => 'OrderController@get_invoice_',
+            'as' => 'admin.order.download.invoice'
+        ]);
+
         Route::post('download/invoice', [
             'uses' => 'OrderController@download_invoice',
             'as' => 'admin.order.invoice.download'
         ]);
+
 
         Route::post('download/shipping/', [
             'uses' => 'OrderController@create_pdf',

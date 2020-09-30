@@ -265,8 +265,7 @@
                                             <td>
                                                 @if($item->finish_payment == 1)
                                                     <div class="btn-group">
-                                                        <a href="javascript:void(0)" class="btn btn-danger"
-                                                           onclick="getInvoice('{{$item->getUser->id}}','{{ucfirst($item->uni_code_payment)}}')"
+                                                        <a href="{{route('admin.order.download.invoice',['code' => ucfirst($item->uni_code_payment),'user_id' => $item->getUser->id])}}" class="btn btn-danger"
                                                            data-toggle="tooltip" title="Download Invoice"><i
                                                                 class="fa fa-file-pdf"></i></a>
                                                         <a href="{{route('admin.order.user',['kode'=>$item->uni_code_payment])}}" class="btn btn-info"

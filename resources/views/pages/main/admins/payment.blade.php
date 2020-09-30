@@ -270,8 +270,8 @@
                                                             </button>
                                                             <div class="dropdown-menu"
                                                                  aria-labelledby="dropdownMenuButton">
-                                                                <a class="dropdown-item" href="javascript:void(0)"
-                                                                   onclick="getInvoice('{{$item->getUser->id}}','{{ucfirst($item->uni_code_payment)}}')">Invoice</a>
+                                                                <a class="dropdown-item" href="{{route('admin.order.download.invoice',['code' => ucfirst($item->uni_code_payment),'user_id' => $item->getUser->id])}}"
+                                                                   >Invoice</a>
                                                                 <a class="dropdown-item" href="javascript:void(0)"
                                                                    onclick=" get_design('{{ucfirst($item->uni_code_payment)}}')">Production
                                                                     Summary</a>
