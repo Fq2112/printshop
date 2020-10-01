@@ -173,13 +173,13 @@ class MainController extends Controller
 
         if (!is_null($sub)) {
             $data = $sub;
+            $specs = $data->getSubkatSpecs;
             $clusters = ClusterKategori::where('subkategori_id', $data->id)->where('isActive', true)->get();
 
-            if (count($clusters) > 0) {
+            if (is_null($specs) && count($clusters) > 0) {
                 return view('pages.main.produk', compact('data', 'clusters'));
 
             } else {
-                $specs = $data->getSubkatSpecs;
                 $guidelines = $data->guidelines;
                 $setting = Setting::first();
                 $gallery = $data->getGallery;
