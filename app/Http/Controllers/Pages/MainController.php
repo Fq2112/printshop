@@ -164,11 +164,26 @@ class MainController extends Controller
     public function produk(Request $request)
     {
         $sub = SubKategori::where('permalink->en', $request->produk)->where('isActive', true)
-            ->orwhere('permalink->id', $request->produk)->where('isActive', true)->first();
-        $clust = ClusterKategori::where('permalink->en', $request->produk)->where('isActive', true)
-            ->orwhere('permalink->id', $request->produk)->where('isActive', true)->first();
-        $guidelines = null;
+            ->whereHas('getKategori', function ($q) {
+                $q->where('isActive', true);
+            })->orwhere('permalink->id', $request->produk)->where('isActive', true)
+            ->whereHas('getKategori', function ($q) {
+                $q->where('isActive', true);
+            })->first();
 
+        $clust = ClusterKategori::where('permalink->en', $request->produk)->where('isActive', true)
+            ->whereHas('getSubKategori', function ($q) {
+                $q->where('isActive', true)->whereHas('getKategori', function ($q) {
+                    $q->where('isActive', true);
+                });
+            })->orwhere('permalink->id', $request->produk)->where('isActive', true)
+            ->whereHas('getSubKategori', function ($q) {
+                $q->where('isActive', true)->whereHas('getKategori', function ($q) {
+                    $q->where('isActive', true);
+                });
+            })->first();
+
+        $guidelines = null;
         $cart = $request->has('cart_id') ? Cart::find(decrypt($request->cart_id)) : null;
 
         if (!is_null($sub)) {
@@ -180,7 +195,7 @@ class MainController extends Controller
 
             } else {
                 $specs = $data->getSubkatSpecs;
-                if($specs) {
+                if ($specs) {
                     $guidelines = $data->guidelines;
                     $setting = Setting::first();
                     $gallery = $data->getGallery;
@@ -193,7 +208,7 @@ class MainController extends Controller
         } elseif (!is_null($clust)) {
             $data = $clust;
             $specs = $data->getClusterSpecs;
-            if($specs) {
+            if ($specs) {
                 $guidelines = $data->getSubKategori->guidelines;
                 $setting = Setting::first();
                 $gallery = $data->getGallery;
@@ -203,7 +218,7 @@ class MainController extends Controller
             }
         }
 
-        return back();
+        return redirect()->route('beranda');
     }
 
     public function downloadGuidelines(Request $request)
