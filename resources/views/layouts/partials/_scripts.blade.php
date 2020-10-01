@@ -9,17 +9,6 @@
 
         $('.datepicker').datepicker({format: "yyyy-mm-dd", autoclose: true, todayHighlight: true, todayBtn: true});
         $(".bt-switch").bootstrapSwitch();
-
-        @if(session('register') || session('error') || session('logout') || session('expire') || session('inactive') ||
-            session('unknown') || session('recovered'))
-        openLoginModal();
-        @elseif($errors->has('email') || $errors->has('password') || $errors->has('name'))
-        openRegisterModal();
-        @elseif(session('resetLink') || session('resetLink_failed'))
-        openEmailModal();
-        @elseif(session('reset') || session('recover_failed'))
-        openPasswordModal();
-        @endif
     });
 
     $("#top-cart-trigger").off('click').on('click', function (e) {
@@ -396,6 +385,17 @@
         };
         var x = document.getElementsByTagName('script')[0];
         x.parentNode.insertBefore(s, x);
+
+        @if(session('register') || session('error') || session('logout') || session('expire') || session('inactive') ||
+            session('unknown') || session('recovered'))
+        openLoginModal();
+        @elseif($errors->has('email') || $errors->has('password') || $errors->has('name'))
+        openRegisterModal();
+        @elseif(session('resetLink') || session('resetLink_failed'))
+        openEmailModal();
+        @elseif(session('reset') || session('recover_failed'))
+        openPasswordModal();
+        @endif
     };
 
     $(document).on('mouseover', '.use-nicescroll', function () {
