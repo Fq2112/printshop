@@ -314,7 +314,7 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                 'as' => 'table.subkat.add'
             ]);
 
-            Route::post('/sub/update', [
+            Route::put('/sub/update', [
                 'uses' => 'CategoryController@update_data',
                 'as' => 'table.subkat.update'
             ]);
@@ -330,7 +330,7 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             ]);
 
             Route::post('/cluster/add', [
-                'uses' => 'CategoryController@create_data',
+                'uses' => 'CategoryController@create_data_cluster',
                 'as' => 'table.cluster.add'
             ]);
 

@@ -111,15 +111,15 @@ class CategoryController extends Controller
         if ($request->hasFile('thumbnail')) {
             $this->validate($request, ['thumbnail' => 'required|image|mimes:jpg,jpeg,gif,png|max:5120']);
             $thumbnail = uniqid() . $request->file('thumbnail')->getClientOriginalName();
-            $request->file('thumbnail')->storeAs('public/subkat/', $thumbnail);
+            $request->file('thumbnail')->storeAs('public/products/thumb/', $thumbnail);
         } else {
             $thumbnail = "";
         }
 
         if ($request->hasFile('guidelines')) {
-            $this->validate($request, ['guidelines' => 'required|image|mimes:jpg,jpeg,gif,png|max:5120']);
+            $this->validate($request, ['guidelines' => 'required|mimes:jpg,jpeg,gif,png,rar,zip,pdf|max:5120']);
             $guidelines = uniqid() . $request->file('guidelines')->getClientOriginalName();
-            $request->file('guidelines')->storeAs('public/subkat/guidelines/', $guidelines);
+            $request->file('guidelines')->storeAs('public/products/guidelines/', $guidelines);
         } else {
             $guidelines = "";
         }
@@ -284,16 +284,16 @@ class CategoryController extends Controller
             $this->validate($request, ['thumbnail' => 'required|image|mimes:jpg,jpeg,gif,png|max:5120']);
             $thumbnail = uniqid() . $request->file('thumbnail')->getClientOriginalName();
             Storage::delete('public/subkat/' . $category->banner);
-            $request->file('thumbnail')->storeAs('public/subkat/', $thumbnail);
+            $request->file('thumbnail')->storeAs('public/products/thumb/', $thumbnail);
         } else {
             $thumbnail = "";
         }
 
         if ($request->hasFile('guidelines')) {
-            $this->validate($request, ['guidelines' => 'required|image|mimes:jpg,jpeg,gif,png|max:5120']);
+            $this->validate($request, ['guidelines' => 'required|mimes:jpg,jpeg,gif,png,rar,zip,pdf|max:5120']);
             $guidelines = uniqid() . $request->file('guidelines')->getClientOriginalName();
             Storage::delete('public/subkat/guidelines/' . $category->guidelines);
-            $request->file('guidelines')->storeAs('public/subkat/guidelines/', $guidelines);
+            $request->file('guidelines')->storeAs('public/products/guidelines/', $guidelines);
         } else {
             $guidelines = "";
         }
@@ -467,17 +467,25 @@ class CategoryController extends Controller
         if ($request->hasFile('thumbnail')) {
             $this->validate($request, ['thumbnail' => 'required|image|mimes:jpg,jpeg,gif,png|max:5120']);
             $thumbnail = uniqid() . $request->file('thumbnail')->getClientOriginalName();
-            $request->file('thumbnail')->storeAs('public/subkat/', $thumbnail);
+            $request->file('thumbnail')->storeAs('public/products/thumb/', $thumbnail);
         } else {
             $thumbnail = "";
         }
 
         if ($request->hasFile('guidelines')) {
-            $this->validate($request, ['guidelines' => 'required|image|mimes:jpg,jpeg,gif,png|max:5120']);
+            $this->validate($request, ['guidelines' => 'required|mimes:jpg,jpeg,gif,png,rar,zip,pdf|max:5120']);
             $guidelines = uniqid() . $request->file('guidelines')->getClientOriginalName();
-            $request->file('guidelines')->storeAs('public/subkat/guidelines/', $guidelines);
+            $request->file('guidelines')->storeAs('public/products/guidelines/', $guidelines);
         } else {
             $guidelines = "";
+        }
+
+        if ($request->hasFile('banner')) {
+            $this->validate($request, ['banner' => 'required|image|mimes:jpg,jpeg,gif,png,rar,zip,pdf|max:5120']);
+            $banner = uniqid() . $request->file('banner')->getClientOriginalName();
+            $request->file('banner')->storeAs('public/products/banner/', $banner);
+        } else {
+            $banner = "";
         }
 
         $subkat = ClusterKategori::create([
@@ -495,7 +503,11 @@ class CategoryController extends Controller
                 'en' => preg_replace("![^a-z0-9]+!i", "-", strtolower($request->name_en)),
             ],
             'thumbnail' => $thumbnail,
-            'features' => $guidelines
+            'banner' => $banner,
+            'features' => [
+                'en' => $request->_feature_en,
+                'id' => $request->_feature_id
+            ]
         ]);
 
         if ($request->has('advance')) {
@@ -630,17 +642,25 @@ class CategoryController extends Controller
         if ($request->hasFile('thumbnail')) {
             $this->validate($request, ['thumbnail' => 'required|image|mimes:jpg,jpeg,gif,png|max:5120']);
             $thumbnail = uniqid() . $request->file('thumbnail')->getClientOriginalName();
-            $request->file('thumbnail')->storeAs('public/subkat/', $thumbnail);
+            $request->file('thumbnail')->storeAs('public/products/thumb/', $thumbnail);
         } else {
             $thumbnail = "";
         }
 
         if ($request->hasFile('guidelines')) {
-            $this->validate($request, ['guidelines' => 'required|image|mimes:jpg,jpeg,gif,png|max:5120']);
+            $this->validate($request, ['guidelines' => 'required|mimes:jpg,jpeg,gif,png,rar,zip,pdf|max:5120']);
             $guidelines = uniqid() . $request->file('guidelines')->getClientOriginalName();
-            $request->file('guidelines')->storeAs('public/subkat/guidelines/', $guidelines);
+            $request->file('guidelines')->storeAs('public/products/guidelines/', $guidelines);
         } else {
             $guidelines = "";
+        }
+
+        if ($request->hasFile('banner')) {
+            $this->validate($request, ['banner' => 'required|image|mimes:jpg,jpeg,gif,png,rar,zip,pdf|max:5120']);
+            $banner = uniqid() . $request->file('banner')->getClientOriginalName();
+            $request->file('banner')->storeAs('public/products/banner/', $banner);
+        } else {
+            $banner = "";
         }
 
         $cluster->update([
@@ -658,7 +678,11 @@ class CategoryController extends Controller
                 'en' => preg_replace("![^a-z0-9]+!i", "-", strtolower($request->name_en)),
             ],
             'thumbnail' => $thumbnail,
-            'features' => $guidelines
+            'banner' => $banner,
+            'features' => [
+                'en' => $request->_feature_en,
+                'id' => $request->_feature_id
+            ]
         ]);
 
         $detail = DetailProduct::where('cluster_kategoris_id', $cluster->id)->first();

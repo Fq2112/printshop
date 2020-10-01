@@ -177,9 +177,31 @@
                                         </div>
                                     </div>
 
+                                    <div class="row form-group has-feedback">
+                                        <div class="col">
+                                            <label for="_content">Feature ( En ) <small><span  data-toggle="tooltip" title="List benefit this product">
+                                                        <i class="fa fa-question"></i> </span></small>
+                                            </label>
+                                            <textarea id="_feature_en" type="text" name="_feature_en"
+                                                      class="summernote form-control"
+                                                      placeholder="Write something about your post here&hellip;"></textarea>
+                                            <span class="glyphicon glyphicon-text-height form-control-feedback"></span>
+                                        </div>
+                                        <div class="col">
+                                            <label for="_content">Feature ( Id )
+                                                <small><span  data-toggle="tooltip" title="Daftar Kelebihan Produk ini">
+                                                        <i class="fa fa-question"></i> </span></small>
+                                            </label>
+                                            <textarea id="_feature_id" type="text" name="_feature_id"
+                                                      class="summernote form-control"
+                                                      placeholder="Write something about your post here&hellip;"></textarea>
+                                            <span class="glyphicon glyphicon-text-height form-control-feedback"></span>
+                                        </div>
+                                    </div>
+
                                     <div class="row form-group">
                                         <div class="col">
-                                            <label for="thumbnail">Banner</label>
+                                            <label for="thumbnail">Thumbnail</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fa fa-images"></i></span>
@@ -199,15 +221,15 @@
 
                                     <div class="row form-group">
                                         <div class="col">
-                                            <label for="thumbnail">Guidelines <small>( optional )</small></label>
+                                            <label for="thumbnail">Banner</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fa fa-images"></i></span>
                                                 </div>
                                                 <div class="custom-file">
-                                                    <input type="file" name="guidelines" class="custom-file-input"
-                                                           id="thumbnail" accept="image/*">
-                                                    <label class="custom-file-label" id="txt_thumbnail">Choose
+                                                    <input type="file" name="banner" class="custom-file-input"
+                                                           id="banner" accept="image/*" required>
+                                                    <label class="custom-file-label" id="txt_thumbnail" for="banner">Choose
                                                         File</label>
                                                 </div>
                                             </div>
@@ -217,7 +239,29 @@
                                         </div>
                                     </div>
 
-                                    <div class="row form-group" id="advance_check">
+
+                                    <div class="row form-group" style="display: none">
+                                        <div class="col">
+                                            <label for="thumbnail">Guidelines <small>( optional )</small></label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-images"></i></span>
+                                                </div>
+                                                <div class="custom-file">
+                                                    <input type="file" name="guidelines" class="custom-file-input"
+                                                           id="thumbnail" accept="image/*,.pdf,.rar,.zip">
+                                                    <label class="custom-file-label" id="txt_thumbnail">Choose
+                                                        File</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-text text-muted">
+                                                Allowed extension: jpg, jpeg, gif, png, rar, zip, pdf. Allowed size: < 5
+                                                MB
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row form-group" style="display: none">
                                         <div class="col">
                                             <div class="custom-checkbox custom-control">
                                                 <input type="checkbox" id="advance" name="advance"
@@ -232,500 +276,504 @@
                                         </div>
                                     </div>
 
-                                    <div id="advance_menu">
 
-                                        <div class="row form-group">
-                                            <div class="col">
-                                                <div class="col fix-label-group">
-                                                    <label for="category_id">Material</label>
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
+                                    <div class="row form-group">
+                                        <div class="col">
+                                            <div class="col fix-label-group">
+                                                <label for="category_id">Material</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
                                                             <span class="input-group-text fix-label-item"
                                                                   style="height: 2.25rem">
                                                                 <i class="fa fa-tag"></i></span>
-                                                        </div>
-                                                        <select id="material_id" class="form-control selectpicker"
-                                                                title="-- Choose --" multiple
-                                                                name="material_id" data-live-search="true">
-                                                            @foreach(\App\Models\Material::all() as $material)
-                                                                <option
-                                                                    value="{{$material->id}}">{{$material->name}}</option>
-                                                            @endforeach
-                                                        </select>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row form-group">
-                                            <div class="col">
-                                                <div class="col fix-label-group">
-                                                    <label for="category_id">Type</label>
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text fix-label-item"
-                                                                  style="height: 2.25rem">
-                                                                <i class="fa fa-tag"></i></span>
-                                                        </div>
-                                                        <select id="type_id" class="form-control selectpicker"
-                                                                title="-- Choose --" multiple
-                                                                name="type_id" data-live-search="true">
-                                                            @foreach(\App\Models\TypeProduct::all() as $material)
-                                                                <option
-                                                                    value="{{$material->id}}">{{$material->name}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row form-group">
-                                            <div class="col">
-                                                <div class="col fix-label-group">
-                                                    <label for="category_id">Balance</label>
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text fix-label-item"
-                                                                  style="height: 2.25rem">
-                                                                <i class="fa fa-tag"></i></span>
-                                                        </div>
-                                                        <select id="balance_id" class="form-control selectpicker"
-                                                                title="-- Choose --" multiple
-                                                                name="balance_id" data-live-search="true">
-                                                            @foreach(\App\Models\Balance::all() as $material)
-                                                                <option
-                                                                    value="{{$material->id}}">{{$material->name}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row form-group">
-                                            <div class="col">
-                                                <div class="col fix-label-group">
-                                                    <label for="category_id">Pages</label>
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text fix-label-item"
-                                                                  style="height: 2.25rem">
-                                                                <i class="fa fa-tag"></i></span>
-                                                        </div>
-                                                        <select id="page_id" class="form-control selectpicker"
-                                                                title="-- Choose --" multiple
-                                                                name="page_id" data-live-search="true" >
-                                                            @foreach(\App\Models\Pages::all() as $material)
-                                                                <option
-                                                                    value="{{$material->id}}">{{$material->name}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="row form-group">
-                                                    <div class="col">
-                                                        <div class="col fix-label-group">
-                                                            <label for="category_id">Copies</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                            <span class="input-group-text fix-label-item"
-                                                                  style="height: 2.25rem">
-                                                                <i class="fa fa-tag"></i></span>
-                                                                </div>
-                                                                <select id="copies_id"
-                                                                        class="form-control selectpicker"
-                                                                        title="-- Choose --" multiple
-                                                                        name="copies_id" data-live-search="true"
-                                                                        >
-                                                                    @foreach(\App\Models\Copies::all() as $material)
-                                                                        <option
-                                                                            value="{{$material->id}}">{{$material->name}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row form-group">
-                                                    <div class="col">
-                                                        <div class="col fix-label-group">
-                                                            <label for="category_id">Size</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                            <span class="input-group-text fix-label-item"
-                                                                  style="height: 2.25rem">
-                                                                <i class="fa fa-tag"></i></span>
-                                                                </div>
-                                                                <select id="size_id"
-                                                                        class="form-control selectpicker"
-                                                                        title="-- Choose --" multiple
-                                                                        name="size_id" data-live-search="true" >
-                                                                    @foreach(\App\Models\Size::all() as $material)
-                                                                        <option
-                                                                            value="{{$material->id}}">{{$material->name}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row form-group">
-                                                    <div class="col">
-                                                        <div class="col fix-label-group">
-                                                            <label for="category_id">Lamination</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                            <span class="input-group-text fix-label-item"
-                                                                  style="height: 2.25rem">
-                                                                <i class="fa fa-tag"></i></span>
-                                                                </div>
-                                                                <select id="lamination_id"
-                                                                        class="form-control selectpicker"
-                                                                        title="-- Choose --" multiple
-                                                                        name="lamination_id" data-live-search="true"
-                                                                        >
-                                                                    @foreach(\App\Models\Lamination::all() as $material)
-                                                                        <option
-                                                                            value="{{$material->id}}">{{$material->name}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row form-group">
-                                                    <div class="col">
-                                                        <div class="col fix-label-group">
-                                                            <label for="category_id">Side Print</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                            <span class="input-group-text fix-label-item"
-                                                                  style="height: 2.25rem">
-                                                                <i class="fa fa-tag"></i></span>
-                                                                </div>
-                                                                <select id="side_id"
-                                                                        class="form-control selectpicker"
-                                                                        title="-- Choose --" multiple
-                                                                        name="side_id" data-live-search="true" >
-                                                                    @foreach(\App\Models\Side::all() as $material)
-                                                                        <option
-                                                                            value="{{$material->id}}">{{$material->name}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row form-group">
-                                                    <div class="col">
-                                                        <div class="col fix-label-group">
-                                                            <label for="category_id">Edge</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                            <span class="input-group-text fix-label-item"
-                                                                  style="height: 2.25rem">
-                                                                <i class="fa fa-tag"></i></span>
-                                                                </div>
-                                                                <select id="edge_id"
-                                                                        class="form-control selectpicker"
-                                                                        title="-- Choose --" multiple
-                                                                        name="edge_id" data-live-search="true" >
-                                                                    @foreach(\App\Models\Edge::all() as $material)
-                                                                        <option
-                                                                            value="{{$material->id}}">{{$material->name}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row form-group">
-                                                    <div class="col">
-                                                        <div class="col fix-label-group">
-                                                            <label for="category_id">Colors</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                            <span class="input-group-text fix-label-item"
-                                                                  style="height: 2.25rem">
-                                                                <i class="fa fa-tag"></i></span>
-                                                                </div>
-                                                                <select id="color_id"
-                                                                        class="form-control selectpicker"
-                                                                        title="-- Choose --" multiple
-                                                                        name="color_id" data-live-search="true"
-                                                                        >
-                                                                    @foreach(\App\Models\Colors::all() as $material)
-                                                                        <option
-                                                                            value="{{$material->id}}">{{$material->name}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row form-group">
-                                                    <div class="col">
-                                                        <div class="col fix-label-group">
-                                                            <label for="category_id">Front Side</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                            <span class="input-group-text fix-label-item"
-                                                                  style="height: 2.25rem">
-                                                                <i class="fa fa-tag"></i></span>
-                                                                </div>
-                                                                <select id="front_side_id"
-                                                                        class="form-control selectpicker"
-                                                                        title="-- Choose --" multiple
-                                                                        name="front_side_id" data-live-search="true"
-                                                                        >
-                                                                    @foreach(\App\Models\Front::all() as $material)
-                                                                        <option
-                                                                            value="{{$material->id}}">{{$material->name}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row form-group">
-                                                    <div class="col">
-                                                        <div class="col fix-label-group">
-                                                            <label for="category_id">Back Side</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                            <span class="input-group-text fix-label-item"
-                                                                  style="height: 2.25rem">
-                                                                <i class="fa fa-tag"></i></span>
-                                                                </div>
-                                                                <select id="back_side_id"
-                                                                        class="form-control selectpicker"
-                                                                        title="-- Choose --" multiple
-                                                                        name="back_side_id" data-live-search="true"
-                                                                        >
-                                                                    @foreach(\App\Models\BackSide::all() as $material)
-                                                                        <option
-                                                                            value="{{$material->id}}">{{$material->name}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row form-group">
-                                                    <div class="col">
-                                                        <div class="col fix-label-group">
-                                                            <label for="category_id">Right Side</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                            <span class="input-group-text fix-label-item"
-                                                                  style="height: 2.25rem">
-                                                                <i class="fa fa-tag"></i></span>
-                                                                </div>
-                                                                <select id="right_side_id"
-                                                                        class="form-control selectpicker"
-                                                                        title="-- Choose --" multiple
-                                                                        name="right_side_id" data-live-search="true"
-                                                                        >
-                                                                    @foreach(\App\Models\RightLeftSide::all() as $material)
-                                                                        <option
-                                                                            value="{{$material->id}}">{{$material->name}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row form-group">
-                                                    <div class="col">
-                                                        <div class="col fix-label-group">
-                                                            <label for="category_id">Left Side</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                            <span class="input-group-text fix-label-item"
-                                                                  style="height: 2.25rem">
-                                                                <i class="fa fa-tag"></i></span>
-                                                                </div>
-                                                                <select id="left_side_id"
-                                                                        class="form-control selectpicker"
-                                                                        title="-- Choose --" multiple
-                                                                        name="left_side_id" data-live-search="true"
-                                                                        >
-                                                                    @foreach(\App\Models\RightLeftSide::all() as $material)
-                                                                        <option
-                                                                            value="{{$material->id}}">{{$material->name}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row form-group">
-                                                    <div class="col">
-                                                        <div class="col fix-label-group">
-                                                            <label for="category_id">Front Cover</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                            <span class="input-group-text fix-label-item"
-                                                                  style="height: 2.25rem">
-                                                                <i class="fa fa-tag"></i></span>
-                                                                </div>
-                                                                <select id="front_cover_id"
-                                                                        class="form-control selectpicker"
-                                                                        title="-- Choose --" multiple
-                                                                        name="front_cover_id" data-live-search="true"
-                                                                        >
-                                                                    @foreach(\App\Models\Material::all() as $material)
-                                                                        <option
-                                                                            value="{{$material->id}}">{{$material->name}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row form-group">
-                                                    <div class="col">
-                                                        <div class="col fix-label-group">
-                                                            <label for="category_id">Back Cover</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                            <span class="input-group-text fix-label-item"
-                                                                  style="height: 2.25rem">
-                                                                <i class="fa fa-tag"></i></span>
-                                                                </div>
-                                                                <select id="back_cover_id"
-                                                                        class="form-control selectpicker"
-                                                                        title="-- Choose --" multiple
-                                                                        name="back_cover_id" data-live-search="true"
-                                                                        >
-                                                                    @foreach(\App\Models\Material::all() as $material)
-                                                                        <option
-                                                                            value="{{$material->id}}">{{$material->name}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row form-group">
-                                                    <div class="col">
-                                                        <div class="col fix-label-group">
-                                                            <label for="category_id">Binding</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                            <span class="input-group-text fix-label-item"
-                                                                  style="height: 2.25rem">
-                                                                <i class="fa fa-tag"></i></span>
-                                                                </div>
-                                                                <select id="binding_id"
-                                                                        class="form-control selectpicker"
-                                                                        title="-- Choose --" multiple
-                                                                        name="binding_id" data-live-search="true"
-                                                                        >
-                                                                    @foreach(\App\Models\Finishing::all() as $material)
-                                                                        <option
-                                                                            value="{{$material->id}}">{{$material->name}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row form-group">
-                                                    <div class="col">
-                                                        <div class="col fix-label-group">
-                                                            <label for="category_id">Print Method</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                            <span class="input-group-text fix-label-item"
-                                                                  style="height: 2.25rem">
-                                                                <i class="fa fa-tag"></i></span>
-                                                                </div>
-                                                                <select id="print_method_id"
-                                                                        class="form-control selectpicker"
-                                                                        title="-- Choose --" multiple
-                                                                        name="print_method_id" data-live-search="true"
-                                                                        >
-                                                                    @foreach(\App\Models\PrintingMethods::all() as $material)
-                                                                        <option
-                                                                            value="{{$material->id}}">{{$material->name}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row form-group">
-                                                    <div class="col has-feedback">
-                                                        <label for="title">Base Price (HPP)</label>
-                                                        <input id="price" type="number" maxlength="191" name="price"
-                                                               class="form-control"
-                                                               placeholder="Write its price here&hellip;">
-                                                        <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row form-group">
-                                                    <div class="col has-feedback">
-                                                        <label for="title">Weight Product (in Grams)</label>
-                                                        <input id="weight" type="number" maxlength="191" name="weight"
-                                                               class="form-control"
-                                                               placeholder="Write its price here&hellip;">
-                                                        <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row form-group">
-                                                    <div class="col-4 has-feedback">
-                                                        <label for="title">Length (in Centimeter)</label>
-                                                        <input id="length_inp" type="number" maxlength="191" name="length"
-                                                               class="form-control"
-                                                               placeholder="Write its price here&hellip;">
-                                                        <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
-                                                    </div>
-                                                    <div class="col-4 has-feedback">
-                                                        <label for="title">Width (in Centimeter)</label>
-                                                        <input id="width_inp" type="number" maxlength="191" name="width"
-                                                               class="form-control"
-                                                               placeholder="Write its price here&hellip;">
-                                                        <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
-                                                    </div>
-                                                    <div class="col-4 has-feedback">
-                                                        <label for="title">Height (in Centimeter)</label>
-                                                        <input id="height_inp" type="number" maxlength="191" name="height"
-                                                               class="form-control"
-                                                               placeholder="Write its price here&hellip;">
-                                                        <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
-                                                    </div>
+                                                    <select id="material_id" class="form-control selectpicker"
+                                                            title="-- Choose --" multiple
+                                                            name="material_id[]" data-live-search="true">
+                                                        @foreach(\App\Models\Material::all() as $material)
+                                                            <option
+                                                                value="{{$material->id}}">{{$material->name}}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                        <div class="row form-group">
-                                            <div class="col">
-                                                <button type="submit" class="btn btn-primary btn-block text-uppercase"
-                                                        style="font-weight: 900">Submit
-                                                </button>
+                                    <div class="row form-group">
+                                        <div class="col">
+                                            <div class="col fix-label-group">
+                                                <label for="category_id">Type</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                            <span class="input-group-text fix-label-item"
+                                                                  style="height: 2.25rem">
+                                                                <i class="fa fa-tag"></i></span>
+                                                    </div>
+                                                    <select id="type_id" class="form-control selectpicker"
+                                                            title="-- Choose --" multiple
+                                                            name="type_id[]" data-live-search="true">
+                                                        @foreach(\App\Models\TypeProduct::all() as $material)
+                                                            <option
+                                                                value="{{$material->id}}">{{$material->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div class="row form-group">
+                                        <div class="col">
+                                            <div class="col fix-label-group">
+                                                <label for="category_id">Balance</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                            <span class="input-group-text fix-label-item"
+                                                                  style="height: 2.25rem">
+                                                                <i class="fa fa-tag"></i></span>
+                                                    </div>
+                                                    <select id="balance_id" class="form-control selectpicker"
+                                                            title="-- Choose --" multiple
+                                                            name="balance_id[]" data-live-search="true">
+                                                        @foreach(\App\Models\Balance::all() as $material)
+                                                            <option
+                                                                value="{{$material->id}}">{{$material->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row form-group">
+                                        <div class="col">
+                                            <div class="col fix-label-group">
+                                                <label for="category_id">Pages</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                            <span class="input-group-text fix-label-item"
+                                                                  style="height: 2.25rem">
+                                                                <i class="fa fa-tag"></i></span>
+                                                    </div>
+                                                    <select id="page_id" class="form-control selectpicker"
+                                                            title="-- Choose --" multiple
+                                                            name="page_id[]" data-live-search="true">
+                                                        @foreach(\App\Models\Pages::all() as $material)
+                                                            <option
+                                                                value="{{$material->id}}">{{$material->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row form-group">
+                                                <div class="col">
+                                                    <div class="col fix-label-group">
+                                                        <label for="category_id">Copies</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                            <span class="input-group-text fix-label-item"
+                                                                  style="height: 2.25rem">
+                                                                <i class="fa fa-tag"></i></span>
+                                                            </div>
+                                                            <select id="copies_id"
+                                                                    class="form-control selectpicker"
+                                                                    title="-- Choose --" multiple
+                                                                    name="copies_id[]" data-live-search="true"
+                                                            >
+                                                                @foreach(\App\Models\Copies::all() as $material)
+                                                                    <option
+                                                                        value="{{$material->id}}">{{$material->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group">
+                                                <div class="col">
+                                                    <div class="col fix-label-group">
+                                                        <label for="category_id">Size</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                            <span class="input-group-text fix-label-item"
+                                                                  style="height: 2.25rem">
+                                                                <i class="fa fa-tag"></i></span>
+                                                            </div>
+                                                            <select id="size_id"
+                                                                    class="form-control selectpicker"
+                                                                    title="-- Choose --" multiple
+                                                                    name="size_id[]" data-live-search="true">
+                                                                @foreach(\App\Models\Size::all() as $material)
+                                                                    <option
+                                                                        value="{{$material->id}}">{{$material->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group">
+                                                <div class="col">
+                                                    <div class="col fix-label-group">
+                                                        <label for="category_id">Lamination</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                            <span class="input-group-text fix-label-item"
+                                                                  style="height: 2.25rem">
+                                                                <i class="fa fa-tag"></i></span>
+                                                            </div>
+                                                            <select id="lamination_id"
+                                                                    class="form-control selectpicker"
+                                                                    title="-- Choose --" multiple
+                                                                    name="lamination_id[]" data-live-search="true"
+                                                            >
+                                                                @foreach(\App\Models\Lamination::all() as $material)
+                                                                    <option
+                                                                        value="{{$material->id}}">{{$material->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group">
+                                                <div class="col">
+                                                    <div class="col fix-label-group">
+                                                        <label for="category_id">Side Print</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                            <span class="input-group-text fix-label-item"
+                                                                  style="height: 2.25rem">
+                                                                <i class="fa fa-tag"></i></span>
+                                                            </div>
+                                                            <select id="side_id"
+                                                                    class="form-control selectpicker"
+                                                                    title="-- Choose --" multiple
+                                                                    name="side_id[]" data-live-search="true">
+                                                                @foreach(\App\Models\Side::all() as $material)
+                                                                    <option
+                                                                        value="{{$material->id}}">{{$material->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group">
+                                                <div class="col">
+                                                    <div class="col fix-label-group">
+                                                        <label for="category_id">Edge</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                            <span class="input-group-text fix-label-item"
+                                                                  style="height: 2.25rem">
+                                                                <i class="fa fa-tag"></i></span>
+                                                            </div>
+                                                            <select id="edge_id"
+                                                                    class="form-control selectpicker"
+                                                                    title="-- Choose --" multiple
+                                                                    name="edge_id[]" data-live-search="true">
+                                                                @foreach(\App\Models\Edge::all() as $material)
+                                                                    <option
+                                                                        value="{{$material->id}}">{{$material->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group">
+                                                <div class="col">
+                                                    <div class="col fix-label-group">
+                                                        <label for="category_id">Colors</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                            <span class="input-group-text fix-label-item"
+                                                                  style="height: 2.25rem">
+                                                                <i class="fa fa-tag"></i></span>
+                                                            </div>
+                                                            <select id="color_id"
+                                                                    class="form-control selectpicker"
+                                                                    title="-- Choose --" multiple
+                                                                    name="color_id[]" data-live-search="true"
+                                                            >
+                                                                @foreach(\App\Models\Colors::all() as $material)
+                                                                    <option
+                                                                        value="{{$material->id}}">{{$material->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group">
+                                                <div class="col">
+                                                    <div class="col fix-label-group">
+                                                        <label for="category_id">Front Side</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                            <span class="input-group-text fix-label-item"
+                                                                  style="height: 2.25rem">
+                                                                <i class="fa fa-tag"></i></span>
+                                                            </div>
+                                                            <select id="front_side_id"
+                                                                    class="form-control selectpicker"
+                                                                    title="-- Choose --" multiple
+                                                                    name="front_side_id[]" data-live-search="true"
+                                                            >
+                                                                @foreach(\App\Models\Front::all() as $material)
+                                                                    <option
+                                                                        value="{{$material->id}}">{{$material->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group">
+                                                <div class="col">
+                                                    <div class="col fix-label-group">
+                                                        <label for="category_id">Back Side</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                            <span class="input-group-text fix-label-item"
+                                                                  style="height: 2.25rem">
+                                                                <i class="fa fa-tag"></i></span>
+                                                            </div>
+                                                            <select id="back_side_id"
+                                                                    class="form-control selectpicker"
+                                                                    title="-- Choose --" multiple
+                                                                    name="back_side_id[]" data-live-search="true"
+                                                            >
+                                                                @foreach(\App\Models\BackSide::all() as $material)
+                                                                    <option
+                                                                        value="{{$material->id}}">{{$material->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group">
+                                                <div class="col">
+                                                    <div class="col fix-label-group">
+                                                        <label for="category_id">Right Side</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                            <span class="input-group-text fix-label-item"
+                                                                  style="height: 2.25rem">
+                                                                <i class="fa fa-tag"></i></span>
+                                                            </div>
+                                                            <select id="right_side_id"
+                                                                    class="form-control selectpicker"
+                                                                    title="-- Choose --" multiple
+                                                                    name="right_side_id[]" data-live-search="true"
+                                                            >
+                                                                @foreach(\App\Models\RightLeftSide::all() as $material)
+                                                                    <option
+                                                                        value="{{$material->id}}">{{$material->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group">
+                                                <div class="col">
+                                                    <div class="col fix-label-group">
+                                                        <label for="category_id">Left Side</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                            <span class="input-group-text fix-label-item"
+                                                                  style="height: 2.25rem">
+                                                                <i class="fa fa-tag"></i></span>
+                                                            </div>
+                                                            <select id="left_side_id"
+                                                                    class="form-control selectpicker"
+                                                                    title="-- Choose --" multiple
+                                                                    name="left_side_id[]" data-live-search="true"
+                                                            >
+                                                                @foreach(\App\Models\RightLeftSide::all() as $material)
+                                                                    <option
+                                                                        value="{{$material->id}}">{{$material->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group">
+                                                <div class="col">
+                                                    <div class="col fix-label-group">
+                                                        <label for="category_id">Front Cover</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                            <span class="input-group-text fix-label-item"
+                                                                  style="height: 2.25rem">
+                                                                <i class="fa fa-tag"></i></span>
+                                                            </div>
+                                                            <select id="front_cover_id"
+                                                                    class="form-control selectpicker"
+                                                                    title="-- Choose --" multiple
+                                                                    name="front_cover_id[]" data-live-search="true"
+                                                            >
+                                                                @foreach(\App\Models\Material::all() as $material)
+                                                                    <option
+                                                                        value="{{$material->id}}">{{$material->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group">
+                                                <div class="col">
+                                                    <div class="col fix-label-group">
+                                                        <label for="category_id">Back Cover</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                            <span class="input-group-text fix-label-item"
+                                                                  style="height: 2.25rem">
+                                                                <i class="fa fa-tag"></i></span>
+                                                            </div>
+                                                            <select id="back_cover_id"
+                                                                    class="form-control selectpicker"
+                                                                    title="-- Choose --" multiple
+                                                                    name="back_cover_id[]" data-live-search="true"
+                                                            >
+                                                                @foreach(\App\Models\Material::all() as $material)
+                                                                    <option
+                                                                        value="{{$material->id}}">{{$material->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group">
+                                                <div class="col">
+                                                    <div class="col fix-label-group">
+                                                        <label for="category_id">Binding</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                            <span class="input-group-text fix-label-item"
+                                                                  style="height: 2.25rem">
+                                                                <i class="fa fa-tag"></i></span>
+                                                            </div>
+                                                            <select id="binding_id"
+                                                                    class="form-control selectpicker"
+                                                                    title="-- Choose --" multiple
+                                                                    name="binding_id[]" data-live-search="true"
+                                                            >
+                                                                @foreach(\App\Models\Finishing::all() as $material)
+                                                                    <option
+                                                                        value="{{$material->id}}">{{$material->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group">
+                                                <div class="col">
+                                                    <div class="col fix-label-group">
+                                                        <label for="category_id">Print Method</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                            <span class="input-group-text fix-label-item"
+                                                                  style="height: 2.25rem">
+                                                                <i class="fa fa-tag"></i></span>
+                                                            </div>
+                                                            <select id="print_method_id"
+                                                                    class="form-control selectpicker"
+                                                                    title="-- Choose --" multiple
+                                                                    name="print_method_id[]" data-live-search="true"
+                                                            >
+                                                                @foreach(\App\Models\PrintingMethods::all() as $material)
+                                                                    <option
+                                                                        value="{{$material->id}}">{{$material->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group">
+                                                <div class="col has-feedback">
+                                                    <label for="title">Base Price (HPP)</label>
+                                                    <input id="price" type="number" maxlength="191" name="price"
+                                                           class="form-control"
+                                                           placeholder="Write its price here&hellip;" required>
+                                                    <span
+                                                        class="glyphicon glyphicon-text-width form-control-feedback"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group">
+                                                <div class="col has-feedback">
+                                                    <label for="title">Weight Product (in Grams)</label>
+                                                    <input id="weight" type="number" maxlength="191" name="weight"
+                                                           class="form-control"
+                                                           placeholder="Write its price here&hellip;" required>
+                                                    <span
+                                                        class="glyphicon glyphicon-text-width form-control-feedback"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group">
+                                                <div class="col-4 has-feedback">
+                                                    <label for="title">Length (in Centimeter)</label>
+                                                    <input id="length_inp" type="number" maxlength="191" name="length"
+                                                           class="form-control"
+                                                           placeholder="Write its price here&hellip;" required>
+                                                    <span
+                                                        class="glyphicon glyphicon-text-width form-control-feedback"></span>
+                                                </div>
+                                                <div class="col-4 has-feedback">
+                                                    <label for="title">Width (in Centimeter)</label>
+                                                    <input id="width_inp" type="number" maxlength="191" name="width"
+                                                           class="form-control"
+                                                           placeholder="Write its price here&hellip;" required>
+                                                    <span
+                                                        class="glyphicon glyphicon-text-width form-control-feedback"></span>
+                                                </div>
+                                                <div class="col-4 has-feedback">
+                                                    <label for="title">Height (in Centimeter)</label>
+                                                    <input id="height_inp" type="number" maxlength="191" name="height"
+                                                           class="form-control"
+                                                           placeholder="Write its price here&hellip;" required>
+                                                    <span
+                                                        class="glyphicon glyphicon-text-width form-control-feedback"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row form-group">
+                                        <div class="col">
+                                            <button type="submit" class="btn btn-primary btn-block text-uppercase"
+                                                    style="font-weight: 900">Submit
+                                            </button>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -744,6 +792,8 @@
     <script src="{{asset('admins/modules/summernote/summernote-bs4.js')}}"></script>
     <script>
         $(function () {
+            $('#advance').prop('checked', true);
+
             var export_filename = 'Blog Categories Table ({{now()->format('j F Y')}})',
                 table = $("#dt-buttons").DataTable({
                     dom: "<'row'<'col-sm-12 col-md-3'l><'col-sm-12 col-md-5'B><'col-sm-12 col-md-4'f>>" +
@@ -891,11 +941,12 @@
             $("#name_en").val("");
             $("#name_id").val("");
             $('#_content_en').summernote('code', "");
-            $('#_content_id').summernote('code',"");
-
+            $('#_content_id').summernote('code', "");
+            $('#_feature_en').summernote('code', "");
+            $('#_feature_id').summernote('code',"");
             $('#material_id').selectpicker('val', null);
-            $('#type_id').selectpicker('val',null);
-            $('#balance_id').selectpicker('val',null);
+            $('#type_id').selectpicker('val', null);
+            $('#balance_id').selectpicker('val', null);
             $('#page_id').selectpicker('val', null);
             $('#copies_id').selectpicker('val', null);
             $('#size_id').selectpicker('val', null);
@@ -957,12 +1008,14 @@
                 $('#kategori_id').selectpicker('val', data.data.kategoris_id);
                 $('#_content_en').summernote('code', data.data.caption.en);
                 $('#_content_id').summernote('code', data.data.caption.id);
+                $('#_feature_en').summernote('code', data.data.features.en);
+                $('#_feature_id').summernote('code', data.data.features.id);
                 $("#thumbnail").removeAttr('required', 'required');
                 // $("#txt_thumbnail").text(data.data.image.length > 60 ? data.data.image.slice(0, 60) + "..." : data.data.image);
 
-                if(!data.detail){
+                if (!data.detail) {
                     $("#advance_check").hide();
-                }else{
+                } else {
                     $("#advance").attr('checked', true);
                     $('#advance_menu').show();
                     $('#material_id').selectpicker('val', data.detail.material_ids);

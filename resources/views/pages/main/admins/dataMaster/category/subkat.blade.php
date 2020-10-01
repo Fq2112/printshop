@@ -201,7 +201,7 @@
 
                                     <div class="row form-group">
                                         <div class="col">
-                                            <label for="thumbnail">Guidelines <small>( optional )</small></label>
+                                            <label for="thumbnail">Guidelines </label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fa fa-images"></i></span>
@@ -248,7 +248,7 @@
                                                         </div>
                                                         <select id="material_id" class="form-control selectpicker"
                                                                 title="-- Choose --" multiple
-                                                                name="material_id" data-live-search="true">
+                                                                name="material_id[]" data-live-search="true">
                                                             @foreach(\App\Models\Material::all() as $material)
                                                                 <option
                                                                     value="{{$material->id}}">{{$material->name}}</option>
@@ -271,7 +271,7 @@
                                                         </div>
                                                         <select id="type_id" class="form-control selectpicker"
                                                                 title="-- Choose --" multiple
-                                                                name="type_id" data-live-search="true">
+                                                                name="type_id[]" data-live-search="true">
                                                             @foreach(\App\Models\TypeProduct::all() as $material)
                                                                 <option
                                                                     value="{{$material->id}}">{{$material->name}}</option>
@@ -294,7 +294,7 @@
                                                         </div>
                                                         <select id="balance_id" class="form-control selectpicker"
                                                                 title="-- Choose --" multiple
-                                                                name="balance_id" data-live-search="true">
+                                                                name="balance_id[]" data-live-search="true">
                                                             @foreach(\App\Models\Balance::all() as $material)
                                                                 <option
                                                                     value="{{$material->id}}">{{$material->name}}</option>
@@ -317,7 +317,7 @@
                                                         </div>
                                                         <select id="page_id" class="form-control selectpicker"
                                                                 title="-- Choose --" multiple
-                                                                name="page_id" data-live-search="true">
+                                                                name="page_id[]" data-live-search="true">
                                                             @foreach(\App\Models\Pages::all() as $material)
                                                                 <option
                                                                     value="{{$material->id}}">{{$material->name}}</option>
@@ -340,7 +340,7 @@
                                                                 <select id="copies_id"
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
-                                                                        name="copies_id" data-live-search="true"
+                                                                        name="copies_id[]" data-live-search="true"
                                                                 >
                                                                     @foreach(\App\Models\Copies::all() as $material)
                                                                         <option
@@ -365,7 +365,7 @@
                                                                 <select id="size_id"
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
-                                                                        name="size_id" data-live-search="true">
+                                                                        name="size_id[]" data-live-search="true">
                                                                     @foreach(\App\Models\Size::all() as $material)
                                                                         <option
                                                                             value="{{$material->id}}">{{$material->name}}</option>
@@ -389,7 +389,7 @@
                                                                 <select id="lamination_id"
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
-                                                                        name="lamination_id" data-live-search="true"
+                                                                        name="lamination_id[]" data-live-search="true"
                                                                 >
                                                                     @foreach(\App\Models\Lamination::all() as $material)
                                                                         <option
@@ -414,7 +414,7 @@
                                                                 <select id="side_id"
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
-                                                                        name="side_id" data-live-search="true">
+                                                                        name="side_id[]" data-live-search="true">
                                                                     @foreach(\App\Models\Side::all() as $material)
                                                                         <option
                                                                             value="{{$material->id}}">{{$material->name}}</option>
@@ -438,7 +438,7 @@
                                                                 <select id="edge_id"
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
-                                                                        name="edge_id" data-live-search="true">
+                                                                        name="edge_id[]" data-live-search="true">
                                                                     @foreach(\App\Models\Edge::all() as $material)
                                                                         <option
                                                                             value="{{$material->id}}">{{$material->name}}</option>
@@ -462,7 +462,7 @@
                                                                 <select id="color_id"
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
-                                                                        name="color_id" data-live-search="true"
+                                                                        name="color_id[]" data-live-search="true"
                                                                 >
                                                                     @foreach(\App\Models\Colors::all() as $material)
                                                                         <option
@@ -487,7 +487,7 @@
                                                                 <select id="front_side_id"
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
-                                                                        name="front_side_id" data-live-search="true"
+                                                                        name="front_side_id[]" data-live-search="true"
                                                                 >
                                                                     @foreach(\App\Models\Front::all() as $material)
                                                                         <option
@@ -512,7 +512,7 @@
                                                                 <select id="back_side_id"
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
-                                                                        name="back_side_id" data-live-search="true"
+                                                                        name="back_side_id[]" data-live-search="true"
                                                                 >
                                                                     @foreach(\App\Models\BackSide::all() as $material)
                                                                         <option
@@ -537,7 +537,7 @@
                                                                 <select id="right_side_id"
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
-                                                                        name="right_side_id" data-live-search="true"
+                                                                        name="right_side_id[]" data-live-search="true"
                                                                 >
                                                                     @foreach(\App\Models\RightLeftSide::all() as $material)
                                                                         <option
@@ -562,7 +562,7 @@
                                                                 <select id="left_side_id"
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
-                                                                        name="left_side_id" data-live-search="true"
+                                                                        name="left_side_id[]" data-live-search="true"
                                                                 >
                                                                     @foreach(\App\Models\RightLeftSide::all() as $material)
                                                                         <option
@@ -587,7 +587,7 @@
                                                                 <select id="front_cover_id"
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
-                                                                        name="front_cover_id" data-live-search="true"
+                                                                        name="front_cover_id[]" data-live-search="true"
                                                                 >
                                                                     @foreach(\App\Models\Material::all() as $material)
                                                                         <option
@@ -612,7 +612,7 @@
                                                                 <select id="back_cover_id"
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
-                                                                        name="back_cover_id" data-live-search="true"
+                                                                        name="back_cover_id[]" data-live-search="true"
                                                                 >
                                                                     @foreach(\App\Models\Material::all() as $material)
                                                                         <option
@@ -637,7 +637,7 @@
                                                                 <select id="binding_id"
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
-                                                                        name="binding_id" data-live-search="true"
+                                                                        name="binding_id[]" data-live-search="true"
                                                                 >
                                                                     @foreach(\App\Models\Finishing::all() as $material)
                                                                         <option
@@ -662,7 +662,7 @@
                                                                 <select id="print_method_id"
                                                                         class="form-control selectpicker"
                                                                         title="-- Choose --" multiple
-                                                                        name="print_method_id" data-live-search="true"
+                                                                        name="print_method_id[]" data-live-search="true"
                                                                 >
                                                                     @foreach(\App\Models\PrintingMethods::all() as $material)
                                                                         <option
