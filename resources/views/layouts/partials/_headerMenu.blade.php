@@ -23,14 +23,17 @@
                 </div>
                 <div class="card-columns col-lg-9">
                     @foreach(\App\Models\SubKategori::where('kategoris_id', $kat->id)->where('isActive', true)->get() as $sub)
-                        @if($sub->getSubkatSpecs)
+                        @php
+                            $clusters = \App\Models\ClusterKategori::where('subkategori_id', $sub->id)->where('isActive', true)->get();
+                        @endphp
+                        @if(count($clusters) > 0 || (count($clusters) <= 0 && $sub->getSubkatSpecs))
                             <div class="card card-body nopadding nomargin">
                                 <ul class="mega-menu-column border-left-0">
                                     <li class="mega-menu-title">
                                         <a href="{{route('produk', ['produk' => $sub->permalink])}}">
                                             <div>{{$sub->name}}</div>
                                         </a>
-                                        @if($sub->getCluster)
+                                        @if(count($clusters) > 0)
                                             <ul>
                                                 @foreach(\App\Models\ClusterKategori::where('subkategori_id', $sub->id)->where('isActive', true)->get() as $row)
                                                     @if($row->getClusterSpecs)
