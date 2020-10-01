@@ -163,9 +163,9 @@ class MainController extends Controller
 
     public function produk(Request $request)
     {
-        $sub = SubKategori::where('permalink->en', $request->produk)
+        $sub = SubKategori::where('permalink->en', $request->produk)->where('isActive', true)
             ->orwhere('permalink->id', $request->produk)->where('isActive', true)->first();
-        $clust = ClusterKategori::where('permalink->en', $request->produk)
+        $clust = ClusterKategori::where('permalink->en', $request->produk)->where('isActive', true)
             ->orwhere('permalink->id', $request->produk)->where('isActive', true)->first();
         $guidelines = null;
 
