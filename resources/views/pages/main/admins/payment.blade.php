@@ -272,8 +272,7 @@
                                                                  aria-labelledby="dropdownMenuButton">
                                                                 <a class="dropdown-item" href="{{route('admin.order.download.invoice',['code' => ucfirst($item->uni_code_payment),'user_id' => $item->getUser->id])}}"
                                                                    >Invoice</a>
-                                                                <a class="dropdown-item" href="javascript:void(0)"
-                                                                   onclick=" get_design('{{ucfirst($item->uni_code_payment)}}')">Production
+                                                                <a class="dropdown-item" target="_blank" href="{{route('admin.order.production.download',['code' =>$item->uni_code_payment])}}">Production
                                                                     Summary</a>
                                                                 <a class="dropdown-item"
                                                                    href="{{route('admin.order.shipping',['code' =>$item->uni_code_payment])}}"
@@ -587,45 +586,45 @@
         });
 
         function get_design(code) {
-            $.ajax({
-                type: 'post',
-                url: '{{route('admin.order.production.pdf')}}',
-                data: {
-                    _token: '{{csrf_token()}}',
-                    code: code
-                },
-                success: function (data) {
+            {{--$.ajax({--}}
+            {{--    type: 'post',--}}
+            {{--    url: '{{route('admin.order.production.pdf')}}',--}}
+            {{--    data: {--}}
+            {{--        _token: '{{csrf_token()}}',--}}
+            {{--        code: code--}}
+            {{--    },--}}
+            {{--    success: function (data) {--}}
 
-                    setTimeout(
-                        function () {
-                            $.ajax({ //Download File from above
-                                type: 'post',
-                                url: '{{route('admin.order.production.download')}}',
-                                data: {
-                                    _token: '{{csrf_token()}}',
-                                    code: code
-                                },
-                                success: function (data) {
-                                    console.log('downloaded')
-                                }
-                            });
-                        }, 1000);
-
-
-                    swal('Success', "Plesae Wait Till Page Succesfully Realoded", 'success');
-                    setTimeout(
-                        function () {
-                            location.reload();
-                        }, 5000);
+            {{--        setTimeout(--}}
+            {{--            function () {--}}
+            {{--                $.ajax({ //Download File from above--}}
+            {{--                    type: 'post',--}}
+            {{--                    url: '{{route('admin.order.production.download')}}',--}}
+            {{--                    data: {--}}
+            {{--                        _token: '{{csrf_token()}}',--}}
+            {{--                        code: code--}}
+            {{--                    },--}}
+            {{--                    success: function (data) {--}}
+            {{--                        console.log('downloaded')--}}
+            {{--                    }--}}
+            {{--                });--}}
+            {{--            }, 1000);--}}
 
 
-                }, error: function (xhr, ajaxOptions, thrownError) {
-                    if (xhr.status == 500) {
-                        console.log(xhr);
-                        swal('Error', xhr.responseJSON.error, 'error');
-                    }
-                }
-            });
+            {{--        swal('Success', "Plesae Wait Till Page Succesfully Realoded", 'success');--}}
+            {{--        setTimeout(--}}
+            {{--            function () {--}}
+            {{--                location.reload();--}}
+            {{--            }, 5000);--}}
+
+
+            {{--    }, error: function (xhr, ajaxOptions, thrownError) {--}}
+            {{--        if (xhr.status == 500) {--}}
+            {{--            console.log(xhr);--}}
+            {{--            swal('Error', xhr.responseJSON.error, 'error');--}}
+            {{--        }--}}
+            {{--    }--}}
+            {{--});--}}
         }
 
         function set_end_date(value) {

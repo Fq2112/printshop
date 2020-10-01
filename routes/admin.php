@@ -198,7 +198,7 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             'as' => 'admin.order.production.pdf'
         ]);
 
-        Route::post('download/production', [
+        Route::get('create/production/{code}', [
             'uses' => 'OrderController@download_production',
             'as' => 'admin.order.production.download'
         ]);

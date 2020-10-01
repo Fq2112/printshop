@@ -181,14 +181,14 @@ class OrderController extends Controller
         return back()->with('success', __('admin.alert.blog.delete', ['param' => $post->title]));
     }
 
-    public function create_pdf(Request $request)
+    public function create_pdf($code)
     {
-        $filename = $request->code . '.pdf';
+        $filename = $code . '.pdf';
 
-        $payment = \App\Models\PaymentCart::where('uni_code_payment', $request->code)->first();
+        $payment = \App\Models\PaymentCart::where('uni_code_payment', $code)->first();
 
         $pdf = PDF::loadView('exports.production', [
-            'code' => $request->code
+            'code' => $code
         ]);
 
         Storage::put('public/users/order/invoice/owner/' . $filename, $pdf->output());
@@ -198,9 +198,12 @@ class OrderController extends Controller
         ], 201);
     }
 
-    public function download_production(Request $request)
+    public function download_production(Request $request,$code)
     {
-        $filename = $request->code . '.pdf';
+
+        $this->create_pdf($code);
+        sleep(1);
+        $filename = $code . '.pdf';
         $file_path = storage_path('app/public/users/order/invoice/owner/' . $filename);
         if (file_exists($file_path)) {
             return Response::download($file_path, 'Production_' . $filename, [
