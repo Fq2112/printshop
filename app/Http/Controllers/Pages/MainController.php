@@ -164,18 +164,19 @@ class MainController extends Controller
     public function produk(Request $request)
     {
         $sub = SubKategori::where('permalink->en', $request->produk)
-            ->orwhere('permalink->id', $request->produk)->first();
+            ->orwhere('permalink->id', $request->produk)->where('isActive', true)->first();
         $clust = ClusterKategori::where('permalink->en', $request->produk)
-            ->orwhere('permalink->id', $request->produk)->first();
+            ->orwhere('permalink->id', $request->produk)->where('isActive', true)->first();
         $guidelines = null;
 
         $cart = $request->has('cart_id') ? Cart::find(decrypt($request->cart_id)) : null;
 
         if (!is_null($sub)) {
             $data = $sub;
+            $clusters = ClusterKategori::where('subkategori_id', $data->id)->where('isActive', true)->get();
 
-            if (count($data->getCluster) > 0) {
-                return view('pages.main.produk', compact('data'));
+            if (count($clusters) > 0) {
+                return view('pages.main.produk', compact('data', 'clusters'));
 
             } else {
                 $specs = $data->getSubkatSpecs;

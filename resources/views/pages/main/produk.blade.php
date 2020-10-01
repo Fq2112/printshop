@@ -119,7 +119,7 @@
                     <h3>{{__('lang.product.head', ['name' => $data->name])}}</h3>
                 </div>
                 <div class="page-section card-deck nopadding nomargin">
-                    @foreach($data->getCluster as $row)
+                    @foreach($clusters as $row)
                         <div class="card myCard noborder nopadding" style="margin-bottom: 2rem;min-width: 18rem;">
                             <div class="img-card">
                                 <a href="{{route('produk', ['produk' => $row->permalink])}}">

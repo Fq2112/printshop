@@ -17,7 +17,7 @@
                  data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\TypeProduct::whereIn('id', $specs->type_ids)->get() as $row)
+                        @foreach(\App\Models\TypeProduct::whereIn('id', $specs->type_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="type-{{$row->id}}">
@@ -78,7 +78,7 @@
                  data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Material::whereIn('id', $specs->material_cover_ids)->get() as $row)
+                        @foreach(\App\Models\Material::whereIn('id', $specs->material_cover_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="cover_material-{{$row->id}}">
@@ -138,7 +138,7 @@
                  style="height: 0;" data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Side::whereIn('id', $specs->side_cover_ids)->get() as $row)
+                        @foreach(\App\Models\Side::whereIn('id', $specs->side_cover_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="cover_side-{{$row->id}}">
@@ -201,7 +201,7 @@
                  style="height: 0;" data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Lamination::whereIn('id', $specs->cover_lamination_ids)->get() as $row)
+                        @foreach(\App\Models\Lamination::whereIn('id', $specs->cover_lamination_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="cover_lamination-{{$row->id}}">
@@ -264,7 +264,7 @@
                  data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Material::whereIn('id', $specs->material_ids)->get() as $row)
+                        @foreach(\App\Models\Material::whereIn('id', $specs->material_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="materials-{{$row->id}}">
@@ -324,7 +324,7 @@
                  data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Colors::whereIn('id', $specs->material_color_ids)->get() as $row)
+                        @foreach(\App\Models\Colors::whereIn('id', $specs->material_color_ids)->where('isActive', true)->get() as $row)
                             @if(strpos($row->description, '#') !== false)
                                 <div class="col">
                                     <label class="card-label" for="material_color-{{$row->id}}">
@@ -406,7 +406,7 @@
                  data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Colors::whereIn('id', $specs->color_ids)->get() as $row)
+                        @foreach(\App\Models\Colors::whereIn('id', $specs->color_ids)->where('isActive', true)->get() as $row)
                             @if(strpos($row->description, '#') !== false)
                                 <div class="col">
                                     <label class="card-label" for="color-{{$row->id}}">
@@ -489,7 +489,7 @@
                  style="height: 0;" data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\PrintingMethods::whereIn('id', $specs->print_method_ids)->get() as $row)
+                        @foreach(\App\Models\PrintingMethods::whereIn('id', $specs->print_method_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="print_method-{{$row->id}}">
@@ -553,7 +553,7 @@
                  style="height: 0;" data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Size::whereIn('id', $specs->size_ids)->get() as $row)
+                        @foreach(\App\Models\Size::whereIn('id', $specs->size_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="size-{{$row->id}}">
@@ -635,7 +635,7 @@
                  style="height: 0;" data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Side::whereIn('id', $specs->side_ids)->get() as $row)
+                        @foreach(\App\Models\Side::whereIn('id', $specs->side_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="side-{{$row->id}}">
@@ -697,7 +697,7 @@
                  style="height: 0;" data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Finishing::whereIn('id', $specs->holder_ids)->get() as $row)
+                        @foreach(\App\Models\Finishing::whereIn('id', $specs->holder_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="holder-{{$row->id}}">
@@ -759,7 +759,7 @@
                  style="height: 0;" data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Lid::whereIn('id', $specs->lid_ids)->get() as $row)
+                        @foreach(\App\Models\Lid::whereIn('id', $specs->lid_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="lid-{{$row->id}}">
@@ -821,7 +821,7 @@
                  style="height: 0;" data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Edge::whereIn('id', $specs->edge_ids)->get() as $row)
+                        @foreach(\App\Models\Edge::whereIn('id', $specs->edge_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="corner-{{$row->id}}">
@@ -883,7 +883,7 @@
                  style="height: 0;" data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Folding::whereIn('id', $specs->folding_ids)->get() as $row)
+                        @foreach(\App\Models\Folding::whereIn('id', $specs->folding_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="folding-{{$row->id}}">
@@ -946,7 +946,7 @@
                  style="height: 0;" data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Front::whereIn('id', $specs->front_side_ids)->get() as $row)
+                        @foreach(\App\Models\Front::whereIn('id', $specs->front_side_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="front_side-{{$row->id}}">
@@ -1009,7 +1009,7 @@
                  style="height: 0;" data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\BackSide::whereIn('id', $specs->back_side_ids)->get() as $row)
+                        @foreach(\App\Models\BackSide::whereIn('id', $specs->back_side_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="back_side-{{$row->id}}">
@@ -1072,7 +1072,7 @@
                  style="height: 0;" data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\RightLeftSide::whereIn('id', $specs->right_side_ids)->get() as $row)
+                        @foreach(\App\Models\RightLeftSide::whereIn('id', $specs->right_side_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="right_side-{{$row->id}}">
@@ -1135,7 +1135,7 @@
                  style="height: 0;" data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\RightLeftSide::whereIn('id', $specs->left_side_ids)->get() as $row)
+                        @foreach(\App\Models\RightLeftSide::whereIn('id', $specs->left_side_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="left_side-{{$row->id}}">
@@ -1198,7 +1198,7 @@
                  style="height: 0;" data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Balance::whereIn('id', $specs->balance_ids)->get() as $row)
+                        @foreach(\App\Models\Balance::whereIn('id', $specs->balance_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="balance-{{$row->id}}">
@@ -1261,7 +1261,7 @@
                  style="height: 0;" data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Copies::whereIn('id', $specs->copies_ids)->get() as $row)
+                        @foreach(\App\Models\Copies::whereIn('id', $specs->copies_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="copies-{{$row->id}}">
@@ -1324,7 +1324,7 @@
                  style="height: 0;" data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Pages::whereIn('id', $specs->page_ids)->get() as $row)
+                        @foreach(\App\Models\Pages::whereIn('id', $specs->page_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="page-{{$row->id}}">
@@ -1386,7 +1386,7 @@
                  data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Material::whereIn('id', $specs->front_cover_ids)->get() as $row)
+                        @foreach(\App\Models\Material::whereIn('id', $specs->front_cover_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="front_cover-{{$row->id}}">
@@ -1447,7 +1447,7 @@
                  data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Material::whereIn('id', $specs->back_cover_ids)->get() as $row)
+                        @foreach(\App\Models\Material::whereIn('id', $specs->back_cover_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="back_cover-{{$row->id}}">
@@ -1508,7 +1508,7 @@
                  data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Finishing::whereIn('id', $specs->orientation_ids)->get() as $row)
+                        @foreach(\App\Models\Finishing::whereIn('id', $specs->orientation_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="orientation-{{$row->id}}">
@@ -1569,7 +1569,7 @@
                  data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Finishing::whereIn('id', $specs->binding_ids)->get() as $row)
+                        @foreach(\App\Models\Finishing::whereIn('id', $specs->binding_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="binding-{{$row->id}}">
@@ -1631,7 +1631,7 @@
                  style="height: 0;" data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Lamination::whereIn('id', $specs->lamination_ids)->get() as $row)
+                        @foreach(\App\Models\Lamination::whereIn('id', $specs->lamination_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="lamination-{{$row->id}}">
@@ -1690,7 +1690,7 @@
                  style="height: 0;" data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Finishing::whereIn('id', $specs->finishing_ids)->get() as $row)
+                        @foreach(\App\Models\Finishing::whereIn('id', $specs->finishing_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="finishing-{{$row->id}}">
@@ -1749,7 +1749,7 @@
                  style="height: 0;" data-parent="#accordion">
                 <div class="panel-body">
                     <div class="row">
-                        @foreach(\App\Models\Finishing::whereIn('id', $specs->extra_ids)->get() as $row)
+                        @foreach(\App\Models\Finishing::whereIn('id', $specs->extra_ids)->where('isActive', true)->get() as $row)
                             <div class="col-lg-{{$row->image != "" ? 6 : 4}} col-md-6 col-sm-12 mb-3">
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="extra-{{$row->id}}">
