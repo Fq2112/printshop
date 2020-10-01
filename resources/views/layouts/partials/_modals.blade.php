@@ -47,7 +47,7 @@
                                 @csrf
                                 <div class="row has-feedback">
                                     <div class="col-12">
-                                        <input class="form-control" type="text" name="useremail" required
+                                        <input class="form-control" type="text" name="useremail" autofocus required
                                                value="{{old('email')}}"
                                                placeholder="{{__('lang.placeholder.useremail')}}">
                                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -118,7 +118,7 @@
                                 <div class="row has-feedback">
                                     <div class="col-12">
                                         <input id="reg_name" type="text" placeholder="{{__('lang.placeholder.name')}}"
-                                               class="form-control" name="name" required>
+                                               class="form-control" name="name" autofocus required>
                                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                                     </div>
                                 </div>
@@ -204,7 +204,7 @@
                                     <div class="col-12">
                                         <input class="form-control {{$errors->has('email') ? 'is-invalid' : ''}}"
                                                type="email" placeholder="Email" name="email"
-                                               value="{{ old('email') }}" required>
+                                               value="{{ old('email') }}" autofocus required>
                                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                                         @if ($errors->has('email'))
                                             <span class="invalid-feedback" style="display: block">
@@ -261,7 +261,7 @@
                                         <input id="forg_password" type="password"
                                                class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}"
                                                placeholder="{{__('lang.placeholder.new-password')}}" name="password"
-                                               minlength="6" required>
+                                               minlength="6" autofocus required>
                                         <span class="glyphicon glyphicon-eye-open form-control-feedback"
                                               style="pointer-events: all;cursor: pointer"></span>
                                         @if ($errors->has('password'))
@@ -313,7 +313,7 @@
     @endphp
     @if(!is_null($visitor->lang))
         @if(!is_null($promo) && (Auth::guest() || (Auth::check() && count(Auth::user()->getPayment) <= 0)) && !session('claim'))
-            <div class="modal-on-load" data-target="#welcomeModal"></div>
+            <div class="modal-on-load customjs" data-target="#welcomeModal"></div>
             <div class="modal1 mfp-hide subscribe-widget customjs" id="welcomeModal">
                 <div class="block dark divcenter">
                     <div style="padding: 50px;">
@@ -328,7 +328,7 @@
                             <input type="email" id="widget-subscribe-form2-email" name="claim_email"
                                    class="form-control form-control-lg not-dark required email"
                                    value="{{Auth::check() ? Auth::user()->email : null}}"
-                                   placeholder="{{__('lang.placeholder.email')}}" required>
+                                   placeholder="{{__('lang.placeholder.email')}}" autofocus required>
                             <button type="submit"
                                     class="button button-rounded button-reveal button-border button-primary tright ml-0 mt-3">
                                 <i class="icon-angle-right"></i><span>{{__('lang.modal.welcome.button')}}</span>
