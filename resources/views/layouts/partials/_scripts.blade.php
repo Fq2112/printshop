@@ -197,6 +197,10 @@
             $('.modal-title').html('{{__('lang.modal.auth.header-create')}}');
         });
         $('.error').removeClass('alert alert-danger').html('');
+
+        $("#loginModal").on("shown.bs.modal", function () {
+            $("#loginModal form").find('*').filter(':input:visible:first').trigger("focus");
+        });
     }
 
     function showLoginForm() {
@@ -208,6 +212,10 @@
             $('.modal-title').html('{{__('lang.modal.auth.header-login')}}');
         });
         $('.error').removeClass('alert alert-danger').html('');
+
+        $("#loginModal").on("shown.bs.modal", function () {
+            $("#loginModal form").find('*').filter(':input:visible:first').trigger("focus");
+        });
     }
 
     function showEmailForm() {
@@ -221,6 +229,10 @@
                 $('.modal-title').html('{{__('lang.modal.auth.header-reset')}}');
             });
         $('.error').removeClass('alert alert-danger').html('');
+
+        $("#loginModal").on("shown.bs.modal", function () {
+            $("#loginModal form").find('*').filter(':input:visible:first').trigger("focus");
+        });
     }
 
     function showResetPasswordForm() {
@@ -231,6 +243,10 @@
                 $('.modal-title').html('{{__('lang.modal.auth.header-recovery')}}');
             });
         $('.error').removeClass('alert alert-danger').html('');
+
+        $("#loginModal").on("shown.bs.modal", function () {
+            $("#loginModal form").find('*').filter(':input:visible:first').trigger("focus");
+        });
     }
 
     function openLoginModal() {

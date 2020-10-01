@@ -309,7 +309,7 @@
 @if(Request::is(app()->getLocale()))
     @php
         $visitor = \App\Models\Visitor::where('ip', $_SERVER['REMOTE_ADDR'])->where('date', date('Y-m-d'))->first();
-        $promo = \App\Models\PromoCode::where('promo_code', 'welcome10')->first();
+        $promo = \App\Models\PromoCode::where('promo_code', 'welcome10')->where('end', '>', now()->subDay())->first();
     @endphp
     @if(!is_null($visitor->lang))
         @if(!is_null($promo) && (Auth::guest() || (Auth::check() && count(Auth::user()->getPayment) <= 0)) && !session('claim'))
