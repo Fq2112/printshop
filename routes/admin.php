@@ -300,7 +300,7 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             ]);
 
             Route::get('{id}/delete', [
-                'uses' => 'CategoryController@deleteCategory',
+                'uses' => 'CategoryController@deactivate_kategori',
                 'as' => 'delete.categories'
             ]);
 
@@ -324,6 +324,11 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                 'as' => 'edit.categories.sub.posts'
             ]);
 
+            Route::get('{id}/delete', [
+                'uses' => 'CategoryController@deactivate_sub',
+                'as' => 'delete.categories.sub.delete'
+            ]);
+
             Route::get('/cluster', [
                 'uses' => 'CategoryController@show_cluster',
                 'as' => 'table.categories.cluster'
@@ -342,6 +347,11 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             Route::get('edit/cluster/{id}', [
                 'uses' => 'CategoryController@editcluster',
                 'as' => 'edit.categories.cluster.posts'
+            ]);
+
+            Route::get('{id}/delete', [
+                'uses' => 'CategoryController@deactivate_cluster',
+                'as' => 'delete.categories.cluster.delete'
             ]);
 
             Route::get('subs/gallery/{id}', [

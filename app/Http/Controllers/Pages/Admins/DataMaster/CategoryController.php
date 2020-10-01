@@ -20,7 +20,7 @@ class CategoryController extends Controller
 {
     public function show_main()
     {
-        $data = Kategori::all();
+        $data = Kategori::all()->sortByDesc('isActive');
 
         return view('pages.main.admins.dataMaster.category.main', [
             'kategori' => $data
@@ -97,9 +97,29 @@ class CategoryController extends Controller
         return back()->with('success', __('admin.alert.blog.delete', ['param' => $post->title]));
     }
 
+    public function deactivate_kategori($id)
+    {
+        $data = Kategori::find(decrypt($id));
+        $message = '';
+        if ($data->isActive){
+            $data->update([
+               'isActive' => false
+            ]);
+            $message = 'Successfully deactivate data';
+        }else{
+            $data->update([
+                'isActive' => true
+            ]);
+
+            $message = 'Successfully activate data';
+        }
+
+        return back()->with('success',$message);
+    }
+
     public function show_subkategori()
     {
-        $data = SubKategori::all();
+        $data = SubKategori::all()->sortByDesc('isActive');
 
         return view('pages.main.admins.dataMaster.category.subkat', [
             'kategori' => $data
@@ -443,9 +463,29 @@ class CategoryController extends Controller
 
     }
 
+    public function deactivate_sub($id)
+    {
+        $data = SubKategori::find(decrypt($id));
+        $message = '';
+        if ($data->isActive){
+            $data->update([
+                'isActive' => false
+            ]);
+            $message = 'Successfully deactivate data';
+        }else{
+            $data->update([
+                'isActive' => true
+            ]);
+
+            $message = 'Successfully activate data';
+        }
+
+        return back()->with('success',$message);
+    }
+
     public function show_cluster()
     {
-        $data = ClusterKategori::all();
+        $data = ClusterKategori::all()->sortByDesc('isActive');
 
         return view('pages.main.admins.dataMaster.category.cluster', [
             'kategori' => $data
@@ -807,6 +847,27 @@ class CategoryController extends Controller
             }
         }
         return back()->with('success', __('admin.alert.blog-category.create', ['param' => $request->name]));
+    }
+
+
+    public function deactivate_cluster($id)
+    {
+        $data = ClusterKategori::find(decrypt($id));
+        $message = '';
+        if ($data->isActive){
+            $data->update([
+                'isActive' => false
+            ]);
+            $message = 'Successfully deactivate data';
+        }else{
+            $data->update([
+                'isActive' => true
+            ]);
+
+            $message = 'Successfully activate data';
+        }
+
+        return back()->with('success',$message);
     }
 
     public function show_gallery_subs($id)

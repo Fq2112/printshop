@@ -18,6 +18,44 @@
         return false;
     });
 
+    $(".deactivate-data").on('click', function () {
+        var linkURL = $(this).attr("href");
+        swal({
+            title: "Deactivate",
+            text: "You can activate this data again later",
+            icon: 'warning',
+            dangerMode: true,
+            buttons: ["{{__('lang.button.no')}}", "Deactivate"],
+            closeOnEsc: false,
+            closeOnClickOutside: false,
+        }).then((confirm) => {
+            if (confirm) {
+                swal({icon: "success", buttons: false});
+                window.location.href = linkURL;
+            }
+        });
+        return false;
+    });
+
+    $(".activate-data").on('click', function () {
+        var linkURL = $(this).attr("href");
+        swal({
+            title: "Activate",
+            text: "You can deactivate this data again later",
+            icon: 'warning',
+            dangerMode: true,
+            buttons: ["{{__('lang.button.no')}}", "Deactivate"],
+            closeOnEsc: false,
+            closeOnClickOutside: false,
+        }).then((confirm) => {
+            if (confirm) {
+                swal({icon: "success", buttons: false});
+                window.location.href = linkURL;
+            }
+        });
+        return false;
+    });
+
     $(".btn_signOut").click(function () {
         swal({
             title: "{{__('lang.alert.logout-head')}}",
