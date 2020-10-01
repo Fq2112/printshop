@@ -23,26 +23,30 @@
                 </div>
                 <div class="card-columns col-lg-9">
                     @foreach(\App\Models\SubKategori::where('kategoris_id', $kat->id)->where('isActive', true)->get() as $sub)
-                        <div class="card card-body nopadding nomargin">
-                            <ul class="mega-menu-column border-left-0">
-                                <li class="mega-menu-title">
-                                    <a href="{{route('produk', ['produk' => $sub->permalink])}}">
-                                        <div>{{$sub->name}}</div>
-                                    </a>
-                                    @if($sub->getCluster)
-                                        <ul>
-                                            @foreach(\App\Models\ClusterKategori::where('subkategori_id', $sub->id)->where('isActive', true)->get() as $row)
-                                                <li>
-                                                    <a href="{{route('produk',['produk' => $row->permalink])}}">
-                                                        <div>{{$row->name}}</div>
-                                                    </a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    @endif
-                                </li>
-                            </ul>
-                        </div>
+                        @if($sub->getSubkatSpecs)
+                            <div class="card card-body nopadding nomargin">
+                                <ul class="mega-menu-column border-left-0">
+                                    <li class="mega-menu-title">
+                                        <a href="{{route('produk', ['produk' => $sub->permalink])}}">
+                                            <div>{{$sub->name}}</div>
+                                        </a>
+                                        @if($sub->getCluster)
+                                            <ul>
+                                                @foreach(\App\Models\ClusterKategori::where('subkategori_id', $sub->id)->where('isActive', true)->get() as $row)
+                                                    @if($row->getClusterSpecs)
+                                                        <li>
+                                                            <a href="{{route('produk',['produk' => $row->permalink])}}">
+                                                                <div>{{$row->name}}</div>
+                                                            </a>
+                                                        </li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </li>
+                                </ul>
+                            </div>
+                        @endif
                     @endforeach
                 </div>
             </div>

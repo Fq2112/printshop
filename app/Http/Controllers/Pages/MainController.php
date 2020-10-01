@@ -193,12 +193,14 @@ class MainController extends Controller
         } elseif (!is_null($clust)) {
             $data = $clust;
             $specs = $data->getClusterSpecs;
-            $guidelines = $data->getSubKategori->guidelines;
-            $setting = Setting::first();
-            $gallery = $data->getGallery;
+            if($specs) {
+                $guidelines = $data->getSubKategori->guidelines;
+                $setting = Setting::first();
+                $gallery = $data->getGallery;
 
-            return view('pages.main.form-pemesanan', compact('clust', 'data', 'specs',
-                'guidelines', 'cart', 'setting', 'gallery'));
+                return view('pages.main.form-pemesanan', compact('clust', 'data', 'specs',
+                    'guidelines', 'cart', 'setting', 'gallery'));
+            }
         }
 
         return back();
