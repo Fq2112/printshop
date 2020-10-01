@@ -24,6 +24,7 @@ class CreateSubKategorisTable extends Migration
             $table->text('banner');
             $table->text('caption');
             $table->text('guidelines')->nullable();
+            $table->boolean('isActive')->default(true);
             $table->timestamps();
         });
     }

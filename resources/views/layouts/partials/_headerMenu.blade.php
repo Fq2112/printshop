@@ -1,5 +1,5 @@
 <ul>
-    @foreach(\App\Models\Kategori::all() as $kat)
+    @foreach(\App\Models\Kategori::where('isActive', true)->get() as $kat)
         <li class="mega-menu">
             <a href="#">
                 <div>{{$kat->name}}</div>
@@ -22,27 +22,34 @@
                     </ul>
                 </div>
                 <div class="card-columns col-lg-9">
-                    @foreach($kat->getSubKategori as $sub)
-                        <div class="card card-body nopadding nomargin">
-                            <ul class="mega-menu-column border-left-0">
-                                <li class="mega-menu-title">
-                                    <a href="{{route('produk', ['produk' => $sub->permalink])}}">
-                                        <div>{{$sub->name}}</div>
-                                    </a>
-                                    @if($sub->getCluster)
-                                        <ul>
-                                            @foreach($sub->getCluster as $row)
-                                                <li>
-                                                    <a href="{{route('produk',['produk' => $row->permalink])}}">
-                                                        <div>{{$row->name}}</div>
-                                                    </a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    @endif
-                                </li>
-                            </ul>
-                        </div>
+                    @foreach(\App\Models\SubKategori::where('kategoris_id', $kat->id)->where('isActive', true)->get() as $sub)
+                        @php
+                            $clusters = \App\Models\ClusterKategori::where('subkategori_id', $sub->id)->where('isActive', true)->get();
+                        @endphp
+                        @if(count($clusters) > 0 || (count($clusters) <= 0 && $sub->getSubkatSpecs))
+                            <div class="card card-body nopadding nomargin">
+                                <ul class="mega-menu-column border-left-0">
+                                    <li class="mega-menu-title">
+                                        <a href="{{route('produk', ['produk' => $sub->permalink])}}">
+                                            <div>{{$sub->name}}</div>
+                                        </a>
+                                        @if(count($clusters) > 0)
+                                            <ul>
+                                                @foreach(\App\Models\ClusterKategori::where('subkategori_id', $sub->id)->where('isActive', true)->get() as $row)
+                                                    @if($row->getClusterSpecs)
+                                                        <li>
+                                                            <a href="{{route('produk',['produk' => $row->permalink])}}">
+                                                                <div>{{$row->name}}</div>
+                                                            </a>
+                                                        </li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </li>
+                                </ul>
+                            </div>
+                        @endif
                     @endforeach
                 </div>
             </div>

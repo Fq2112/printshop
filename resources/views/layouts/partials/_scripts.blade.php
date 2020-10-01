@@ -9,17 +9,6 @@
 
         $('.datepicker').datepicker({format: "yyyy-mm-dd", autoclose: true, todayHighlight: true, todayBtn: true});
         $(".bt-switch").bootstrapSwitch();
-
-        @if(session('register') || session('error') || session('logout') || session('expire') || session('inactive') ||
-            session('unknown') || session('recovered'))
-        openLoginModal();
-        @elseif($errors->has('email') || $errors->has('password') || $errors->has('name'))
-        openRegisterModal();
-        @elseif(session('resetLink') || session('resetLink_failed'))
-        openEmailModal();
-        @elseif(session('reset') || session('recover_failed'))
-        openPasswordModal();
-        @endif
     });
 
     $("#top-cart-trigger").off('click').on('click', function (e) {
@@ -380,6 +369,93 @@
         };
         var x = document.getElementsByTagName('script')[0];
         x.parentNode.insertBefore(s, x);
+
+        @if(session('register') || session('error') || session('logout') || session('expire') || session('inactive') ||
+            session('unknown') || session('recovered'))
+        openLoginModal();
+        @elseif($errors->has('email') || $errors->has('password') || $errors->has('name'))
+        openRegisterModal();
+        @elseif(session('resetLink') || session('resetLink_failed'))
+        openEmailModal();
+        @elseif(session('reset') || session('recover_failed'))
+        openPasswordModal();
+        @else
+        if( !$().magnificPopup ) {
+            console.log('modal: Magnific Popup not Defined.');
+            return true;
+        }
+
+        if( Cookies === 'undefined' ) {
+            console.log('cookieNotify: Cookie Function not defined.');
+            return true;
+        }
+
+        var $modal = $('.modal-on-load.customjs');
+        if( $modal.length > 0 ) {
+            $modal.each( function(){
+                var element				= $(this),
+                    elementTarget		= element.attr('data-target'),
+                    elementTargetValue	= elementTarget.split('#')[1],
+                    elementDelay		= element.attr('data-delay'),
+                    elementTimeout		= element.attr('data-timeout'),
+                    elementAnimateIn	= element.attr('data-animate-in'),
+                    elementAnimateOut	= element.attr('data-animate-out');
+
+                if( !element.hasClass('enable-cookie') ) { Cookies.remove( elementTargetValue ); }
+
+                if( element.hasClass('enable-cookie') ) {
+                    var elementCookie = Cookies.get( elementTargetValue );
+
+                    if( typeof elementCookie !== 'undefined' && elementCookie == '0' ) {
+                        return true;
+                    }
+                }
+
+                if( !elementDelay ) {
+                    elementDelay = 1500;
+                } else {
+                    elementDelay = Number(elementDelay) + 1500;
+                }
+
+                var t = setTimeout(function() {
+                    $.magnificPopup.open({
+                        items: { src: elementTarget },
+                        type: 'inline',
+                        mainClass: 'mfp-no-margins mfp-fade',
+                        closeBtnInside: false,
+                        fixedContentPos: true,
+                        removalDelay: 500,
+                        callbacks: {
+                            open: function(){
+                                if( elementAnimateIn != '' ) {
+                                    $(elementTarget).addClass( elementAnimateIn + ' animated' );
+                                }
+                            },
+                            beforeClose: function(){
+                                if( elementAnimateOut != '' ) {
+                                    $(elementTarget).removeClass( elementAnimateIn ).addClass( elementAnimateOut );
+                                }
+                            },
+                            afterClose: function() {
+                                if( elementAnimateIn != '' || elementAnimateOut != '' ) {
+                                    $(elementTarget).removeClass( elementAnimateIn + ' ' + elementAnimateOut + ' animated' );
+                                }
+                                if( element.hasClass('enable-cookie') ) {
+                                    Cookies.set( elementTargetValue, '0' );
+                                }
+                            }
+                        }
+                    }, 0);
+                }, Number(elementDelay) );
+
+                if( elementTimeout != '' ) {
+                    var to = setTimeout(function() {
+                        $.magnificPopup.close();
+                    }, Number(elementDelay) + Number(elementTimeout) );
+                }
+            });
+        }
+        @endif
     };
 
     $(document).on('mouseover', '.use-nicescroll', function () {

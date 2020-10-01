@@ -19,7 +19,7 @@ class CreateLidsTable extends Migration
             $table->text('image')->nullable();
             $table->text('description')->nullable();
             $table->string('price')->default('10000');
-
+            $table->boolean('isActive')->default(true);
             $table->timestamps();
         });
     }

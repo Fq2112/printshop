@@ -163,42 +163,62 @@ class MainController extends Controller
 
     public function produk(Request $request)
     {
-        $sub = SubKategori::where('permalink->en', $request->produk)
-            ->orwhere('permalink->id', $request->produk)->first();
-        $clust = ClusterKategori::where('permalink->en', $request->produk)
-            ->orwhere('permalink->id', $request->produk)->first();
-        $guidelines = null;
+        $sub = SubKategori::where('permalink->en', $request->produk)->where('isActive', true)
+            ->whereHas('getKategori', function ($q) {
+                $q->where('isActive', true);
+            })->orwhere('permalink->id', $request->produk)->where('isActive', true)
+            ->whereHas('getKategori', function ($q) {
+                $q->where('isActive', true);
+            })->first();
 
+        $clust = ClusterKategori::where('permalink->en', $request->produk)->where('isActive', true)
+            ->whereHas('getSubKategori', function ($q) {
+                $q->where('isActive', true)->whereHas('getKategori', function ($q) {
+                    $q->where('isActive', true);
+                });
+            })->orwhere('permalink->id', $request->produk)->where('isActive', true)
+            ->whereHas('getSubKategori', function ($q) {
+                $q->where('isActive', true)->whereHas('getKategori', function ($q) {
+                    $q->where('isActive', true);
+                });
+            })->first();
+
+        $guidelines = null;
         $cart = $request->has('cart_id') ? Cart::find(decrypt($request->cart_id)) : null;
 
         if (!is_null($sub)) {
             $data = $sub;
+            $clusters = ClusterKategori::where('subkategori_id', $data->id)->where('isActive', true)->get();
 
-            if (count($data->getCluster) > 0) {
-                return view('pages.main.produk', compact('data'));
+            if (count($clusters) > 0) {
+                return view('pages.main.produk', compact('data', 'clusters'));
 
             } else {
                 $specs = $data->getSubkatSpecs;
-                $guidelines = $data->guidelines;
+                if ($specs) {
+                    $guidelines = $data->guidelines;
+                    $setting = Setting::first();
+                    $gallery = $data->getGallery;
+
+                    return view('pages.main.form-pemesanan', compact('clust', 'data', 'specs',
+                        'guidelines', 'cart', 'setting', 'gallery'));
+                }
+            }
+
+        } elseif (!is_null($clust)) {
+            $data = $clust;
+            $specs = $data->getClusterSpecs;
+            if ($specs) {
+                $guidelines = $data->getSubKategori->guidelines;
                 $setting = Setting::first();
                 $gallery = $data->getGallery;
 
                 return view('pages.main.form-pemesanan', compact('clust', 'data', 'specs',
                     'guidelines', 'cart', 'setting', 'gallery'));
             }
-
-        } elseif (!is_null($clust)) {
-            $data = $clust;
-            $specs = $data->getClusterSpecs;
-            $guidelines = $data->getSubKategori->guidelines;
-            $setting = Setting::first();
-            $gallery = $data->getGallery;
-
-            return view('pages.main.form-pemesanan', compact('clust', 'data', 'specs',
-                'guidelines', 'cart', 'setting', 'gallery'));
         }
 
-        return back();
+        return redirect()->route('beranda');
     }
 
     public function downloadGuidelines(Request $request)
