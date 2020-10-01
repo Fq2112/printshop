@@ -173,19 +173,21 @@ class MainController extends Controller
 
         if (!is_null($sub)) {
             $data = $sub;
-            $specs = $data->getSubkatSpecs;
             $clusters = ClusterKategori::where('subkategori_id', $data->id)->where('isActive', true)->get();
 
-            if (is_null($specs) && count($clusters) > 0) {
+            if (count($clusters) > 0) {
                 return view('pages.main.produk', compact('data', 'clusters'));
 
             } else {
-                $guidelines = $data->guidelines;
-                $setting = Setting::first();
-                $gallery = $data->getGallery;
+                $specs = $data->getSubkatSpecs;
+                if($specs) {
+                    $guidelines = $data->guidelines;
+                    $setting = Setting::first();
+                    $gallery = $data->getGallery;
 
-                return view('pages.main.form-pemesanan', compact('clust', 'data', 'specs',
-                    'guidelines', 'cart', 'setting', 'gallery'));
+                    return view('pages.main.form-pemesanan', compact('clust', 'data', 'specs',
+                        'guidelines', 'cart', 'setting', 'gallery'));
+                }
             }
 
         } elseif (!is_null($clust)) {
