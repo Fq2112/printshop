@@ -18,6 +18,7 @@ class CreateKategorisTable extends Migration
             $table->string('name');
             $table->text('image');
             $table->text('caption');
+            $table->boolean('isActive')->default(true);
             $table->timestamps();
         });
     }

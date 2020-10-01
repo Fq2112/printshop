@@ -1,5 +1,5 @@
 <ul>
-    @foreach(\App\Models\Kategori::all() as $kat)
+    @foreach(\App\Models\Kategori::where('isActive', true)->get() as $kat)
         <li class="mega-menu">
             <a href="#">
                 <div>{{$kat->name}}</div>
@@ -22,7 +22,7 @@
                     </ul>
                 </div>
                 <div class="card-columns col-lg-9">
-                    @foreach($kat->getSubKategori as $sub)
+                    @foreach(\App\Models\SubKategori::where('kategoris_id', $kat->id)->where('isActive', true)->get() as $sub)
                         <div class="card card-body nopadding nomargin">
                             <ul class="mega-menu-column border-left-0">
                                 <li class="mega-menu-title">
@@ -31,7 +31,7 @@
                                     </a>
                                     @if($sub->getCluster)
                                         <ul>
-                                            @foreach($sub->getCluster as $row)
+                                            @foreach(\App\Models\ClusterKategori::where('subkategori_id', $sub->id)->where('isActive', true)->get() as $row)
                                                 <li>
                                                     <a href="{{route('produk',['produk' => $row->permalink])}}">
                                                         <div>{{$row->name}}</div>
