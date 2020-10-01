@@ -328,7 +328,7 @@
                             <input type="email" id="widget-subscribe-form2-email" name="claim_email"
                                    class="form-control form-control-lg not-dark required email"
                                    value="{{Auth::check() ? Auth::user()->email : null}}"
-                                   placeholder="{{__('lang.placeholder.email')}}" autofocus required>
+                                   placeholder="{{__('lang.placeholder.email')}}" required>
                             <button type="submit"
                                     class="button button-rounded button-reveal button-border button-primary tright ml-0 mt-3">
                                 <i class="icon-angle-right"></i><span>{{__('lang.modal.welcome.button')}}</span>
