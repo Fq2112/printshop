@@ -23,7 +23,7 @@ class BalanceController extends Controller
     {
         if ($request->hasFile('thumbnail')) {
             $this->validate($request, ['thumbnail' => 'required|image|mimes:jpg,jpeg,gif,png|max:5120']);
-            $thumbnail = uniqid().$request->file('thumbnail')->getClientOriginalName();
+            $thumbnail = uniqid() . $request->file('thumbnail')->getClientOriginalName();
             $request->file('thumbnail')->storeAs('public/products/specs/', $thumbnail);
 
         }
@@ -56,7 +56,7 @@ class BalanceController extends Controller
 
         if ($request->hasFile('thumbnail')) {
             $this->validate($request, ['thumbnail' => 'required|image|mimes:jpg,jpeg,gif,png|max:5120']);
-            $thumbnail = uniqid().$request->file('thumbnail')->getClientOriginalName();;
+            $thumbnail = uniqid() . $request->file('thumbnail')->getClientOriginalName();;
             Storage::delete('public/products/specs/' . $thumbnail);
             $request->file('thumbnail')->storeAs('public/products/specs/', $thumbnail);
 
@@ -81,12 +81,26 @@ class BalanceController extends Controller
 
     public function delete_data($id)
     {
-        $post = Balance::find(decrypt($id));
+        $data = Balance::find(decrypt($id));
 
-        Storage::delete('public/products/specs/' . $post->image);
+//        Storage::delete('public/products/specs/' . $post->image);
+//
+//        $post->delete();
 
-        $post->delete();
+//        return back()->with('success', __('admin.alert.blog.delete', ['param' => $post->title]));
+        if ($data->isActive) {
+            $data->update([
+                'isActive' => false
+            ]);
+            $message = 'Successfully deactivate data';
+        } else {
+            $data->update([
+                'isActive' => true
+            ]);
 
-        return back()->with('success', __('admin.alert.blog.delete', ['param' => $post->title]));
+            $message = 'Successfully activate data';
+        }
+
+        return back()->with('success', $message);
     }
 }

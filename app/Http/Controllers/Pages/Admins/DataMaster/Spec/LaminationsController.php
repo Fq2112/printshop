@@ -13,7 +13,7 @@ class LaminationsController extends Controller
     {
         $data = Lamination::all();
 
-        return view('pages.main.admins.dataMaster.spec.front', [
+        return view('pages.main.admins.dataMaster.spec.lamination', [
             'title' => 'Lamination Table',
             'kategori' => $data
         ]);
@@ -28,7 +28,7 @@ class LaminationsController extends Controller
 
         }
 
-        Front::create([
+        Lamination::create([
             'name' => [
                 'en' => $request->name_en,
                 'id' => $request->name_id
@@ -81,12 +81,25 @@ class LaminationsController extends Controller
 
     public function delete_data($id)
     {
-        $post = Lamination::find(decrypt($id));
+        $data = Lamination::find(decrypt($id));
+//        Storage::delete('public/products/specs/' . $post->image);
+//
+//        $post->delete();
+//
+//        return back()->with('success', __('admin.alert.blog.delete', ['param' => $post->title]));
+        if ($data->isActive) {
+            $data->update([
+                'isActive' => false
+            ]);
+            $message = 'Successfully deactivate data';
+        } else {
+            $data->update([
+                'isActive' => true
+            ]);
 
-        Storage::delete('public/products/specs/' . $post->image);
+            $message = 'Successfully activate data';
+        }
 
-        $post->delete();
-
-        return back()->with('success', __('admin.alert.blog.delete', ['param' => $post->title]));
+        return back()->with('success', $message);
     }
 }

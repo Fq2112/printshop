@@ -81,12 +81,27 @@ class CopiesController extends Controller
 
     public function delete_data($id)
     {
-        $post = Copies::find(decrypt($id));
+        $data = Copies::find(decrypt($id));
 
-        Storage::delete('public/products/specs/' . $post->image);
+//        Storage::delete('public/products/specs/' . $post->image);
+//
+//        $post->delete();
+//
+//        return back()->with('success', __('admin.alert.blog.delete', ['param' => $post->title]));
 
-        $post->delete();
+        if ($data->isActive) {
+            $data->update([
+                'isActive' => false
+            ]);
+            $message = 'Successfully deactivate data';
+        } else {
+            $data->update([
+                'isActive' => true
+            ]);
 
-        return back()->with('success', __('admin.alert.blog.delete', ['param' => $post->title]));
+            $message = 'Successfully activate data';
+        }
+
+        return back()->with('success', $message);
     }
 }

@@ -56,6 +56,7 @@
                                         </th>
                                         <th class="text-center">ID</th>
                                         <th width="35%">Name</th>
+                                        <th>Status</th>
                                         <th class="text-center" width="15%">Created at</th>
                                         <th class="text-center" width="15%">Last Update</th>
                                         <th width="25%">Action</th>
@@ -78,6 +79,13 @@
                                                 <strong>{{$row->getTranslation('name', 'id')}} (Id)</strong> <br>
                                                 <strong>{{$row->getTranslation('name', 'en')}} (En)</strong>
                                             </td>
+                                            <td>
+                                                @if($row->isActive == 1)
+                                                    <span class="badge badge-success"><i class="fa fa-check"> </i>&nbsp;&nbsp;Active </span>
+                                                @else
+                                                    <span class="badge badge-danger"><i class="fa fa-times-circle"> </i>&nbsp;&nbsp;Non-Active </span>
+                                                @endif
+                                            </td>
                                             <td style="vertical-align: middle" align="center">
                                                 {{\Carbon\Carbon::parse($row->created_at)->format('j F Y')}}</td>
                                             <td style="vertical-align: middle" align="center">
@@ -85,12 +93,21 @@
                                             <td style="vertical-align: middle" align="center">
                                                 <button data-placement="left" data-toggle="tooltip" title="Edit"
                                                         type="button" class="btn btn-warning mr-1"
-                                                        onclick="editBlogPost('{{$row->id}}','{{route('edit.print.posts', ['id' => $row->id])}}')">
+                                                        onclick="editBlogPost('{{$row->id}}','{{route('edit.right.posts', ['id' => $row->id])}}')">
                                                     <i class="fa fa-edit"></i></button>
-                                                <a href="{{route('delete.print', ['id' => encrypt($row->id)])}}"
-                                                   class="btn btn-danger delete-data" data-toggle="tooltip"
-                                                   title="Delete" data-placement="right">
-                                                    <i class="fas fa-trash-alt"></i></a>
+
+                                                @if($row->isActive == 1)
+                                                    <a href="{{route('delete.right', ['id' => encrypt($row->id)])}}"
+                                                       class="btn btn-danger deactivate-data" data-toggle="tooltip"
+                                                       title="Deactivate Data" data-placement="right">
+                                                        <i class="fas fa-times-circle"></i></a>
+                                                @else
+                                                    <a href="{{route('delete.right', ['id' => encrypt($row->id)])}}"
+                                                       class="btn btn-success activate-data" data-toggle="tooltip"
+                                                       title="Activate Data" data-placement="right">
+                                                        <i class="fas fa-check-circle"></i></a>
+                                                @endif
+
                                             </td>
                                         </tr>
                                     @endforeach
@@ -209,7 +226,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="form-blogCategory" method="post" action="{{route('create.print')}}">
+                <form id="form-blogCategory" method="post" action="{{route('create.right')}}">
                     {{csrf_field()}}
                     <input type="hidden" name="_method">
                     <input type="hidden" name="id">
@@ -397,7 +414,7 @@
             $(".fix-label-group .bootstrap-select").addClass('p-0');
             $(".fix-label-group .bootstrap-select button").css('border-color', '#e4e6fc');
 
-            $("#form-blogPost").attr('action', '{{route('create.print')}}');
+            $("#form-blogPost").attr('action', '{{route('create.right')}}');
             $("#form-blogPost input[name=_method], #form-blogPost input[name=id], #form-blogPost input[name=admin_id], #title").val('');
             $(".input-files").show();
             $("#form-blogPost button[type=submit]").text('Submit');
@@ -415,7 +432,7 @@
 
         function createBlogCategory() {
             $("#blogCategoryModal .modal-title").text('Create Form');
-            $("#form-blogCategory").attr('action', '{{route('create.print')}}');
+            $("#form-blogCategory").attr('action', '{{route('create.right')}}');
             $("#form-blogCategory input[name=_method]").val('');
             $("#form-blogCategory input[name=id]").val('');
             $("#form-blogCategory button[type=submit]").text('Submit');
@@ -425,7 +442,7 @@
 
         function editBlogCategory(id, name, name_id, caption) {
             $("#blogCategoryModal .modal-title").text('Edit Form');
-            $("#form-blogCategory").attr('action', '{{route('update.print')}}');
+            $("#form-blogCategory").attr('action', '{{route('update.right')}}');
             $("#form-blogCategory input[name=_method]").val('PUT');
             $("#form-blogCategory input[name=id]").val(id);
             $("#form-blogCategory button[type=submit]").text('Save Changes');
@@ -447,7 +464,7 @@
             $(".fix-label-group .bootstrap-select").addClass('p-0');
             $(".fix-label-group .bootstrap-select button").css('border-color', '#e4e6fc');
 
-            $("#form-blogPost").attr('action', '{{route('update.print')}}');
+            $("#form-blogPost").attr('action', '{{route('update.right')}}');
             $("#form-blogPost input[name=_method]").val('PUT');
             $("#form-blogPost input[name=id]").val(id);
             $(".input-files").hide();

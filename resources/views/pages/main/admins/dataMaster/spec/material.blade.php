@@ -56,6 +56,7 @@
                                         </th>
                                         <th class="text-center">ID</th>
                                         <th width="35%">Name</th>
+                                        <th>Status</th>
                                         <th class="text-center" width="15%">Created at</th>
                                         <th class="text-center" width="15%">Last Update</th>
                                         <th width="25%">Action</th>
@@ -78,6 +79,14 @@
                                                 <strong>{{$row->getTranslation('name', 'id')}} (Id)</strong> <br>
                                                 <strong>{{$row->getTranslation('name', 'en')}} (En)</strong>
                                             </td>
+
+                                            <td>
+                                                @if($row->isActive == 1)
+                                                    <span class="badge badge-success"><i class="fa fa-check"> </i>&nbsp;&nbsp;Active </span>
+                                                @else
+                                                    <span class="badge badge-danger"><i class="fa fa-times-circle"> </i>&nbsp;&nbsp;Non-Active </span>
+                                                @endif
+                                            </td>
                                             <td style="vertical-align: middle" align="center">
                                                 {{\Carbon\Carbon::parse($row->created_at)->format('j F Y')}}</td>
                                             <td style="vertical-align: middle" align="center">
@@ -87,10 +96,19 @@
                                                         type="button" class="btn btn-warning mr-1"
                                                         onclick="editBlogPost('{{$row->id}}','{{route('edit.material.posts', ['id' => $row->id])}}')">
                                                     <i class="fa fa-edit"></i></button>
-                                                <a href="{{route('delete.material', ['id' => encrypt($row->id)])}}"
-                                                   class="btn btn-danger delete-data" data-toggle="tooltip"
-                                                   title="Delete" data-placement="right">
-                                                    <i class="fas fa-trash-alt"></i></a>
+
+                                                @if($row->isActive == 1)
+                                                    <a href="{{route('delete.material', ['id' => encrypt($row->id)])}}"
+                                                       class="btn btn-danger deactivate-data" data-toggle="tooltip"
+                                                       title="Deactivate Data" data-placement="right">
+                                                        <i class="fas fa-times-circle"></i></a>
+                                                @else
+                                                    <a href="{{route('delete.material', ['id' => encrypt($row->id)])}}"
+                                                       class="btn btn-success activate-data" data-toggle="tooltip"
+                                                       title="Activate Data" data-placement="right">
+                                                        <i class="fas fa-check-circle"></i></a>
+                                                @endif
+
                                             </td>
                                         </tr>
                                     @endforeach

@@ -81,12 +81,26 @@ class RightLeftSideController extends Controller
 
     public function delete_data($id)
     {
-        $post = RightLeftSide::find(decrypt($id));
+        $data = RightLeftSide::find(decrypt($id));
 
-        Storage::delete('public/products/specs/' . $post->image);
+//        Storage::delete('public/products/specs/' . $post->image);
+//
+//        $post->delete();
+//
+//        return back()->with('success', __('admin.alert.blog.delete', ['param' => $post->title]));
+        if ($data->isActive) {
+            $data->update([
+                'isActive' => false
+            ]);
+            $message = 'Successfully deactivate data';
+        } else {
+            $data->update([
+                'isActive' => true
+            ]);
 
-        $post->delete();
+            $message = 'Successfully activate data';
+        }
 
-        return back()->with('success', __('admin.alert.blog.delete', ['param' => $post->title]));
+        return back()->with('success', $message);
     }
 }
