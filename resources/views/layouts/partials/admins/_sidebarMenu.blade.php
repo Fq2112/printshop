@@ -1,4 +1,4 @@
-@if(Auth::user()->isRoot() || Auth::user()->isOwner())
+@if(Auth::user()->isRoot() || Auth::user()->isOwner() || Auth::user()->isAdmin()  )
     @include('layouts.partials.admins.owner')
     @elseif(Auth::user()->isCs())
     @include('layouts.partials.admins.cs')

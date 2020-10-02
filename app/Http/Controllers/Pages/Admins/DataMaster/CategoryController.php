@@ -101,12 +101,12 @@ class CategoryController extends Controller
     {
         $data = Kategori::find(decrypt($id));
         $message = '';
-        if ($data->isActive){
+        if ($data->isActive) {
             $data->update([
-               'isActive' => false
+                'isActive' => false
             ]);
             $message = 'Successfully deactivate data';
-        }else{
+        } else {
             $data->update([
                 'isActive' => true
             ]);
@@ -114,7 +114,7 @@ class CategoryController extends Controller
             $message = 'Successfully activate data';
         }
 
-        return back()->with('success',$message);
+        return back()->with('success', $message);
     }
 
     public function show_subkategori()
@@ -131,7 +131,7 @@ class CategoryController extends Controller
         if ($request->hasFile('thumbnail')) {
             $this->validate($request, ['thumbnail' => 'required|image|mimes:jpg,jpeg,gif,png|max:5120']);
             $thumbnail = uniqid() . $request->file('thumbnail')->getClientOriginalName();
-            $request->file('thumbnail')->storeAs('public/products/thumb/', $thumbnail);
+            $request->file('thumbnail')->storeAs('public/products/banner/', $thumbnail);
         } else {
             $thumbnail = "";
         }
@@ -289,10 +289,13 @@ class CategoryController extends Controller
     public function editSubCategory($id)
     {
         $data = SubKategori::find($id);
+        $banner_path = asset('storage/products/banner/' . $data->banner);
+        $guideline = asset('storage/products/guidelines/' . $data->guidelines);
         return response()->json([
             'data' => $data,
-            'detail' => $data->getSubkatSpecs
-
+            'detail' => $data->getSubkatSpecs,
+            'banner_path' => $banner_path,
+            'guideline' => $guideline
         ]);
     }
 
@@ -304,9 +307,9 @@ class CategoryController extends Controller
             $this->validate($request, ['thumbnail' => 'required|image|mimes:jpg,jpeg,gif,png|max:5120']);
             $thumbnail = uniqid() . $request->file('thumbnail')->getClientOriginalName();
             Storage::delete('public/subkat/' . $category->banner);
-            $request->file('thumbnail')->storeAs('public/products/thumb/', $thumbnail);
+            $request->file('thumbnail')->storeAs('public/products/banner/', $thumbnail);
         } else {
-            $thumbnail = "";
+            $thumbnail = $category->banner;
         }
 
         if ($request->hasFile('guidelines')) {
@@ -315,7 +318,7 @@ class CategoryController extends Controller
             Storage::delete('public/subkat/guidelines/' . $category->guidelines);
             $request->file('guidelines')->storeAs('public/products/guidelines/', $guidelines);
         } else {
-            $guidelines = "";
+            $guidelines = $category->guidelines;
         }
 
         $category->update([
@@ -467,12 +470,12 @@ class CategoryController extends Controller
     {
         $data = SubKategori::find(decrypt($id));
         $message = '';
-        if ($data->isActive){
+        if ($data->isActive) {
             $data->update([
                 'isActive' => false
             ]);
             $message = 'Successfully deactivate data';
-        }else{
+        } else {
             $data->update([
                 'isActive' => true
             ]);
@@ -480,7 +483,7 @@ class CategoryController extends Controller
             $message = 'Successfully activate data';
         }
 
-        return back()->with('success',$message);
+        return back()->with('success', $message);
     }
 
     public function show_cluster()
@@ -495,10 +498,13 @@ class CategoryController extends Controller
     public function editcluster($id)
     {
         $data = ClusterKategori::find($id);
+        $banner_path = asset('storage/products/banner/' . $data->banner);
+        $thumnail = asset('storage/products/thumb/' . $data->thumbnail);
         return response()->json([
             'data' => $data,
-            'detail' => $data->getClusterSpecs
-
+            'detail' => $data->getClusterSpecs,
+            'banner_path' => $banner_path,
+            'thumbnail' => $thumnail
         ]);
     }
 
@@ -684,7 +690,7 @@ class CategoryController extends Controller
             $thumbnail = uniqid() . $request->file('thumbnail')->getClientOriginalName();
             $request->file('thumbnail')->storeAs('public/products/thumb/', $thumbnail);
         } else {
-            $thumbnail = "";
+            $thumbnail = $cluster->thumbnail;
         }
 
         if ($request->hasFile('guidelines')) {
@@ -700,7 +706,7 @@ class CategoryController extends Controller
             $banner = uniqid() . $request->file('banner')->getClientOriginalName();
             $request->file('banner')->storeAs('public/products/banner/', $banner);
         } else {
-            $banner = "";
+            $banner = $cluster->banner;
         }
 
         $cluster->update([
@@ -854,12 +860,12 @@ class CategoryController extends Controller
     {
         $data = ClusterKategori::find(decrypt($id));
         $message = '';
-        if ($data->isActive){
+        if ($data->isActive) {
             $data->update([
                 'isActive' => false
             ]);
             $message = 'Successfully deactivate data';
-        }else{
+        } else {
             $data->update([
                 'isActive' => true
             ]);
@@ -867,7 +873,7 @@ class CategoryController extends Controller
             $message = 'Successfully activate data';
         }
 
-        return back()->with('success',$message);
+        return back()->with('success', $message);
     }
 
     public function show_gallery_subs($id)
@@ -905,7 +911,7 @@ class CategoryController extends Controller
             $data->delete();
             return back()->with('success', 'Banner Photo Successfully Removed');
 
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return back()->with('error', $exception->getMessage());
         }
     }
@@ -944,7 +950,7 @@ class CategoryController extends Controller
             $data->delete();
             return back()->with('success', 'Banner Photo Successfully Removed');
 
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return back()->with('error', $exception->getMessage());
         }
     }

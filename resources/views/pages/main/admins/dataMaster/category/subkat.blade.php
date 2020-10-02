@@ -195,6 +195,15 @@
                                         </div>
                                     </div>
 
+                                    <div class="row form-group" style="display: none" id="banner_div">
+                                        <div class="col">
+                                            <div class="row lightgallery float-left mr-0">
+                                                <img width="100%" alt="Banner" class="img-thumbnail" id="banner_img"
+                                                     src="">
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="row form-group">
                                         <div class="col">
                                             <label for="thumbnail">Banner</label>
@@ -215,6 +224,17 @@
                                         </div>
                                     </div>
 
+
+                                    <div class="row form-group" style="display: none" id="guide_div">
+                                        <div class="col">
+                                            <div class="row lightgallery float-left mr-0">
+                                                <object data="" type="application/pdf" id="object_guid" type="application/pdf">
+                                                    <iframe src="" id="iframe_guide" type="application/pdf"></iframe>
+                                                </object>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="row form-group">
                                         <div class="col">
                                             <label for="thumbnail">Guidelines </label>
@@ -224,13 +244,13 @@
                                                 </div>
                                                 <div class="custom-file">
                                                     <input type="file" name="guidelines" class="custom-file-input"
-                                                           id="thumbnail" accept="image/*">
+                                                           id="thumbnail" accept="image/*,.rar,.zip,.pdf">
                                                     <label class="custom-file-label" id="txt_thumbnail">Choose
                                                         File</label>
                                                 </div>
                                             </div>
                                             <div class="form-text text-muted">
-                                                Allowed extension: jpg, jpeg, gif, png. Allowed size: < 5 MB
+                                                Allowed extension: jpg, jpeg, gif, png. pdf, rar, zip Allowed size: < 5 MB
                                             </div>
                                         </div>
                                     </div>
@@ -971,6 +991,8 @@
             $("#advance").removeAttr('checked');
             $("#advance_check").show();
             $('#advance_menu').hide();
+            $("#banner_div").hide();
+            $("#guide_div").hide();
             reset_input();
         });
 
@@ -1051,7 +1073,7 @@
             $("#form-blogPost button[type=submit]").text('Save Changes');
 
             $.get(url, function (data) {
-                console.log(data.detail);
+                console.log(data.banner_path);
                 $("#form-blogPost input[name=admin_id]").val(data.admin_id);
                 $("#category_id").val(data.category_id).selectpicker('refresh');
                 $("#name_en").val(data.data.name.en);
@@ -1060,6 +1082,15 @@
                 $('#_content_en').summernote('code', data.data.caption.en);
                 $('#_content_id').summernote('code', data.data.caption.id);
                 $("#thumbnail").removeAttr('required', 'required');
+
+                $("#banner_div").show();
+                $("#guide_div").show();
+
+                $("#banner_img").attr('src',data.banner_path);
+                $("#object_guid").attr('data',data.guideline);
+                $("#iframe_guide").attr('src',data.guideline);
+
+
                 // $("#txt_thumbnail").text(data.data.image.length > 60 ? data.data.image.slice(0, 60) + "..." : data.data.image);
 
                 if (!data.detail) {

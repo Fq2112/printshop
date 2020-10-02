@@ -215,6 +215,15 @@
                                         </div>
                                     </div>
 
+                                    <div class="row form-group" style="display: none" id="thumb_div">
+                                        <div class="col">
+                                            <div class="row lightgallery float-left mr-0">
+                                                <img width="100%" alt="Banner" class="img-thumbnail" id="thumb_img"
+                                                     src="">
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="row form-group">
                                         <div class="col">
                                             <label for="thumbnail">Thumbnail</label>
@@ -234,6 +243,16 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="row form-group" style="display: none" id="banner_div">
+                                        <div class="col">
+                                            <div class="row lightgallery float-left mr-0">
+                                                        <img width="100%" alt="Banner" class="img-thumbnail" id="banner_img"
+                                                             src="">
+                                            </div>
+                                        </div>
+                                    </div>
+
 
                                     <div class="row form-group">
                                         <div class="col">
@@ -935,6 +954,8 @@
             $("#advance").removeAttr('checked');
             $("#advance_check").show();
             $('#advance_menu').hide();
+            $("#banner_div").hide();
+            $("#thumb_div").hide();
             reset_input();
         });
 
@@ -1016,7 +1037,7 @@
             $("#form-blogPost button[type=submit]").text('Save Changes');
 
             $.get(url, function (data) {
-                console.log(data.data.subkategori_id);
+                console.log(data.banner_path);
                 $("#form-blogPost input[name=admin_id]").val(data.admin_id);
                 $("#category_id").val(data.data.subkategori_id).selectpicker('refresh');
                 $("#name_en").val(data.data.name.en);
@@ -1026,7 +1047,15 @@
                 $('#_content_id').summernote('code', data.data.caption.id);
                 $('#_feature_en').summernote('code', data.data.features.en);
                 $('#_feature_id').summernote('code', data.data.features.id);
-                $("#thumbnail").removeAttr('required', 'required');
+                $("#thumbnail").removeAttr('required');
+                $("#banner").removeAttr('required');
+
+                $("#banner_div").show();
+                $("#thumb_div").show();
+                $("#banner_overlay").attr('data-src',data.banner_path);
+                $("#banner_img").attr('src',data.banner_path);
+                $("#thumb_img").attr('src',data.thumbnail);
+
                 // $("#txt_thumbnail").text(data.data.image.length > 60 ? data.data.image.slice(0, 60) + "..." : data.data.image);
 
                 if (!data.detail) {
