@@ -190,7 +190,7 @@ class AdminController extends Controller
                 'name' => $request->name,
                 'username' => $request->username,
                 'password' => bcrypt($request->username),
-                'role' => Role::ADMIN
+                'role' => $request->role
             ]);
             return back()->with('success', 'Successfully add new admin!');
         }else{

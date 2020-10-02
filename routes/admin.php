@@ -299,9 +299,9 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                 'as' => 'update.categories'
             ]);
 
-            Route::get('{id}/delete', [
+            Route::get('{id}/delete/categories', [
                 'uses' => 'CategoryController@deactivate_kategori',
-                'as' => 'delete.categories'
+                'as' => 'delete.categories.data'
             ]);
 
             Route::get('/sub', [
@@ -324,7 +324,7 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
                 'as' => 'edit.categories.sub.posts'
             ]);
 
-            Route::get('{id}/delete', [
+            Route::get('{id}/delete/sub', [
                 'uses' => 'CategoryController@deactivate_sub',
                 'as' => 'delete.categories.sub.delete'
             ]);

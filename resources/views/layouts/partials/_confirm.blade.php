@@ -44,7 +44,7 @@
             text: "You can deactivate this data again later",
             icon: 'warning',
             dangerMode: true,
-            buttons: ["{{__('lang.button.no')}}", "Deactivate"],
+            buttons: ["{{__('lang.button.no')}}", "Activate"],
             closeOnEsc: false,
             closeOnClickOutside: false,
         }).then((confirm) => {

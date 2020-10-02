@@ -59,7 +59,7 @@
                                         <th>Role</th>
                                         <th class="text-center" width="15%">Created at</th>
                                         <th class="text-center" width="15%">Last Update</th>
-                                        <th width="25%">Action</th>
+                                        <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -87,25 +87,26 @@
                                                 {{\Carbon\Carbon::parse($row->created_at)->format('j F Y')}}</td>
                                             <td style="vertical-align: middle" align="center">
                                                 {{$row->updated_at->diffForHumans()}}</td>
-                                            <td style="vertical-align: middle" align="center">
+                                            <td style="vertical-align: middle">
                                                 <button data-placement="left" data-toggle="tooltip"
                                                         title="Reset Password"
                                                         type="button" class="btn btn-warning mr-1"
                                                         onclick="show_swal_reset('{{$row->id}}')">
                                                     <i class="fa fa-user-lock"></i></button>
+                                                @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Support\Role::OWNER)
+                                                    @if($row->id != \Illuminate\Support\Facades\Auth::user()->id)
+                                                        <a href="{{route('delete.admin', ['id' => encrypt($row->id)])}}"
+                                                           class="btn btn-danger delete-data" data-toggle="tooltip"
+                                                           title="Delete" data-placement="right">
+                                                            <i class="fas fa-trash-alt"></i></a>
+                                                    @endif
+                                                @endif
                                                 <form action="{{route('admin.reset')}}" id="update_form_{{$row->id}}"
                                                       method="post">
                                                     @CSRF
                                                     <input type="hidden" name="id" value="{{$row->id}}">
                                                 </form>
-                                                @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Support\Role::OWNER)
-                                                    @if($row->id != \Illuminate\Support\Facades\Auth::user()->id)
-                                                    <a href="{{route('delete.admin', ['id' => encrypt($row->id)])}}"
-                                                       class="btn btn-danger delete-data" data-toggle="tooltip"
-                                                       title="Delete" data-placement="right">
-                                                        <i class="fas fa-trash-alt"></i></a>
-                                                        @endif
-                                                @endif
+
                                             </td>
                                         </tr>
                                     @endforeach
@@ -229,7 +230,7 @@
                     <input type="hidden" name="_method">
                     <input type="hidden" name="id">
                     <div class="modal-body">
-                        <div class="row">
+                        <div class="row form-group">
                             <div class="col">
                                 <label for="name">Name <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
@@ -241,7 +242,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row form-group">
                             <div class="col">
                                 <label for="name">Username <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
@@ -253,9 +254,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row form-group">
                             <div class="col">
-                                <label for="name">email <sup class="text-danger">*</sup></label>
+                                <label for="name">Email <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-envelope"></i></span>
@@ -265,7 +266,28 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row form-group">
+                            <div class="col">
+                                <label for="role">Job Desc <sup class="text-danger">*</sup></label>
+                                <div class="input-group">
+                                    <select id="role" style="width: 100%"
+                                            class="form-control selectpicker"
+                                            title="-- Choose --"
+                                            name="role" data-live-search="true" required>
+                                        @foreach(\App\Support\Role::ALL as $role)
+                                            <option
+                                                value="{{$role}}">{{ucwords($role)}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                            <div  class="text-danger"><strong>Password</strong> will be same with <strong>username</strong> </div>
+
                     </div>
+
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -316,10 +338,7 @@
                                 columns: [0, 2, 3, 4]
                             },
                             className: 'btn btn-info assets-select-btn export-print'
-                        }, {
-                            text: '<strong class="text-uppercase"><i class="fa fa-trash-alt mr-2"></i>Deletes</strong>',
-                            className: 'btn btn-danger btn_massDelete'
-                        }
+                        },
                     ],
                     fnDrawCallback: function (oSettings) {
                         $('.use-nicescroll').getNiceScroll().resize();

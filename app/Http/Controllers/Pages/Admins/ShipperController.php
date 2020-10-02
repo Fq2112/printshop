@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Pages\Admins;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\PaymentCart;
 use App\Support\StatusProgress;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -135,6 +136,11 @@ class ShipperController extends Controller
             $labelPdf->setPaper('a5', 'potrait');
             Storage::put('public/users/order/invoice/owner/prodution/' . $data->uni_code_payment . '/' . $labelname, $labelPdf->output());
 
+            foreach ($data->getOrder as $item){
+                $item->update([
+                    'progress_status' => StatusProgress::SHIPPING
+                ]);
+            }
 
             return back()->with('success', $ersponseData['data']['content'] . " & " . $ActiveresponseData['data']['message']);
         } catch (Exception $exception) {
