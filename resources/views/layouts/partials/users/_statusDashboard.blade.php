@@ -643,7 +643,11 @@
                                                 @elseif($acc == 'produced')
                                                     <b class="text-uppercase">{{__('lang.order.tab-bp')}}</b>
                                                 @elseif($acc == 'shipped' || $acc == 'received')
-                                                    <b class="text-uppercase">{{__('lang.order.AWB').' #'.$val->resi}}</b>
+                                                    @if(!is_null($val->tracking_id))
+                                                        <b class="text-uppercase">{{__('lang.order.shipping_id').' #'.$val->tracking_id}}</b>
+                                                    @else
+                                                        <b class="text-uppercase">{{__('lang.order.shipping_id').' #'.$val->shipping_id}}</b>
+                                                    @endif
                                                 @endif
                                             </a>
                                         </h4>
