@@ -176,7 +176,9 @@
                                         <th class="text-center">ID</th>
                                         <th width="15%">Code</th>
                                         <th width="15%">Customer</th>
-                                        <th width="15%"> <center>Courier</center></th>
+                                        <th width="15%">
+                                            <center>Courier</center>
+                                        </th>
                                         <th class="text-center" width="10%">Order date</th>
                                         <th class="text-center" width="10%">Payment</th>
                                         <th class="text-center" width="10%">Shipper</th>
@@ -200,7 +202,7 @@
                                             <td class="text-center">ID</td>
                                             <td width="15%">{{ucfirst($item->uni_code_payment)}}</td>
                                             <td width="15%">{{$item->getUser->name}} <br>
-                                            ( {{$item->getUser->getBio->phone}} )
+                                                ( {{$item->getUser->getBio->phone}} )
                                             </td>
                                             <td width="15%" align="center">
                                                 <img src="{{asset($item->rate_logo)}}" alt="" width="50px"> <br>
@@ -238,7 +240,8 @@
                                                 $order = \App\Models\PaymentCart::where('uni_code_payment', $item->uni_code_payment)->get()
                                                 ?>
                                                 @if($item->finish_payment == 1)
-                                                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                                    <div class="btn-group" role="group"
+                                                         aria-label="Button group with nested dropdown">
                                                         @if($item->tracking_id == null)
                                                             <button type="button" class="btn btn-danger"
                                                                     data-toggle="tooltip"
@@ -270,9 +273,11 @@
                                                             </button>
                                                             <div class="dropdown-menu"
                                                                  aria-labelledby="dropdownMenuButton">
-                                                                <a class="dropdown-item" href="{{route('admin.order.download.invoice',['code' => ucfirst($item->uni_code_payment),'user_id' => $item->getUser->id])}}"
-                                                                   >Invoice</a>
-                                                                <a class="dropdown-item" target="_blank" href="{{route('admin.order.production.download',['code' =>$item->uni_code_payment])}}">Production
+                                                                <a class="dropdown-item"
+                                                                   href="{{route('admin.order.download.invoice',['code' => ucfirst($item->uni_code_payment),'user_id' => $item->getUser->id])}}"
+                                                                >Invoice</a>
+                                                                <a class="dropdown-item" target="_blank"
+                                                                   href="{{route('admin.order.production.download',['code' =>$item->uni_code_payment])}}">Production
                                                                     Summary</a>
                                                                 <a class="dropdown-item"
                                                                    href="{{route('admin.order.shipping',['code' =>$item->uni_code_payment])}}"
@@ -282,8 +287,8 @@
                                                                 $file_path = storage_path('app/public/users/order/invoice/owner/prodution/' . $item->uni_code_payment . '/' . $item->uni_code_payment . '.pdf');
                                                                 ?>
                                                                 @if(file_exists($file_path))
-                                                                    <a class="dropdown-item" href="javascript:void(0)"
-                                                                       onclick="get_shipping('{{ucfirst($item->uni_code_payment)}}')">Shipping
+                                                                    <a class="dropdown-item" target="_blank"
+                                                                       href="{{route('admin.order.shipping',['code' =>ucfirst($item->uni_code_payment) ])}}">Shipping
                                                                         Label</a>
                                                                 @endif
                                                             </div>

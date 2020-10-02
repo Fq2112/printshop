@@ -124,9 +124,7 @@ class OrderController extends Controller
                     'progress_status' => StatusProgress::FINISH_PRODUCTION
                 ]);
             } elseif ($order->progress_status == StatusProgress::FINISH_PRODUCTION) {
-                $order->update([
-                    'progress_status' => StatusProgress::SHIPPING
-                ]);
+                return back()->with('error', 'Order Already Finished!');
             }
         }
         return back()->with('success', 'Order Successfully Updated!');
@@ -144,9 +142,7 @@ class OrderController extends Controller
                 'progress_status' => StatusProgress::FINISH_PRODUCTION
             ]);
         } elseif ($order->progress_status == StatusProgress::FINISH_PRODUCTION) {
-            $order->update([
-                'progress_status' => StatusProgress::SHIPPING
-            ]);
+            return back()->with('error', 'Order Already Finished!');
         }
         return back()->with('success', 'Order Successfully Updated!');
 
