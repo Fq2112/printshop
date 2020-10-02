@@ -97,12 +97,12 @@
                                                     <i class="fa fa-edit"></i></button>
 
                                                 @if($row->isActive == 1)
-                                                    <a href="{{route('delete.categories', ['id' => encrypt($row->id)])}}"
+                                                    <a href="{{route('delete.categories.data', ['id' => encrypt($row->id)])}}"
                                                        class="btn btn-danger deactivate-data" data-toggle="tooltip"
                                                        title="Deactivate Data" data-placement="right">
                                                         <i class="fas fa-times-circle"></i></a>
                                                 @else
-                                                    <a href="{{route('delete.categories', ['id' => encrypt($row->id)])}}"
+                                                    <a href="{{route('delete.categories.data', ['id' => encrypt($row->id)])}}"
                                                        class="btn btn-success activate-data" data-toggle="tooltip"
                                                        title="Activate Data" data-placement="right">
                                                         <i class="fas fa-check-circle"></i></a>

@@ -238,7 +238,7 @@
                                                 $order = \App\Models\PaymentCart::where('uni_code_payment', $item->uni_code_payment)->get()
                                                 ?>
                                                 @if($item->finish_payment == 1)
-                                                    <div class="btn-group">
+                                                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                                                         @if($item->tracking_id == null)
                                                             <button type="button" class="btn btn-danger"
                                                                     data-toggle="tooltip"
@@ -260,7 +260,7 @@
                                                             @endif
                                                         @endif
 
-                                                        <div class="dropdown">
+                                                        <div class="btn-group" role="group">
                                                             <button class="btn btn-primary dropdown-toggle"
                                                                     type="button" id="dropdownMenuButton"
                                                                     data-toggle="dropdown" aria-haspopup="true"

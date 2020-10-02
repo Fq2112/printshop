@@ -56,6 +56,25 @@ class Admin extends Authenticatable
         return ($this->role == Role::OWNER);
     }
 
+    /**
+     * Check whether this user is Customer Service or not
+     * @return bool
+     */
+    public function isCs()
+    {
+        return ($this->role == Role::CS);
+    }
+
+    /**
+     * Check whether this user is Content Creator or not
+     *
+     * @return bool
+     */
+    public function isCreator()
+    {
+        return ($this->role == Role::CREATOR);
+    }
+
     public function getBlog()
     {
         return $this->hasMany(Blog::class, 'admin_id');
