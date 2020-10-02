@@ -236,6 +236,7 @@ return [
         "empty-capt" => "Lengkapi kebutuhan cetak Anda sekarang",
         "payment_id" => "ID Pembayaran #<span style=\"font-weight: 800\">:id</span>",
         "order_id" => "ID Pemesanan #<span style=\"font-weight: 600\">:id</span>",
+        "shipping_id" => "ID Pengiriman #<span style=\"font-weight: 600\">:id</span>",
         "invoice" => "Faktur",
         "reorder" => "Pesan Ulang",
         "status" => "Status Pesanan",
