@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="{{asset('admins/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('admins/modules/datatables/Buttons-1.5.6/css/buttons.dataTables.min.css')}}">
     <link rel="stylesheet" href="{{asset('admins/modules/summernote/summernote-bs4.css')}}">
+
+    <link rel="stylesheet" href="{{asset('js/plugins/lightgallery/dist/css/lightgallery.min.css')}}">
     <style>
         .modal-header {
             padding: 1rem !important;
@@ -55,6 +57,7 @@
                                             </div>
                                         </th>
                                         <th class="text-center">ID</th>
+                                        <th>Image</th>
                                         <th width="35%">Name</th>
                                         <th>Status</th>
                                         <th class="text-center" width="15%">Created at</th>
@@ -75,6 +78,17 @@
                                                 </div>
                                             </td>
                                             <td style="vertical-align: middle" align="center">{{$row->id}}</td>
+                                            <td style="vertical-align: middle;">
+                                                <div class="row lightgallery float-left mr-0">
+                                                    <div class="col item" data-src="{{asset('storage/products/specs/'.$row->image)}}"
+                                                         data-sub-html="<h4>{{$row->image}}</h4><p></p>">
+                                                        <a href="javascript:void(0)">
+                                                            <img width="100" alt="Thumbnail" class="img-thumbnail"
+                                                                 src="{{asset('storage/products/specs/'.$row->image)}}">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td style="vertical-align: middle">
                                                 <strong>{{$row->getTranslation('name', 'id')}} (Id)</strong> <br>
                                                 <strong>{{$row->getTranslation('name', 'en')}} (En)</strong>
@@ -300,6 +314,7 @@
     <script src="{{asset('admins/modules/datatables/Buttons-1.5.6/js/buttons.dataTables.min.js')}}"></script>
     <script src="{{asset('admins/modules/jquery-ui/jquery-ui.min.js')}}"></script>
     <script src="{{asset('admins/modules/summernote/summernote-bs4.js')}}"></script>
+    <script src="{{asset('js/plugins/lightgallery/dist/js/lightgallery-all.min.js')}}"></script>
     <script>
         $(function () {
             var export_filename = 'Blog Categories Table ({{now()->format('j F Y')}})',
@@ -342,7 +357,10 @@
                     fnDrawCallback: function (oSettings) {
                         $('.use-nicescroll').getNiceScroll().resize();
                         $('[data-toggle="tooltip"]').tooltip();
-
+                        $('.lightgallery').lightGallery({
+                            loadYoutubeThumbnail: true,
+                            youtubeThumbSize: 'default',
+                        });
                         $("#cb-all").on('click', function () {
                             if ($(this).is(":checked")) {
                                 $("#dt-buttons tbody tr").addClass("terpilih")
