@@ -469,7 +469,7 @@
             $("#form-blogPost input[name=id]").val(id);
             $(".input-files").hide();
             $("#form-blogPost button[type=submit]").text('Save Changes');
-
+            $("#thumbnail").removeAttr('required');
             $.get(url, function (data) {
                 // console.log(data.name.id);
                 $("#form-blogPost input[name=admin_id]").val(data.admin_id);
@@ -479,7 +479,7 @@
                 $("#price").val(data.price);
                 $('#_content_en').summernote('code', data.caption.en);
                 $('#_content_id').summernote('code', data.caption.id);
-                $("#thumbnail").removeAttr('required', 'required');
+
                 $("#txt_thumbnail").text(data.image.length > 60 ? data.image.slice(0, 60) + "..." : data.thumbnail);
             }).fail(function () {
                 swal("Error!", "There's no any selected record!", "error");
