@@ -253,8 +253,7 @@
                                 @else
                                     @foreach($payment->take(5) as $item)
                                         <tr>
-                                            <td><a href="javascript:void(0)"
-                                                   onclick="getInvoice('{{$item->getUser->id}}','{{ucfirst($item->uni_code_payment)}}')">#{{$item->uni_code_payment}}</a>
+                                            <td><a href="{{route('admin.order.user',['kode'=>$item->uni_code_payment])}}">#{{$item->uni_code_payment}}</a>
                                             </td>
                                             <td class="font-weight-600">{{$item->getUser->name}}</td>
                                             <td>
