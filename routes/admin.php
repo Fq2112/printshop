@@ -69,7 +69,7 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
 
 
     Route::group(['prefix' => 'msc'], function () {
-        Route::group(['prefix' => 'promo', 'middleware' => 'owner'], function () {
+        Route::group(['prefix' => 'promo'], function () {
             Route::get('show', [
                 'uses' => 'PromoController@show_promo',
                 'as' => 'admin.promo'
@@ -97,7 +97,7 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             ]);
         });
 
-        Route::group(['prefix' => 'setting', 'middleware' => 'owner'], function () {
+        Route::group(['prefix' => 'setting'], function () {
             Route::get('show', [
                 'uses' => 'SettingController@show_setting',
                 'as' => 'admin.setting.general'

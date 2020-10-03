@@ -55,7 +55,8 @@
                                             </div>
                                         </th>
                                         <th class="text-center">ID</th>
-                                        <th width="35%">Name</th>
+                                        <th width="15%">Name</th>
+                                        <th>Username</th>
                                         <th>Role</th>
                                         <th class="text-center">Created at</th>
                                         <th class="text-center">Last Update</th>
@@ -78,6 +79,7 @@
                                             <td style="vertical-align: middle">
                                                 <strong>{{$row->name}}</strong>
                                             </td>
+                                            <td>{{$row->username}}</td>
 
                                             <td style="vertical-align: middle">
                                                 <span class="badge badge-warning">{{$row->role}}</span>
@@ -93,6 +95,7 @@
                                                         type="button" class="btn btn-info mr-1"
                                                         onclick="editUser('{{$row->id}}','{{$row->name}}','{{$row->username}}','{{$row->email}}','{{$row->role}}')">
                                                     <i class="fa fa-edit"></i></button>
+
                                                 <button data-placement="top" data-toggle="tooltip"
                                                         title="Reset Password"
                                                         type="button" class="btn btn-warning mr-1"
@@ -280,7 +283,7 @@
                                             title="-- Choose --"
                                             name="role" data-live-search="true" required>
                                         @foreach(\App\Support\Role::ALL as $role)
-                                            @if($role != \App\Support\Role::ROOT)
+                                            @if($role != \App\Support\Role::ROOT && $role != \App\Support\Role::OWNER)
                                                 <option
                                                     value="{{$role}}">{{ucwords($role)}}</option>
                                             @endif
@@ -368,7 +371,7 @@
                                             title="-- Choose --"
                                             name="role" data-live-search="true" required>
                                         @foreach(\App\Support\Role::ALL as $role)
-                                            @if($role != \App\Support\Role::ROOT)
+                                            @if($role != \App\Support\Role::ROOT && $role != \App\Support\Role::OWNER)
                                                 <option
                                                     value="{{$role}}">{{ucwords($role)}}</option>
                                             @endif
