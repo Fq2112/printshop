@@ -399,14 +399,20 @@
                         $('#message-contents').show();
                     },
                     success: function (data) {
+                        var content = '';
+                        if(data.str_attach != null) {
+                            content='<br><small><i class="fa fa-paperclip mr-2"></i>'+data.str_attach+'</small>'
+                        }
+
                         $("#message-contents").html(
                             '<div class="ticket-header">' +
                             '<div class="ticket-sender-picture img-shadow"><img src="' + data.ava + '" alt="Avatar"></div>' +
                             '<div class="ticket-detail">' +
                             '<div class="ticket-title"><h4>' + data.subject + '</h4></div>' +
                             '<div class="ticket-info">' +
-                            '<div class="font-weight-600">' + data.name + '</div> <div class="bullet"></div> ' +
-                            '<div class="text-primary font-weight-600">' + data.created_at + '</div></div></div></div>' +
+                            'to: <div class="font-weight-600">' + data.email + '</div> <div class="bullet"></div> ' +
+                            '<div class="text-primary font-weight-600">' + data.created_at + '</div>' + content +
+                            '</div></div></div>' +
                             '<div class="ticket-description"><p>' + data.message + '</p>' +
                             '<div class="ticket-divider"></div></div>' +
                             '<div class="btn-group" role="group">' +
@@ -420,7 +426,8 @@
 
                         $(".btn_reply" + data.id).on("click", function () {
                             $("#compose_title").text('Reply Message');
-                            inbox_to.val(data.email);
+                            inbox_to.tagsinput('removeAll');
+                            inbox_to.tagsinput('add', data.recipients);
                             $("#inbox_subject").val('Re: ' + data.subject);
                             $('.summernote').summernote('code', '');
                             $(".compose").slideToggle();
@@ -428,7 +435,7 @@
 
                         $(".btn_forward" + data.id).on("click", function () {
                             $("#compose_title").text('Forward Message');
-                            inbox_to.val('');
+                            inbox_to.tagsinput('removeAll');
                             $("#inbox_subject").val('Fwd: ' + data.subject);
                             $('.summernote').summernote('code', data.message);
                             $(".compose").slideToggle();

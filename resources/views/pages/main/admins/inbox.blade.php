@@ -420,7 +420,8 @@
 
                         $(".btn_reply" + data.id).on("click", function () {
                             $("#compose_title").text('Reply Message');
-                            inbox_to.val(data.email);
+                            inbox_to.tagsinput('removeAll');
+                            inbox_to.tagsinput('add', data.email);
                             $("#inbox_subject").val('Re: ' + data.subject);
                             $('.summernote').summernote('code', '');
                             $(".compose").slideToggle();
@@ -428,7 +429,7 @@
 
                         $(".btn_forward" + data.id).on("click", function () {
                             $("#compose_title").text('Forward Message');
-                            inbox_to.val('');
+                            inbox_to.tagsinput('removeAll');
                             $("#inbox_subject").val('Fwd: ' + data.subject);
                             $('.summernote').summernote('code', data.message);
                             $(".compose").slideToggle();
