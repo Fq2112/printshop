@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use PHPMailer\PHPMailer\Exception;
 
 class AdminController extends Controller
 {
@@ -277,6 +278,22 @@ class AdminController extends Controller
         }
 
 
+    }
+
+    public function admin_edit(Request $request)
+    {
+        try {
+            $data = Admin::find($request->id);
+
+            $data->update([
+                'name' => $request->name,
+                'role' => $request->role
+            ]);
+
+            return back()->with('success', 'Data Successfully updated!');
+        }catch (Exception $exception){
+            return back()->with('error', $exception->getMessage());
+        }
     }
 
     public function delete_admin($id)
