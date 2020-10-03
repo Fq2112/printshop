@@ -1,5 +1,5 @@
 @extends('layouts.mst_admin')
-@section('title', __('admin.sidebar.head').': Inbox | '.__('lang.title'))
+@section('title', __('admin.sidebar.head').': Sent | '.__('lang.title'))
 @push('styles')
     <link rel="stylesheet" href="{{asset('admins/modules/summernote/summernote-bs4.css')}}">
     <link rel="stylesheet" href="{{asset('js/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
@@ -137,15 +137,15 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            @if(count($contacts) > 0)
+                            @if(count($sents) > 0)
                                 <a href="javascript:void(0)" data-toggle-slide="#message-items"
                                    class="btn btn-primary btn-icon icon-left btn-lg btn-block mb-4 d-md-none">
                                     <i class="fas fa-list"></i> All Message</a>
                                 <div class="tickets">
                                     <div class="ticket-items" id="message-items" style="height: 800px">
-                                        @foreach($contacts as $row)
+                                        @foreach($sents as $row)
                                             <div class="ticket-item" style="cursor: pointer" id="{{$row->id}}"
-                                                 onclick="viewMail('{{$row->id}}','{{route('admin.get.read', ['id' => encrypt($row->id), 'type' => 'inbox'])}}')">
+                                                 onclick="viewMail('{{$row->id}}','{{route('admin.get.read', ['id' => encrypt($row->id), 'type' => 'sent'])}}')">
                                                 <div class="ticket-title">
                                                     <h4>{{ucfirst($row->subject)}}</h4>
                                                 </div>
@@ -167,7 +167,7 @@
                                 </div>
                             @else
                                 <img class="img-fluid float-left" src="{{asset('images/searchPlace.png')}}" width="128">
-                                <h5><em>There seems to be none of the feedback was found&hellip;</em></h5>
+                                <h5><em>There seems to be none of the sent mail was found&hellip;</em></h5>
                             @endif
                         </div>
                     </div>
