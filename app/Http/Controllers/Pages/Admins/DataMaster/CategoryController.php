@@ -32,8 +32,8 @@ class CategoryController extends Controller
         if ($request->hasFile('thumbnail')) {
             $this->validate($request, ['thumbnail' => 'required|image|mimes:jpg,jpeg,gif,png|max:5120']);
             $thumbnail = $request->file('thumbnail')->getClientOriginalName();
-            Storage::delete('public/blog/thumbnail/' . $blog->thumbnail);
-            $request->file('thumbnail')->storeAs('public/blog/thumbnail', $thumbnail);
+//            Storage::delete('public/blog/thumbnail/' . $blog->thumbnail);
+            $request->file('thumbnail')->storeAs('public/products/thumb/', $thumbnail);
 
         }
 
@@ -65,8 +65,8 @@ class CategoryController extends Controller
         if ($request->hasFile('thumbnail')) {
             $this->validate($request, ['thumbnail' => 'required|image|mimes:jpg,jpeg,gif,png|max:5120']);
             $thumbnail = $request->file('thumbnail')->getClientOriginalName();
-            Storage::delete('public/blog/thumbnail/' . $thumbnail);
-            $request->file('thumbnail')->storeAs('public/blog/thumbnail', $thumbnail);
+//            Storage::delete('public/blog/thumbnail/' . $thumbnail);
+            $request->file('thumbnail')->storeAs('public/products/thumb/', $thumbnail);
 
         } else {
             $thumbnail = $category->image;
