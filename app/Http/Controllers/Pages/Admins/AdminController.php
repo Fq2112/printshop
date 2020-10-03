@@ -9,6 +9,8 @@ use App\Models\Cart;
 use App\Models\Kontak;
 use App\Models\Order;
 use App\Models\PaymentCart;
+use App\Models\PromoCode;
+use App\Models\Sent;
 use App\Support\Role;
 use App\User;
 use Carbon\Carbon;
@@ -59,6 +61,7 @@ class AdminController extends Controller
     public function showInbox(Request $request)
     {
         $contacts = Kontak::orderByDesc('id')->get();
+        $promo = PromoCode::where('end', '>', now()->subDay())->orderBy('promo_code')->get();
 
         if ($request->has("id")) {
             $findMessage = $request->id;
@@ -66,28 +69,82 @@ class AdminController extends Controller
             $findMessage = null;
         }
 
-        return view('pages.main.admins.inbox', compact('contacts', 'findMessage'));
+        return view('pages.main.admins.inbox', compact('contacts', 'findMessage', 'promo'));
+    }
+
+    public function getRead(Request $request)
+    {
+        if ($request->type == 'sent') {
+            $data = Sent::find(decrypt($request->id))->toArray();
+            $ava = asset('images/icon-512.png');
+        } else {
+            $data = Kontak::find(decrypt($request->id))->toArray();
+            $user = User::where('email', $data['email'])->first();
+            $ava = $user->getBio->ava != "" ? asset('storage/users/ava/' . $user->getBio->ava) : asset('admins/img/avatar/avatar-' . rand(1, 5) . '.png');
+        }
+
+        $data = array_replace($data, [
+            'ava' => $ava,
+            'created_at' => \Illuminate\Support\Carbon::parse($data['created_at'])->format('l, j F Y') . ' at ' .
+                Carbon::parse($data['created_at'])->format('H:i'),
+            'encryptID' => encrypt($data['id']),
+            'del_route' => $request->type == 'sent' ? route('admin.delete.sent', ['id' => encrypt($data['id'])]) :
+                route('admin.delete.inbox', ['id' => encrypt($data['id'])]),
+            'str_attach' => $request->type == 'sent' && !is_null($data['attachments']) ?
+                count($data['attachments']) . ' attachment(s): ' . implode(', ', $data['attachments']) : null,
+        ]);
+
+        return $data;
     }
 
     public function composeInbox(Request $request)
     {
         $this->validate($request, [
-            'inbox_to' => 'required|string|email|max:255',
-            'inbox_subject' => 'string|min:3',
-            'inbox_message' => 'required'
+            'inbox_to' => 'required',
+            'inbox_subject' => 'required|string|min:3',
+            'inbox_category' => 'required|string',
+            'inbox_promo' => 'string',
+            'inbox_message' => 'required',
+            'attachments' => 'array',
+            'attachments.*' => 'max:5120'
         ]);
-        $data = array(
-            'email' => $request->inbox_to,
-            'subject' => $request->inbox_subject,
-            'bodymessage' => $request->inbox_message
-        );
-        Mail::send('emails.contact', $data, function ($message) use ($data) {
-            $message->from(env('MAIL_USERNAME'), env('APP_TITLE'));
-            $message->to($data['email']);
-            $message->subject($data['subject']);
-        });
 
-        return back()->with('success', 'Successfully sent message to ' . $data['email'] . '!');
+        $data = [
+            'subject' => $request->inbox_subject,
+            'category' => $request->inbox_category,
+            'promo_code' => $request->inbox_promo,
+            'body-message' => $request->inbox_message,
+            'attachments' => [],
+        ];
+
+        if ($request->hasFile('attachments')) {
+            foreach ($request->file('attachments') as $row) {
+                array_push($data['attachments'], $row->getClientOriginalName());
+                $row->storeAs('public/admins/attachments', $row->getClientOriginalName());
+            }
+        }
+
+        $emails = explode(',', $request->inbox_to);
+        foreach ($emails as $email) {
+            Sent::create([
+                'recipients' => $email,
+                'subject' => $data['subject'],
+                'category' => $data['category'],
+                'promo_code' => $data['promo_code'],
+                'message' => $data['body-message'],
+                'attachments' => count($data['attachments']) > 0 ? $data['attachments'] : null,
+            ]);
+
+            Mail::to($email)->send(new ComposeMail($data));
+        }
+
+        if (count($data['attachments']) > 0) {
+            foreach ($data['attachments'] as $filename) {
+                Storage::delete('public/admins/attachments/' . $filename);
+            }
+        }
+
+        return back()->with('success', 'Successfully sent a message to ' . implode(', ', $emails) . '!');
     }
 
     public function deleteInbox(Request $request)
@@ -96,6 +153,28 @@ class AdminController extends Controller
         $contact->delete();
 
         return back()->with('success', 'Message from ' . $contact->name . ' [' . $contact->email . '] is successfully deleted!');
+    }
+
+    public function showSent(Request $request)
+    {
+        $sents = Sent::orderByDesc('id')->get();
+        $promo = PromoCode::where('end', '>', now()->subDay())->orderBy('promo_code')->get();
+
+        if ($request->has("id")) {
+            $findMessage = $request->id;
+        } else {
+            $findMessage = null;
+        }
+
+        return view('pages.main.admins.sent', compact('sents', 'findMessage', 'promo'));
+    }
+
+    public function deleteSent(Request $request)
+    {
+        $sent = Sent::find(decrypt($request->id));
+        $sent->delete();
+
+        return back()->with('success', 'Message for ' . $sent->recipients . ' is successfully deleted!');
     }
 
     public function profil()

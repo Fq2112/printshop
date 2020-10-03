@@ -245,14 +245,17 @@
                                                 <img src="{{asset('images/searchPlace.png')}}" class="img-fluid">
                                             </div>
                                             <div class="dropdown-item-desc">
-                                                <p>There seem none payment data for a while,please staty toon</p>
+                                                <p>There seems to be none of the payment data was found, please stay
+                                                    tune!</p>
                                             </div>
                                         </td>
                                     </tr>
                                 @else
                                     @foreach($payment->take(5) as $item)
                                         <tr>
-                                            <td><a href="javascript:void(0)">#{{$item->uni_code_payment}}</a></td>
+                                            <td><a href="javascript:void(0)"
+                                                   onclick="getInvoice('{{$item->getUser->id}}','{{ucfirst($item->uni_code_payment)}}')">#{{$item->uni_code_payment}}</a>
+                                            </td>
                                             <td class="font-weight-600">{{$item->getUser->name}}</td>
                                             <td>
                                                 @if($item->finish_payment == 1)
@@ -265,19 +268,21 @@
                                             <td>
                                                 @if($item->finish_payment == 1)
                                                     <div class="btn-group">
-                                                        <a href="{{route('admin.order.download.invoice',['code' => ucfirst($item->uni_code_payment),'user_id' => $item->getUser->id])}}" class="btn btn-danger"
+                                                        <a href="{{route('admin.order.download.invoice',['code' => ucfirst($item->uni_code_payment),'user_id' => $item->getUser->id])}}"
+                                                           class="btn btn-danger"
                                                            data-toggle="tooltip" title="Download Invoice"><i
                                                                 class="fa fa-file-pdf"></i></a>
-                                                        <a href="{{route('admin.order.user',['kode'=>$item->uni_code_payment])}}" class="btn btn-info"
+                                                        <a href="{{route('admin.order.user',['kode'=>$item->uni_code_payment])}}"
+                                                           class="btn btn-info"
                                                            data-toggle="tooltip" title="Detail Invoice"><i
-                                                                class="fa fa-info"></i></a>
+                                                                class="fa fa-info-circle"></i></a>
                                                     </div>
                                                 @else
                                                     <div class="btn-group">
                                                         <a href="javascript:void(0)" class="btn btn-danger"
-                                                           onclick="getInvoice('{{$item->getUser->id}}','{{ucfirst($item->uni_code_payment)}}')" class="btn btn-danger"
-                                                           data-toggle="tooltip" title="Download Invoice"><i
-                                                                class="fa fa-file-pdf"></i></a>
+                                                           onclick="getInvoice('{{$item->getUser->id}}','{{ucfirst($item->uni_code_payment)}}')"
+                                                           data-toggle="tooltip" title="Download Invoice">
+                                                            <i class="fa fa-file-pdf"></i></a>
                                                     </div>
                                                 @endif
 

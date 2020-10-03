@@ -20,7 +20,7 @@ class AdminSeeder extends Seeder
             'email' => 'fiqy_a@icloud.com',
             'password' => bcrypt('Fiqy2112'),
             'role' => \App\Support\Role::ROOT,
-            'facebook' => 'FqNkk',
+            'facebook' => 'fq_whysoserious',
             'twitter' => 'Fq2112',
             'instagram' => 'fq_whysoserious',
             'whatsapp' => '+6281356598237',
@@ -29,7 +29,7 @@ class AdminSeeder extends Seeder
         \App\Models\Admin::create([
             'name' => 'Sindhu',
             'username' => 'sindhu.scott.royce',
-            'email' => 'sindhu@supremewrap.co.id',
+            'email' => 'sindhu@indoprint.co.id',
             'password' => bcrypt('Sindhu2112'),
             'role' => \App\Support\Role::OWNER,
             'instagram' => 'sindhu.scott.royce',
@@ -39,12 +39,36 @@ class AdminSeeder extends Seeder
         \App\Models\Admin::create([
             'name' => 'Marsella Tanaya',
             'username' => 'mar_tanaya',
-            'email' => 'marsella@supremewrap.co.id',
+            'email' => 'marsella@indoprint.co.id',
             'password' => bcrypt('Marsella2112'),
-            'role' => \App\Support\Role::ADMIN,
+            'role' => \App\Support\Role::CREATOR,
             'instagram' => 'mar_tanaya',
             'whatsapp' => '+628113051492',
         ]);
+
+        $x = 1;
+        $y = 1;
+        for ($c = 1; $c <= 2; $c++) {
+            \App\Models\Admin::create([
+                'name' => 'Admin ' . $c,
+                'username' => 'admin_' . $x++,
+                'email' => 'admin_' . $y++ . '@indoprint.co.id',
+                'password' => bcrypt('Admin2112'),
+                'role' => \App\Support\Role::ADMIN,
+            ]);
+        }
+
+        $a = 1;
+        $b = 1;
+        for ($c = 1; $c <= 3; $c++) {
+            \App\Models\Admin::create([
+                'name' => 'CS ' . $c++,
+                'username' => 'cs_' . $a++,
+                'email' => 'cs_' . $b++ . '@indoprint.co.id',
+                'password' => bcrypt('CS2112'),
+                'role' => \App\Support\Role::CS,
+            ]);
+        }
 
         $user = \App\User::create([
             'name' => 'Fiqy Ainuzzaqy',

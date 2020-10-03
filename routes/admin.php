@@ -236,11 +236,11 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
 
     });
 
-    Route::group(['prefix' => 'inbox', 'middleware' => 'owner'], function () {
+    Route::group(['prefix' => 'mail'], function () {
 
-        Route::get('/', [
-            'uses' => 'AdminController@showInbox',
-            'as' => 'admin.inbox'
+        Route::get('read/{id}/{type}', [
+            'uses' => 'AdminController@getRead',
+            'as' => 'admin.get.read'
         ]);
 
         Route::post('compose', [
@@ -248,11 +248,33 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             'as' => 'admin.compose.inbox'
         ]);
 
-        Route::get('{id}/delete', [
-            'uses' => 'AdminController@deleteInbox',
-            'as' => 'admin.delete.inbox'
-        ]);
+        Route::group(['prefix' => 'inbox'], function () {
 
+            Route::get('/', [
+                'uses' => 'AdminController@showInbox',
+                'as' => 'admin.inbox'
+            ]);
+
+            Route::get('{id}/delete', [
+                'uses' => 'AdminController@deleteInbox',
+                'as' => 'admin.delete.inbox'
+            ]);
+
+        });
+
+        Route::group(['prefix' => 'sent'], function () {
+
+            Route::get('/', [
+                'uses' => 'AdminController@showSent',
+                'as' => 'admin.sent'
+            ]);
+
+            Route::get('{id}/delete', [
+                'uses' => 'AdminController@deleteSent',
+                'as' => 'admin.delete.sent'
+            ]);
+
+        });
 
     });
 

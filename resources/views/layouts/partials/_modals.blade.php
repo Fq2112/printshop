@@ -340,7 +340,7 @@
             </div>
         @endif
     @else
-        <div class="modal-on-load" data-target="#langModal"></div>
+        <div class="modal-on-load customjs" data-target="#langModal"></div>
         <div class="modal1 mfp-hide subscribe-widget customjs" id="langModal">
             <div class="block dark divcenter">
                 <div style="padding: 50px;">

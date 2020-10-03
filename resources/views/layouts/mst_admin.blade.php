@@ -21,6 +21,7 @@
 <!-- Template CSS -->
     <link rel="stylesheet" href="{{asset('admins/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('admins/css/components.css')}}">
+    <link rel="stylesheet" href="{{asset('admins/css/preloader.css')}}">
 
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>

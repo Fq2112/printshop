@@ -2,6 +2,8 @@
 @section('title', __('admin.sidebar.head').': Inbox | '.__('lang.title'))
 @push('styles')
     <link rel="stylesheet" href="{{asset('admins/modules/summernote/summernote-bs4.css')}}">
+    <link rel="stylesheet" href="{{asset('admins/modules/bootstrap-tagsinput/tagsinput.css')}}">
+    <link rel="stylesheet" href="{{asset('css/components/bs-filestyle.css')}}">
     <style>
         .compose {
             padding: 0;
@@ -32,9 +34,86 @@
         .compose .compose-footer {
             padding: 10px
         }
+
+        .fix-label-group .bootstrap-select {
+            padding: 0 !important;
+        }
+
+        .bootstrap-select .dropdown-menu {
+            min-width: 100% !important;
+        }
+
+        .form-control-feedback {
+            position: absolute;
+            top: 3em;
+            right: 2em;
+        }
+
+        .bootstrap-tagsinput {
+            background-color: #fff !important;
+            border: 1px solid #e4e6fc !important;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075) !important;
+            display: inline-block !important;
+            padding: 4px 6px;
+            color: #555;
+            vertical-align: middle;
+            border-radius: 0 4px 4px 0;
+            width: 95.5%;
+            height: 42px !important;
+            line-height: 22px;
+            cursor: text;
+        }
+
+        .bootstrap-tagsinput .badge {
+            background-color: #f89406 !important;
+        }
+
+        .bootstrap-tagsinput .badge [data-role="remove"]:after {
+            content: "\f00d";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+        }
+
+        .bootstrap-tagsinput {
+            padding: 1em;
+            border-radius: 0;
+        }
+
+        .bootstrap-multiemail {
+            width: 100%;
+            cursor: text;
+            margin-bottom: 0;
+        }
+
+        .bootstrap-multiemail .tag {
+            background-color: transparent;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            color: #555 !important;
+            padding: 1px 5px;
+            line-height: 18px;
+        }
+
+        .bootstrap-multiemail .tag.invalid {
+            background-color: #E74C3C !important;
+            color: #fff !important;
+            border-color: #E74C3C !important;
+        }
+
+        #attach-div .input-group {
+            margin-bottom: 0;
+        }
+
+        #attach-div .file-preview {
+            border-radius: 0;
+            border-color: #ccc;
+        }
+
+        .file-drop-zone.clickable:focus {
+            border-color: #f89406
+        }
     </style>
 @endpush
-
 @section('content')
     <section class="section">
         <div class="section-header">
@@ -66,11 +145,7 @@
                                     <div class="ticket-items" id="message-items" style="height: 800px">
                                         @foreach($contacts as $row)
                                             <div class="ticket-item" style="cursor: pointer" id="{{$row->id}}"
-                                                 onclick="viewMail('{{$row->id}}','{{$row->name}}','{{$row->email}}',
-                                                     '{{asset('admins/img/avatar/avatar-'.rand(1,5).'.png')}}',
-                                                     '{{$row->subject}}','{{str_replace('\'', "’",$row->message)}}','{{encrypt($row->id)}}',
-                                                     '{{\Carbon\Carbon::parse($row->created_at)->format('l, j F Y').
-                                                 ' at '.\Carbon\Carbon::parse($row->created_at)->format('H:i')}}')">
+                                                 onclick="viewMail('{{$row->id}}','{{route('admin.get.read', ['id' => encrypt($row->id), 'type' => 'inbox'])}}')">
                                                 <div class="ticket-title">
                                                     <h4>{{ucfirst($row->subject)}}</h4>
                                                 </div>
@@ -82,8 +157,13 @@
                                             </div>
                                         @endforeach
                                     </div>
-                                    <div class="ticket-content" id="message-contents"
-                                         style="height: 800px;display: none"></div>
+                                    <div id="preload-mail" class="css3-spinner"
+                                         style="z-index: 1;position:relative;top:3em;display: none">
+                                        <div class="css3-spinner-bounce1"></div>
+                                        <div class="css3-spinner-bounce2"></div>
+                                        <div class="css3-spinner-bounce3"></div>
+                                    </div>
+                                    <div class="ticket-content" id="message-contents" style="height: 800px;"></div>
                                 </div>
                             @else
                                 <img class="img-fluid float-left" src="{{asset('images/searchPlace.png')}}" width="128">
@@ -104,18 +184,13 @@
                 </div>
 
                 <div class="compose-body" style="margin: 1em">
-                    <form action="{{route('admin.compose.inbox')}}" method="post" id="form-compose">
+                    <form action="{{route('admin.compose.inbox')}}" method="post" id="form-compose"
+                          enctype="multipart/form-data" novalidate>
                         {{csrf_field()}}
                         <div class="row form-group">
                             <div class="col">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-                                    </div>
-                                    <input class="form-control" id="inbox_to" type="email" name="inbox_to"
-                                           placeholder="To:"
-                                           required>
-                                </div>
+                                <input class="form-control" id="inbox_to" type="email" name="inbox_to"
+                                       placeholder="To:">
                             </div>
                         </div>
                         <div class="row form-group">
@@ -125,31 +200,81 @@
                                         <span class="input-group-text"><i class="fa fa-text-width"></i></span>
                                     </div>
                                     <input class="form-control" id="inbox_subject" type="text" name="inbox_subject"
-                                           placeholder="Subject:" required>
+                                           placeholder="Subject:">
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row form-group">
+                            <div class="col fix-label-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text fix-label-item" style="height: 2.25rem">
+                                            <i class="fa fa-tags"></i></span>
+                                    </div>
+                                    <select id="inbox_category" class="form-control selectpicker"
+                                            title="-- Choose Category --" name="inbox_category"
+                                            data-live-search="true">
+                                        <option value="promo">Promo</option>
+                                        <option value="others">Others</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col fix-label-group" style="display: none">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text fix-label-item" style="height: 2.25rem">
+                                            <i class="fa fa-ticket-alt"></i></span>
+                                    </div>
+                                    <select id="inbox_promo" class="form-control selectpicker"
+                                            title="-- Choose Promo --" name="inbox_promo" data-live-search="true">
+                                        @foreach($promo as $row)
+                                            <option value="{{$row->promo_code}}"
+                                                    data-subtext="{{$row->description}}">{{$row->promo_code}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col">
                                 <textarea class="summernote form-control" name="inbox_message"
                                           id="inbox_message"></textarea>
                             </div>
                         </div>
-                        <div class="row">
+                        <div id="attach-div" class="row form-group" style="display: none">
                             <div class="col">
-                                <button id="send" class="btn btn-block btn-primary" type="submit">Send</button>
+                                <input accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.odt,.ppt,.pptx"
+                                       type="file" name="attachments[]" multiple>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1">
+                                <button id="attach" class="btn btn-icon btn-light" type="button">
+                                    <i class="fa fa-paperclip"></i></button>
+                            </div>
+                            <div class="col">
+                                <button id="send" class="btn btn-block btn-primary" type="submit">SEND MESSAGE</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-            <!-- /compose -->
         </div>
     </section>
 @endsection
 @push('scripts')
     <script src="{{asset('admins/modules/summernote/summernote-bs4.js')}}"></script>
+    <script src="{{asset('admins/modules/bootstrap-tagsinput/tagsinput.js')}}"></script>
+    <script src="{{asset('admins/modules/bootstrap-tagsinput/bootstrap-multiEmail.js')}}"></script>
+    <script src="{{asset('js/components/bs-filestyle.js')}}"></script>
     <script>
+        var inbox_to = $("#inbox_to"), multiEmailInput = inbox_to.multiEmail(),
+            inbox_category = $("#inbox_category"),
+            inbox_promo = $("#inbox_promo"),
+            btn_attach = $("#attach"), input_attach = $("#attach-div input[type=file]");
+
         $(function () {
             @if($findMessage != null)
             $("#{{$findMessage}}").click();
@@ -173,81 +298,173 @@
         $("#compose").on("click", function () {
             $("#compose_title").text('New Message');
             $('.summernote').summernote('code', '');
+            inbox_category.parents('.fix-label-group').next().hide();
+            $("#inbox_category, #inbox_promo").val('default').selectpicker('refresh');
             $("#form-compose")[0].reset();
+        });
+
+        inbox_category.on('change', function () {
+            inbox_promo.val('default').selectpicker('refresh');
+
+            if ($(this).val() == 'promo') {
+                $(this).parents('.fix-label-group').next().show();
+            } else {
+                $(this).parents('.fix-label-group').next().hide();
+            }
+        });
+
+        btn_attach.on('click', function () {
+            $("#attach-div").toggle(300);
+            $(".file-input").hide().parents('label').find('.card-text').show();
+
+            input_attach.fileinput('destroy').fileinput({
+                showUpload: false,
+                showBrowse: false,
+                showCaption: true,
+                browseOnZoneClick: true,
+                showPreview: true,
+                initialPreviewAsData: true,
+                overwriteInitial: true,
+                initialCaption: "Choose file...",
+                dropZoneTitle: 'Drag & drop your design file here...',
+                dropZoneClickTitle: '<br>(or click to choose it)',
+                removeLabel: 'DELETE',
+                removeIcon: '<i class="fa fa-trash-alt mr-1"></i>',
+                removeClass: 'btn btn-danger btn-block m-0',
+                removeTitle: 'Click here to clear the file you selected!',
+                cancelLabel: 'CANCEL',
+                cancelIcon: '<i class="fa fa-undo mr-1"></i>',
+                cancelClass: 'btn btn-danger btn-block m-0',
+                cancelTitle: 'Click here to cancel your file upload process!',
+                allowedFileExtensions: ["jpg", "jpeg", "png", "tiff", "pdf", "doc", "docx"],
+                maxFileSize: 5120,
+                msgSizeTooLarge: 'File \"{name}\" (<b>{size} KB</b>) exceeds maximum allowed upload size of <b>{maxSize} KB (5 MB)</b>, try to upload smaller file!',
+                msgInvalidFileExtension: 'Invalid extension for file \"{name}\", only \"{extensions}\" files are supported!',
+            });
+
+            $(".file-input .file-caption-name").attr('disabled', 'disabled').removeAttr('title').css('cursor', 'text');
+            $(".file-input .file-caption").removeClass('icon-visible');
         });
 
         $("#form-compose").on('submit', function (e) {
             e.preventDefault();
-            if ($('.summernote').summernote('isEmpty')) {
-                swal('ATTENTION!', 'Please, write some messages!', 'warning');
+            if (!inbox_to.val()) {
+                swal('ATTENTION!', 'You have to write the recipient\'s email!', 'warning');
 
             } else {
-                $(this)[0].submit();
+                if (!$("#inbox_subject").val()) {
+                    swal('ATTENTION!', 'You have to write the email subject!', 'warning');
+
+                } else {
+                    if (!inbox_category.val()) {
+                        swal('ATTENTION!', 'You have to choose the category!', 'warning');
+
+                    } else {
+                        if (inbox_category.val() == 'promo' && !inbox_promo.val()) {
+                            swal('ATTENTION!', 'You have to choose the promo code!', 'warning');
+
+                        } else {
+                            if ($('.summernote').summernote('isEmpty')) {
+                                swal('ATTENTION!', 'Please, write some messages!', 'warning');
+
+                            } else {
+                                var validEmails = $.grep(inbox_to.tagsinput('items'), function (email, index) {
+                                    return multiEmailInput[0].validEmail(email);
+                                });
+                                multiEmailInput[0].removeAll();
+                                $.each(validEmails, function (i, val) {
+                                    multiEmailInput[0].add(val);
+                                });
+
+                                $(this)[0].submit();
+                            }
+                        }
+                    }
+                }
             }
         });
 
-        function viewMail(id, name, email, ava, subject, message, deleteId, date) {
+        function viewMail(id, url) {
             $(".ticket-item").removeClass('active');
             $("#" + id).addClass('active');
             $(".compose").hide("slide");
 
-            $("#message-contents").html(
-                '<div class="ticket-header">' +
-                '<div class="ticket-sender-picture img-shadow"><img src="' + ava + '" alt="Avatar"></div>' +
-                '<div class="ticket-detail">' +
-                '<div class="ticket-title"><h4>' + subject + '</h4></div>' +
-                '<div class="ticket-info">' +
-                '<div class="font-weight-600">' + name + '</div> <div class="bullet"></div> ' +
-                '<div class="text-primary font-weight-600">' + date + '</div></div></div></div>' +
-                '<div class="ticket-description"><p>' + message + '</p>' +
-                '<div class="ticket-divider"></div></div>' +
-                '<div class="btn-group" role="group">' +
-                '<button class="btn btn-primary btn_reply' + id + '" type="button">' +
-                '<i class="fas fa-reply mr-2"></i>Reply</button>' +
-                '<button class="btn btn-info btn_forward' + id + '" type="button">' +
-                '<i class="fas fa-share mr-2"></i>Forward</button>' +
-                '<button class="btn btn-danger btn_delete_inbox' + id + '" type="button">' +
-                '<i class="fas fa-trash mr-2"></i>Delete</button></div>'
-            ).fadeIn("slow");
+            clearTimeout(this.delay);
+            this.delay = setTimeout(function () {
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    beforeSend: function () {
+                        $('#preload-mail').show();
+                        $('#message-contents').hide();
+                    },
+                    complete: function () {
+                        $('#preload-mail').hide();
+                        $('#message-contents').show();
+                    },
+                    success: function (data) {
+                        $("#message-contents").html(
+                            '<div class="ticket-header">' +
+                            '<div class="ticket-sender-picture img-shadow"><img src="' + data.ava + '" alt="Avatar"></div>' +
+                            '<div class="ticket-detail">' +
+                            '<div class="ticket-title"><h4>' + data.subject + '</h4></div>' +
+                            '<div class="ticket-info">' +
+                            '<div class="font-weight-600">' + data.name + '</div> <div class="bullet"></div> ' +
+                            '<div class="text-primary font-weight-600">' + data.created_at + '</div></div></div></div>' +
+                            '<div class="ticket-description"><p>' + data.message + '</p>' +
+                            '<div class="ticket-divider"></div></div>' +
+                            '<div class="btn-group" role="group">' +
+                            '<button class="btn btn-primary btn_reply' + data.id + '" type="button">' +
+                            '<i class="fas fa-reply mr-2"></i>Reply</button>' +
+                            '<button class="btn btn-info btn_forward' + data.id + '" type="button">' +
+                            '<i class="fas fa-share mr-2"></i>Forward</button>' +
+                            '<button class="btn btn-danger btn_delete_inbox' + data.id + '" type="button">' +
+                            '<i class="fas fa-trash mr-2"></i>Delete</button></div>'
+                        ).fadeIn("slow");
 
-            $(".btn_reply" + id).on("click", function () {
-                $("#compose_title").text('Reply Message');
-                $("#inbox_to").val(email);
-                $("#inbox_subject").val('Re: ' + subject);
-                $('.summernote').summernote('code', '');
-                $(".compose").slideToggle();
-            });
+                        $(".btn_reply" + data.id).on("click", function () {
+                            $("#compose_title").text('Reply Message');
+                            inbox_to.val(data.email);
+                            $("#inbox_subject").val('Re: ' + data.subject);
+                            $('.summernote').summernote('code', '');
+                            $(".compose").slideToggle();
+                        });
 
-            $(".btn_forward" + id).on("click", function () {
-                $("#compose_title").text('Forward Message');
-                $("#inbox_to").val('');
-                $("#inbox_subject").val('Fwd: ' + subject);
-                $('.summernote').summernote('code', message);
-                $(".compose").slideToggle();
-            });
+                        $(".btn_forward" + data.id).on("click", function () {
+                            $("#compose_title").text('Forward Message');
+                            inbox_to.val('');
+                            $("#inbox_subject").val('Fwd: ' + data.subject);
+                            $('.summernote').summernote('code', data.message);
+                            $(".compose").slideToggle();
+                        });
 
-            $(".btn_delete_inbox" + id).on("click", function () {
-                var linkURL = '{{url('scott.royce/inbox')}}/' + deleteId + '/delete';
-                swal({
-                    title: 'Delete Message',
-                    text: "Are you sure to delete " + name + "'s message? You can't revert it!",
-                    icon: 'warning',
-                    dangerMode: true,
-                    buttons: ["No", "Yes"],
-                    closeOnEsc: false,
-                    closeOnClickOutside: false,
-                }).then((confirm) => {
-                    if (confirm) {
-                        swal({icon: "success", buttons: false});
-                        window.location.href = linkURL;
+                        $(".btn_delete_inbox" + data.id).on("click", function () {
+                            swal({
+                                title: 'Delete Message',
+                                text: "Are you sure to delete " + data.name + "'s message? You can't revert it!",
+                                icon: 'warning',
+                                dangerMode: true,
+                                buttons: ["No", "Yes"],
+                                closeOnEsc: false,
+                                closeOnClickOutside: false,
+                            }).then((confirm) => {
+                                if (confirm) {
+                                    swal({icon: "success", buttons: false});
+                                    window.location.href = data.del_route;
+                                }
+                            });
+                            return false;
+                        });
+
+                        $('html, body').animate({
+                            scrollTop: $('#inbox').offset().top
+                        }, 500);
+                    },
+                    error: function () {
+                        swal('Oops..', 'Something went wrong! Please, refresh your browser.', 'error');
                     }
                 });
-                return false;
-            });
-
-            $('html, body').animate({
-                scrollTop: $('#inbox').offset().top
-            }, 500);
+            }.bind(this), 800);
         }
 
         $(document).on('mouseover', '.use-nicescroll', function () {

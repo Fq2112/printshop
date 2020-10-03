@@ -7,9 +7,15 @@
     </li>
 
 
-    <li class="dropdown {{\Illuminate\Support\Facades\Request::is('*scott.royce/inbox*') ? 'active' : ''}}">
-        <a href="{{route('admin.inbox')}}" class="nav-link"><i
-                class="fas fa-envelope"></i><span>{{__('admin.sidebar.inbox')}}</span></a>
+    <li class="dropdown {{\Illuminate\Support\Facades\Request::is('*scott.royce/mail*') ? 'active' : ''}}">
+        <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
+            <i class="fas fa-envelope"></i><span>Mail</span></a>
+        <ul class="dropdown-menu">
+            <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/mail/inbox*') ?
+                'active' : ''}}"><a href="{{route('admin.inbox')}}" class="nav-link">Inbox</a></li>
+            <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/mail/sent*') ?
+                'active' : ''}}"><a href="{{route('admin.sent')}}" class="nav-link">Sent</a></li>
+        </ul>
     </li>
 
 
