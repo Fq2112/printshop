@@ -293,6 +293,7 @@
         $("#compose").on("click", function () {
             $("#compose_title").text('New Message');
             $('.summernote').summernote('code', '');
+            inbox_to.tagsinput('removeAll');
             inbox_category.parents('.fix-label-group').next().hide();
             $("#inbox_category, #inbox_promo").val('default').selectpicker('refresh');
             $("#form-compose")[0].reset();
