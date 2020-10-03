@@ -45,6 +45,11 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             'as' => 'admin.add'
         ]);
 
+        Route::post('admin/edit', [
+            'uses' => 'AdminController@admin_edit',
+            'as' => 'admin.edit'
+        ]);
+
         Route::post('reset', [
             'uses' => 'AdminController@reset_password',
             'as' => 'admin.reset'

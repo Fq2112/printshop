@@ -57,9 +57,9 @@
                                         <th class="text-center">ID</th>
                                         <th width="35%">Name</th>
                                         <th>Role</th>
-                                        <th class="text-center" width="15%">Created at</th>
-                                        <th class="text-center" width="15%">Last Update</th>
-                                        <th>Action</th>
+                                        <th class="text-center">Created at</th>
+                                        <th class="text-center">Last Update</th>
+                                        <th width="25%">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -88,7 +88,12 @@
                                             <td style="vertical-align: middle" align="center">
                                                 {{$row->updated_at->diffForHumans()}}</td>
                                             <td style="vertical-align: middle">
-                                                <button data-placement="left" data-toggle="tooltip"
+                                                <button data-placement="top" data-toggle="tooltip"
+                                                        title="Edit"
+                                                        type="button" class="btn btn-info mr-1"
+                                                        onclick="editUser('{{$row->id}}','{{$row->name}}','{{$row->username}}','{{$row->email}}','{{$row->role}}')">
+                                                    <i class="fa fa-edit"></i></button>
+                                                <button data-placement="top" data-toggle="tooltip"
                                                         title="Reset Password"
                                                         type="button" class="btn btn-warning mr-1"
                                                         onclick="show_swal_reset('{{$row->id}}')">
@@ -97,7 +102,7 @@
                                                     @if($row->id != \Illuminate\Support\Facades\Auth::user()->id)
                                                         <a href="{{route('delete.admin', ['id' => encrypt($row->id)])}}"
                                                            class="btn btn-danger delete-data" data-toggle="tooltip"
-                                                           title="Delete" data-placement="right">
+                                                           title="Delete" data-placement="top">
                                                             <i class="fas fa-trash-alt"></i></a>
                                                     @endif
                                                 @endif
@@ -275,15 +280,18 @@
                                             title="-- Choose --"
                                             name="role" data-live-search="true" required>
                                         @foreach(\App\Support\Role::ALL as $role)
-                                            <option
-                                                value="{{$role}}">{{ucwords($role)}}</option>
+                                            @if($role != \App\Support\Role::ROOT)
+                                                <option
+                                                    value="{{$role}}">{{ucwords($role)}}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                         </div>
 
-                            <div  class="text-danger"><strong>Password</strong> will be same with <strong>username</strong> </div>
+                        <div class="text-danger"><strong>Password</strong> will be same with <strong>username</strong>
+                        </div>
 
                     </div>
 
@@ -291,6 +299,90 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade " id="editUser" tabindex="-1" role="dialog"
+         aria-labelledby="blogCategoryModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document" style="width: 100%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="edit_title">Edit form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="form-blogCategory" method="post" action="{{route('admin.edit')}}">
+                    {{csrf_field()}}
+                    <input type="hidden" name="_method">
+                    <input type="hidden" name="id">
+                    <div class="modal-body">
+                        <div class="row form-group">
+                            <div class="col">
+                                <label for="name">Name <sup class="text-danger">*</sup></label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                    </div>
+                                    <input id="name_input" type="text" maxlength="191" name="name" class="form-control"
+                                           placeholder="Write its name here&hellip;" required>
+                                    <input type="hidden" name="id" id="user_id">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col">
+                                <label for="name">Username <sup class="text-danger">*</sup></label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                    </div>
+                                    <input id="username_input" type="text" maxlength="191" name="username"
+                                           class="form-control disabled"
+                                           placeholder="Write its name here&hellip;" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col">
+                                <label for="name">Email <sup class="text-danger">*</sup></label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                                    </div>
+                                    <input id="email_input" type="email" maxlength="191" name="email"
+                                           class="form-control disabled"
+                                           placeholder="Write its name here&hellip;" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col">
+                                <label for="role">Job Desc <sup class="text-danger">*</sup></label>
+                                <div class="input-group">
+                                    <select id="role_input" style="width: 100%"
+                                            class="form-control selectpicker"
+                                            title="-- Choose --"
+                                            name="role" data-live-search="true" required>
+                                        @foreach(\App\Support\Role::ALL as $role)
+                                            @if($role != \App\Support\Role::ROOT)
+                                                <option
+                                                    value="{{$role}}">{{ucwords($role)}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </form>
             </div>
@@ -433,6 +525,17 @@
 
         function createBlogCategory() {
             $("#blogCategoryModal").modal('show');
+        }
+
+        function editUser(id, name, username, email, role_id) {
+
+            $("#edit_title").text('Edit ' + name);
+            $("#user_id").val(id);
+            $("#name_input").val(name);
+            $("#username_input").val(username);
+            $("#email_input").val(email);
+            $("#role_input").val(role_id).selectpicker('refresh');
+            $("#editUser").modal('show');
         }
 
         function editBlogCategory(id, name, name_id, caption) {
