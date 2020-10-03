@@ -17,6 +17,11 @@
     <link rel="stylesheet" href="{{asset('admins/modules/izitoast/css/iziToast.min.css')}}">
     <link rel="stylesheet" href="{{asset('admins/modules/bootstrap-datepicker/bootstrap-datepicker.css')}}">
 @stack('styles')
+    <style>
+        .beep:after {
+            background-color: #ffffff !important;
+        }
+    </style>
 
 <!-- Template CSS -->
     <link rel="stylesheet" href="{{asset('admins/css/style.css')}}">
