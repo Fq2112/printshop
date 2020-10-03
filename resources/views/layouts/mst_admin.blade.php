@@ -17,6 +17,11 @@
     <link rel="stylesheet" href="{{asset('admins/modules/izitoast/css/iziToast.min.css')}}">
     <link rel="stylesheet" href="{{asset('admins/modules/bootstrap-datepicker/bootstrap-datepicker.css')}}">
 @stack('styles')
+    <style>
+        .beep:after {
+            background-color: #ffffff !important;
+        }
+    </style>
 
 <!-- Template CSS -->
     <link rel="stylesheet" href="{{asset('admins/css/style.css')}}">
@@ -52,7 +57,7 @@
                 <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
             </ul>
             <ul class="navbar-nav navbar-right">
-                @if($role->isRoot() || $role->isOwner())
+                @if($role->isRoot() || $role->isOwner() || $role->isCs())
                     <li class="dropdown dropdown-list-toggle">
                         <a href="#" data-toggle="dropdown"
                            class="nav-link nav-link-lg message-toggle {{count($contacts) > 0 ? 'beep' : ''}}">
@@ -91,6 +96,37 @@
                                 <a href="{{route('admin.inbox')}}">
                                     {{__('admin.header.message.footer')}}<i class="fas fa-chevron-right ml-2"></i>
                                 </a>
+                            </div>
+                        </div>
+                    </li>
+                    <?php
+                    $notif_order = \App\Models\PaymentCart::where('finish_payment', true)->where('isActive', false)->get();
+                    ?>
+                    <li class="dropdown dropdown-list-toggle">
+                        <a href="#" data-toggle="dropdown"
+                           class="nav-link notification-toggle nav-link-lg {{count($notif_order) > 0 ? 'beep' : ''}}"><i
+                                class="far fa-bell"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-list dropdown-menu-right">
+                            <div class="dropdown-header">Notifications
+                            </div>
+                            <div class="dropdown-list-content dropdown-list-icons">
+                                @foreach($notif_order as $item  )
+                                    <a href="{{route('admin.order.user',['kode'=>$item->uni_code_payment])}}"
+                                       class="dropdown-item dropdown-item-unread">
+                                        <div class="dropdown-item-icon bg-primary text-white">
+                                            <i class="fas fa-shopping-bag"></i>
+                                        </div>
+                                        <div class="dropdown-item-desc">
+                                           New Order From <strong>{{$item->getUser->name}}</strong>
+                                            <div
+                                                class="time text-primary">{{\Carbon\Carbon::parse($item->updated_at)->diffForHumans()}}</div>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            </div>
+                            <div class="dropdown-footer text-center">
+                                <a href="{{route('admin.order')}}">View All <i class="fas fa-chevron-right"></i></a>
                             </div>
                         </div>
                     </li>
@@ -165,11 +201,12 @@
         <div class="main-content">
             @yield('content')
             <div class="modal fade " id="customModal" tabindex="-1" role="dialog"
-                 aria-labelledby="blogCategoryModalLabel" aria-hidden="true" >
+                 aria-labelledby="blogCategoryModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header bg-primary">
-                            <h5 class="modal-title text-light" style="color: white" id="customModalTitle">Create Form</h5>
+                            <h5 class="modal-title text-light" style="color: white" id="customModalTitle">Create
+                                Form</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
