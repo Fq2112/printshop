@@ -401,7 +401,7 @@
                     success: function (data) {
                         var content = '';
                         if(data.str_attach != null) {
-                            content='<br><small><i class="fa fa-paperclip mr-2"></i>'+data.str_attach+'</small>'
+                            content='<div class="ticket-title"><i class="fa fa-paperclip mr-2"></i>'+data.str_attach+'</div>'
                         }
 
                         $("#message-contents").html(
@@ -410,7 +410,7 @@
                             '<div class="ticket-detail">' +
                             '<div class="ticket-title"><h4>' + data.subject + '</h4></div>' +
                             '<div class="ticket-info">' +
-                            'to: <div class="font-weight-600">' + data.email + '</div> <div class="bullet"></div> ' +
+                            'to: <div class="font-weight-600">' + data.recipients + '</div> <div class="bullet"></div> ' +
                             '<div class="text-primary font-weight-600">' + data.created_at + '</div>' + content +
                             '</div></div></div>' +
                             '<div class="ticket-description"><p>' + data.message + '</p>' +
