@@ -54,10 +54,10 @@
             border: 1px solid #e4e6fc !important;
             box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075) !important;
             display: inline-block !important;
-            padding: 4px 6px;
+            padding: 0;
             color: #555;
             vertical-align: middle;
-            border-radius: 0 4px 4px 0;
+            border-radius: .25rem;
             width: 95.5%;
             height: 42px !important;
             line-height: 22px;
@@ -74,11 +74,6 @@
             font-weight: 900;
         }
 
-        .bootstrap-tagsinput {
-            padding: 1em;
-            border-radius: 0;
-        }
-
         .bootstrap-multiemail {
             width: 100%;
             cursor: text;
@@ -86,11 +81,11 @@
         }
 
         .bootstrap-multiemail .tag {
-            background-color: transparent;
+            background-color: transparent !important;
             border: 1px solid #ccc;
-            border-radius: 10px;
+            border-radius: 10px !important;
             color: #555 !important;
-            padding: 1px 5px;
+            padding: 1px 5px !important;
             line-height: 18px;
         }
 
