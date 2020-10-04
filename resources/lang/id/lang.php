@@ -226,7 +226,7 @@ return [
     ],
     "order" => [
         "capt" => "Di sini Anda dapat melihat riwayat pemesanan Anda beserta statusnya.",
-        "search" => "Masukkan ID pembayaran / pengiriman pesanan Anda...",
+        "search" => "Masukkan ID pembayaran / cetak / pengiriman pesanan Anda...",
         "tab-or" => "Pesanan Diterima",
         "tab-pr" => "Pembayaran Diterima",
         "tab-bp" => "Sedang Diproduksi",
@@ -235,7 +235,7 @@ return [
         "empty-head" => "Anda belum membuat pesanan apapun",
         "empty-capt" => "Lengkapi kebutuhan cetak Anda sekarang",
         "payment_id" => "ID Pembayaran #<span style=\"font-weight: 800\">:id</span>",
-        "order_id" => "ID Pemesanan #<span style=\"font-weight: 800\">:id</span>",
+        "order_id" => "ID Cetak #<span style=\"font-weight: 800\">:id</span>",
         "shipping_id" => "ID Pengiriman #<span style=\"font-weight: 800\">:id</span>",
         "invoice" => "Faktur",
         "reorder" => "Pesan Ulang",

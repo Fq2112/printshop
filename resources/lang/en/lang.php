@@ -226,7 +226,7 @@ return [
     ],
     "order" => [
         "capt" => "Here you can see your order history and its status.",
-        "search" => "Enter the payment / shipping ID of your order...",
+        "search" => "Enter the payment / print / shipping ID of your order...",
         "tab-or" => "Order Received",
         "tab-pr" => "Payment Received",
         "tab-bp" => "Being Produced",
@@ -235,7 +235,7 @@ return [
         "empty-head" => "You haven't made any orders",
         "empty-capt" => "Complete your printing needs now",
         "payment_id" => "Payment ID #<span style=\"font-weight: 800\">:id</span>",
-        "order_id" => "Order ID #<span style=\"font-weight: 800\">:id</span>",
+        "order_id" => "Print ID #<span style=\"font-weight: 800\">:id</span>",
         "shipping_id" => "Shipping ID #<span style=\"font-weight: 800\">:id</span>",
         "invoice" => "Invoice",
         "reorder" => "Re-Order",
