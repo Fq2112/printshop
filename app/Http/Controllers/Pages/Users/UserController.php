@@ -174,8 +174,8 @@ class UserController extends Controller
         $initial = '';
 
         if ($request->has('q') && !is_null($keyword)) {
-            $sub = SubKategori::where('permalink->en', $keyword)->orwhere('permalink->id', $keyword)->first();
-            $clust = ClusterKategori::where('permalink->en', $keyword)->orwhere('permalink->id', $keyword)->first();
+            $sub = SubKategori::where('name->en', 'LIKE', '%' . $keyword . '%')->orwhere('name->id', 'LIKE', '%' . $keyword . '%')->first();
+            $clust = ClusterKategori::where('name->en', 'LIKE', '%' . $keyword . '%')->orwhere('name->id', 'LIKE', '%' . $keyword . '%')->first();
 
             $item_name = !is_null($sub) ? $sub->getTranslation('name', 'en') : $clust->getTranslation('name', 'en');
             $trim_name = explode(' ', trim($item_name));
