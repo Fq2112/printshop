@@ -197,8 +197,8 @@ class UserController extends Controller
             ->whereHas('getOrder', function ($q) use ($keyword, $user) {
                 $q->where('progress_status', StatusProgress::SHIPPING)
                     ->when($keyword, function ($q) use ($keyword, $user) {
-                        $q->where('uni_code', 'LIKE', '%' . $keyword . '%');
-//                            ->orWhere('shipping_id', 'LIKE', '%' . $keyword . '%');
+                        $q->where('uni_code', 'LIKE', '%' . $keyword . '%')
+                            ->orWhere('tracking_id', 'LIKE', '%' . $keyword . '%');
                     });
             })->orderByDesc('id')->get();
 
@@ -206,8 +206,8 @@ class UserController extends Controller
             ->whereHas('getOrder', function ($q) use ($keyword, $user) {
                 $q->where('progress_status', StatusProgress::RECEIVED)
                     ->when($keyword, function ($q) use ($keyword, $user) {
-                        $q->where('uni_code', 'LIKE', '%' . $keyword . '%');
-//                            ->orWhere('shipping_id', 'LIKE', '%' . $keyword . '%');
+                        $q->where('uni_code', 'LIKE', '%' . $keyword . '%')
+                            ->orWhere('tracking_id', 'LIKE', '%' . $keyword . '%');
                     });
             })->orderByDesc('id')->get();
 
