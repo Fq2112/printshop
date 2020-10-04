@@ -190,7 +190,10 @@ class UserController extends Controller
             })->when($keyword, function ($q) use ($keyword) {
                 $q->where('uni_code_payment', 'LIKE', '%' . $keyword . '%')
                     ->orWhereHas('getOrder', function ($q) use ($keyword) {
-                        $q->where('uni_code', 'LIKE', '%' . $keyword . '%');
+                        $q->where('uni_code', 'LIKE', '%' . $keyword . '%')
+                            ->where('progress_status', StatusProgress::START_PRODUCTION)
+                            ->orWhere('progress_status', StatusProgress::FINISH_PRODUCTION)
+                            ->where('uni_code', 'LIKE', '%' . $keyword . '%');
                     });
             })->orderByDesc('id')->get();
 
@@ -200,7 +203,8 @@ class UserController extends Controller
             })->when($keyword, function ($q) use ($keyword) {
                 $q->where('uni_code_payment', 'LIKE', '%' . $keyword . '%')
                     ->orWhereHas('getOrder', function ($q) use ($keyword) {
-                        $q->where('uni_code', 'LIKE', '%' . $keyword . '%');
+                        $q->where('uni_code', 'LIKE', '%' . $keyword . '%')
+                            ->where('progress_status', StatusProgress::SHIPPING);
                     });
             })->orderByDesc('id')->get();
 
@@ -210,7 +214,8 @@ class UserController extends Controller
             })->when($keyword, function ($q) use ($keyword) {
                 $q->where('uni_code_payment', 'LIKE', '%' . $keyword . '%')
                     ->orWhereHas('getOrder', function ($q) use ($keyword) {
-                        $q->where('uni_code', 'LIKE', '%' . $keyword . '%');
+                        $q->where('uni_code', 'LIKE', '%' . $keyword . '%')
+                            ->where('progress_status', StatusProgress::RECEIVED);
                     });
             })->orderByDesc('id')->get();
 
