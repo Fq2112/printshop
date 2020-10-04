@@ -177,11 +177,13 @@ class UserController extends Controller
             $sub = SubKategori::where('name->en', 'LIKE', '%' . $keyword . '%')->orwhere('name->id', 'LIKE', '%' . $keyword . '%')->first();
             $clust = ClusterKategori::where('name->en', 'LIKE', '%' . $keyword . '%')->orwhere('name->id', 'LIKE', '%' . $keyword . '%')->first();
 
-            $item_name = !is_null($sub) ? $sub->getTranslation('name', 'en') : $clust->getTranslation('name', 'en');
-            $trim_name = explode(' ', trim($item_name));
-            foreach ($trim_name as $key => $trimItem) {
-                $name = substr($trim_name[$key], 0, 1);
-                $initial = $initial . $name;
+            if(!is_null($sub) || !is_null($clust)) {
+                $item_name = !is_null($sub) ? $sub->getTranslation('name', 'en') : $clust->getTranslation('name', 'en');
+                $trim_name = explode(' ', trim($item_name));
+                foreach ($trim_name as $key => $trimItem) {
+                    $name = substr($trim_name[$key], 0, 1);
+                    $initial = $initial . $name;
+                }
             }
         }
 
