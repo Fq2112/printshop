@@ -172,22 +172,22 @@ class UserController extends Controller
 
         $unpaid = PaymentCart::where('user_id', $user->id)->where('finish_payment', false)
             ->doesntHave('getOrder')
-            ->when($keyword, function ($q) use ($keyword, $user) {
+            ->when($keyword, function ($q) use ($keyword) {
                 $q->where('uni_code_payment', 'LIKE', '%' . $keyword . '%');
             })->orderByDesc('id')->get();
 
         $paid = PaymentCart::where('user_id', $user->id)->where('finish_payment', true)
             ->whereHas('getOrder', function ($q) {
                 $q->where('progress_status', StatusProgress::NEW);
-            })->when($keyword, function ($q) use ($keyword, $user) {
+            })->when($keyword, function ($q) use ($keyword) {
                 $q->where('uni_code_payment', 'LIKE', '%' . $keyword . '%');
             })->orderByDesc('id')->get();
 
         $produced = PaymentCart::where('user_id', $user->id)->where('finish_payment', true)
-            ->whereHas('getOrder', function ($q) use ($keyword, $user) {
+            ->whereHas('getOrder', function ($q) use ($keyword) {
                 $q->where('progress_status', StatusProgress::START_PRODUCTION)
                     ->orWhere('progress_status', StatusProgress::FINISH_PRODUCTION);
-            })->when($keyword, function ($q) use ($keyword, $user) {
+            })->when($keyword, function ($q) use ($keyword) {
                 $q->where('uni_code_payment', 'LIKE', '%' . $keyword . '%')
                     ->orWhereHas('getOrder', function ($q) use ($keyword) {
                         $q->where('uni_code', 'LIKE', '%' . $keyword . '%');
@@ -195,23 +195,23 @@ class UserController extends Controller
             })->orderByDesc('id')->get();
 
         $shipped = PaymentCart::where('user_id', $user->id)->where('finish_payment', true)
-            ->whereHas('getOrder', function ($q) use ($keyword, $user) {
+            ->whereHas('getOrder', function ($q) use ($keyword) {
                 $q->where('progress_status', StatusProgress::SHIPPING);
-            })->when($keyword, function ($q) use ($keyword, $user) {
+            })->when($keyword, function ($q) use ($keyword) {
                 $q->where('uni_code_payment', 'LIKE', '%' . $keyword . '%')
                     ->orWhereHas('getOrder', function ($q) use ($keyword) {
                         $q->where('uni_code', 'LIKE', '%' . $keyword . '%');
-                    })->orWhere('tracking_id', 'LIKE', '%' . $keyword . '%');
+                    });
             })->orderByDesc('id')->get();
 
         $received = PaymentCart::where('user_id', $user->id)->where('finish_payment', true)
-            ->whereHas('getOrder', function ($q) use ($keyword, $user) {
+            ->whereHas('getOrder', function ($q) use ($keyword) {
                 $q->where('progress_status', StatusProgress::RECEIVED);
-            })->when($keyword, function ($q) use ($keyword, $user) {
+            })->when($keyword, function ($q) use ($keyword) {
                 $q->where('uni_code_payment', 'LIKE', '%' . $keyword . '%')
                     ->orWhereHas('getOrder', function ($q) use ($keyword) {
                         $q->where('uni_code', 'LIKE', '%' . $keyword . '%');
-                    })->orWhere('tracking_id', 'LIKE', '%' . $keyword . '%');
+                    });
             })->orderByDesc('id')->get();
 
         $all = count($paid) + count($unpaid) + count($produced) + count($shipped) + count($received);

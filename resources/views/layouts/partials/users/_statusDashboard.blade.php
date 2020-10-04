@@ -167,7 +167,7 @@
                                                             @if($acc == 'produced' || $acc == 'shipped' || $acc == 'received')
                                                                 <span class="fright text-uppercase"
                                                                       style="color: unset;font-weight: 500">
-                                                                    {!! __('lang.order.order_id', ['id' => str_replace('-','',$uni_code)]) !!}
+                                                                    {!! __('lang.order.order_id', ['id' => $uni_code]) !!}
                                                                 </span>
                                                             @endif
                                                         </h5>
