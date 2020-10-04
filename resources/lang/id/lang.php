@@ -226,7 +226,7 @@ return [
     ],
     "order" => [
         "capt" => "Di sini Anda dapat melihat riwayat pemesanan Anda beserta statusnya.",
-        "search" => "Masukkan ID pembayaran/cetak/pengiriman atau nama produk cetak pesanan Anda...",
+        "search" => "Masukkan ID pembayaran / cetak / pengiriman atau nama produk cetak pesanan Anda...",
         "tab-or" => "Pesanan Diterima",
         "tab-pr" => "Pembayaran Diterima",
         "tab-bp" => "Sedang Diproduksi",
