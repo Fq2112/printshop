@@ -146,7 +146,7 @@
                                                     $specs = !is_null($cart->subkategori_id) ? $data->getSubkatSpecs : $data->getClusterSpecs;
                                                     $weight = ($specs->weight / 1000) * $cart->qty;
 
-                                                    if($acc == 'produced' || $acc == 'shipped' || $acc == 'received') {
+                                                    if($acc != 'unpaid') {
                                                         $uni_code = \App\Models\Order::whereRaw('SUBSTRING_INDEX(uni_code,"-",-1) = '.$cart->id)->first()->uni_code;
                                                     }
                                                 @endphp
@@ -164,7 +164,7 @@
                                                     <div class="ml-3 media-body">
                                                         <h5 class="mt-3 mb-1">
                                                             <i class="icon-drafting-compass mr-2"></i>{{$data->name}}
-                                                            @if($acc == 'produced' || $acc == 'shipped' || $acc == 'received')
+                                                            @if($acc != 'unpaid')
                                                                 <span class="fright text-uppercase"
                                                                       style="color: unset;font-weight: 500">
                                                                     {!! __('lang.order.order_id', ['id' => $uni_code]) !!}
