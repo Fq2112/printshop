@@ -212,7 +212,7 @@ class UserController extends Controller
                         $q->where('uni_code', $keyword);
                     });
             })->when($keyword, function ($q) use ($keyword, $user) {
-                $q->where('uni_code_payment', $keyword)->orWhere('tracking_id', $keyword);
+                $q->where('uni_code_payment', $keyword);
             })->orderByDesc('id')->get();
 
         $all = count($paid) + count($unpaid) + count($produced) + count($shipped) + count($received);
