@@ -226,7 +226,7 @@ return [
     ],
     "order" => [
         "capt" => "Here you can see your order history and its status.",
-        "search" => "Enter the payment/order/AWB number of your order...",
+        "search" => "Enter the payment / shipping ID of your order...",
         "tab-or" => "Order Received",
         "tab-pr" => "Payment Received",
         "tab-bp" => "Being Produced",
