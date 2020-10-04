@@ -1550,8 +1550,8 @@
                             $('#preload-shipping').hide();
                             $("#accordion2").css('opacity', '1');
                         },
-                        success: function (data) {
-                            var rate_content = '', logistic = data['data']['rates']['logistic']['regular'];
+                        success: function (logistic) {
+                            var rate_content = '';
                             if (logistic.length > 0) {
                                 $("#shipping-alert").hide();
                                 $("#billing-alert").show();
