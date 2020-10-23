@@ -384,7 +384,7 @@
                                                 </small>
                                                 <div class="divider divider-center mt-0 mb-2"><i
                                                         class="icon-circle"></i></div>
-                                                <div class="mt-0 stats_address" style="font-size: 14px;">
+                                                <div class="mt-0 stats_address use-nicescroll" style="font-size: 14px;max-height: 550px">
                                                     @if(count($addresses) > 0)
                                                         <div class="css3-spinner" style="z-index:1;top:0;display:none">
                                                             <div class="css3-spinner-bounce1"></div>
