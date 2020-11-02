@@ -437,7 +437,7 @@ return [
         "checkout-fail" => "Maaf kanal pembayaran yang Anda pilih masih maintenance, silahkan pilih kanal lainnya.",
         "payment-loading" => "Mohon tunggu, transaksi Anda sedang diproses",
         "payment-success" => ":qty produk cetak Anda dengan ID Pembayaran #:code berhasil dikonfirmasi! Tetap awasi status pesanan Anda pada halaman Dashboard.",
-        "payment-success2" => "Pesanan Anda berhasil di checkout! Anda akan dialihkan ke halaman \"Dashboard\", terimakasih :)",
+        "payment-success2" => "Pesanan Anda berhasil di checkout! Anda akan dialihkan ke halaman Dashboard [Riwayat Pemesanan], terimakasih :)",
         "payment-expired" => ":qty produk cetak Anda dengan ID Pembayaran #:code telah dibatalkan!",
         "received" => "Dengan melanjutkan ini, Anda mengakui bahwa Anda telah menerima paket pesanan ['+code+'] dan tidak ada masalah.",
         "reorder" => "Apakah Anda yakin untuk memesan ulang produk cetak ['+name+'] ini?",
