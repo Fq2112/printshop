@@ -41,7 +41,7 @@ Route::group(['namespace' => 'API'], function () {
 
         Route::group(['prefix' => 'callback'], function () {
 
-            Route::get('finish', [
+            /*Route::get('finish', [
                 'uses' => 'MidtransController@finishCallback',
                 'as' => 'get.midtrans-callback.finish'
             ]);
@@ -49,7 +49,7 @@ Route::group(['namespace' => 'API'], function () {
             Route::get('unfinish', [
                 'uses' => 'MidtransController@unfinishCallback',
                 'as' => 'get.midtrans-callback.unfinish'
-            ]);
+            ]);*/
 
             Route::post('payment', [
                 'uses' => 'MidtransController@notificationCallback',

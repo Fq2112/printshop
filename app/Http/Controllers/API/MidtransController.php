@@ -12,6 +12,7 @@ use App\Support\StatusProgress;
 use App\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -91,6 +92,29 @@ class MidtransController extends Controller
             'name' => __('lang.product.form.summary.ongkir')
         ];
 
+        $check = PaymentCart::where('uni_code_payment', $request->code)->first();
+        if(!$check) {
+            PaymentCart::firstOrCreate([
+                'user_id' => $user->id,
+                'shipping_address' => $request->shipping_id,
+                'billing_address' => $request->billing_id,
+                'cart_ids' => explode(',', $request->cart_ids),
+                'uni_code_payment' => $request->code,
+                'token' => uniqid(),
+                'production_finished' => $request->production_finished,
+                'ongkir' => $request->ongkir,
+                'delivery_duration' => $request->delivery_duration,
+                'received_date' => $request->received_date,
+                'rate_id' => $request->rate_id,
+                'rate_name' => $request->rate_name,
+                'rate_logo' => $request->rate_logo,
+                'price_total' => $request->total,
+                'promo_code' => $request->promo_code,
+                'is_discount' => !is_null($request->discount) ? 1 : 0,
+                'discount' => $request->discount,
+            ]);
+        }
+
         return Snap::getSnapToken([
             'enabled_payments' => $this->channels,
             'transaction_details' => [
@@ -126,7 +150,7 @@ class MidtransController extends Controller
         ]);
     }
 
-    public function unfinishCallback(Request $request)
+    /*public function unfinishCallback(Request $request)
     {
         app()->setLocale($request->lang);
 
@@ -219,30 +243,74 @@ class MidtransController extends Controller
         } catch (\Exception $exception) {
             return response()->json($exception, 500);
         }
-    }
+    }*/
 
     public function notificationCallback()
     {
         $notif = new Notification();
         $data_tr = collect(Transaction::status($notif->transaction_id))->toArray();
+        $payment_cart = PaymentCart::where('uni_code_payment', $notif->order_id)->first();
+        $input = ['rate_name' => $payment_cart->rate_name, 'rate_logo' => $payment_cart->rate_logo];
+        $carts = Cart::whereIn('id', $payment_cart->cart_ids)->get();
+        $user = User::find($payment_cart->user_id);
 
         try {
             if (!array_key_exists('fraud_status', $data_tr) ||
                 (array_key_exists('fraud_status', $data_tr) && $data_tr['fraud_status'] == 'accept')) {
 
-                if ($data_tr['payment_type'] != 'credit_card' &&
-                    ($data_tr['transaction_status'] == 'capture' || $data_tr['transaction_status'] == 'settlement')) {
+                if ($data_tr['transaction_status'] == 'pending') {
+                    DB::beginTransaction();
 
-                    $this->updatePayment($notif->order_id);
+                    foreach ($carts as $cart) {
+                        $cart->update(['isCheckout' => true]);
+                    }
+                    $this->invoiceMail('unfinish', $notif->order_id, $user, null, $data_tr, $input);
 
-                    $payment_cart = PaymentCart::where('uni_code_payment', $notif->order_id)->first();
-                    $input = ['rate_name' => $payment_cart->rate_name, 'rate_logo' => $payment_cart->rate_logo];
-                    $user = User::find($payment_cart->user_id);
+                    DB::commit();
+                    return __('lang.alert.checkout', ['qty' => count($carts), 's' => count($carts) > 1 ? 's' : '', 'code' => $notif->order_id]);
+
+                } elseif ($data_tr['transaction_status'] == 'capture' || $data_tr['transaction_status'] == 'settlement') {
+                    DB::beginTransaction();
+
+                    foreach ($carts as $item) {
+                        $item->update(['isCheckout' => true]);
+
+                        $item_name = $item->subkategori_id != null ? $item->getSubKategori->getTranslation('name', 'en') : $item->getCluster->getTranslation('name', 'en');
+                        $trim_name = explode(' ', trim($item_name));
+                        $initial = '';
+                        foreach ($trim_name as $key => $trimItem) {
+                            $name = substr($trim_name[$key], 0, 1);
+                            $initial = $initial . $name;
+                        }
+
+                        Order::create([
+                            'payment_carts_id' => $payment_cart->id,
+                            'progress_status' => StatusProgress::NEW,
+                            'uni_code' => strtoupper(uniqid($initial)) . '-' . $item->id
+                        ]);
+                    }
+                    $payment_cart->update(['finish_payment' => true]);
                     $this->invoiceMail('finish', $notif->order_id, $user, null, $data_tr, $input);
 
+                    DB::commit();
                     return __('lang.alert.payment-success', [
-                        'qty' => count($payment_cart->cart_ids),
-                        's' => count($payment_cart->cart_ids) > 1 ? 's' : '',
+                        'qty' => count($carts),
+                        's' => count($carts) > 1 ? 's' : '',
+                        'code' => $notif->order_id
+                    ]);
+
+                } elseif ($data_tr['transaction_status'] == 'expired') {
+                    DB::beginTransaction();
+
+                    foreach ($carts as $cart) {
+                        $cart->delete();
+                    }
+                    $payment_cart->delete();
+
+                    DB::commit();
+                    return __('lang.alert.payment-expired', [
+                        'qty' => count($carts),
+                        's' => count($carts) > 1 ? 's' : '',
                         'code' => $notif->order_id
                     ]);
                 }
@@ -253,7 +321,7 @@ class MidtransController extends Controller
         }
     }
 
-    private function updatePayment($code)
+    /*private function updatePayment($code)
     {
         $payment_cart = PaymentCart::where('uni_code_payment', $code)->first();
         $payment_cart->update(['finish_payment' => true]);
@@ -275,7 +343,7 @@ class MidtransController extends Controller
                 'uni_code' => strtoupper(uniqid($initial)) . '-' . $item->id
             ]);
         }
-    }
+    }*/
 
     private function invoiceMail($status, $code, $user, $pdf_url, $data_tr, $input)
     {

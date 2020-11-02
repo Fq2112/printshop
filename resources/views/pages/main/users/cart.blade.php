@@ -1785,10 +1785,12 @@
                         snap.pay(data, {
                             language: '{{app()->getLocale()}}',
                             onSuccess: function (result) {
-                                responseMidtrans('{{route('get.midtrans-callback.finish')}}', result);
+                                {{--responseMidtrans('{{route('get.midtrans-callback.finish')}}', result);--}}
+                                responseMidtrans('finish', result);
                             },
                             onPending: function (result) {
-                                responseMidtrans('{{route('get.midtrans-callback.unfinish')}}', result);
+                                {{--responseMidtrans('{{route('get.midtrans-callback.unfinish')}}', result);--}}
+                                responseMidtrans('unfinish', result);
                             },
                             onError: function (result) {
                                 swal('{{__('lang.alert.error')}}', result.status_message, 'error');
@@ -1806,7 +1808,7 @@
             if (result.payment_type == 'credit_card' || result.payment_type == 'bank_transfer' ||
                 result.payment_type == 'echannel' || result.payment_type == 'gopay' || result.payment_type == 'cstore') {
 
-                $("#form-pembayaran input[name=transaction_id]").val(result.transaction_id);
+                /*$("#form-pembayaran input[name=transaction_id]").val(result.transaction_id);
                 $("#form-pembayaran input[name=pdf_url]").val(result.pdf_url);
 
                 clearTimeout(this.delay);
@@ -1853,7 +1855,32 @@
                             swal('{{__('lang.alert.error')}}', '{{__('lang.alert.error-capt')}}', 'error');
                         }
                     });
-                }.bind(this), 800);
+                }.bind(this), 800);*/
+
+                swal({
+                    title: 'Loading...',
+                    text: '{{__('lang.alert.payment-loading')}}',
+                    icon: 'warning',
+                    buttons: false,
+                    closeOnEsc: false,
+                    closeOnClickOutside: false,
+                    timer: 2000
+                });
+
+                setTimeout(function () {
+                    swal({
+                        title: "{{__('lang.alert.success')}}",
+                        text:  "{{__('lang.alert.payment-success2')}}",
+                        icon: 'success',
+                        buttons: false,
+                        closeOnEsc: false,
+                        closeOnClickOutside: false,
+                        timer: 3000
+                    });
+                    setTimeout(function () {
+                        location.href = '{{route('user.dashboard')}}'
+                    }, 3000);
+                }, 2000);
 
             } else {
                 swal('{{__('lang.alert.error')}}', '{{__('lang.alert.checkout-fail')}}', 'error');

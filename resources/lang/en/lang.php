@@ -436,6 +436,8 @@ return [
         "checkout-fail" => "Sorry the payment channel you selected is still maintenance, please select another one.",
         "payment-loading" => "Please wait, your transaction is being processed",
         "payment-success" => "Your :qty print product:s with Payment ID #:code is successfully confirmed! Keep an eye on the status of your order on the Dashboard page.",
+        "payment-success2" => "Your order is successfully checked out! You will be redirected to the \"Dashboard\" page, thank you :)",
+        "payment-expired" => "Your :qty print product:s with Payment ID #:code is aborted!",
         "received" => "By continuing this, you acknowledge that you have received the order package ['+code+'] and there`s no any problems.",
         "reorder" => "Are you sure to re-order this print product ['+name+']?",
         "reorder-cart" => "Your print product [:param] is successfully added to your shopping cart!",
