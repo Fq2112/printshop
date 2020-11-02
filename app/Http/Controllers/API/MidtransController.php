@@ -300,14 +300,8 @@ class MidtransController extends Controller
                     ]);
 
                 } elseif ($data_tr['transaction_status'] == 'expired') {
-                    DB::beginTransaction();
-
-                    foreach ($carts as $cart) {
-                        $cart->delete();
-                    }
                     $payment_cart->delete();
 
-                    DB::commit();
                     return __('lang.alert.payment-expired', [
                         'qty' => count($carts),
                         's' => count($carts) > 1 ? 's' : '',
