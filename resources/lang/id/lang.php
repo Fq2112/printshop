@@ -435,6 +435,7 @@ return [
         "checkout-dashboard" => "Anda akan dialihkan ke halaman Dashboard [Riwayat Pemesanan].",
         "checkout-xendit" => "Anda akan dialihkan ke halaman Pembayaran Xendit.",
         "checkout-fail" => "Maaf kanal pembayaran yang Anda pilih masih maintenance, silahkan pilih kanal lainnya.",
+        "checkout-fail2" => "Maaf saat ini Anda tidak bisa melanjutkan proses checkout, karena total transaksi pembelian Anda masih kurang dari Rp' + number_format(parseInt(min_transaksi), 2, ',', '.') + ' :(",
         "payment-loading" => "Mohon tunggu, transaksi Anda sedang diproses",
         "payment-success" => ":qty produk cetak Anda dengan ID Pembayaran #:code berhasil dikonfirmasi! Tetap awasi status pesanan Anda pada halaman Dashboard.",
         "payment-success2" => "Pesanan Anda berhasil di checkout! Anda akan dialihkan ke halaman Dashboard [Riwayat Pemesanan], terimakasih :)",

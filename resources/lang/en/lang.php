@@ -434,6 +434,7 @@ return [
         "checkout-dashboard" => "You will be redirected to the Dashboard [Order History] page.",
         "checkout-xendit" => "You will be redirected to the Xendit Payment page.",
         "checkout-fail" => "Sorry the payment channel you selected is still maintenance, please select another one.",
+        "checkout-fail2" => "Sorry at this moment you can`t continue the checkout process, because your total purchase transaction is still less than Rp' + number_format(parseInt(min_transaksi), 2, ',', '.') + ' :(",
         "payment-loading" => "Please wait, your transaction is being processed",
         "payment-success" => "Your :qty print product:s with Payment ID #:code is successfully confirmed! Keep an eye on the status of your order on the Dashboard page.",
         "payment-success2" => "Your order is successfully checked out! You will be redirected to the Dashboard [Order History] page, thank you :)",

@@ -1275,7 +1275,8 @@
             data-client-key="{{env('MIDTRANS_SERVER_KEY')}}"></script>
     <script>
         var collapse = $('.panel-collapse'), upload_input = $("#file"), link_input = $("#link"), check_file = null,
-            btn_pay = $("#btn_pay"), production_day = 3, ongkir = 0, etd = '', str_etd = '', str_date = '',
+            btn_pay = $("#btn_pay"), etd = '', str_etd = '', str_date = '',
+            production_day = 3, min_transaksi = 10000, ongkir = 0,
             harga_diskon = 0, total = parseInt('{{count($carts) > 0 ? $subtotal : 0}}');
 
         $(function () {
@@ -1767,41 +1768,45 @@
         }
 
         btn_pay.on("click", function () {
-            clearTimeout(this.delay);
-            this.delay = setTimeout(function () {
-                $.ajax({
-                    url: '{{route('get.midtrans.snap')}}',
-                    type: "GET",
-                    data: $("#form-pembayaran").serialize(),
-                    beforeSend: function () {
-                        btn_pay.prop("disabled", true).html(
-                            'LOADING&hellip; <span class="spinner-border spinner-border-sm fright" role="status" aria-hidden="true"></span>'
-                        );
-                    },
-                    complete: function () {
-                        btn_pay.prop("disabled", false).html('CHECKOUT <i class="icon-chevron-right fright"></i>');
-                    },
-                    success: function (data) {
-                        snap.pay(data, {
-                            language: '{{app()->getLocale()}}',
-                            onSuccess: function (result) {
-                                {{--responseMidtrans('{{route('get.midtrans-callback.finish')}}', result);--}}
-                                responseMidtrans('finish', result);
-                            },
-                            onPending: function (result) {
-                                {{--responseMidtrans('{{route('get.midtrans-callback.unfinish')}}', result);--}}
-                                responseMidtrans('unfinish', result);
-                            },
-                            onError: function (result) {
-                                swal('{{__('lang.alert.error')}}', result.status_message, 'error');
-                            }
-                        });
-                    },
-                    error: function () {
-                        swal('{{__('lang.alert.error')}}', '{{__('lang.alert.error-capt')}}', 'error');
-                    }
-                });
-            }.bind(this), 800);
+            if (parseInt($("#form-pembayaran input[name=total]").val()) < parseInt(min_transaksi)) {
+                swal('{{__('lang.alert.warning')}}', '{!! __('lang.alert.checkout-fail2') !!}', 'warning');
+            } else {
+                clearTimeout(this.delay);
+                this.delay = setTimeout(function () {
+                    $.ajax({
+                        url: '{{route('get.midtrans.snap')}}',
+                        type: "GET",
+                        data: $("#form-pembayaran").serialize(),
+                        beforeSend: function () {
+                            btn_pay.prop("disabled", true).html(
+                                'LOADING&hellip; <span class="spinner-border spinner-border-sm fright" role="status" aria-hidden="true"></span>'
+                            );
+                        },
+                        complete: function () {
+                            btn_pay.prop("disabled", false).html('CHECKOUT <i class="icon-chevron-right fright"></i>');
+                        },
+                        success: function (data) {
+                            snap.pay(data, {
+                                language: '{{app()->getLocale()}}',
+                                onSuccess: function (result) {
+                                    {{--responseMidtrans('{{route('get.midtrans-callback.finish')}}', result);--}}
+                                    responseMidtrans('finish', result);
+                                },
+                                onPending: function (result) {
+                                    {{--responseMidtrans('{{route('get.midtrans-callback.unfinish')}}', result);--}}
+                                    responseMidtrans('unfinish', result);
+                                },
+                                onError: function (result) {
+                                    swal('{{__('lang.alert.error')}}', result.status_message, 'error');
+                                }
+                            });
+                        },
+                        error: function () {
+                            swal('{{__('lang.alert.error')}}', '{{__('lang.alert.error-capt')}}', 'error');
+                        }
+                    });
+                }.bind(this), 800);
+            }
         });
 
         function responseMidtrans(url, result) {

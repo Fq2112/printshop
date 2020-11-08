@@ -31,6 +31,11 @@
             outline: 0;
             box-shadow: 0 0 0 0.2rem rgba(248, 148, 6, 0.5);
         }
+
+        .page-item.disabled {
+            cursor: no-drop;
+            pointer-events: none;
+        }
     </style>
 @endpush
 @section('content')
