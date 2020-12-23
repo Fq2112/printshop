@@ -389,14 +389,20 @@
                                                     <tr>
                                                         <td>
                                                             <small style="line-height: 2em">
-                                                                @if($data->finish_payment == false)
+                                                                @if($status == 'expired')
                                                                     <b style="font-size: 22px">
-                                                                        {{__('lang.mail.content.unpaid')}}</b><br>
-                                                                    {{__('lang.mail.content.unpaid2', ['datetime' => now()->formatLocalized('%d %B %Y – %H:%M')])}}
+                                                                        {{__('lang.mail.content.expired')}}</b><br>
+                                                                    {{__('lang.mail.content.expired2')}}
                                                                 @else
-                                                                    <b style="font-size: 22px">
-                                                                        {{__('lang.mail.content.paid')}}</b><br>
-                                                                    {{__('lang.mail.content.paid2')}}
+                                                                    @if($data->finish_payment == false)
+                                                                        <b style="font-size: 22px">
+                                                                            {{__('lang.mail.content.unpaid')}}</b><br>
+                                                                        {{__('lang.mail.content.unpaid2', ['datetime' => now()->formatLocalized('%d %B %Y – %H:%M')])}}
+                                                                    @else
+                                                                        <b style="font-size: 22px">
+                                                                            {{__('lang.mail.content.paid')}}</b><br>
+                                                                        {{__('lang.mail.content.paid2')}}
+                                                                    @endif
                                                                 @endif
                                                             </small>
                                                         </td>
@@ -513,14 +519,14 @@
                                                         <td>
                                                             <small><b>Due Date</b></small>
                                                             <hr class="hr-divider">
-                                                            <span>{{now()->addDay()->formatLocalized('%d %B %Y – %H:%M')}}</span>
+                                                            <span>{{$status == 'expired' ? now()->formatLocalized('%d %B %Y – %H:%M') : now()->addDay()->formatLocalized('%d %B %Y – %H:%M')}}</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>
                                                             <small><b>{{__('lang.mail.content.payment')}}</b></small>
                                                             <hr class="hr-divider">
-                                                            <span>{{$data->finish_payment == false ? __('lang.mail.content.payment2') : __('lang.mail.content.payment3')}}</span>
+                                                            <span>{{$status == 'expired' ? __('lang.mail.content.payment6') : ($data->finish_payment == false ? __('lang.mail.content.payment2') : __('lang.mail.content.payment3'))}}</span>
                                                         </td>
                                                     </tr>
                                                 </table>

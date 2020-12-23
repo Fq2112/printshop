@@ -301,6 +301,7 @@ class MidtransController extends Controller
 
                 } elseif ($data_tr['transaction_status'] == 'expired') {
                     $payment_cart->delete();
+                    $this->invoiceMail('expired', $notif->order_id, $user, null, $data_tr, $input);
 
                     return __('lang.alert.payment-expired', [
                         'qty' => count($carts),
@@ -399,6 +400,6 @@ class MidtransController extends Controller
             $instruction = null;
         }
 
-        Mail::to($user->email)->send(new InvoiceMail($code, $data, $payment, $filename, $instruction, $input));
+        Mail::to($user->email)->send(new InvoiceMail($status, $code, $data, $payment, $filename, $instruction, $input));
     }
 }
