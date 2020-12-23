@@ -362,7 +362,7 @@ class MidtransController extends Controller
         } else if ($data_tr['payment_type'] == 'echannel') {
             $type = 'bank_transfer';
             $bank = 'mandiri';
-            $account = $data_tr['bill_key'];
+            $account = $data_tr['biller_code'].' / '.$data_tr['bill_key'];
 
         } else if ($data_tr['payment_type'] == 'cstore') {
             $type = $data_tr['payment_type'];
