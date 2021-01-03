@@ -176,15 +176,11 @@
                                         <th class="text-center">ID</th>
                                         <th width="15%">Code</th>
                                         <th width="15%">Customer</th>
-                                        <th width="15%">
-                                            <center>Courier</center>
-                                        </th>
+                                        <th class="text-center" width="15%">Courier</th>
                                         <th class="text-center" width="10%">Order date</th>
                                         <th class="text-center" width="10%">Payment</th>
                                         <th class="text-center" width="10%">Shipper</th>
-                                        <th width="25%" align="center">
-                                            <center>Action</center>
-                                        </th>
+                                        <th class="text-center" width="25%">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -200,18 +196,21 @@
                                                 </div>
                                             </td>
                                             <td class="text-center">ID</td>
-                                            <td width="15%">{{\Illuminate\Support\Str::limit($item->uni_code_payment,16,'...')}}</td>
-                                            <td width="15%">{{$item->getUser->name}}<br>
+                                            <td style="vertical-align: middle" width="15%">
+                                                {{\Illuminate\Support\Str::limit($item->uni_code_payment,16,'...')}}
+                                            </td>
+                                            <td style="vertical-align: middle" width="15%">{{$item->getUser->name}}<br>
                                                 <a href="tel:{{$item->getUser->getBio->phone}}">
                                                     {{$item->getUser->getBio->phone}}</a>
                                             </td>
-                                            <td width="15%" align="center">
-                                                <img src="{{asset($item->rate_logo)}}" alt="" width="50px"> <br>
+                                            <td style="vertical-align: middle" width="15%" align="center">
+                                                <img src="{{asset($item->rate_logo)}}" alt="" width="50px"><br>
                                                 {{$item->rate_name}}
                                             </td>
 
-                                            <td class="text-center" width="10%">{{$item->updated_at}}</td>
-                                            <td class="text-center" width="10%">
+                                            <td style="vertical-align: middle" class="text-center" width="10%">
+                                                {{$item->updated_at}}</td>
+                                            <td style="vertical-align: middle" class="text-center" width="10%">
                                                 @if($item->finish_payment == 1)
                                                     <div class="badge badge-success" data-placement="top"
                                                          data-toggle="tooltip"
@@ -222,7 +221,7 @@
                                                          title="Unpaid"><i class="fa fa-window-close"></i></div>
                                                 @endif
                                             </td>
-                                            <td class="text-center" width="10%">
+                                            <td style="vertical-align: middle" class="text-center" width="10%">
                                                 @if($item->tracking_id == null | $item->tracking_id == "")
 
                                                     <div class="badge badge-danger" data-placement="top"
@@ -236,7 +235,7 @@
                                                     </div>
                                                 @endif
                                             </td>
-                                            <td width="25%" align="center">
+                                            <td style="vertical-align: middle" width="25%" align="center">
                                                 <?php
                                                 $order = \App\Models\PaymentCart::where('uni_code_payment', $item->uni_code_payment)->get()
                                                 ?>
@@ -376,8 +375,6 @@
             </div>
         </div>
     </section>
-
-
 @endsection
 @push("scripts")
     <script src="{{asset('admins/modules/datatables/datatables.min.js')}}"></script>
@@ -393,7 +390,7 @@
                     dom: "<'row'<'col-sm-12 col-md-3'l><'col-sm-12 col-md-5'B><'col-sm-12 col-md-4'f>>" +
                         "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                     columnDefs: [
-                        {sortable: false, targets: 6},
+                        {sortable: false, targets: 8},
                         {targets: 1, visible: false, searchable: false}
                     ],
                     buttons: [
@@ -401,14 +398,14 @@
                             text: '<strong class="text-uppercase"><i class="far fa-clipboard mr-2"></i>Copy</strong>',
                             extend: 'copy',
                             exportOptions: {
-                                columns: [0, 2, 3, 4]
+                                columns: [0, 2, 3, 4, 5, 6, 7]
                             },
                             className: 'btn btn-warning assets-export-btn export-copy ttip'
                         }, {
                             text: '<strong class="text-uppercase"><i class="far fa-file-excel mr-2"></i>Excel</strong>',
                             extend: 'excel',
                             exportOptions: {
-                                columns: [0, 2, 3, 4]
+                                columns: [0, 2, 3, 4, 5, 6, 7]
                             },
                             className: 'btn btn-success assets-export-btn export-xls ttip',
                             title: export_filename,
@@ -417,7 +414,7 @@
                             text: '<strong class="text-uppercase"><i class="fa fa-print mr-2"></i>Print</strong>',
                             extend: 'print',
                             exportOptions: {
-                                columns: [0, 2, 3, 4]
+                                columns: [0, 2, 3, 4, 5, 6, 7]
                             },
                             className: 'btn btn-info assets-select-btn export-print'
                         },
