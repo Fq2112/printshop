@@ -80,7 +80,7 @@ class AdminController extends Controller
         } else {
             $data = Kontak::find(decrypt($request->id))->toArray();
             $user = User::where('email', $data['email'])->first();
-            $ava = $user->getBio->ava != "" ? asset('storage/users/ava/' . $user->getBio->ava) : asset('admins/img/avatar/avatar-' . rand(1, 5) . '.png');
+            $ava = !is_null($user) && $user->getBio->ava != "" ? asset('storage/users/ava/' . $user->getBio->ava) : asset('admins/img/avatar/avatar-' . rand(1, 5) . '.png');
         }
 
         $data = array_replace($data, [
