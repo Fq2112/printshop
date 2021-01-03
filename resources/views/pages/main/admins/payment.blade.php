@@ -200,9 +200,10 @@
                                                 </div>
                                             </td>
                                             <td class="text-center">ID</td>
-                                            <td width="15%">{{ucfirst($item->uni_code_payment)}}</td>
-                                            <td width="15%">{{$item->getUser->name}} <br>
-                                                ( {{$item->getUser->getBio->phone}} )
+                                            <td width="15%">{{\Illuminate\Support\Str::limit($item->uni_code_payment,16,'...')}}</td>
+                                            <td width="15%">{{$item->getUser->name}}<br>
+                                                <a href="tel:{{$item->getUser->getBio->phone}}">
+                                                    {{$item->getUser->getBio->phone}}</a>
                                             </td>
                                             <td width="15%" align="center">
                                                 <img src="{{asset($item->rate_logo)}}" alt="" width="50px"> <br>
