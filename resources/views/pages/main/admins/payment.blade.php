@@ -196,9 +196,10 @@
                                                 </div>
                                             </td>
                                             <td class="text-center">ID</td>
-                                            <td style="vertical-align: middle" width="15%" data-toggle="tooltip"
-                                                title="{{$item->uni_code_payment}}">
-                                                {{\Illuminate\Support\Str::limit($item->uni_code_payment,16,'...')}}
+                                            <td style="vertical-align: middle" width="15%">
+                                                <b data-toggle="tooltip" title="{{$item->uni_code_payment}}">
+                                                    {{\Illuminate\Support\Str::limit($item->uni_code_payment,16,'...')}}
+                                                </b>
                                             </td>
                                             <td style="vertical-align: middle" width="15%">{{$item->getUser->name}}<br>
                                                 <a href="tel:{{$item->getUser->getBio->phone}}">
