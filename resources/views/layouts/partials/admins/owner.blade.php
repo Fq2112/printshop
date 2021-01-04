@@ -132,7 +132,7 @@
             <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
                 <i class="fas fa-user-cog"></i><span>Privilege</span></a>
             <ul class="dropdown-menu">
-                <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/account/admins*') ?
+                <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/account/admins') ?
                 'active' : ''}}"><a href="{{route('admin.show.list')}}" class="nav-link">Admins</a></li>
                 <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/account/admins/user*') ?
                 'active' : ''}}"><a href="{{route('admin.user.list')}}" class="nav-link">Users</a></li>
