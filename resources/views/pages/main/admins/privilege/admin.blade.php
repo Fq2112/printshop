@@ -57,10 +57,10 @@
                                         <th class="text-center">ID</th>
                                         <th width="15%">Name</th>
                                         <th>Username</th>
-                                        <th>Role</th>
+                                        <th class="text-center">Role</th>
                                         <th class="text-center">Created at</th>
                                         <th class="text-center">Last Update</th>
-                                        <th width="25%">Action</th>
+                                        <th class="text-center" width="25%">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -79,9 +79,9 @@
                                             <td style="vertical-align: middle">
                                                 <strong>{{$row->name}}</strong>
                                             </td>
-                                            <td>{{$row->username}}</td>
+                                            <td style="vertical-align: middle">{{$row->username}}</td>
 
-                                            <td style="vertical-align: middle">
+                                            <td style="vertical-align: middle" align="center">
                                                 @if($row->role == \App\Support\Role::ROOT)
                                                     <span class="badge badge-dark">{{$row->role}}</span>
                                                 @elseif($row->role == \App\Support\Role::OWNER)
@@ -99,7 +99,7 @@
                                                 {{\Carbon\Carbon::parse($row->created_at)->format('j F Y')}}</td>
                                             <td style="vertical-align: middle" align="center">
                                                 {{$row->updated_at->diffForHumans()}}</td>
-                                            <td style="vertical-align: middle">
+                                            <td style="vertical-align: middle" align="center">
                                                 <button data-placement="top" data-toggle="tooltip"
                                                         title="Edit"
                                                         type="button" class="btn btn-info mr-1"
@@ -416,7 +416,7 @@
                     dom: "<'row'<'col-sm-12 col-md-3'l><'col-sm-12 col-md-5'B><'col-sm-12 col-md-4'f>>" +
                         "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                     columnDefs: [
-                        {sortable: false, targets: 5},
+                        {sortable: false, targets: 7},
                         {targets: 1, visible: false, searchable: false}
                     ],
                     buttons: [
@@ -424,14 +424,14 @@
                             text: '<strong class="text-uppercase"><i class="far fa-clipboard mr-2"></i>Copy</strong>',
                             extend: 'copy',
                             exportOptions: {
-                                columns: [0, 2, 3, 4]
+                                columns: [0, 2, 3, 4, 5, 6]
                             },
                             className: 'btn btn-warning assets-export-btn export-copy ttip'
                         }, {
                             text: '<strong class="text-uppercase"><i class="far fa-file-excel mr-2"></i>Excel</strong>',
                             extend: 'excel',
                             exportOptions: {
-                                columns: [0, 2, 3, 4]
+                                columns: [0, 2, 3, 4, 5, 6]
                             },
                             className: 'btn btn-success assets-export-btn export-xls ttip',
                             title: export_filename,
@@ -440,7 +440,7 @@
                             text: '<strong class="text-uppercase"><i class="fa fa-print mr-2"></i>Print</strong>',
                             extend: 'print',
                             exportOptions: {
-                                columns: [0, 2, 3, 4]
+                                columns: [0, 2, 3, 4, 5, 6]
                             },
                             className: 'btn btn-info assets-select-btn export-print'
                         },
