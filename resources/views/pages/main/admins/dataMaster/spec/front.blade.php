@@ -494,8 +494,8 @@
                 $("#name_en").val(data.name.en);
                 $("#name_id").val(data.name.id);
                 $("#price").val(data.price);
-                $('#_content_en').summernote('code', data.caption.en);
-                $('#_content_id').summernote('code', data.caption.id);
+                $('#_content_en').summernote('code', data.description.en);
+                $('#_content_id').summernote('code', data.description.id);
 
                 $("#txt_thumbnail").text(data.image.length > 60 ? data.image.slice(0, 60) + "..." : data.thumbnail);
             }).fail(function () {
