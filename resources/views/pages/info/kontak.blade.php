@@ -97,7 +97,7 @@
                     </div>
                     <div class="form-widget">
                         <div class="form-result"></div>
-                        <form class="no-ajax nobottommargin" method="post" action="{{route('kirim.kontak')}}">
+                        <form id="form-contact" class="no-ajax nobottommargin" method="post" action="{{route('kirim.kontak')}}">
                             @csrf
                             <div class="col_one_third">
                                 <label for="con-name">
@@ -149,8 +149,12 @@
                                           name="message" placeholder="{{__('lang.placeholder.message')}}"
                                           rows="6" cols="30" required></textarea>
                             </div>
+
+                            <div class="col_full" id="recaptcha-contact"></div>
+
                             <div class="col_full">
-                                <button type="submit" tabindex="5" class="button button-3d btn-block nomargin">
+                                <button id="btn_contact" type="submit" tabindex="5"
+                                        class="button button-3d btn-block nomargin" disabled>
                                     {{__('lang.button.contact')}}</button>
                             </div>
                         </form>
