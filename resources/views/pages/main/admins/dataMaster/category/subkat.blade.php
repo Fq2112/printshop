@@ -1077,11 +1077,14 @@
                 $("#thumbnail").removeAttr('required', 'required');
 
                 $("#banner_div").show();
-                $("#guide_div").show();
-
                 $("#banner_img").attr('src',data.banner_path);
-                $("#object_guid").attr('data',data.guideline);
-                $("#iframe_guide").attr('src',data.guideline);
+
+                if(data.guideline != null) {
+                    $("#guide_div").show();
+                    $("#object_guid").attr('data',data.guideline);
+                    $("#iframe_guide").attr('src',data.guideline);
+                }
+
 
 
                 // $("#txt_thumbnail").text(data.data.image.length > 60 ? data.data.image.slice(0, 60) + "..." : data.data.image);

@@ -248,6 +248,11 @@
                                 <span class="glyphicon glyphicon-text-height form-control-feedback"></span>
                             </div>
                         </div>
+                        <div class="row form-group" style="display: none" id="banner_div">
+                            <div class="col lightgallery">
+                                <img width="100%" alt="Banner" class="img-thumbnail" id="banner_img" src="">
+                            </div>
+                        </div>
                         <div class="row form-group">
                             <div class="col">
                                 <label for="thumbnail">Image</label>
@@ -404,7 +409,9 @@
             $(".input-files").show();
             $("#form-blogPost button[type=submit]").text('Submit');
             $("#category_id").val('default').selectpicker('refresh');
-            $('#_content_en, #_content_id').summernote('code', '');
+            $('#_content_en').summernote('code', '');
+            $('#_content_id').summernote('code', '');
+            $("#banner_div").hide();
             $("#thumbnail").attr('required', 'required');
             $("#txt_thumbnail, #txt_photo").text('Choose File');
             $("#count_files").text('Allowed extension: jpg, jpeg, gif, png. Allowed size: < 5 MB');
@@ -459,8 +466,10 @@
                 $("#name_id").val(data.name.id);
                 $('#_content_en').summernote('code', data.caption.en);
                 $('#_content_id').summernote('code', data.caption.id);
+                $("#banner_div").show();
+                $("#banner_img").attr('src','{{asset('storage/products/menu')}}/'+data.image);
                 $("#thumbnail").removeAttr('required', 'required');
-                $("#txt_thumbnail").text(data.image.length > 60 ? data.image.slice(0, 60) + "..." : data.thumbnail);
+                $("#txt_thumbnail").text(data.image.length > 60 ? data.image.slice(0, 60) + "..." : data.image);
             }).fail(function () {
                 swal("Error!", "There's no any selected record!", "error");
             });
