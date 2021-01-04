@@ -295,7 +295,7 @@ class CategoryController extends Controller
             'data' => $data,
             'detail' => $data->getSubkatSpecs,
             'banner_path' => $banner_path,
-            'guideline' => $guideline
+            'guideline' => Storage::exists('public/products/guidelines/' . $data->guidelines) ? $guideline : null
         ]);
     }
 

@@ -164,6 +164,11 @@
                                         </div>
                                     </div>
 
+                                    <div class="row form-group" style="display: none" id="banner_div">
+                                        <div class="col lightgallery">
+                                            <img width="100%" alt="Banner" class="img-thumbnail" id="banner_img" src="">
+                                        </div>
+                                    </div>
                                     <div class="row form-group">
                                         <div class="col">
                                             <label for="thumbnail">Thumbnail</label>
