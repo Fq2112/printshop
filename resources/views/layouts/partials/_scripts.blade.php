@@ -89,11 +89,11 @@
     }
 
     $("#form-contact").on("submit", function (e) {
+        e.preventDefault();
         if (grecaptcha.getResponse(recaptcha_register).length === 0) {
-            e.preventDefault();
             swal('{{__('lang.alert.warning')}}', '{{__('lang.alert.recaptcha')}}', 'warning');
         } else {
-            return true;
+            $(this)[0].submit();
         }
     });
 
