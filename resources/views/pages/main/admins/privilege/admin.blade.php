@@ -82,7 +82,17 @@
                                             <td>{{$row->username}}</td>
 
                                             <td style="vertical-align: middle">
-                                                <span class="badge badge-warning">{{$row->role}}</span>
+                                                @if($row->role == \App\Support\Role::ROOT)
+                                                    <span class="badge badge-dark">{{$row->role}}</span>
+                                                @elseif($row->role == \App\Support\Role::OWNER)
+                                                    <span class="badge badge-primary">{{$row->role}}</span>
+                                                @elseif($row->role == \App\Support\Role::ADMIN)
+                                                    <span class="badge badge-warning">{{$row->role}}</span>
+                                                @elseif($row->role == \App\Support\Role::CS)
+                                                    <span class="badge badge-info">{{$row->role}}</span>
+                                                @else
+                                                    <span class="badge badge-success">{{$row->role}}</span>
+                                                @endif
                                             </td>
 
                                             <td style="vertical-align: middle" align="center">
