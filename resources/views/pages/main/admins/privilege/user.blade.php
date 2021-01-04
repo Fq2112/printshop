@@ -56,10 +56,9 @@
                                         </th>
                                         <th class="text-center">ID</th>
                                         <th width="35%">Name</th>
-                                        <th>Role</th>
                                         <th class="text-center" width="15%">Created at</th>
                                         <th class="text-center" width="15%">Last Update</th>
-                                        <th width="25%">Action</th>
+{{--                                        <th width="25%">Action</th>--}}
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -79,34 +78,30 @@
                                                 <strong>{{$row->name}}</strong>
                                             </td>
 
-                                            <td style="vertical-align: middle">
-                                                <span class="badge badge-warning">{{$row->role}}</span>
-                                            </td>
-
                                             <td style="vertical-align: middle" align="center">
                                                 {{\Carbon\Carbon::parse($row->created_at)->format('j F Y')}}</td>
                                             <td style="vertical-align: middle" align="center">
                                                 {{$row->updated_at->diffForHumans()}}</td>
-                                            <td style="vertical-align: middle" align="center">
-{{--                                                <button data-placement="left" data-toggle="tooltip"--}}
-{{--                                                        title="Reset Password"--}}
-{{--                                                        type="button" class="btn btn-warning mr-1"--}}
-{{--                                                        onclick="show_swal_reset('{{$row->id}}')">--}}
-{{--                                                    <i class="fa fa-user-lock"></i></button>--}}
-{{--                                                <form action="{{route('admin.reset')}}" id="update_form_{{$row->id}}"--}}
-{{--                                                      method="post">--}}
-{{--                                                    @CSRF--}}
-{{--                                                    <input type="hidden" name="id" value="{{$row->id}}">--}}
-{{--                                                </form>--}}
-{{--                                                @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Support\Role::OWNER)--}}
-{{--                                                    @if($row->id != \Illuminate\Support\Facades\Auth::user()->id)--}}
-{{--                                                    <a href="{{route('delete.admin', ['id' => encrypt($row->id)])}}"--}}
-{{--                                                       class="btn btn-danger delete-data" data-toggle="tooltip"--}}
-{{--                                                       title="Delete" data-placement="right">--}}
-{{--                                                        <i class="fas fa-trash-alt"></i></a>--}}
-{{--                                                        @endif--}}
-{{--                                                @endif--}}
-                                            </td>
+                                            {{--<td style="vertical-align: middle" align="center">
+                                                <button data-placement="left" data-toggle="tooltip"
+                                                        title="Reset Password"
+                                                        type="button" class="btn btn-warning mr-1"
+                                                        onclick="show_swal_reset('{{$row->id}}')">
+                                                    <i class="fa fa-user-lock"></i></button>
+                                                <form action="{{route('admin.reset')}}" id="update_form_{{$row->id}}"
+                                                      method="post">
+                                                    @CSRF
+                                                    <input type="hidden" name="id" value="{{$row->id}}">
+                                                </form>
+                                                @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Support\Role::OWNER)
+                                                    @if($row->id != \Illuminate\Support\Facades\Auth::user()->id)
+                                                    <a href="{{route('delete.admin', ['id' => encrypt($row->id)])}}"
+                                                       class="btn btn-danger delete-data" data-toggle="tooltip"
+                                                       title="Delete" data-placement="right">
+                                                        <i class="fas fa-trash-alt"></i></a>
+                                                        @endif
+                                                @endif
+                                            </td>--}}
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -289,7 +284,7 @@
                     dom: "<'row'<'col-sm-12 col-md-3'l><'col-sm-12 col-md-5'B><'col-sm-12 col-md-4'f>>" +
                         "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                     columnDefs: [
-                        {sortable: false, targets: 5},
+                        // {sortable: false, targets: 5},
                         {targets: 1, visible: false, searchable: false}
                     ],
                     buttons: [

@@ -81,7 +81,7 @@
                                             </td>
                                             <td style="vertical-align: middle">{{$row->username}}</td>
 
-                                            <td style="vertical-align: middle" align="center">
+                                            <td style="vertical-align: middle;text-transform: uppercase" align="center">
                                                 @if($row->role == \App\Support\Role::ROOT)
                                                     <span class="badge badge-dark">{{$row->role}}</span>
                                                 @elseif($row->role == \App\Support\Role::OWNER)
