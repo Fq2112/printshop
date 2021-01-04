@@ -39,6 +39,7 @@ class DetailProduct extends Model
         'extra_ids' => 'array',
         'material_color_ids' => 'array',
         'holder_ids' => 'array',
+        'tier_ids' => 'array',
     ];
 
     public function getCluster()

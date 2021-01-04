@@ -29,6 +29,7 @@ class DetailSubkat extends Model
         'back_cover_ids' => 'array',
         'binding_ids' => 'array',
         'print_method_ids' => 'array',
+        'tier_ids' => 'array',
     ];
 
     public function getSubKategori()
