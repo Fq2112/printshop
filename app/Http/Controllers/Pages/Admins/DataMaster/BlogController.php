@@ -61,7 +61,7 @@ class BlogController extends Controller
     public function showBlogPostsTable(Request $request)
     {
         $categories = BlogCategory::all();
-        if(Auth::guard('admin')->user()->isOwner()){
+        if(Auth::guard('admin')->user()->isRoot() || Auth::guard('admin')->user()->isOwner()){
             $posts = Blog::all();
 
         } else {
