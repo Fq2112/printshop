@@ -56,10 +56,10 @@
                                         </th>
                                         <th class="text-center">ID</th>
                                         <th width="35%">Name</th>
-                                        <th>Status</th>
+                                        <th class="text-center">Status</th>
                                         <th class="text-center" width="15%">Created at</th>
                                         <th class="text-center" width="15%">Last Update</th>
-                                        <th width="25%">Action</th>
+                                        <th class="text-center" width="25%">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -76,10 +76,10 @@
                                             </td>
                                             <td style="vertical-align: middle" align="center">{{$row->id}}</td>
                                             <td style="vertical-align: middle">
-                                                <strong>{{$row->getTranslation('name', 'id')}} (Id)</strong> <br>
-                                                <strong>{{$row->getTranslation('name', 'en')}} (En)</strong>
+                                                <strong>{{$row->getTranslation('name', 'id')}} (ID)</strong> <br>
+                                                <strong>{{$row->getTranslation('name', 'en')}} (EN)</strong>
                                             </td>
-                                            <td>
+                                            <td style="vertical-align: middle" align="center">
                                                 @if($row->isActive == 1)
                                                     <span class="badge badge-success"><i class="fa fa-check"> </i>&nbsp;&nbsp;Active </span>
                                                 @else
@@ -132,14 +132,14 @@
 
                                     <div class="row form-group">
                                         <div class="col-6 has-feedback">
-                                            <label for="title">Name ( En )</label>
+                                            <label for="title">Name ( EN )</label>
                                             <input id="name_en" type="text" maxlength="191" name="name_en"
                                                    class="form-control"
                                                    placeholder="Write its title here&hellip;" required>
                                             <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
                                         </div>
                                         <div class="col-6 has-feedback">
-                                            <label for="title">Name ( Id )</label>
+                                            <label for="title">Name ( ID )</label>
                                             <input id="name_id" type="text" maxlength="191" name="name_id"
                                                    class="form-control"
                                                    placeholder="Write its title here&hellip;" required>
@@ -149,14 +149,14 @@
 
                                     <div class="row form-group has-feedback">
                                         <div class="col">
-                                            <label for="_content">Caption ( En )</label>
+                                            <label for="_content">Caption ( EN )</label>
                                             <textarea id="_content_en" type="text" name="_content_en"
                                                       class="summernote form-control"
                                                       placeholder="Write something about your post here&hellip;"></textarea>
                                             <span class="glyphicon glyphicon-text-height form-control-feedback"></span>
                                         </div>
                                         <div class="col">
-                                            <label for="_content">Caption ( Id )</label>
+                                            <label for="_content">Caption ( ID )</label>
                                             <textarea id="_content_id" type="text" name="_content_id"
                                                       class="summernote form-control"
                                                       placeholder="Write something about your post here&hellip;"></textarea>
@@ -217,7 +217,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col">
-                                <label for="name">Name <small>(En)</small></label>
+                                <label for="name">Name <small>(EN)</small></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
@@ -229,7 +229,7 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <label for="name">Name <small>(Id)</small></label>
+                                <label for="name">Name <small>(ID)</small></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
@@ -291,7 +291,7 @@
                     dom: "<'row'<'col-sm-12 col-md-3'l><'col-sm-12 col-md-5'B><'col-sm-12 col-md-4'f>>" +
                         "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                     columnDefs: [
-                        {sortable: false, targets: 5},
+                        {sortable: false, targets: 6},
                         {targets: 1, visible: false, searchable: false}
                     ],
                     buttons: [
@@ -299,14 +299,14 @@
                             text: '<strong class="text-uppercase"><i class="far fa-clipboard mr-2"></i>Copy</strong>',
                             extend: 'copy',
                             exportOptions: {
-                                columns: [0, 2, 3, 4]
+                                columns: [0, 2, 3, 4, 5]
                             },
                             className: 'btn btn-warning assets-export-btn export-copy ttip'
                         }, {
                             text: '<strong class="text-uppercase"><i class="far fa-file-excel mr-2"></i>Excel</strong>',
                             extend: 'excel',
                             exportOptions: {
-                                columns: [0, 2, 3, 4]
+                                columns: [0, 2, 3, 4, 5]
                             },
                             className: 'btn btn-success assets-export-btn export-xls ttip',
                             title: export_filename,
@@ -315,7 +315,7 @@
                             text: '<strong class="text-uppercase"><i class="fa fa-print mr-2"></i>Print</strong>',
                             extend: 'print',
                             exportOptions: {
-                                columns: [0, 2, 3, 4]
+                                columns: [0, 2, 3, 4, 5]
                             },
                             className: 'btn btn-info assets-select-btn export-print'
                         },
@@ -400,11 +400,11 @@
             $(".fix-label-group .bootstrap-select button").css('border-color', '#e4e6fc');
 
             $("#form-blogPost").attr('action', '{{route('create.blog.posts')}}');
-            $("#form-blogPost input[name=_method], #form-blogPost input[name=id], #form-blogPost input[name=admin_id], #title").val('');
+            $("#form-blogPost input[name=_method], #form-blogPost input[name=id], #form-blogPost input[name=admin_id], #title, #name_en, #name_id").val('');
             $(".input-files").show();
             $("#form-blogPost button[type=submit]").text('Submit');
             $("#category_id").val('default').selectpicker('refresh');
-            $('#_content').summernote('code', '');
+            $('#_content_en, #_content_id').summernote('code', '');
             $("#thumbnail").attr('required', 'required');
             $("#txt_thumbnail, #txt_photo").text('Choose File');
             $("#count_files").text('Allowed extension: jpg, jpeg, gif, png. Allowed size: < 5 MB');
