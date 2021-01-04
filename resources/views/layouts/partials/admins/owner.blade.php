@@ -103,15 +103,15 @@
             </ul>
         </li>
 
-        <li class="dropdown {{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/msc*') ? 'active' : ''}}">
+        <li class="dropdown {{\Illuminate\Support\Facades\Request::is('*scott.royce/msc*') ? 'active' : ''}}">
             <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
                 <i class="fas fa-database"></i><span>Miscellaneous</span></a>
             <ul class="dropdown-menu">
-                <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/msc/promo*') ?
+                <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/msc/promo*') ?
                 'active' : ''}}"><a href="{{route('admin.promo')}}" class="nav-link">Promo Code</a></li>
-                {{--                <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/msc/privacy*') ?--}}
+                {{--                <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/msc/privacy*') ?--}}
                 {{--                'active' : ''}}"><a href="{{route('table.blog.posts')}}" class="nav-link">Privacy & Term</a></li>--}}
-                <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/msc/setting*') ?
+                <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/msc/setting*') ?
                 'active' : ''}}"><a href="{{route('admin.setting.general')}}" class="nav-link">Setting</a></li>
             </ul>
         </li>
