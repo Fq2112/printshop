@@ -58,18 +58,27 @@
         window.location.href = data.link;
     });
 
-    var recaptcha_register, recaptchaCallback = function () {
+    var recaptcha_register, recaptcha_contact,
+        recaptchaCallback = function () {
         recaptcha_register = grecaptcha.render(document.getElementById('recaptcha-register'), {
             'sitekey': '{{env('reCAPTCHA_v2_SITEKEY')}}',
             'callback': 'enable_btnRegister',
             'expired-callback': 'disabled_btnRegister'
-        }), recaptcha_contact, recaptchaCallback = function () {
+        });
         recaptcha_contact = grecaptcha.render(document.getElementById('recaptcha-contact'), {
             'sitekey': '{{env('reCAPTCHA_v2_SITEKEY')}}',
             'callback': 'enable_btnContact',
             'expired-callback': 'disabled_btnContact'
         });
     };
+
+    function enable_btnContact() {
+        $("#btn_contact").removeAttr('disabled');
+    }
+
+    function disabled_btnContact() {
+        $("#btn_contact").attr('disabled', 'disabled');
+    }
 
     function enable_btnRegister() {
         $("#btn_register").removeAttr('disabled');
@@ -79,13 +88,14 @@
         $("#btn_register").attr('disabled', 'disabled');
     }
 
-    function enable_btnContact() {
-        $("#btn_contact").removeAttr('disabled');
-    }
-
-    function disabled_btnContact() {
-        $("#btn_contact").attr('disabled', 'disabled');
-    }
+    $("#form-contact").on("submit", function (e) {
+        if (grecaptcha.getResponse(recaptcha_register).length === 0) {
+            e.preventDefault();
+            swal('{{__('lang.alert.warning')}}', '{{__('lang.alert.recaptcha')}}', 'warning');
+        } else {
+            return true;
+        }
+    });
 
     $("#reg_username").on('blur', function () {
         $.get('{{route('cek.username')}}?username=' + $("#reg_username").val(), function (data) {
@@ -121,15 +131,6 @@
                 $("#reg_errorAlert").html('');
                 return true;
             }
-        }
-    });
-
-    $("#form-contact").on("submit", function (e) {
-        if (grecaptcha.getResponse(recaptcha_register).length === 0) {
-            e.preventDefault();
-            swal('{{__('lang.alert.warning')}}', '{{__('lang.alert.recaptcha')}}', 'warning');
-        } else {
-            return true;
         }
     });
 

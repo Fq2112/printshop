@@ -147,7 +147,7 @@
                                     {{__('lang.contact.message')}} <span class="required">*</span></label>
                                 <textarea class="sm-form-control" id="con-message"
                                           name="message" placeholder="{{__('lang.placeholder.message')}}"
-                                          rows="6" cols="30" required></textarea>
+                                          rows="4" cols="30" required></textarea>
                             </div>
 
                             <div class="col_full" id="recaptcha-contact"></div>
@@ -162,7 +162,7 @@
                 </div>
 
                 <div class="col_half col_last">
-                    <section id="google-map" class="gmap img-thumbnail" style="height: 500px"></section>
+                    <section id="google-map" class="gmap img-thumbnail" style="height: 560px"></section>
                 </div>
 
                 <div class="clear"></div>
