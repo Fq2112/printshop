@@ -251,8 +251,8 @@ class AdminController extends Controller
 
     public function show_admin()
     {
-        if (Auth::user()->role == Role::OWNER){
-        $data = Admin::whereNotIn('role', [Role::ROOT])->get();
+        if (Auth::user()->role == Role::OWNER || Auth::user()->isRoot()){
+            $data = Admin::whereNotIn('role', [Role::ROOT])->get();
         } elseif (Auth::user()->role == Role::ADMIN){
             $data = Admin::whereNotIn('role', [Role::ROOT,Role::OWNER])->get();
         }
