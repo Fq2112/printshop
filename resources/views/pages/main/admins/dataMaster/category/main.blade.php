@@ -420,7 +420,6 @@
             $("#thumbnail").attr('required', 'required');
             $("#txt_thumbnail, #txt_photo").text('Choose File');
             $("#count_files").text('Allowed extension: jpg, jpeg, gif, png. Allowed size: < 5 MB');
-            $("#video").tagsinput('removeAll');
         });
 
         function createBlogCategory() {
