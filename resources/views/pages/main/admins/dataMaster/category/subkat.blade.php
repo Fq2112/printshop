@@ -668,6 +668,29 @@
                                         </div>
 
                                         <div class="row form-group">
+                                            <div class="col fix-label-group">
+                                                <label for="category_id">Pricing Product Tier </label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                            <span class="input-group-text fix-label-item"
+                                                                  style="height: 2.25rem">
+                                                                <i class="fa fa-tag"></i></span>
+                                                    </div>
+                                                    <select id="type_tier_id"
+                                                            class="form-control selectpicker"
+                                                            title="-- Choose --"
+                                                            name="type_tier_id" data-live-search="true"
+                                                    >
+                                                        @foreach(\App\Models\TypeTier::all() as $material)
+                                                            <option
+                                                                value="{{$material->id}}">{{$material->name}} : {{count($material->get_tier)}} tier &#64;{{$material->discount}}%   </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-group">
                                             <div class="col has-feedback">
                                                 <label for="title">Base Price (HPP) </label>
                                                 <input id="price" type="number" maxlength="191" name="price"
@@ -990,6 +1013,7 @@
             $('#back_cover_id').selectpicker('val', null);
             $('#binding_id').selectpicker('val', null);
             $('#print_method_id').selectpicker('val', null);
+            $('#type_tier_id').selectpicker('val', null);
             $('#price').val(null);
             $('#weight').val(null);
             $('#length_inp').val(null);
@@ -1074,6 +1098,7 @@
                     $('#back_cover_id').selectpicker('val', data.detail.back_side_ids);
                     $('#binding_id').selectpicker('val', data.detail.binding_ids);
                     $('#print_method_id').selectpicker('val', data.detail.print_method_ids);
+                    $('#type_tier_id').selectpicker('val', data.detail.type_tier_id);
                     $('#price').val(data.detail.price);
                     $('#weight').val(data.detail.weight);
                     $('#length_inp').val(data.detail.length);

@@ -281,6 +281,11 @@ class CategoryController extends Controller
                     'print_method_ids' => $request->print_method_id
                 ]);
             }
+            if ($request->has('type_tier_id')) {
+                $detail->update([
+                    'type_tier_id' => $request->type_tier_id
+                ]);
+            }
         }
 
         return back()->with('success', __('admin.alert.blog-category.create', ['param' => $request->name]));
@@ -457,6 +462,11 @@ class CategoryController extends Controller
                 $detail->update([
                     'is_print_method' => true,
                     'print_method_ids' => $request->print_method_id
+                ]);
+            }
+            if ($request->has('type_tier_id')) {
+                $detail->update([
+                    'type_tier_id' => $request->type_tier_id
                 ]);
             }
 
@@ -675,6 +685,11 @@ class CategoryController extends Controller
                     'print_method_ids' => $request->print_method_id
                 ]);
             }
+            if ($request->has('type_tier_id')) {
+                $detail->update([
+                    'type_tier_id' => $request->type_tier_id
+                ]);
+            }
         }
 
         return back()->with('success', __('admin.alert.blog-category.create', ['param' => $request->name]));
@@ -849,6 +864,11 @@ class CategoryController extends Controller
                 $detail->update([
                     'is_print_method' => true,
                     'print_method_ids' => $request->print_method_id
+                ]);
+            }
+            if ($request->has('type_tier_id')) {
+                $detail->update([
+                    'type_tier_id' => $request->type_tier_id
                 ]);
             }
         }
