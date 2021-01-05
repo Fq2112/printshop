@@ -98,7 +98,7 @@
                                                 <strong>{{$row->getTranslation('name', 'en')}} (EN)</strong>
                                             </td>
                                             <td style="vertical-align: middle">
-                                                <b>{{$row->price}}x</b> HPP
+                                                <b>{{$row->price}}</b>&times; HPP
                                             </td>
                                             <td style="vertical-align: middle">
                                                 @if($row->isActive == 1)
