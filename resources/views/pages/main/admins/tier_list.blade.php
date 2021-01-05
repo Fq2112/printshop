@@ -22,7 +22,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Print Tier Type</h1>
+            <h1>Tier List {{$data->name}}</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{route('admin.dashboard')}}">Dashboard</a></div>
                 <div class="breadcrumb-item">Data Master</div>
@@ -54,10 +54,9 @@
                                                 <label for="cb-all" class="custom-control-label">#</label>
                                             </div>
                                         </th>
-                                        <th class="text-center">ID</th>
-                                        <th width="15%">Name</th>
-                                        <th>Price Reduction (%) </th>
-                                        <th class="text-center">Total Tiers</th>
+
+                                        <th width="15%">Start</th>
+                                        <th>End</th>
                                         <th class="text-center">Created at</th>
                                         <th class="text-center">Last Update</th>
                                         <th class="text-center" width="25%">Action</th>
@@ -65,7 +64,7 @@
                                     </thead>
                                     <tbody>
                                     @php $no = 1; @endphp
-                                    @foreach($data as $row)
+                                    @foreach($data->get_tier as $row)
                                         <tr>
                                             <td style="vertical-align: middle" align="center">
                                                 <div class="custom-checkbox custom-control">
@@ -75,34 +74,27 @@
                                                            class="custom-control-label">{{$no++}}</label>
                                                 </div>
                                             </td>
-                                            <td style="vertical-align: middle" align="center">{{$row->id}}</td>
-                                            <td style="vertical-align: middle">
-                                                <strong>{{$row->name}}</strong>
-                                            </td>
-                                            <td style="vertical-align: middle">{{$row->discount}}</td>
 
-                                            <td style="vertical-align: middle;text-transform: uppercase" align="center">
-                                                    {{count($row->get_tier)}}
+                                            <td style="vertical-align: middle">
+                                                <strong>{{$row->start}}</strong>
                                             </td>
+                                            <td style="vertical-align: middle"><strong>{{$row->end}}</strong></td>
 
                                             <td style="vertical-align: middle" align="center">
                                                 {{\Carbon\Carbon::parse($row->created_at)->format('j F Y')}}</td>
                                             <td style="vertical-align: middle" align="center">
                                                 {{$row->updated_at->diffForHumans()}}</td>
                                             <td style="vertical-align: middle" align="center">
-                                                <a href="{{route('table.tier.list', ['id' => encrypt($row->id)])}}"
-                                                   class="btn btn-warning" data-toggle="tooltip"
-                                                   title="Tier List" data-placement="top">
-                                                    <i class="fas fa-layer-group"></i></a>
+
                                                 <button data-placement="top" data-toggle="tooltip"
                                                         title="Edit"
                                                         type="button" class="btn btn-info mr-1"
-                                                        onclick="editUser('{{$row->id}}','{{$row->name}}','{{$row->discount}}')">
+                                                        onclick="editUser('{{$row->id}}','{{$row->start}}','{{$row->end}}')">
                                                     <i class="fa fa-edit"></i></button>
 
                                                 @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Support\Role::OWNER)
 
-                                                        <a href="{{route('create.tier.delete', ['id' => encrypt($row->id)])}}"
+                                                        <a href="{{route('create.tier_list.delete', ['id' => encrypt($row->id)])}}"
                                                            class="btn btn-danger delete-data" data-toggle="tooltip"
                                                            title="Delete" data-placement="top">
                                                             <i class="fas fa-trash-alt"></i></a>
@@ -232,32 +224,33 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="form-blogCategory" method="post" action="{{route('create.tier.create')}}">
+                <form id="form-blogCategory" method="post" action="{{route('create.tier_list.create')}}">
                     {{csrf_field()}}
                     <input type="hidden" name="_method">
                     <input type="hidden" name="id">
+                    <input type="hidden" name="type_id" value="{{$data->id}}" id="">
                     <div class="modal-body">
                         <div class="row form-group">
                             <div class="col">
-                                <label for="name">Name <sup class="text-danger">*</sup></label>
+                                <label for="name">Start <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
                                     </div>
-                                    <input id="name" type="text" maxlength="191" name="name" class="form-control"
-                                           placeholder="Write its name here&hellip;" required>
+                                    <input  type="text" maxlength="191" name="start" class="form-control" onkeypress="return numberOnly(event,',')"
+                                           placeholder="1" required>
                                 </div>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col">
-                                <label for="name">Price Reduction each Tiers <sup class="text-danger">*</sup></label>
+                                <label for="name">End <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-percent"></i></span>
+                                        <span class="input-group-text"><i class="fa fa-tag"></i></span>
                                     </div>
-                                    <input id="discount_create" type="text" maxlength="191" name="discount" class="form-control" onkeypress="return numberOnly(event,',')"
-                                           placeholder="12%" required>
+                                    <input type="text" maxlength="191" name="end" class="form-control" onkeypress="return numberOnly(event,',')"
+                                           placeholder="1" required>
                                 </div>
                             </div>
                         </div>
@@ -283,32 +276,33 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="form-blogCategory" method="post" action="{{route('create.tier.update')}}">
+                <form id="form-blogCategory" method="post" action="{{route('create.tier_list.update')}}">
                     {{csrf_field()}}
                     <input type="hidden" name="_method">
                     <input type="hidden" name="id" id="id_update">
+                    <input type="hidden" name="type_id" value="{{$data->id}}" id="">
                     <div class="modal-body">
                         <div class="row form-group">
                             <div class="col">
-                                <label for="name">Name <sup class="text-danger">*</sup></label>
+                                <label for="name">Start <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
                                     </div>
-                                    <input id="name_update" type="text" maxlength="191" name="name" class="form-control"
-                                           placeholder="Write its name here&hellip;" required>
+                                    <input id="start_" type="text" maxlength="191" name="start" class="form-control" onkeypress="return numberOnly(event,',')"
+                                            placeholder="1" required>
                                 </div>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col">
-                                <label for="name">Price Reduction each Tiers <sup class="text-danger">*</sup></label>
+                                <label for="name">End <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-percent"></i></span>
+                                        <span class="input-group-text"><i class="fa fa-tag"></i></span>
                                     </div>
-                                    <input id="discount_update" type="text" maxlength="191" name="discount" class="form-control" onkeypress="return numberOnly(event,',')"
-                                           placeholder="12%" required>
+                                    <input id="end_" type="text" maxlength="191" name="end" class="form-control" onkeypress="return numberOnly(event,',')"
+                                           placeholder="1" required>
                                 </div>
                             </div>
                         </div>
@@ -337,8 +331,7 @@
                     dom: "<'row'<'col-sm-12 col-md-3'l><'col-sm-12 col-md-5'B><'col-sm-12 col-md-4'f>>" +
                         "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                     columnDefs: [
-                        {sortable: false, targets: 7},
-                        {targets: 1, visible: false, searchable: false}
+
                     ],
                     buttons: [
                         {
@@ -461,12 +454,12 @@
             $("#blogCategoryModal").modal('show');
         }
 
-        function editUser(id, name, discount,) {
+        function editUser(id, start, end,) {
 
             $("#edit_title").text('Edit ' + name);
             $("#id_update").val(id);
-            $("#name_update").val(name);
-            $("#discount_update").val(discount);
+            $("#start_").val(start);
+            $("#end_").val(end);
             $("#editUser").modal('show');
         }
 
