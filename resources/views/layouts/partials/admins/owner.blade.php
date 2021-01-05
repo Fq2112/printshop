@@ -48,17 +48,15 @@
 
     <li class="menu-header">Tables</li>
 
-
-
     @if(Auth::user()->isRoot() || Auth::user()->isOwner())
         <li class="dropdown {{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/categories*') ? 'active' : ''}}">
             <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
-                <i class="fas fa-database"></i><span>Product Categories</span></a>
+                <i class="fas fa-print"></i><span>Print Products</span></a>
             <ul class="dropdown-menu">
                 <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/categories/main*') ?
-                'active' : ''}}"><a href="{{route('table.categories.main')}}" class="nav-link">Main</a></li>
+                'active' : ''}}"><a href="{{route('table.categories.main')}}" class="nav-link">Categories</a></li>
                 <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/categories/sub*') ?
-                'active' : ''}}"><a href="{{route('table.categories.subkat')}}" class="nav-link">Subs</a></li>
+                'active' : ''}}"><a href="{{route('table.categories.subkat')}}" class="nav-link">Sub-Categories</a></li>
                 <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/categories/cluster*') ?
                 'active' : ''}}"><a href="{{route('table.categories.cluster')}}" class="nav-link">Clusters</a></li>
             </ul>
@@ -66,7 +64,7 @@
 
         <li class="dropdown {{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/spec*') ? 'active' : ''}}">
             <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
-                <i class="fas fa-database"></i><span>Product Specs</span></a>
+                <i class="fas fa-drafting-compass"></i><span>Print Product Specs</span></a>
             <ul class="dropdown-menu">
                 <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/spec/backside*') ?
                 'active' : ''}}"><a href="{{route('table.backside')}}" class="nav-link">Back Side</a></li>
@@ -105,7 +103,7 @@
 
         <li class="dropdown {{\Illuminate\Support\Facades\Request::is('*scott.royce/msc*') ? 'active' : ''}}">
             <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
-                <i class="fas fa-database"></i><span>Miscellaneous</span></a>
+                <i class="fas fa-cogs"></i><span>Miscellaneous</span></a>
             <ul class="dropdown-menu">
                 <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/msc/promo*') ?
                 'active' : ''}}"><a href="{{route('admin.promo')}}" class="nav-link">Promo Code</a></li>

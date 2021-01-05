@@ -6,7 +6,6 @@
         </a>
     </li>
 
-
     <li class="dropdown {{\Illuminate\Support\Facades\Request::is('*scott.royce/mail*') ? 'active' : ''}}">
         <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
             <i class="fas fa-envelope"></i><span>Mail</span></a>
@@ -18,11 +17,9 @@
         </ul>
     </li>
 
-
     <li class="dropdown  {{\Illuminate\Support\Facades\Request::is('*scott.royce/order*') ? 'active' : ''}}">
         <a href="{{route('admin.order')}}" class="nav-link"><i class="fas fa-archive"></i><span>Orders</span></a>
     </li>
-
 
     <li class="dropdown {{\Illuminate\Support\Facades\Request::is('*scott.royce/account*') ? 'active' : ''}}">
         <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
@@ -32,6 +29,5 @@
                 'active' : ''}}"><a href="{{route('admin.profil')}}" class="nav-link">Edit Profile</a></li>
         </ul>
     </li>
-
 </ul>
 
