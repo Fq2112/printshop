@@ -640,7 +640,8 @@
                                 <label class="card-label h-100 {{$row->image != "" ? '' : 'align-items-center'}}"
                                        for="side-{{$row->id}}">
                                     <input id="side-{{$row->id}}" class="card-rb" name="side" type="radio"
-                                           value="{{$row->id}}" data-name="{{$row->name}}" data-price="{{$row->price*$specs->price}}"
+                                           value="{{$row->id}}" data-name="{{$row->name}}"
+                                           data-price="{{$row->price * $specs->price != $specs->price ? $row->price * $specs->price : 0}}"
                                         {{!is_null($cart) && $cart->side_id == $row->id ? 'checked' : ''}}>
                                     <div class="card card-input h-100">
                                         <div

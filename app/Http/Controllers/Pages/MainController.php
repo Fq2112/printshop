@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\Users\ClaimOfferMail;
 use App\Models\Cart;
 use App\Models\ClusterKategori;
+use App\Models\PriceTier;
 use App\Models\PromoCode;
 use App\Models\Setting;
 use App\Models\SubKategori;
@@ -196,12 +197,16 @@ class MainController extends Controller
             } else {
                 $specs = $data->getSubkatSpecs;
                 if ($specs) {
-                    $guidelines = $data->guidelines;
-                    $setting = Setting::first();
-                    $gallery = $data->getGallery;
+                    $typeTier = $specs->get_type;
+                    if($typeTier) {
+                        $tiers = PriceTier::where('type_id', $typeTier->id)->orderBy('start')->get();
+                        $last_tier = PriceTier::where('type_id', $typeTier->id)->orderByDesc('end')->first();
+                        $gallery = $data->getGallery;
+                        $guidelines = $data->guidelines;
 
-                    return view('pages.main.form-pemesanan', compact('clust', 'data', 'specs',
-                        'guidelines', 'cart', 'setting', 'gallery'));
+                        return view('pages.main.form-pemesanan', compact('clust', 'data',
+                            'specs', 'typeTier', 'tiers', 'last_tier', 'guidelines', 'cart', 'gallery'));
+                    }
                 }
             }
 
@@ -209,12 +214,16 @@ class MainController extends Controller
             $data = $clust;
             $specs = $data->getClusterSpecs;
             if ($specs) {
-                $guidelines = $data->getSubKategori->guidelines;
-                $setting = Setting::first();
-                $gallery = $data->getGallery;
+                $typeTier = $specs->get_type;
+                if($typeTier) {
+                    $tiers = PriceTier::where('type_id', $typeTier->id)->orderBy('start')->get();
+                    $last_tier = PriceTier::where('type_id', $typeTier->id)->orderByDesc('end')->first();
+                    $gallery = $data->getGallery;
+                    $guidelines = $data->getSubKategori->guidelines;
 
-                return view('pages.main.form-pemesanan', compact('clust', 'data', 'specs',
-                    'guidelines', 'cart', 'setting', 'gallery'));
+                    return view('pages.main.form-pemesanan', compact('clust', 'data',
+                        'specs', 'typeTier', 'tiers', 'last_tier', 'guidelines', 'cart', 'gallery'));
+                }
             }
         }
 

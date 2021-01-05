@@ -386,21 +386,15 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
+                                                @foreach($tiers as $i => $row)
+                                                    <tr>
+                                                        <td>{{$row->start}} &ndash; {{$row->end.' '.$specs->getUnit->name}}</td>
+                                                        <td id="qty-{{$i}}"></td>
+                                                    </tr>
+                                                @endforeach
                                                 <tr>
-                                                    <td>1 &ndash; 20 {{$specs->getUnit->name}}</td>
-                                                    <td id="qty-120"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>21 &ndash; 50 {{$specs->getUnit->name}}</td>
-                                                    <td id="qty-2150"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>51 &ndash; 100 {{$specs->getUnit->name}}</td>
-                                                    <td id="qty-51100"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>&ge; 100 {{$specs->getUnit->name}}</td>
-                                                    <td id="qty-100"></td>
+                                                    <td>&ge; {{$last_tier->end.' '.$specs->getUnit->name}}</td>
+                                                    <td id="qty-{{count($tiers)}}"></td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -569,7 +563,8 @@
             btn_upload = $("#btn_upload"), upload_input = $("#file"), link_input = $("#link"),
             range_max = 100, qty = parseInt('{{!is_null($cart) ? $cart->qty : 0}}'),
             weight = Number('{{$specs->weight / 1000}}'), pricing_specs = 0,
-            pricing_rules = Number('{{$setting->rules}}' / 100), disc_1 = 0, disc_2 = 0, disc_3 = 0,
+            pricing_rules = Number('{{$typeTier->discount}}' / 100),
+            @foreach($tiers as $i => $row) disc_{{$i}} = 0, @endforeach disc_last = 0,
             price_pcs = parseInt('{{$specs->price}}'), str_unit = ' {{$specs->getUnit->name}}', total = 0;
 
         $(function () {
@@ -748,9 +743,9 @@
 
         function resetter(check) {
             if (check == 1) {
-                if (qty >= 1 && qty <= 20) {
+                /*if (qty >= 1 && qty <= 20) {
                     pricing_specs = 0;
-                    price_pcs = parseInt('{{$specs->price}}');
+                    {{--price_pcs = parseInt('{{$specs->price}}');--}}
                     setPrice();
                 } else if (qty >= 21 && qty <= 50) {
                     price_pcs = disc_1;
@@ -758,7 +753,21 @@
                     price_pcs = disc_2;
                 } else if (qty > 100) {
                     price_pcs = disc_3;
+                }*/
+                if (qty > parseInt('{{$last_tier->end}}')) {
+                    price_pcs = disc_last;
                 }
+                @foreach($tiers as $i => $row)
+                    else if (qty >= parseInt('{{$row->start}}') && qty <= parseInt('{{$row->end}}')) {
+                        @if($i == 0)
+                            pricing_specs = 0;
+                            price_pcs = parseInt('{{$specs->price}}');
+                            setPrice();
+                        @else
+                            price_pcs = disc_{{$i}};
+                        @endif
+                    }
+                @endforeach
 
                 total = qty * price_pcs;
                 input_qty.val(qty);
@@ -832,14 +841,28 @@
             }
 
             price_pcs += pricing_specs;
-            disc_1 = parseInt(price_pcs - (price_pcs * pricing_rules));
+            /*disc_1 = parseInt(price_pcs - (price_pcs * pricing_rules));
             disc_2 = parseInt(disc_1 - (disc_1 * pricing_rules));
-            disc_3 = parseInt(disc_2 - (disc_2 * pricing_rules));
+            disc_3 = parseInt(disc_2 - (disc_2 * pricing_rules));*/
+            @foreach($tiers as $i => $row)
+                @if($i == 0)
+                    $("#qty-{{$i}}").text('Rp' + number_format(price_pcs, 2, ',', '.'));
+                @elseif($i == 1)
+                    disc_{{$i}} = parseInt(price_pcs - (price_pcs * pricing_rules));
+                    $("#qty-{{$i}}").text('Rp' + number_format(disc_{{$i}}, 2, ',', '.'));
+                @else
+                    @php $x = $i - 1; @endphp
+                    disc_{{$i}} = parseInt(disc_{{$x}} - (disc_{{$x}} * pricing_rules));
+                    $("#qty-{{$i}}").text('Rp' + number_format(disc_{{$i}}, 2, ',', '.'));
+                @endif
+            @endforeach
 
-            $("#qty-120").text('Rp' + number_format(price_pcs, 2, ',', '.'));
+            disc_last = parseInt(disc_{{count($tiers) - 1}} - (disc_{{count($tiers) - 1}} * pricing_rules));
+            $("#qty-{{count($tiers)}}").text('Rp' + number_format(disc_last, 2, ',', '.'));
+            /*$("#qty-120").text('Rp' + number_format(price_pcs, 2, ',', '.'));
             $("#qty-2150").text('Rp' + number_format(disc_1, 2, ',', '.'));
             $("#qty-51100").text('Rp' + number_format(disc_2, 2, ',', '.'));
-            $("#qty-100").text('Rp' + number_format(disc_3, 2, ',', '.'));
+            $("#qty-100").text('Rp' + number_format(disc_3, 2, ',', '.'));*/
         }
 
         btn_upload.on('click', function () {

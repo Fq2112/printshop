@@ -16,7 +16,8 @@ class SideSeeder extends Seeder
             'description' => [
                 'Desain akan dicetak pada satu sisi.',
                 'Design will be printed on one side.'
-            ]
+            ],
+            'price' => 1
         ],
         [
             'name' => ['2 sisi', '2 sides'],
@@ -24,6 +25,7 @@ class SideSeeder extends Seeder
                 'Desain akan dicetak pada kedua sisi.',
                 'Design will be printed on both sides.'
             ],
+            'price' => 2
         ]
     ];
     public function run()
@@ -39,7 +41,7 @@ class SideSeeder extends Seeder
                     'en' => $DATUM['description'][1],
                     'id' => $DATUM['description'][0]
                 ],
-                'price' => round(rand(5000, 10000))
+                'price' => $DATUM['price']
             ]);
         }
     }
