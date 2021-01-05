@@ -49,20 +49,20 @@
                                 <table class="table table-striped" id="dt-buttons">
                                     <thead>
                                     <tr>
-                                        <th class="text-center" width="10%">
+                                        <th class="text-center">
                                             <div class="custom-checkbox custom-control">
                                                 <input type="checkbox" class="custom-control-input" id="cb-all">
                                                 <label for="cb-all" class="custom-control-label">#</label>
                                             </div>
                                         </th>
                                         <th class="text-center">ID</th>
-                                        <th>Image</th>
-                                        <th width="35%">Name</th>
-
+                                        <th width="10%">Image</th>
+                                        <th>Name</th>
+                                        <th>Price</th>
                                         <th>Status</th>
-                                        <th class="text-center" width="15%">Created at</th>
-                                        <th class="text-center" width="15%">Last Update</th>
-                                        <th width="25%">Action</th>
+                                        <th class="text-center">Created at</th>
+                                        <th class="text-center">Last Update</th>
+                                        <th width="15%" class="text-center">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -78,22 +78,27 @@
                                                 </div>
                                             </td>
                                             <td style="vertical-align: middle" align="center">{{$row->id}}</td>
-                                            <td style="vertical-align: middle;">
-                                                <div class="row lightgallery float-left mr-0">
-                                                    <div class="col item" data-src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                         data-sub-html="<h4>{{$row->image}}</h4><p></p>">
-                                                        <a href="javascript:void(0)">
-                                                            <img width="100" alt="Thumbnail" class="img-thumbnail"
-                                                                 src="{{asset('storage/products/specs/'.$row->image)}}">
-                                                        </a>
+                                            <td style="vertical-align: middle;" align="center">
+                                                @if(!is_null($row->image))
+                                                    <div class="row lightgallery float-left mr-0">
+                                                        <div class="col item" data-src="{{asset('storage/products/specs/'.$row->image)}}"
+                                                             data-sub-html="<h4>{{$row->image}}</h4><p></p>">
+                                                            <a href="javascript:void(0)">
+                                                                <img width="100" alt="Thumbnail" class="img-thumbnail"
+                                                                     src="{{asset('storage/products/specs/'.$row->image)}}">
+                                                            </a>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                @else
+                                                    &ndash;
+                                                @endif
                                             </td>
                                             <td style="vertical-align: middle">
-                                                <strong>{{$row->getTranslation('name', 'id')}} (Id)</strong> <br>
-                                                <strong>{{$row->getTranslation('name', 'en')}} (En)</strong>
+                                                <strong>{{$row->getTranslation('name', 'id')}} (ID)</strong> <br>
+                                                <strong>{{$row->getTranslation('name', 'en')}} (EN)</strong>
                                             </td>
-                                            <td>
+                                            <td style="vertical-align: middle">Rp{{number_format($row->price,2,',','.')}}</td>
+                                            <td style="vertical-align: middle">
                                                 @if($row->isActive == 1)
                                                     <span class="badge badge-success"><i class="fa fa-check"> </i>&nbsp;&nbsp;Active </span>
                                                 @else
@@ -147,14 +152,14 @@
 
                                     <div class="row form-group">
                                         <div class="col-6 has-feedback">
-                                            <label for="title">Name ( En )</label>
+                                            <label for="title">Name ( EN )</label>
                                             <input id="name_en" type="text" maxlength="191" name="name_en"
                                                    class="form-control"
                                                    placeholder="Write its title here&hellip;" required>
                                             <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
                                         </div>
                                         <div class="col-6 has-feedback">
-                                            <label for="title">Name ( Id )</label>
+                                            <label for="title">Name ( ID )</label>
                                             <input id="name_id" type="text" maxlength="191" name="name_id"
                                                    class="form-control"
                                                    placeholder="Write its title here&hellip;" required>
@@ -164,14 +169,14 @@
 
                                     <div class="row form-group has-feedback">
                                         <div class="col">
-                                            <label for="_content">Caption ( En )</label>
+                                            <label for="_content">Caption ( EN )</label>
                                             <textarea id="_content_en" type="text" name="_content_en"
                                                       class="summernote form-control"
                                                       placeholder="Write something about your post here&hellip;"></textarea>
                                             <span class="glyphicon glyphicon-text-height form-control-feedback"></span>
                                         </div>
                                         <div class="col">
-                                            <label for="_content">Caption ( Id )</label>
+                                            <label for="_content">Caption ( ID )</label>
                                             <textarea id="_content_id" type="text" name="_content_id"
                                                       class="summernote form-control"
                                                       placeholder="Write something about your post here&hellip;"></textarea>
@@ -322,7 +327,7 @@
                     dom: "<'row'<'col-sm-12 col-md-3'l><'col-sm-12 col-md-5'B><'col-sm-12 col-md-4'f>>" +
                         "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                     columnDefs: [
-                        {sortable: false, targets: 5},
+                        {sortable: false, targets: 8},
                         {targets: 1, visible: false, searchable: false}
                     ],
                     buttons: [
@@ -330,14 +335,14 @@
                             text: '<strong class="text-uppercase"><i class="far fa-clipboard mr-2"></i>Copy</strong>',
                             extend: 'copy',
                             exportOptions: {
-                                columns: [0, 2, 3, 4]
+                                columns: [0, 3, 4, 5, 6, 7]
                             },
                             className: 'btn btn-warning assets-export-btn export-copy ttip'
                         }, {
                             text: '<strong class="text-uppercase"><i class="far fa-file-excel mr-2"></i>Excel</strong>',
                             extend: 'excel',
                             exportOptions: {
-                                columns: [0, 2, 3, 4]
+                                columns: [0, 3, 4, 5, 6, 7]
                             },
                             className: 'btn btn-success assets-export-btn export-xls ttip',
                             title: export_filename,
@@ -346,7 +351,7 @@
                             text: '<strong class="text-uppercase"><i class="fa fa-print mr-2"></i>Print</strong>',
                             extend: 'print',
                             exportOptions: {
-                                columns: [0, 2, 3, 4]
+                                columns: [0, 3, 4, 5, 6, 7]
                             },
                             className: 'btn btn-info assets-select-btn export-print'
                         }, {
