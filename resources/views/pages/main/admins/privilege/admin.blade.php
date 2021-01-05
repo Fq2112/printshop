@@ -1,5 +1,5 @@
 @extends('layouts.mst_admin')
-@section('title', __('admin.sidebar.head').': '.__('admin.tables.blog-category').' | '.env('APP_TITLE'))
+@section('title', __('admin.sidebar.head').': Admin List | '.env('APP_TITLE'))
 @push('styles')
     <link rel="stylesheet" href="{{asset('admins/modules/datatables/datatables.min.css')}}">
     <link rel="stylesheet"
@@ -26,8 +26,8 @@
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{route('admin.dashboard')}}">Dashboard</a></div>
                 <div class="breadcrumb-item">Data Master</div>
-                <div class="breadcrumb-item">Category</div>
-                <div class="breadcrumb-item">Main Category</div>
+                <div class="breadcrumb-item">Privilege</div>
+                <div class="breadcrumb-item">Admin List</div>
             </div>
         </div>
 

@@ -1,5 +1,5 @@
 @extends('layouts.mst_admin')
-@section('title', __('admin.sidebar.head').': '.__('admin.tables.blog-category').' | '.env('APP_TITLE'))
+@section('title', __('admin.sidebar.head').': '.__('lang.order.invoice').' #'.$code.' | '.env('APP_TITLE'))
 @push('styles')
     <link rel="stylesheet" href="{{asset('admins/modules/datatables/datatables.min.css')}}">
     <link rel="stylesheet"
@@ -36,11 +36,11 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Order #{{$code}}</h1>
+            <h1>Invoice #{{$code}}</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{route('admin.dashboard')}}">Dashboard</a></div>
-                <div class="breadcrumb-item">Order History</div>
-                <div class="breadcrumb-item">#{{$code}}</div>
+                <div class="breadcrumb-item"><a href="{{route('admin.order')}}">Order</a></div>
+                <div class="breadcrumb-item">{{__('lang.order.invoice')}}</div>
             </div>
         </div>
 

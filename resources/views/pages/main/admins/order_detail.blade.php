@@ -1,5 +1,5 @@
 @extends('layouts.mst_admin')
-@section('title', __('admin.sidebar.head').': Inbox | '.__('lang.title'))
+@section('title', __('admin.sidebar.head').': Detail Order | '.__('lang.title'))
 @push('styles')
     <link rel="stylesheet" href="{{asset('admins/modules/summernote/summernote-bs4.css')}}">
     <style>
@@ -42,9 +42,8 @@
             <h1>Detail Order </h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{route('admin.dashboard')}}">Dashboard</a></div>
-                <div class="breadcrumb-item">Order</div>
+                <div class="breadcrumb-item"><a href="{{route('admin.order')}}">Order</a></div>
                 <div class="breadcrumb-item">Detail</div>
-                <div class="breadcrumb-item">{{$data->uni_code}}</div>
             </div>
         </div>
 

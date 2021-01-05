@@ -1,5 +1,5 @@
 @extends('layouts.mst_admin')
-@section('title','Manage Cluster Gallery | '.env('APP_TITLE'))
+@section('title', __('admin.sidebar.head').': Product Sub-Category Galleries | '.env('APP_TITLE'))
 @push('styles')
     <link rel="stylesheet" href="{{asset('admins/modules/datatables/datatables.min.css')}}">
     <link rel="stylesheet"
@@ -62,13 +62,13 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>{{__('admin.sidebar.blog-gallery')}} {{$data->name}}</h1>
+            <h1>{{$data->name}} Galleries</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{route('admin.dashboard')}}">Dashboard</a></div>
                 <div class="breadcrumb-item">Data Master</div>
-                <div class="breadcrumb-item">Blog</div>
-                <div class="breadcrumb-item"></div>
-                <div class="breadcrumb-item">{{__('admin.sidebar.blog-gallery')}}</div>
+                <div class="breadcrumb-item">Product</div>
+                <div class="breadcrumb-item"><a href="{{route('table.categories.subkat')}}">Sub-Category</a></div>
+                <div class="breadcrumb-item">Gallery</div>
             </div>
         </div>
 

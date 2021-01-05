@@ -1,5 +1,5 @@
 @extends('layouts.mst_admin')
-@section('title', __('admin.sidebar.head').': '.__('admin.tables.blog-category').' | '.env('APP_TITLE'))
+@section('title', __('admin.sidebar.head').': Product Sub-Categories | '.env('APP_TITLE'))
 @push('styles')
     <link rel="stylesheet" href="{{asset('admins/modules/datatables/datatables.min.css')}}">
     <link rel="stylesheet"
@@ -22,12 +22,12 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Sub-Categories Product Table</h1>
+            <h1>Product Sub-Categories Table</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{route('admin.dashboard')}}">Dashboard</a></div>
                 <div class="breadcrumb-item">Data Master</div>
-                <div class="breadcrumb-item">Category</div>
-                <div class="breadcrumb-item">Main Category</div>
+                <div class="breadcrumb-item">Product</div>
+                <div class="breadcrumb-item">Sub-Category</div>
             </div>
         </div>
 
