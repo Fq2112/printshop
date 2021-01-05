@@ -145,12 +145,5 @@ class DetailSubkatSeeder extends Seeder
             'print_method_ids' => ['1', '2', '3'],
             'unit_id' => 1
         ]);
-
-        foreach (\App\Models\DetailSubkat::all() as $row) {
-            $row->update([
-                'price' => round(rand(25000, 50000)),
-                'type_tier_id' => rand(1,2)
-            ]);
-        }
     }
 }
