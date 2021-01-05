@@ -669,7 +669,7 @@
 
                                         <div class="row form-group">
                                             <div class="col fix-label-group">
-                                                <label for="category_id">Print Product Tier </label>
+                                                <label for="category_id">Pricing Product Tier </label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
                                                             <span class="input-group-text fix-label-item"

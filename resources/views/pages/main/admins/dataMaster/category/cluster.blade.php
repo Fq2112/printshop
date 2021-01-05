@@ -708,19 +708,8 @@
                                     </div>
 
                                     <div class="row form-group">
-                                        <div class="col has-feedback">
-                                            <label for="title">Base Price (HPP)</label>
-                                            <input id="price" type="number" maxlength="191" name="price"
-                                                   class="form-control"
-                                                   placeholder="Write its price here&hellip;" required>
-                                            <span
-                                                class="glyphicon glyphicon-text-width form-control-feedback"></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="row form-group">
                                         <div class="col fix-label-group">
-                                            <label for="category_id">Print Product Tier </label>
+                                            <label for="category_id">Pricing Product Tier </label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                             <span class="input-group-text fix-label-item"
@@ -740,6 +729,19 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="row form-group">
+                                        <div class="col has-feedback">
+                                            <label for="title">Base Price (HPP)</label>
+                                            <input id="price" type="number" maxlength="191" name="price"
+                                                   class="form-control"
+                                                   placeholder="Write its price here&hellip;" required>
+                                            <span
+                                                class="glyphicon glyphicon-text-width form-control-feedback"></span>
+                                        </div>
+                                    </div>
+
+
 
                                     <div class="row form-group">
                                         <div class="col has-feedback">
