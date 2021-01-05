@@ -56,13 +56,13 @@
                                             </div>
                                         </th>
                                         <th class="text-center">ID</th>
-                                        <th>Image</th>
+                                        <th width="10%">Image</th>
                                         <th>Name</th>
                                         <th>Price</th>
                                         <th>Status</th>
                                         <th class="text-center">Created at</th>
                                         <th class="text-center">Last Update</th>
-                                        <th>Action</th>
+                                        <th width="15%" class="text-center">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
