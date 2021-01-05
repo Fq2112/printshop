@@ -1,5 +1,5 @@
 @extends('layouts.mst_admin')
-@section('title', __('admin.sidebar.head').': Tier Type | '.env('APP_TITLE'))
+@section('title', __('admin.sidebar.head').': Pricing Rule Types | '.env('APP_TITLE'))
 @push('styles')
     <link rel="stylesheet" href="{{asset('admins/modules/datatables/datatables.min.css')}}">
     <link rel="stylesheet"
@@ -22,12 +22,12 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Print Tier Type</h1>
+            <h1>Pricing Rule Types</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{route('admin.dashboard')}}">Dashboard</a></div>
                 <div class="breadcrumb-item">Data Master</div>
-                <div class="breadcrumb-item">Privilege</div>
-                <div class="breadcrumb-item">Admin List</div>
+                <div class="breadcrumb-item">Pricing Rules</div>
+                <div class="breadcrumb-item">Type</div>
             </div>
         </div>
 
@@ -48,19 +48,19 @@
                                 <table class="table table-striped" id="dt-buttons">
                                     <thead>
                                     <tr>
-                                        <th class="text-center" width="10%">
+                                        <th class="text-center">
                                             <div class="custom-checkbox custom-control">
                                                 <input type="checkbox" class="custom-control-input" id="cb-all">
                                                 <label for="cb-all" class="custom-control-label">#</label>
                                             </div>
                                         </th>
                                         <th class="text-center">ID</th>
-                                        <th width="15%">Name</th>
-                                        <th>Price Reduction (%) </th>
+                                        <th>Name</th>
+                                        <th>Price Reduction</th>
                                         <th class="text-center">Total Tiers</th>
                                         <th class="text-center">Created at</th>
                                         <th class="text-center">Last Update</th>
-                                        <th class="text-center" width="25%">Action</th>
+                                        <th class="text-center" width="20%">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -79,10 +79,10 @@
                                             <td style="vertical-align: middle">
                                                 <strong>{{$row->name}}</strong>
                                             </td>
-                                            <td style="vertical-align: middle">{{$row->discount}}</td>
+                                            <td style="vertical-align: middle">{{$row->discount}} %</td>
 
                                             <td style="vertical-align: middle;text-transform: uppercase" align="center">
-                                                    {{count($row->get_tier)}}
+                                                {{count($row->get_tier)}}
                                             </td>
 
                                             <td style="vertical-align: middle" align="center">
@@ -91,29 +91,23 @@
                                                 {{$row->updated_at->diffForHumans()}}</td>
                                             <td style="vertical-align: middle" align="center">
                                                 <a href="{{route('table.tier.list', ['id' => encrypt($row->id)])}}"
-                                                   class="btn btn-warning" data-toggle="tooltip"
-                                                   title="Tier List" data-placement="top">
-                                                    <i class="fas fa-layer-group"></i></a>
-                                                <button data-placement="top" data-toggle="tooltip"
-                                                        title="Edit"
-                                                        type="button" class="btn btn-info mr-1"
+                                                   class="btn btn-info" data-toggle="tooltip" title="Tier List"
+                                                   data-placement="top"><i class="fas fa-layer-group"></i></a>
+                                                <button data-placement="top" data-toggle="tooltip" title="Edit"
+                                                        type="button" class="btn btn-warning mr-1"
                                                         onclick="editUser('{{$row->id}}','{{$row->name}}','{{$row->discount}}')">
                                                     <i class="fa fa-edit"></i></button>
-
                                                 @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Support\Role::OWNER)
-
-                                                        <a href="{{route('create.tier.delete', ['id' => encrypt($row->id)])}}"
-                                                           class="btn btn-danger delete-data" data-toggle="tooltip"
-                                                           title="Delete" data-placement="top">
-                                                            <i class="fas fa-trash-alt"></i></a>
-
+                                                    <a href="{{route('create.tier.delete', ['id' => encrypt($row->id)])}}"
+                                                       class="btn btn-danger delete-data" data-toggle="tooltip"
+                                                       title="Delete" data-placement="top">
+                                                        <i class="fas fa-trash-alt"></i></a>
                                                 @endif
                                                 <form action="{{route('admin.reset')}}" id="update_form_{{$row->id}}"
                                                       method="post">
                                                     @CSRF
                                                     <input type="hidden" name="id" value="{{$row->id}}">
                                                 </form>
-
                                             </td>
                                         </tr>
                                     @endforeach
@@ -251,13 +245,13 @@
                         </div>
                         <div class="row form-group">
                             <div class="col">
-                                <label for="name">Price Reduction each Tiers <sup class="text-danger">*</sup></label>
+                                <label for="discount_create">Price Reduction foreach Tiers <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-percent"></i></span>
+                                        <span class="input-group-text"><i class="fa fa-percentage"></i></span>
                                     </div>
-                                    <input id="discount_create" type="text" maxlength="191" name="discount" class="form-control" onkeypress="return numberOnly(event,',')"
-                                           placeholder="12%" required>
+                                    <input id="discount_create" type="number" min="1" max="100" step=".05"
+                                           name="discount" class="form-control" placeholder="0.00 %" required>
                                 </div>
                             </div>
                         </div>
@@ -290,7 +284,7 @@
                     <div class="modal-body">
                         <div class="row form-group">
                             <div class="col">
-                                <label for="name">Name <sup class="text-danger">*</sup></label>
+                                <label for="name_update">Name <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
@@ -302,13 +296,13 @@
                         </div>
                         <div class="row form-group">
                             <div class="col">
-                                <label for="name">Price Reduction each Tiers <sup class="text-danger">*</sup></label>
+                                <label for="discount_update">Price Reduction foreach Tiers <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-percent"></i></span>
+                                        <span class="input-group-text"><i class="fa fa-percentage"></i></span>
                                     </div>
-                                    <input id="discount_update" type="text" maxlength="191" name="discount" class="form-control" onkeypress="return numberOnly(event,',')"
-                                           placeholder="12%" required>
+                                    <input id="discount_update" type="number" min="1" max="100" step=".05"
+                                           name="discount" class="form-control" placeholder="0.00 %" required>
                                 </div>
                             </div>
                         </div>

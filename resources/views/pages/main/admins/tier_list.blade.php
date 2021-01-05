@@ -1,5 +1,5 @@
 @extends('layouts.mst_admin')
-@section('title', __('admin.sidebar.head').': Tier Type | '.env('APP_TITLE'))
+@section('title', __('admin.sidebar.head').': Pricing Rule Tiers | '.env('APP_TITLE'))
 @push('styles')
     <link rel="stylesheet" href="{{asset('admins/modules/datatables/datatables.min.css')}}">
     <link rel="stylesheet"
@@ -22,12 +22,13 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Tier List {{$data->name}}</h1>
+            <h1>{{$data->name}} Tier List</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{route('admin.dashboard')}}">Dashboard</a></div>
                 <div class="breadcrumb-item">Data Master</div>
-                <div class="breadcrumb-item">Privilege</div>
-                <div class="breadcrumb-item">Admin List</div>
+                <div class="breadcrumb-item">Pricing Rules</div>
+                <div class="breadcrumb-item"><a href="{{url()->previous()}}">Type</a></div>
+                <div class="breadcrumb-item">Tier</div>
             </div>
         </div>
 
@@ -48,18 +49,17 @@
                                 <table class="table table-striped" id="dt-buttons">
                                     <thead>
                                     <tr>
-                                        <th class="text-center" width="10%">
+                                        <th class="text-center">
                                             <div class="custom-checkbox custom-control">
                                                 <input type="checkbox" class="custom-control-input" id="cb-all">
                                                 <label for="cb-all" class="custom-control-label">#</label>
                                             </div>
                                         </th>
-
-                                        <th width="15%">Start</th>
-                                        <th>End</th>
+                                        <th>Start Qty.</th>
+                                        <th>End Qty.</th>
                                         <th class="text-center">Created at</th>
                                         <th class="text-center">Last Update</th>
-                                        <th class="text-center" width="25%">Action</th>
+                                        <th class="text-center" width="15%">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -76,9 +76,9 @@
                                             </td>
 
                                             <td style="vertical-align: middle">
-                                                <strong>{{$row->start}}</strong>
+                                                <strong>{{$row->start}}</strong> unit(s)
                                             </td>
-                                            <td style="vertical-align: middle"><strong>{{$row->end}}</strong></td>
+                                            <td style="vertical-align: middle"><strong>{{$row->end}}</strong> unit(s)</td>
 
                                             <td style="vertical-align: middle" align="center">
                                                 {{\Carbon\Carbon::parse($row->created_at)->format('j F Y')}}</td>
@@ -86,9 +86,8 @@
                                                 {{$row->updated_at->diffForHumans()}}</td>
                                             <td style="vertical-align: middle" align="center">
 
-                                                <button data-placement="top" data-toggle="tooltip"
-                                                        title="Edit"
-                                                        type="button" class="btn btn-info mr-1"
+                                                <button data-placement="top" data-toggle="tooltip" title="Edit"
+                                                        type="button" class="btn btn-warning mr-1"
                                                         onclick="editUser('{{$row->id}}','{{$row->start}}','{{$row->end}}')">
                                                     <i class="fa fa-edit"></i></button>
 
@@ -232,7 +231,7 @@
                     <div class="modal-body">
                         <div class="row form-group">
                             <div class="col">
-                                <label for="name">Start <sup class="text-danger">*</sup></label>
+                                <label for="name">Start Qty. <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
@@ -244,7 +243,7 @@
                         </div>
                         <div class="row form-group">
                             <div class="col">
-                                <label for="name">End <sup class="text-danger">*</sup></label>
+                                <label for="name">End Qty. <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
@@ -284,7 +283,7 @@
                     <div class="modal-body">
                         <div class="row form-group">
                             <div class="col">
-                                <label for="name">Start <sup class="text-danger">*</sup></label>
+                                <label for="name">Start Qty. <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
@@ -296,7 +295,7 @@
                         </div>
                         <div class="row form-group">
                             <div class="col">
-                                <label for="name">End <sup class="text-danger">*</sup></label>
+                                <label for="name">End Qty. <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>

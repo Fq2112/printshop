@@ -22,7 +22,7 @@
 
     <li class="dropdown {{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/spec*') ? 'active' : ''}}">
         <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
-            <i class="fas fa-drafting-compass"></i><span>Print Product Specs</span></a>
+            <i class="fas fa-drafting-compass"></i><span>Product Specifications</span></a>
         <ul class="dropdown-menu">
             <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/spec/backside*') ?
                 'active' : ''}}"><a href="{{route('table.backside')}}" class="nav-link">Back Side</a></li>
