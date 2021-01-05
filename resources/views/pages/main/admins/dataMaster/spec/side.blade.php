@@ -49,7 +49,7 @@
                                 <table class="table table-striped" id="dt-buttons">
                                     <thead>
                                     <tr>
-                                        <th class="text-center" width="10%">
+                                        <th class="text-center">
                                             <div class="custom-checkbox custom-control">
                                                 <input type="checkbox" class="custom-control-input" id="cb-all">
                                                 <label for="cb-all" class="custom-control-label">#</label>
@@ -57,12 +57,12 @@
                                         </th>
                                         <th class="text-center">ID</th>
                                         <th>Image</th>
-                                        <th width="35%">Name</th>
+                                        <th>Name</th>
                                         <th>Price</th>
                                         <th>Status</th>
-                                        <th class="text-center" width="15%">Created at</th>
-                                        <th class="text-center" width="15%">Last Update</th>
-                                        <th width="15%">Action</th>
+                                        <th class="text-center">Created at</th>
+                                        <th class="text-center">Last Update</th>
+                                        <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
