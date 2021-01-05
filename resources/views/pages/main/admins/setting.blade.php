@@ -68,7 +68,7 @@
                                 <li class="nav-item"><a href="javascript:void(0)"
                                                         onclick="viewMail('maintenance_','{{route('admin.setting.maintenance.show')}}','Maintenance')"
                                                         class="nav-link" id="maintenance_">Maintenance</a></li>
-                                <li class="nav-item"><a href="javascript:void(0)"
+                                <li class="nav-item" style="display: none"><a href="javascript:void(0)"
                                                         onclick="viewMail('rule_','{{route('admin.setting.rules.show')}}','Pricing Rules')"
                                                         class="nav-link" id="rule_">Pricing Rules</a></li>
                             </ul>

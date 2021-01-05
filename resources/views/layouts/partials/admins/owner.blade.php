@@ -101,6 +101,10 @@
             </ul>
         </li>
 
+        <li class="dropdown  {{\Illuminate\Support\Facades\Request::is('*scott.royce/tables/tier**') ? 'active' : ''}}">
+            <a href="{{route('table.tier')}}" class="nav-link"><i class="fas fa-funnel-dollar"></i><span>Print Product Tiers</span></a>
+        </li>
+
         <li class="dropdown {{\Illuminate\Support\Facades\Request::is('*scott.royce/msc*') ? 'active' : ''}}">
             <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
                 <i class="fas fa-cogs"></i><span>Miscellaneous</span></a>

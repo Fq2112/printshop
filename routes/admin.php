@@ -960,7 +960,29 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
 
         });
 
+        Route::group(['prefix' => 'tier'], function () {
 
+            Route::get('/', [
+                'uses' => 'TierController@show',
+                'as' => 'table.tier'
+            ]);
+
+            Route::post('create', [
+                'uses' => 'TierController@add_type',
+                'as' => 'create.tier.create'
+            ]);
+
+            Route::post('update', [
+                'uses' => 'TierController@update_type',
+                'as' => 'create.tier.update'
+            ]);
+
+            Route::get('delete/{id}', [
+                'uses' => 'TierController@delete_type',
+                'as' => 'create.tier.delete'
+            ]);
+
+        });
     });
 
 });
