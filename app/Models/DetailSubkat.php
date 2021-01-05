@@ -29,7 +29,6 @@ class DetailSubkat extends Model
         'back_cover_ids' => 'array',
         'binding_ids' => 'array',
         'print_method_ids' => 'array',
-        'tier_ids' => 'array',
     ];
 
     public function getSubKategori()
@@ -40,5 +39,10 @@ class DetailSubkat extends Model
     public function getUnit()
     {
         return $this->belongsTo(Unit::class, 'unit_id');
+    }
+
+    public function  get_type()
+    {
+        return $this->belongsTo(TypeTier::class,'type_id');
     }
 }

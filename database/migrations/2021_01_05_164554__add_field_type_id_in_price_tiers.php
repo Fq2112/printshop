@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTiersToDetailSubkat extends Migration
+class AddFieldTypeIdInPriceTiers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddTiersToDetailSubkat extends Migration
      */
     public function up()
     {
-        Schema::table('detail_subkats', function (Blueprint $table) {
-
+        Schema::table('tiers', function (Blueprint $table) {
+            $table->unsignedBigInteger('type_id')->nullable();
+            $table->foreign('type_id')->references('id')
+                ->on('type_tiers')->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
         });
     }
 
@@ -25,7 +28,7 @@ class AddTiersToDetailSubkat extends Migration
      */
     public function down()
     {
-        Schema::table('detail_subkats', function (Blueprint $table) {
+        Schema::table('price_tiers', function (Blueprint $table) {
             //
         });
     }

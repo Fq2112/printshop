@@ -39,7 +39,6 @@ class DetailProduct extends Model
         'extra_ids' => 'array',
         'material_color_ids' => 'array',
         'holder_ids' => 'array',
-        'tier_ids' => 'array',
     ];
 
     public function getCluster()
@@ -50,5 +49,10 @@ class DetailProduct extends Model
     public function getUnit()
     {
         return $this->belongsTo(Unit::class, 'unit_id');
+    }
+
+    public function  get_type()
+    {
+        return $this->belongsTo(TypeTier::class,'type_id');
     }
 }

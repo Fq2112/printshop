@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTiersToDetailProducts extends Migration
+class AddFieldTypeIdInDetailProduk extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,10 @@ class AddTiersToDetailProducts extends Migration
     public function up()
     {
         Schema::table('detail_products', function (Blueprint $table) {
-
+            $table->unsignedBigInteger('type_id')->nullable();
+            $table->foreign('type_id')->references('id')
+                ->on('type_tiers')->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
         });
     }
 

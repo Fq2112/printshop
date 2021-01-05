@@ -13,14 +13,10 @@ class CreatePriceTiersTable extends Migration
      */
     public function up()
     {
-        Schema::create('price_tiers', function (Blueprint $table) {
+        Schema::create('tiers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreign('unit_id')->references('id')
-                ->on('units')->onDelete('CASCADE')
-                ->onUpdate('CASCADE');
             $table->integer('start');
             $table->integer('end');
-            $table->decimal('discount',6,2);
             $table->timestamps();
         });
     }
