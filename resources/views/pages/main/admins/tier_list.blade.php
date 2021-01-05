@@ -26,8 +26,7 @@
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{route('admin.dashboard')}}">Dashboard</a></div>
                 <div class="breadcrumb-item">Data Master</div>
-                <div class="breadcrumb-item">Pricing Rules</div>
-                <div class="breadcrumb-item"><a href="{{url()->previous()}}">Type</a></div>
+                <div class="breadcrumb-item"><a href="{{url()->previous()}}">Pricing Rules</a></div>
                 <div class="breadcrumb-item">Tier</div>
             </div>
         </div>
