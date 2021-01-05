@@ -17,11 +17,11 @@ class TypeTier extends Model
 
     public function get_detail_subkat()
     {
-        return $this->hasOne(DetailSubkat::class,'type_id');
+        return $this->hasMany(DetailSubkat::class,'type_id');
     }
 
     public function get_detail_product()
     {
-        return $this->hasOne(DetailProduct::class,'type_id');
+        return $this->hasMany(DetailProduct::class,'type_id');
     }
 }
