@@ -43,6 +43,6 @@ class DetailSubkat extends Model
 
     public function  get_type()
     {
-        return $this->belongsTo(TypeTier::class,'type_id');
+        return $this->belongsTo(TypeTier::class,'type_tier_id');
     }
 }

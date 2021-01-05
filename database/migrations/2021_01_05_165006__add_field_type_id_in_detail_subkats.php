@@ -14,8 +14,8 @@ class AddFieldTypeIdInDetailSubkats extends Migration
     public function up()
     {
         Schema::table('detail_subkats', function (Blueprint $table) {
-            $table->unsignedBigInteger('type_id')->nullable();
-            $table->foreign('type_id')->references('id')
+            $table->unsignedBigInteger('type_tier_id')->nullable();
+            $table->foreign('type_tier_id')->references('id')
                 ->on('type_tiers')->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
         });
