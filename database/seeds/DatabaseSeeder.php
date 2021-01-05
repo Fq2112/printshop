@@ -39,6 +39,7 @@ class DatabaseSeeder extends Seeder
             DetailSubkatSeeder::class,
             LidSeeder::class,
             DetailProductSeeder::class,
+            TypeTierSeeder::class,
             OccupancyTypeSeeder::class,
             AdminSeeder::class,
             KontakSeeder::class,
