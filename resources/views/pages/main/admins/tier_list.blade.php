@@ -530,6 +530,7 @@
         }
 
         function createBlogCategory() {
+            $("#start_qty, #end_qty").val(null);
             $("#blogCategoryModal").modal('show');
             resetTierError(0);
         }
