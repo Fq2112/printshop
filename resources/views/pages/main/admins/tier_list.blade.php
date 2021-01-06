@@ -233,7 +233,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
                                     </div>
-                                    <input id="start_qty" type="text" maxlength="191" name="start" class="form-control" onkeypress="return numberOnly(event,',')"
+                                    <input id="start_qty" type="number" min="1" name="start" class="form-control"
                                            placeholder="1" required>
                                     <span class="invalid-feedback">
                                         <b id="aj_start" style="text-transform: none"></b>
@@ -248,7 +248,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
                                     </div>
-                                    <input id="end_qty" type="text" maxlength="191" name="end" class="form-control" onkeypress="return numberOnly(event,',')"
+                                    <input id="end_qty" type="number" min="1" name="end" class="form-control"
                                            placeholder="1" required>
                                     <span class="invalid-feedback">
                                         <b id="aj_end" style="text-transform: none"></b>
@@ -291,8 +291,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
                                     </div>
-                                    <input id="start_" type="text" maxlength="191" name="start" class="form-control" onkeypress="return numberOnly(event,',')"
-                                            placeholder="1" required>
+                                    <input id="start_" type="number" min="1" name="start" class="form-control"
+                                           placeholder="1" required>
                                     <span class="invalid-feedback">
                                         <b id="aj_start_" style="text-transform: none"></b>
                                     </span>
@@ -306,7 +306,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
                                     </div>
-                                    <input id="end_" type="text" maxlength="191" name="end" class="form-control" onkeypress="return numberOnly(event,',')"
+                                    <input id="end_" type="number" min="1" name="end" class="form-control"
                                            placeholder="1" required>
                                     <span class="invalid-feedback">
                                         <b id="aj_end_" style="text-transform: none"></b>
@@ -461,7 +461,9 @@
         $("#start_qty, #end_qty").on("keyup", function () {
             var start = $("#start_qty"), end = $("#end_qty");
 
-            if(start.val() && end.val()) {
+            if(!start.val() && !end.val()) {
+                resetTierError()
+            } else {
                 if(parseInt(start.val()) <= parseInt(end.val())) {
                     $(this).addClass('is-invalid');
                     $(".error-tier").addClass('has-danger');
@@ -477,7 +479,9 @@
         $("#start_, #end_").on("keyup", function () {
             var start = $("#start_"), end = $("#end_");
 
-            if(start.val() && end.val()) {
+            if(!start.val() && !end.val()) {
+                resetTierError()
+            } else {
                 if(parseInt(start.val()) <= parseInt(end.val())) {
                     $(this).addClass('is-invalid');
                     $(".error-tier").addClass('has-danger');
