@@ -464,7 +464,7 @@
             if(!start.val() && !end.val()) {
                 resetTierError(0);
             } else {
-                if(parseInt(start.val()) <= parseInt(end.val())) {
+                if(parseInt(start.val()) >= parseInt(end.val())) {
                     resetTierError(1);
                 } else {
                     resetTierError(0);
@@ -478,7 +478,7 @@
             if(!start.val() && !end.val()) {
                 resetTierError(0);
             } else {
-                if(parseInt(start.val()) <= parseInt(end.val())) {
+                if(parseInt(start.val()) >= parseInt(end.val())) {
                     resetTierError(1);
                 } else {
                     resetTierError(0);
@@ -492,7 +492,7 @@
             if(!start.val() && !end.val()) {
                 resetTierError(0);
             } else {
-                if(parseInt(start.val()) <= parseInt(end.val())) {
+                if(parseInt(start.val()) >= parseInt(end.val())) {
                     resetTierError(1);
                 } else {
                     resetTierError(0);
@@ -506,7 +506,7 @@
             if(!start.val() && !end.val()) {
                 resetTierError(0);
             } else {
-                if(parseInt(start.val()) <= parseInt(end.val())) {
+                if(parseInt(start.val()) >= parseInt(end.val())) {
                     resetTierError(1);
                 } else {
                     resetTierError(0);
