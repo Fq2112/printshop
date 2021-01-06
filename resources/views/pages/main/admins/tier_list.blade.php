@@ -340,7 +340,6 @@
                         "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                     columnDefs: [
                         {sortable: false, targets: 4},
-                        {targets: 1, visible: false, searchable: false}
                     ],
                     buttons: [
                         {
