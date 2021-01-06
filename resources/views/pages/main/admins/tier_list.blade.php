@@ -54,8 +54,7 @@
                                                 <label for="cb-all" class="custom-control-label">#</label>
                                             </div>
                                         </th>
-                                        <th>Start Qty.</th>
-                                        <th>End Qty.</th>
+                                        <th>Quantity ( Start &ndash; End )</th>
                                         <th class="text-center">Created at</th>
                                         <th class="text-center">Last Update</th>
                                         <th class="text-center" width="15%">Action</th>
@@ -75,9 +74,8 @@
                                             </td>
 
                                             <td style="vertical-align: middle">
-                                                <strong>{{$row->start}}</strong> unit(s)
+                                                <b>{{$row->start}}</b> &ndash; <b>{{$row->end}}</b> units
                                             </td>
-                                            <td style="vertical-align: middle"><strong>{{$row->end}}</strong> unit(s)</td>
 
                                             <td style="vertical-align: middle" align="center">
                                                 {{\Carbon\Carbon::parse($row->created_at)->format('j F Y')}}</td>
@@ -228,27 +226,33 @@
                     <input type="hidden" name="id">
                     <input type="hidden" name="type_id" value="{{$data->id}}" id="">
                     <div class="modal-body">
-                        <div class="row form-group">
+                        <div class="row form-group has-feedback error-tier">
                             <div class="col">
-                                <label for="name">Start Qty. <sup class="text-danger">*</sup></label>
+                                <label for="start_qty">Start Qty. <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
                                     </div>
-                                    <input  type="text" maxlength="191" name="start" class="form-control" onkeypress="return numberOnly(event,',')"
+                                    <input id="start_qty" type="text" maxlength="191" name="start" class="form-control" onkeypress="return numberOnly(event,',')"
                                            placeholder="1" required>
+                                    <span class="invalid-feedback">
+                                        <b id="aj_start" style="text-transform: none"></b>
+                                    </span>
                                 </div>
                             </div>
                         </div>
-                        <div class="row form-group">
+                        <div class="row form-group has-feedback error-tier">
                             <div class="col">
-                                <label for="name">End Qty. <sup class="text-danger">*</sup></label>
+                                <label for="end_qty">End Qty. <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
                                     </div>
-                                    <input type="text" maxlength="191" name="end" class="form-control" onkeypress="return numberOnly(event,',')"
+                                    <input id="end_qty" type="text" maxlength="191" name="end" class="form-control" onkeypress="return numberOnly(event,',')"
                                            placeholder="1" required>
+                                    <span class="invalid-feedback">
+                                        <b id="aj_end" style="text-transform: none"></b>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -280,27 +284,33 @@
                     <input type="hidden" name="id" id="id_update">
                     <input type="hidden" name="type_id" value="{{$data->id}}" id="">
                     <div class="modal-body">
-                        <div class="row form-group">
+                        <div class="row form-group has-feedback error-tier">
                             <div class="col">
-                                <label for="name">Start Qty. <sup class="text-danger">*</sup></label>
+                                <label for="start_">Start Qty. <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
                                     </div>
                                     <input id="start_" type="text" maxlength="191" name="start" class="form-control" onkeypress="return numberOnly(event,',')"
                                             placeholder="1" required>
+                                    <span class="invalid-feedback">
+                                        <b id="aj_start_" style="text-transform: none"></b>
+                                    </span>
                                 </div>
                             </div>
                         </div>
-                        <div class="row form-group">
+                        <div class="row form-group has-feedback error-tier">
                             <div class="col">
-                                <label for="name">End Qty. <sup class="text-danger">*</sup></label>
+                                <label for="end_">End Qty. <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
                                     </div>
                                     <input id="end_" type="text" maxlength="191" name="end" class="form-control" onkeypress="return numberOnly(event,',')"
                                            placeholder="1" required>
+                                    <span class="invalid-feedback">
+                                        <b id="aj_end_" style="text-transform: none"></b>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -329,21 +339,22 @@
                     dom: "<'row'<'col-sm-12 col-md-3'l><'col-sm-12 col-md-5'B><'col-sm-12 col-md-4'f>>" +
                         "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                     columnDefs: [
-
+                        {sortable: false, targets: 4},
+                        {targets: 1, visible: false, searchable: false}
                     ],
                     buttons: [
                         {
                             text: '<strong class="text-uppercase"><i class="far fa-clipboard mr-2"></i>Copy</strong>',
                             extend: 'copy',
                             exportOptions: {
-                                columns: [0, 2, 3, 4, 5, 6]
+                                columns: [0, 1, 2, 3]
                             },
                             className: 'btn btn-warning assets-export-btn export-copy ttip'
                         }, {
                             text: '<strong class="text-uppercase"><i class="far fa-file-excel mr-2"></i>Excel</strong>',
                             extend: 'excel',
                             exportOptions: {
-                                columns: [0, 2, 3, 4, 5, 6]
+                                columns: [0, 1, 2, 3]
                             },
                             className: 'btn btn-success assets-export-btn export-xls ttip',
                             title: export_filename,
@@ -352,7 +363,7 @@
                             text: '<strong class="text-uppercase"><i class="fa fa-print mr-2"></i>Print</strong>',
                             extend: 'print',
                             exportOptions: {
-                                columns: [0, 2, 3, 4, 5, 6]
+                                columns: [0, 1, 2, 3]
                             },
                             className: 'btn btn-info assets-select-btn export-print'
                         },
@@ -448,6 +459,38 @@
             $('#_content_id').summernote('code', "");
         });
 
+        $("#start_qty, #end_qty").on("keyup", function () {
+            var start = $("#start_qty"), end = $("#end_qty");
+
+            if(start.val() && end.val()) {
+                if(parseInt(start.val()) <= parseInt(end.val())) {
+                    $(this).addClass('is-invalid');
+                    $(".error-tier").addClass('has-danger');
+                    $("#aj_start").text("Start Qty value must be greater than the End Qty!").parent().show();
+                    $("#aj_end").text("End Qty value must be less than the Start Qty!").parent().show();
+                    $("#blogCategoryModal button[type=submit]").attr('disabled', 'disabled');
+                } else {
+                    resetTierError();
+                }
+            }
+        });
+
+        $("#start_, #end_").on("keyup", function () {
+            var start = $("#start_"), end = $("#end_");
+
+            if(start.val() && end.val()) {
+                if(parseInt(start.val()) <= parseInt(end.val())) {
+                    $(this).addClass('is-invalid');
+                    $(".error-tier").addClass('has-danger');
+                    $("#aj_start_").text("Start Qty value must be greater than the End Qty!").parent().show();
+                    $("#aj_end_").text("End Qty value must be less than the Start Qty!").parent().show();
+                    $("#editUser button[type=submit]").attr('disabled', 'disabled');
+                } else {
+                    resetTierError();
+                }
+            }
+        });
+
         function createBlogCategory() {
             $("#blogCategoryModal").modal('show');
         }
@@ -523,6 +566,13 @@
                     document.getElementById('update_form_' + id).submit();
                 }
             });
+        }
+
+        function resetTierError() {
+            $("#start_qty, #end_qty, #start_, #end_").removeClass('is-invalid');
+            $(".error-tier").removeClass('has-danger');
+            $("#aj_start, #aj_end, #aj_start_, #aj_end_").text("").parent().hide();
+            $("#blogCategoryModal button[type=submit], #editUser button[type=submit]").removeAttr('disabled');
         }
     </script>
 @endpush
