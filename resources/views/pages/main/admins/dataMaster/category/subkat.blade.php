@@ -669,12 +669,12 @@
 
                                         <div class="row form-group">
                                             <div class="col fix-label-group">
-                                                <label for="category_id">Pricing Product Tier </label>
+                                                <label for="category_id">Product Pricing Rules</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
                                                             <span class="input-group-text fix-label-item"
                                                                   style="height: 2.25rem">
-                                                                <i class="fa fa-tag"></i></span>
+                                                                <i class="fa fa-funnel-dollar"></i></span>
                                                     </div>
                                                     <select id="type_tier_id"
                                                             class="form-control selectpicker"
