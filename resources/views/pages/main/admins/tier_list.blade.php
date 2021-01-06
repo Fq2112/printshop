@@ -233,8 +233,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
                                     </div>
-                                    <input id="start_qty" type="number" min="1" name="start" class="form-control"
-                                           placeholder="1" required>
+                                    <input id="start_qty" name="start" class="form-control" placeholder="1"
+                                           onkeypress="return numberOnly(event, false)" required>
                                     <span class="invalid-feedback">
                                         <b id="aj_start" style="text-transform: none"></b>
                                     </span>
@@ -248,8 +248,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
                                     </div>
-                                    <input id="end_qty" type="number" min="1" name="end" class="form-control"
-                                           placeholder="1" required>
+                                    <input id="end_qty" name="end" class="form-control" placeholder="1"
+                                           onkeypress="return numberOnly(event, false)" required>
                                     <span class="invalid-feedback">
                                         <b id="aj_end" style="text-transform: none"></b>
                                     </span>
@@ -291,8 +291,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
                                     </div>
-                                    <input id="start_" type="number" min="1" name="start" class="form-control"
-                                           placeholder="1" required>
+                                    <input id="start_" name="start" class="form-control" placeholder="1"
+                                           onkeypress="return numberOnly(event, false)" required>
                                     <span class="invalid-feedback">
                                         <b id="aj_start_" style="text-transform: none"></b>
                                     </span>
@@ -306,8 +306,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
                                     </div>
-                                    <input id="end_" type="number" min="1" name="end" class="form-control"
-                                           placeholder="1" required>
+                                    <input id="end_" name="end" class="form-control" placeholder="1"
+                                           onkeypress="return numberOnly(event, false)" required>
                                     <span class="invalid-feedback">
                                         <b id="aj_end_" style="text-transform: none"></b>
                                     </span>
@@ -458,53 +458,89 @@
             $('#_content_id').summernote('code', "");
         });
 
-        $("#start_qty, #end_qty").on("keyup", function () {
-            var start = $("#start_qty"), end = $("#end_qty");
+        $("#start_qty").on("keyup", function () {
+            var start = $(this), end = $("#end_qty");
 
             if(!start.val() && !end.val()) {
-                resetTierError()
+                resetTierError(0);
             } else {
                 if(parseInt(start.val()) <= parseInt(end.val())) {
-                    $(this).addClass('is-invalid');
-                    $(".error-tier").addClass('has-danger');
-                    $("#aj_start").text("Start Qty value must be greater than the End Qty!").parent().show();
-                    $("#aj_end").text("End Qty value must be less than the Start Qty!").parent().show();
-                    $("#blogCategoryModal button[type=submit]").attr('disabled', 'disabled');
+                    resetTierError(1);
                 } else {
-                    resetTierError();
+                    resetTierError(0);
                 }
             }
         });
 
-        $("#start_, #end_").on("keyup", function () {
-            var start = $("#start_"), end = $("#end_");
+        $("#end_qty").on("keyup", function () {
+            var start = $("#start_qty"), end = $(this);
 
             if(!start.val() && !end.val()) {
-                resetTierError()
+                resetTierError(0);
             } else {
                 if(parseInt(start.val()) <= parseInt(end.val())) {
-                    $(this).addClass('is-invalid');
-                    $(".error-tier").addClass('has-danger');
-                    $("#aj_start_").text("Start Qty value must be greater than the End Qty!").parent().show();
-                    $("#aj_end_").text("End Qty value must be less than the Start Qty!").parent().show();
-                    $("#editUser button[type=submit]").attr('disabled', 'disabled');
+                    resetTierError(1);
                 } else {
-                    resetTierError();
+                    resetTierError(0);
                 }
             }
         });
+
+        $("#start_").on("keyup", function () {
+            var start = $(this), end = $("#end_");
+
+            if(!start.val() && !end.val()) {
+                resetTierError(0);
+            } else {
+                if(parseInt(start.val()) <= parseInt(end.val())) {
+                    resetTierError(1);
+                } else {
+                    resetTierError(0);
+                }
+            }
+        });
+
+        $("#end_").on("keyup", function () {
+            var start = $("#start_"), end = $(this);
+
+            if(!start.val() && !end.val()) {
+                resetTierError(0);
+            } else {
+                if(parseInt(start.val()) <= parseInt(end.val())) {
+                    resetTierError(1);
+                } else {
+                    resetTierError(0);
+                }
+            }
+        });
+
+        function resetTierError(check) {
+            if(check == 1) {
+                $("#start_qty, #end_qty, #start_, #end_").addClass('is-invalid');
+                $(".error-tier").addClass('has-danger');
+                $("#aj_start, #aj_start_").text("Start Qty value must be greater than the End Qty!").parent().show();
+                $("#aj_end, #aj_end_").text("End Qty value must be less than the Start Qty!").parent().show();
+                $("#blogCategoryModal button[type=submit], #editUser button[type=submit]").attr('disabled', 'disabled');
+            } else {
+                $("#start_qty, #end_qty, #start_, #end_").removeClass('is-invalid');
+                $(".error-tier").removeClass('has-danger');
+                $("#aj_start, #aj_end, #aj_start_, #aj_end_").text("").parent().hide();
+                $("#blogCategoryModal button[type=submit], #editUser button[type=submit]").removeAttr('disabled');
+            }
+        }
 
         function createBlogCategory() {
             $("#blogCategoryModal").modal('show');
+            resetTierError(0);
         }
 
         function editUser(id, start, end,) {
-
             $("#edit_title").text('Edit ' + name);
             $("#id_update").val(id);
             $("#start_").val(start);
             $("#end_").val(end);
             $("#editUser").modal('show');
+            resetTierError(0);
         }
 
         function editBlogCategory(id, name, name_id, caption) {
@@ -569,13 +605,6 @@
                     document.getElementById('update_form_' + id).submit();
                 }
             });
-        }
-
-        function resetTierError() {
-            $("#start_qty, #end_qty, #start_, #end_").removeClass('is-invalid');
-            $(".error-tier").removeClass('has-danger');
-            $("#aj_start, #aj_end, #aj_start_, #aj_end_").text("").parent().hide();
-            $("#blogCategoryModal button[type=submit], #editUser button[type=submit]").removeAttr('disabled');
         }
     </script>
 @endpush
