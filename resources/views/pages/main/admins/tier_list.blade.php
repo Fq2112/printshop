@@ -234,6 +234,7 @@
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
                                     </div>
                                     <input id="start_qty" name="start" class="form-control" placeholder="1"
+                                           type="number" min="1"
                                            onkeypress="return numberOnly(event, false)" required>
                                     <span class="invalid-feedback">
                                         <b id="aj_start" style="text-transform: none"></b>
@@ -249,6 +250,7 @@
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
                                     </div>
                                     <input id="end_qty" name="end" class="form-control" placeholder="1"
+                                           type="number" min="1"
                                            onkeypress="return numberOnly(event, false)" required>
                                     <span class="invalid-feedback">
                                         <b id="aj_end" style="text-transform: none"></b>
@@ -292,6 +294,7 @@
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
                                     </div>
                                     <input id="start_" name="start" class="form-control" placeholder="1"
+                                           type="number" min="1"
                                            onkeypress="return numberOnly(event, false)" required>
                                     <span class="invalid-feedback">
                                         <b id="aj_start_" style="text-transform: none"></b>
@@ -307,6 +310,7 @@
                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
                                     </div>
                                     <input id="end_" name="end" class="form-control" placeholder="1"
+                                           type="number" min="1"
                                            onkeypress="return numberOnly(event, false)" required>
                                     <span class="invalid-feedback">
                                         <b id="aj_end_" style="text-transform: none"></b>
@@ -464,10 +468,14 @@
             if(!start.val() && !end.val()) {
                 resetTierError(0);
             } else {
-                if(parseInt(start.val()) >= parseInt(end.val())) {
-                    resetTierError(1);
+                if(parseInt($(this).val()) <= 0) {
+                    $(this).val(null);
                 } else {
-                    resetTierError(0);
+                    if (parseInt(start.val()) >= parseInt(end.val())) {
+                        resetTierError(1);
+                    } else {
+                        resetTierError(0);
+                    }
                 }
             }
         });
@@ -478,10 +486,14 @@
             if(!start.val() && !end.val()) {
                 resetTierError(0);
             } else {
-                if(parseInt(start.val()) >= parseInt(end.val())) {
-                    resetTierError(1);
+                if(parseInt($(this).val()) <= 0) {
+                    $(this).val(null);
                 } else {
-                    resetTierError(0);
+                    if (parseInt(start.val()) >= parseInt(end.val())) {
+                        resetTierError(1);
+                    } else {
+                        resetTierError(0);
+                    }
                 }
             }
         });
@@ -492,10 +504,14 @@
             if(!start.val() && !end.val()) {
                 resetTierError(0);
             } else {
-                if(parseInt(start.val()) >= parseInt(end.val())) {
-                    resetTierError(1);
+                if(parseInt($(this).val()) <= 0) {
+                    $(this).val(null);
                 } else {
-                    resetTierError(0);
+                    if (parseInt(start.val()) >= parseInt(end.val())) {
+                        resetTierError(1);
+                    } else {
+                        resetTierError(0);
+                    }
                 }
             }
         });
@@ -506,10 +522,14 @@
             if(!start.val() && !end.val()) {
                 resetTierError(0);
             } else {
-                if(parseInt(start.val()) >= parseInt(end.val())) {
-                    resetTierError(1);
+                if(parseInt($(this).val()) <= 0) {
+                    $(this).val(null);
                 } else {
-                    resetTierError(0);
+                    if (parseInt(start.val()) >= parseInt(end.val())) {
+                        resetTierError(1);
+                    } else {
+                        resetTierError(0);
+                    }
                 }
             }
         });
