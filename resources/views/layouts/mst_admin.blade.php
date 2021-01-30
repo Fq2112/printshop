@@ -219,11 +219,11 @@
         </div>
         <footer class="main-footer">
             <div class="footer-left">
-                &copy;&nbsp;{{now()->format('Y')}} Premier Printing. All rights reserved.
+                &copy;&nbsp;{{now()->format('Y').' '.env('APP_NAME')}}. All rights reserved.
             </div>
-            <div class="footer-right">
+            {{--<div class="footer-right">
                 Designed & Developed by <a href="http://rabbit-media.net" target="_blank">Rabbit Media</a>
-            </div>
+            </div>--}}
         </footer>
     </div>
 </div>
