@@ -665,8 +665,8 @@
                                                     <div class="slider-wrap">
                                                         @foreach($row['thumb'] as $file)
                                                             <div class="slide">
-                                                                <a href="javascript:void(0)"><img src="{{$file}}"
-                                                                                                  alt="{{$row['name']}}"></a>
+                                                                <a href="javascript:void(0)">
+                                                                    <img src="{{$file}}" alt="{{$row['name']}}"></a>
                                                             </div>
                                                         @endforeach
                                                     </div>
