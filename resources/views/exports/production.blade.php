@@ -120,7 +120,7 @@
     <table id="company">
         <tr>
             <td>
-                <img src="{{public_path('images/logotype-invoice.png')}}" alt="logo">
+                <img src="{{public_path('images/logotype-invoice.png')}}" alt="logo" width="128">
                 <div id="co-left">
                     {{env('APP_TITLE')}}<br>Raya Kenjeran 469 Gading, Tambaksari<br>
                     Surabaya, Jawa Timur &ndash; 60134<br>

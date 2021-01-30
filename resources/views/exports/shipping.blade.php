@@ -129,7 +129,7 @@
         <tr>
             <td>
                 <img src="{{public_path('images/logotype-invoice.png')}}" alt="logo"
-                     style="margin-bottom: 0;width: 80px">
+                     style="margin-bottom: 0;width: 64px">
             </td>
             <td style="color: white">asdasdasdasdasdasdasdasdasd</td>
             <td align="left">

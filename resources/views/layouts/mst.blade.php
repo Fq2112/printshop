@@ -170,7 +170,7 @@
                                  style="background: url('{{asset('images/world_map.png')}}') no-repeat center center; background-size: 100%;">
                                 <address class="mb-3">
                                     <strong>{{__('lang.footer.headquarters')}}:</strong><br>
-                                    Raya Kenjeran 469 Gading, Tambaksari, Surabaya, Jawa Timur &ndash; 60134.
+                                    Raya Kenjeran 471 Gading, Tambaksari, Surabaya, Jawa Timur &ndash; 60134.
                                 </address>
                                 <abbr title="{{__('lang.footer.phone')}}"><strong>{{__('lang.footer.phone')}}:</strong></abbr>
                                 <a href="tel:+62313814969">(031) 3814969</a><br>
@@ -223,7 +223,7 @@
             <div class="container clearfix">
                 <div class="row justify-content-between align-items-center">
                     <div class="col-md-6">
-                        © {{now()->format('Y')}} Premier Printing. All rights reserved.
+                        © {{now()->format('Y').' '.env('APP_NAME')}}. All rights reserved.
                         @if(Route::currentRouteName() == 'user.profil')<br>Icons from
                         <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>@endif
                     </div>

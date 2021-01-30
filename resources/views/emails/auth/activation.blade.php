@@ -406,7 +406,7 @@
                                                 <a name="Logo_1" style="display:block;" href="{{route('beranda')}}"
                                                    target="_blank">
                                                     <img src="{{asset('images/logotype-footer.png')}}" alt="logo"
-                                                         border="0" style="display:block;width: 15%;"></a>
+                                                         border="0" style="display:block;width: 64px;"></a>
                                             </td>
                                             <td valign="top" width="20" class="hide">&nbsp;</td>
                                         </tr>

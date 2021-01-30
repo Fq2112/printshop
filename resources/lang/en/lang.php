@@ -1,7 +1,7 @@
 <?php
 return [
-    "title" => "Premier Printshop – The Most Trusted Online Digital Printing Center in Surabaya",
-    "subtitle" => "The Most Trusted Online Digital Printing Center in Surabaya",
+    "title" => "Indoprint – Cetak Asik Tinggal Klik",
+    "subtitle" => "Cetak Asik Tinggal Klik",
     "lang" => [
         "id" => "Indonesia",
         "en" => "English"
