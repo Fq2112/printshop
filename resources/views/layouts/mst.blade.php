@@ -163,8 +163,8 @@
                 <div class="row">
                     <div class="col-lg-5 col-md-4 col-sm-12">
                         <div class="widget clearfix">
-                            <img src="{{asset('images/logotype-footer.png')}}" alt="Logo" class="footer-logo"
-                                 style="margin-top: -1.5rem">
+                            <img src="{{asset('images/logotype-footer.png')}}" alt="Logo" width="128"
+                                 class="footer-logo mb-3" style="margin-top: -1.5rem">
                             {!! __('lang.footer.caption') !!}
                             <div class="mb-3"
                                  style="background: url('{{asset('images/world_map.png')}}') no-repeat center center; background-size: 100%;">
