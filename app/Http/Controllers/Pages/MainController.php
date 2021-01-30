@@ -21,10 +21,9 @@ class MainController extends Controller
 {
     public function beranda(Request $request)
     {
-        $sub = SubKategori::whereIn('id', [1, 31, 28])->orderByRaw('FIELD(id, 1, 31, 28)')->get();
-        $clust = ClusterKategori::whereIn('id', [67, 66])->orderByRaw('FIELD(id, 67,66)')->get();
-        $sub2 = SubKategori::whereIn('id', [8, 5, 38])->orderByRaw('FIELD(id, 8, 5, 38)')->get();
-        $featured = collect(collect($sub)->merge($clust))->merge($sub2);
+        $sub = SubKategori::where('is_featured', true)->get();
+        $clust = ClusterKategori::where('is_featured', true)->get();
+        $featured = collect($sub)->merge($clust)->sortBy('name');
         $this->array_product($featured);
 
         \App\Models\Visitor::hit();
