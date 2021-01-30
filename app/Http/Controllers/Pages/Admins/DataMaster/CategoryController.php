@@ -146,6 +146,7 @@ class CategoryController extends Controller
 
         $subkat = SubKategori::create([
             'kategoris_id' => $request->kategori_id,
+            'is_featured' => $request->is_featured,
             'name' => [
                 'en' => $request->name_en,
                 'id' => $request->name_id
@@ -328,6 +329,7 @@ class CategoryController extends Controller
 
         $category->update([
             'kategoris_id' => $request->kategori_id,
+            'is_featured' => $request->is_featured,
             'name' => [
                 'en' => $request->name_en,
                 'id' => $request->name_id
@@ -546,6 +548,7 @@ class CategoryController extends Controller
 
         $subkat = ClusterKategori::create([
             'subkategori_id' => $request->kategori_id,
+            'is_featured' => $request->is_featured,
             'name' => [
                 'en' => $request->name_en,
                 'id' => $request->name_id
@@ -726,6 +729,7 @@ class CategoryController extends Controller
 
         $cluster->update([
             'subkategori_id' => $request->kategori_id,
+            'is_featured' => $request->is_featured,
             'name' => [
                 'en' => $request->name_en,
                 'id' => $request->name_id

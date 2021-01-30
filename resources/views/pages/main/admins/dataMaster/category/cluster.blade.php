@@ -55,11 +55,12 @@
                                             </div>
                                         </th>
                                         <th class="text-center">ID</th>
-                                        <th width="35%">Name</th>
+                                        <th>Name</th>
+                                        <th class="text-center">Product</th>
                                         <th class="text-center">Status</th>
-                                        <th class="text-center" width="15%">Created at</th>
-                                        <th class="text-center" width="15%">Last Update</th>
-                                        <th class="text-center" width="25%">Action</th>
+                                        <th class="text-center">Created at</th>
+                                        <th class="text-center">Last Update</th>
+                                        <th class="text-center" width="20%">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -79,11 +80,18 @@
                                                 <strong>{{$row->getTranslation('name', 'id')}} (ID)</strong> <br>
                                                 <strong>{{$row->getTranslation('name', 'en')}} (En)</strong>
                                             </td>
-                                            <td style="vertical-align: middle" align="center">
-                                                @if($row->isActive == 1)
-                                                    <span class="badge badge-success"><i class="fa fa-check"> </i>&nbsp;&nbsp;Active </span>
+                                            <td style="vertical-align: middle;text-transform: uppercase" align="center">
+                                                @if($row->is_featured == true)
+                                                    <span class="badge badge-primary"><i class="fa fa-star mr-2"></i>Featured</span>
                                                 @else
-                                                    <span class="badge badge-danger"><i class="fa fa-times-circle"> </i>&nbsp;&nbsp;Non-Active </span>
+                                                    <span class="badge badge-dark"><i class="far fa-star mr-2"></i>Normal</span>
+                                                @endif
+                                            </td>
+                                            <td style="vertical-align: middle;text-transform: uppercase" align="center">
+                                                @if($row->isActive == 1)
+                                                    <span class="badge badge-success"><i class="fa fa-check mr-2"></i>Active</span>
+                                                @else
+                                                    <span class="badge badge-danger"><i class="fa fa-times-circle mr-2"></i>Inactive</span>
                                                 @endif
                                             </td>
                                             <td style="vertical-align: middle" align="center">
@@ -152,6 +160,25 @@
                                                             value="{{$material->id}}">{{$material->name}}</option>
                                                     @endforeach
                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <label>Product Status</label>
+                                            <div class="selectgroup w-100">
+                                                <label class="selectgroup-item" for="_normal">
+                                                    <input id="_normal" type="radio" name="is_featured" value="0"
+                                                           class="selectgroup-input" checked>
+                                                    <span class="selectgroup-button">
+                                                        <i class="far fa-star mr-2"></i><b>NORMAL</b>
+                                                    </span>
+                                                </label>
+                                                <label class="selectgroup-item" for="_featured">
+                                                    <input id="_featured" type="radio" name="is_featured" value="1"
+                                                           class="selectgroup-input">
+                                                    <span class="selectgroup-button">
+                                                        <i class="fa fa-star mr-2"></i><b>FEATURED</b>
+                                                    </span>
+                                                </label>
                                             </div>
                                         </div>
                                     </div>
@@ -814,7 +841,7 @@
                     dom: "<'row'<'col-sm-12 col-md-3'l><'col-sm-12 col-md-5'B><'col-sm-12 col-md-4'f>>" +
                         "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                     columnDefs: [
-                        {sortable: false, targets: 6},
+                        {sortable: false, targets: 7},
                         {targets: 1, visible: false, searchable: false}
                     ],
                     buttons: [
@@ -822,14 +849,14 @@
                             text: '<strong class="text-uppercase"><i class="far fa-clipboard mr-2"></i>Copy</strong>',
                             extend: 'copy',
                             exportOptions: {
-                                columns: [0, 2, 3, 4, 5]
+                                columns: [0, 2, 3, 4, 5, 6]
                             },
                             className: 'btn btn-warning assets-export-btn export-copy ttip'
                         }, {
                             text: '<strong class="text-uppercase"><i class="far fa-file-excel mr-2"></i>Excel</strong>',
                             extend: 'excel',
                             exportOptions: {
-                                columns: [0, 2, 3, 4, 5]
+                                columns: [0, 2, 3, 4, 5, 6]
                             },
                             className: 'btn btn-success assets-export-btn export-xls ttip',
                             title: export_filename,
@@ -838,7 +865,7 @@
                             text: '<strong class="text-uppercase"><i class="fa fa-print mr-2"></i>Print</strong>',
                             extend: 'print',
                             exportOptions: {
-                                columns: [0, 2, 3, 4, 5]
+                                columns: [0, 2, 3, 4, 5, 6]
                             },
                             className: 'btn btn-info assets-select-btn export-print'
                         },
@@ -955,6 +982,7 @@
 
         function reset_input() {
             $("#category_id").val("").selectpicker('refresh');
+            $("label[for='_normal']").click();
             $("#name_en").val("");
             $("#name_id").val("");
             $('#_content_en').summernote('code', "");
@@ -1021,6 +1049,11 @@
                 console.log(data.banner_path);
                 $("#form-blogPost input[name=admin_id]").val(data.admin_id);
                 $("#category_id").val(data.data.subkategori_id).selectpicker('refresh');
+                if(data.data.is_featured == 1) {
+                    $("label[for='_featured']").click();
+                } else{
+                    $("label[for='_normal']").click();
+                }
                 $("#name_en").val(data.data.name.en);
                 $("#name_id").val(data.data.name.id);
                 $('#kategori_id').selectpicker('val', data.data.kategoris_id);

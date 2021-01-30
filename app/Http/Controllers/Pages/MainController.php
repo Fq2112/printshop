@@ -21,8 +21,8 @@ class MainController extends Controller
 {
     public function beranda(Request $request)
     {
-        $sub = SubKategori::where('is_featured', true)->get();
-        $clust = ClusterKategori::where('is_featured', true)->get();
+        $sub = SubKategori::where('is_featured', true)->where('isActive', true)->get();
+        $clust = ClusterKategori::where('is_featured', true)->where('isActive', true)->get();
         $featured = collect($sub)->merge($clust)->sortBy('name');
         $this->array_product($featured);
 
