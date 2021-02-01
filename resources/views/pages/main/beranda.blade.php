@@ -675,10 +675,15 @@
                                                 </div>
                                             </div>
                                             <div class="portfolio-overlay" data-lightbox="gallery">
-                                                <a href="{{$row['thumb'][0]}}" class="left-icon"
-                                                   data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
-                                                @foreach($row['thumb'] as $file)
-                                                    <a href="{{$file}}" class="hidden" data-lightbox="gallery-item"></a>
+                                                @foreach($row['thumb'] as $i => $file)
+                                                    @if($i == 0)
+                                                        <a href="{{$row['thumb'][$i]}}" class="left-icon"
+                                                           data-lightbox="gallery-item">
+                                                            <i class="icon-line-stack-2"></i></a>
+                                                    @else
+                                                        <a href="{{$file}}" class="hidden"
+                                                           data-lightbox="gallery-item"></a>
+                                                    @endif
                                                 @endforeach
                                                 <a href="{{$row['link']}}" class="right-icon">
                                                     <i class="icon-line-ellipsis"></i></a>
