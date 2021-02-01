@@ -832,8 +832,7 @@
                      data-items-sm="3" data-items-md="5" data-items-lg="6" data-items-xl="7">
                     @foreach($clients as $row)
                         <div class="oc-item">
-                            <a href="javascript:void(0)">
-                                <img src="{{asset('storage/clients/'.$row->logo)}}" alt="{{$row->name}}"></a>
+                            <img src="{{asset('storage/clients/'.$row->logo)}}" alt="{{$row->name}}">
                         </div>
                     @endforeach
                 </div>
