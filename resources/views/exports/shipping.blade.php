@@ -142,7 +142,7 @@
         <tr>
             <td>
                 <div id="co-left" style="margin-top: 0">
-                    {{env('APP_TITLE')}}<br>Raya Kenjeran 469 Gading, Tambaksari<br>
+                    {{env('APP_TITLE')}}<br>Raya Kenjeran 471 Gading, Tambaksari<br>
                     Surabaya, Jawa Timur &ndash; 60134<br>
                     Phone: (031) 3814969<br>Fax: (031) 3814969<br>
                 </div>

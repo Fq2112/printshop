@@ -117,7 +117,7 @@
             <td>
                 <img src="{{public_path('images/logotype-invoice.png')}}" alt="logo" width="128">
                 <div id="co-left">
-                    {{env('APP_TITLE')}}<br>Raya Kenjeran 469 Gading, Tambaksari<br>
+                    {{env('APP_TITLE')}}<br>Raya Kenjeran 471 Gading, Tambaksari<br>
                     Surabaya, Jawa Timur &ndash; 60134<br>
                     {{__('lang.footer.phone')}}: (031) 3814969 | Fax: (031) 3814969<br>
                     {{env('APP_URL')}}<br>{{env('MAIL_USERNAME')}}

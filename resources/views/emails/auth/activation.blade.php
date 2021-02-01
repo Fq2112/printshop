@@ -596,7 +596,7 @@
                                                                     <td align="center" class="footer-padding"
                                                                         style="font-family:Helvetica, arial,helv,sans-serif;font-size:10px; color:#949494; font-weight:bold; padding-left:20px; padding-right:20px"
                                                                         bgcolor="#1a1c21">
-                                                                        <span class="appleLinksWhite">© {{now()->format('Y').' '.env('APP_TITLE')}}. All rights reserved. Raya Kenjeran 469, Surabaya &ndash; 60134, East Java, Indonesia.</span>
+                                                                        <span class="appleLinksWhite">© {{now()->format('Y').' '.env('APP_TITLE')}}. All rights reserved. Raya Kenjeran 471, Surabaya &ndash; 60134, East Java, Indonesia.</span>
                                                                         <br>
                                                                         <div id="stat-div"
                                                                              style="visibility:hidden !important;"

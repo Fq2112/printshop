@@ -223,7 +223,7 @@
                 '<div class="iw-content">' +
                 '<img class="img-fluid" src="{{asset('images/logotype.png')}}">' +
                 '<div class="iw-subTitle">{{__('lang.header.contact')}}</div>' +
-                '<p>Raya Kenjeran 469 Gading, Tambaksari, Surabaya, Jawa Timur — 60134.<br>' +
+                '<p>Raya Kenjeran 471 Gading, Tambaksari, Surabaya, Jawa Timur — 60134.<br>' +
                 '<br>{{__('lang.footer.phone')}}: <a href="tel:+62313814969">(031) 3814969</a>' +
                 '<br>E-mail: <a href="mailto:{{env('MAIL_USERNAME')}}">{{env('MAIL_USERNAME')}}</a>' +
                 '</p></div><div class="iw-bottom-gradient"></div></div>';
