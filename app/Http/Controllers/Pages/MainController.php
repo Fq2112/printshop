@@ -34,12 +34,10 @@ class MainController extends Controller
     {
         foreach ($featured as $x => $row) {
             $thumb = [];
-            $gallery = [];
-            $capt = [];
+            $capt = $row->getCluster;
 
             if(!is_null($row->kategoris_id)) { // if subkat
-                if (!is_null($row->getCluster)) { // if has cluster
-                    $capt = $row->getCluster;
+                if (count($capt) > 0) { // if has cluster
                     foreach ($capt as $y => $item) {
                         $split = explode(" ", $item->name);
                         $first = current(explode(' ', $item->name));
@@ -49,18 +47,16 @@ class MainController extends Controller
                             'link' => route('produk', ['produk' => $item->permalink])
                         ];
 
-                        $init = asset('storage/products/thumb/'.$item->thumbnail);
                         $thumb[$y] = asset('storage/products/thumb/'.$item->thumbnail);
                     }
                 } else { // if doesnt have cluster
-                    foreach ($row->getGallery as $y => $item) {
-                        $init = asset('storage/products/gallery/'.$item->image);
+                    $gallery = $row->getGallery;
+                    foreach ($gallery as $y => $item) {
                         $thumb[$y] = asset('storage/products/gallery/'.$item->image);
                     }
                 }
             } else { // if cluster
                 foreach ($row->getGallery as $y => $item) {
-                    $init = asset('storage/products/gallery/'.$item->image);
                     $thumb[$y] = asset('storage/products/gallery/'.$item->image);
                 }
             }
@@ -69,8 +65,6 @@ class MainController extends Controller
                 'name' => $row->name,
                 'link' => route('produk', ['produk' => $row->permalink]),
                 'thumb' => $thumb,
-                'init' => $init,
-                'gallery' => $gallery,
                 'capt' => $capt,
             ];
         }

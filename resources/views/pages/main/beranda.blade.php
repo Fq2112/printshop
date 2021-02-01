@@ -666,17 +666,18 @@
                                                         @foreach($row['thumb'] as $file)
                                                             <div class="slide">
                                                                 <a href="javascript:void(0)">
-                                                                    <img src="{{$file}}" alt="{{$row['name']}}"></a>
+                                                                    <img src="{{$file}}" alt="{{$row['name']}}"
+                                                                         style="width: 280px;height: 200px;object-fit: cover;">
+                                                                </a>
                                                             </div>
                                                         @endforeach
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="portfolio-overlay" data-lightbox="gallery">
-                                                <a href="{{$row['init']}}" class="left-icon"
-                                                   data-lightbox="gallery-item">
-                                                    <i class="icon-line-stack-2"></i></a>
-                                                @foreach($row['gallery'] as $file)
+                                                <a href="{{$row['thumb'][0]}}" class="left-icon"
+                                                   data-lightbox="gallery-item"><i class="icon-line-stack-2"></i></a>
+                                                @foreach($row['thumb'] as $file)
                                                     <a href="{{$file}}" class="hidden" data-lightbox="gallery-item"></a>
                                                 @endforeach
                                                 <a href="{{$row['link']}}" class="right-icon">
@@ -685,11 +686,13 @@
                                         </div>
                                         <div class="portfolio-desc">
                                             <h3><a href="{{$row['link']}}">{{$row['name']}}</a></h3>
-                                            <span>
-                                                @foreach($row['capt'] as $val)
-                                                    <a href="{{$val['link']}}">{{$val['name']}}</a>
-                                                @endforeach
-                                            </span>
+                                            @if($row['capt'])
+                                                <span>
+                                                    @foreach($row['capt'] as $val)
+                                                        <a href="{{$val['link']}}">{{$val['name']}}</a>
+                                                    @endforeach
+                                                </span>
+                                            @endif
                                         </div>
                                     </article>
                                 @endforeach
