@@ -24,7 +24,7 @@ class TierController extends Controller
                 'name' => $request->name,
                 'discount' => $request->discount
             ]);
-            return back()->with('success', 'Data Added');
+            return back()->with('success', 'Pricing rules type ['.$request->name.'] is successfully created!');
         } catch (\Exception $exception) {
             return back()->with('error', $exception->getMessage());
         }
@@ -37,7 +37,7 @@ class TierController extends Controller
                 'name' => $request->name,
                 'discount' => $request->discount
             ]);
-            return back()->with('success', 'Data Updated');
+            return back()->with('success', 'Pricing rules type ['.$data->name.'] is successfully updated!');
         } catch (\Exception $exception) {
             return back()->with('error', $exception->getMessage());
         }
@@ -47,7 +47,7 @@ class TierController extends Controller
     {
         $data = TypeTier::query()->find(decrypt($id))->delete();
 
-        return back()->with('success', 'Data deleted');
+        return back()->with('success', 'Pricing rules type ['.$data->name.'] is successfully deleted!');
     }
 
     public function show_tier_list($id)
@@ -62,12 +62,12 @@ class TierController extends Controller
     public function add_type_list(Request $request)
     {
         try {
-            PriceTier::query()->create([
+            $data = PriceTier::query()->create([
                 'start' => $request->start,
                 'end' => $request->end,
                 'type_id' => $request->type_id
             ]);
-            return back()->with('success', 'Data Added');
+            return back()->with('success', 'Successfully added a tier to pricing rules type ['.$data->get_type->name.']!');
         } catch (\Exception $exception) {
             return back()->with('error', $exception->getMessage());
         }
@@ -80,7 +80,7 @@ class TierController extends Controller
                 'start' => $request->start,
                 'end' => $request->end
             ]);
-            return back()->with('success', 'Data Updated');
+            return back()->with('success', 'Successfully updated a tier from pricing rules type ['.$data->get_type->name.']!');
         } catch (\Exception $exception) {
             return back()->with('error', $exception->getMessage());
         }
@@ -90,6 +90,6 @@ class TierController extends Controller
     {
         $data = PriceTier::query()->find(decrypt($id))->delete();
 
-        return back()->with('success', 'Data deleted');
+        return back()->with('success', 'Successfully deleted a tier from pricing rules type ['.$data->get_type->name.']!');
     }
 }

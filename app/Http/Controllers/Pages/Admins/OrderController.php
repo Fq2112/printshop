@@ -170,11 +170,10 @@ class OrderController extends Controller
 
     public function delete_data($id)
     {
-        $post = Order::find(decrypt($id));
+        $order = Order::find(decrypt($id));
+        $order->delete();
 
-        $post->delete();
-
-        return back()->with('success', __('admin.alert.blog.delete', ['param' => $post->title]));
+        return back()->with('success', 'Order ['.$order->uni_code.'] is successfully deleted!');
     }
 
     public function create_pdf($code)

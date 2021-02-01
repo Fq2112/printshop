@@ -59,12 +59,12 @@ class SettingController extends Controller
                 $data->update([
                     'is_maintenance' => 1
                 ]);
-                return back()->with('success', 'Printshop Maintenance Mode Active');
+                return back()->with('success', env('APP_NAME').' Maintenance Mode Active');
             } else {
                 $data->update([
                     'is_maintenance' => 0
                 ]);
-                return back()->with('success', 'Printshop Maintenance Done');
+                return back()->with('success', env('APP_NAME').' Maintenance Done');
             }
 
         }

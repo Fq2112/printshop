@@ -49,7 +49,7 @@ class CategoryController extends Controller
             'image' => $thumbnail
         ]);
 
-        return back()->with('success', __('admin.alert.blog-category.create', ['param' => $request->name]));
+        return back()->with('success', 'Product category ['.$request->name.'] is successfully created!');
     }
 
     public function editCategory($id)
@@ -83,7 +83,7 @@ class CategoryController extends Controller
             'image' => $thumbnail
         ]);
 
-        return back()->with('success', __('admin.alert.blog-category.update', ['param' => $category->name]));
+        return back()->with('success', 'Product category ['.$request->name.'] is successfully updated!');
     }
 
     public function deleteCategory($id)
@@ -94,24 +94,18 @@ class CategoryController extends Controller
 
         $post->delete();
 
-        return back()->with('success', __('admin.alert.blog.delete', ['param' => $post->title]));
+        return back()->with('success', 'Product category ['.$post->getTranslation('name', 'en').'] is successfully deleted!');
     }
 
     public function deactivate_kategori($id)
     {
         $data = Kategori::find(decrypt($id));
-        $message = '';
         if ($data->isActive) {
-            $data->update([
-                'isActive' => false
-            ]);
-            $message = 'Successfully deactivate data';
+            $data->update(['isActive' => false]);
+            $message = 'Product category ['.$data->getTranslation('name', 'en').'] is successfully deactivated!';
         } else {
-            $data->update([
-                'isActive' => true
-            ]);
-
-            $message = 'Successfully activate data';
+            $data->update(['isActive' => true]);
+            $message = 'Product category ['.$data->getTranslation('name', 'en').'] is successfully activated!';
         }
 
         return back()->with('success', $message);
@@ -289,7 +283,7 @@ class CategoryController extends Controller
             }
         }
 
-        return back()->with('success', __('admin.alert.blog-category.create', ['param' => $request->name]));
+        return back()->with('success', 'Product sub-category ['.$request->name_en.'] is successfully created!');
     }
 
     public function editSubCategory($id)
@@ -474,25 +468,19 @@ class CategoryController extends Controller
 
         }
 
-        return back()->with('success', __('admin.alert.blog-category.update', ['param' => $category->name]));
+        return back()->with('success', 'Product sub-category ['.$request->name_en.'] is successfully updated!');
 
     }
 
     public function deactivate_sub($id)
     {
         $data = SubKategori::find(decrypt($id));
-        $message = '';
         if ($data->isActive) {
-            $data->update([
-                'isActive' => false
-            ]);
-            $message = 'Successfully deactivate data';
+            $data->update(['isActive' => false]);
+            $message = 'Product sub-category ['.$data->getTranslation('name', 'en').'] is successfully deactivated!';
         } else {
-            $data->update([
-                'isActive' => true
-            ]);
-
-            $message = 'Successfully activate data';
+            $data->update(['isActive' => true]);
+            $message = 'Product sub-category ['.$data->getTranslation('name', 'en').'] is successfully activated!';
         }
 
         return back()->with('success', $message);
@@ -695,7 +683,7 @@ class CategoryController extends Controller
             }
         }
 
-        return back()->with('success', __('admin.alert.blog-category.create', ['param' => $request->name]));
+        return back()->with('success', 'Product cluster ['.$request->name_en.'] is successfully created!');
     }
 
     public function update_data_cluster(Request $request)
@@ -876,25 +864,19 @@ class CategoryController extends Controller
                 ]);
             }
         }
-        return back()->with('success', __('admin.alert.blog-category.create', ['param' => $request->name]));
+        return back()->with('success', 'Product cluster ['.$request->name_en.'] is successfully updated!');
     }
 
 
     public function deactivate_cluster($id)
     {
         $data = ClusterKategori::find(decrypt($id));
-        $message = '';
         if ($data->isActive) {
-            $data->update([
-                'isActive' => false
-            ]);
-            $message = 'Successfully deactivate data';
+            $data->update(['isActive' => false]);
+            $message = 'Product cluster ['.$data->getTranslation('name', 'en').'] is successfully deactivated!';
         } else {
-            $data->update([
-                'isActive' => true
-            ]);
-
-            $message = 'Successfully activate data';
+            $data->update(['isActive' => true]);
+            $message = 'Product cluster ['.$data->getTranslation('name', 'en').'] is successfully activated!';
         }
 
         return back()->with('success', $message);
@@ -921,7 +903,7 @@ class CategoryController extends Controller
                     'image' => $photo
                 ]);
             }
-            return back()->with('success', 'Banner Photo Successfully Added');
+            return back()->with('success', 'Successfully added '.count($request->file('photos')).' image(s) to gallery sub-category!');
         } catch (Exception $exception) {
             return back()->with('error', $exception->getMessage());
         }
@@ -933,7 +915,7 @@ class CategoryController extends Controller
         try {
             $data = GallerySubs::find($id);
             $data->delete();
-            return back()->with('success', 'Banner Photo Successfully Removed');
+            return back()->with('success', 'Successfully deleted from gallery sub-category!');
 
         } catch (\Exception $exception) {
             return back()->with('error', $exception->getMessage());
@@ -961,7 +943,7 @@ class CategoryController extends Controller
                     'image' => $photo
                 ]);
             }
-            return back()->with('success', 'Banner Photo Successfully Added');
+            return back()->with('success', 'Successfully added '.count($request->file('photos')).' image(s) to gallery cluster!');
         } catch (Exception $exception) {
             return back()->with('error', $exception->getMessage());
         }
@@ -972,7 +954,7 @@ class CategoryController extends Controller
         try {
             $data = GalleryCluster::find($id);
             $data->delete();
-            return back()->with('success', 'Banner Photo Successfully Removed');
+            return back()->with('success', 'Successfully deleted from gallery cluster!');
 
         } catch (\Exception $exception) {
             return back()->with('error', $exception->getMessage());

@@ -89,7 +89,7 @@ class ShipperController extends Controller
                 "rateID" => $data->rate_id,
                 "consigneeName" => $data->getUser->name,
                 "consigneePhoneNumber" => $data->getUser->getBio->phone,
-                "consignerName" => "Premier Printshop",
+                "consignerName" => env('APP_NAME'),
                 "consignerPhoneNumber" => "0313814969",
                 "originAddress" => "Raya Kenjeran 469 Gading, Tambaksari, Surabaya, Jawa Timur – 60134.",
                 "originDirection" => "q",

@@ -14,7 +14,7 @@ class PromoController extends Controller
         $data = PromoCode::all();
 
         return view('pages.main.admins.promo', [
-            'title' => 'Promo Printshop List',
+            'title' => 'Promo '.env('APP_NAME').' List',
             'kategori' => $data
         ]);
     }
@@ -31,7 +31,8 @@ class PromoController extends Controller
                 'description' => $request->description,
                 'discount' => $request->discount,
             ]);
-            return back()->with('success', 'Successfully add new Promo!');
+            return back()->with('success', 'Promo ['.$request->promo_code.'] is successfully created!');
+
         } else {
             return back()->with('error', 'Promo Code already taken please use another name');
         }
@@ -53,16 +54,15 @@ class PromoController extends Controller
             'description' => $request->description,
             'discount' => $request->discount,
         ]);
-        return back()->with('success', 'Successfully add new Promo!');
 
+        return back()->with('success', 'Promo ['.$promo->promo_code.'] is successfully updated!');
     }
 
     public function delete_data($id)
     {
-        $post = PromoCode::find(decrypt($id));
+        $promo = PromoCode::find(decrypt($id));
+        $promo->delete();
 
-        $post->delete();
-
-        return back()->with('success', __('admin.alert.blog.delete', ['param' => $post->title]));
+        return back()->with('success', 'Promo ['.$promo->promo_code.'] is successfully deleted!');
     }
 }

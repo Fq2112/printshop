@@ -41,7 +41,7 @@ class EdgesController extends Controller
             'price' => $request->price
         ]);
 
-        return back()->with('success', __('admin.alert.blog-category.create', ['param' => $request->name]));
+        return back()->with('success', 'Specs ['.$request->name_en.'] is successfully created!');
     }
 
     public function edit_data($id)
@@ -76,7 +76,7 @@ class EdgesController extends Controller
             'price' => $request->price
         ]);
 
-        return back()->with('success', __('admin.alert.blog-category.update', ['param' => $category->name]));
+        return back()->with('success', 'Specs ['.$request->name_en.'] is successfully updated!');
     }
 
     public function delete_data($id)
@@ -89,16 +89,11 @@ class EdgesController extends Controller
 //
 //        return back()->with('success', __('admin.alert.blog.delete', ['param' => $post->title]));
         if ($data->isActive) {
-            $data->update([
-                'isActive' => false
-            ]);
-            $message = 'Successfully deactivate data';
+            $data->update(['isActive' => false]);
+            $message = 'Specs ['.$data->getTranslation('name', 'en').'] is successfully deactivated!';
         } else {
-            $data->update([
-                'isActive' => true
-            ]);
-
-            $message = 'Successfully activate data';
+            $data->update(['isActive' => true]);
+            $message = 'Specs ['.$data->getTranslation('name', 'en').'] is successfully activated!';
         }
 
         return back()->with('success', $message);
