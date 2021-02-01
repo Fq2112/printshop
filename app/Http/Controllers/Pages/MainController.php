@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pages;
 use App\Http\Controllers\Controller;
 use App\Mail\Users\ClaimOfferMail;
 use App\Models\Cart;
+use App\Models\Clients;
 use App\Models\ClusterKategori;
 use App\Models\PriceTier;
 use App\Models\PromoCode;
@@ -21,13 +22,14 @@ class MainController extends Controller
 {
     public function beranda(Request $request)
     {
+        $clients = Clients::orderBy('name')->get();
         $sub = SubKategori::where('is_featured', true)->where('isActive', true)->get();
         $clust = ClusterKategori::where('is_featured', true)->where('isActive', true)->get();
         $featured = collect($sub)->merge($clust)->sortBy('name');
         $this->array_product($featured);
 
         \App\Models\Visitor::hit();
-        return view('pages.main.beranda', compact('featured'));
+        return view('pages.main.beranda', compact('featured', 'clients'));
     }
 
     private function array_product($featured)

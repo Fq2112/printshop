@@ -69,6 +69,31 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
 
 
     Route::group(['prefix' => 'msc'], function () {
+
+        Route::group(['prefix' => 'clients'], function () {
+
+            Route::get('show', [
+                'uses' => 'ClientsController@show_clients',
+                'as' => 'admin.clients'
+            ]);
+
+            Route::post('create', [
+                'uses' => 'ClientsController@create_data',
+                'as' => 'add.clients'
+            ]);
+
+            Route::put('update', [
+                'uses' => 'ClientsController@update_data',
+                'as' => 'update.clients'
+            ]);
+
+            Route::get('{id}/delete', [
+                'uses' => 'ClientsController@delete_data',
+                'as' => 'delete.clients'
+            ]);
+
+        });
+
         Route::group(['prefix' => 'promo'], function () {
             Route::get('show', [
                 'uses' => 'PromoController@show_promo',
@@ -134,6 +159,7 @@ Route::group(['namespace' => 'Pages\Admins'], function () {
             ]);
 
         });
+
     });
 
     Route::group(['prefix' => 'order'], function () {

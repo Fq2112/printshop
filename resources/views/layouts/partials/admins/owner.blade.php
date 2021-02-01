@@ -109,6 +109,8 @@
             <a href="javascript:void(0)" class="nav-link has-dropdown" data-toggle="dropdown">
                 <i class="fas fa-cogs"></i><span>Miscellaneous</span></a>
             <ul class="dropdown-menu">
+                <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/msc/clients*') ?
+                'active' : ''}}"><a href="{{route('admin.clients')}}" class="nav-link">Clients</a></li>
                 <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/msc/promo*') ?
                 'active' : ''}}"><a href="{{route('admin.promo')}}" class="nav-link">Promo Code</a></li>
                 {{--                <li class="{{\Illuminate\Support\Facades\Request::is('*scott.royce/msc/privacy*') ?--}}

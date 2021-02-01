@@ -825,30 +825,12 @@
                 <div id="oc-clients-full" class="owl-carousel owl-carousel-full image-carousel carousel-widget mb-5"
                      data-margin="30" data-nav="true" data-pagi="false" data-autoplay="5000" data-items-xs="3"
                      data-items-sm="3" data-items-md="5" data-items-lg="6" data-items-xl="7">
-                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/1.png')}}"
-                                                                           alt=""></a></div>
-                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/2.png')}}"
-                                                                           alt=""></a></div>
-                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/3.png')}}"
-                                                                           alt=""></a></div>
-                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/4.png')}}"
-                                                                           alt=""></a></div>
-                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/5.png')}}"
-                                                                           alt=""></a></div>
-                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/6.png')}}"
-                                                                           alt=""></a></div>
-                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/7.png')}}"
-                                                                           alt=""></a></div>
-                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/8.png')}}"
-                                                                           alt=""></a></div>
-                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/9.png')}}"
-                                                                           alt=""></a></div>
-                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/10.png')}}"
-                                                                           alt=""></a></div>
-                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/11.png')}}"
-                                                                           alt=""></a></div>
-                    <div class="oc-item"><a href="javascript:void(0)"><img src="{{asset('images/clients/12.png')}}"
-                                                                           alt=""></a></div>
+                    @foreach($clients as $row)
+                        <div class="oc-item">
+                            <a href="javascript:void(0)">
+                                <img src="{{asset('storage/clients/'.$row->logo)}}" alt="{{$row->name}}"></a>
+                        </div>
+                    @endforeach
                 </div>
             </div>
             <div class="clear"></div>
