@@ -21,7 +21,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="card-columns col-lg-9" style="height: 400px; overflow: auto;">
+                <div class="card-columns col-lg-9" style="max-height: 400px; overflow: auto;">
                     @foreach(\App\Models\SubKategori::where('kategoris_id', $kat->id)->where('isActive', true)->get() as $sub)
                         @php
                             $clusters = \App\Models\ClusterKategori::where('subkategori_id', $sub->id)->where('isActive', true)->get();
