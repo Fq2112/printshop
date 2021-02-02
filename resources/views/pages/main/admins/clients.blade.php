@@ -48,12 +48,7 @@
                                 <table class="table table-striped" id="dt-buttons">
                                     <thead>
                                     <tr>
-                                        <th class="text-center" width="10%">
-                                            <div class="custom-checkbox custom-control">
-                                                <input type="checkbox" class="custom-control-input" id="cb-all">
-                                                <label for="cb-all" class="custom-control-label">#</label>
-                                            </div>
-                                        </th>
+                                        <th class="text-center" width="5%">#</th>
                                         <th class="text-center">ID</th>
                                         <th class="text-center">Logo</th>
                                         <th class="text-center">Name</th>
@@ -66,14 +61,7 @@
                                     @php $no = 1; @endphp
                                     @foreach($kategori as $row)
                                         <tr>
-                                            <td style="vertical-align: middle" align="center">
-                                                <div class="custom-checkbox custom-control">
-                                                    <input type="checkbox" id="cb-{{$row->id}}"
-                                                           class="custom-control-input dt-checkboxes">
-                                                    <label for="cb-{{$row->id}}"
-                                                           class="custom-control-label">{{$no++}}</label>
-                                                </div>
-                                            </td>
+                                            <td style="vertical-align: middle" align="center">{{$no++}}</td>
                                             <td style="vertical-align: middle" align="center">{{$row->id}}</td>
                                             <td style="vertical-align: middle" align="center">
                                                 <img class="img-fluid" width="200" alt="logo"
@@ -203,10 +191,10 @@
                                 columns: [0, 2, 3, 4, 5]
                             },
                             className: 'btn btn-info assets-select-btn export-print'
-                        }, {
+                        }, /*{
                             text: '<strong class="text-uppercase"><i class="fa fa-trash-alt mr-2"></i>Deletes</strong>',
                             className: 'btn btn-danger btn_massDelete'
-                        }
+                        }*/
                     ],
                     fnDrawCallback: function (oSettings) {
                         $('.use-nicescroll').getNiceScroll().resize();

@@ -143,7 +143,7 @@
 
                                     <div class="row form-group">
                                         <div class="col fix-label-group">
-                                            <label for="category_id">Sub-Category Parent</label>
+                                            <label for="category_id">Product Sub-Category</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                             <span class="input-group-text fix-label-item"
@@ -255,7 +255,8 @@
                                                 </div>
                                                 <div class="custom-file">
                                                     <input type="file" name="thumbnail" class="custom-file-input"
-                                                           id="thumbnail" accept="image/*" required>
+                                                           id="thumbnail" accept="image/*" required
+                                                           onchange="$('#txt_thumbnail').text($(this).val().replace(/.*(\/|\\)/, ''))">
                                                     <label class="custom-file-label" id="txt_thumbnail">Choose
                                                         File</label>
                                                 </div>
@@ -275,15 +276,16 @@
 
                                     <div class="row form-group">
                                         <div class="col">
-                                            <label for="thumbnail">Banner</label>
+                                            <label for="banner">Banner</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fa fa-images"></i></span>
                                                 </div>
                                                 <div class="custom-file">
                                                     <input type="file" name="banner" class="custom-file-input"
-                                                           id="banner" accept="image/*" required>
-                                                    <label class="custom-file-label" id="txt_thumbnail" for="banner">Choose
+                                                           id="banner" accept="image/*" required
+                                                           onchange="$('#txt_banner').text($(this).val().replace(/.*(\/|\\)/, ''))">
+                                                    <label class="custom-file-label" id="txt_banner" for="banner">Choose
                                                         File</label>
                                                 </div>
                                             </div>
@@ -296,15 +298,16 @@
 
                                     <div class="row form-group" style="display: none">
                                         <div class="col">
-                                            <label for="thumbnail">Guidelines <small>( optional )</small></label>
+                                            <label for="guideline">Guidelines <small>( optional )</small></label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fa fa-images"></i></span>
                                                 </div>
                                                 <div class="custom-file">
                                                     <input type="file" name="guidelines" class="custom-file-input"
-                                                           id="thumbnail" accept="image/*,.pdf,.rar,.zip">
-                                                    <label class="custom-file-label" id="txt_thumbnail">Choose
+                                                           id="guideline" accept="image/*,.pdf,.rar,.zip"
+                                                           onchange="$('#txt_guideline').text($(this).val().replace(/.*(\/|\\)/, ''))">
+                                                    <label class="custom-file-label" id="txt_guideline">Choose
                                                         File</label>
                                                 </div>
                                             </div>
@@ -956,8 +959,7 @@
             $("#category_id").val('default').selectpicker('refresh');
             $('#_content').summernote('code', '');
             $("#thumbnail").attr('required', 'required');
-            $("#txt_thumbnail, #txt_photo").text('Choose File');
-            $("#count_files").text('Allowed extension: jpg, jpeg, gif, png. Allowed size: < 5 MB');
+            $("#txt_thumbnail, #txt_banner, #txt_guideline").text('Choose File');
             $("#advance").removeAttr('checked');
             $("#advance_check").show();
             $('#advance_menu').hide();
@@ -969,16 +971,6 @@
         $('#advance').change(function () {
             $('#advance_menu').toggle(300);
         }).change();
-
-        function createBlogCategory() {
-            $("#blogCategoryModal .modal-title").text('Create Form');
-            $("#form-blogCategory").attr('action', '{{route('table.cluster.add')}}');
-            $("#form-blogCategory input[name=_method]").val('');
-            $("#form-blogCategory input[name=id]").val('');
-            $("#form-blogCategory button[type=submit]").text('Submit');
-            $("#name").val('');
-            $("#blogCategoryModal").modal('show');
-        }
 
         function reset_input() {
             $("#category_id").val("").selectpicker('refresh');
@@ -1015,18 +1007,6 @@
             $('#height_inp').val(null);
         }
 
-        function editBlogCategory(id, name, name_id, caption) {
-            $("#blogCategoryModal .modal-title").text('Edit Form');
-            $("#form-blogCategory").attr('action', '{{route('table.cluster.update')}}');
-            $("#form-blogCategory input[name=_method]").val('PUT');
-            $("#form-blogCategory input[name=id]").val(id);
-            $("#form-blogCategory button[type=submit]").text('Save Changes');
-            $('#_content').summernote('code', caption);
-            $("#name").val(name);
-            $("#name_id").val(name_id);
-            $("#blogCategoryModal").modal('show');
-        }
-
         function editBlogPost(id, url) {
             $("#content1").toggle(300);
             $("#content2").toggle(300);
@@ -1046,7 +1026,6 @@
             $("#form-blogPost button[type=submit]").text('Save Changes');
 
             $.get(url, function (data) {
-                console.log(data.banner_path);
                 $("#form-blogPost input[name=admin_id]").val(data.admin_id);
                 $("#category_id").val(data.data.subkategori_id).selectpicker('refresh');
                 if(data.data.is_featured == 1) {
@@ -1061,16 +1040,16 @@
                 $('#_content_id').summernote('code', data.data.caption.id);
                 $('#_feature_en').summernote('code', data.data.features.en);
                 $('#_feature_id').summernote('code', data.data.features.id);
-                $("#thumbnail").removeAttr('required');
-                $("#banner").removeAttr('required');
+                $("#thumbnail, #banner").removeAttr('required');
+                $("#txt_thumbnail").text(data.data.thumbnail);
+                $("#txt_banner").text(data.data.banner);
+                $("#txt_guideline").text(data.data.guidelines);
 
                 $("#banner_div").show();
                 $("#thumb_div").show();
                 $("#banner_overlay").attr('data-src',data.banner_path);
                 $("#banner_img").attr('src',data.banner_path);
                 $("#thumb_img").attr('src',data.thumbnail);
-
-                // $("#txt_thumbnail").text(data.data.image.length > 60 ? data.data.image.slice(0, 60) + "..." : data.data.image);
 
                 if (!data.detail) {
                     $("#advance_check").hide();

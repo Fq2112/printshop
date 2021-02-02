@@ -180,7 +180,7 @@
                                         <th class="text-center" width="15%">Courier</th>
                                         <th class="text-center" width="10%">Order date</th>
                                         <th class="text-center" width="10%">Payment</th>
-                                        <th class="text-center" width="10%">Shipper</th>
+                                        <th class="text-center" width="10%">Shipment</th>
                                         <th class="text-center" width="25%">Action</th>
                                     </tr>
                                     </thead>
@@ -229,12 +229,12 @@
 
                                                     <div class="badge badge-danger" data-placement="top"
                                                          data-toggle="tooltip"
-                                                         title="Not Connected with Shipper Yet"><i
-                                                            class="fa fa-window-close"></i></div>
+                                                         title="Inactive"><i
+                                                            class="fa fa-times"></i></div>
                                                 @else
                                                     <div class="badge badge-success" data-placement="top"
                                                          data-toggle="tooltip"
-                                                         title="Connected With Shipper"><i class="fa fa-check"></i>
+                                                         title="Active"><i class="fa fa-check"></i>
                                                     </div>
                                                 @endif
                                             </td>
@@ -246,10 +246,10 @@
                                                     <div class="btn-group" role="group"
                                                          aria-label="Button group with nested dropdown">
                                                         @if($item->tracking_id == null)
-                                                            <button type="button" class="btn btn-danger"
+                                                            <button type="button" class="btn btn-primary"
                                                                     data-toggle="tooltip"
                                                                     onclick="openModal('{{ucfirst($item->uni_code_payment)}}','{{route('admin.shipper.modal.create')}}','Create Data to Shipper')"
-                                                                    title="Create to Shipper" data-html="true"
+                                                                    title="Create Shipment" data-html="true"
                                                                     data-placement="top"><i
                                                                     class="fa fa-shipping-fast"></i>
                                                             </button>
@@ -267,12 +267,11 @@
                                                         @endif
 
                                                         <div class="btn-group" role="group">
-                                                            <button class="btn btn-primary dropdown-toggle"
+                                                            <button class="btn btn-success dropdown-toggle"
                                                                     type="button" id="dropdownMenuButton"
-                                                                    data-toggle="dropdown" aria-haspopup="true"
-                                                                    aria-expanded="false"><i
-                                                                    class="fa fa-file-download"></i>
-                                                                Download
+                                                                    title="Download" data-toggle="dropdown"
+                                                                    aria-haspopup="true" aria-expanded="false">
+                                                                <i class="fa fa-download"></i>
                                                             </button>
                                                             <div class="dropdown-menu"
                                                                  aria-labelledby="dropdownMenuButton">
@@ -345,12 +344,12 @@
 
                                                         <a href="{{route('admin.order.user',['kode'=>$item->uni_code_payment])}}"
                                                            data-placement="right" data-toggle="tooltip"
-                                                           title="Detail Info" type="button" class="btn btn-info">
+                                                           title="Detail" type="button" class="btn btn-info">
                                                             <i class="fa fa-info-circle"></i></a>
                                                     </div>
                                                 @else
                                                     <div class="btn-group">
-                                                        <button type="button" class="btn btn-danger"
+                                                        <button type="button" class="btn btn-success"
                                                                 data-toggle="tooltip"
                                                                 onclick="getInvoice('{{$item->getUser->id}}','{{ucfirst($item->uni_code_payment)}}')"
                                                                 title="Download Invoice" data-html="true"

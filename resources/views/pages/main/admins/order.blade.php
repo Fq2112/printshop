@@ -185,14 +185,16 @@
 
                                                         @if($cart->link != null || $cart->link != '')
                                                             <a href="{{$cart->link}}" target="_blank"
-                                                               class="btn btn-primary">
-                                                                <i class="fa fa-link"></i> DOWNLOAD
+                                                               class="btn btn-primary" data-toggle="tooltip"
+                                                               title="Download Design File">
+                                                                <i class="fa fa-external-link-alt mr-2"></i>Download
                                                             </a>
                                                         @endif
                                                         @if($cart->file != null || $cart->file != '')
-                                                            <a class="btn btn-primary"
+                                                            <a class="btn btn-primary" data-toggle="tooltip"
+                                                               title="Download Design File"
                                                                href="{{route('admin.order.download',['id'=>encrypt($cart->id)])}}">
-                                                                <i class="fa fa-file-download"></i> DOWNLOAD
+                                                                <i class="fa fa-download mr-2"></i>DOWNLOAD
                                                             </a>
                                                         @endif
                                                         <a href="javascript:void(0)"
@@ -202,10 +204,10 @@
                                                                '                                                    {{$cart->getCluster->name}}\n'+
                                                                '                                                @endif','{{$row->id}}')"
                                                            data-placement="top" data-toggle="tooltip"
-                                                           title="Detail Info"
+                                                           title="Proceed Order"
                                                            type="button" class="btn btn-info">
 
-                                                            <i class="fa fa-info-circle"></i>
+                                                            <i class="fa fa-paper-plane mr-2"></i>PROCEED
                                                         </a>
                                                     </div>
                                                 </td>

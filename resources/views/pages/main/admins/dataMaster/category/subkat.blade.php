@@ -146,18 +146,15 @@
 
                                     <div class="row form-group">
                                         <div class="col fix-label-group">
-                                            <label for="category_id">Category Parent</label>
+                                            <label for="category_id">Product Category</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                             <span class="input-group-text fix-label-item"
                                                                   style="height: 2.25rem">
                                                                 <i class="fa fa-tag"></i></span>
                                                 </div>
-                                                <select id="kategori_id"
-                                                        class="form-control selectpicker"
-                                                        title="-- Choose --"
-                                                        name="kategori_id" data-live-search="true"
-                                                >
+                                                <select id="kategori_id" class="form-control selectpicker" required
+                                                        title="-- Choose --" name="kategori_id" data-live-search="true">
                                                     @foreach(\App\Models\Kategori::all() as $material)
                                                         <option
                                                             value="{{$material->id}}">{{$material->name}}</option>
@@ -228,15 +225,16 @@
 
                                     <div class="row form-group">
                                         <div class="col">
-                                            <label for="thumbnail">Banner</label>
+                                            <label for="banner">Banner</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fa fa-images"></i></span>
                                                 </div>
                                                 <div class="custom-file">
                                                     <input type="file" name="thumbnail" class="custom-file-input"
-                                                           id="thumbnail" accept="image/*" required>
-                                                    <label class="custom-file-label" id="txt_thumbnail">Choose
+                                                           id="banner" accept="image/*" required
+                                                           onchange="$('#txt_banner').text($(this).val().replace(/.*(\/|\\)/, ''))">
+                                                    <label class="custom-file-label" id="txt_banner">Choose
                                                         File</label>
                                                 </div>
                                             </div>
@@ -257,15 +255,16 @@
 
                                     <div class="row form-group">
                                         <div class="col">
-                                            <label for="thumbnail">Guidelines </label>
+                                            <label for="guideline">Guidelines</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fa fa-images"></i></span>
                                                 </div>
                                                 <div class="custom-file">
                                                     <input type="file" name="guidelines" class="custom-file-input"
-                                                           id="thumbnail" accept="image/*,.rar,.zip,.pdf">
-                                                    <label class="custom-file-label" id="txt_thumbnail">Choose
+                                                           id="guideline" accept="image/*,.rar,.zip,.pdf"
+                                                           onchange="$('#txt_guideline').text($(this).val().replace(/.*(\/|\\)/, ''))">
+                                                    <label class="custom-file-label" id="txt_guideline">Choose
                                                         File</label>
                                                 </div>
                                             </div>
@@ -784,83 +783,6 @@
             </div>
         </div>
     </section>
-
-    <div class="modal fade " id="blogCategoryModal" tabindex="-1" role="dialog"
-         aria-labelledby="blogCategoryModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document" style="width: 100%">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Create Form</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form id="form-blogCategory" method="post" action="{{route('create.blog.categories')}}">
-                    {{csrf_field()}}
-                    <input type="hidden" name="_method">
-                    <input type="hidden" name="id">
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col">
-                                <label for="name">Name <small>(EN)</small></label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-tag"></i></span>
-                                    </div>
-                                    <input id="name" type="text" maxlength="191" name="name" class="form-control"
-                                           placeholder="Write its name here&hellip;" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label for="name">Name <small>(ID)</small></label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-tag"></i></span>
-                                    </div>
-                                    <input id="name_id" type="text" maxlength="191" name="name_id" class="form-control"
-                                           placeholder="Write its name here&hellip;" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row form-group has-feedback">
-                            <div class="col">
-                                <label for="_content">Caption</label>
-                                <textarea id="_content" type="text" name="_content"
-                                          class="summernote form-control"
-                                          placeholder="Write something about your post here&hellip;"></textarea>
-                                <span class="glyphicon glyphicon-text-height form-control-feedback"></span>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col">
-                                <label for="thumbnail">Image</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-images"></i></span>
-                                    </div>
-                                    <div class="custom-file">
-                                        <input type="file" name="thumbnail" class="custom-file-input"
-                                               id="thumbnail" accept="image/*" required>
-                                        <label class="custom-file-label" id="txt_thumbnail">Choose
-                                            File</label>
-                                    </div>
-                                </div>
-                                <div class="form-text text-muted">
-                                    Allowed extension: jpg, jpeg, gif, png. Allowed size: < 5 MB
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 @endsection
 @push("scripts")
     <script src="{{asset('admins/modules/datatables/datatables.min.js')}}"></script>
@@ -990,9 +912,8 @@
             $("#form-blogPost button[type=submit]").text('Submit');
             $("#category_id").val('default').selectpicker('refresh');
             $('#_content').summernote('code', '');
-            $("#thumbnail").attr('required', 'required');
-            $("#txt_thumbnail, #txt_photo").text('Choose File');
-            $("#count_files").text('Allowed extension: jpg, jpeg, gif, png. Allowed size: < 5 MB');
+            $("#banner").attr('required', 'required');
+            $("#txt_banner, #txt_guideline").text('Choose File');
             $("#advance").removeAttr('checked');
             $("#advance_check").show();
             $('#advance_menu').hide();
@@ -1004,16 +925,6 @@
         $('#advance').change(function () {
             $('#advance_menu').toggle(300);
         }).change();
-
-        function createBlogCategory() {
-            $("#blogCategoryModal .modal-title").text('Create Form');
-            $("#form-blogCategory").attr('action', '{{route('create.categories')}}');
-            $("#form-blogCategory input[name=_method]").val('');
-            $("#form-blogCategory input[name=id]").val('');
-            $("#form-blogCategory button[type=submit]").text('Submit');
-            $("#name").val('');
-            $("#blogCategoryModal").modal('show');
-        }
 
         function reset_input() {
             $("#kategori_id").val('default').selectpicker('refresh');
@@ -1049,18 +960,6 @@
             $('#height_inp').val(null);
         }
 
-        function editBlogCategory(id, name, name_id, caption) {
-            $("#blogCategoryModal .modal-title").text('Edit Form');
-            $("#form-blogCategory").attr('action', '{{route('table.subkat.update')}}');
-            $("#form-blogCategory input[name=_method]").val('PUT');
-            $("#form-blogCategory input[name=id]").val(id);
-            $("#form-blogCategory button[type=submit]").text('Save Changes');
-            $('#_content').summernote('code', caption);
-            $("#name").val(name);
-            $("#name_id").val(name_id);
-            $("#blogCategoryModal").modal('show');
-        }
-
         function editBlogPost(id, url) {
             $("#content1").toggle(300);
             $("#content2").toggle(300);
@@ -1092,7 +991,9 @@
                 $('#kategori_id').selectpicker('val', data.data.kategoris_id);
                 $('#_content_en').summernote('code', data.data.caption.en);
                 $('#_content_id').summernote('code', data.data.caption.id);
-                $("#thumbnail").removeAttr('required', 'required');
+                $("#banner").removeAttr('required');
+                $("#txt_banner").text(data.data.banner);
+                $("#txt_guideline").text(data.data.guidelines);
 
                 $("#banner_div").show();
                 $("#banner_img").attr('src',data.banner_path);
@@ -1102,10 +1003,6 @@
                     $("#object_guid").attr('data',data.guideline);
                     $("#iframe_guide").attr('src',data.guideline);
                 }
-
-
-
-                // $("#txt_thumbnail").text(data.data.image.length > 60 ? data.data.image.slice(0, 60) + "..." : data.data.image);
 
                 if (!data.detail) {
                     $("#advance_check").hide();

@@ -44,7 +44,7 @@
                         </div>
 
                         <div class="card-body">
-                            <div id="content1" class="table-responsive">
+                            <div class="table-responsive">
                                 <table class="table table-striped" id="dt-buttons">
                                     <thead>
                                     <tr>
@@ -100,15 +100,14 @@
                                             <td style="vertical-align: middle" align="center">
                                                 {{$row->updated_at->diffForHumans()}}</td>
                                             <td style="vertical-align: middle" align="center">
-                                                <button data-placement="top" data-toggle="tooltip"
-                                                        title="Edit"
-                                                        type="button" class="btn btn-info mr-1"
+                                                <button data-placement="top" data-toggle="tooltip" title="Edit"
+                                                        type="button" class="btn btn-warning mr-1"
                                                         onclick="editUser('{{$row->id}}','{{$row->name}}','{{$row->username}}','{{$row->email}}','{{$row->role}}')">
                                                     <i class="fa fa-edit"></i></button>
 
                                                 <button data-placement="top" data-toggle="tooltip"
                                                         title="Reset Password"
-                                                        type="button" class="btn btn-warning mr-1"
+                                                        type="button" class="btn btn-danger mr-1"
                                                         onclick="show_swal_reset('{{$row->id}}')">
                                                     <i class="fa fa-user-lock"></i></button>
                                                 @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Support\Role::OWNER)
@@ -137,93 +136,6 @@
                                 <form method="post" id="form-mass">
                                     {{csrf_field()}}
                                     <input type="hidden" name="post_ids">
-                                </form>
-                            </div>
-
-                            <div id="content2" style="display: none;">
-                                <form id="form-blogPost" method="post" action="{{route('create.categories')}}"
-                                      enctype="multipart/form-data">
-                                    {{csrf_field()}}
-                                    <input type="hidden" name="_method">
-                                    <input type="hidden" name="id">
-                                    <input type="hidden" name="admin_id">
-
-                                    <div class="row form-group">
-                                        <div class="col-6 has-feedback">
-                                            <label for="title">Name ( En )</label>
-                                            <input id="name_en" type="text" maxlength="191" name="name_en"
-                                                   class="form-control"
-                                                   placeholder="Write its title here&hellip;" required>
-                                            <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
-                                        </div>
-                                        <div class="col-6 has-feedback">
-                                            <label for="title">Name ( Id )</label>
-                                            <input id="name_id" type="text" maxlength="191" name="name_id"
-                                                   class="form-control"
-                                                   placeholder="Write its title here&hellip;" required>
-                                            <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="row form-group has-feedback">
-                                        <div class="col">
-                                            <label for="_content">Caption ( En )</label>
-                                            <textarea id="_content_en" type="text" name="_content_en"
-                                                      class="summernote form-control"
-                                                      placeholder="Write something about your post here&hellip;"></textarea>
-                                            <span class="glyphicon glyphicon-text-height form-control-feedback"></span>
-                                        </div>
-                                        <div class="col">
-                                            <label for="_content">Caption ( Id )</label>
-                                            <textarea id="_content_id" type="text" name="_content_id"
-                                                      class="summernote form-control"
-                                                      placeholder="Write something about your post here&hellip;"></textarea>
-                                            <span class="glyphicon glyphicon-text-height form-control-feedback"></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="row form-group">
-                                        <div class="col">
-                                            <label for="thumbnail">Thumbnail</label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fa fa-images"></i></span>
-                                                </div>
-                                                <div class="custom-file">
-                                                    <input type="file" name="thumbnail" class="custom-file-input"
-                                                           id="thumbnail" accept="image/*" required>
-                                                    <label class="custom-file-label" id="txt_thumbnail">Choose
-                                                        File</label>
-                                                </div>
-                                            </div>
-                                            <div class="form-text text-muted">
-                                                Allowed extension: jpg, jpeg, gif, png. Allowed size: < 5 MB
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row form-group">
-                                        <div class="col has-feedback">
-                                            <label for="title">Price</label>
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">Rp.</div>
-                                                </div>
-                                                <input id="price" type="number" maxlength="191" name="price"
-                                                       class="form-control"
-                                                       placeholder="1xxxxxx" required>
-                                            </div>
-                                            <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="row form-group">
-                                        <div class="col">
-                                            <button type="submit" class="btn btn-primary btn-block text-uppercase"
-                                                    style="font-weight: 900">Submit
-                                            </button>
-                                        </div>
-                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -285,12 +197,14 @@
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col">
+                            <div class="col fix-label-group">
                                 <label for="role">Job Desc <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
-                                    <select id="role" style="width: 100%"
-                                            class="form-control selectpicker"
-                                            title="-- Choose --"
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text fix-label-item" style="height: 2.25rem">
+                                            <i class="fa fa-briefcase"></i></span>
+                                    </div>
+                                    <select id="role" class="form-control selectpicker" title="-- Choose --"
                                             name="role" data-live-search="true" required>
                                         @foreach(\App\Support\Role::ALL as $role)
                                             @if($role != \App\Support\Role::ROOT && $role != \App\Support\Role::OWNER)
@@ -373,12 +287,14 @@
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col">
-                                <label for="role">Job Desc <sup class="text-danger">*</sup></label>
+                            <div class="col fix-label-group">
+                                <label for="role_input">Job Desc <sup class="text-danger">*</sup></label>
                                 <div class="input-group">
-                                    <select id="role_input" style="width: 100%"
-                                            class="form-control selectpicker"
-                                            title="-- Choose --"
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text fix-label-item" style="height: 2.25rem">
+                                            <i class="fa fa-briefcase"></i></span>
+                                    </div>
+                                    <select id="role_input" class="form-control selectpicker" title="-- Choose --"
                                             name="role" data-live-search="true" required>
                                         @foreach(\App\Support\Role::ALL as $role)
                                             @if($role != \App\Support\Role::ROOT && $role != \App\Support\Role::OWNER)
@@ -508,40 +424,15 @@
                 });
         });
 
-        $("#btn_create").on('click', function () {
-            $("#content1").toggle(300);
-            $("#content2").toggle(300);
-            $(this).toggleClass('btn-primary btn-outline-primary');
-            $("#btn_create strong").html(function (i, v) {
-                return v === '<i class="fas fa-plus mr-2"></i>Create' ?
-                    '<i class="fas fa-th-list mr-2"></i>View' : '<i class="fas fa-plus mr-2"></i>Create';
-            });
-
+        function createBlogCategory() {
             $(".fix-label-group .bootstrap-select").addClass('p-0');
             $(".fix-label-group .bootstrap-select button").css('border-color', '#e4e6fc');
-
-            $("#form-blogPost").attr('action', '{{route('create.balance')}}');
-            $("#form-blogPost input[name=_method], #form-blogPost input[name=id], #form-blogPost input[name=admin_id], #title").val('');
-            $(".input-files").show();
-            $("#form-blogPost button[type=submit]").text('Submit');
-            $("#category_id").val('default').selectpicker('refresh');
-            $('#_content').summernote('code', '');
-            $("#thumbnail").attr('required', 'required');
-            $("#txt_thumbnail, #txt_photo").text('Choose File');
-            $("#count_files").text('Allowed extension: jpg, jpeg, gif, png. Allowed size: < 5 MB');
-            $("#name_en").val("");
-            $("#name_id").val("");
-            $("#price").val("");
-            $('#_content_en').summernote('code', "");
-            $('#_content_id').summernote('code', "");
-        });
-
-        function createBlogCategory() {
             $("#blogCategoryModal").modal('show');
         }
 
         function editUser(id, name, username, email, role_id) {
-
+            $(".fix-label-group .bootstrap-select").addClass('p-0');
+            $(".fix-label-group .bootstrap-select button").css('border-color', '#e4e6fc');
             $("#edit_title").text('Edit ' + name);
             $("#user_id").val(id);
             $("#name_input").val(name);
@@ -549,52 +440,6 @@
             $("#email_input").val(email);
             $("#role_input").val(role_id).selectpicker('refresh');
             $("#editUser").modal('show');
-        }
-
-        function editBlogCategory(id, name, name_id, caption) {
-            $("#blogCategoryModal .modal-title").text('Edit Form');
-            $("#form-blogCategory").attr('action', '{{route('update.balance')}}');
-            $("#form-blogCategory input[name=_method]").val('PUT');
-            $("#form-blogCategory input[name=id]").val(id);
-            $("#form-blogCategory button[type=submit]").text('Save Changes');
-            $('#_content').summernote('code', caption);
-            $("#name").val(name);
-            $("#name_id").val(name_id);
-            $("#blogCategoryModal").modal('show');
-        }
-
-        function editBlogPost(id, url) {
-            $("#content1").toggle(300);
-            $("#content2").toggle(300);
-            $("#btn_create").toggleClass('btn-primary btn-outline-primary');
-            $("#btn_create strong").html(function (i, v) {
-                return v === '<i class="fas fa-plus mr-2"></i>Create' ?
-                    '<i class="fas fa-th-list mr-2"></i>View' : '<i class="fas fa-plus mr-2"></i>Create';
-            });
-
-            $(".fix-label-group .bootstrap-select").addClass('p-0');
-            $(".fix-label-group .bootstrap-select button").css('border-color', '#e4e6fc');
-
-            $("#form-blogPost").attr('action', '{{route('update.balance')}}');
-            $("#form-blogPost input[name=_method]").val('PUT');
-            $("#form-blogPost input[name=id]").val(id);
-            $(".input-files").hide();
-            $("#form-blogPost button[type=submit]").text('Save Changes');
-
-            $.get(url, function (data) {
-                // console.log(data.name.id);
-                $("#form-blogPost input[name=admin_id]").val(data.admin_id);
-                $("#category_id").val(data.category_id).selectpicker('refresh');
-                $("#name_en").val(data.name.en);
-                $("#name_id").val(data.name.id);
-                $("#price").val(data.price);
-                $('#_content_en').summernote('code', data.caption.en);
-                $('#_content_id').summernote('code', data.caption.id);
-                $("#thumbnail").removeAttr('required', 'required');
-                $("#txt_thumbnail").text(data.image.length > 60 ? data.image.slice(0, 60) + "..." : data.thumbnail);
-            }).fail(function () {
-                swal("Error!", "There's no any selected record!", "error");
-            });
         }
 
         function show_swal_reset(id) {

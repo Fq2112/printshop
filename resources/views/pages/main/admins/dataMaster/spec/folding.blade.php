@@ -192,7 +192,8 @@
                                                 </div>
                                                 <div class="custom-file">
                                                     <input type="file" name="thumbnail" class="custom-file-input"
-                                                           id="thumbnail" accept="image/*" required>
+                                                           id="thumbnail" accept="image/*" required
+                                                           onchange="$('#txt_thumbnail').text($(this).val().replace(/.*(\/|\\)/, ''))">
                                                     <label class="custom-file-label" id="txt_thumbnail">Choose
                                                         File</label>
                                                 </div>
@@ -353,10 +354,10 @@
                                 columns: [0, 3, 4, 5, 6, 7]
                             },
                             className: 'btn btn-info assets-select-btn export-print'
-                        }, {
+                        }, /*{
                             text: '<strong class="text-uppercase"><i class="fa fa-trash-alt mr-2"></i>Deletes</strong>',
                             className: 'btn btn-danger btn_massDelete'
-                        }
+                        }*/
                     ],
                     fnDrawCallback: function (oSettings) {
                         $('.use-nicescroll').getNiceScroll().resize();

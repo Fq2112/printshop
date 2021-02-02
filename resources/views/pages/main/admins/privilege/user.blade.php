@@ -44,20 +44,18 @@
                         </div>
 
                         <div class="card-body">
-                            <div id="content1" class="table-responsive">
+                            <div iclass="table-responsive">
                                 <table class="table table-striped" id="dt-buttons">
                                     <thead>
                                     <tr>
-                                        <th class="text-center" width="10%">
-                                            <div class="custom-checkbox custom-control">
-                                                <input type="checkbox" class="custom-control-input" id="cb-all">
-                                                <label for="cb-all" class="custom-control-label">#</label>
-                                            </div>
-                                        </th>
+                                        <th class="text-center" width="5%">#</th>
                                         <th class="text-center">ID</th>
-                                        <th width="35%">Name</th>
-                                        <th class="text-center" width="15%">Created at</th>
-                                        <th class="text-center" width="15%">Last Update</th>
+                                        <th class="text-center" width="10%">Avatar</th>
+                                        <th>Full Name</th>
+                                        <th>E-mail</th>
+                                        <th>Phone</th>
+                                        <th class="text-center">Created at</th>
+                                        <th class="text-center">Last Update</th>
 {{--                                        <th width="25%">Action</th>--}}
                                     </tr>
                                     </thead>
@@ -65,18 +63,15 @@
                                     @php $no = 1; @endphp
                                     @foreach($kategori as $row)
                                         <tr>
-                                            <td style="vertical-align: middle" align="center">
-                                                <div class="custom-checkbox custom-control">
-                                                    <input type="checkbox" id="cb-{{$row->id}}"
-                                                           class="custom-control-input dt-checkboxes">
-                                                    <label for="cb-{{$row->id}}"
-                                                           class="custom-control-label">{{$no++}}</label>
-                                                </div>
-                                            </td>
+                                            <td style="vertical-align: middle" align="center">{{$no++}}</td>
                                             <td style="vertical-align: middle" align="center">{{$row->id}}</td>
-                                            <td style="vertical-align: middle">
-                                                <strong>{{$row->name}}</strong>
+                                            <td style="vertical-align: middle" align="center">
+                                                <img class="img-thumbnail" alt="avatar"
+                                                     src="{{$row->getBio->ava != "" ? asset('storage/users/ava/'.$row->getBio->ava) : asset('admins/img/avatar/avatar-'.rand(1,5).'.png')}}">
                                             </td>
+                                            <td style="vertical-align: middle"><b>{{$row->name}}</b></td>
+                                            <td style="vertical-align: middle"><a href="mailto:{{$row->email}}">{{$row->email}}</a></td>
+                                            <td style="vertical-align: middle"><a href="tel:{{$row->getBio->phone}}">{{$row->getBio->phone}}</a></td>
 
                                             <td style="vertical-align: middle" align="center">
                                                 {{\Carbon\Carbon::parse($row->created_at)->format('j F Y')}}</td>
@@ -113,93 +108,6 @@
                                 <form method="post" id="form-mass">
                                     {{csrf_field()}}
                                     <input type="hidden" name="post_ids">
-                                </form>
-                            </div>
-
-                            <div id="content2" style="display: none;">
-                                <form id="form-blogPost" method="post" action="{{route('create.categories')}}"
-                                      enctype="multipart/form-data">
-                                    {{csrf_field()}}
-                                    <input type="hidden" name="_method">
-                                    <input type="hidden" name="id">
-                                    <input type="hidden" name="admin_id">
-
-                                    <div class="row form-group">
-                                        <div class="col-6 has-feedback">
-                                            <label for="title">Name ( En )</label>
-                                            <input id="name_en" type="text" maxlength="191" name="name_en"
-                                                   class="form-control"
-                                                   placeholder="Write its title here&hellip;" required>
-                                            <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
-                                        </div>
-                                        <div class="col-6 has-feedback">
-                                            <label for="title">Name ( Id )</label>
-                                            <input id="name_id" type="text" maxlength="191" name="name_id"
-                                                   class="form-control"
-                                                   placeholder="Write its title here&hellip;" required>
-                                            <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="row form-group has-feedback">
-                                        <div class="col">
-                                            <label for="_content">Caption ( En )</label>
-                                            <textarea id="_content_en" type="text" name="_content_en"
-                                                      class="summernote form-control"
-                                                      placeholder="Write something about your post here&hellip;"></textarea>
-                                            <span class="glyphicon glyphicon-text-height form-control-feedback"></span>
-                                        </div>
-                                        <div class="col">
-                                            <label for="_content">Caption ( Id )</label>
-                                            <textarea id="_content_id" type="text" name="_content_id"
-                                                      class="summernote form-control"
-                                                      placeholder="Write something about your post here&hellip;"></textarea>
-                                            <span class="glyphicon glyphicon-text-height form-control-feedback"></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="row form-group">
-                                        <div class="col">
-                                            <label for="thumbnail">Thumbnail</label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fa fa-images"></i></span>
-                                                </div>
-                                                <div class="custom-file">
-                                                    <input type="file" name="thumbnail" class="custom-file-input"
-                                                           id="thumbnail" accept="image/*" required>
-                                                    <label class="custom-file-label" id="txt_thumbnail">Choose
-                                                        File</label>
-                                                </div>
-                                            </div>
-                                            <div class="form-text text-muted">
-                                                Allowed extension: jpg, jpeg, gif, png. Allowed size: < 5 MB
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row form-group">
-                                        <div class="col has-feedback">
-                                            <label for="title">Price</label>
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">Rp.</div>
-                                                </div>
-                                                <input id="price" type="number" maxlength="191" name="price"
-                                                       class="form-control"
-                                                       placeholder="1xxxxxx" required>
-                                            </div>
-                                            <span class="glyphicon glyphicon-text-width form-control-feedback"></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="row form-group">
-                                        <div class="col">
-                                            <button type="submit" class="btn btn-primary btn-block text-uppercase"
-                                                    style="font-weight: 900">Submit
-                                            </button>
-                                        </div>
-                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -279,7 +187,7 @@
     <script src="{{asset('admins/modules/summernote/summernote-bs4.js')}}"></script>
     <script>
         $(function () {
-            var export_filename = 'Blog Categories Table ({{now()->format('j F Y')}})',
+            var export_filename = 'User Account Table ({{now()->format('j F Y')}})',
                 table = $("#dt-buttons").DataTable({
                     dom: "<'row'<'col-sm-12 col-md-3'l><'col-sm-12 col-md-5'B><'col-sm-12 col-md-4'f>>" +
                         "<'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
@@ -292,14 +200,14 @@
                             text: '<strong class="text-uppercase"><i class="far fa-clipboard mr-2"></i>Copy</strong>',
                             extend: 'copy',
                             exportOptions: {
-                                columns: [0, 2, 3, 4]
+                                columns: [0, 3, 4, 5, 6, 7]
                             },
                             className: 'btn btn-warning assets-export-btn export-copy ttip'
                         }, {
                             text: '<strong class="text-uppercase"><i class="far fa-file-excel mr-2"></i>Excel</strong>',
                             extend: 'excel',
                             exportOptions: {
-                                columns: [0, 2, 3, 4]
+                                columns: [0, 3, 4, 5, 6, 7]
                             },
                             className: 'btn btn-success assets-export-btn export-xls ttip',
                             title: export_filename,
@@ -308,13 +216,13 @@
                             text: '<strong class="text-uppercase"><i class="fa fa-print mr-2"></i>Print</strong>',
                             extend: 'print',
                             exportOptions: {
-                                columns: [0, 2, 3, 4]
+                                columns: [0, 3, 4, 5, 6, 7]
                             },
                             className: 'btn btn-info assets-select-btn export-print'
-                        }, {
+                        }, /*{
                             text: '<strong class="text-uppercase"><i class="fa fa-trash-alt mr-2"></i>Deletes</strong>',
                             className: 'btn btn-danger btn_massDelete'
-                        }
+                        }*/
                     ],
                     fnDrawCallback: function (oSettings) {
                         $('.use-nicescroll').getNiceScroll().resize();
@@ -379,82 +287,8 @@
                 });
         });
 
-        $("#btn_create").on('click', function () {
-            $("#content1").toggle(300);
-            $("#content2").toggle(300);
-            $(this).toggleClass('btn-primary btn-outline-primary');
-            $("#btn_create strong").html(function (i, v) {
-                return v === '<i class="fas fa-plus mr-2"></i>Create' ?
-                    '<i class="fas fa-th-list mr-2"></i>View' : '<i class="fas fa-plus mr-2"></i>Create';
-            });
-
-            $(".fix-label-group .bootstrap-select").addClass('p-0');
-            $(".fix-label-group .bootstrap-select button").css('border-color', '#e4e6fc');
-
-            $("#form-blogPost").attr('action', '{{route('create.balance')}}');
-            $("#form-blogPost input[name=_method], #form-blogPost input[name=id], #form-blogPost input[name=admin_id], #title").val('');
-            $(".input-files").show();
-            $("#form-blogPost button[type=submit]").text('Submit');
-            $("#category_id").val('default').selectpicker('refresh');
-            $('#_content').summernote('code', '');
-            $("#thumbnail").attr('required', 'required');
-            $("#txt_thumbnail, #txt_photo").text('Choose File');
-            $("#count_files").text('Allowed extension: jpg, jpeg, gif, png. Allowed size: < 5 MB');
-            $("#name_en").val("");
-            $("#name_id").val("");
-            $("#price").val("");
-            $('#_content_en').summernote('code', "");
-            $('#_content_id').summernote('code', "");
-        });
-
         function createBlogCategory() {
             $("#blogCategoryModal").modal('show');
-        }
-
-        function editBlogCategory(id, name, name_id, caption) {
-            $("#blogCategoryModal .modal-title").text('Edit Form');
-            $("#form-blogCategory").attr('action', '{{route('update.balance')}}');
-            $("#form-blogCategory input[name=_method]").val('PUT');
-            $("#form-blogCategory input[name=id]").val(id);
-            $("#form-blogCategory button[type=submit]").text('Save Changes');
-            $('#_content').summernote('code', caption);
-            $("#name").val(name);
-            $("#name_id").val(name_id);
-            $("#blogCategoryModal").modal('show');
-        }
-
-        function editBlogPost(id, url) {
-            $("#content1").toggle(300);
-            $("#content2").toggle(300);
-            $("#btn_create").toggleClass('btn-primary btn-outline-primary');
-            $("#btn_create strong").html(function (i, v) {
-                return v === '<i class="fas fa-plus mr-2"></i>Create' ?
-                    '<i class="fas fa-th-list mr-2"></i>View' : '<i class="fas fa-plus mr-2"></i>Create';
-            });
-
-            $(".fix-label-group .bootstrap-select").addClass('p-0');
-            $(".fix-label-group .bootstrap-select button").css('border-color', '#e4e6fc');
-
-            $("#form-blogPost").attr('action', '{{route('update.balance')}}');
-            $("#form-blogPost input[name=_method]").val('PUT');
-            $("#form-blogPost input[name=id]").val(id);
-            $(".input-files").hide();
-            $("#form-blogPost button[type=submit]").text('Save Changes');
-
-            $.get(url, function (data) {
-                // console.log(data.name.id);
-                $("#form-blogPost input[name=admin_id]").val(data.admin_id);
-                $("#category_id").val(data.category_id).selectpicker('refresh');
-                $("#name_en").val(data.name.en);
-                $("#name_id").val(data.name.id);
-                $("#price").val(data.price);
-                $('#_content_en').summernote('code', data.caption.en);
-                $('#_content_id').summernote('code', data.caption.id);
-                $("#thumbnail").removeAttr('required', 'required');
-                $("#txt_thumbnail").text(data.image.length > 60 ? data.image.slice(0, 60) + "..." : data.thumbnail);
-            }).fail(function () {
-                swal("Error!", "There's no any selected record!", "error");
-            });
         }
 
         function show_swal_reset(id) {
