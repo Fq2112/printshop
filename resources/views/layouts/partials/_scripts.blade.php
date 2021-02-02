@@ -48,7 +48,7 @@
                 empty: '<div class="tt-empty text-center">{{__('lang.header.search')}}</div>',
                 pending: '<div class="tt-pending"><div class="css3-spinner" style="position: absolute; z-index:auto;"><div class="css3-spinner-bounce1"></div><div class="css3-spinner-bounce2"></div><div class="css3-spinner-bounce3"></div></div></div>',
                 suggestion: function (data) {
-                    return '<div><img alt="thumbnail" src="' + data.image + '">' + data.name + '</div>'
+                    return '<div><img alt="thumbnail" src="' + data.image + '" style="object-fit: cover">' + data.name + '</div>'
                 },
             },
             display: function (data) {
