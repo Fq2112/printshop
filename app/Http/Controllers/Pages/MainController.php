@@ -36,9 +36,10 @@ class MainController extends Controller
     {
         foreach ($featured as $x => $row) {
             $thumb = [];
-            $capt = $row->getCluster;
+            $capt = [];
 
             if(!is_null($row->kategoris_id)) { // if subkat
+                $capt = $row->getCluster;
                 if (count($capt) > 0) { // if has cluster
                     foreach ($capt as $y => $item) {
                         $split = explode(" ", $item->name);

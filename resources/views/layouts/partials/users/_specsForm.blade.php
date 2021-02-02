@@ -33,7 +33,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -94,7 +94,7 @@
                                                     <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                             alt="Thumbnail">
+                                                             alt="Thumbnail" style="object-fit: cover">
                                                         <div class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
                                                         </div>
@@ -154,7 +154,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -218,7 +218,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -280,7 +280,7 @@
                                                     <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                        data-lightbox="image">
                                                         <img src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                             alt="Thumbnail">
+                                                             alt="Thumbnail" style="object-fit: cover">
                                                         <div class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
                                                         </div>
@@ -361,7 +361,7 @@
                                                         <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                            data-lightbox="image">
                                                             <img src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                                 alt="Thumbnail">
+                                                                 alt="Thumbnail" style="object-fit: cover">
                                                             <div class="card-img-overlay d-flex">
                                                                 <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
                                                             </div>
@@ -444,7 +444,7 @@
                                                         <a href="{{asset('storage/products/specs/'.$row->image)}}"
                                                            data-lightbox="image">
                                                             <img src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                                 alt="Thumbnail">
+                                                                 alt="Thumbnail" style="object-fit: cover">
                                                             <div class="card-img-overlay d-flex">
                                                                 <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
                                                             </div>
@@ -506,7 +506,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -569,7 +569,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -652,7 +652,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -714,7 +714,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -776,7 +776,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -838,7 +838,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -900,7 +900,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -963,7 +963,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -1026,7 +1026,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -1089,7 +1089,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -1152,7 +1152,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -1215,7 +1215,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -1278,7 +1278,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -1341,7 +1341,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -1403,7 +1403,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -1464,7 +1464,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -1525,7 +1525,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -1586,7 +1586,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -1648,7 +1648,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -1707,7 +1707,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>
@@ -1766,7 +1766,7 @@
                                                        data-lightbox="image">
                                                         <img
                                                             src="{{asset('storage/products/specs/'.$row->image)}}"
-                                                            alt="Thumbnail">
+                                                            alt="Thumbnail" style="object-fit: cover">
                                                         <div
                                                             class="card-img-overlay d-flex">
                                                             <i class="icon-zoom-in icon-flip-horizontal align-self-center mx-auto"></i>

@@ -689,9 +689,9 @@
                                                     <i class="icon-line-ellipsis"></i></a>
                                             </div>
                                         </div>
-                                        <div class="portfolio-desc">
+                                        <div class="portfolio-desc" @if(count($row['capt']) <= 0) style="height: 58px" @endif>
                                             <h3><a href="{{$row['link']}}">{{$row['name']}}</a></h3>
-                                            @if($row['capt'])
+                                            @if(count($row['capt']) > 0)
                                                 <span>
                                                     @foreach($row['capt'] as $val)
                                                         <a href="{{$val['link']}}">{{$val['name']}}</a>

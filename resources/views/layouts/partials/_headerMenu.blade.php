@@ -11,7 +11,7 @@
                             <div class="widget clearfix">
                                 <div class="content-area">
                                     <img class="card-img-top" src="{{asset('storage/products/menu/'.$kat->image)}}"
-                                         alt="Thumbnail">
+                                         alt="Thumbnail" style="width: 230px;height: 170px;object-fit: cover;">
                                     <div class="custom-overlay">
                                         <div class="custom-text"></div>
                                     </div>
@@ -21,7 +21,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="card-columns col-lg-9">
+                <div class="card-columns col-lg-9" style="height: 400px; overflow: auto;">
                     @foreach(\App\Models\SubKategori::where('kategoris_id', $kat->id)->where('isActive', true)->get() as $sub)
                         @php
                             $clusters = \App\Models\ClusterKategori::where('subkategori_id', $sub->id)->where('isActive', true)->get();
