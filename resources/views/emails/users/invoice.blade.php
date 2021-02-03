@@ -762,7 +762,7 @@
                                                                 <tbody>
                                                                 <tr>
                                                                     <td align="center">
-                                                                        <a href="https://fb.com/pages/Premiere-Digital-Printing/164943546903733"
+                                                                        <a href="https://fb.com/IDN-PRINT-341187123737720"
                                                                            name="Facebook" target="_blank">
                                                                             <img class="social-icons"
                                                                                  src="https://cdn.shazam.com/shazamauth/facebook.jpg"
@@ -770,7 +770,7 @@
                                                                                  style="display:block" border="0"></a>
                                                                     </td>
                                                                     <td>
-                                                                        <a href="https://instagram.com/premierprintingsby"
+                                                                        <a href="https://instagram.com/idn.print"
                                                                            name="Instagram" target="_blank"><img
                                                                                 class="social-icons"
                                                                                 src="https://cdn.shazam.com/shazamauth/instagram.jpg"

@@ -115,17 +115,17 @@
 
                     <div id="top-social">
                         <ul>
-                            <li><a href="https://fb.com/pages/Premiere-Digital-Printing/164943546903733"
+                            <li><a href="https://fb.com/IDN-PRINT-341187123737720"
                                    target="_blank" class="si-facebook">
                                     <span class="ts-icon"><i class="icon-facebook"></i></span>
                                     <span class="ts-text">Facebook</span></a></li>
-                            <li><a href="https://instagram.com/premierprintingsby" target="_blank" class="si-instagram">
+                            <li><a href="https://instagram.com/idn.print" target="_blank" class="si-instagram">
                                     <span class="ts-icon"><i class="icon-instagram"></i></span>
                                     <span class="ts-text">Instagram</span></a></li>
-                            <li><a href="https://api.whatsapp.com/send?phone=62817597777&text=&source=&data="
+                            <li><a href="https://api.whatsapp.com/send?phone=6281217182169&text=&source=&data="
                                    target="_blank" class="si-whatsapp">
                                     <span class="ts-icon"><i class="icon-whatsapp"></i></span>
-                                    <span class="ts-text">+62 817-597-777</span></a></li>
+                                    <span class="ts-text">+62 812-1718-2169</span></a></li>
                             <li><a href="mailto:{{env('MAIL_USERNAME')}}" class="si-call">
                                     <span class="ts-icon"><i class="icon-envelope-alt"></i></span>
                                     <span class="ts-text">{{env('MAIL_USERNAME')}}</span></a></li>

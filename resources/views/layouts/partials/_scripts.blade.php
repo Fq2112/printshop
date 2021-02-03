@@ -375,7 +375,7 @@
         });
 
         var options = {
-            whatsapp: "+62817597777",
+            whatsapp: "+6281217182169",
             email: "{{env('MAIL_USERNAME')}}",
             call_to_action: "{{__('lang.footer.wh')}}",
             button_color: "#f89406",
