@@ -8727,6 +8727,10 @@ body:not(.device-touch) .social-icon i {
 .si-colored.si-foursquare { background-color: #25A0CA !important; }
 .si-call:hover,
 .si-colored.si-call { background-color: #444 !important; }
+.si-tokopedia:hover,
+.si-colored.si-tokopedia { background-color: #41ac47 !important; }
+.si-shopee:hover,
+.si-colored.si-shopee { background-color: #ea501f !important; }
 .si-ninetyninedesigns:hover,
 .si-colored.si-ninetyninedesigns { background-color: #F26739 !important; }
 .si-forrst:hover,
@@ -8871,6 +8875,8 @@ body:not(.device-touch) .social-icon i {
 .si-text-color.si-stumbleupon i { color: #F74425; }
 .si-text-color.si-foursquare i { color: #25A0CA; }
 .si-text-color.si-call i { color: #444; }
+.si-text-color.si-tokopedia i { color: #41ac47; }
+.si-text-color.si-shopee i { color: #ea501f; }
 .si-text-color.si-ninetyninedesigns i { color: #F26739; }
 .si-text-color.si-forrst i { color: #5B9A68; }
 .si-text-color.si-digg i { color: #191919; }

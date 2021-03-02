@@ -122,13 +122,19 @@
                             <li><a href="https://instagram.com/idn.print" target="_blank" class="si-instagram">
                                     <span class="ts-icon"><i class="icon-instagram"></i></span>
                                     <span class="ts-text">Instagram</span></a></li>
-                            <li><a href="https://api.whatsapp.com/send?phone=6281217182169&text=&source=&data="
+                            {{--<li><a href="https://api.whatsapp.com/send?phone=6281217182169&text=&source=&data="
                                    target="_blank" class="si-whatsapp">
                                     <span class="ts-icon"><i class="icon-whatsapp"></i></span>
                                     <span class="ts-text">+62 812-1718-2169</span></a></li>
                             <li><a href="mailto:{{env('MAIL_USERNAME')}}" class="si-call">
                                     <span class="ts-icon"><i class="icon-envelope-alt"></i></span>
-                                    <span class="ts-text">{{env('MAIL_USERNAME')}}</span></a></li>
+                                    <span class="ts-text">{{env('MAIL_USERNAME')}}</span></a></li>--}}
+                            <li><a href="https://tokopedia.com/idnprint" target="_blank" class="si-tokopedia">
+                                    <span class="ts-icon"><i class="icon-icomoon-tokopedia"></i></span>
+                                    <span class="ts-text">IDN PRINT</span></a></li>
+                            <li><a href="https://shopee.co.id/idnprint" target="_blank" class="si-shopee">
+                                    <span class="ts-icon"><i class="icon-icomoon-shopee"></i></span>
+                                    <span class="ts-text">IDN PRINT</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -196,11 +202,19 @@
                         </div>
 
                         <div class="widget mt-0 clearfix">
-                            <h4 class="ls0 mb-0 nott" data-toc-skip>{{__('lang.footer.tracking')}}</h4>
-                            <button type="button" onclick="orderTrack()"
-                                    class="button button-3d button-primary button-rounded mx-0 mb-3">
-                                <i class="icon-crosshairs mr-2"></i>{{__('lang.button.tracking')}}
-                            </button>
+                            <h4 class="ls0 mb-0 nott" data-toc-skip>{{__('lang.footer.marketplace')}}</h4>
+                            <div class="row">
+                                <div class="col">
+                                    <a href="https://tokopedia.com/idnprint" target="_blank">
+                                        <img src="{{asset('images/tokopedia.png')}}" alt="Logo" class="footer-logo">
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a href="https://shopee.co.id/idnprint" target="_blank">
+                                        <img src="{{asset('images/shopee.png')}}" alt="Logo" class="footer-logo">
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -210,9 +224,17 @@
                             <img src="{{asset('images/midtrans.svg')}}" alt="Logo" class="footer-logo">
                         </div>
 
-                        <div class="widget clearfix">
+                        <div class="widget mt-0 clearfix">
                             <h4 class="ls0 mb-3 nott" data-toc-skip>{{__('lang.footer.shipping')}}</h4>
                             <img src="{{asset('images/shipper.png')}}" alt="Logo" class="footer-logo">
+                        </div>
+
+                        <div class="widget mt-0 clearfix">
+                            <h4 class="ls0 mb-0 nott" data-toc-skip>{{__('lang.footer.tracking')}}</h4>
+                            <button type="button" onclick="orderTrack()"
+                                    class="button button-3d button-primary button-rounded mx-0 mb-3">
+                                <i class="icon-crosshairs mr-2"></i>{{__('lang.button.tracking')}}
+                            </button>
                         </div>
                     </div>
                 </div>

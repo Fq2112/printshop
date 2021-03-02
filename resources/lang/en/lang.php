@@ -514,6 +514,7 @@ return [
         "tracking" => "Track your Order",
         "payment" => "Payment Partner",
         "shipping" => "Shipping Partner",
+        "marketplace" => "Visit Us",
         "subs-head" => "Subscribe Now",
         "subs-capt" => "<strong>Subscribe</strong> to Our Newsletter to get Important News, Amazing Offers &amp; Inside Scoops:",
         "social" => "Get in Touch",

@@ -514,6 +514,7 @@ return [
         "tracking" => "Lacak Pesanan Anda",
         "payment" => "Mitra Pembayaran",
         "shipping" => "Mitra Pengiriman",
+        "marketplace" => "Kunjungi Kami",
         "subs-head" => "Berlangganan Sekarang",
         "subs-capt" => "<strong>Berlangganan</strong> Newsletter Kami untuk mendapatkan Berita Penting, Penawawan Menakjubkan &amp; <em>Inside Scoops</em>:",
         "social" => "Ikuti Kami",

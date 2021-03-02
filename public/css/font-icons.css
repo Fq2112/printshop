@@ -1,4 +1,14 @@
-
+@font-face {
+    font-family: 'icomoon';
+    src:url('fonts/icomoon/icomoon.eot?1baj6s');
+    src:url('fonts/icomoon/icomoon.eot?1baj6s#iefix') format('embedded-opentype'),
+        url('fonts/icomoon/icomoon.ttf?1baj6s') format('truetype'),
+        url('fonts/icomoon/icomoon.woff?1baj6s') format('woff'),
+        url('fonts/icomoon/icomoon.svg?1baj6s#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
 
 @font-face {
 	font-family: 'font-icons';
@@ -31,6 +41,21 @@
 		url('fonts/Simple-Line-Icons.svg#Simple-Line-Icons') format('svg');
 	font-weight: normal;
 	font-style: normal;
+}
+
+[class^="icon-icomoon-"], [class*=" icon-icomoon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 [class^="icon-"], [class*=" icon-"],
@@ -234,6 +259,12 @@
   color: #ffffff;
 }
 
+.icon-icomoon-shopee:before {
+    content: "\e900";
+}
+.icon-icomoon-tokopedia:before {
+    content: "\e901";
+}
 .icon-type:before {
   content: "\e600";
 }
